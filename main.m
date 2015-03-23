@@ -40,23 +40,26 @@ lpcord = 2+round(Fs/1000);       %lpc order for itakura distance
 %% Signal Generation
 % Duration = 2.0;                 %signal Duration 
 % time = 0:T:Duration-T; 
-[yh,fs]=audioread('test.wav');
+[y,fs]=audioread('test.wav');
 %y=0.4*chirp(time,200,Duration,400,'li');
 %y = 0.4*sawtooth(2*pi*440*time);
 % yh = 0.4*cos(2*pi*440*time);
-yd=resample(yh,Fds,fs);
-time=(0:length(yd)-1)/Fds;
+yh = resample(y,Fs,fs);
+yd = resample(y,Fds,fs);
+time = (0:length(yh)-1)/Fs;
+timed = (0:length(yd)-1)/Fds;
 Duration = time(end);
-M = round(length(time)/z);     %Number of Frames
+M = round(length(time)/z);      %number of Frames
+Md = round(length(time)/zd);     
 subplot(3,1,1)
-plot(time,yd)
+plot(time,yh)
 
 %% NCCF LowPass
-R = zeros(Kdmax,M);
-Peaks = zeros(N_CANDS,M);
-Locations = zeros(N_CANDS,M);
+R = zeros(Kdmax,Md);
+Peaks = zeros(N_CANDS,Md);
+Locations = zeros(N_CANDS,Md);
 yd = yd - mean(yd);
-for i=0:M-1
+for i=0:Md-1
     for j=i*zd+1:i*zd+nd
         e_m = sum(yd(i*zd+1:i*zd+nd).^2);
         for k=Kdmin:Kdmax-1
