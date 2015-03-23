@@ -22,9 +22,13 @@ preemph = -7000;                 %s-plane position of preemphasis zero
 nfullag = 7;                     %number of full lags to try (must be odd)
 %% Derived Constants
 T = 1/Fs;                        %sampling Interval for Fs
+Td = 1/Fds;
 z = round(t/T);                  %frame step size for Fs(samples)
-n = round(w/T);                  %analysis window length for Fs(samples), number of samples correlated at each lag 
-K = round(Fs/F0min);             %max Lags, longeset lag at each frame for Fs
+zd = round(t/Td);
+n = round(w/T);                  %analysis window length for Fs(samples), number of samples correlated at each lag
+nd = round(w/Td);
+
+Kmax = round(Fs/F0min);          %max Lags, longeset lag at each frame for Fs
 Kmin = round(Fs/F0max);          %min Lags, shortest lag at each frame for Fs
 
 Kdmax = round(Fds/F0min);        %max Lags, longeset lag at each frame for Fds
@@ -34,31 +38,33 @@ J = round(0.03*Fs);              %window spacing for rms measurement
 h = round(0.02*Fs);              %window spacing for rms measurement
 lpcord = 2+round(Fs/1000);       %lpc order for itakura distance
 %% Signal Generation
+% Duration = 2.0;                 %signal Duration 
+% time = 0:T:Duration-T; 
+[yh,fs]=audioread('test.wav');
 %y=0.4*chirp(time,200,Duration,400,'li');
 %y = 0.4*sawtooth(2*pi*440*time);
-%y = 0.4*cos(2*pi*440*time);
-[yh,fs]=audioread('test.wav');
-y=resample(yh,Fs,fs);
-time=(0:length(y)-1)/Fs;
+% yh = 0.4*cos(2*pi*440*time);
+yd=resample(yh,Fds,fs);
+time=(0:length(yd)-1)/Fds;
 Duration = time(end);
 M = round(length(time)/z);     %Number of Frames
 subplot(3,1,1)
-plot(time,y)
+plot(time,yd)
 
 %% NCCF LowPass
-R = zeros(K,M);
+R = zeros(Kdmax,M);
 Peaks = zeros(N_CANDS,M);
 Locations = zeros(N_CANDS,M);
-y = y - mean(y);
+yd = yd - mean(yd);
 for i=0:M-1
-    for j=i*z+1:i*z+n
-        e_m = sum(y(i*z+1:i*z+n).^2);
-        for k=Kdmin:K-1
-            if(i*z+n+k+1 > length(y))
+    for j=i*zd+1:i*zd+nd
+        e_m = sum(yd(i*zd+1:i*zd+nd).^2);
+        for k=Kdmin:Kdmax-1
+            if(i*zd+nd+k+1 > length(yd))
                 break;
             end
-            e_mpk = sum(y(i*z+1+k:i*z+n+k).^2);
-            R(k,i+1)=R(k,i+1)+(y(j)*y(j+k)/sqrt(e_m*e_mpk));
+            e_mpk = sum(yd(i*zd+1+k:i*zd+nd+k).^2);
+            R(k,i+1)=R(k,i+1)+(yd(j)*yd(j+k)/sqrt(e_m*e_mpk));
         end
     end
     [max_peak loc_max] = max(R(:,i+1));
@@ -83,7 +89,7 @@ for i=0:M-1
 end
 %% NCCF HighPass
 RL = R;
-R = zeros(K,M);
+R = zeros(Kmax,M);
 High_Peaks = zeros(N_CANDS,M);
 High_Locations = zeros(N_CANDS,M);
 yh = yh - mean(yh);
@@ -95,14 +101,14 @@ for i=0:M-1
         Khat(Khat==0) = [];
         Khat = sevnadj(Khat');
         Khat(Khat==0) = [];
-        Khat(Khat>K) = [];
+        Khat(Khat>Kmax) = [];
         if (~isempty(Khat))
             for k=Khat
                if(i*z+n+k+1 > length(yh))
                   break;
                end
               e_mpk = sum(yh(i*z+1+k:i*z+n+k).^2);
-              R(k,i+1)=R(k,i+1)+(yh(j)*yh(j+k)/sqrt(e_m*e_mpk));
+              R(k,i+1)=R(k,i+1)+(yh(j)*yh(j+k)/sqrt(A_FACT+e_m*e_mpk));
             end
         end
     end
@@ -131,7 +137,7 @@ for i=0:M-1
     Ii(i+1).dij = 1-Ii(i+1).Cij.*(1-beta.*Ii(i+1).Lij);                 %objective function as the local cost for frame i is voiced with period TLij
     Ii(i+1).diI = VO_BIAS + max(Ii(i+1).Cij);                           %cost for the single unvoiced hypothesis at this frame
     if (i+1==1)                                                         %the first frame
-        Ii(i+1).deltaijk = 0;                                             %inter-frame F0 transitioin cost delta at frame i
+        Ii(i+1).deltaijk = 0;                                           %inter-frame F0 transitioin cost delta at frame i
         costm=zeros(1,length(Ii(i+1).Lij)+1);
         Ii(i+1).Dij = 0;
     else
@@ -182,7 +188,7 @@ F0(F0>F0max|F0<F0min|~isfinite(F0)) = 0;
 
 %% Plot
 subplot(3,1,2)
-imagesc([0, Duration],[Kdmin+1,K],RL)
+imagesc([0, Duration],[Kdmin+1,Kmax],R)
 set(gca,'YDir','normal');
 colormap(flipud(colormap('gray')))
 colorbar('southoutside')
