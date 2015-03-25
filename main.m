@@ -61,6 +61,9 @@ Locations = zeros(N_CANDS,Md);
 yd = yd - mean(yd);
 for i=0:Md-1
     for j=i*zd+1:i*zd+nd
+            if(i*zd+nd > length(yd))
+                break;
+            end
         e_m = sum(yd(i*zd+1:i*zd+nd).^2);
         for k=Kdmin:Kdmax-1
             if(i*zd+nd+k+1 > length(yd))
@@ -96,9 +99,12 @@ R = zeros(Kmax,M);
 High_Peaks = zeros(N_CANDS,M);
 High_Locations = zeros(N_CANDS,M);
 yh = yh - mean(yh);
-Ii = struct('Cij',{},'Lij',{},'dij',{},'diI',{},'Li_1k',{},'deltaijk',{},'Dij',{},'cost',{},'prev',{});
+Ii = struct('Cij',{},'Lij',{},'dij',{},'diI',{},'Li_1k',{},'deltaijk',{},'cost',{},'prev',{});
 for i=0:M-1
     for j=i*z+1:i*z+n
+        if(i*z+n > length(yh))
+            break;
+        end
         e_m = sum(yh(i*z+1:i*z+n).^2);
         Khat = Locations(:,i+1);
         Khat(Khat==0) = [];
@@ -139,10 +145,13 @@ for i=0:M-1
     Ii(i+1).Lij = loc;                                                  %sample lag at which Cij was observed
     Ii(i+1).dij = 1-Ii(i+1).Cij.*(1-beta.*Ii(i+1).Lij);                 %objective function as the local cost for frame i is voiced with period TLij
     Ii(i+1).diI = VO_BIAS + max(Ii(i+1).Cij);                           %cost for the single unvoiced hypothesis at this frame
+    if (~any(High_Locations(:,i+1)))
+        Ii(i+1).diI = VO_BIAS;
+    end
     if (i+1==1)                                                         %the first frame
         Ii(i+1).deltaijk = 0;                                           %inter-frame F0 transitioin cost delta at frame i
+        Ii(i+1).cost = 0;
         costm=zeros(1,length(Ii(i+1).Lij)+1);
-        Ii(i+1).Dij = 0;
     else
         costm=zeros(length(Ii(i).Lij)+1,length(Ii(i+1).Lij)+1);
         if (any(High_Locations(:,i))&&(any(High_Locations(:,i+1))))        %current and previous frames are both voiced
@@ -153,6 +162,9 @@ for i=0:M-1
             rmsidx = i*z+1+(1:J)+floor((h-z)/2);
             rmsidx_h = rmsidx-h;
             rmswin = hann(J);
+            if (max(rmsidx(rmsidx_h>0))>length(yh) || max(rmsidx_h(rmsidx_h>0))>length(yh))
+                break;
+            end
             rri=sqrt((rmswin(rmsidx_h>0)'*yh(rmsidx(rmsidx_h>0)).^2)/(rmswin(rmsidx_h>0)'*yh(rmsidx_h(rmsidx_h>0)).^2));
             sp=filter([1 exp(preemph/fs)],1,yh);                               %preemphasised speech for LPC calculation
             Si=0.2/(distitar(lpcauto(sp(rmsidx(rmsidx_h>0)),lpcord),lpcauto(sp(rmsidx_h(rmsidx_h>0)),lpcord),'e')-0.8);
@@ -177,17 +189,17 @@ for i=0:M-1
     end                          
 end
 %% Trace Back
-best=zeros(1,M-1);
-[cbest,best(M-1)]=min(Ii(M-1).cost);
-for i=M-2:-1:1
+best=zeros(1,length(Ii)-1);
+[cbest,best(length(Ii)-1)]=min(Ii(end-1).cost);
+for i=length(Ii)-2:-1:1
     best(i)=Ii(i+1).prev(best(i+1));
 end
 Lags =[];
-for i=1:M-1
+for i=1:length(Ii)-1
     Lags = [Lags High_Locations(best(i),i)];
 end
 F0 = Fs./Lags;
-F0(F0>F0max|F0<F0min|~isfinite(F0)) = 0;
+F0(~isfinite(F0)) = 0;
 
 %% Plot
 subplot(3,1,2)
@@ -196,4 +208,4 @@ set(gca,'YDir','normal');
 colormap(flipud(colormap('gray')))
 colorbar('southoutside')
 subplot(3,1,3)
-plot(1:M-1,F0);
+plot(1:length(Ii)-1,F0);

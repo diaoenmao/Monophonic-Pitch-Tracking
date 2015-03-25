@@ -1,6 +1,6 @@
 function [p,y,a] = qint(ym1,y0,yp1)
 %QINT - quadratic interpolation of three adjacent samples
-%
+% Online by Dr.Julius Smith
 % [p,y,a] = qint(ym1,y0,yp1)
 %
 % returns the extremum location p, height y, and half-curvature a
