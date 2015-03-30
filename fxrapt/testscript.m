@@ -3,4 +3,5 @@ fxrapt(y,fs,'g');
 tic
 [fx,tt] = fxrapt(y,fs,'u');
 toc
-plot(tt(:,1),fx)
+figure
+plot(fx)

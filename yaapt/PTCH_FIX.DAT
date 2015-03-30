@@ -1,0 +1,52 @@
+// Sample setup file for ptch_fix
+//   Creation date:    May 07, 2013
+//   Revision date:
+
+
+PITCH_HALF:	0			// attempt to eliminate pitch halves
+					// 0 = no, 1 = zero them, 2 = double them
+
+PITCH_HALF_SENS: 2.8			// Sensitivity - number of std devs away
+					// from the mean before being identified
+
+PITCH_DOUBLE:	0			// Attempt to correct pitch doubles
+					// 0 = no, 1 = zero them, 2 = halve them
+
+PITCH_DOUBLE_SENS: 3.3			// Sensitivity - number of std devs away 
+					// from the mean before being identified
+
+SMOOTH_INTERP:	1			// Smoothly interpolate unvoiced regions
+                           		// 0 no, 1 yes
+SMOOTH_FACTOR:	5			// Parameter for smoothing median filter
+					// Odd numbers are best (default = 5)
+
+SMOOTH:		0			// Smooth the track (after interpolation)
+					// 0=Disabled, # = median filter order
+
+EXTRAP:		1			// Extrapolate: Set all leading and
+					// trailing zeros to mean value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
