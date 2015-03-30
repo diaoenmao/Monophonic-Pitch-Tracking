@@ -34,7 +34,7 @@
  
  s=size(x);
  if prod(s)==1
-     y=x
+     y=x;
  else
      if nargin <3 || isempty(d)
          d=find(s>1,1);

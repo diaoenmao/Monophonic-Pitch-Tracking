@@ -1,0 +1,3 @@
+[y,fs] = audioread('test.wav');
+[fx,tt] = fxrapt(y,fs,'u');
+time = tt(:,1) : tt(:,2);

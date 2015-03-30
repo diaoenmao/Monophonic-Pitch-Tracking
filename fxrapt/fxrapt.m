@@ -342,4 +342,4 @@
  w=irfft(repmat(conj(rfft(x,nf,1)),1,my).*rfft(y,nf,1));
  s=zeros(ny+1,my);
  s(2:end,:)=cumsum(y.^2,1);
- v=w(1:nv,:)./sqrt(d+(x'*x).*(s(nx+1:end,:)-s(1:end-nx,:)));Copy-paste code here to remove the line numbers.
+ v=w(1:nv,:)./sqrt(d+(x'*x).*(s(nx+1:end,:)-s(1:end-nx,:)));
