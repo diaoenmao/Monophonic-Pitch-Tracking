@@ -80,19 +80,19 @@ toc
 figure
 subplot(5,1,1)
 plot(0:1/fs:(length(y)-1)/fs,y);
-title('full entry')
 subplot(5,1,2)
 fx = resample(fx,round((length(fx)-1)/((length(y)-1)/fs)),fs);
 plot(0:1/fs:(length(fx)-1)/fs,fx);
-title('1s entry')
+title('full entry')
 subplot(5,1,3)
-fx_1s = resample(fx_1s,round((length(fx_1s)-1)/((length(y)-1)/fs)),fs);
-plot(0:1/fs:(length(fx_1s)-1)/fs,fx_1s);
-title('500ms entry')
+fs_1s = round((length(fx_1s)-1)/((length(y)-1)/fs));
+plot(0:1/fs_1s:(length(fx_1s)-1)/fs_1s,fx_1s);
+title('1s entry')
 subplot(5,1,4)
-fx_500ms = resample(fx_500ms,round((length(fx_500ms)-1)/((length(y)-1)/fs)),fs);
-plot(0:1/fs:(length(fx_500ms)-1)/fs,fx_500ms);
+fs_500ms = round((length(fx_500ms)-1)/((length(y)-1)/fs));
+plot(0:1/fs_500ms:(length(fx_500ms)-1)/fs_500ms,fx_500ms);
+title('500ms entry')
 subplot(5,1,5)
-fx_100ms = resample(fx_100ms,round((length(fx_100ms)-1)/((length(y)-1)/fs)),fs);
-plot(0:1/fs:(length(fx_100ms)-1)/fs,fx_100ms);
+fs_100ms = round((length(fx_100ms)-1)/((length(y)-1)/fs));
+plot(0:1/fs_100ms:(length(fx_100ms)-1)/fs_100ms,fx_100ms);
 title('100ms entry')
