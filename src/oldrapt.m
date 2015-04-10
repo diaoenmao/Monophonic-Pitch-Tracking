@@ -9,7 +9,7 @@ t = .01;                         %frame advance Duration
 w = .0075;                       %analysis window Duration
 CAND_TR = 0.3;                   %minimum acceptable peak value
 N_CANDS = 20;                    %max number of hypothese(candidates) at each frame
-A_FACT = 10000;                  %unvoiced detection, term to decrease peaks of weak signals
+A_FACT = 10^(-7);                  %unvoiced detection, term to decrease peaks of weak signals
 % Constatnts for dynamic programming pitch selection
 LAG_WT = 0.3;                    %linear lag taper factor for NCCF
 FREQ_WT = 0.02;                  %cost factor for F0 range
@@ -23,17 +23,16 @@ nfullag = 7;                     %number of full lags to try (must be odd)
 %% Derived Constants
 T = 1/Fs;                        %sampling Interval for Fs
 Td = 1/Fds;
-z = round(t/T);                  %frame step size for Fs(samples)
-zd = round(t/Td);
-n = round(w/T);                  %analysis window length for Fs(samples), number of samples correlated at each lag
-nd = round(w/Td);
+kdsmp = Fs/Fds;
+zd = round(t*Fds);
+z = zd*kdsmp;                  %frame step size for Fs(samples)
+nd = round(w*Fds);
+n = nd*kdsmp;                  %analysis window length for Fs(samples), number of samples correlated at each lag
 
-Kmax = round(Fs/F0min);          %max Lags, longeset lag at each frame for Fs
-Kmin = round(Fs/F0max);          %min Lags, shortest lag at each frame for Fs
+Kmax = round(Fds/F0min);        %max Lags, longeset lag at each frame for Fds
+Kmin = round(Fds/F0max);        %min Lags, shortest lag at each frame for Fds
 
-Kdmax = round(Fds/F0min);        %max Lags, longeset lag at each frame for Fds
-Kdmin = round(Fds/F0max);        %min Lags, shortest lag at each frame for Fds
-
+lagoff=(Kmin-1)*kdsmp;        % lag offset when converting to high sample rate
 J = round(0.03*Fs);              %window spacing for rms measurement
 h = round(0.02*Fs);              %window spacing for rms measurement
 lpcord = 2+round(Fs/1000);       %lpc order for itakura distance
@@ -49,23 +48,22 @@ yd = resample(y,Fds,fs);
 time = (0:length(yh)-1)/Fs;
 timed = (0:length(yd)-1)/Fds;
 Duration = time(end);
-M = round(length(time)/z);      %number of Frames
-Md = round(length(time)/zd);     
+M = round(length(time)/z);     
 subplot(3,1,1)
 plot(time,yh)
 
 %% NCCF LowPass
-R = zeros(Kdmax,Md);
-Peaks = zeros(N_CANDS,Md);
-Locations = zeros(N_CANDS,Md);
+R = zeros(Kmax,M);
+Peaks = zeros(N_CANDS,M);
+Locations = zeros(N_CANDS,M);
 yd = yd - mean(yd);
-for i=0:Md-1
+for i=0:M-1
     for j=i*zd+1:i*zd+nd
             if(i*zd+nd > length(yd))
                 break;
             end
         e_m = sum(yd(i*zd+1:i*zd+nd).^2);
-        for k=Kdmin:Kdmax-1
+        for k=Kmin:Kmax-1
             if(i*zd+nd+k+1 > length(yd))
                 break;
             end
@@ -198,12 +196,13 @@ Lags =[];
 for i=1:length(Ii)-1
     Lags = [Lags High_Locations(best(i),i)];
 end
+Lags(Lags ~= 0) = Lags(Lags ~= 0) * kdsmp + lagoff;
 F0 = Fs./Lags;
 F0(~isfinite(F0)) = 0;
 
 %% Plot
 subplot(3,1,2)
-imagesc([0, Duration],[Kdmin+1,Kmax],R)
+imagesc([0, Duration],[Kmin+1,Kmax],R)
 set(gca,'YDir','normal');
 colormap(flipud(colormap('gray')))
 colorbar('southoutside')
