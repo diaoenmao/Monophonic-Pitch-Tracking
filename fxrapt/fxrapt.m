@@ -121,8 +121,7 @@
  ssq=s.^2;
  csssq=cumsum(ssq);
  sqrt(min(csssq(kcorw+1:end)-csssq(1:end-kcorw))/kcorw);
- afact=max([absnoise^2,max(ssq)*signoise^2,min(csssq(kcorw+1:end)-csssq(1:end-kcorw))*(relnoise/kcorw)^2])^2*kcorw^2;
- 
+ afact=max([absnoise^2,max(ssq)*signoise^2,min(csssq(kcorw+1:end)-csssq(1:end-kcorw))*(relnoise/kcorw)^2])^2*kcorw^2;     
  % downsample signal to approx 2 kHz to speed up autocorrelation calculation
  % kdsmp is the downsample factor
  
