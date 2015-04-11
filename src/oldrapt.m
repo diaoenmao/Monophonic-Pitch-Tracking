@@ -197,9 +197,21 @@ for i=1:length(Ii)-1
     Lags = [Lags High_Locations(best(i),i)];
 end
 Lags(Lags ~= 0) = Lags(Lags ~= 0) * kdsmp + lagoff;
+Prm = struct(...
+    'frame_length',   25, ... % Length of each analysis frame (ms)
+    'frame_space',    10, ... % Spacing between analysis frame (ms)
+    'f0_min',         60, ... % Minimum F0 searched (Hz)
+    'f0_max',        400, ... % Maximum F0 searached (Hz)
+    'fft_length',   8192, ... % FFT length
+    'nlfer_thresh1',0.75); % NLFER boundary for voiced/unvoiced decisions
 F0 = Fs./Lags;
 F0(~isfinite(F0)) = 0;
-
+[Energy, VUVEnergy]= nlfer(y, fs, Prm);
+VUVEnergy = [zeros(1,length(F0)-length(VUVEnergy)) VUVEnergy];
+VUVEnergy = logical(VUVEnergy);
+F0(~VUVEnergy)=0;
+B = 1/20*ones(1,20);
+F0(VUVEnergy) = filter(B,1,F0(VUVEnergy));
 %% Plot
 subplot(3,1,2)
 imagesc([0, Duration],[Kmin+1,Kmax],R)
