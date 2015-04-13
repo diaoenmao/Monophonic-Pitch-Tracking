@@ -32,7 +32,7 @@ n = nd*kdsmp;                  %analysis window length for Fs(samples), number o
 Kmax = round(Fds/F0min);        %max Lags, longeset lag at each frame for Fds
 Kmin = round(Fds/F0max);        %min Lags, shortest lag at each frame for Fds
 
-lagoff=(Kmin-1)*kdsmp;        % lag offset when converting to high sample rate
+lagoff=(Kmin-1)*kdsmp;           %lag offset when converting to high sample rate
 J = round(0.03*Fs);              %window spacing for rms measurement
 h = round(0.02*Fs);              %window spacing for rms measurement
 lpcord = 2+round(Fs/1000);       %lpc order for itakura distance
@@ -51,6 +51,16 @@ Duration = time(end);
 M = round(length(time)/z);     
 subplot(3,1,1)
 plot(time,yh)
+
+Prm = struct(...
+    'frame_length',   25, ... % Length of each analysis frame (ms)
+    'frame_space',    10, ... % Spacing between analysis frame (ms)
+    'f0_min',         60, ... % Minimum F0 searched (Hz)
+    'f0_max',        400, ... % Maximum F0 searached (Hz)
+    'fft_length',   8192, ... % FFT length
+    'nlfer_thresh1',0.75); % NLFER boundary for voiced/unvoiced decisions
+[Energy, VUVEnergy]= nlfer(y, fs, Prm);
+VUVEnergy = logical(VUVEnergy);
 
 %% NCCF LowPass
 R = zeros(Kmax,M);
@@ -79,9 +89,9 @@ for i=0:M-1
     end
     p = p(p >CAND_TR*max_peak);
     loc = loc(p>CAND_TR*max_peak);
+    [p,loc_sort] = sort(p,'descend');
+    loc = loc(loc_sort);
     if (length(p) > N_CANDS-1)
-        [p,loc_sort] = sort(p,'descend');
-        loc = loc(loc_sort);
         p = p(1:N_CANDS-1);
         loc = loc(1:N_CANDS-1);
     end
@@ -91,6 +101,8 @@ for i=0:M-1
     Peaks(1:length(p),i+1) = p;
     Locations(1:length(loc),i+1) = loc;
 end
+Peaks(~VUVEnergy) = 0;
+Locations(~VUVEnergy) = 0;
 %% NCCF HighPass
 RL = R;
 R = zeros(Kmax,M);
@@ -196,7 +208,7 @@ Lags =[];
 for i=1:length(Ii)-1
     Lags = [Lags High_Locations(best(i),i)];
 end
-Lags(Lags ~= 0) = Lags(Lags ~= 0) * kdsmp + lagoff;
+Lags(Lags ~= 0) = Lags(Lags ~= 0) * kdsmp;
 Prm = struct(...
     'frame_length',   25, ... % Length of each analysis frame (ms)
     'frame_space',    10, ... % Spacing between analysis frame (ms)
@@ -209,9 +221,9 @@ F0(~isfinite(F0)) = 0;
 [Energy, VUVEnergy]= nlfer(y, fs, Prm);
 VUVEnergy = [zeros(1,length(F0)-length(VUVEnergy)) VUVEnergy];
 VUVEnergy = logical(VUVEnergy);
+B = 1/30*ones(1,30);
+F0 = filter(B,1,F0);
 F0(~VUVEnergy)=0;
-B = 1/20*ones(1,20);
-F0(VUVEnergy) = filter(B,1,F0(VUVEnergy));
 %% Plot
 subplot(3,1,2)
 imagesc([0, Duration],[Kmin+1,Kmax],R)
