@@ -1,6 +1,12 @@
 tic
+[y,fs]=audioread('test.wav');
+[F0,t0] = myrapt(y,fs);
+figure
+plot(F0)
+toc
+tic
 [s,Fs] = audioread('test.wav');
-[fx,tt] = myrapt(s,Fs);
+[fx,tt] = learnrapt(s,Fs);
 figure
 plot(fx)
 toc
