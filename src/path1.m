@@ -27,12 +27,12 @@ function [PATH]=path1(Local,Trans)
 
 [M,N]=size(Local);                              %getting the size of the local matrix;
 
-if M>=500
-    error('Stop in Dynamic due to M>100')         %if M is greater than 100, stop the routine;
-end
-if N>=5000                                      %if N is greater than 1000, stop the routine;
-    error('Stop in Dynamic due to N>1000')
-end
+% if M>=500
+%     error('Stop in Dynamic due to M>100')         %if M is greater than 100, stop the routine;
+% end
+% if N>=5000                                      %if N is greater than 1000, stop the routine;
+%     error('Stop in Dynamic due to N>1000')
+% end
 
 
 PRED=ones(M,N);                                 %initializing several desired matrix;

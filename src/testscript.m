@@ -4,15 +4,17 @@ tic
 figure
 plot(F0)
 toc
+fxrapt(s,Fs,'g');
 tic
 [s,Fs] = audioread('test.wav');
-[fx,tt] = learnrapt(s,Fs);
+[fx,tt] = fxrapt(s,Fs,'u');
 figure
 plot(fx)
 toc
 tic
 [s,Fs] = audioread('test.wav');
-[Pitch, nf] = yaapt(s,Fs,1,[]);
+sd = downsample(s,4);
+[Pitch, nf] = yaapt(sd,8000,1,[]);
 figure
 plot(Pitch)
 toc
