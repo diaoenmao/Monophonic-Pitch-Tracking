@@ -1,0 +1,3 @@
+YAAPT Elapsed time is 106.577892 seconds.
+RAPT Elapsed time is 83.584592 seconds.
+MyRAPT Elapsed time is 918.060643 seconds.

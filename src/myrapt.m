@@ -223,7 +223,7 @@ VUVEnergy = logical(VUVEnergy);
 B = 1/40*ones(1,40);
 F0 = filter(B,1,F0);
 F0(~VUVEnergy)=0;
-t0=1:length(Ii)-1;
+t0 = 0:0.01:length(F0)*0.01-0.01;
 %% Plot
 subplot(3,1,2)
 imagesc([0, Duration],[Kmin+1,Kmax],R)
