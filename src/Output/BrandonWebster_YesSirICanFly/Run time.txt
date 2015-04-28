@@ -1,3 +1,3 @@
-YAAPY Elapsed time is 102.105114 seconds.
-RAPT Elapsed time is 78.575232 seconds.
-MyRAPT Elapsed time is 924.044403 seconds.
+Elapsed time is 24.001454 seconds.
+Elapsed time is 38.887498 seconds.
+Elapsed time is 224.926997 seconds.
