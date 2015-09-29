@@ -10,7 +10,7 @@ Monophonic Pitch Tracking includes [A Robust Algorithm for Pitch Tracking (RAPT)
 2. `fxrapt` contains source code of RAPT
 3. `yaapt` contains source code of YAAPT
 4. `resources` includes all compressed files for download
-5. `Evaluation Code` includes Audio Melody Extration evaluation code based on MIREX metrics
+5. `Evaluation Code` includes Audio Melody Extration evaluation code based on [Music Information Retrieval Evaluation eXchange (MIREX)](http://www.music-ir.org/mirex/wiki/MIREX_HOME) metrics
 6. `src` contains my effort to rewrite RAPT
 
 ## Resources
