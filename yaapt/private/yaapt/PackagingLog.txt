@@ -1,0 +1,127 @@
+ant:
+<ant>
+  <mkdir dir="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_redistribution" />
+  <mkdir dir="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing" />
+</ant>
+mcc -W 'java:yaapt,Class1' -T link:lib -d D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing -v D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m class{Class1:D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m} 
+Compiler version: 5.1 (R2014a)
+Dependency analysis by REQUIREMENTS.
+[Warning: Duplicate directory name:
+F:\MATLAB\toolbox\coder\simulinkcoder\cgv\API] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Duplicate directory name: F:\MATLAB\toolbox\matlab\winfun\NET] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Duplicate directory name:
+F:\MATLAB\toolbox\rtw\targets\AUTOSAR\AUTOSAR] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Duplicate directory name:
+F:\MATLAB\toolbox\rtw\targets\AUTOSAR\AUTOSAR\dataclasses] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Duplicate directory name: F:\MATLAB\toolbox\simulink\simulink\MPlayIO] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Duplicate directory name: F:\MATLAB\toolbox\slvnv\reqmgt\RTExplorer] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Private directories not allowed in MATLAB path:
+D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private] 
+[> In path at 33
+  In requirements at 156] 
+[Warning: Adding path "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" to
+Compiler path instance.] 
+[Warning: Private directories not allowed in MATLAB path:
+D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private] 
+Parsing file "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m"
+	(Referenced from: "Compiler Command Line").
+Parsing file "F:\MATLAB\toolbox\compiler\deploy\deployprint.m"
+	(Referenced from: "Compiler Command Line").
+Parsing file "F:\MATLAB\toolbox\compiler\deploy\printdlg.m"
+	(Referenced from: "Compiler Command Line").
+Deleting 1 temporary MEX authorization files.
+Removing: 'C:\Users\ADMINI~1\AppData\Local\Temp\mathworks_tmp_9308_16288_9308.auth'.
+Generating file "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\readme.txt".
+[语法分析开始时间 RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\Class1.java]]
+[语法分析已完成, 用时 15 毫秒]
+[语法分析开始时间 RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\YaaptMCRFactory.java]]
+[语法分析已完成, 用时 1 毫秒]
+[语法分析开始时间 RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\Class1Remote.java]]
+[语法分析已完成, 用时 1 毫秒]
+[语法分析开始时间 RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\package-info.java]]
+[语法分析已完成, 用时 0 毫秒]
+[源文件的搜索路径: F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar]
+[类文件的搜索路径: C:\Program Files\Java\jdk1.7.0_11\jre\lib\resources.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\rt.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\sunrsasign.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\jsse.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\jce.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\charsets.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\jfr.jar,C:\Program Files\Java\jdk1.7.0_11\jre\classes,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\access-bridge-64.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\dnsns.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\jaccess.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\localedata.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\sunec.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\sunjce_provider.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\sunmscapi.jar,C:\Program Files\Java\jdk1.7.0_11\jre\lib\ext\zipfs.jar,F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/internal/MWComponentInstance.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/Disposable.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/Object.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/Set.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/internal/MWFunctionSignature.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/internal/MWMCR.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/MWException.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/String.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/MWComponentOptions.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/List.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/pooling/Poolable.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/rmi/Remote.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/rmi/RemoteException.class)]]
+[正在检查yaapt.Class1]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/Throwable.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/AutoCloseable.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/HashSet.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/Collection.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/AbstractSet.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/AbstractCollection.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/Iterable.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/Exception.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/Class.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/MWCtfExtractLocation.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/io/File.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/MWCtfDirectorySource.class)]]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/MWCtfSource.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/Arrays.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/Error.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/lang/RuntimeException.class)]]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/util/Iterator.class)]]
+[已写入RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\classes\yaapt\Class1.class]]
+[正在检查yaapt.YaaptMCRFactory]
+[正在加载ZipFileIndexFileObject[F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar(com/mathworks/toolbox/javabuilder/MWCtfClassLoaderSource.class)]]
+[已写入RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\classes\yaapt\YaaptMCRFactory.class]]
+[正在检查yaapt.Class1Remote]
+[正在加载ZipFileIndexFileObject[C:\Program Files\Java\jdk1.7.0_11\lib\ct.sym(META-INF/sym/rt.jar/java/io/IOException.class)]]
+[已写入RegularFileObject[D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\classes\yaapt\Class1Remote.class]]
+[共 265 毫秒]
+Executing command: ""C:\Program Files\Java\jdk1.7.0_11\bin\javac" -verbose -classpath "F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar" -d "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\classes" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\Class1.java" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\YaaptMCRFactory.java" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\Class1Remote.java" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt\package-info.java""Executing command: ""C:\Program Files\Java\jdk1.7.0_11\bin\jar" -vcf "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\yaapt.jar" -C "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\classes" ."已添加清单
+正在添加: yaapt/(输入 = 0) (输出 = 0)(存储了 0%)
+正在添加: yaapt/Class1.class(输入 = 3848) (输出 = 1622)(压缩了 57%)
+正在添加: yaapt/Class1Remote.class(输入 = 316) (输出 = 224)(压缩了 29%)
+正在添加: yaapt/yaapt.ctf(输入 = 127314) (输出 = 117232)(压缩了 7%)
+正在添加: yaapt/YaaptMCRFactory.class(输入 = 1791) (输出 = 767)(压缩了 57%)
+Executing command: ""C:\Program Files\Java\jdk1.7.0_11\bin\javadoc" -d "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html" -sourcepath "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing" -classpath "F:\MATLAB\toolbox\javabuilder\jar\javabuilder.jar" yaapt"正在创建目标目录: "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\"
+正在加载程序包yaapt的源文件...
+正在构造 Javadoc 信息...
+标准 Doclet 版本 1.7.0_11
+正在构建所有程序包和类的树...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\yaapt\Class1.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\yaapt\Class1Remote.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\yaapt\YaaptMCRFactory.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\yaapt\package-frame.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\yaapt\package-summary.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\yaapt\package-tree.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\constant-values.html...
+正在构建所有程序包和类的索引...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\overview-tree.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\index-all.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\deprecated-list.html...
+正在构建所有类的索引...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\allclasses-frame.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\allclasses-noframe.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\index.html...
+正在生成D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc\html\help-doc.html...
+Packaging...
+Creating the bundle...
+Web based installer created at D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_redistribution\MyAppInstaller_web.exe.
+Packaging complete.
+Source 'D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt\for_testing\doc' exists but is a directory
