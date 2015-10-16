@@ -1,4 +1,4 @@
-[y,fs] = audioread('test.wav');
+[y,fs] = audioread('01.wav');
 fxrapt(y,fs,'g');
 tic
 [fx,tt] = fxrapt(y,fs,'u');
