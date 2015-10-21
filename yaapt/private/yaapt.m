@@ -1,4 +1,4 @@
-function[Pitch, numfrms, frmrate] = yaapt(Data, Fs, VU, ExtrPrm, fig)
+function[Pitch, numfrms, frmrate] = yaapt(Data, Fs)
 
 % YAAPT Fundamental Frequency (Pitch) tracking
 %
@@ -98,21 +98,21 @@ Prm = struct(...
 % Not needed if ignoring gross error minimization
 
 % Overwrite parameters if they are passed from command line(ExtrPar)  
-if ((nargin > 3) && isstruct(ExtrPrm))
-    fdNames = fieldnames(ExtrPrm);
-    for n = 1:length(fdNames)
-        pName = char(fdNames(n));
-        Prm.(pName) = ExtrPrm.(pName);
-        %message('PT:det', 'Parameter %s replaced: %d', pName,Prm.(pName));
-    end
-end
+% if ((nargin > 3) && isstruct(ExtrPrm))
+%     fdNames = fieldnames(ExtrPrm);
+%     for n = 1:length(fdNames)
+%         pName = char(fdNames(n));
+%         Prm.(pName) = ExtrPrm.(pName);
+%         %message('PT:det', 'Parameter %s replaced: %d', pName,Prm.(pName));
+%     end
+% end
 %Prm
 
 % Whether to plot pitch tracks, spectrum, engergy, etc.
-GraphPar = 0;
-if (nargin > 4 && ~isempty(fig))
-    GraphPar = fig;
-end
+% GraphPar = 0;
+% if (nargin > 4 && ~isempty(fig))
+%     GraphPar = fig;
+% end
 
 %-- MAIN ROUTINE --------------------------------------------------------------
 %  Step 1. Preprocessing
@@ -177,17 +177,17 @@ frmrate = Prm.frame_space;
 %      end;
 
 % Replace above VU = 0 section for new ptch_fix() function
-if (VU==0)
-    Pitch = ptch_fix(Pitch);
-end
+% if (VU==0)
+%     Pitch = ptch_fix(Pitch);
+% end
         
 
     % Pitch = SPitch;   % to see how good spectral track is
 
 %== FIGURE ====================================================================
 %  Several plots to illustrate processing and performance
-if (GraphPar)     
-    pt_figs(DataB, DataD, nFs, SPitch, Energy, VUVEnergy, RPitch, Pitch, Prm);
-end
+% if (GraphPar)     
+%     pt_figs(DataB, DataD, nFs, SPitch, Energy, VUVEnergy, RPitch, Pitch, Prm);
+% end
 
 %==============================================================================
