@@ -34,8 +34,8 @@ Fs_min = 1000;    % Do not decimate if Fs less than this
 
 %  Parameters for filtering original signal, with a broader band
 Filter_order = Prm.bp_forder;
-%F_hp = Prm.bp_low;
-%F_lp = Prm.bp_high;
+F_hp = Prm.bp_low;
+F_lp = Prm.bp_high;
 
 if (Fs > Fs_min)
     dec_factor = Prm.dec_factor;
@@ -48,13 +48,11 @@ end
 lenDataA = length(DataA);
 
 % filter F1
-% w1  = (F_hp / (Fs/2));
-% w2  = (F_lp / (Fs/2));
-  w1  = 0.005;
-  w2  = 0.15;
-  w   = [w1 w2];
-  b_F1 = coder.const(@fir1,Filter_order,w);
-% b_F1 = fir1(Filter_order,w);
+ w1  = (F_hp / (Fs/2));
+ w2  = (F_lp / (Fs/2));
+ w   = [w1 w2];
+ b_F1 = Myfir1(Filter_order,w);
+%  b_F1_test = fir1(Filter_order,w);
   a   = 1;
 
 

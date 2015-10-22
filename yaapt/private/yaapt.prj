@@ -276,7 +276,6 @@
         <param.HardwareSizeWord.Production />
         <param.HardwareSizePointer.Production />
         <param.HardwareEndianness.Production />
-        <param.HardwareAtomicIntegerSize.Production />
         <param.HardwareAtomicFloatSize.Production />
         <param.HardwareVendor.Target />
         <param.HardwareType.Target />
@@ -292,7 +291,6 @@
         <param.HardwareSizeWord.Target />
         <param.HardwareSizePointer.Target />
         <param.HardwareEndianness.Target />
-        <param.HardwareAtomicIntegerSize.Target />
         <param.HardwareAtomicFloatSize.Target />
         <param.Toolchain />
         <param.BuildConfiguration />

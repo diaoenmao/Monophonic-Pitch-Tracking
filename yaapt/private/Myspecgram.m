@@ -1,4 +1,4 @@
-function [yo,fo,to] = Myspecgram(varargin)
+function [yo,fo,to] = Myspecgram(x,nfft,Fs,window,noverlap)
 %SPECGRAM Calculate spectrogram from signal.
 %   B = SPECGRAM(A,NFFT,Fs,WINDOW,NOVERLAP) calculates the spectrogram for 
 %   the signal in vector A.  SPECGRAM splits the signal into overlapping 
@@ -47,10 +47,11 @@ function [yo,fo,to] = Myspecgram(varargin)
 %   Copyright 1988-2002 The MathWorks, Inc.
 %   $Revision: 1.8 $  $Date: 2002/03/28 17:30:53 $
 
-error(nargchk(1,5,nargin))
-[msg,x,nfft,Fs,window,noverlap]=specgramchk(varargin);
-error(msg)
-    
+% error(nargchk(1,5,nargin))
+% [msg,x,nfft,Fs,window,noverlap]=specgramchk(varargin);
+% error(msg)
+window = Myhanning(window);   
+% window = hanning(window);
 nx = length(x);
 nwind = length(window);
 if nx < nwind    % zero-pad x if it has length less than the window length
@@ -76,7 +77,7 @@ else
 end
 
 if (length(nfft)==1) | use_chirp
-    y = zeros(nwind,ncol);
+    y = complex(zeros(nwind,ncol));
 
     % put x into columns of y with the proper offset
     % should be able to do this with fancy indexing!
@@ -84,15 +85,15 @@ if (length(nfft)==1) | use_chirp
 
     % Apply the window to the array of offset signal segments.
     y = window(:,ones(1,ncol)).*y;
-
+    select=[];
     if ~use_chirp     % USE FFT
         % now fft y which does the columns
         y = fft(y,nfft);
         if ~any(any(imag(x)))    % x purely real
             if rem(nfft,2),    % nfft odd
-                select = [1:(nfft+1)/2];
+                select = 1:(nfft+1)/2;
             else
-                select = [1:nfft/2+1];
+                select = 1:nfft/2+1;
             end
             y = y(select,:);
         else
@@ -143,53 +144,55 @@ elseif nargout == 3,
     to = t;
 end
 
-function [msg,x,nfft,Fs,window,noverlap] = specgramchk(P)
-%SPECGRAMCHK Helper function for SPECGRAM.
-%   SPECGRAMCHK(P) takes the cell array P and uses each cell as 
-%   an input argument.  Assumes P has between 1 and 5 elements.
-
-msg = [];
-
-x = P{1}; 
-if (length(P) > 1) & ~isempty(P{2})
-    nfft = P{2};
-else
-    nfft = min(length(x),256);
-end
-if (length(P) > 2) & ~isempty(P{3})
-    Fs = P{3};
-else
-    Fs = 2;
-end
-if length(P) > 3 & ~isempty(P{4})
-    window = P{4}; 
-else
-    if length(nfft) == 1
-        window = hanning(nfft);
-    else
-        msg = 'You must specify a window function.';
-    end
-end
-if length(window) == 1, window = hanning(window); end
-if (length(P) > 4) & ~isempty(P{5})
-    noverlap = P{5};
-else
-    noverlap = ceil(length(window)/2);
-end
-
-% NOW do error checking
-if (length(nfft)==1) & (nfft<length(window)), 
-    msg = 'Requires window''s length to be no greater than the FFT length.';
-end
-if (noverlap >= length(window)),
-    msg = 'Requires NOVERLAP to be strictly less than the window length.';
-end
-if (length(nfft)==1) & (nfft ~= abs(round(nfft)))
-    msg = 'Requires positive integer values for NFFT.';
-end
-if (noverlap ~= abs(round(noverlap))),
-    msg = 'Requires positive integer value for NOVERLAP.';
-end
-if min(size(x))~=1,
-    msg = 'Requires vector (either row or column) input.';
+% function [msg,x,nfft,Fs,window,noverlap] = specgramchk(P)
+% %SPECGRAMCHK Helper function for SPECGRAM.
+% %   SPECGRAMCHK(P) takes the cell array P and uses each cell as 
+% %   an input argument.  Assumes P has between 1 and 5 elements.
+% 
+% msg = [];
+% 
+% x = P{1}; 
+% if (length(P) > 1) & ~isempty(P{2})
+%     nfft = P{2};
+% else
+%     nfft = min(length(x),256);
+% end
+% if (length(P) > 2) & ~isempty(P{3})
+%     Fs = P{3};
+% else
+%     Fs = 2;
+% end
+% if length(P) > 3 & ~isempty(P{4})
+%     window = P{4}; 
+% else
+%     if length(nfft) == 1
+%         window = hanning(nfft);
+%     else
+%         msg = 'You must specify a window function.';
+%     end
+% end
+% if length(window) == 1, window = hanning(window); end
+% if (length(P) > 4) & ~isempty(P{5})
+%     noverlap = P{5};
+% else
+%     noverlap = ceil(length(window)/2);
+% end
+% 
+% % NOW do error checking
+% if (length(nfft)==1) & (nfft<length(window)), 
+%     msg = 'Requires window''s length to be no greater than the FFT length.';
+% end
+% if (noverlap >= length(window)),
+%     msg = 'Requires NOVERLAP to be strictly less than the window length.';
+% end
+% if (length(nfft)==1) & (nfft ~= abs(round(nfft)))
+%     msg = 'Requires positive integer values for NFFT.';
+% end
+% if (noverlap ~= abs(round(noverlap))),
+%     msg = 'Requires positive integer value for NOVERLAP.';
+% end
+% if min(size(x))~=1,
+%     msg = 'Requires vector (either row or column) input.';
+% end
+% end
 end

@@ -72,7 +72,8 @@ Data(end:(numframes-1)*nframejump+nframesize) = 0;
 
 %-- MAIN ROUTINE --------------------------------------------------------------
 % Compute SHC for voiced frame
-Kaiser_window = kaiser(nframesize);
+Kaiser_window = Mykaiser(nframesize);
+% Kaiser_window_test = kaiser(nframesize);
 SHC = zeros(1,max_SHC);
 
 winix = repmat([1:window_length], numharmonics+1,1);

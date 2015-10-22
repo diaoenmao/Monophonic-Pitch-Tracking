@@ -1,0 +1,95 @@
+<!-- saved from url=(0014)about:internet -->
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="117,1" id="srcline1"> 1</a></span><span class="line"><span class="keyword">function</span> <span class="var type1" id="S2T51U3">w</span> = Myhanning(<span class="var type1" id="S3T2U6">order</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="117,2" id="srcline2"> 2</a></span><span class="line"><span class="comment">%HANNING   Hanning window.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,3" id="srcline3"> 3</a></span><span class="line"><span class="comment">%   HANNING(N) returns the N-point symmetric Hanning window in a column</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,4" id="srcline4"> 4</a></span><span class="line"><span class="comment">%   vector.  Note that the first and last zero-weighted window samples</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,5" id="srcline5"> 5</a></span><span class="line"><span class="comment">%   are not included.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,6" id="srcline6"> 6</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,7" id="srcline7"> 7</a></span><span class="line"><span class="comment">%   HANNING(N,'symmetric') returns the same result as HANNING(N).</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,8" id="srcline8"> 8</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,9" id="srcline9"> 9</a></span><span class="line"><span class="comment">%   HANNING(N,'periodic') returns the N-point periodic Hanning window,</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,10" id="srcline10">10</a></span><span class="line"><span class="comment">%   and includes the first zero-weighted window sample.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,11" id="srcline11">11</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,12" id="srcline12">12</a></span><span class="line"><span class="comment">%   NOTE: Use the HANN function to get a Hanning window which has the </span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,13" id="srcline13">13</a></span><span class="line"><span class="comment">%          first and last zero-weighted samples. </span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,14" id="srcline14">14</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,15" id="srcline15">15</a></span><span class="line"><span class="comment">%   See also BARTLETT, BLACKMAN, BOXCAR, CHEBWIN, HAMMING, HANN, KAISER</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,16" id="srcline16">16</a></span><span class="line"><span class="comment">%   and TRIANG.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,17" id="srcline17">17</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,18" id="srcline18">18</a></span><span class="line"><span class="comment">%   Copyright 1988-2002 The MathWorks, Inc.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,19" id="srcline19">19</a></span><span class="line"><span class="comment">%   $Revision: 1.11 $  $Date: 2002/04/15 01:11:49 $</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,20" id="srcline20">20</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,21" id="srcline21">21</a></span><span class="line"><span class="comment">% Check number of inputs</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,22" id="srcline22">22</a></span><span class="line"><span class="comment">% error(nargchk(1,2,nargin));</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,23" id="srcline23">23</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,24" id="srcline24">24</a></span><span class="line"><span class="comment">% Check for trivial order</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,25" id="srcline25">25</a></span><span class="line"><span class="comment">%[n,w,trivialwin] = check_order(varargin{1});</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,26" id="srcline26">26</a></span><span class="line"><span class="comment">%if trivialwin, return, end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,27" id="srcline27">27</a></span><span class="line"><span class="mxinfo" id="T2:U3"><span class="var type1" id="S4T2U9">n</span>=<span class="var type1" id="S3T2U10">order</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,28" id="srcline28">28</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,29" id="srcline29">29</a></span><span class="line"><span class="comment">% Select the sampling option</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,30" id="srcline30">30</a></span><span class="line"><span class="comment">% if nargin == 1,</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,31" id="srcline31">31</a></span><span class="line"><span class="comment">%    sflag = 'symmetric';</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,32" id="srcline32">32</a></span><span class="line"><span class="comment">% else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,33" id="srcline33">33</a></span><span class="line"><span class="comment">%    sflag = lower(varargin{2});</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,34" id="srcline34">34</a></span><span class="line"><span class="comment">% end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,35" id="srcline35">35</a></span><span class="line"><span class="comment">% </span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,36" id="srcline36">36</a></span><span class="line"><span class="comment">% % Allow partial strings for sampling options</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,37" id="srcline37">37</a></span><span class="line"><span class="comment">% allsflags = {'symmetric','periodic'};</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,38" id="srcline38">38</a></span><span class="line"><span class="comment">% sflagindex = strmatch(sflag, allsflags);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,39" id="srcline39">39</a></span><span class="line"><span class="comment">% if length(sflagindex)~=1         % catch 0 or 2 matches</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,40" id="srcline40">40</a></span><span class="line"><span class="comment">%    error('Sampling flag must be either ''symmetric'' or ''periodic''.');</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,41" id="srcline41">41</a></span><span class="line"><span class="comment">% end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,42" id="srcline42">42</a></span><span class="line"><span class="comment">% sflag = allsflags{sflagindex};</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,43" id="srcline43">43</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,44" id="srcline44">44</a></span><span class="line"><span class="comment">% Evaluate the window</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,45" id="srcline45">45</a></span><span class="line"><span class="comment">% switch sflag,</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,46" id="srcline46">46</a></span><span class="line"><span class="comment">% case 'periodic'</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,47" id="srcline47">47</a></span><span class="line">   <span class="comment">% Includes the first zero sample</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,48" id="srcline48">48</a></span><span class="line"><span class="comment">%    w = [0; sym_hanning(n-1)];</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,49" id="srcline49">49</a></span><span class="line"><span class="comment">% case 'symmetric'</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,50" id="srcline50">50</a></span><span class="line">   <span class="comment">% Does not include the first and last zero sample</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,51" id="srcline51">51</a></span><span class="line"><span class="comment">%    w = sym_hanning(n);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,52" id="srcline52">52</a></span><span class="line"><span class="keyword">if</span> <span class="mxinfo" id="T4:U6">~<span class="mxinfo" id="T2:U7">rem(<span class="var type1" id="S4T2U16">n</span>,<span class="mxinfo" id="T2:U9">2</span>)</span></span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,53" id="srcline53">53</a></span><span class="line">   <span class="comment">% Even length window</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,54" id="srcline54">54</a></span><span class="line">   <span class="mxinfo" id="T2:U10"><span class="var type1" id="S6T2U20">half</span> = <span class="mxinfo" id="T2:U12"><span class="var type1" id="S4T2U22">n</span>/<span class="mxinfo" id="T2:U14">2</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,55" id="srcline55">55</a></span><span class="line">   <span class="mxinfo" id="T51:U15"><span class="var type1" id="S2T51U26">w</span> = <span class="mxinfo" id="T51:U17"><span class="mxinfo" id="T2:U18">.5</span>*(<span class="mxinfo" id="T51:U19"><span class="mxinfo" id="T2:U20">1</span> - <span class="mxinfo" id="T51:U21">cos(<span class="mxinfo" id="T51:U22"><span class="mxinfo" id="T51:U23"><span class="mxinfo" id="T2:U24">2*pi</span>*<span class="mxinfo" id="T51:U25">(<span class="mxinfo" id="T1:U26">1:<span class="var type1" id="S6T2U44">half</span></span>)'</span></span>/(<span class="mxinfo" id="T2:U28"><span class="var type1" id="S4T2U47">n</span>+<span class="mxinfo" id="T2:U30">1</span></span>)</span>)</span></span>)</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,56" id="srcline56">56</a></span><span class="line">   <span class="mxinfo" id="T51:U31"><span class="var type1" id="S2T51U51">w</span> = <span class="mxinfo" id="T51:U33">[<span class="var type1" id="S2T51U54">w</span>; <span class="mxinfo" id="T51:U35"><span class="var type1" id="S2T51U57">w</span>(<span class="mxinfo" id="T2:U37">end</span>:<span class="mxinfo" id="T2:U38">-1</span>:<span class="mxinfo" id="T2:U39">1</span>)</span>]</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,57" id="srcline57">57</a></span><span class="line"><span class="keyword">else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,58" id="srcline58">58</a></span><span class="line">   <span class="comment">% Odd length window</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,59" id="srcline59">59</a></span><span class="line">   <span class="mxinfo" id="T2:U40"><span class="var type1" id="S6T2U68">half</span> = <span class="mxinfo" id="T2:U42">(<span class="mxinfo" id="T2:U43"><span class="var type1" id="S4T2U72">n</span>+<span class="mxinfo" id="T2:U45">1</span></span>)/<span class="mxinfo" id="T2:U46">2</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,60" id="srcline60">60</a></span><span class="line">   <span class="mxinfo" id="T51:U47"><span class="var type1" id="S2T51U77">w</span> = <span class="mxinfo" id="T51:U49"><span class="mxinfo" id="T2:U50">.5</span>*(<span class="mxinfo" id="T51:U51"><span class="mxinfo" id="T2:U52">1</span> - <span class="mxinfo" id="T51:U53">cos(<span class="mxinfo" id="T51:U54"><span class="mxinfo" id="T51:U55"><span class="mxinfo" id="T2:U56">2*pi</span>*<span class="mxinfo" id="T51:U57">(<span class="mxinfo" id="T1:U58">1:<span class="var type1" id="S6T2U95">half</span></span>)'</span></span>/(<span class="mxinfo" id="T2:U60"><span class="var type1" id="S4T2U98">n</span>+<span class="mxinfo" id="T2:U62">1</span></span>)</span>)</span></span>)</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,61" id="srcline61">61</a></span><span class="line">   <span class="mxinfo" id="T51:U63"><span class="var type1" id="S2T51U102">w</span> = <span class="mxinfo" id="T51:U65">[<span class="var type1" id="S2T51U105">w</span>; <span class="mxinfo" id="T51:U67"><span class="var type1" id="S2T51U108">w</span>(<span class="mxinfo" id="T2:U69"><span class="mxinfo" id="T2:U70">end</span>-<span class="mxinfo" id="T2:U71">1</span></span>:<span class="mxinfo" id="T2:U72">-1</span>:<span class="mxinfo" id="T2:U73">1</span>)</span>]</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="117,62" id="srcline62">62</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,63" id="srcline63">63</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,64" id="srcline64">64</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,65" id="srcline65">65</a></span><span class="line"><span class="comment">%---------------------------------------------------------------------</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,66" id="srcline66">66</a></span><span class="line"><span class="comment">% function w = sym_hanning(n)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,67" id="srcline67">67</a></span><span class="line"><span class="comment">%SYM_HANNING   Symmetric Hanning window. </span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,68" id="srcline68">68</a></span><span class="line"><span class="comment">%   SYM_HANNING Returns an exactly symmetric N point window by evaluating</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,69" id="srcline69">69</a></span><span class="line"><span class="comment">%   the first half and then flipping the same samples over the other half.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,70" id="srcline70">70</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,71" id="srcline71">71</a></span><span class="line"><span class="comment">% if ~rem(n,2)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,72" id="srcline72">72</a></span><span class="line"><span class="comment">%    % Even length window</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,73" id="srcline73">73</a></span><span class="line"><span class="comment">%    half = n/2;</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,74" id="srcline74">74</a></span><span class="line"><span class="comment">%    w = calc_hanning(half,n);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,75" id="srcline75">75</a></span><span class="line"><span class="comment">%    w = [w; w(end:-1:1)];</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,76" id="srcline76">76</a></span><span class="line"><span class="comment">% else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,77" id="srcline77">77</a></span><span class="line"><span class="comment">%    % Odd length window</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,78" id="srcline78">78</a></span><span class="line"><span class="comment">%    half = (n+1)/2;</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,79" id="srcline79">79</a></span><span class="line"><span class="comment">%    w = calc_hanning(half,n);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,80" id="srcline80">80</a></span><span class="line"><span class="comment">%    w = [w; w(end-1:-1:1)];</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,81" id="srcline81">81</a></span><span class="line"><span class="comment">% end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,82" id="srcline82">82</a></span><span class="line"><span class="comment">% end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,83" id="srcline83">83</a></span><span class="line"><span class="comment">%---------------------------------------------------------------------</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,84" id="srcline84">84</a></span><span class="line"><span class="comment">% function w = calc_hanning(m,n)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,85" id="srcline85">85</a></span><span class="line"><span class="comment">%CALC_HANNING   Calculates Hanning window samples.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,86" id="srcline86">86</a></span><span class="line"><span class="comment">%   CALC_HANNING Calculates and returns the first M points of an N point</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,87" id="srcline87">87</a></span><span class="line"><span class="comment">%   Hanning window.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,88" id="srcline88">88</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,89" id="srcline89">89</a></span><span class="line"><span class="comment">% w = .5*(1 - cos(2*pi*(1:m)'/(n+1))); </span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,90" id="srcline90">90</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="117,91" id="srcline91">91</a></span><span class="line"><span class="comment">% [EOF] hanning.m</span></span></span>
+<span class="srcline"><span class="lineno"><a href="117,92" id="srcline92">92</a></span><span class="line"><span class="comment">% end</span></span></span>
+</pre>

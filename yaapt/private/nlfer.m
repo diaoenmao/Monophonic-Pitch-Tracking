@@ -44,7 +44,7 @@ N_F0_max = round ((Prm.f0_max/Fs) * nfftlength );
 
 %  Spectrogram of the data
 SpecData = Myspecgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump));
-
+% SpecData_test = specgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump));
 % Compute normalize low-frequency energy ratio 
 FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:)));
 avgEnergy = mean(FrmEnergy);
