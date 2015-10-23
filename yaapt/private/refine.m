@@ -54,7 +54,8 @@ for n=1:numframes
 end
 
 % A best pitch track is generated from the best candidates
-BestPitch = medfilt1(Pitch(1,:), Prm.median_value).*VUVEnergy;
+BestPitch = Mymedfilt1(Pitch(1,:), Prm.median_value).*VUVEnergy;
+% BestPitch_test = medfilt1(Pitch(1,:), Prm.median_value).*VUVEnergy;
 
 % Refine pitch candidates
 for i = 1:numframes

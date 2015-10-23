@@ -1,4 +1,4 @@
-function b = Mybesseli(alpha,xx,scale)
+function output = Mybesseli(alpha,xx,scale)
 %BESSELI Modified Bessel functions of the first kind.
 %	I = BESSELI(ALPHA,X) computes modified Bessel functions of the
 %	first kind, I_sub_alpha(X) for real, non-negative order ALPHA
@@ -45,20 +45,22 @@ function b = Mybesseli(alpha,xx,scale)
 %
 %  Check for real, non-negative arguments.
 %
-   if nargin < 3, scale = 0; end
-   if any(imag(xx)) | any(xx < 0) | any(imag(alpha)) | any(alpha < 0)
-      error('Input arguments must be real and nonnegative.')
-   end
-   if isempty(alpha) | isempty(xx)
-      bk = []; 
-      return
-   end
+%    if nargin < 3, scale = 0; end
+%    if any(imag(xx)) | any(xx < 0) | any(imag(alpha)) | any(alpha < 0)
+%       error('Input arguments must be real and nonnegative.')
+%    end
+%    if isempty(alpha) | isempty(xx)
+%       bk = []; 
+%       return
+%    end
+   scale = 0;
 %
 %  Break alpha into integer and fractional parts,
 %  and initialize result array.
 %
    nfirst = fix(alpha(1));
    nb = fix(alpha(length(alpha))) + 1;
+   b = NaN*ones(length(xx),nb);
    if ~(nb <= 1001)
       error('Alpha must be <= 1000.')
    end
@@ -67,10 +69,14 @@ function b = Mybesseli(alpha,xx,scale)
          error('Increment in alpha must be 1.')
       end
    end
-   resize = (length(alpha) == 1);
-   if resize, resize = size(xx); end
+%    resize = (length(alpha) == 1);
+   resize_flag = (length(alpha) == 1);
+%    if resize, resize = size(xx); end
+   if resize_flag
+       resize = size(xx); 
+   end
    xx = xx(:);
-   b = NaN*ones(length(xx),nb);
+%    b = NaN*ones(length(xx),nb);
    alpha = alpha(1) - nfirst;
 %
 %  Asymptotic expansion for large x.
@@ -111,80 +117,87 @@ function b = Mybesseli(alpha,xx,scale)
       else
          test = test / 1.585^magx;
       end
-      if (nbmx >= 3)
-%
-%     Calculate p-sequence until n = nb-1.
-%
-         tover = eps*realmax;
-         nstart = magx+2;
-         nend = nb - 1;
-         for k = nstart:nend
-            n = k;
-            en = en + 2;
-            pold = plast;
-            plast = p;
-            p = en * plast./x + pold;
-            if any(p > tover)
-%
-%           To avoid overflow, divide p-sequence by tover.
-%           Calculate p-sequence until abs(p) > 1.
-%
-               tover = realmax;
-               p = p / tover;
-               plast = plast / tover;
-               psave = p;
-               psavel = plast;
-               nstart = n + 1;
-               while any(p <= 1);
-                  n = n + 1;
-                  en = en + 2;
-                  pold = plast;
-                  plast = p;
-                  p = en * plast./x + pold;
-               end
-               tempb = en ./ x;
-%
-%              Calculate backward test, and find ncalc,
-%              the highest n such that the test is passed.
-%
-               test = pold*plast*eps;
-               test = test*(0.5-0.5/min(tempb*tempb));
-               p = plast * tover;
-               n = n - 1;
-               en = en - 2;
-               nend = min(nb,n);
-               ncalc = nend + 1;
-               for l = nstart:nend
-                  pold = psavel;
-                  psavel = psave;
-                  psave = en * psavel./x + pold;
-                  if any(psave.*psavel > test);
-                     ncalc = l-1;
-                     test = 0;
-                     break
-                  end
-               end
-               break
-            end
-         end
-         if ~test
-            n = nend;
-            en = (n+n) + (alpha+alpha);
-%
-%           Calculate special significance test for nbmx > 2.
-%
-            test = max(test,max(sqrt(plast/eps).*sqrt(p+p)));
-         end
-      end
+%       if (nbmx >= 3)
+% %
+% %     Calculate p-sequence until n = nb-1.
+% %
+%          tover = eps*realmax;
+%          nstart = magx+2;
+%          nend = nb - 1;
+%          for k = nstart:nend
+%             n = k;
+%             en = en + 2;
+%             pold = plast;
+%             plast = p;
+%             p = en * plast./x + pold;
+%             if any(p > tover)
+% %
+% %           To avoid overflow, divide p-sequence by tover.
+% %           Calculate p-sequence until abs(p) > 1.
+% %
+%                tover = realmax;
+%                p = p / tover;
+%                plast = plast / tover;
+%                psave = p;
+%                psavel = plast;
+%                nstart = n + 1;
+%                while any(p <= 1);
+%                   n = n + 1;
+%                   en = en + 2;
+%                   pold = plast;
+%                   plast = p;
+%                   p = en * plast./x + pold;
+%                end
+%                tempb = en ./ x;
+% %
+% %              Calculate backward test, and find ncalc,
+% %              the highest n such that the test is passed.
+% %
+%                test = pold*plast*eps;
+%                test = test*(0.5-0.5/min(tempb*tempb));
+%                p = plast * tover;
+%                n = n - 1;
+%                en = en - 2;
+%                nend = min(nb,n);
+%                ncalc = nend + 1;
+%                for l = nstart:nend
+%                   pold = psavel;
+%                   psavel = psave;
+%                   psave = en * psavel./x + pold;
+%                   if any(psave.*psavel > test);
+%                      ncalc = l-1;
+%                      test = 0;
+%                      break
+%                   end
+%                end
+%                break
+%             end
+%          end
+%          if ~test
+%             n = nend;
+%             en = (n+n) + (alpha+alpha);
+% %
+% %           Calculate special significance test for nbmx > 2.
+% %
+%             test = max(test,max(sqrt(plast/eps).*sqrt(p+p)));
+%          end
+%       end
 %
 %     Calculate p-sequence until significance test passed.
 %
+      a = p;
+      count = 0;
       while any(p < test)
          n = n + 1;
          en = en + 2;
+         if count == 1
+            plast = a;
+         else
+             count = 1;
+         end
          pold = plast;
-         plast = p;
-         p = en * plast./x + pold;
+         a = p;
+         p = en * a./x + pold;
       end
 %
 %     Initialize the backward recursion and the normalization sum.
@@ -209,12 +222,19 @@ function b = Mybesseli(alpha,xx,scale)
 %           Recur backward via difference equation, calculating 
 %           (but not storing) b(n), until n = nb.
 %
+            kk= tempa;
+            count2 = 0;
             for l = 1:nend
                n = n - 1;
                en = en - 2;
+               if count2 == 1
+                   tempb = kk;
+               else
+                   count2 = 1;
+               end
                tempc = tempb;
-               tempb = tempa;
-               tempa = (en*tempb) ./ x + tempc;
+               kk = tempa;
+               tempa = (en*kk) ./ x + tempc;
                em = em - 1;
                emp2al = emp2al - 1;
                if (n == 1), break, end
@@ -269,8 +289,12 @@ function b = Mybesseli(alpha,xx,scale)
 %
 %     Calculate b(1)
 %
-      if skip == 0, b(v,1) = 2*empal*b(v,2) ./ x + b(v,3); end
-      if skip >= 0, sum = (sum + sum) + b(v,1); end
+%       if skip == 0
+%           b(v,1) = 2*empal*b(v,2) ./ x + b(v,3); 
+%       end
+%       if skip >= 0
+%           sum = (sum + sum) + b(v,1); 
+%       end
 %
 %     Normalize.  Divide all b(n) by sum.
 %
@@ -323,6 +347,10 @@ function b = Mybesseli(alpha,xx,scale)
 %  Return the requested index range
 %
    b = b(:,nfirst+1:nb);
-   if resize
-      b = reshape(b,resize(1),resize(2));
+%    if resize
+   if resize_flag
+      output = reshape(b,resize(1),resize(2));
+   else
+       output = b;
    end
+end

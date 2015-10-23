@@ -84,7 +84,8 @@ for frame = 1:numframes
         firstp = 1+(frame-1)*(nframejump);
         Signal = Data(firstp:firstp+nframesize-1) .* Kaiser_window;
         Signal = Signal - mean(Signal);
-        Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))];
+%          Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))];
+         Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))'];
 
         % Compute SHC (Spectral Harmonic Correlation)
         for k=min_SHC:max_SHC;
@@ -155,7 +156,8 @@ for n=1: length(Idx)
     VPeak_minmrt(n)  = VCandsPitch(Idx(n), n);
     VMerit_minmrt(n) = VCandsMerit(Idx(n), n); 
 end
-VPeak_minmrt = medfilt1(VPeak_minmrt, max(1,Prm.median_value-2));
+VPeak_minmrt = Mymedfilt1(VPeak_minmrt, max(1,Prm.median_value-2));
+% VPeak_minmrt_test = medfilt1(VPeak_minmrt, max(1,Prm.median_value-2));
 % Replace the lowest merit candidates by the median smoothed ones
 % computed from highest merit peaks above
 for n=1: length(Idx)
@@ -171,8 +173,9 @@ weight_trans = Prm.dp5_k1*std_voiced/avg_voiced;
 
 if (Num_VCands >2) 
   [VPitch] = dynamic5(VCandsPitch, VCandsMerit,weight_trans);
-   VPitch = medfilt1(VPitch, max(Prm.median_value-2, 1));
-    
+   VPitch = Mymedfilt1(VPitch, max(Prm.median_value-2, 1));
+%    VPitch_test = medfilt1(VPitch, max(Prm.median_value-2, 1));
+   
 else
      
     if (Num_VCands > 0) 

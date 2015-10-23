@@ -57,11 +57,11 @@ max_lag  = fix(Prm.f0_max/delta + width/4);
 
 if (min_lag < 1)
     min_lag = 1;
-    warning('min_lag is too low and adjusted (%d)', min_lag); 
+    disp('min_lag is too low and adjusted (%d)', min_lag); 
 end
 if max_lag > (length(Data) - width)
     max_lag = length(Data) - width;
-    warning('max_lag is too high and adjusted (%d)', max_lag);
+    disp('max_lag is too high and adjusted (%d)', max_lag);
 end
 
 

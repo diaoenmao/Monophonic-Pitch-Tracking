@@ -48,7 +48,7 @@ function w = Mykaiser (n)
     k = (0 : m)';
     k = 2 * beta / m * sqrt (k .* (m - k));
     w = Mybesseli (0, k) / Mybesseli (0, beta);
-    w_test = besseli (0, k) / besseli (0, beta);
+%     w_test = besseli (0, k) / besseli (0, beta);
   end
     
 end

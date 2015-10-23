@@ -1,2 +1,2 @@
-[Data, Fs] = wavread ('sample/f1nw0000pes_short.wav'); 
+[Data, Fs] = wavread ('sample/01.wav'); 
 [Pitch, nf] = yaapt(Data, Fs); 
