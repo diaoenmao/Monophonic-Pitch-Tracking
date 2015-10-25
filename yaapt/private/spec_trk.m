@@ -84,8 +84,8 @@ for frame = 1:numframes
         firstp = 1+(frame-1)*(nframejump);
         Signal = Data(firstp:firstp+nframesize-1) .* Kaiser_window;
         Signal = Signal - mean(Signal);
-%          Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))];
-         Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))'];
+%             Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))];
+            Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))'];
 
         % Compute SHC (Spectral Harmonic Correlation)
         for k=min_SHC:max_SHC;
@@ -170,7 +170,7 @@ end
 % Dynamic weight for transition costs
 % balance between local and transition costs
 weight_trans = Prm.dp5_k1*std_voiced/avg_voiced;
-
+VPitch = [];
 if (Num_VCands >2) 
   [VPitch] = dynamic5(VCandsPitch, VCandsMerit,weight_trans);
    VPitch = Mymedfilt1(VPitch, max(Prm.median_value-2, 1));
@@ -199,8 +199,14 @@ pStd = std(VPitch);
 SPitch(Idx_voiced) = VPitch;
 
 % Interpolating thru unvoiced frames
-if (SPitch(1) < pAvg/2) SPitch(1)   = pAvg;   end;
-if (SPitch(end) <pAvg/2) SPitch(end) = pAvg;  end;
+SPitch_temp_first = SPitch(1);
+SPitch_temp_end = SPitch(end);
+if all(SPitch_temp_first < (pAvg/2))
+    SPitch(1)   = pAvg;   
+end
+if all(SPitch_temp_end < (pAvg/2))
+    SPitch(end) = pAvg;  
+end
 
 [Indrows, Indcols, Vals] = find(SPitch);
 SPitch = interp1(Indcols, Vals, [1:numframes], 'pchip');

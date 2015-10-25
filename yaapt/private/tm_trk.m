@@ -44,7 +44,7 @@ merit_boost = Prm.merit_boost;
 maxcands   = Prm.nccf_maxcands; 
 %freq_thresh = pAvg;  % seems too large
 freq_thresh = 5 * pStd;
-
+SRange = zeros(2,length(SPitch));
 % Determine the search range according spectral pitch track
 SRange(1,:)  = max((SPitch-2*pStd), Prm.f0_min);
 SRange(2,:)  = min((SPitch+2*pStd), Prm.f0_max);    
