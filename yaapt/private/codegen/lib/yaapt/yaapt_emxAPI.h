@@ -2,7 +2,7 @@
  * File: yaapt_emxAPI.h
  *
  * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 26-Oct-2015 23:41:06
+ * C/C++ source code generated on  : 27-Oct-2015 00:20:18
  */
 
 #ifndef __YAAPT_EMXAPI_H__

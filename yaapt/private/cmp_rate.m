@@ -89,8 +89,15 @@ Pitch  = Pitch(1:numpeaks);
 % if the number of peaks in the frame are less than the maxcands, then we 
 % assign "null" values to remainder of peak and merit values in arrays
 if (numpeaks < maxcands)
-    Pitch(numpeaks+1:maxcands) = 0;
-    Merit(numpeaks+1:maxcands) = 0.001;
+    if(isempty(Pitch))
+        Pitch=zeros(1,maxcands);
+        Merit=0.001*ones(1,maxcands);
+    else
+    Pitch = [Pitch zeros(1,maxcands-numpeaks)];
+    Merit = [Merit 0.001*ones(1,maxcands-numpeaks)];
+%     Pitch(numpeaks+1:maxcands) = 0;
+%     Merit(numpeaks+1:maxcands) = 0.001;
+    end
 end;
 
 % Normlize merits

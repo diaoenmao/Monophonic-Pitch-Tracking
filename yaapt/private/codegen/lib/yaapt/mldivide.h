@@ -2,7 +2,7 @@
  * File: mldivide.h
  *
  * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 26-Oct-2015 23:41:06
+ * C/C++ source code generated on  : 27-Oct-2015 00:20:18
  */
 
 #ifndef __MLDIVIDE_H__

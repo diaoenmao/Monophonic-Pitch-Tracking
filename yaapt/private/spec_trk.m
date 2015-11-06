@@ -67,9 +67,11 @@ numharmonics = Prm.shc_numharms;
 %-- INITIALIZATION -----------------------------------------------------------
 CandsPitch = zeros(maxpeaks, numframes);
 CandsMerit = ones(maxpeaks, numframes);
-% Zero padding
-Data(end:(numframes-1)*nframejump+nframesize) = 0;
-
+% Zero paddinga
+% a = Data;
+% Data(end:(numframes-1)*nframejump+nframesize) = 0;
+Data(end) = 0;
+Data = [Data zeros(1,(numframes-1)*nframejump+nframesize-length(Data))];
 %-- MAIN ROUTINE --------------------------------------------------------------
 % Compute SHC for voiced frame
 Kaiser_window = Mykaiser(nframesize);
@@ -82,10 +84,10 @@ rowix = repmat([1:numharmonics+1]', 1, window_length);
 for frame = 1:numframes
     if (VUVEnergy(frame) > 0)
         firstp = 1+(frame-1)*(nframejump);
-        Signal = Data(firstp:firstp+nframesize-1) .* Kaiser_window;
+        Signal = Data(firstp:firstp+nframesize-1) .* Kaiser_window';
         Signal = Signal - mean(Signal);
-%             Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))];
-            Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))'];
+%            Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))];
+             Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))'];
 
         % Compute SHC (Spectral Harmonic Correlation)
         for k=min_SHC:max_SHC;
@@ -192,8 +194,8 @@ end;
 
 
 % Computing some statistics from the voiced frames
-pAvg = mean(VPitch);
-pStd = std(VPitch);
+pAvg = mean(VPitch,2);
+pStd = std(VPitch,0,2);
 
 % Streching out the smoothed pitch track
 SPitch(Idx_voiced) = VPitch;

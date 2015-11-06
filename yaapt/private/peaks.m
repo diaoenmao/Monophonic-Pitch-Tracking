@@ -66,8 +66,9 @@ end
 
 
 %-- INITIALIZATION -----------------------------------------------------------
-Pitch     = zeros(1, maxpeaks);         % Peak(Pitch) candidates
-Merit     = zeros(1, maxpeaks);         % Merits for peaks
+max_allow_lags = 100;
+Pitch     = zeros(1, max_allow_lags);         % Peak(Pitch) candidates
+Merit     = zeros(1, max_allow_lags);         % Merits for peaks
 
 %-- MAIN ROUTINE --------------------------------------------------------------
 % Normalize the signal so that peak value = 1
@@ -102,7 +103,7 @@ for n = min_lag:max_lag
         % Note Pitch(1) = delta, Pitch(2) = 2*delta
         % Convert FFT indices to Pitch in Hz
         numpeaks = numpeaks + 1;
-        Pitch (numpeaks)  = (n+center-1)*delta;
+        Pitch(numpeaks)  = (n+center-1)*delta;
         Merit(numpeaks)  = y;
     end
 end
@@ -122,15 +123,19 @@ end
 Pitch = Pitch(Idx);
 % keep the number of peaks not greater than max number
 numpeaks = min(numpeaks, maxpeaks);
+
 Pitch  = Pitch(1:numpeaks);
 Merit = Merit(1:numpeaks);
-
 % Step 4
 % Insert candidates to reduce pitch doubling and pitch halving, if needed
 if (numpeaks > 0)
     % if best peak has F < this, insert peak at 2F
     if (Pitch(1) > Prm.f0_double)   
         numpeaks = min(numpeaks+1, maxpeaks);
+        if(numpeaks>length(Pitch))
+            Pitch = [Pitch zeros(1,numpeaks-length(Pitch))];
+            Merit = [Merit zeros(1,numpeaks-length(Merit))];
+        end
         Pitch(numpeaks) = Pitch(1)/2.0;
         % Set merit for inserted peaks
         Merit(numpeaks) = Prm.merit_extra;
@@ -139,12 +144,18 @@ if (numpeaks > 0)
     % If best peak has F > this, insert peak at half F
     if (Pitch(1) < Prm.f0_half)     
         numpeaks = min(numpeaks+1, maxpeaks);
+        if(numpeaks>length(Pitch))
+            Pitch = [Pitch zeros(1,numpeaks-length(Pitch))];
+            Merit = [Merit zeros(1,numpeaks-length(Merit))];
+        end
         Pitch(numpeaks) = 2.0*Pitch(1);
         Merit(numpeaks) = Prm.merit_extra;
     end
     
     % Fill in  frames with less than maxpeaks with best choice
     if (numpeaks < maxpeaks)
+        Pitch = [Pitch zeros(1,maxpeaks-numpeaks)];
+        Merit = [Merit zeros(1,maxpeaks-numpeaks)];
         Pitch(numpeaks+1:maxpeaks)  = Pitch(1);
         Merit(numpeaks+1:maxpeaks) = Merit(1);
     end

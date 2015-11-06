@@ -192,12 +192,16 @@ function output = Mybesseli(alpha,xx,scale)
          en = en + 2;
          if count == 1
             plast = a;
+            pold = plast;
+            a = p;
+            p = en * a./x + pold;
          else
              count = 1;
+             a = p;
+             p = en * a./x + ones(length(a),1);
          end
-         pold = plast;
-         a = p;
-         p = en * a./x + pold;
+%          a = p;
+%          p = en * a./x + pold;
       end
 %
 %     Initialize the backward recursion and the normalization sum.
@@ -229,12 +233,17 @@ function output = Mybesseli(alpha,xx,scale)
                en = en - 2;
                if count2 == 1
                    tempb = kk;
+                   tempc = tempb;
+                   kk = tempa;
+                   tempa = (en*kk) ./ x + tempc;
                else
                    count2 = 1;
+                   kk = tempa;
+                   tempa = (en*kk) ./ x;
                end
-               tempc = tempb;
-               kk = tempa;
-               tempa = (en*kk) ./ x + tempc;
+%                tempc = tempb;
+%                kk = tempa;
+%                tempa = (en*kk) ./ x + tempc;
                em = em - 1;
                emp2al = emp2al - 1;
                if (n == 1), break, end

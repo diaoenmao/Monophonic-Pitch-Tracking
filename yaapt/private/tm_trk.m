@@ -46,9 +46,15 @@ maxcands   = Prm.nccf_maxcands;
 freq_thresh = 5 * pStd;
 SRange = zeros(2,length(SPitch));
 % Determine the search range according spectral pitch track
-SRange(1,:)  = max((SPitch-2*pStd), Prm.f0_min);
-SRange(2,:)  = min((SPitch+2*pStd), Prm.f0_max);    
-
+temp_max = zeros(1,length(SPitch));
+temp_min = zeros(1,length(SPitch));
+for i = 1:length(SPitch)
+    temp_max(i) = SPitch(i)-2*pStd;
+    temp_min(i) = SPitch(i)+2*pStd;
+end
+SRange(1,:)  = max(temp_max, Prm.f0_min);
+SRange(2,:)  = min(temp_min, Prm.f0_max);    
+  
 %-- INITIALIZATION -----------------------------------------------------------
 Pitch = zeros(maxcands, numframes);
 Merit = zeros(maxcands, numframes);
@@ -65,7 +71,7 @@ for n = 1:numframes
     Lag_min0 = fix(Fs/SRange(2,n)) - 3;
     Lag_max0 = fix(Fs/SRange(1,n)) + 3;
     % Compute correaltion
-    Phi =  crs_corr(Signal, Lag_min0, Lag_max0);
+    Phi =  crs_corr(Signal', Lag_min0, Lag_max0);
     
     % The Max_cand pitch candidates are collected into Pitch and
     % Merit arraies 
@@ -79,7 +85,11 @@ end
 %   spectrogram
 for i = 1:maxcands
     diff   =  abs( (Pitch(i,:) - SPitch(1,:)));
-    match1 =  (diff < freq_thresh);
+    match1 = zeros(1,length(diff));
+    for j = 1:length(diff)
+         match1(j) = diff(j) < freq_thresh;
+    end
+%     match1 =  (diff < freq_thresh);
     match  =  ((1 - diff/freq_thresh) .* match1);
     Merit(i,:) = ((1+merit_boost)*Merit(i,:)).*match;
 end

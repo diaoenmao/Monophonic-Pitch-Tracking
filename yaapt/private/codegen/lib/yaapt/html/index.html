@@ -539,7 +539,7 @@ var scriptInfoTable = {
 <li class="leaf  passed"><a href="#" class="fcn" id="F1375N21:F20">refine</a></li>
 <li class="leaf  passed"><a href="#" class="fcn" id="F1107N22:F21">spec_trk</a></li>
 <li class="leaf  passed"><a href="#" class="fcn" id="F1308N23:F22">tm_trk</a></li>
-<li class="leaf  passed"><a href="#" class="fcn" id="F1N24:F23">yaapt</a></li>
+<li class="leaf  warning"><a href="#" class="fcn" id="F1N24:F23">yaapt</a></li>
 <!-- End Function Tree Roots -->
 </ol>
 <!-- Function Tree Nodes -->
@@ -555,7 +555,7 @@ var scriptInfoTable = {
 <div class="treewrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="callTreeClick(event);">
 <ol class="tree">
 <!-- Call Tree Root -->
-<li class="node collapsed passed"><a href="#" class="fcn" id="F1N24:L1">yaapt</a>
+<li class="node collapsed warning"><a href="#" class="fcn" id="F1N24:L1">yaapt</a>
 <ul>
 <li class="node collapsed passed"><a href="#" class="fcn" id="F433N18:L2">nonlinear</a></li>
 <li class="node collapsed passed"><a href="#" class="fcn" id="F589N17:L3">nlfer</a></li>
@@ -570,7 +570,7 @@ var scriptInfoTable = {
 <div class="callstacknodes hidden">
 <ol class="callstacknode" id="callstacknode1">
 
-<li class="node collapsed passed"><a href="#" class="fcn" id="F1N24:l1">yaapt</a>
+<li class="node collapsed warning"><a href="#" class="fcn" id="F1N24:l1">yaapt</a>
 <ul>
 <li class="node collapsed passed"><a href="#" class="fcn" id="F433N18:l2">nonlinear</a></li>
 <li class="node collapsed passed"><a href="#" class="fcn" id="F589N17:l3">nlfer</a></li>
@@ -1021,7 +1021,7 @@ var scriptInfoTable = {
 <div class="south">
 <ul class="ui-tabs-nav">
 <li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="summary"><span>Summary</span></span></li>
-<li class="ui-tabs-nav-item"><span class="tab-link" id="messages"><span>All Messages (0)</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="messages"><span>All Messages (1)</span></span></li>
 <li class="ui-tabs-nav-item"><span class="tab-link" id="watchlist"><span>Variables</span></span></li>
 <li class="ui-tabs-nav-item hidden"><span class="tab-link" id="watchload"><span>Variables</span></span></li>
 <li class="ui-tabs-nav-item"><span class="tab-link" id="buildlog1"><span>Target Build Log</span></span></li>
@@ -1030,10 +1030,10 @@ var scriptInfoTable = {
 <!-- Compilation Summary -->
 <div id="summarybody" class="ui-tabs-panel">
 <table cellpadding="1" cellspacing="4">
-<tr><td>C source code generated on:</td><td>26-Oct-2015 23:42:03</td></tr>
+<tr><td>C source code generated on:</td><td>27-Oct-2015 00:21:11</td></tr>
 <tr><td>Coding target:</td><td>Static Library</td></tr>
 <tr><td>Number of errors:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
-<tr><td>Number of warnings:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+<tr><td>Number of warnings:</td><td><a href="javascript:selectMessagesTab();">1</a></td></tr>
 <tr><td>Number of notices:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
 </table>
 <p/><p/><table>
@@ -1045,9 +1045,26 @@ var scriptInfoTable = {
 
 <!-- Message Table -->
 <div id="messagesbody" class="ui-tabs-panel hidden">
-<div>
-<div class="msgsuccess">Code generation successful. Click here to <a href="javaScript:selectSummaryTab();">view summary</a>.</div>
-</div>
+<table class="grid" summary="This table lists the messages produced during code generation." cellspacing="0" cellpadding="6">
+<thead>
+<tr>
+<th id="msgorder" scope="col"><div class="d1"><div class="d2"><a href="#">Order</a></div></div></th>
+<th id="msgtype" scope="col"><div class="d1"><div class="d2"><a href="#">Type</a></div></div></th>
+<th id="function" scope="col"><div class="d1"><div class="d2"><a href="#">Function</a></div></div></th>
+<th id="location" scope="col"><div class="d1"><div class="d2"><a href="#">Line</a></div></div></th>
+<th id="text" scope="col"><div class="d1"><div class="d2"><a href="#">Description</a></div></div></th>
+</tr>
+</thead>
+<tbody onmouseover="messagesMouseOver(event);" onmouseout="messagesMouseOut(event);" onclick="messagesClick(event);"">
+<tr class="message warning" id="M1F1">
+<td class="msgorder" headers="msgorder"><a href="#">1</a></td>
+<td class="warning" headers="msgtype"></td>
+<td class="function" headers="function"><div>yaapt</div></td>
+<td class="location" headers="location"><div>1</div></td>
+<td class="text" headers="text"><div>The target compiler produced warnings. See the target build log for further details.</div></td>
+</tr>
+</tbody>
+</table>
 </div>
 <!-- Watchlist Table -->
 <div id="watchlistbody" class="ui-tabs-panel hidden">
@@ -1074,7 +1091,106 @@ Loading Variables table ...
 <tr><td align="left" class="td-linebottomrt-gray">Build Log</td></tr>
 <tr><td valign="top" class="td-script">
 <pre>
-<span class="td-line-number">    1   </span><span class="td-line-normal">Compilation suppressed: generating code only.</span>
+<span class="td-line-number">    1   </span><span class="td-line-normal"></span>
+<span class="td-line-number">    2   </span><span class="td-line-normal">Microsoft (R) Program Maintenance Utility Version 12.00.21005.1</span>
+<span class="td-line-number">    3   </span><span class="td-line-normal">Copyright (C) Microsoft Corporation.  All rights reserved.</span>
+<span class="td-line-number">    4   </span><span class="td-line-normal"></span>
+<span class="td-line-number">    5   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"yaapt_rtwutil.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt_rtwutil.c"</span>
+<span class="td-line-number">    6   </span><span class="td-line-normal">yaapt_rtwutil.c</span>
+<span class="td-line-number">    7   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"yaapt_initialize.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt_initialize.c"</span>
+<span class="td-line-number">    8   </span><span class="td-line-normal">yaapt_initialize.c</span>
+<span class="td-line-number">    9   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"yaapt_terminate.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt_terminate.c"</span>
+<span class="td-line-number">   10   </span><span class="td-line-normal">yaapt_terminate.c</span>
+<span class="td-line-number">   11   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"yaapt.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt.c"</span>
+<span class="td-line-number">   12   </span><span class="td-line-normal">yaapt.c</span>
+<span class="td-line-number">   13   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"rdivide.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\rdivide.c"</span>
+<span class="td-line-number">   14   </span><span class="td-line-normal">rdivide.c</span>
+<span class="td-line-number">   15   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"colon.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\colon.c"</span>
+<span class="td-line-number">   16   </span><span class="td-line-normal">colon.c</span>
+<span class="td-line-number">   17   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"abs.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\abs.c"</span>
+<span class="td-line-number">   18   </span><span class="td-line-normal">abs.c</span>
+<span class="td-line-number">   19   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"any.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\any.c"</span>
+<span class="td-line-number">   20   </span><span class="td-line-normal">any.c</span>
+<span class="td-line-number">   21   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"Myfirls.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\Myfirls.c"</span>
+<span class="td-line-number">   22   </span><span class="td-line-normal">Myfirls.c</span>
+<span class="td-line-number">   23   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"cos.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\cos.c"</span>
+<span class="td-line-number">   24   </span><span class="td-line-normal">cos.c</span>
+<span class="td-line-number">   25   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"sinc.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\sinc.c"</span>
+<span class="td-line-number">   26   </span><span class="td-line-normal">sinc.c</span>
+<span class="td-line-number">   27   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"sin.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\sin.c"</span>
+<span class="td-line-number">   28   </span><span class="td-line-normal">sin.c</span>
+<span class="td-line-number">   29   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"mldivide.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\mldivide.c"</span>
+<span class="td-line-number">   30   </span><span class="td-line-normal">mldivide.c</span>
+<span class="td-line-number">   31   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"mean.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\mean.c"</span>
+<span class="td-line-number">   32   </span><span class="td-line-normal">mean.c</span>
+<span class="td-line-number">   33   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"sum.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\sum.c"</span>
+<span class="td-line-number">   34   </span><span class="td-line-normal">sum.c</span>
+<span class="td-line-number">   35   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"exp.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\exp.c"</span>
+<span class="td-line-number">   36   </span><span class="td-line-normal">exp.c</span>
+<span class="td-line-number">   37   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"filter.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\filter.c"</span>
+<span class="td-line-number">   38   </span><span class="td-line-normal">filter.c</span>
+<span class="td-line-number">   39   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"fix.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\fix.c"</span>
+<span class="td-line-number">   40   </span><span class="td-line-normal">fix.c</span>
+<span class="td-line-number">   41   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"Myspecgram.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\Myspecgram.c"</span>
+<span class="td-line-number">   42   </span><span class="td-line-normal">Myspecgram.c</span>
+<span class="td-line-number">   43   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"Myhanning.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\Myhanning.c"</span>
+<span class="td-line-number">   44   </span><span class="td-line-normal">Myhanning.c</span>
+<span class="td-line-number">   45   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"fft.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\fft.c"</span>
+<span class="td-line-number">   46   </span><span class="td-line-normal">fft.c</span>
+<span class="td-line-number">   47   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"spec_trk.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\spec_trk.c"</span>
+<span class="td-line-number">   48   </span><span class="td-line-normal">spec_trk.c</span>
+<span class="td-line-number">   49   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"mod.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\mod.c"</span>
+<span class="td-line-number">   50   </span><span class="td-line-normal">mod.c</span>
+<span class="td-line-number">   51   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"Mykaiser.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\Mykaiser.c"</span>
+<span class="td-line-number">   52   </span><span class="td-line-normal">Mykaiser.c</span>
+<span class="td-line-number">   53   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"Mybesseli.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\Mybesseli.c"</span>
+<span class="td-line-number">   54   </span><span class="td-line-normal">Mybesseli.c</span>
+<span class="td-line-number">   55   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"repmat.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\repmat.c"</span>
+<span class="td-line-number">   56   </span><span class="td-line-normal">repmat.c</span>
+<span class="td-line-number">   57   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"all.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\all.c"</span>
+<span class="td-line-number">   58   </span><span class="td-line-normal">all.c</span>
+<span class="td-line-number">   59   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"prod.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\prod.c"</span>
+<span class="td-line-number">   60   </span><span class="td-line-normal">prod.c</span>
+<span class="td-line-number">   61   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"peaks.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\peaks.c"</span>
+<span class="td-line-number">   62   </span><span class="td-line-normal">peaks.c</span>
+<span class="td-line-number">   63   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"eml_sort.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\eml_sort.c"</span>
+<span class="td-line-number">   64   </span><span class="td-line-normal">eml_sort.c</span>
+<span class="td-line-number">   65   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"std.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\std.c"</span>
+<span class="td-line-number">   66   </span><span class="td-line-normal">std.c</span>
+<span class="td-line-number">   67   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"Mymedfilt1.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\Mymedfilt1.c"</span>
+<span class="td-line-number">   68   </span><span class="td-line-normal">Mymedfilt1.c</span>
+<span class="td-line-number">   69   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"median.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\median.c"</span>
+<span class="td-line-number">   70   </span><span class="td-line-normal">median.c</span>
+<span class="td-line-number">   71   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"dynamic5.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\dynamic5.c"</span>
+<span class="td-line-number">   72   </span><span class="td-line-normal">dynamic5.c</span>
+<span class="td-line-number">   73   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"interp1.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\interp1.c"</span>
+<span class="td-line-number">   74   </span><span class="td-line-normal">interp1.c</span>
+<span class="td-line-number">   75   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"pchip.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\pchip.c"</span>
+<span class="td-line-number">   76   </span><span class="td-line-normal">pchip.c</span>
+<span class="td-line-number">   77   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"tm_trk.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\tm_trk.c"</span>
+<span class="td-line-number">   78   </span><span class="td-line-normal">tm_trk.c</span>
+<span class="td-line-number">   79   </span><span class="td-line-warning">d:\github\monophonic-pitch-tracking\yaapt\private\codegen\lib\yaapt\tm_trk.c(136) : warning C4701: potentially uninitialized local variable 'tau_data_idx_0' used</span>
+<span class="td-line-number">   80   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"crs_corr.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\crs_corr.c"</span>
+<span class="td-line-number">   81   </span><span class="td-line-normal">crs_corr.c</span>
+<span class="td-line-number">   82   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"cat.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\cat.c"</span>
+<span class="td-line-number">   83   </span><span class="td-line-normal">cat.c</span>
+<span class="td-line-number">   84   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"dynamic.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\dynamic.c"</span>
+<span class="td-line-number">   85   </span><span class="td-line-normal">dynamic.c</span>
+<span class="td-line-number">   86   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"yaapt_emxutil.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt_emxutil.c"</span>
+<span class="td-line-number">   87   </span><span class="td-line-normal">yaapt_emxutil.c</span>
+<span class="td-line-number">   88   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"yaapt_emxAPI.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt_emxAPI.c"</span>
+<span class="td-line-number">   89   </span><span class="td-line-normal">yaapt_emxAPI.c</span>
+<span class="td-line-number">   90   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"rt_nonfinite.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\rt_nonfinite.c"</span>
+<span class="td-line-number">   91   </span><span class="td-line-normal">rt_nonfinite.c</span>
+<span class="td-line-number">   92   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"rtGetNaN.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\rtGetNaN.c"</span>
+<span class="td-line-number">   93   </span><span class="td-line-normal">rtGetNaN.c</span>
+<span class="td-line-number">   94   </span><span class="td-line-normal">	cl -c -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -GS -D_AMD64_=1 -DWIN64 -D_WIN64 -DWIN32 -D_WIN32 -W4 -D_WINNT -D_WIN32_WINNT=0x0502 -DNTDDI_VERSION=0x05020000 -D_WIN32_IE=0x0600 -DWINVER=0x0502 -D_MT -MT -D_CRT_SECURE_NO_WARNINGS  /Od /Oy- -DMODEL=yaapt -DHAVESTDIO -DUSE_RTMODEL -Fo"rtGetInf.obj" "D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\rtGetInf.c"</span>
+<span class="td-line-number">   95   </span><span class="td-line-normal">rtGetInf.c</span>
+<span class="td-line-number">   96   </span><span class="td-line-normal">	F:\MATLAB\sys\perl\win32\bin\perl.exe F:\MATLAB\rtw\c\tools\mkvc_lnk.pl yaapt.lnk yaapt_rtwutil.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj rdivide.obj colon.obj abs.obj any.obj Myfirls.obj cos.obj sinc.obj sin.obj mldivide.obj mean.obj sum.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj eml_sort.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj crs_corr.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj</span>
+<span class="td-line-number">   97   </span><span class="td-line-normal">### Creating static library ".\yaapt.lib" ...</span>
+<span class="td-line-number">   98   </span><span class="td-line-normal">	lib /nologo -out:.\yaapt.lib @yaapt.lnk</span>
+<span class="td-line-number">   99   </span><span class="td-line-normal">### Created: .\yaapt.lib</span>
+<span class="td-line-number">  100   </span><span class="td-line-normal">### Successfully generated all binary outputs.</span>
 </pre>
 </td></tr></table>
 
