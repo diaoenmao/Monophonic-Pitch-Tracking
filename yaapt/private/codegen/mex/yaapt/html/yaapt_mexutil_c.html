@@ -27,9 +27,9 @@
 <a name="15"><font color="#888888 "><i>   15   </i></font></a>  *location)
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><b>{</b>
 <a name="17"><font color="#888888 "><i>   17   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *pArray;
-<a name="18"><font color="#888888 "><i>   18   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m41;
+<a name="18"><font color="#888888 "><i>   18   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m40;
 <a name="19"><font color="#888888 "><i>   19   </i></font></a>  pArray = b;
-<a name="20"><font color="#888888 "><i>   20   </i></font></a>  <font color="#112266"><b>return</b></font> emlrtCallMATLABR2012b(sp, 1, &amp;m41, 1, &amp;pArray, <font color="#1122ff">&quot;message&quot;</font>, true,
+<a name="20"><font color="#888888 "><i>   20   </i></font></a>  <font color="#112266"><b>return</b></font> emlrtCallMATLABR2012b(sp, 1, &amp;m40, 1, &amp;pArray, <font color="#1122ff">&quot;message&quot;</font>, true,
 <a name="21"><font color="#888888 "><i>   21   </i></font></a>    location);
 <a name="22"><font color="#888888 "><i>   22   </i></font></a><b>}</b>
 <a name="23"><font color="#888888 "><i>   23   </i></font></a>
@@ -37,21 +37,21 @@
 <a name="25"><font color="#888888 "><i>   25   </i></font></a>  *c, <font color="#112266"><b>const</b></font> mxArray *d, emlrtMCInfo *location)
 <a name="26"><font color="#888888 "><i>   26   </i></font></a><b>{</b>
 <a name="27"><font color="#888888 "><i>   27   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *pArrays[3];
-<a name="28"><font color="#888888 "><i>   28   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m42;
+<a name="28"><font color="#888888 "><i>   28   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m41;
 <a name="29"><font color="#888888 "><i>   29   </i></font></a>  pArrays[0] = b;
 <a name="30"><font color="#888888 "><i>   30   </i></font></a>  pArrays[1] = c;
 <a name="31"><font color="#888888 "><i>   31   </i></font></a>  pArrays[2] = d;
-<a name="32"><font color="#888888 "><i>   32   </i></font></a>  <font color="#112266"><b>return</b></font> emlrtCallMATLABR2012b(sp, 1, &amp;m42, 3, pArrays, <font color="#1122ff">&quot;message&quot;</font>, true,
+<a name="32"><font color="#888888 "><i>   32   </i></font></a>  <font color="#112266"><b>return</b></font> emlrtCallMATLABR2012b(sp, 1, &amp;m41, 3, pArrays, <font color="#1122ff">&quot;message&quot;</font>, true,
 <a name="33"><font color="#888888 "><i>   33   </i></font></a>    location);
 <a name="34"><font color="#888888 "><i>   34   </i></font></a><b>}</b>
 <a name="35"><font color="#888888 "><i>   35   </i></font></a>
 <a name="36"><font color="#888888 "><i>   36   </i></font></a><font color="#112266"><b>const</b></font> mxArray *<a name="fcn_emlrt_marshallOut">emlrt_marshallOut</a>(<font color="#112266"><b>const</b></font> real_T u)
 <a name="37"><font color="#888888 "><i>   37   </i></font></a><b>{</b>
 <a name="38"><font color="#888888 "><i>   38   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *y;
-<a name="39"><font color="#888888 "><i>   39   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m38;
+<a name="39"><font color="#888888 "><i>   39   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m37;
 <a name="40"><font color="#888888 "><i>   40   </i></font></a>  y = NULL;
-<a name="41"><font color="#888888 "><i>   41   </i></font></a>  m38 = emlrtCreateDoubleScalar(u);
-<a name="42"><font color="#888888 "><i>   42   </i></font></a>  emlrtAssign(&amp;y, m38);
+<a name="41"><font color="#888888 "><i>   41   </i></font></a>  m37 = emlrtCreateDoubleScalar(u);
+<a name="42"><font color="#888888 "><i>   42   </i></font></a>  emlrtAssign(&amp;y, m37);
 <a name="43"><font color="#888888 "><i>   43   </i></font></a>  <font color="#112266"><b>return</b></font> y;
 <a name="44"><font color="#888888 "><i>   44   </i></font></a><b>}</b>
 <a name="45"><font color="#888888 "><i>   45   </i></font></a>

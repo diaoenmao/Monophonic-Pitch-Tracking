@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: mldivide.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 2.6</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 27-Oct-2015 00:20:18</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 13-Nov-2015 04:43:17</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include files */</i></font>
@@ -102,7 +102,7 @@
 <a name="90"><font color="#888888 "><i>   90   </i></font></a><b>{</b>
 <a name="91"><font color="#888888 "><i>   91   </i></font></a>  <font color="#112266"><b>double</b></font> b_A[5776];
 <a name="92"><font color="#888888 "><i>   92   </i></font></a>  <font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>char</b></font> ipiv[76];
-<a name="93"><font color="#888888 "><i>   93   </i></font></a>  <font color="#112266"><b>int</b></font> i24;
+<a name="93"><font color="#888888 "><i>   93   </i></font></a>  <font color="#112266"><b>int</b></font> i20;
 <a name="94"><font color="#888888 "><i>   94   </i></font></a>  <font color="#112266"><b>int</b></font> j;
 <a name="95"><font color="#888888 "><i>   95   </i></font></a>  <font color="#112266"><b>int</b></font> c;
 <a name="96"><font color="#888888 "><i>   96   </i></font></a>  <font color="#112266"><b>int</b></font> jA;
@@ -113,8 +113,8 @@
 <a name="101"><font color="#888888 "><i>  101   </i></font></a>  <font color="#112266"><b>int</b></font> b_j;
 <a name="102"><font color="#888888 "><i>  102   </i></font></a>  <font color="#112266"><b>int</b></font> ijA;
 <a name="103"><font color="#888888 "><i>  103   </i></font></a>  memcpy(&amp;b_A[0], &amp;A[0], 5776U * <font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
-<a name="104"><font color="#888888 "><i>  104   </i></font></a>  <font color="#112266"><b>for</b></font> (i24 = 0; i24 &lt; 76; i24++) <b>{</b>
-<a name="105"><font color="#888888 "><i>  105   </i></font></a>    ipiv[i24] = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>char</b></font>)(1 + i24);
+<a name="104"><font color="#888888 "><i>  104   </i></font></a>  <font color="#112266"><b>for</b></font> (i20 = 0; i20 &lt; 76; i20++) <b>{</b>
+<a name="105"><font color="#888888 "><i>  105   </i></font></a>    ipiv[i20] = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>char</b></font>)(1 + i20);
 <a name="106"><font color="#888888 "><i>  106   </i></font></a>  <b>}</b>
 <a name="107"><font color="#888888 "><i>  107   </i></font></a>
 <a name="108"><font color="#888888 "><i>  108   </i></font></a>  <font color="#112266"><b>for</b></font> (j = 0; j &lt; 75; j++) <b>{</b>
@@ -137,8 +137,8 @@
 <a name="125"><font color="#888888 "><i>  125   </i></font></a>        <a href="#fcn_eml_xswap" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_eml_xswap');" target="_self"><font color="#1122aa">eml_xswap</font></a>(b_A, j + 1, j + jA);
 <a name="126"><font color="#888888 "><i>  126   </i></font></a>      <b>}</b>
 <a name="127"><font color="#888888 "><i>  127   </i></font></a>
-<a name="128"><font color="#888888 "><i>  128   </i></font></a>      i24 = (c - j) + 76;
-<a name="129"><font color="#888888 "><i>  129   </i></font></a>      <font color="#112266"><b>for</b></font> (jA = c + 1; jA + 1 &lt;= i24; jA++) <b>{</b>
+<a name="128"><font color="#888888 "><i>  128   </i></font></a>      i20 = (c - j) + 76;
+<a name="129"><font color="#888888 "><i>  129   </i></font></a>      <font color="#112266"><b>for</b></font> (jA = c + 1; jA + 1 &lt;= i20; jA++) <b>{</b>
 <a name="130"><font color="#888888 "><i>  130   </i></font></a>        b_A[jA] /= b_A[c];
 <a name="131"><font color="#888888 "><i>  131   </i></font></a>      <b>}</b>
 <a name="132"><font color="#888888 "><i>  132   </i></font></a>    <b>}</b>
@@ -149,8 +149,8 @@
 <a name="137"><font color="#888888 "><i>  137   </i></font></a>      temp = b_A[jy];
 <a name="138"><font color="#888888 "><i>  138   </i></font></a>      <font color="#112266"><b>if</b></font> (b_A[jy] != 0.0) <b>{</b>
 <a name="139"><font color="#888888 "><i>  139   </i></font></a>        ix = c + 1;
-<a name="140"><font color="#888888 "><i>  140   </i></font></a>        i24 = (jA - j) + 152;
-<a name="141"><font color="#888888 "><i>  141   </i></font></a>        <font color="#112266"><b>for</b></font> (ijA = 77 + jA; ijA + 1 &lt;= i24; ijA++) <b>{</b>
+<a name="140"><font color="#888888 "><i>  140   </i></font></a>        i20 = (jA - j) + 152;
+<a name="141"><font color="#888888 "><i>  141   </i></font></a>        <font color="#112266"><b>for</b></font> (ijA = 77 + jA; ijA + 1 &lt;= i20; ijA++) <b>{</b>
 <a name="142"><font color="#888888 "><i>  142   </i></font></a>          b_A[ijA] += b_A[ix] * -temp;
 <a name="143"><font color="#888888 "><i>  143   </i></font></a>          ix++;
 <a name="144"><font color="#888888 "><i>  144   </i></font></a>        <b>}</b>

@@ -2,7 +2,7 @@
  * File: tm_trk.h
  *
  * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 27-Oct-2015 00:20:18
+ * C/C++ source code generated on  : 13-Nov-2015 04:43:17
  */
 
 #ifndef __TM_TRK_H__
@@ -20,8 +20,8 @@
 
 /* Function Declarations */
 extern void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
-                   *SPitch, const emxArray_real_T *pStd, emxArray_real_T *Pitch,
-                   emxArray_real_T *Merit);
+                   *SPitch, const double pStd_data[], const int pStd_size[1],
+                   emxArray_real_T *Pitch, emxArray_real_T *Merit);
 
 #endif
 

@@ -90,7 +90,11 @@ for i = 1:maxcands
          match1(j) = diff(j) < freq_thresh;
     end
 %     match1 =  (diff < freq_thresh);
-    match  =  ((1 - diff/freq_thresh) .* match1);
+    match = zeros(1,length(diff));
+    for j = 1:length(diff)
+         match(j) = ((1 - (diff(j)/freq_thresh)) * match1(j));
+    end
+%     match  =  ((1 - (diff./freq_thresh)) .* match1);
     Merit(i,:) = ((1+merit_boost)*Merit(i,:)).*match;
 end
 

@@ -66,11 +66,11 @@ static emlrtRSInfo mb_emlrtRSI = { 41, "eml_xgeru",
 static emlrtRSInfo nb_emlrtRSI = { 1, "xgeru",
   "F:\\MATLAB\\toolbox\\coder\\coder\\+coder\\+internal\\+blas\\xgeru.p" };
 
-static emlrtBCInfo bj_emlrtBCI = { 1, 5776, 1, 1, "", "ixamax",
+static emlrtBCInfo fj_emlrtBCI = { 1, 5776, 1, 1, "", "ixamax",
   "F:\\MATLAB\\toolbox\\coder\\coder\\+coder\\+internal\\+refblas\\ixamax.p", 0
 };
 
-static emlrtBCInfo cj_emlrtBCI = { 1, 5776, 1, 1, "", "xswap",
+static emlrtBCInfo gj_emlrtBCI = { 1, 5776, 1, 1, "", "xswap",
   "F:\\MATLAB\\toolbox\\coder\\coder\\+coder\\+internal\\+refblas\\xswap.p", 0 };
 
 /* Function Declarations */
@@ -136,9 +136,9 @@ static void eml_xswap(const emlrtStack *sp, real_T x[5776], int32_T ix0, int32_T
   ix = ix0;
   iy = iy0;
   for (k = 0; k < 76; k++) {
-    temp = x[emlrtDynamicBoundsCheckFastR2012b(ix, 1, 5776, &cj_emlrtBCI, &b_st)
+    temp = x[emlrtDynamicBoundsCheckFastR2012b(ix, 1, 5776, &gj_emlrtBCI, &b_st)
       - 1];
-    x[ix - 1] = x[emlrtDynamicBoundsCheckFastR2012b(iy, 1, 5776, &cj_emlrtBCI,
+    x[ix - 1] = x[emlrtDynamicBoundsCheckFastR2012b(iy, 1, 5776, &gj_emlrtBCI,
       &b_st) - 1];
     x[iy - 1] = temp;
     ix += 76;
@@ -260,7 +260,7 @@ void mldivide(const emlrtStack *sp, const real_T A[5776], real_T B[76])
     temp = muDoubleScalarAbs(b_A[c]);
     for (k = 2; k <= 76 - j; k++) {
       ix++;
-      emlrtDynamicBoundsCheckFastR2012b(ix + 1, 1, 5776, &bj_emlrtBCI, &h_st);
+      emlrtDynamicBoundsCheckFastR2012b(ix + 1, 1, 5776, &fj_emlrtBCI, &h_st);
       s = muDoubleScalarAbs(b_A[ix]);
       if (s > temp) {
         xi = k;

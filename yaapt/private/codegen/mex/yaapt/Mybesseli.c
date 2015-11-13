@@ -1387,7 +1387,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
 
         /* 'Mybesseli:231' for l = 1:nend */
         emlrtForLoopVectorCheckR2012b(1.0, 1.0, n - 1.0, mxDOUBLE_CLASS,
-          (int32_T)(n - 1.0), &sd_emlrtRTEI, sp);
+          (int32_T)(n - 1.0), &ud_emlrtRTEI, sp);
         idx = 0;
         b_emxInit_real_T(sp, &d_en, 1, &ob_emlrtRTEI, true);
         b_emxInit_real_T(sp, &e_en, 1, &ob_emlrtRTEI, true);

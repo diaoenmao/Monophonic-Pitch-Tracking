@@ -15,9 +15,9 @@ const mxArray *b_message(const emlrtStack *sp, const mxArray *b, emlrtMCInfo
   *location)
 {
   const mxArray *pArray;
-  const mxArray *m41;
+  const mxArray *m40;
   pArray = b;
-  return emlrtCallMATLABR2012b(sp, 1, &m41, 1, &pArray, "message", true,
+  return emlrtCallMATLABR2012b(sp, 1, &m40, 1, &pArray, "message", true,
     location);
 }
 
@@ -25,21 +25,21 @@ const mxArray *c_message(const emlrtStack *sp, const mxArray *b, const mxArray
   *c, const mxArray *d, emlrtMCInfo *location)
 {
   const mxArray *pArrays[3];
-  const mxArray *m42;
+  const mxArray *m41;
   pArrays[0] = b;
   pArrays[1] = c;
   pArrays[2] = d;
-  return emlrtCallMATLABR2012b(sp, 1, &m42, 3, pArrays, "message", true,
+  return emlrtCallMATLABR2012b(sp, 1, &m41, 3, pArrays, "message", true,
     location);
 }
 
 const mxArray *emlrt_marshallOut(const real_T u)
 {
   const mxArray *y;
-  const mxArray *m38;
+  const mxArray *m37;
   y = NULL;
-  m38 = emlrtCreateDoubleScalar(u);
-  emlrtAssign(&y, m38);
+  m37 = emlrtCreateDoubleScalar(u);
+  emlrtAssign(&y, m37);
   return y;
 }
 

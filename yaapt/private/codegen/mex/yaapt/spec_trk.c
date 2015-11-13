@@ -188,7 +188,7 @@ static emlrtRTEInfo lb_emlrtRTEI = { 175, 1, "spec_trk",
 static emlrtRTEInfo dc_emlrtRTEI = { 17, 9, "eml_li_find",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_li_find.m" };
 
-static emlrtRTEInfo qd_emlrtRTEI = { 84, 1, "spec_trk",
+static emlrtRTEInfo sd_emlrtRTEI = { 84, 1, "spec_trk",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\spec_trk.m" };
 
 static emlrtDCInfo i_emlrtDCI = { 87, 18, "spec_trk",
@@ -200,7 +200,7 @@ static emlrtBCInfo dc_emlrtBCI = { -1, -1, 87, 18, "Data", "spec_trk",
 static emlrtECInfo k_emlrtECI = { 2, 87, 18, "spec_trk",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\spec_trk.m" };
 
-static emlrtRTEInfo rd_emlrtRTEI = { 93, 9, "spec_trk",
+static emlrtRTEInfo td_emlrtRTEI = { 93, 9, "spec_trk",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\spec_trk.m" };
 
 static emlrtECInfo l_emlrtECI = { 2, 94, 39, "spec_trk",
@@ -383,7 +383,7 @@ static emlrtDCInfo s_emlrtDCI = { 94, 13, "spec_trk",
 static emlrtDCInfo eb_emlrtDCI = { 17, 37, "eml_li_find",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_li_find.m", 4 };
 
-static emlrtBCInfo dj_emlrtBCI = { -1, -1, 1, 1, "", "xaxpy",
+static emlrtBCInfo hj_emlrtBCI = { -1, -1, 1, 1, "", "xaxpy",
   "F:\\MATLAB\\toolbox\\coder\\coder\\+coder\\+internal\\+blas\\xaxpy.p", 0 };
 
 static emlrtRSInfo nk_emlrtRSI = { 14, "eml_li_find",
@@ -487,9 +487,9 @@ void eml_xaxpy(const emlrtStack *sp, int32_T n, real_T a, const emxArray_real_T 
   a_t = (double *)(&a);
   i41 = y->size[1];
   yiy0_t = (double *)(&y->data[emlrtDynamicBoundsCheckFastR2012b(iy0, 1, i41,
-    &dj_emlrtBCI, &b_st) - 1]);
+    &hj_emlrtBCI, &b_st) - 1]);
   i41 = x->size[1];
-  emlrtDynamicBoundsCheckFastR2012b(1, 1, i41, &dj_emlrtBCI, &b_st);
+  emlrtDynamicBoundsCheckFastR2012b(1, 1, i41, &hj_emlrtBCI, &b_st);
   xix0_t = (double *)(&x->data[0]);
   daxpy(&n_t, a_t, xix0_t, &incx_t, yiy0_t, &incy_t);
 }
@@ -895,7 +895,7 @@ void spec_trk(yaaptStackData *SD, const emlrtStack *sp, emxArray_real_T *Data,
 
   /* 'spec_trk:84' for frame = 1:numframes */
   emlrtForLoopVectorCheckR2012b(1.0, 1.0, numframes, mxDOUBLE_CLASS, (int32_T)
-    numframes, &qd_emlrtRTEI, sp);
+    numframes, &sd_emlrtRTEI, sp);
   b_ix = 0;
   b_emxInit_real_T(sp, &Magnit, 1, &gb_emlrtRTEI, true);
   emxInit_real_T(sp, &VCandsMerit, 2, &ib_emlrtRTEI, true);
@@ -994,7 +994,7 @@ void spec_trk(yaaptStackData *SD, const emlrtStack *sp, emxArray_real_T *Data,
       /* 'spec_trk:93' for k=min_SHC:max_SHC */
       ix = (int32_T)(max_SHC + (1.0 - min_SHC));
       emlrtForLoopVectorCheckR2012b(min_SHC, 1.0, max_SHC, mxDOUBLE_CLASS, ix,
-        &rd_emlrtRTEI, sp);
+        &td_emlrtRTEI, sp);
       i = 0;
       while (i <= ix - 1) {
         SPitch_temp_end = min_SHC + (real_T)i;

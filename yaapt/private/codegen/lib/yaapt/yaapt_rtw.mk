@@ -2,7 +2,7 @@
 ## Makefile generated for MATLAB file/project 'yaapt'. 
 ## 
 ## Makefile     : yaapt_rtw.mk
-## Generated on : Mon Oct 26 23:41:39 2015
+## Generated on : Fri Nov 13 04:13:48 2015
 ## MATLAB Coder version: 2.6 (R2014a)
 ## 
 ## Build Info:
@@ -204,7 +204,7 @@ DEFINES = $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)\codegen\lib\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_initialize.c $(START_DIR)\codegen\lib\yaapt\yaapt_terminate.c $(START_DIR)\codegen\lib\yaapt\yaapt.c $(START_DIR)\codegen\lib\yaapt\rdivide.c $(START_DIR)\codegen\lib\yaapt\colon.c $(START_DIR)\codegen\lib\yaapt\abs.c $(START_DIR)\codegen\lib\yaapt\any.c $(START_DIR)\codegen\lib\yaapt\Myfirls.c $(START_DIR)\codegen\lib\yaapt\cos.c $(START_DIR)\codegen\lib\yaapt\sinc.c $(START_DIR)\codegen\lib\yaapt\sin.c $(START_DIR)\codegen\lib\yaapt\mldivide.c $(START_DIR)\codegen\lib\yaapt\mean.c $(START_DIR)\codegen\lib\yaapt\sum.c $(START_DIR)\codegen\lib\yaapt\exp.c $(START_DIR)\codegen\lib\yaapt\filter.c $(START_DIR)\codegen\lib\yaapt\fix.c $(START_DIR)\codegen\lib\yaapt\Myspecgram.c $(START_DIR)\codegen\lib\yaapt\Myhanning.c $(START_DIR)\codegen\lib\yaapt\fft.c $(START_DIR)\codegen\lib\yaapt\spec_trk.c $(START_DIR)\codegen\lib\yaapt\mod.c $(START_DIR)\codegen\lib\yaapt\Mykaiser.c $(START_DIR)\codegen\lib\yaapt\Mybesseli.c $(START_DIR)\codegen\lib\yaapt\repmat.c $(START_DIR)\codegen\lib\yaapt\all.c $(START_DIR)\codegen\lib\yaapt\prod.c $(START_DIR)\codegen\lib\yaapt\peaks.c $(START_DIR)\codegen\lib\yaapt\eml_sort.c $(START_DIR)\codegen\lib\yaapt\std.c $(START_DIR)\codegen\lib\yaapt\Mymedfilt1.c $(START_DIR)\codegen\lib\yaapt\median.c $(START_DIR)\codegen\lib\yaapt\dynamic5.c $(START_DIR)\codegen\lib\yaapt\interp1.c $(START_DIR)\codegen\lib\yaapt\pchip.c $(START_DIR)\codegen\lib\yaapt\tm_trk.c $(START_DIR)\codegen\lib\yaapt\crs_corr.c $(START_DIR)\codegen\lib\yaapt\cat.c $(START_DIR)\codegen\lib\yaapt\dynamic.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\lib\yaapt\rt_nonfinite.c $(START_DIR)\codegen\lib\yaapt\rtGetNaN.c $(START_DIR)\codegen\lib\yaapt\rtGetInf.c
+SRCS = $(START_DIR)\codegen\lib\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_initialize.c $(START_DIR)\codegen\lib\yaapt\yaapt_terminate.c $(START_DIR)\codegen\lib\yaapt\yaapt.c $(START_DIR)\codegen\lib\yaapt\rdivide.c $(START_DIR)\codegen\lib\yaapt\abs.c $(START_DIR)\codegen\lib\yaapt\any.c $(START_DIR)\codegen\lib\yaapt\Myfirls.c $(START_DIR)\codegen\lib\yaapt\sqrt.c $(START_DIR)\codegen\lib\yaapt\cos.c $(START_DIR)\codegen\lib\yaapt\sinc.c $(START_DIR)\codegen\lib\yaapt\sin.c $(START_DIR)\codegen\lib\yaapt\mldivide.c $(START_DIR)\codegen\lib\yaapt\mean.c $(START_DIR)\codegen\lib\yaapt\sum.c $(START_DIR)\codegen\lib\yaapt\exp.c $(START_DIR)\codegen\lib\yaapt\filter.c $(START_DIR)\codegen\lib\yaapt\fix.c $(START_DIR)\codegen\lib\yaapt\Myspecgram.c $(START_DIR)\codegen\lib\yaapt\Myhanning.c $(START_DIR)\codegen\lib\yaapt\fft.c $(START_DIR)\codegen\lib\yaapt\spec_trk.c $(START_DIR)\codegen\lib\yaapt\mod.c $(START_DIR)\codegen\lib\yaapt\Mykaiser.c $(START_DIR)\codegen\lib\yaapt\Mybesseli.c $(START_DIR)\codegen\lib\yaapt\repmat.c $(START_DIR)\codegen\lib\yaapt\all.c $(START_DIR)\codegen\lib\yaapt\prod.c $(START_DIR)\codegen\lib\yaapt\peaks.c $(START_DIR)\codegen\lib\yaapt\eml_sort.c $(START_DIR)\codegen\lib\yaapt\std.c $(START_DIR)\codegen\lib\yaapt\Mymedfilt1.c $(START_DIR)\codegen\lib\yaapt\median.c $(START_DIR)\codegen\lib\yaapt\dynamic5.c $(START_DIR)\codegen\lib\yaapt\interp1.c $(START_DIR)\codegen\lib\yaapt\pchip.c $(START_DIR)\codegen\lib\yaapt\tm_trk.c $(START_DIR)\codegen\lib\yaapt\crs_corr.c $(START_DIR)\codegen\lib\yaapt\cat.c $(START_DIR)\codegen\lib\yaapt\dynamic.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\lib\yaapt\rt_nonfinite.c $(START_DIR)\codegen\lib\yaapt\rtGetNaN.c $(START_DIR)\codegen\lib\yaapt\rtGetInf.c
 
 ALL_SRCS = $(SRCS)
 
@@ -212,7 +212,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = yaapt_rtwutil.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj rdivide.obj colon.obj abs.obj any.obj Myfirls.obj cos.obj sinc.obj sin.obj mldivide.obj mean.obj sum.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj eml_sort.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj crs_corr.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
+OBJS = yaapt_rtwutil.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj rdivide.obj abs.obj any.obj Myfirls.obj sqrt.obj cos.obj sinc.obj sin.obj mldivide.obj mean.obj sum.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj eml_sort.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj crs_corr.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
 
 ALL_OBJS = $(OBJS)
 

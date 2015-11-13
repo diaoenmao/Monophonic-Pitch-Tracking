@@ -516,7 +516,7 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 
     /* 'Mybesseli:231' for l = 1:nend */
     emlrtForLoopVectorCheckR2012b(1.0, 1.0, c_n - 1.0, mxDOUBLE_CLASS, (int32_T)
-                                  (c_n - 1.0), &sd_emlrtRTEI, &st);
+                                  (c_n - 1.0), &ud_emlrtRTEI, &st);
     k = 0;
     exitg1 = false;
     while ((!exitg1) && (k <= (int32_T)nend - 1)) {

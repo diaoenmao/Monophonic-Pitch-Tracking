@@ -25,190 +25,190 @@ static emlrtRSInfo hj_emlrtRSI = { 96, "dynamic",
 static emlrtRSInfo ij_emlrtRSI = { 31, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo kd_emlrtRTEI = { 1, 23, "dynamic",
+static emlrtRTEInfo md_emlrtRTEI = { 1, 23, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRTEInfo ld_emlrtRTEI = { 49, 1, "dynamic",
+static emlrtRTEInfo nd_emlrtRTEI = { 49, 1, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRTEInfo md_emlrtRTEI = { 63, 1, "dynamic",
+static emlrtRTEInfo od_emlrtRTEI = { 63, 1, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRTEInfo nd_emlrtRTEI = { 66, 1, "dynamic",
+static emlrtRTEInfo pd_emlrtRTEI = { 66, 1, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtBCInfo sg_emlrtBCI = { -1, -1, 80, 50, "Energy", "dynamic",
+static emlrtBCInfo wg_emlrtBCI = { -1, -1, 80, 50, "Energy", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo tg_emlrtBCI = { -1, -1, 80, 38, "Energy", "dynamic",
+static emlrtBCInfo xg_emlrtBCI = { -1, -1, 80, 38, "Energy", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ug_emlrtBCI = { -1, -1, 75, 62, "Pitch", "dynamic",
+static emlrtBCInfo yg_emlrtBCI = { -1, -1, 75, 62, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo vg_emlrtBCI = { -1, -1, 75, 60, "Pitch", "dynamic",
+static emlrtBCInfo ah_emlrtBCI = { -1, -1, 75, 60, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo wg_emlrtBCI = { -1, -1, 75, 51, "Pitch", "dynamic",
+static emlrtBCInfo bh_emlrtBCI = { -1, -1, 75, 51, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo xg_emlrtBCI = { -1, -1, 75, 49, "Pitch", "dynamic",
+static emlrtBCInfo ch_emlrtBCI = { -1, -1, 75, 49, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo yg_emlrtBCI = { -1, -1, 49, 20, "Pitch", "dynamic",
+static emlrtBCInfo dh_emlrtBCI = { -1, -1, 49, 20, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ah_emlrtBCI = { -1, -1, 50, 19, "BestPitch", "dynamic",
+static emlrtBCInfo eh_emlrtBCI = { -1, -1, 50, 19, "BestPitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo bh_emlrtBCI = { -1, -1, 101, 3, "FinPitch", "dynamic",
+static emlrtBCInfo fh_emlrtBCI = { -1, -1, 101, 3, "FinPitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ch_emlrtBCI = { -1, -1, 101, 23, "Pitch", "dynamic",
+static emlrtBCInfo gh_emlrtBCI = { -1, -1, 101, 23, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo dh_emlrtBCI = { -1, -1, 101, 23, "Path", "dynamic",
+static emlrtBCInfo hh_emlrtBCI = { -1, -1, 101, 23, "Path", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo eh_emlrtBCI = { -1, -1, 101, 31, "Pitch", "dynamic",
+static emlrtBCInfo ih_emlrtBCI = { -1, -1, 101, 31, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo fh_emlrtBCI = { -1, -1, 100, 14, "PRED", "path1",
+static emlrtBCInfo jh_emlrtBCI = { -1, -1, 100, 14, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo gh_emlrtBCI = { -1, -1, 74, 12, "CCOST", "path1",
+static emlrtBCInfo kh_emlrtBCI = { -1, -1, 74, 12, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo hh_emlrtBCI = { -1, -1, 75, 22, "CCOST", "path1",
+static emlrtBCInfo lh_emlrtBCI = { -1, -1, 75, 22, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ih_emlrtBCI = { -1, -1, 69, 9, "PCOST", "path1",
+static emlrtBCInfo mh_emlrtBCI = { -1, -1, 69, 9, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo jh_emlrtBCI = { -1, -1, 69, 18, "CCOST", "path1",
+static emlrtBCInfo nh_emlrtBCI = { -1, -1, 69, 18, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo kh_emlrtBCI = { -1, -1, 51, 9, "CCOST", "path1",
+static emlrtBCInfo oh_emlrtBCI = { -1, -1, 51, 9, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo lh_emlrtBCI = { -1, -1, 60, 12, "CCOST", "path1",
+static emlrtBCInfo ph_emlrtBCI = { -1, -1, 60, 12, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo mh_emlrtBCI = { -1, -1, 64, 9, "CCOST", "path1",
+static emlrtBCInfo qh_emlrtBCI = { -1, -1, 64, 9, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo nh_emlrtBCI = { -1, -1, 64, 18, "CCOST", "path1",
+static emlrtBCInfo rh_emlrtBCI = { -1, -1, 64, 18, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo oh_emlrtBCI = { -1, -1, 64, 33, "Local", "path1",
+static emlrtBCInfo sh_emlrtBCI = { -1, -1, 64, 33, "Local", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ph_emlrtBCI = { -1, -1, 54, 16, "PCOST", "path1",
+static emlrtBCInfo th_emlrtBCI = { -1, -1, 54, 16, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo qh_emlrtBCI = { -1, -1, 54, 31, "Trans", "path1",
+static emlrtBCInfo uh_emlrtBCI = { -1, -1, 54, 31, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo rh_emlrtBCI = { -1, -1, 54, 33, "Trans", "path1",
+static emlrtBCInfo vh_emlrtBCI = { -1, -1, 54, 33, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo sh_emlrtBCI = { -1, -1, 54, 39, "CCOST", "path1",
+static emlrtBCInfo wh_emlrtBCI = { -1, -1, 54, 39, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo th_emlrtBCI = { -1, -1, 55, 17, "CCOST", "path1",
+static emlrtBCInfo xh_emlrtBCI = { -1, -1, 55, 17, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo uh_emlrtBCI = { -1, -1, 55, 26, "PCOST", "path1",
+static emlrtBCInfo yh_emlrtBCI = { -1, -1, 55, 26, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo vh_emlrtBCI = { -1, -1, 55, 41, "Trans", "path1",
+static emlrtBCInfo ai_emlrtBCI = { -1, -1, 55, 41, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo wh_emlrtBCI = { -1, -1, 55, 43, "Trans", "path1",
+static emlrtBCInfo bi_emlrtBCI = { -1, -1, 55, 43, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo xh_emlrtBCI = { -1, -1, 56, 22, "PRED", "path1",
+static emlrtBCInfo ci_emlrtBCI = { -1, -1, 56, 22, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo yh_emlrtBCI = { -1, -1, 46, 5, "PCOST", "path1",
+static emlrtBCInfo di_emlrtBCI = { -1, -1, 46, 5, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ai_emlrtBCI = { -1, -1, 46, 20, "Local", "path1",
+static emlrtBCInfo ei_emlrtBCI = { -1, -1, 46, 20, "Local", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo bi_emlrtBCI = { -1, -1, 74, 24, "Pitch", "dynamic",
+static emlrtBCInfo fi_emlrtBCI = { -1, -1, 74, 24, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ci_emlrtBCI = { -1, -1, 74, 26, "Pitch", "dynamic",
+static emlrtBCInfo gi_emlrtBCI = { -1, -1, 74, 26, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo di_emlrtBCI = { -1, -1, 74, 44, "Pitch", "dynamic",
+static emlrtBCInfo hi_emlrtBCI = { -1, -1, 74, 44, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ei_emlrtBCI = { -1, -1, 74, 46, "Pitch", "dynamic",
+static emlrtBCInfo ii_emlrtBCI = { -1, -1, 74, 46, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo fi_emlrtBCI = { -1, -1, 75, 23, "Trans", "dynamic",
+static emlrtBCInfo ji_emlrtBCI = { -1, -1, 75, 23, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo gi_emlrtBCI = { -1, -1, 75, 25, "Trans", "dynamic",
+static emlrtBCInfo ki_emlrtBCI = { -1, -1, 75, 25, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo hi_emlrtBCI = { -1, -1, 75, 27, "Trans", "dynamic",
+static emlrtBCInfo li_emlrtBCI = { -1, -1, 75, 27, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ii_emlrtBCI = { -1, -1, 79, 23, "Pitch", "dynamic",
+static emlrtBCInfo mi_emlrtBCI = { -1, -1, 79, 23, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ji_emlrtBCI = { -1, -1, 79, 25, "Pitch", "dynamic",
+static emlrtBCInfo ni_emlrtBCI = { -1, -1, 79, 25, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ki_emlrtBCI = { -1, -1, 79, 40, "Pitch", "dynamic",
+static emlrtBCInfo oi_emlrtBCI = { -1, -1, 79, 40, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo li_emlrtBCI = { -1, -1, 79, 42, "Pitch", "dynamic",
+static emlrtBCInfo pi_emlrtBCI = { -1, -1, 79, 42, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo mi_emlrtBCI = { -1, -1, 79, 60, "Pitch", "dynamic",
+static emlrtBCInfo qi_emlrtBCI = { -1, -1, 79, 60, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ni_emlrtBCI = { -1, -1, 79, 62, "Pitch", "dynamic",
+static emlrtBCInfo ri_emlrtBCI = { -1, -1, 79, 62, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo oi_emlrtBCI = { -1, -1, 79, 76, "Pitch", "dynamic",
+static emlrtBCInfo si_emlrtBCI = { -1, -1, 79, 76, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo pi_emlrtBCI = { -1, -1, 79, 78, "Pitch", "dynamic",
+static emlrtBCInfo ti_emlrtBCI = { -1, -1, 79, 78, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo qi_emlrtBCI = { -1, -1, 81, 23, "Trans", "dynamic",
+static emlrtBCInfo ui_emlrtBCI = { -1, -1, 81, 23, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ri_emlrtBCI = { -1, -1, 81, 25, "Trans", "dynamic",
+static emlrtBCInfo vi_emlrtBCI = { -1, -1, 81, 25, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo si_emlrtBCI = { -1, -1, 81, 27, "Trans", "dynamic",
+static emlrtBCInfo wi_emlrtBCI = { -1, -1, 81, 27, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ti_emlrtBCI = { -1, -1, 85, 24, "Pitch", "dynamic",
+static emlrtBCInfo xi_emlrtBCI = { -1, -1, 85, 24, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo ui_emlrtBCI = { -1, -1, 85, 26, "Pitch", "dynamic",
+static emlrtBCInfo yi_emlrtBCI = { -1, -1, 85, 26, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo vi_emlrtBCI = { -1, -1, 85, 45, "Pitch", "dynamic",
+static emlrtBCInfo aj_emlrtBCI = { -1, -1, 85, 45, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo wi_emlrtBCI = { -1, -1, 85, 47, "Pitch", "dynamic",
+static emlrtBCInfo bj_emlrtBCI = { -1, -1, 85, 47, "Pitch", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo xi_emlrtBCI = { -1, -1, 86, 23, "Trans", "dynamic",
+static emlrtBCInfo cj_emlrtBCI = { -1, -1, 86, 23, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo yi_emlrtBCI = { -1, -1, 86, 25, "Trans", "dynamic",
+static emlrtBCInfo dj_emlrtBCI = { -1, -1, 86, 25, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
-static emlrtBCInfo aj_emlrtBCI = { -1, -1, 86, 27, "Trans", "dynamic",
+static emlrtBCInfo ej_emlrtBCI = { -1, -1, 86, 27, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
 /* Function Definitions */
@@ -226,7 +226,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   int32_T i38;
   int32_T b_Pitch;
   emxArray_boolean_T *b_BestPitch;
-  emxArray_int32_T *r21;
+  emxArray_int32_T *r20;
   emxArray_real_T *c_BestPitch;
   int32_T i39;
   emxArray_real_T *Local;
@@ -252,7 +252,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &BestPitch, 2, &ld_emlrtRTEI, true);
+  emxInit_real_T(sp, &BestPitch, 2, &nd_emlrtRTEI, true);
 
   /* DYNAMIC Dynamic programming for YAAPT pitch tracking */
   /*  */
@@ -299,51 +299,51 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   loop_ub = Pitch->size[1];
   i37 = Pitch->size[0];
   i38 = Pitch->size[0] - 1;
-  b_Pitch = emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &yg_emlrtBCI, sp);
+  b_Pitch = emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &dh_emlrtBCI, sp);
   i37 = BestPitch->size[0] * BestPitch->size[1];
   BestPitch->size[0] = 1;
   BestPitch->size[1] = loop_ub;
   emxEnsureCapacity(sp, (emxArray__common *)BestPitch, i37, (int32_T)sizeof
-                    (real_T), &kd_emlrtRTEI);
+                    (real_T), &md_emlrtRTEI);
   for (i37 = 0; i37 < loop_ub; i37++) {
     BestPitch->data[BestPitch->size[0] * i37] = Pitch->data[(b_Pitch +
       Pitch->size[0] * i37) - 1];
   }
 
-  emxInit_boolean_T(sp, &b_BestPitch, 2, &kd_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &b_BestPitch, 2, &md_emlrtRTEI, true);
 
   /* 'dynamic:50' mean_pitch = mean(BestPitch(BestPitch>0)); */
   i37 = b_BestPitch->size[0] * b_BestPitch->size[1];
   b_BestPitch->size[0] = 1;
   b_BestPitch->size[1] = BestPitch->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)b_BestPitch, i37, (int32_T)sizeof
-                    (boolean_T), &kd_emlrtRTEI);
+                    (boolean_T), &md_emlrtRTEI);
   loop_ub = BestPitch->size[0] * BestPitch->size[1];
   for (i37 = 0; i37 < loop_ub; i37++) {
     b_BestPitch->data[i37] = (BestPitch->data[i37] > 0.0);
   }
 
-  b_emxInit_int32_T(sp, &r21, 2, &kd_emlrtRTEI, true);
-  emxInit_real_T(sp, &c_BestPitch, 2, &kd_emlrtRTEI, true);
+  b_emxInit_int32_T(sp, &r20, 2, &md_emlrtRTEI, true);
+  emxInit_real_T(sp, &c_BestPitch, 2, &md_emlrtRTEI, true);
   st.site = &gj_emlrtRSI;
-  eml_li_find(&st, b_BestPitch, r21);
+  eml_li_find(&st, b_BestPitch, r20);
   i37 = Pitch->size[1];
   i38 = c_BestPitch->size[0] * c_BestPitch->size[1];
   c_BestPitch->size[0] = 1;
-  c_BestPitch->size[1] = r21->size[1];
+  c_BestPitch->size[1] = r20->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)c_BestPitch, i38, (int32_T)sizeof
-                    (real_T), &kd_emlrtRTEI);
-  loop_ub = r21->size[0] * r21->size[1];
+                    (real_T), &md_emlrtRTEI);
+  loop_ub = r20->size[0] * r20->size[1];
   emxFree_boolean_T(&b_BestPitch);
   for (i38 = 0; i38 < loop_ub; i38++) {
-    i39 = r21->data[i38];
+    i39 = r20->data[i38];
     c_BestPitch->data[i38] = BestPitch->data[emlrtDynamicBoundsCheckFastR2012b
-      (i39, 1, i37, &ah_emlrtBCI, sp) - 1];
+      (i39, 1, i37, &eh_emlrtBCI, sp) - 1];
   }
 
-  emxFree_int32_T(&r21);
+  emxFree_int32_T(&r20);
   emxFree_real_T(&BestPitch);
-  emxInit_real_T(sp, &Local, 2, &md_emlrtRTEI, true);
+  emxInit_real_T(sp, &Local, 2, &od_emlrtRTEI, true);
   st.site = &gj_emlrtRSI;
   mean_pitch = mean(&st, c_BestPitch);
 
@@ -361,14 +361,14 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   Local->size[0] = Merit->size[0];
   Local->size[1] = Merit->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)Local, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   loop_ub = Merit->size[0] * Merit->size[1];
   emxFree_real_T(&c_BestPitch);
   for (i37 = 0; i37 < loop_ub; i37++) {
     Local->data[i37] = 1.0 - Merit->data[i37];
   }
 
-  c_emxInit_real_T(sp, &Trans, 3, &nd_emlrtRTEI, true);
+  c_emxInit_real_T(sp, &Trans, 3, &pd_emlrtRTEI, true);
 
   /*  Initialization for the formation of the transition cost matrix */
   /* 'dynamic:66' Trans  = ones(numcands,numcands,numframes); */
@@ -376,17 +376,17 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   i37 = Trans->size[0] * Trans->size[1] * Trans->size[2];
   Trans->size[0] = b_Pitch;
   emxEnsureCapacity(sp, (emxArray__common *)Trans, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   b_Pitch = Pitch->size[0];
   i37 = Trans->size[0] * Trans->size[1] * Trans->size[2];
   Trans->size[1] = b_Pitch;
   emxEnsureCapacity(sp, (emxArray__common *)Trans, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   b_Pitch = Pitch->size[1];
   i37 = Trans->size[0] * Trans->size[1] * Trans->size[2];
   Trans->size[2] = b_Pitch;
   emxEnsureCapacity(sp, (emxArray__common *)Trans, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   loop_ub = Pitch->size[0] * Pitch->size[0] * Pitch->size[1];
   for (i37 = 0; i37 < loop_ub; i37++) {
     Trans->data[i37] = 1.0;
@@ -408,37 +408,37 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
         i37 = Pitch->size[0];
         i38 = Pitch->size[1];
         if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37,
-              &bi_emlrtBCI, sp) + Pitch->size[0] *
+              &fi_emlrtBCI, sp) + Pitch->size[0] *
                          (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i38,
-               &ci_emlrtBCI, sp) - 1)) - 1] > 0.0) {
+               &gi_emlrtBCI, sp) - 1)) - 1] > 0.0) {
           i37 = Pitch->size[0];
           i38 = Pitch->size[1];
           if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-                &di_emlrtBCI, sp) + Pitch->size[0] *
+                &hi_emlrtBCI, sp) + Pitch->size[0] *
                            (emlrtDynamicBoundsCheckFastR2012b(i + 1, 1, i38,
-                 &ei_emlrtBCI, sp) - 1)) - 1] > 0.0) {
+                 &ii_emlrtBCI, sp) - 1)) - 1] > 0.0) {
             /* 'dynamic:75' Trans(k,j,i) = dp_w1*(abs(Pitch(j,i)-Pitch(k,i-1))/mean_pitch); */
             i37 = Pitch->size[0];
             i38 = (b_Pitch - 1) + 1;
-            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &xg_emlrtBCI, sp);
+            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &ch_emlrtBCI, sp);
             i37 = Pitch->size[1];
             i38 = (int32_T)(2.0 + (real_T)i);
-            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &wg_emlrtBCI, sp);
+            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &bh_emlrtBCI, sp);
             i37 = Pitch->size[0];
             i38 = (loop_ub - 1) + 1;
-            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &vg_emlrtBCI, sp);
+            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &ah_emlrtBCI, sp);
             i37 = Pitch->size[1];
             i38 = (int32_T)((2.0 + (real_T)i) - 1.0);
-            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &ug_emlrtBCI, sp);
+            emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &yg_emlrtBCI, sp);
             i37 = Trans->size[0];
             i38 = Trans->size[1];
             i39 = Trans->size[2];
             Trans->data[((emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-              &fi_emlrtBCI, sp) + Trans->size[0] *
+              &ji_emlrtBCI, sp) + Trans->size[0] *
                           (emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i38,
-              &gi_emlrtBCI, sp) - 1)) + Trans->size[0] * Trans->size[1] *
+              &ki_emlrtBCI, sp) - 1)) + Trans->size[0] * Trans->size[1] *
                          (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i39,
-              &hi_emlrtBCI, sp) - 1)) - 1] = 0.15 * (muDoubleScalarAbs
+              &li_emlrtBCI, sp) - 1)) - 1] = 0.15 * (muDoubleScalarAbs
               (Pitch->data[(b_Pitch + Pitch->size[0] * (i + 1)) - 1] -
                Pitch->data[(loop_ub + Pitch->size[0] * i) - 1]) / mean_pitch);
           }
@@ -451,15 +451,15 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
         guard1 = false;
         guard2 = false;
         if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37,
-              &ii_emlrtBCI, sp) + Pitch->size[0] *
+              &mi_emlrtBCI, sp) + Pitch->size[0] *
                          (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i38,
-               &ji_emlrtBCI, sp) - 1)) - 1] == 0.0) {
+               &ni_emlrtBCI, sp) - 1)) - 1] == 0.0) {
           i37 = Pitch->size[0];
           i38 = Pitch->size[1];
           if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-                &ki_emlrtBCI, sp) + Pitch->size[0] *
+                &oi_emlrtBCI, sp) + Pitch->size[0] *
                            (emlrtDynamicBoundsCheckFastR2012b(i + 1, 1, i38,
-                 &li_emlrtBCI, sp) - 1)) - 1] > 0.0) {
+                 &pi_emlrtBCI, sp) - 1)) - 1] > 0.0) {
             guard1 = true;
           } else {
             guard2 = true;
@@ -472,15 +472,15 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
           i37 = Pitch->size[0];
           i38 = Pitch->size[1];
           if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37,
-                &mi_emlrtBCI, sp) + Pitch->size[0] *
+                &qi_emlrtBCI, sp) + Pitch->size[0] *
                            (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i38,
-                 &ni_emlrtBCI, sp) - 1)) - 1] > 0.0) {
+                 &ri_emlrtBCI, sp) - 1)) - 1] > 0.0) {
             i37 = Pitch->size[0];
             i38 = Pitch->size[1];
             if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-                  &oi_emlrtBCI, sp) + Pitch->size[0] *
+                  &si_emlrtBCI, sp) + Pitch->size[0] *
                              (emlrtDynamicBoundsCheckFastR2012b(i + 1, 1, i38,
-                   &pi_emlrtBCI, sp) - 1)) - 1] == 0.0) {
+                   &ti_emlrtBCI, sp) - 1)) - 1] == 0.0) {
               guard1 = true;
             }
           }
@@ -490,21 +490,21 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
           /* 'dynamic:80' benefit = min(1, abs(Energy(i-1)-Energy(i))); */
           i37 = Energy->size[1];
           i38 = (int32_T)((2.0 + (real_T)i) - 1.0);
-          emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &tg_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &xg_emlrtBCI, sp);
           i37 = Energy->size[1];
           i38 = (int32_T)(2.0 + (real_T)i);
-          emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &sg_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckFastR2012b(i38, 1, i37, &wg_emlrtBCI, sp);
 
           /* 'dynamic:81' Trans(k,j,i) =  dp_w2*(1-benefit); */
           i37 = Trans->size[0];
           i38 = Trans->size[1];
           i39 = Trans->size[2];
           Trans->data[((emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-            &qi_emlrtBCI, sp) + Trans->size[0] *
+            &ui_emlrtBCI, sp) + Trans->size[0] *
                         (emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i38,
-            &ri_emlrtBCI, sp) - 1)) + Trans->size[0] * Trans->size[1] *
+            &vi_emlrtBCI, sp) - 1)) + Trans->size[0] * Trans->size[1] *
                        (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i39,
-            &si_emlrtBCI, sp) - 1)) - 1] = 0.5 * (1.0 - muDoubleScalarMin(1.0,
+            &wi_emlrtBCI, sp) - 1)) - 1] = 0.5 * (1.0 - muDoubleScalarMin(1.0,
             muDoubleScalarAbs(Energy->data[i] - Energy->data[i + 1])));
         }
 
@@ -513,25 +513,25 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
         i37 = Pitch->size[0];
         i38 = Pitch->size[1];
         if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37,
-              &ti_emlrtBCI, sp) + Pitch->size[0] *
+              &xi_emlrtBCI, sp) + Pitch->size[0] *
                          (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i38,
-               &ui_emlrtBCI, sp) - 1)) - 1] == 0.0) {
+               &yi_emlrtBCI, sp) - 1)) - 1] == 0.0) {
           i37 = Pitch->size[0];
           i38 = Pitch->size[1];
           if (Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-                &vi_emlrtBCI, sp) + Pitch->size[0] *
+                &aj_emlrtBCI, sp) + Pitch->size[0] *
                            (emlrtDynamicBoundsCheckFastR2012b(i + 1, 1, i38,
-                 &wi_emlrtBCI, sp) - 1)) - 1] == 0.0) {
+                 &bj_emlrtBCI, sp) - 1)) - 1] == 0.0) {
             /* 'dynamic:86' Trans(k,j,i) =  dp_w3; */
             i37 = Trans->size[0];
             i38 = Trans->size[1];
             i39 = Trans->size[2];
             Trans->data[((emlrtDynamicBoundsCheckFastR2012b(loop_ub, 1, i37,
-              &xi_emlrtBCI, sp) + Trans->size[0] *
+              &cj_emlrtBCI, sp) + Trans->size[0] *
                           (emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i38,
-              &yi_emlrtBCI, sp) - 1)) + Trans->size[0] * Trans->size[1] *
+              &dj_emlrtBCI, sp) - 1)) + Trans->size[0] * Trans->size[1] *
                          (emlrtDynamicBoundsCheckFastR2012b(i + 2, 1, i39,
-              &aj_emlrtBCI, sp) - 1)) - 1] = 0.1;
+              &ej_emlrtBCI, sp) - 1)) - 1] = 0.1;
           }
         }
 
@@ -551,7 +551,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   /* 'dynamic:93' Trans = Trans/dp_w4; */
   i37 = Trans->size[0] * Trans->size[1] * Trans->size[2];
   emxEnsureCapacity(sp, (emxArray__common *)Trans, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   b_Pitch = Trans->size[0];
   loop_ub = Trans->size[1];
   i = Trans->size[2];
@@ -610,12 +610,12 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   i37 = PRED->size[0] * PRED->size[1];
   PRED->size[0] = b_Pitch;
   emxEnsureCapacity(&st, (emxArray__common *)PRED, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   b_Pitch = Local->size[1];
   i37 = PRED->size[0] * PRED->size[1];
   PRED->size[1] = b_Pitch;
   emxEnsureCapacity(&st, (emxArray__common *)PRED, i37, (int32_T)sizeof(real_T),
-                    &kd_emlrtRTEI);
+                    &md_emlrtRTEI);
   loop_ub = Local->size[0] * Local->size[1];
   for (i37 = 0; i37 < loop_ub; i37++) {
     PRED->data[i37] = 1.0;
@@ -660,8 +660,8 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     emlrtDynamicBoundsCheckFastR2012b(1, 1, i37, &xe_emlrtBCI, &st);
     i37 = Local->size[0];
     PCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, c_unnamed_idx_1,
-      &yh_emlrtBCI, &st) - 1] = Local->data[emlrtDynamicBoundsCheckFastR2012b
-      (b_Pitch, 1, i37, &ai_emlrtBCI, &st) - 1];
+      &di_emlrtBCI, &st) - 1] = Local->data[emlrtDynamicBoundsCheckFastR2012b
+      (b_Pitch, 1, i37, &ei_emlrtBCI, &st) - 1];
     b_Pitch++;
     emlrtBreakCheckFastR2012b(emlrtBreakCheckR2012bFlagVar, &st);
   }
@@ -675,7 +675,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     while (b_Pitch - 1 <= Local->size[0] - 1) {
       /* 'path1:51' CCOST(J)=1.0E+30; */
       CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, d_unnamed_idx_1,
-        &kh_emlrtBCI, &st) - 1] = 1.0E+30;
+        &oh_emlrtBCI, &st) - 1] = 1.0E+30;
 
       /* get the lowest cost path; */
       /* 'path1:53' for K=1:M */
@@ -686,25 +686,25 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
         i38 = Trans->size[1];
         i39 = Trans->size[2];
         if (PCOST_data[emlrtDynamicBoundsCheckFastR2012b(i, 1, c_unnamed_idx_1,
-             &ph_emlrtBCI, &st) - 1] + Trans->data
-            [((emlrtDynamicBoundsCheckFastR2012b(i, 1, i37, &qh_emlrtBCI, &st) +
+             &th_emlrtBCI, &st) - 1] + Trans->data
+            [((emlrtDynamicBoundsCheckFastR2012b(i, 1, i37, &uh_emlrtBCI, &st) +
                Trans->size[0] * (emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1,
-                i38, &rh_emlrtBCI, &st) - 1)) + Trans->size[0] * Trans->size[1] *
+                i38, &vh_emlrtBCI, &st) - 1)) + Trans->size[0] * Trans->size[1] *
               (emlrtDynamicBoundsCheckFastR2012b(I, 1, i39, &pf_emlrtBCI, &st) -
                1)) - 1] <= CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch,
-             1, d_unnamed_idx_1, &sh_emlrtBCI, &st) - 1]) {
+             1, d_unnamed_idx_1, &wh_emlrtBCI, &st) - 1]) {
           /* deciding the optimal path between two points in two next column;  */
           /* 'path1:55' CCOST(J)=PCOST(K)+Trans(K,J,I); */
           i37 = Trans->size[0];
           i38 = Trans->size[1];
           i39 = Trans->size[2];
           CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1,
-            d_unnamed_idx_1, &th_emlrtBCI, &st) - 1] =
+            d_unnamed_idx_1, &xh_emlrtBCI, &st) - 1] =
             PCOST_data[emlrtDynamicBoundsCheckFastR2012b(i, 1, c_unnamed_idx_1,
-            &uh_emlrtBCI, &st) - 1] + Trans->data
-            [((emlrtDynamicBoundsCheckFastR2012b(i, 1, i37, &vh_emlrtBCI, &st) +
+            &yh_emlrtBCI, &st) - 1] + Trans->data
+            [((emlrtDynamicBoundsCheckFastR2012b(i, 1, i37, &ai_emlrtBCI, &st) +
                Trans->size[0] * (emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1,
-                 i38, &wh_emlrtBCI, &st) - 1)) + Trans->size[0] * Trans->size[1]
+                 i38, &bi_emlrtBCI, &st) - 1)) + Trans->size[0] * Trans->size[1]
               * (emlrtDynamicBoundsCheckFastR2012b(I, 1, i39, &qf_emlrtBCI, &st)
                  - 1)) - 1];
 
@@ -712,7 +712,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
           i37 = PRED->size[0];
           i38 = PRED->size[1];
           PRED->data[(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37,
-            &xh_emlrtBCI, &st) + PRED->size[0] *
+            &ci_emlrtBCI, &st) + PRED->size[0] *
                       (emlrtDynamicBoundsCheckFastR2012b(I, 1, i38, &rf_emlrtBCI,
             &st) - 1)) - 1] = 1.0 + (real_T)(i - 1);
 
@@ -725,7 +725,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
       /* 'path1:60' if CCOST(J)>=1.0E+30 */
       if (CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1,
-           d_unnamed_idx_1, &lh_emlrtBCI, &st) - 1] >= 1.0E+30) {
+           d_unnamed_idx_1, &ph_emlrtBCI, &st) - 1] >= 1.0E+30) {
         b_st.site = &og_emlrtRSI;
         d_error(&b_st);
       }
@@ -734,9 +734,9 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
       i37 = Local->size[0];
       i38 = Local->size[1];
       CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, d_unnamed_idx_1,
-        &mh_emlrtBCI, &st) - 1] = CCOST_data[emlrtDynamicBoundsCheckFastR2012b
-        (b_Pitch, 1, d_unnamed_idx_1, &nh_emlrtBCI, &st) - 1] + Local->data
-        [(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37, &oh_emlrtBCI, &st)
+        &qh_emlrtBCI, &st) - 1] = CCOST_data[emlrtDynamicBoundsCheckFastR2012b
+        (b_Pitch, 1, d_unnamed_idx_1, &rh_emlrtBCI, &st) - 1] + Local->data
+        [(emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, i37, &sh_emlrtBCI, &st)
           + Local->size[0] * (emlrtDynamicBoundsCheckFastR2012b(I, 1, i38,
             &of_emlrtBCI, &st) - 1)) - 1];
 
@@ -750,8 +750,8 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     while (b_Pitch - 1 <= Local->size[0] - 1) {
       /* 'path1:69' PCOST(J)=CCOST(J); */
       PCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch, 1, c_unnamed_idx_1,
-        &ih_emlrtBCI, &st) - 1] = CCOST_data[emlrtDynamicBoundsCheckFastR2012b
-        (b_Pitch, 1, d_unnamed_idx_1, &jh_emlrtBCI, &st) - 1];
+        &mh_emlrtBCI, &st) - 1] = CCOST_data[emlrtDynamicBoundsCheckFastR2012b
+        (b_Pitch, 1, d_unnamed_idx_1, &nh_emlrtBCI, &st) - 1];
 
       /* using the new current cost to update the previous cost; */
       b_Pitch++;
@@ -768,10 +768,10 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
       /* obtaining the points with lowest cost in every column; */
       /* 'path1:74' if CCOST(J)<=CCOST(1) */
       if (CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch + 2, 1,
-           d_unnamed_idx_1, &gh_emlrtBCI, &st) - 1] <= CCOST_data[0]) {
+           d_unnamed_idx_1, &kh_emlrtBCI, &st) - 1] <= CCOST_data[0]) {
         /* 'path1:75' CCOST(1)=CCOST(J); */
         CCOST_data[0] = CCOST_data[emlrtDynamicBoundsCheckFastR2012b(b_Pitch + 2,
-          1, d_unnamed_idx_1, &hh_emlrtBCI, &st) - 1];
+          1, d_unnamed_idx_1, &lh_emlrtBCI, &st) - 1];
 
         /* 'path1:75' p(I)=J; */
         p_data[emlrtDynamicBoundsCheckFastR2012b(I, 1, b_unnamed_idx_1,
@@ -811,7 +811,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
   /* 'path1:99' for I=N-1:-1:1 */
   emlrtForLoopVectorCheckR2012b((real_T)Local->size[1] - 1.0, -1.0, 1.0,
-    mxDOUBLE_CLASS, Local->size[1] - 1, &ud_emlrtRTEI, &st);
+    mxDOUBLE_CLASS, Local->size[1] - 1, &wd_emlrtRTEI, &st);
   I = 0;
   while (I <= Local->size[1] - 2) {
     b_Pitch = Local->size[1] - I;
@@ -825,7 +825,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     loop_ub = PRED->size[1];
     P_data[emlrtDynamicBoundsCheckFastR2012b(i37, 1, unnamed_idx_1, &if_emlrtBCI,
       &st) - 1] = PRED->data[(emlrtDynamicBoundsCheckFastR2012b(i39, 1, i38,
-      &fh_emlrtBCI, &st) + PRED->size[0] * (emlrtDynamicBoundsCheckFastR2012b
+      &jh_emlrtBCI, &st) + PRED->size[0] * (emlrtDynamicBoundsCheckFastR2012b
       (b_Pitch, 1, loop_ub, &lf_emlrtBCI, &st) - 1)) - 1];
 
     /* backward to find the previous points, etc; */
@@ -843,12 +843,12 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   i37 = FinPitch->size[0] * FinPitch->size[1];
   FinPitch->size[0] = 1;
   emxEnsureCapacity(sp, (emxArray__common *)FinPitch, i37, (int32_T)sizeof
-                    (real_T), &kd_emlrtRTEI);
+                    (real_T), &md_emlrtRTEI);
   b_unnamed_idx_1 = Pitch->size[1];
   i37 = FinPitch->size[0] * FinPitch->size[1];
   FinPitch->size[1] = b_unnamed_idx_1;
   emxEnsureCapacity(sp, (emxArray__common *)FinPitch, i37, (int32_T)sizeof
-                    (real_T), &kd_emlrtRTEI);
+                    (real_T), &md_emlrtRTEI);
   loop_ub = Pitch->size[1];
   for (i37 = 0; i37 < loop_ub; i37++) {
     FinPitch->data[i37] = 0.0;
@@ -861,12 +861,12 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     i37 = FinPitch->size[1];
     i38 = Pitch->size[0];
     i39 = (int32_T)P_data[emlrtDynamicBoundsCheckFastR2012b(i, 1, unnamed_idx_1,
-      &dh_emlrtBCI, sp) - 1];
+      &hh_emlrtBCI, sp) - 1];
     loop_ub = Pitch->size[1];
-    FinPitch->data[emlrtDynamicBoundsCheckFastR2012b(i, 1, i37, &bh_emlrtBCI, sp)
+    FinPitch->data[emlrtDynamicBoundsCheckFastR2012b(i, 1, i37, &fh_emlrtBCI, sp)
       - 1] = Pitch->data[(emlrtDynamicBoundsCheckFastR2012b(i39, 1, i38,
-      &ch_emlrtBCI, sp) + Pitch->size[0] * (emlrtDynamicBoundsCheckFastR2012b(i,
-      1, loop_ub, &eh_emlrtBCI, sp) - 1)) - 1];
+      &gh_emlrtBCI, sp) + Pitch->size[0] * (emlrtDynamicBoundsCheckFastR2012b(i,
+      1, loop_ub, &ih_emlrtBCI, sp) - 1)) - 1];
     i++;
     emlrtBreakCheckFastR2012b(emlrtBreakCheckR2012bFlagVar, sp);
   }

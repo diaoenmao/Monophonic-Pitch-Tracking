@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: dynamic.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 2.6</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 27-Oct-2015 00:20:18</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 13-Nov-2015 04:43:17</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include files */</i></font>
@@ -60,13 +60,13 @@
 <a name="48"><font color="#888888 "><i>   48   </i></font></a>  <font color="#112266"><b>int</b></font> b_Pitch;
 <a name="49"><font color="#888888 "><i>   49   </i></font></a>  <font color="#112266"><b>int</b></font> Trans;
 <a name="50"><font color="#888888 "><i>   50   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_boolean_T');" target="_self"><font color="#1122aa">emxArray_boolean_T</font></a> *b_BestPitch;
-<a name="51"><font color="#888888 "><i>   51   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *r4;
+<a name="51"><font color="#888888 "><i>   51   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *r9;
 <a name="52"><font color="#888888 "><i>   52   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *c_BestPitch;
 <a name="53"><font color="#888888 "><i>   53   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *Local;
 <a name="54"><font color="#888888 "><i>   54   </i></font></a>  <font color="#112266"><b>double</b></font> mean_pitch;
 <a name="55"><font color="#888888 "><i>   55   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *b_Trans;
 <a name="56"><font color="#888888 "><i>   56   </i></font></a>  <font color="#112266"><b>double</b></font> y;
-<a name="57"><font color="#888888 "><i>   57   </i></font></a>  <font color="#112266"><b>double</b></font> d3;
+<a name="57"><font color="#888888 "><i>   57   </i></font></a>  <font color="#112266"><b>double</b></font> d1;
 <a name="58"><font color="#888888 "><i>   58   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *PRED;
 <a name="59"><font color="#888888 "><i>   59   </i></font></a>  <font color="#112266"><b>double</b></font> P_data[4999];
 <a name="60"><font color="#888888 "><i>   60   </i></font></a>  <font color="#112266"><b>double</b></font> p_data[4999];
@@ -117,20 +117,20 @@
 <a name="105"><font color="#888888 "><i>  105   </i></font></a>    b_BestPitch-&gt;data[Trans] = (BestPitch-&gt;data[Trans] &gt; 0.0);
 <a name="106"><font color="#888888 "><i>  106   </i></font></a>  <b>}</b>
 <a name="107"><font color="#888888 "><i>  107   </i></font></a>
-<a name="108"><font color="#888888 "><i>  108   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T');" target="_self"><font color="#1122aa">emxInit_int32_T</font></a>(&amp;r4, 2);
+<a name="108"><font color="#888888 "><i>  108   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T');" target="_self"><font color="#1122aa">emxInit_int32_T</font></a>(&amp;r9, 2);
 <a name="109"><font color="#888888 "><i>  109   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;c_BestPitch, 2);
-<a name="110"><font color="#888888 "><i>  110   </i></font></a>  <a href="#fcn_eml_li_find" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_eml_li_find');" target="_self"><font color="#1122aa">eml_li_find</font></a>(b_BestPitch, r4);
+<a name="110"><font color="#888888 "><i>  110   </i></font></a>  <a href="#fcn_eml_li_find" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_eml_li_find');" target="_self"><font color="#1122aa">eml_li_find</font></a>(b_BestPitch, r9);
 <a name="111"><font color="#888888 "><i>  111   </i></font></a>  Trans = c_BestPitch-&gt;size[0] * c_BestPitch-&gt;size[1];
 <a name="112"><font color="#888888 "><i>  112   </i></font></a>  c_BestPitch-&gt;size[0] = 1;
-<a name="113"><font color="#888888 "><i>  113   </i></font></a>  c_BestPitch-&gt;size[1] = r4-&gt;size[1];
+<a name="113"><font color="#888888 "><i>  113   </i></font></a>  c_BestPitch-&gt;size[1] = r9-&gt;size[1];
 <a name="114"><font color="#888888 "><i>  114   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)c_BestPitch, Trans, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
-<a name="115"><font color="#888888 "><i>  115   </i></font></a>  loop_ub = r4-&gt;size[0] * r4-&gt;size[1];
+<a name="115"><font color="#888888 "><i>  115   </i></font></a>  loop_ub = r9-&gt;size[0] * r9-&gt;size[1];
 <a name="116"><font color="#888888 "><i>  116   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_boolean_T');" target="_self"><font color="#1122aa">emxFree_boolean_T</font></a>(&amp;b_BestPitch);
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>  <font color="#112266"><b>for</b></font> (Trans = 0; Trans &lt; loop_ub; Trans++) <b>{</b>
-<a name="118"><font color="#888888 "><i>  118   </i></font></a>    c_BestPitch-&gt;data[Trans] = BestPitch-&gt;data[r4-&gt;data[Trans] - 1];
+<a name="118"><font color="#888888 "><i>  118   </i></font></a>    c_BestPitch-&gt;data[Trans] = BestPitch-&gt;data[r9-&gt;data[Trans] - 1];
 <a name="119"><font color="#888888 "><i>  119   </i></font></a>  <b>}</b>
 <a name="120"><font color="#888888 "><i>  120   </i></font></a>
-<a name="121"><font color="#888888 "><i>  121   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>(&amp;r4);
+<a name="121"><font color="#888888 "><i>  121   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>(&amp;r9);
 <a name="122"><font color="#888888 "><i>  122   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;BestPitch);
 <a name="123"><font color="#888888 "><i>  123   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;Local, 2);
 <a name="124"><font color="#888888 "><i>  124   </i></font></a>  mean_pitch = <a href="mean_c.html#fcn_mean" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_mean');" target="_self"><font color="#1122aa">mean</font></a>(c_BestPitch);
@@ -191,13 +191,13 @@
 <a name="179"><font color="#888888 "><i>  179   </i></font></a>             (Pitch-&gt;data[Trans + Pitch-&gt;size[0] * (loop_ub - 1)] == 0.0))) <b>{</b>
 <a name="180"><font color="#888888 "><i>  180   </i></font></a>          y = fabs(Energy-&gt;data[loop_ub - 1] - Energy-&gt;data[loop_ub]);
 <a name="181"><font color="#888888 "><i>  181   </i></font></a>          <font color="#112266"><b>if</b></font> ((1.0 &lt;= y) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(y)) <b>{</b>
-<a name="182"><font color="#888888 "><i>  182   </i></font></a>            d3 = 1.0;
+<a name="182"><font color="#888888 "><i>  182   </i></font></a>            d1 = 1.0;
 <a name="183"><font color="#888888 "><i>  183   </i></font></a>          <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="184"><font color="#888888 "><i>  184   </i></font></a>            d3 = y;
+<a name="184"><font color="#888888 "><i>  184   </i></font></a>            d1 = y;
 <a name="185"><font color="#888888 "><i>  185   </i></font></a>          <b>}</b>
 <a name="186"><font color="#888888 "><i>  186   </i></font></a>
 <a name="187"><font color="#888888 "><i>  187   </i></font></a>          b_Trans-&gt;data[(Trans + b_Trans-&gt;size[0] * b_Pitch) + b_Trans-&gt;size[0] *
-<a name="188"><font color="#888888 "><i>  188   </i></font></a>            b_Trans-&gt;size[1] * loop_ub] = 0.5 * (1.0 - d3);
+<a name="188"><font color="#888888 "><i>  188   </i></font></a>            b_Trans-&gt;size[1] * loop_ub] = 0.5 * (1.0 - d1);
 <a name="189"><font color="#888888 "><i>  189   </i></font></a>        <b>}</b>
 <a name="190"><font color="#888888 "><i>  190   </i></font></a>
 <a name="191"><font color="#888888 "><i>  191   </i></font></a>        <font color="#117755"><i>/*  both candidates are unvoiced */</i></font>

@@ -68,7 +68,7 @@ static emlrtBCInfo qe_emlrtBCI = { -1, -1, 99, 21, "Data", "peaks",
 static emlrtDCInfo w_emlrtDCI = { 99, 21, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m", 1 };
 
-static emlrtRTEInfo td_emlrtRTEI = { 98, 1, "peaks",
+static emlrtRTEInfo vd_emlrtRTEI = { 98, 1, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
 static emlrtBCInfo re_emlrtBCI = { -1, -1, 81, 17, "Data", "peaks",
@@ -514,7 +514,7 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta, real_T
     /* 'peaks:98' for n = min_lag:max_lag */
     i19 = (int32_T)(max_lag + (1.0 - min_lag));
     emlrtForLoopVectorCheckR2012b(min_lag, 1.0, max_lag, mxDOUBLE_CLASS, i19,
-      &td_emlrtRTEI, sp);
+      &vd_emlrtRTEI, sp);
     n = 0;
     while (n <= i19 - 1) {
       b_n = min_lag + (real_T)n;

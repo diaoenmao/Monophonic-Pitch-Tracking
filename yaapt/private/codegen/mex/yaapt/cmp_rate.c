@@ -23,19 +23,19 @@ static emlrtRSInfo mi_emlrtRSI = { 68, "cmp_rate",
 static emlrtRSInfo ni_emlrtRSI = { 104, "cmp_rate",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\cmp_rate.m" };
 
-static emlrtRTEInfo bd_emlrtRTEI = { 1, 27, "cmp_rate",
+static emlrtRTEInfo dd_emlrtRTEI = { 1, 27, "cmp_rate",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\cmp_rate.m" };
 
-static emlrtRTEInfo xd_emlrtRTEI = { 67, 1, "cmp_rate",
+static emlrtRTEInfo ae_emlrtRTEI = { 67, 1, "cmp_rate",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\cmp_rate.m" };
 
 static emlrtDCInfo nb_emlrtDCI = { 68, 21, "cmp_rate",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\cmp_rate.m", 1 };
 
-static emlrtBCInfo qg_emlrtBCI = { -1, -1, 68, 21, "Phi", "cmp_rate",
+static emlrtBCInfo ug_emlrtBCI = { -1, -1, 68, 21, "Phi", "cmp_rate",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\cmp_rate.m", 0 };
 
-static emlrtBCInfo rg_emlrtBCI = { 1, 3, 72, 9, "Pitch", "cmp_rate",
+static emlrtBCInfo vg_emlrtBCI = { 1, 3, 72, 9, "Pitch", "cmp_rate",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\cmp_rate.m", 0 };
 
 /* Function Definitions */
@@ -59,19 +59,19 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
   int32_T i;
   boolean_T b8;
   const mxArray *y;
-  static const int32_T iv78[2] = { 1, 36 };
+  static const int32_T iv77[2] = { 1, 36 };
 
-  const mxArray *m35;
-  char_T cv118[36];
-  static const char_T cv119[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
+  const mxArray *m34;
+  char_T cv116[36];
+  static const char_T cv117[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
     'l', 'b', 'o', 'x', ':', 'a', 'u', 't', 'o', 'D', 'i', 'm', 'I', 'n', 'c',
     'o', 'm', 'p', 'a', 't', 'i', 'b', 'i', 'l', 'i', 't', 'y' };
 
   const mxArray *b_y;
-  static const int32_T iv79[2] = { 1, 39 };
+  static const int32_T iv78[2] = { 1, 39 };
 
-  char_T cv120[39];
-  static const char_T cv121[39] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
+  char_T cv118[39];
+  static const char_T cv119[39] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
     'l', 'b', 'o', 'x', ':', 'e', 'm', 'l', '_', 'm', 'i', 'n', '_', 'o', 'r',
     '_', 'm', 'a', 'x', '_', 'v', 'a', 'r', 'D', 'i', 'm', 'Z', 'e', 'r', 'o' };
 
@@ -84,13 +84,13 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
   boolean_T guard1 = false;
   real_T b_Merit[3];
   int32_T iidx[3];
+  emxArray_real_T *r18;
   emxArray_real_T *r19;
-  emxArray_real_T *r20;
   const mxArray *c_y;
-  static const int32_T iv80[2] = { 1, 36 };
+  static const int32_T iv79[2] = { 1, 36 };
 
   const mxArray *d_y;
-  static const int32_T iv81[2] = { 1, 39 };
+  static const int32_T iv80[2] = { 1, 39 };
 
   boolean_T exitg1;
   emlrtStack st;
@@ -182,7 +182,7 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
   /* 'cmp_rate:67' for n = lag_min-center:lag_max */
   i34 = (int32_T)(lag_max + (1.0 - (lag_min - 3.0)));
   emlrtForLoopVectorCheckR2012b(lag_min - 3.0, 1.0, lag_max, mxDOUBLE_CLASS, i34,
-    &xd_emlrtRTEI, sp);
+    &ae_emlrtRTEI, sp);
   n = 0;
   exitg2 = false;
   while ((!exitg2) && (n <= i34 - 1)) {
@@ -195,10 +195,10 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
     } else {
       i35 = Phi->size[1];
       i36 = (int32_T)emlrtIntegerCheckFastR2012b(b_n, &nb_emlrtDCI, sp);
-      i35 = emlrtDynamicBoundsCheckFastR2012b(i36, 1, i35, &qg_emlrtBCI, sp);
+      i35 = emlrtDynamicBoundsCheckFastR2012b(i36, 1, i35, &ug_emlrtBCI, sp);
       i36 = Phi->size[1];
       i = (int32_T)((uint32_T)b_n + 4U);
-      i36 = emlrtDynamicBoundsCheckFastR2012b(i, 1, i36, &qg_emlrtBCI, sp) + 1;
+      i36 = emlrtDynamicBoundsCheckFastR2012b(i, 1, i36, &ug_emlrtBCI, sp) + 1;
     }
 
     st.site = &mi_emlrtRSI;
@@ -213,13 +213,13 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
     if (b8) {
     } else {
       y = NULL;
-      m35 = emlrtCreateCharArray(2, iv78);
+      m34 = emlrtCreateCharArray(2, iv77);
       for (i = 0; i < 36; i++) {
-        cv118[i] = cv119[i];
+        cv116[i] = cv117[i];
       }
 
-      emlrtInitCharArrayR2013a(&c_st, 36, m35, cv118);
-      emlrtAssign(&y, m35);
+      emlrtInitCharArrayR2013a(&c_st, 36, m34, cv116);
+      emlrtAssign(&y, m34);
       d_st.site = &gk_emlrtRSI;
       e_st.site = &mj_emlrtRSI;
       f_error(&d_st, b_message(&e_st, y, &r_emlrtMCI), &s_emlrtMCI);
@@ -228,13 +228,13 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
     if (i36 - i35 > 0) {
     } else {
       b_y = NULL;
-      m35 = emlrtCreateCharArray(2, iv79);
+      m34 = emlrtCreateCharArray(2, iv78);
       for (i = 0; i < 39; i++) {
-        cv120[i] = cv121[i];
+        cv118[i] = cv119[i];
       }
 
-      emlrtInitCharArrayR2013a(&c_st, 39, m35, cv120);
-      emlrtAssign(&b_y, m35);
+      emlrtInitCharArrayR2013a(&c_st, 39, m34, cv118);
+      emlrtAssign(&b_y, m34);
       d_st.site = &fk_emlrtRSI;
       e_st.site = &lj_emlrtRSI;
       f_error(&d_st, b_message(&e_st, b_y, &t_emlrtMCI), &u_emlrtMCI);
@@ -303,7 +303,7 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
       numpeaks++;
 
       /* 'cmp_rate:72' Pitch(numpeaks) = Fs/(n+lag-1); */
-      Pitch[emlrtDynamicBoundsCheckFastR2012b(numpeaks, 1, 3, &rg_emlrtBCI, sp)
+      Pitch[emlrtDynamicBoundsCheckFastR2012b(numpeaks, 1, 3, &vg_emlrtBCI, sp)
         - 1] = Fs / ((b_n + 3.0) - 1.0);
 
       /* 'cmp_rate:73' Merit(numpeaks) = y; */
@@ -398,38 +398,38 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
         Pitch_data[i + i34] = 0.0;
       }
 
-      emxInit_real_T(sp, &r19, 2, &bd_emlrtRTEI, true);
+      emxInit_real_T(sp, &r18, 2, &dd_emlrtRTEI, true);
 
       /* 'cmp_rate:97' Merit = [Merit 0.001*ones(1,maxcands-numpeaks)]; */
-      i34 = r19->size[0] * r19->size[1];
-      r19->size[0] = 1;
-      r19->size[1] = 3 - numpeaks;
-      emxEnsureCapacity(sp, (emxArray__common *)r19, i34, (int32_T)sizeof(real_T),
-                        &bd_emlrtRTEI);
+      i34 = r18->size[0] * r18->size[1];
+      r18->size[0] = 1;
+      r18->size[1] = 3 - numpeaks;
+      emxEnsureCapacity(sp, (emxArray__common *)r18, i34, (int32_T)sizeof(real_T),
+                        &dd_emlrtRTEI);
       i = 3 - numpeaks;
       for (i34 = 0; i34 < i; i34++) {
-        r19->data[i34] = 0.001;
+        r18->data[i34] = 0.001;
       }
 
-      emxInit_real_T(sp, &r20, 2, &bd_emlrtRTEI, true);
-      ix = r19->size[1];
+      emxInit_real_T(sp, &r19, 2, &dd_emlrtRTEI, true);
+      ix = r18->size[1];
       Merit_size[1] = itmp + ix;
       i = 3 - numpeaks;
-      i34 = r20->size[0] * r20->size[1];
-      r20->size[0] = 1;
-      r20->size[1] = i;
-      emxEnsureCapacity(sp, (emxArray__common *)r20, i34, (int32_T)sizeof(real_T),
-                        &bd_emlrtRTEI);
-      emxFree_real_T(&r19);
+      i34 = r19->size[0] * r19->size[1];
+      r19->size[0] = 1;
+      r19->size[1] = i;
+      emxEnsureCapacity(sp, (emxArray__common *)r19, i34, (int32_T)sizeof(real_T),
+                        &dd_emlrtRTEI);
+      emxFree_real_T(&r18);
       for (i34 = 0; i34 < i; i34++) {
-        r20->data[r20->size[0] * i34] = 0.001;
+        r19->data[r19->size[0] * i34] = 0.001;
       }
 
       for (i34 = 0; i34 < ix; i34++) {
-        Merit_data[itmp + i34] = r20->data[i34];
+        Merit_data[itmp + i34] = r19->data[i34];
       }
 
-      emxFree_real_T(&r20);
+      emxFree_real_T(&r19);
 
       /*      Pitch(numpeaks+1:maxcands) = 0; */
       /*      Merit(numpeaks+1:maxcands) = 0.001; */
@@ -450,13 +450,13 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
   if (b8) {
   } else {
     c_y = NULL;
-    m35 = emlrtCreateCharArray(2, iv80);
+    m34 = emlrtCreateCharArray(2, iv79);
     for (i = 0; i < 36; i++) {
-      cv118[i] = cv119[i];
+      cv116[i] = cv117[i];
     }
 
-    emlrtInitCharArrayR2013a(&c_st, 36, m35, cv118);
-    emlrtAssign(&c_y, m35);
+    emlrtInitCharArrayR2013a(&c_st, 36, m34, cv116);
+    emlrtAssign(&c_y, m34);
     d_st.site = &gk_emlrtRSI;
     e_st.site = &mj_emlrtRSI;
     f_error(&d_st, b_message(&e_st, c_y, &r_emlrtMCI), &s_emlrtMCI);
@@ -465,13 +465,13 @@ void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
   if (Merit_size[1] > 0) {
   } else {
     d_y = NULL;
-    m35 = emlrtCreateCharArray(2, iv81);
+    m34 = emlrtCreateCharArray(2, iv80);
     for (i = 0; i < 39; i++) {
-      cv120[i] = cv121[i];
+      cv118[i] = cv119[i];
     }
 
-    emlrtInitCharArrayR2013a(&c_st, 39, m35, cv120);
-    emlrtAssign(&d_y, m35);
+    emlrtInitCharArrayR2013a(&c_st, 39, m34, cv118);
+    emlrtAssign(&d_y, m34);
     d_st.site = &fk_emlrtRSI;
     e_st.site = &lj_emlrtRSI;
     f_error(&d_st, b_message(&e_st, d_y, &t_emlrtMCI), &u_emlrtMCI);

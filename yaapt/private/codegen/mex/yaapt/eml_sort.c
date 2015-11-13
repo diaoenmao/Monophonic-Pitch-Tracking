@@ -53,25 +53,25 @@ static emlrtRSInfo ej_emlrtRSI = { 134, "eml_sort_idx",
 static emlrtRSInfo fj_emlrtRSI = { 138, "eml_sort_idx",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort_idx.m" };
 
-static emlrtRTEInfo dd_emlrtRTEI = { 52, 1, "eml_sort",
+static emlrtRTEInfo fd_emlrtRTEI = { 52, 1, "eml_sort",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort.m" };
 
-static emlrtRTEInfo ed_emlrtRTEI = { 53, 1, "eml_sort",
+static emlrtRTEInfo gd_emlrtRTEI = { 53, 1, "eml_sort",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort.m" };
 
-static emlrtRTEInfo fd_emlrtRTEI = { 61, 5, "eml_sort",
+static emlrtRTEInfo hd_emlrtRTEI = { 61, 5, "eml_sort",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort.m" };
 
-static emlrtRTEInfo gd_emlrtRTEI = { 27, 5, "eml_sort_idx",
+static emlrtRTEInfo id_emlrtRTEI = { 27, 5, "eml_sort_idx",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort_idx.m" };
 
-static emlrtRTEInfo hd_emlrtRTEI = { 1, 20, "eml_sort",
+static emlrtRTEInfo jd_emlrtRTEI = { 1, 20, "eml_sort",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort.m" };
 
-static emlrtRTEInfo id_emlrtRTEI = { 78, 13, "eml_sort",
+static emlrtRTEInfo kd_emlrtRTEI = { 78, 13, "eml_sort",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort.m" };
 
-static emlrtRTEInfo jd_emlrtRTEI = { 145, 5, "eml_sort_idx",
+static emlrtRTEInfo ld_emlrtRTEI = { 145, 5, "eml_sort_idx",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_sort_idx.m" };
 
 /* Function Declarations */
@@ -311,19 +311,19 @@ static void f_eml_sort(const emlrtStack *sp, const emxArray_real_T *x, int32_T
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  b_emxInit_real_T(sp, &vwork, 1, &dd_emlrtRTEI, true);
+  b_emxInit_real_T(sp, &vwork, 1, &fd_emlrtRTEI, true);
   st.site = &yi_emlrtRSI;
   b_st.site = &aj_emlrtRSI;
   uv4[0] = (uint32_T)x->size[dim - 1];
   i2 = vwork->size[0];
   vwork->size[0] = (int32_T)uv4[0];
   emxEnsureCapacity(sp, (emxArray__common *)vwork, i2, (int32_T)sizeof(real_T),
-                    &dd_emlrtRTEI);
+                    &fd_emlrtRTEI);
   for (i2 = 0; i2 < 2; i2++) {
     ix = y->size[0] * y->size[1];
     y->size[i2] = x->size[i2];
     emxEnsureCapacity(sp, (emxArray__common *)y, ix, (int32_T)sizeof(real_T),
-                      &ed_emlrtRTEI);
+                      &gd_emlrtRTEI);
   }
 
   for (i2 = 0; i2 < 2; i2++) {
@@ -334,7 +334,7 @@ static void f_eml_sort(const emlrtStack *sp, const emxArray_real_T *x, int32_T
   idx->size[0] = (int32_T)uv4[0];
   idx->size[1] = (int32_T)uv4[1];
   emxEnsureCapacity(sp, (emxArray__common *)idx, i2, (int32_T)sizeof(int32_T),
-                    &fd_emlrtRTEI);
+                    &hd_emlrtRTEI);
   st.site = &xi_emlrtRSI;
   b_st.site = &bj_emlrtRSI;
   vstride = 1;
@@ -378,8 +378,8 @@ static void f_eml_sort(const emlrtStack *sp, const emxArray_real_T *x, int32_T
   }
 
   i = 1;
-  emxInit_int32_T(sp, &iidx, 1, &id_emlrtRTEI, true);
-  emxInit_int32_T(sp, &idx0, 1, &jd_emlrtRTEI, true);
+  emxInit_int32_T(sp, &iidx, 1, &kd_emlrtRTEI, true);
+  emxInit_int32_T(sp, &idx0, 1, &ld_emlrtRTEI, true);
   while (i <= npages) {
     i1 = b_i2;
     b_i2 += vspread;
@@ -409,7 +409,7 @@ static void f_eml_sort(const emlrtStack *sp, const emxArray_real_T *x, int32_T
       i2 = iidx->size[0];
       iidx->size[0] = (int32_T)uv4[0];
       emxEnsureCapacity(&st, (emxArray__common *)iidx, i2, (int32_T)sizeof
-                        (int32_T), &gd_emlrtRTEI);
+                        (int32_T), &id_emlrtRTEI);
       if (vwork->size[0] == 0) {
         b_st.site = &dj_emlrtRSI;
       } else {
@@ -443,7 +443,7 @@ static void f_eml_sort(const emlrtStack *sp, const emxArray_real_T *x, int32_T
         i2 = idx0->size[0];
         idx0->size[0] = vwork->size[0];
         emxEnsureCapacity(&st, (emxArray__common *)idx0, i2, (int32_T)sizeof
-                          (int32_T), &hd_emlrtRTEI);
+                          (int32_T), &jd_emlrtRTEI);
         ix = vwork->size[0];
         for (i2 = 0; i2 < ix; i2++) {
           idx0->data[i2] = 1;

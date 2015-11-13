@@ -2,7 +2,7 @@
  * File: yaapt_types.h 
  *  
  * MATLAB Coder version            : 2.6 
- * C/C++ source code generated on  : 27-Oct-2015 00:20:18 
+ * C/C++ source code generated on  : 13-Nov-2015 04:43:17 
  */
 
 #ifndef __YAAPT_TYPES_H__
@@ -111,6 +111,30 @@ struct emxArray_real_T
 #define typedef_emxArray_real_T
 typedef struct emxArray_real_T emxArray_real_T;
 #endif /*typedef_emxArray_real_T*/
+#ifndef struct_emxArray_real_T_1
+#define struct_emxArray_real_T_1
+struct emxArray_real_T_1
+{
+    double data[1];
+    int size[1];
+};
+#endif /*struct_emxArray_real_T_1*/
+#ifndef typedef_emxArray_real_T_1
+#define typedef_emxArray_real_T_1
+typedef struct emxArray_real_T_1 emxArray_real_T_1;
+#endif /*typedef_emxArray_real_T_1*/
+#ifndef struct_emxArray_real_T_1x15
+#define struct_emxArray_real_T_1x15
+struct emxArray_real_T_1x15
+{
+    double data[15];
+    int size[2];
+};
+#endif /*struct_emxArray_real_T_1x15*/
+#ifndef typedef_emxArray_real_T_1x15
+#define typedef_emxArray_real_T_1x15
+typedef struct emxArray_real_T_1x15 emxArray_real_T_1x15;
+#endif /*typedef_emxArray_real_T_1x15*/
 #ifndef struct_emxArray_real_T_1x4097
 #define struct_emxArray_real_T_1x4097
 struct emxArray_real_T_1x4097

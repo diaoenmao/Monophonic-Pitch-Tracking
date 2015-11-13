@@ -11,7 +11,7 @@
 #include "eml_error.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo pd_emlrtRTEI = { 20, 5, "eml_error",
+static emlrtRTEInfo rd_emlrtRTEI = { 20, 5, "eml_error",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_error.m" };
 
 /* Function Definitions */
@@ -21,7 +21,7 @@ static emlrtRTEInfo pd_emlrtRTEI = { 20, 5, "eml_error",
  */
 void b_eml_error(const emlrtStack *sp)
 {
-  emlrtErrorWithMessageIdR2012b(sp, &pd_emlrtRTEI,
+  emlrtErrorWithMessageIdR2012b(sp, &rd_emlrtRTEI,
     "Coder:toolbox:reshape_emptyReshapeLimit", 0);
 }
 
@@ -30,7 +30,7 @@ void b_eml_error(const emlrtStack *sp)
  */
 void c_eml_error(const emlrtStack *sp)
 {
-  emlrtErrorWithMessageIdR2012b(sp, &pd_emlrtRTEI, "MATLAB:interp1:NaNinX", 0);
+  emlrtErrorWithMessageIdR2012b(sp, &rd_emlrtRTEI, "MATLAB:interp1:NaNinX", 0);
 }
 
 /*
@@ -38,7 +38,7 @@ void c_eml_error(const emlrtStack *sp)
  */
 void d_eml_error(const emlrtStack *sp)
 {
-  emlrtErrorWithMessageIdR2012b(sp, &pd_emlrtRTEI,
+  emlrtErrorWithMessageIdR2012b(sp, &rd_emlrtRTEI,
     "Coder:toolbox:interp1_nonMonotonicX", 0);
 }
 
@@ -47,7 +47,7 @@ void d_eml_error(const emlrtStack *sp)
  */
 void e_eml_error(const emlrtStack *sp)
 {
-  emlrtErrorWithMessageIdR2012b(sp, &pd_emlrtRTEI,
+  emlrtErrorWithMessageIdR2012b(sp, &rd_emlrtRTEI,
     "Coder:toolbox:cat_UnsupportedVariableSizeEmpty", 0);
 }
 
@@ -58,7 +58,7 @@ void eml_error(const emlrtStack *sp)
 {
   static char_T cv8[4][1] = { { 's' }, { 'q' }, { 'r' }, { 't' } };
 
-  emlrtErrorWithMessageIdR2012b(sp, &pd_emlrtRTEI,
+  emlrtErrorWithMessageIdR2012b(sp, &rd_emlrtRTEI,
     "Coder:toolbox:ElFunDomainError", 3, 4, 4, cv8);
 }
 

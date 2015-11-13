@@ -2,7 +2,7 @@
  * File: eml_sort.h
  *
  * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 27-Oct-2015 00:20:18
+ * C/C++ source code generated on  : 13-Nov-2015 04:43:17
  */
 
 #ifndef __EML_SORT_H__
@@ -22,7 +22,7 @@
 extern void c_eml_sort(const double x[3], double y[3], int idx[3]);
 extern void e_eml_sort(const emxArray_real_T *x, emxArray_real_T *y,
   emxArray_int32_T *idx);
-extern void eml_sort(const double x[4], double y[4], int idx[4]);
+extern void eml_sort(const double x[100], double y[100], int idx[100]);
 
 #endif
 

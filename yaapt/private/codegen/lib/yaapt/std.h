@@ -2,7 +2,7 @@
  * File: std.h
  *
  * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 27-Oct-2015 00:20:18
+ * C/C++ source code generated on  : 13-Nov-2015 04:43:17
  */
 
 #ifndef __STD_H__
@@ -20,7 +20,8 @@
 
 /* Function Declarations */
 extern double b_std(const emxArray_real_T *varargin_1);
-extern void c_std(const emxArray_real_T *varargin_1, emxArray_real_T *y);
+extern void c_std(const emxArray_real_T *varargin_1, double y_data[], int
+                  y_size[1]);
 
 #endif
 

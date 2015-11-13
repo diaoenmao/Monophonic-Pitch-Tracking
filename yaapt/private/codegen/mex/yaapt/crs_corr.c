@@ -59,16 +59,16 @@ static emlrtMCInfo sb_emlrtMCI = { 104, 13, "eml_mtimes_helper",
 static emlrtMCInfo tb_emlrtMCI = { 103, 23, "eml_mtimes_helper",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
 
-static emlrtRTEInfo xc_emlrtRTEI = { 1, 17, "crs_corr",
+static emlrtRTEInfo ad_emlrtRTEI = { 1, 17, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRTEInfo yc_emlrtRTEI = { 51, 1, "crs_corr",
+static emlrtRTEInfo bd_emlrtRTEI = { 51, 1, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRTEInfo ad_emlrtRTEI = { 57, 5, "crs_corr",
+static emlrtRTEInfo cd_emlrtRTEI = { 57, 5, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtBCInfo mg_emlrtBCI = { -1, -1, 51, 8, "Data", "crs_corr",
+static emlrtBCInfo qg_emlrtBCI = { -1, -1, 51, 8, "Data", "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m", 0 };
 
 static emlrtDCInfo kb_emlrtDCI = { 51, 8, "crs_corr",
@@ -77,22 +77,22 @@ static emlrtDCInfo kb_emlrtDCI = { 51, 8, "crs_corr",
 static emlrtECInfo ac_emlrtECI = { -1, 51, 8, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRTEInfo wd_emlrtRTEI = { 54, 1, "crs_corr",
+static emlrtRTEInfo yd_emlrtRTEI = { 54, 1, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
 static emlrtDCInfo lb_emlrtDCI = { 57, 12, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m", 1 };
 
-static emlrtBCInfo ng_emlrtBCI = { -1, -1, 57, 12, "Data", "crs_corr",
+static emlrtBCInfo rg_emlrtBCI = { -1, -1, 57, 12, "Data", "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m", 0 };
 
 static emlrtECInfo bc_emlrtECI = { -1, 57, 12, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtBCInfo og_emlrtBCI = { -1, -1, 1, 1, "", "xdot",
+static emlrtBCInfo sg_emlrtBCI = { -1, -1, 1, 1, "", "xdot",
   "F:\\MATLAB\\toolbox\\coder\\coder\\+coder\\+internal\\+blas\\xdot.p", 0 };
 
-static emlrtBCInfo pg_emlrtBCI = { -1, -1, 68, 5, "Phi", "crs_corr",
+static emlrtBCInfo tg_emlrtBCI = { -1, -1, 68, 5, "Phi", "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m", 0 };
 
 static emlrtDCInfo mb_emlrtDCI = { 68, 5, "crs_corr",
@@ -127,20 +127,20 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   emxArray_real_T *x_j;
   emxArray_real_T *a;
   const mxArray *y;
-  static const int32_T iv70[2] = { 1, 45 };
+  static const int32_T iv69[2] = { 1, 45 };
 
-  const mxArray *m33;
-  char_T cv110[45];
-  static const char_T cv111[45] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
+  const mxArray *m32;
+  char_T cv108[45];
+  static const char_T cv109[45] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
     'l', 'b', 'o', 'x', ':', 'm', 't', 'i', 'm', 'e', 's', '_', 'n', 'o', 'D',
     'y', 'n', 'a', 'm', 'i', 'c', 'S', 'c', 'a', 'l', 'a', 'r', 'E', 'x', 'p',
     'a', 'n', 's', 'i', 'o', 'n' };
 
   const mxArray *b_y;
-  static const int32_T iv71[2] = { 1, 21 };
+  static const int32_T iv70[2] = { 1, 21 };
 
-  char_T cv112[21];
-  static const char_T cv113[21] = { 'C', 'o', 'd', 'e', 'r', ':', 'M', 'A', 'T',
+  char_T cv110[21];
+  static const char_T cv111[21] = { 'C', 'o', 'd', 'e', 'r', ':', 'M', 'A', 'T',
     'L', 'A', 'B', ':', 'i', 'n', 'n', 'e', 'r', 'd', 'i', 'm' };
 
   real_T p;
@@ -154,17 +154,17 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   real_T b_k;
   int32_T i33;
   const mxArray *c_y;
-  static const int32_T iv72[2] = { 1, 45 };
+  static const int32_T iv71[2] = { 1, 45 };
 
   const mxArray *d_y;
-  static const int32_T iv73[2] = { 1, 21 };
+  static const int32_T iv72[2] = { 1, 21 };
 
   real_T formula_nume;
   const mxArray *e_y;
-  static const int32_T iv74[2] = { 1, 45 };
+  static const int32_T iv73[2] = { 1, 45 };
 
   const mxArray *f_y;
-  static const int32_T iv75[2] = { 1, 21 };
+  static const int32_T iv74[2] = { 1, 21 };
 
   emlrtStack st;
   emlrtStack b_st;
@@ -233,12 +233,12 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   i31 = Phi->size[0] * Phi->size[1];
   Phi->size[0] = 1;
   emxEnsureCapacity(sp, (emxArray__common *)Phi, i31, (int32_T)sizeof(real_T),
-                    &xc_emlrtRTEI);
+                    &ad_emlrtRTEI);
   i = Data->size[0];
   i31 = Phi->size[0] * Phi->size[1];
   Phi->size[1] = i;
   emxEnsureCapacity(sp, (emxArray__common *)Phi, i31, (int32_T)sizeof(real_T),
-                    &xc_emlrtRTEI);
+                    &ad_emlrtRTEI);
   loop_ub = Data->size[0];
   for (i31 = 0; i31 < loop_ub; i31++) {
     Phi->data[i31] = 0.0;
@@ -250,7 +250,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   q = c_mean(&st, Data);
   i31 = Data->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)Data, i31, (int32_T)sizeof(real_T),
-                    &xc_emlrtRTEI);
+                    &ad_emlrtRTEI);
   loop_ub = Data->size[0];
   for (i31 = 0; i31 < loop_ub; i31++) {
     Data->data[i31] -= q;
@@ -261,24 +261,24 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     loop_ub = 0;
   } else {
     i31 = Data->size[0];
-    emlrtDynamicBoundsCheckFastR2012b(1, 1, i31, &mg_emlrtBCI, sp);
+    emlrtDynamicBoundsCheckFastR2012b(1, 1, i31, &qg_emlrtBCI, sp);
     i31 = Data->size[0];
     i32 = (int32_T)emlrtIntegerCheckFastR2012b(N, &kb_emlrtDCI, sp);
-    loop_ub = emlrtDynamicBoundsCheckFastR2012b(i32, 1, i31, &mg_emlrtBCI, sp);
+    loop_ub = emlrtDynamicBoundsCheckFastR2012b(i32, 1, i31, &qg_emlrtBCI, sp);
   }
 
-  b_emxInit_real_T(sp, &x_j, 1, &yc_emlrtRTEI, true);
+  b_emxInit_real_T(sp, &x_j, 1, &bd_emlrtRTEI, true);
   emlrtVectorVectorIndexCheckR2012b(Data->size[0], 1, 1, loop_ub, &ac_emlrtECI,
     sp);
   i31 = x_j->size[0];
   x_j->size[0] = loop_ub;
   emxEnsureCapacity(sp, (emxArray__common *)x_j, i31, (int32_T)sizeof(real_T),
-                    &xc_emlrtRTEI);
+                    &ad_emlrtRTEI);
   for (i31 = 0; i31 < loop_ub; i31++) {
     x_j->data[i31] = Data->data[i31];
   }
 
-  emxInit_real_T(sp, &a, 2, &xc_emlrtRTEI, true);
+  emxInit_real_T(sp, &a, 2, &ad_emlrtRTEI, true);
 
   /*  s[j]   1 <= j <= N. */
   /* 'crs_corr:52' p = x_j' * x_j; */
@@ -287,7 +287,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   a->size[0] = 1;
   a->size[1] = x_j->size[0];
   emxEnsureCapacity(&st, (emxArray__common *)a, i31, (int32_T)sizeof(real_T),
-                    &xc_emlrtRTEI);
+                    &ad_emlrtRTEI);
   i = x_j->size[0];
   for (i31 = 0; i31 < i; i31++) {
     a->data[a->size[0] * i31] = x_j->data[i31];
@@ -297,25 +297,25 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   if (!(a->size[1] == loop_ub)) {
     if ((a->size[1] == 1) || (loop_ub == 1)) {
       y = NULL;
-      m33 = emlrtCreateCharArray(2, iv70);
+      m32 = emlrtCreateCharArray(2, iv69);
       for (i = 0; i < 45; i++) {
-        cv110[i] = cv111[i];
+        cv108[i] = cv109[i];
       }
 
-      emlrtInitCharArrayR2013a(&b_st, 45, m33, cv110);
-      emlrtAssign(&y, m33);
+      emlrtInitCharArrayR2013a(&b_st, 45, m32, cv108);
+      emlrtAssign(&y, m32);
       c_st.site = &hk_emlrtRSI;
       d_st.site = &oj_emlrtRSI;
       f_error(&c_st, b_message(&d_st, y, &qb_emlrtMCI), &rb_emlrtMCI);
     } else {
       b_y = NULL;
-      m33 = emlrtCreateCharArray(2, iv71);
+      m32 = emlrtCreateCharArray(2, iv70);
       for (i = 0; i < 21; i++) {
-        cv112[i] = cv113[i];
+        cv110[i] = cv111[i];
       }
 
-      emlrtInitCharArrayR2013a(&b_st, 21, m33, cv112);
-      emlrtAssign(&b_y, m33);
+      emlrtInitCharArrayR2013a(&b_st, 21, m32, cv110);
+      emlrtAssign(&b_y, m32);
       c_st.site = &ik_emlrtRSI;
       d_st.site = &pj_emlrtRSI;
       f_error(&c_st, b_message(&d_st, b_y, &sb_emlrtMCI), &tb_emlrtMCI);
@@ -339,7 +339,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
       incx_t = (ptrdiff_t)(1);
       incy_t = (ptrdiff_t)(1);
       xix0_t = (double *)(&a->data[0]);
-      emlrtDynamicBoundsCheckFastR2012b(1, 1, loop_ub, &og_emlrtBCI, &f_st);
+      emlrtDynamicBoundsCheckFastR2012b(1, 1, loop_ub, &sg_emlrtBCI, &f_st);
       yiy0_t = (double *)(&x_j->data[0]);
       p = ddot(&n_t, xix0_t, &incx_t, yiy0_t, &incy_t);
     }
@@ -348,9 +348,9 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   /* 'crs_corr:54' for k = lag_min:lag_max */
   i31 = (int32_T)(lag_max + (1.0 - lag_min));
   emlrtForLoopVectorCheckR2012b(lag_min, 1.0, lag_max, mxDOUBLE_CLASS, i31,
-    &wd_emlrtRTEI, sp);
+    &yd_emlrtRTEI, sp);
   k = 0;
-  b_emxInit_real_T(sp, &x_jr, 1, &ad_emlrtRTEI, true);
+  b_emxInit_real_T(sp, &x_jr, 1, &cd_emlrtRTEI, true);
   while (k <= i31 - 1) {
     b_k = lag_min + (real_T)k;
 
@@ -363,10 +363,10 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     } else {
       i32 = Data->size[0];
       i33 = (int32_T)emlrtIntegerCheckFastR2012b(b_k, &lb_emlrtDCI, sp);
-      i32 = emlrtDynamicBoundsCheckFastR2012b(i33, 1, i32, &ng_emlrtBCI, sp);
+      i32 = emlrtDynamicBoundsCheckFastR2012b(i33, 1, i32, &rg_emlrtBCI, sp);
       i33 = Data->size[0];
       i = (int32_T)emlrtIntegerCheckFastR2012b(q, &lb_emlrtDCI, sp);
-      i33 = emlrtDynamicBoundsCheckFastR2012b(i, 1, i33, &ng_emlrtBCI, sp) + 1;
+      i33 = emlrtDynamicBoundsCheckFastR2012b(i, 1, i33, &rg_emlrtBCI, sp) + 1;
     }
 
     emlrtVectorVectorIndexCheckR2012b(Data->size[0], 1, 1, i33 - i32,
@@ -374,7 +374,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     i = x_jr->size[0];
     x_jr->size[0] = i33 - i32;
     emxEnsureCapacity(sp, (emxArray__common *)x_jr, i, (int32_T)sizeof(real_T),
-                      &xc_emlrtRTEI);
+                      &ad_emlrtRTEI);
     loop_ub = i33 - i32;
     for (i = 0; i < loop_ub; i++) {
       x_jr->data[i] = Data->data[(i32 + i) - 1];
@@ -387,7 +387,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     a->size[0] = 1;
     a->size[1] = x_j->size[0];
     emxEnsureCapacity(&st, (emxArray__common *)a, i, (int32_T)sizeof(real_T),
-                      &xc_emlrtRTEI);
+                      &ad_emlrtRTEI);
     loop_ub = x_j->size[0];
     for (i = 0; i < loop_ub; i++) {
       a->data[a->size[0] * i] = x_j->data[i];
@@ -397,25 +397,25 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     if (!(a->size[1] == i33 - i32)) {
       if ((a->size[1] == 1) || (i33 - i32 == 1)) {
         c_y = NULL;
-        m33 = emlrtCreateCharArray(2, iv72);
+        m32 = emlrtCreateCharArray(2, iv71);
         for (i = 0; i < 45; i++) {
-          cv110[i] = cv111[i];
+          cv108[i] = cv109[i];
         }
 
-        emlrtInitCharArrayR2013a(&b_st, 45, m33, cv110);
-        emlrtAssign(&c_y, m33);
+        emlrtInitCharArrayR2013a(&b_st, 45, m32, cv108);
+        emlrtAssign(&c_y, m32);
         c_st.site = &hk_emlrtRSI;
         d_st.site = &oj_emlrtRSI;
         f_error(&c_st, b_message(&d_st, c_y, &qb_emlrtMCI), &rb_emlrtMCI);
       } else {
         d_y = NULL;
-        m33 = emlrtCreateCharArray(2, iv73);
+        m32 = emlrtCreateCharArray(2, iv72);
         for (i = 0; i < 21; i++) {
-          cv112[i] = cv113[i];
+          cv110[i] = cv111[i];
         }
 
-        emlrtInitCharArrayR2013a(&b_st, 21, m33, cv112);
-        emlrtAssign(&d_y, m33);
+        emlrtInitCharArrayR2013a(&b_st, 21, m32, cv110);
+        emlrtAssign(&d_y, m32);
         c_st.site = &ik_emlrtRSI;
         d_st.site = &pj_emlrtRSI;
         f_error(&c_st, b_message(&d_st, d_y, &sb_emlrtMCI), &tb_emlrtMCI);
@@ -440,7 +440,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
         incy_t = (ptrdiff_t)(1);
         xix0_t = (double *)(&a->data[0]);
         i = i33 - i32;
-        emlrtDynamicBoundsCheckFastR2012b(1, 1, i, &og_emlrtBCI, &f_st);
+        emlrtDynamicBoundsCheckFastR2012b(1, 1, i, &sg_emlrtBCI, &f_st);
         yiy0_t = (double *)(&x_jr->data[0]);
         formula_nume = ddot(&n_t, xix0_t, &incx_t, yiy0_t, &incy_t);
       }
@@ -453,7 +453,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     a->size[0] = 1;
     a->size[1] = x_jr->size[0];
     emxEnsureCapacity(&st, (emxArray__common *)a, i, (int32_T)sizeof(real_T),
-                      &xc_emlrtRTEI);
+                      &ad_emlrtRTEI);
     loop_ub = x_jr->size[0];
     for (i = 0; i < loop_ub; i++) {
       a->data[a->size[0] * i] = x_jr->data[i];
@@ -463,25 +463,25 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     if (!(a->size[1] == i33 - i32)) {
       if ((a->size[1] == 1) || (i33 - i32 == 1)) {
         e_y = NULL;
-        m33 = emlrtCreateCharArray(2, iv74);
+        m32 = emlrtCreateCharArray(2, iv73);
         for (i = 0; i < 45; i++) {
-          cv110[i] = cv111[i];
+          cv108[i] = cv109[i];
         }
 
-        emlrtInitCharArrayR2013a(&b_st, 45, m33, cv110);
-        emlrtAssign(&e_y, m33);
+        emlrtInitCharArrayR2013a(&b_st, 45, m32, cv108);
+        emlrtAssign(&e_y, m32);
         c_st.site = &hk_emlrtRSI;
         d_st.site = &oj_emlrtRSI;
         f_error(&c_st, b_message(&d_st, e_y, &qb_emlrtMCI), &rb_emlrtMCI);
       } else {
         f_y = NULL;
-        m33 = emlrtCreateCharArray(2, iv75);
+        m32 = emlrtCreateCharArray(2, iv74);
         for (i = 0; i < 21; i++) {
-          cv112[i] = cv113[i];
+          cv110[i] = cv111[i];
         }
 
-        emlrtInitCharArrayR2013a(&b_st, 21, m33, cv112);
-        emlrtAssign(&f_y, m33);
+        emlrtInitCharArrayR2013a(&b_st, 21, m32, cv110);
+        emlrtAssign(&f_y, m32);
         c_st.site = &ik_emlrtRSI;
         d_st.site = &pj_emlrtRSI;
         f_error(&c_st, b_message(&d_st, f_y, &sb_emlrtMCI), &tb_emlrtMCI);
@@ -506,7 +506,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
         incy_t = (ptrdiff_t)(1);
         xix0_t = (double *)(&a->data[0]);
         i32 = i33 - i32;
-        emlrtDynamicBoundsCheckFastR2012b(1, 1, i32, &og_emlrtBCI, &f_st);
+        emlrtDynamicBoundsCheckFastR2012b(1, 1, i32, &sg_emlrtBCI, &f_st);
         yiy0_t = (double *)(&x_jr->data[0]);
         q = ddot(&n_t, xix0_t, &incx_t, yiy0_t, &incy_t);
       }
@@ -526,7 +526,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
 
     i32 = Phi->size[1];
     i33 = (int32_T)emlrtIntegerCheckFastR2012b(b_k, &mb_emlrtDCI, sp);
-    Phi->data[emlrtDynamicBoundsCheckFastR2012b(i33, 1, i32, &pg_emlrtBCI, sp) -
+    Phi->data[emlrtDynamicBoundsCheckFastR2012b(i33, 1, i32, &tg_emlrtBCI, sp) -
       1] = formula_nume / muDoubleScalarSqrt(q);
     k++;
     emlrtBreakCheckFastR2012b(emlrtBreakCheckR2012bFlagVar, sp);

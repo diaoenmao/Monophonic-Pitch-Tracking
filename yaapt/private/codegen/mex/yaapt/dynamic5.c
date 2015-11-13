@@ -415,7 +415,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
 
   /* 'path1:99' for I=N-1:-1:1 */
   emlrtForLoopVectorCheckR2012b((real_T)Local->size[1] - 1.0, -1.0, 1.0,
-    mxDOUBLE_CLASS, Local->size[1] - 1, &ud_emlrtRTEI, &st);
+    mxDOUBLE_CLASS, Local->size[1] - 1, &wd_emlrtRTEI, &st);
   loop_ub = 0;
   while (loop_ub <= Local->size[1] - 2) {
     i = Local->size[1] - loop_ub;

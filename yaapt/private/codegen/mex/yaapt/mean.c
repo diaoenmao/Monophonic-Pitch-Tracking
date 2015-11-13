@@ -119,20 +119,20 @@ real_T c_mean(const emlrtStack *sp, const emxArray_real_T *x)
   real_T y;
   boolean_T overflow;
   const mxArray *b_y;
-  static const int32_T iv76[2] = { 1, 31 };
+  static const int32_T iv75[2] = { 1, 31 };
 
-  const mxArray *m34;
-  char_T cv114[31];
+  const mxArray *m33;
+  char_T cv112[31];
   int32_T i;
-  static const char_T cv115[31] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
+  static const char_T cv113[31] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
     'l', 'b', 'o', 'x', ':', 'm', 'e', 'a', 'n', '_', 's', 'p', 'e', 'c', 'i',
     'a', 'l', 'E', 'm', 'p', 't', 'y' };
 
   const mxArray *c_y;
-  static const int32_T iv77[2] = { 1, 36 };
+  static const int32_T iv76[2] = { 1, 36 };
 
-  char_T cv116[36];
-  static const char_T cv117[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
+  char_T cv114[36];
+  static const char_T cv115[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
     'l', 'b', 'o', 'x', ':', 'a', 'u', 't', 'o', 'D', 'i', 'm', 'I', 'n', 'c',
     'o', 'm', 'p', 'a', 't', 'i', 'b', 'i', 'l', 'i', 't', 'y' };
 
@@ -150,13 +150,13 @@ real_T c_mean(const emlrtStack *sp, const emxArray_real_T *x)
   if (overflow) {
   } else {
     b_y = NULL;
-    m34 = emlrtCreateCharArray(2, iv76);
+    m33 = emlrtCreateCharArray(2, iv75);
     for (i = 0; i < 31; i++) {
-      cv114[i] = cv115[i];
+      cv112[i] = cv113[i];
     }
 
-    emlrtInitCharArrayR2013a(&st, 31, m34, cv114);
-    emlrtAssign(&b_y, m34);
+    emlrtInitCharArrayR2013a(&st, 31, m33, cv112);
+    emlrtAssign(&b_y, m33);
     b_st.site = &nj_emlrtRSI;
     f_error(&b_st, b_message(&b_st, b_y, &l_emlrtMCI), &l_emlrtMCI);
   }
@@ -171,13 +171,13 @@ real_T c_mean(const emlrtStack *sp, const emxArray_real_T *x)
   if (overflow) {
   } else {
     c_y = NULL;
-    m34 = emlrtCreateCharArray(2, iv77);
+    m33 = emlrtCreateCharArray(2, iv76);
     for (i = 0; i < 36; i++) {
-      cv116[i] = cv117[i];
+      cv114[i] = cv115[i];
     }
 
-    emlrtInitCharArrayR2013a(&st, 36, m34, cv116);
-    emlrtAssign(&c_y, m34);
+    emlrtInitCharArrayR2013a(&st, 36, m33, cv114);
+    emlrtAssign(&c_y, m33);
     b_st.site = &nj_emlrtRSI;
     f_error(&b_st, b_message(&b_st, c_y, &l_emlrtMCI), &l_emlrtMCI);
   }

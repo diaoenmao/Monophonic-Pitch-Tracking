@@ -111,12 +111,12 @@ void d_error(const emlrtStack *sp)
 void e_error(const emlrtStack *sp)
 {
   const mxArray *y;
-  static const int32_T iv84[2] = { 1, 28 };
+  static const int32_T iv83[2] = { 1, 28 };
 
-  const mxArray *m37;
-  char_T cv124[28];
+  const mxArray *m36;
+  char_T cv122[28];
   int32_T i;
-  static const char_T cv125[28] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ', 'D',
+  static const char_T cv123[28] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ', 'D',
     'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o', ' ', 'M',
     '>', '1', '0', '0' };
 
@@ -124,13 +124,13 @@ void e_error(const emlrtStack *sp)
   st.prev = sp;
   st.tls = sp->tls;
   y = NULL;
-  m37 = emlrtCreateCharArray(2, iv84);
+  m36 = emlrtCreateCharArray(2, iv83);
   for (i = 0; i < 28; i++) {
-    cv124[i] = cv125[i];
+    cv122[i] = cv123[i];
   }
 
-  emlrtInitCharArrayR2013a(sp, 28, m37, cv124);
-  emlrtAssign(&y, m37);
+  emlrtInitCharArrayR2013a(sp, 28, m36, cv122);
+  emlrtAssign(&y, m36);
   st.site = &dk_emlrtRSI;
   f_error(&st, y, &emlrtMCI);
 }
