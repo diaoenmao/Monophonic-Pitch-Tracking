@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * nlfer.c
  *
  * Code generation for function 'nlfer'
@@ -10,12 +14,11 @@
 #include "yaapt.h"
 #include "nlfer.h"
 #include "yaapt_emxutil.h"
-#include "eml_warning.h"
-#include "mean.h"
 #include "eml_int_forloop_overflow_check.h"
+#include "mean.h"
 #include "Myspecgram.h"
-#include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Variable Definitions */
 static emlrtRSInfo xb_emlrtRSI = { 46, "nlfer",
@@ -27,22 +30,16 @@ static emlrtRSInfo yb_emlrtRSI = { 49, "nlfer",
 static emlrtRSInfo ac_emlrtRSI = { 50, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRSInfo vc_emlrtRSI = { 70, "sum",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\sum.m" };
-
 static emlrtRTEInfo h_emlrtRTEI = { 1, 30, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRTEInfo j_emlrtRTEI = { 55, 1, "sum",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\sum.m" };
-
-static emlrtRTEInfo k_emlrtRTEI = { 46, 1, "nlfer",
+static emlrtRTEInfo i_emlrtRTEI = { 46, 1, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
 static emlrtDCInfo e_emlrtDCI = { 49, 30, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m", 1 };
 
-static emlrtBCInfo sb_emlrtBCI = { -1, -1, 49, 30, "SpecData", "nlfer",
+static emlrtBCInfo qb_emlrtBCI = { -1, -1, 49, 30, "SpecData", "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m", 0 };
 
 /* Function Definitions */
@@ -58,50 +55,38 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   emxArray_real_T *b_Data;
   real_T N_F0_min;
   real_T N_F0_max;
-  int32_T i5;
-  int32_T ixstart;
+  int32_T n;
+  int32_T k;
   emxArray_creal_T *SpecData;
   real_T b_s;
-  int32_T k;
-  int32_T i;
-  emxArray_creal_T *x;
+  int32_T vlen;
   int32_T ix;
+  emxArray_creal_T *x;
   int32_T iy;
+  int32_T i;
   emxArray_creal_T *b_SpecData;
-  uint32_T sz[2];
+  uint32_T uv0[2];
   emxArray_real_T *b_x;
+  boolean_T b1;
   boolean_T overflow;
   boolean_T p;
   int32_T exitg1;
-  const mxArray *y;
-  static const int32_T iv13[2] = { 1, 30 };
-
-  const mxArray *m6;
-  char_T cv21[30];
-  static const char_T cv22[30] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
-    'l', 'b', 'o', 'x', ':', 's', 'u', 'm', '_', 's', 'p', 'e', 'c', 'i', 'a',
-    'l', 'E', 'm', 'p', 't', 'y' };
-
-  const mxArray *b_y;
-  static const int32_T iv14[2] = { 1, 36 };
-
-  char_T cv23[36];
-  static const char_T cv24[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
-    'l', 'b', 'o', 'x', ':', 'a', 'u', 't', 'o', 'D', 'i', 'm', 'I', 'n', 'c',
-    'o', 'm', 'p', 'a', 't', 'i', 'b', 'i', 'l', 'i', 't', 'y' };
-
+  real_T avgEnergy;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
+  emlrtStack e_st;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  c_st.prev = &st;
-  c_st.tls = st.tls;
-  d_st.prev = &b_st;
-  d_st.tls = b_st.tls;
+  c_st.prev = &b_st;
+  c_st.tls = b_st.tls;
+  d_st.prev = &c_st;
+  d_st.tls = c_st.tls;
+  e_st.prev = &d_st;
+  e_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
 
   /*  NLFER  Normalized Low Frequency Energy Ratio */
@@ -157,17 +142,17 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*   Spectrogram of the data */
   /* 'nlfer:46' SpecData = Myspecgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump)); */
-  i5 = b_Data->size[0] * b_Data->size[1];
+  n = b_Data->size[0] * b_Data->size[1];
   b_Data->size[0] = 1;
   b_Data->size[1] = Data->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b_Data, i5, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)b_Data, n, (int32_T)sizeof(real_T),
                     &h_emlrtRTEI);
-  ixstart = Data->size[0] * Data->size[1];
-  for (i5 = 0; i5 < ixstart; i5++) {
-    b_Data->data[i5] = Data->data[i5];
+  k = Data->size[0] * Data->size[1];
+  for (n = 0; n < k; n++) {
+    b_Data->data[n] = Data->data[n];
   }
 
-  emxInit_creal_T(sp, &SpecData, 2, &k_emlrtRTEI, true);
+  emxInit_creal_T(sp, &SpecData, 2, &i_emlrtRTEI, true);
   if (s < 0.0) {
     b_s = muDoubleScalarCeil(s);
   } else {
@@ -182,67 +167,109 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   /* 'nlfer:49' FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:))); */
   emxFree_real_T(&b_Data);
   if (N_F0_min > N_F0_max) {
-    i5 = 1;
-    k = 1;
+    vlen = 1;
+    n = 1;
   } else {
-    i5 = SpecData->size[0];
-    k = (int32_T)emlrtIntegerCheckFastR2012b(N_F0_min, &e_emlrtDCI, sp);
-    i5 = emlrtDynamicBoundsCheckFastR2012b(k, 1, i5, &sb_emlrtBCI, sp);
-    k = SpecData->size[0];
-    i = (int32_T)emlrtIntegerCheckFastR2012b(N_F0_max, &e_emlrtDCI, sp);
-    k = emlrtDynamicBoundsCheckFastR2012b(i, 1, k, &sb_emlrtBCI, sp) + 1;
+    if (N_F0_min != (int32_T)muDoubleScalarFloor(N_F0_min)) {
+      emlrtIntegerCheckR2012b(N_F0_min, &e_emlrtDCI, sp);
+    }
+
+    n = SpecData->size[0];
+    vlen = (int32_T)N_F0_min;
+    if (!((vlen >= 1) && (vlen <= n))) {
+      emlrtDynamicBoundsCheckR2012b(vlen, 1, n, &qb_emlrtBCI, sp);
+    }
+
+    if (N_F0_max != (int32_T)muDoubleScalarFloor(N_F0_max)) {
+      emlrtIntegerCheckR2012b(N_F0_max, &e_emlrtDCI, sp);
+    }
+
+    n = SpecData->size[0];
+    ix = (int32_T)N_F0_max;
+    if (!((ix >= 1) && (ix <= n))) {
+      emlrtDynamicBoundsCheckR2012b(ix, 1, n, &qb_emlrtBCI, sp);
+    }
+
+    n = ix + 1;
   }
 
   emxInit_creal_T(sp, &x, 2, &h_emlrtRTEI, true);
-  ixstart = SpecData->size[1];
-  i = x->size[0] * x->size[1];
-  x->size[0] = k - i5;
-  x->size[1] = ixstart;
-  emxEnsureCapacity(sp, (emxArray__common *)x, i, (int32_T)sizeof(creal_T),
+  st.site = &yb_emlrtRSI;
+  k = SpecData->size[1];
+  ix = x->size[0] * x->size[1];
+  x->size[0] = n - vlen;
+  x->size[1] = k;
+  emxEnsureCapacity(&st, (emxArray__common *)x, ix, (int32_T)sizeof(creal_T),
                     &h_emlrtRTEI);
-  for (i = 0; i < ixstart; i++) {
-    ix = k - i5;
-    for (iy = 0; iy < ix; iy++) {
-      x->data[iy + x->size[0] * i] = SpecData->data[((i5 + iy) + SpecData->size
-        [0] * i) - 1];
+  for (ix = 0; ix < k; ix++) {
+    iy = n - vlen;
+    for (i = 0; i < iy; i++) {
+      x->data[i + x->size[0] * ix] = SpecData->data[((vlen + i) + SpecData->
+        size[0] * ix) - 1];
     }
   }
 
-  emxInit_creal_T(sp, &b_SpecData, 2, &h_emlrtRTEI, true);
-  ixstart = SpecData->size[1];
-  i = b_SpecData->size[0] * b_SpecData->size[1];
-  b_SpecData->size[0] = k - i5;
-  b_SpecData->size[1] = ixstart;
-  emxEnsureCapacity(sp, (emxArray__common *)b_SpecData, i, (int32_T)sizeof
+  emxInit_creal_T(&st, &b_SpecData, 2, &h_emlrtRTEI, true);
+  b_st.site = &xc_emlrtRSI;
+  k = SpecData->size[1];
+  ix = b_SpecData->size[0] * b_SpecData->size[1];
+  b_SpecData->size[0] = n - vlen;
+  b_SpecData->size[1] = k;
+  emxEnsureCapacity(&b_st, (emxArray__common *)b_SpecData, ix, (int32_T)sizeof
                     (creal_T), &h_emlrtRTEI);
-  for (i = 0; i < ixstart; i++) {
-    ix = k - i5;
-    for (iy = 0; iy < ix; iy++) {
-      b_SpecData->data[iy + b_SpecData->size[0] * i] = SpecData->data[((i5 + iy)
-        + SpecData->size[0] * i) - 1];
+  for (ix = 0; ix < k; ix++) {
+    iy = n - vlen;
+    for (i = 0; i < iy; i++) {
+      b_SpecData->data[i + b_SpecData->size[0] * ix] = SpecData->data[((vlen + i)
+        + SpecData->size[0] * ix) - 1];
     }
   }
 
-  for (i = 0; i < 2; i++) {
-    sz[i] = (uint32_T)b_SpecData->size[i];
+  for (ix = 0; ix < 2; ix++) {
+    uv0[ix] = (uint32_T)b_SpecData->size[ix];
   }
 
   emxFree_creal_T(&b_SpecData);
-  emxInit_real_T(sp, &b_x, 2, &h_emlrtRTEI, true);
-  i = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = (int32_T)sz[0];
-  b_x->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b_x, i, (int32_T)sizeof(real_T),
-                    &i_emlrtRTEI);
-  i = SpecData->size[1];
-  i5 = (k - i5) * i;
-  for (k = 0; k < i5; k++) {
+  emxInit_real_T(&b_st, &b_x, 2, &h_emlrtRTEI, true);
+  ix = b_x->size[0] * b_x->size[1];
+  b_x->size[0] = (int32_T)uv0[0];
+  b_x->size[1] = (int32_T)uv0[1];
+  emxEnsureCapacity(&b_st, (emxArray__common *)b_x, ix, (int32_T)sizeof(real_T),
+                    &h_emlrtRTEI);
+  ix = SpecData->size[1];
+  n = (n - vlen) * ix;
+  c_st.site = &yc_emlrtRSI;
+  if (1 > n) {
+    b1 = false;
+  } else {
+    b1 = (n > 2147483646);
+  }
+
+  if (b1) {
+    d_st.site = &mb_emlrtRSI;
+    check_forloop_overflow_error(&d_st);
+  }
+
+  for (k = 0; k + 1 <= n; k++) {
     b_x->data[k] = muDoubleScalarHypot(x->data[k].re, x->data[k].im);
   }
 
   emxFree_creal_T(&x);
   emxFree_creal_T(&SpecData);
   st.site = &yb_emlrtRSI;
+  b_st.site = &ad_emlrtRSI;
+  if (((b_x->size[0] == 1) && (b_x->size[1] == 1)) || (b_x->size[0] != 1)) {
+    overflow = true;
+  } else {
+    overflow = false;
+  }
+
+  if (overflow) {
+  } else {
+    emlrtErrorWithMessageIdR2012b(&b_st, &rd_emlrtRTEI,
+      "Coder:toolbox:autoDimIncompatibility", 0);
+  }
+
   overflow = false;
   p = false;
   k = 0;
@@ -267,78 +294,42 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
 
   if (!overflow) {
   } else {
-    y = NULL;
-    m6 = emlrtCreateCharArray(2, iv13);
-    for (i = 0; i < 30; i++) {
-      cv21[i] = cv22[i];
-    }
-
-    emlrtInitCharArrayR2013a(&st, 30, m6, cv21);
-    emlrtAssign(&y, m6);
-    b_st.site = &mk_emlrtRSI;
-    c_st.site = &uj_emlrtRSI;
-    f_error(&b_st, b_message(&c_st, y, &m_emlrtMCI), &n_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(&b_st, &sd_emlrtRTEI,
+      "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  if (((b_x->size[0] == 1) && (b_x->size[1] == 1)) || (b_x->size[0] != 1)) {
-    overflow = true;
-  } else {
-    overflow = false;
-  }
-
-  if (overflow) {
-  } else {
-    b_y = NULL;
-    m6 = emlrtCreateCharArray(2, iv14);
-    for (i = 0; i < 36; i++) {
-      cv23[i] = cv24[i];
-    }
-
-    emlrtInitCharArrayR2013a(&st, 36, m6, cv23);
-    emlrtAssign(&b_y, m6);
-    b_st.site = &lk_emlrtRSI;
-    c_st.site = &tj_emlrtRSI;
-    f_error(&b_st, b_message(&c_st, b_y, &o_emlrtMCI), &p_emlrtMCI);
-  }
-
-  for (i5 = 0; i5 < 2; i5++) {
-    sz[i5] = (uint32_T)b_x->size[i5];
-  }
-
-  i5 = Energy->size[0] * Energy->size[1];
+  c_st.site = &bd_emlrtRSI;
+  n = Energy->size[0] * Energy->size[1];
   Energy->size[0] = 1;
-  Energy->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(&st, (emxArray__common *)Energy, i5, (int32_T)sizeof(real_T),
-                    &j_emlrtRTEI);
+  Energy->size[1] = b_x->size[1];
+  emxEnsureCapacity(&c_st, (emxArray__common *)Energy, n, (int32_T)sizeof(real_T),
+                    &h_emlrtRTEI);
   if ((b_x->size[0] == 0) || (b_x->size[1] == 0)) {
-    i5 = Energy->size[0] * Energy->size[1];
+    n = Energy->size[0] * Energy->size[1];
     Energy->size[0] = 1;
-    emxEnsureCapacity(&st, (emxArray__common *)Energy, i5, (int32_T)sizeof
+    emxEnsureCapacity(&c_st, (emxArray__common *)Energy, n, (int32_T)sizeof
                       (real_T), &h_emlrtRTEI);
-    i5 = Energy->size[0] * Energy->size[1];
-    Energy->size[1] = (int32_T)sz[1];
-    emxEnsureCapacity(&st, (emxArray__common *)Energy, i5, (int32_T)sizeof
-                      (real_T), &h_emlrtRTEI);
-    ixstart = (int32_T)sz[1];
-    for (i5 = 0; i5 < ixstart; i5++) {
-      Energy->data[i5] = 0.0;
+    k = Energy->size[1];
+    for (n = 0; n < k; n++) {
+      Energy->data[Energy->size[0] * n] = 0.0;
     }
   } else {
+    vlen = b_x->size[0];
     ix = -1;
     iy = -1;
-    b_st.site = &vc_emlrtRSI;
+    d_st.site = &cd_emlrtRSI;
     overflow = (b_x->size[1] > 2147483646);
     if (overflow) {
-      d_st.site = &jb_emlrtRSI;
-      check_forloop_overflow_error(&d_st);
+      e_st.site = &mb_emlrtRSI;
+      check_forloop_overflow_error(&e_st);
     }
 
     for (i = 1; i <= b_x->size[1]; i++) {
-      ixstart = ix + 1;
+      n = ix + 1;
       ix++;
-      s = b_x->data[ixstart];
-      b_st.site = &wc_emlrtRSI;
-      for (k = 2; k <= b_x->size[0]; k++) {
+      s = b_x->data[n];
+      d_st.site = &dd_emlrtRSI;
+      for (k = 2; k <= vlen; k++) {
         ix++;
         s += b_x->data[ix];
       }
@@ -352,30 +343,30 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
 
   /* 'nlfer:50' avgEnergy = mean(FrmEnergy); */
   st.site = &ac_emlrtRSI;
-  s = mean(&st, Energy);
+  avgEnergy = mean(&st, Energy);
 
   /* 'nlfer:52' Energy = FrmEnergy/avgEnergy; */
-  i5 = Energy->size[0] * Energy->size[1];
+  n = Energy->size[0] * Energy->size[1];
   Energy->size[0] = 1;
-  emxEnsureCapacity(sp, (emxArray__common *)Energy, i5, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)Energy, n, (int32_T)sizeof(real_T),
                     &h_emlrtRTEI);
-  ixstart = Energy->size[0];
+  n = Energy->size[0];
   k = Energy->size[1];
-  ixstart *= k;
-  for (i5 = 0; i5 < ixstart; i5++) {
-    Energy->data[i5] /= s;
+  k *= n;
+  for (n = 0; n < k; n++) {
+    Energy->data[n] /= avgEnergy;
   }
 
   /*  The frame is voiced if NLFER enery > threshold, otherwise is unvoiced. */
   /* 'nlfer:54' VUVEnergy = (Energy > nlfer_thersh1); */
-  i5 = VUVEnergy->size[0] * VUVEnergy->size[1];
+  n = VUVEnergy->size[0] * VUVEnergy->size[1];
   VUVEnergy->size[0] = 1;
   VUVEnergy->size[1] = Energy->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)VUVEnergy, i5, (int32_T)sizeof
+  emxEnsureCapacity(sp, (emxArray__common *)VUVEnergy, n, (int32_T)sizeof
                     (boolean_T), &h_emlrtRTEI);
-  ixstart = Energy->size[0] * Energy->size[1];
-  for (i5 = 0; i5 < ixstart; i5++) {
-    VUVEnergy->data[i5] = (Energy->data[i5] > 0.75);
+  k = Energy->size[0] * Energy->size[1];
+  for (n = 0; n < k; n++) {
+    VUVEnergy->data[n] = (Energy->data[n] > 0.75);
   }
 
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);

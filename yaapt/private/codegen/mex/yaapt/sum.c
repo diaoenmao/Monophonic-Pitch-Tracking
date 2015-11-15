@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * sum.c
  *
  * Code generation for function 'sum'
@@ -9,11 +13,11 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "sum.h"
-#include "eml_warning.h"
-#include "eml_int_forloop_overflow_check.h"
+#include "combine_vector_elements.h"
 #include "isequal.h"
-#include "yaapt_mexutil.h"
+#include "eml_int_forloop_overflow_check.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Function Definitions */
 
@@ -25,44 +29,43 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
   real_T y;
   boolean_T overflow;
   boolean_T p;
-  int32_T i;
+  int32_T k;
   int32_T exitg1;
-  const mxArray *b_y;
-  static const int32_T iv51[2] = { 1, 30 };
-
-  const mxArray *m25;
-  char_T cv80[30];
-  static const char_T cv81[30] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
-    'l', 'b', 'o', 'x', ':', 's', 'u', 'm', '_', 's', 'p', 'e', 'c', 'i', 'a',
-    'l', 'E', 'm', 'p', 't', 'y' };
-
-  const mxArray *c_y;
-  static const int32_T iv52[2] = { 1, 36 };
-
-  char_T cv82[36];
-  static const char_T cv83[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
-    'l', 'b', 'o', 'x', ':', 'a', 'u', 't', 'o', 'D', 'i', 'm', 'I', 'n', 'c',
-    'o', 'm', 'p', 'a', 't', 'i', 'b', 'i', 'l', 'i', 't', 'y' };
-
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
+  emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  b_st.prev = sp;
-  b_st.tls = sp->tls;
-  c_st.prev = &st;
-  c_st.tls = st.tls;
+  st.site = &ad_emlrtRSI;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  c_st.prev = &b_st;
+  c_st.tls = b_st.tls;
+  d_st.prev = &c_st;
+  d_st.tls = c_st.tls;
+  if ((x->size[1] == 1) || (x->size[1] != 1)) {
+    overflow = true;
+  } else {
+    overflow = false;
+  }
+
+  if (overflow) {
+  } else {
+    emlrtErrorWithMessageIdR2012b(&st, &rd_emlrtRTEI,
+      "Coder:toolbox:autoDimIncompatibility", 0);
+  }
+
   overflow = false;
   p = false;
-  i = 0;
+  k = 0;
   do {
     exitg1 = 0;
-    if (i < 2) {
-      if (x->size[i] != 0) {
+    if (k < 2) {
+      if (x->size[k] != 0) {
         exitg1 = 1;
       } else {
-        i++;
+        k++;
       }
     } else {
       p = true;
@@ -77,45 +80,16 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
 
   if (!overflow) {
   } else {
-    b_y = NULL;
-    m25 = emlrtCreateCharArray(2, iv51);
-    for (i = 0; i < 30; i++) {
-      cv80[i] = cv81[i];
-    }
-
-    emlrtInitCharArrayR2013a(sp, 30, m25, cv80);
-    emlrtAssign(&b_y, m25);
-    st.site = &mk_emlrtRSI;
-    b_st.site = &uj_emlrtRSI;
-    f_error(&st, b_message(&b_st, b_y, &m_emlrtMCI), &n_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(&st, &sd_emlrtRTEI,
+      "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  if ((x->size[1] == 1) || (x->size[1] != 1)) {
-    overflow = true;
-  } else {
-    overflow = false;
-  }
-
-  if (overflow) {
-  } else {
-    c_y = NULL;
-    m25 = emlrtCreateCharArray(2, iv52);
-    for (i = 0; i < 36; i++) {
-      cv82[i] = cv83[i];
-    }
-
-    emlrtInitCharArrayR2013a(sp, 36, m25, cv82);
-    emlrtAssign(&c_y, m25);
-    st.site = &lk_emlrtRSI;
-    b_st.site = &tj_emlrtRSI;
-    f_error(&st, b_message(&b_st, c_y, &o_emlrtMCI), &p_emlrtMCI);
-  }
-
+  b_st.site = &bd_emlrtRSI;
   if (x->size[1] == 0) {
     y = 0.0;
   } else {
     y = x->data[0];
-    st.site = &bd_emlrtRSI;
+    c_st.site = &fd_emlrtRSI;
     if (2 > x->size[1]) {
       overflow = false;
     } else {
@@ -123,12 +97,12 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
     }
 
     if (overflow) {
-      c_st.site = &jb_emlrtRSI;
-      check_forloop_overflow_error(&c_st);
+      d_st.site = &mb_emlrtRSI;
+      check_forloop_overflow_error(&d_st);
     }
 
-    for (i = 2; i <= x->size[1]; i++) {
-      y += (real_T)x->data[i - 1];
+    for (k = 2; k <= x->size[1]; k++) {
+      y += (real_T)x->data[k - 1];
     }
   }
 
@@ -140,94 +114,35 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
  */
 real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
 {
-  real_T y;
-  boolean_T overflow;
-  const mxArray *b_y;
-  static const int32_T iv43[2] = { 1, 30 };
-
-  const mxArray *m22;
-  char_T cv69[30];
-  int32_T i;
-  static const char_T cv70[30] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
-    'l', 'b', 'o', 'x', ':', 's', 'u', 'm', '_', 's', 'p', 'e', 'c', 'i', 'a',
-    'l', 'E', 'm', 'p', 't', 'y' };
-
-  const mxArray *c_y;
-  static const int32_T iv44[2] = { 1, 36 };
-
-  char_T cv71[36];
-  static const char_T cv72[36] = { 'C', 'o', 'd', 'e', 'r', ':', 't', 'o', 'o',
-    'l', 'b', 'o', 'x', ':', 'a', 'u', 't', 'o', 'D', 'i', 'm', 'I', 'n', 'c',
-    'o', 'm', 'p', 'a', 't', 'i', 'b', 'i', 'l', 'i', 't', 'y' };
-
+  boolean_T b6;
   emlrtStack st;
   emlrtStack b_st;
-  emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  b_st.prev = sp;
-  b_st.tls = sp->tls;
-  c_st.prev = &st;
-  c_st.tls = st.tls;
-  overflow = !b_isequal(x);
-  if (overflow) {
-  } else {
-    b_y = NULL;
-    m22 = emlrtCreateCharArray(2, iv43);
-    for (i = 0; i < 30; i++) {
-      cv69[i] = cv70[i];
-    }
-
-    emlrtInitCharArrayR2013a(sp, 30, m22, cv69);
-    emlrtAssign(&b_y, m22);
-    st.site = &mk_emlrtRSI;
-    b_st.site = &uj_emlrtRSI;
-    f_error(&st, b_message(&b_st, b_y, &m_emlrtMCI), &n_emlrtMCI);
-  }
-
+  st.site = &ad_emlrtRSI;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
   if ((x->size[1] == 1) || (x->size[1] != 1)) {
-    overflow = true;
+    b6 = true;
   } else {
-    overflow = false;
+    b6 = false;
   }
 
-  if (overflow) {
+  if (b6) {
   } else {
-    c_y = NULL;
-    m22 = emlrtCreateCharArray(2, iv44);
-    for (i = 0; i < 36; i++) {
-      cv71[i] = cv72[i];
-    }
-
-    emlrtInitCharArrayR2013a(sp, 36, m22, cv71);
-    emlrtAssign(&c_y, m22);
-    st.site = &lk_emlrtRSI;
-    b_st.site = &tj_emlrtRSI;
-    f_error(&st, b_message(&b_st, c_y, &o_emlrtMCI), &p_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(&st, &rd_emlrtRTEI,
+      "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
-  if (x->size[1] == 0) {
-    y = 0.0;
+  b6 = !b_isequal(x);
+  if (b6) {
   } else {
-    y = x->data[0];
-    st.site = &bd_emlrtRSI;
-    if (2 > x->size[1]) {
-      overflow = false;
-    } else {
-      overflow = (x->size[1] > 2147483646);
-    }
-
-    if (overflow) {
-      c_st.site = &jb_emlrtRSI;
-      check_forloop_overflow_error(&c_st);
-    }
-
-    for (i = 2; i <= x->size[1]; i++) {
-      y += x->data[i - 1];
-    }
+    emlrtErrorWithMessageIdR2012b(&st, &sd_emlrtRTEI,
+      "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  return y;
+  b_st.site = &bd_emlrtRSI;
+  return combine_vector_elements(&b_st, x);
 }
 
 /* End of code generation (sum.c) */

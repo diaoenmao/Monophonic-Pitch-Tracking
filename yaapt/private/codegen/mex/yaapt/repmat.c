@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * repmat.c
  *
  * Code generation for function 'repmat'
@@ -9,45 +13,36 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "repmat.h"
-#include "pchip.h"
-#include "yaapt_emxutil.h"
-#include "eml_warning.h"
 #include "eml_int_forloop_overflow_check.h"
+#include "yaapt_emxutil.h"
+#include "nonlinear.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo kf_emlrtRSI = { 42, "repmat",
+static emlrtRSInfo nf_emlrtRSI = { 114, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRSInfo lf_emlrtRSI = { 40, "repmat",
+static emlrtRSInfo of_emlrtRSI = { 18, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRSInfo mf_emlrtRSI = { 12, "repmat",
+static emlrtRSInfo pf_emlrtRSI = { 112, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtMCInfo cb_emlrtMCI = { 24, 5, "repmat",
+static emlrtMCInfo d_emlrtMCI = { 37, 5, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtMCInfo db_emlrtMCI = { 57, 5, "eml_assert_valid_size_arg",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_assert_valid_size_arg.m" };
-
-static emlrtMCInfo eb_emlrtMCI = { 56, 15, "eml_assert_valid_size_arg",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_assert_valid_size_arg.m" };
-
-static emlrtRTEInfo yb_emlrtRTEI = { 30, 1, "repmat",
+static emlrtRTEInfo sb_emlrtRTEI = { 1, 14, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtDCInfo v_emlrtDCI = { 15, 14, "repmat",
+static emlrtDCInfo v_emlrtDCI = { 21, 14, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m", 4 };
 
-static emlrtRSInfo xj_emlrtRSI = { 57, "eml_assert_valid_size_arg",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_assert_valid_size_arg.m" };
+static emlrtRTEInfo le_emlrtRTEI = { 59, 15, "assertValidSizeArg",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\assertValidSizeArg.m" };
 
-static emlrtRSInfo qk_emlrtRSI = { 56, "eml_assert_valid_size_arg",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_assert_valid_size_arg.m" };
-
-static emlrtRSInfo sk_emlrtRSI = { 24, "repmat",
+static emlrtRSInfo ek_emlrtRSI = { 37, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
 /* Function Definitions */
@@ -59,39 +54,18 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
 {
   boolean_T p;
   boolean_T guard1 = false;
-  const mxArray *y;
-  static const int32_T iv39[2] = { 1, 28 };
-
-  const mxArray *m19;
-  char_T cv61[28];
-  int32_T i;
-  static const char_T cv62[28] = { 'C', 'o', 'd', 'e', 'r', ':', 'M', 'A', 'T',
-    'L', 'A', 'B', ':', 'N', 'o', 'n', 'I', 'n', 't', 'e', 'g', 'e', 'r', 'I',
-    'n', 'p', 'u', 't' };
-
-  const mxArray *b_y;
-  const mxArray *c_y;
   real_T b_varargin_2;
-  const mxArray *d_y;
-  static const int32_T iv40[2] = { 1, 21 };
-
-  char_T cv63[21];
-  static const char_T cv64[21] = { 'C', 'o', 'd', 'e', 'r', ':', 'M', 'A', 'T',
-    'L', 'A', 'B', ':', 'p', 'm', 'a', 'x', 's', 'i', 'z', 'e' };
-
-  boolean_T b2;
+  int32_T jtilecol;
+  boolean_T b4;
   int32_T ibtile;
   int32_T k;
   emlrtStack st;
   emlrtStack b_st;
-  emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &mf_emlrtRSI;
+  st.site = &of_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  c_st.prev = &st;
-  c_st.tls = st.tls;
   if ((varargin_2 != muDoubleScalarFloor(varargin_2)) || muDoubleScalarIsInf
       (varargin_2)) {
     p = false;
@@ -122,25 +96,8 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
 
   if (p) {
   } else {
-    y = NULL;
-    m19 = emlrtCreateCharArray(2, iv39);
-    for (i = 0; i < 28; i++) {
-      cv61[i] = cv62[i];
-    }
-
-    emlrtInitCharArrayR2013a(&st, 28, m19, cv61);
-    emlrtAssign(&y, m19);
-    b_y = NULL;
-    m19 = emlrtCreateNumericMatrix(1, 1, mxINT32_CLASS, mxREAL);
-    *(int32_T *)mxGetData(m19) = MIN_int32_T;
-    emlrtAssign(&b_y, m19);
-    c_y = NULL;
-    m19 = emlrtCreateNumericMatrix(1, 1, mxINT32_CLASS, mxREAL);
-    *(int32_T *)mxGetData(m19) = MAX_int32_T;
-    emlrtAssign(&c_y, m19);
-    b_st.site = &rk_emlrtRSI;
-    c_st.site = &fl_emlrtRSI;
-    f_error(&b_st, c_message(&c_st, y, b_y, c_y, &ab_emlrtMCI), &bb_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(&st, &ke_emlrtRTEI,
+      "Coder:MATLAB:NonIntegerInput", 4, 12, MIN_int32_T, 12, MAX_int32_T);
   }
 
   if (varargin_2 <= 0.0) {
@@ -151,41 +108,33 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
 
   if (2.147483647E+9 >= b_varargin_2) {
   } else {
-    d_y = NULL;
-    m19 = emlrtCreateCharArray(2, iv40);
-    for (i = 0; i < 21; i++) {
-      cv63[i] = cv64[i];
-    }
-
-    emlrtInitCharArrayR2013a(&st, 21, m19, cv63);
-    emlrtAssign(&d_y, m19);
-    b_st.site = &qk_emlrtRSI;
-    c_st.site = &xj_emlrtRSI;
-    f_error(&b_st, b_message(&c_st, d_y, &db_emlrtMCI), &eb_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(&st, &le_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
   }
 
-  emlrtNonNegativeCheckFastR2012b(varargin_2, &v_emlrtDCI, sp);
-  i = b->size[0] * b->size[1];
+  if (!(varargin_2 > 0.0)) {
+    emlrtNonNegativeCheckR2012b(varargin_2, &v_emlrtDCI, sp);
+  }
+
+  jtilecol = b->size[0] * b->size[1];
   b->size[0] = 4;
   b->size[1] = (int32_T)varargin_2;
-  emxEnsureCapacity(sp, (emxArray__common *)b, i, (int32_T)sizeof(real_T),
-                    &yb_emlrtRTEI);
-  if ((int32_T)varargin_2 == 0) {
-  } else {
-    st.site = &lf_emlrtRSI;
+  emxEnsureCapacity(sp, (emxArray__common *)b, jtilecol, (int32_T)sizeof(real_T),
+                    &sb_emlrtRTEI);
+  if (!((int32_T)varargin_2 == 0)) {
+    st.site = &pf_emlrtRSI;
     if (1 > (int32_T)varargin_2) {
-      b2 = false;
+      b4 = false;
     } else {
-      b2 = ((int32_T)varargin_2 > 2147483646);
+      b4 = ((int32_T)varargin_2 > 2147483646);
     }
 
-    if (b2) {
-      b_st.site = &jb_emlrtRSI;
+    if (b4) {
+      b_st.site = &mb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
 
-    for (i = 1; i <= (int32_T)varargin_2; i++) {
-      ibtile = (i - 1) << 2;
+    for (jtilecol = 1; jtilecol <= (int32_T)varargin_2; jtilecol++) {
+      ibtile = (jtilecol - 1) << 2;
       for (k = 0; k < 4; k++) {
         b->data[ibtile + k] = 1.0 + (((real_T)k + 1.0) - 1.0);
       }
@@ -199,16 +148,16 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
 void repmat(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *b)
 {
   int32_T outsize_idx_1;
-  const mxArray *y;
-  static const int32_T iv38[2] = { 1, 15 };
-
-  const mxArray *m18;
-  char_T cv59[15];
-  static const char_T cv60[15] = { 'M', 'A', 'T', 'L', 'A', 'B', ':', 'p', 'm',
+  int32_T ibmat;
+  static const char_T cv3[15] = { 'M', 'A', 'T', 'L', 'A', 'B', ':', 'p', 'm',
     'a', 'x', 's', 'i', 'z', 'e' };
 
+  char_T u[15];
+  const mxArray *y;
+  static const int32_T iv23[2] = { 1, 15 };
+
+  const mxArray *m5;
   boolean_T overflow;
-  int32_T ibmat;
   int32_T itilerow;
   emlrtStack st;
   emlrtStack b_st;
@@ -219,35 +168,28 @@ void repmat(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *b)
   outsize_idx_1 = a->size[1];
   if (outsize_idx_1 == a->size[1]) {
   } else {
-    y = NULL;
-    m18 = emlrtCreateCharArray(2, iv38);
-    for (outsize_idx_1 = 0; outsize_idx_1 < 15; outsize_idx_1++) {
-      cv59[outsize_idx_1] = cv60[outsize_idx_1];
+    for (ibmat = 0; ibmat < 15; ibmat++) {
+      u[ibmat] = cv3[ibmat];
     }
 
-    emlrtInitCharArrayR2013a(sp, 15, m18, cv59);
-    emlrtAssign(&y, m18);
-    st.site = &sk_emlrtRSI;
-    f_error(&st, y, &cb_emlrtMCI);
+    y = NULL;
+    m5 = emlrtCreateCharArray(2, iv23);
+    emlrtInitCharArrayR2013a(sp, 15, m5, &u[0]);
+    emlrtAssign(&y, m5);
+    st.site = &ek_emlrtRSI;
+    m_error(&st, y, &d_emlrtMCI);
   }
 
-  outsize_idx_1 = b->size[0] * b->size[1];
+  ibmat = b->size[0] * b->size[1];
   b->size[0] = 4;
-  b->size[1] = a->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b, outsize_idx_1, (int32_T)sizeof
-                    (real_T), &yb_emlrtRTEI);
-  outsize_idx_1 = a->size[1];
-  if (outsize_idx_1 == 0) {
-  } else {
-    st.site = &kf_emlrtRSI;
-    if (1 > a->size[1]) {
-      overflow = false;
-    } else {
-      overflow = (a->size[1] > 2147483646);
-    }
-
+  b->size[1] = outsize_idx_1;
+  emxEnsureCapacity(sp, (emxArray__common *)b, ibmat, (int32_T)sizeof(real_T),
+                    &sb_emlrtRTEI);
+  if ((!(a->size[1] == 0)) && (!(outsize_idx_1 == 0))) {
+    st.site = &nf_emlrtRSI;
+    overflow = (a->size[1] > 2147483646);
     if (overflow) {
-      b_st.site = &jb_emlrtRSI;
+      b_st.site = &mb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
 

@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: abs.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "abs.h"
@@ -34,19 +37,14 @@ void b_abs(const creal_T x[8192], double y[8192])
  */
 void c_abs(const emxArray_real_T *x, emxArray_real_T *y)
 {
-  unsigned int uv1[2];
-  int i10;
+  int n;
   int k;
-  for (i10 = 0; i10 < 2; i10++) {
-    uv1[i10] = (unsigned int)x->size[i10];
-  }
-
-  i10 = y->size[0] * y->size[1];
+  n = y->size[0] * y->size[1];
   y->size[0] = 4;
-  y->size[1] = (int)uv1[1];
-  emxEnsureCapacity((emxArray__common *)y, i10, (int)sizeof(double));
-  i10 = x->size[1] << 2;
-  for (k = 0; k < i10; k++) {
+  y->size[1] = x->size[1];
+  emxEnsureCapacity((emxArray__common *)y, n, (int)sizeof(double));
+  n = x->size[1] << 2;
+  for (k = 0; k + 1 <= n; k++) {
     y->data[k] = fabs(x->data[k]);
   }
 }

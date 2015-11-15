@@ -1,17 +1,72 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: filter.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "filter.h"
 #include "yaapt_emxutil.h"
 
 /* Function Definitions */
+
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
+void b_filter(const emxArray_real_T *x, emxArray_real_T *y)
+{
+  int k;
+  int nx;
+  int j;
+  double dbuffer[3];
+  double b_dbuffer;
+  k = y->size[0] * y->size[1];
+  y->size[0] = 1;
+  y->size[1] = x->size[1];
+  emxEnsureCapacity((emxArray__common *)y, k, (int)sizeof(double));
+  nx = x->size[1];
+  if (x->size[1] >= 6) {
+    k = y->size[0] * y->size[1];
+    y->size[0] = 1;
+    emxEnsureCapacity((emxArray__common *)y, k, (int)sizeof(double));
+    j = y->size[1];
+    for (k = 0; k < j; k++) {
+      y->data[y->size[0] * k] = 0.0;
+    }
+
+    for (k = 0; k < 3; k++) {
+      for (j = k; j + 1 <= nx; j++) {
+        y->data[j] += 0.33333333333333331 * x->data[j - k];
+      }
+    }
+  } else {
+    for (k = 0; k < 2; k++) {
+      dbuffer[k + 1] = 0.0;
+    }
+
+    for (j = 0; j + 1 <= nx; j++) {
+      for (k = 0; k < 2; k++) {
+        dbuffer[k] = dbuffer[k + 1];
+      }
+
+      dbuffer[2] = 0.0;
+      for (k = 0; k < 3; k++) {
+        b_dbuffer = dbuffer[k] + x->data[j] * 0.33333333333333331;
+        dbuffer[k] = b_dbuffer;
+      }
+
+      y->data[j] = dbuffer[0];
+    }
+  }
+}
 
 /*
  * Arguments    : const double b[151]
@@ -21,41 +76,33 @@
  */
 void filter(const double b[151], const emxArray_real_T *x, emxArray_real_T *y)
 {
-  unsigned int uv0[2];
   int j;
+  int nx;
   int k;
-  int jend;
   double dbuffer[151];
   double b_dbuffer;
-  for (j = 0; j < 2; j++) {
-    uv0[j] = (unsigned int)x->size[j];
-  }
-
   j = y->size[0] * y->size[1];
   y->size[0] = 1;
-  y->size[1] = (int)uv0[1];
+  y->size[1] = x->size[1];
   emxEnsureCapacity((emxArray__common *)y, j, (int)sizeof(double));
+  nx = x->size[1];
   if (x->size[1] >= 302) {
     j = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity((emxArray__common *)y, j, (int)sizeof(double));
-    j = y->size[0] * y->size[1];
-    y->size[1] = (int)uv0[1];
-    emxEnsureCapacity((emxArray__common *)y, j, (int)sizeof(double));
-    k = (int)uv0[1];
+    k = y->size[1];
     for (j = 0; j < k; j++) {
-      y->data[j] = 0.0;
+      y->data[y->size[0] * j] = 0.0;
     }
 
     for (k = 0; k < 151; k++) {
-      jend = (k + x->size[1]) - k;
-      for (j = k; j + 1 <= jend; j++) {
+      for (j = k; j + 1 <= nx; j++) {
         y->data[j] += b[k] * x->data[j - k];
       }
     }
   } else {
     memset(&dbuffer[1], 0, 150U * sizeof(double));
-    for (j = 0; j + 1 <= x->size[1]; j++) {
+    for (j = 0; j + 1 <= nx; j++) {
       for (k = 0; k < 150; k++) {
         dbuffer[k] = dbuffer[k + 1];
       }

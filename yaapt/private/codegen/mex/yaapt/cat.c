@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * cat.c
  *
  * Code generation for function 'cat'
@@ -9,28 +13,18 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "cat.h"
-#include "eml_error.h"
+#include "error1.h"
 #include "yaapt_emxutil.h"
-#include "eml_warning.h"
-#include "yaapt_mexutil.h"
+#include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ti_emlrtRSI = { 29, "cat",
+static emlrtRSInfo ij_emlrtRSI = { 36, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
-static emlrtMCInfo ub_emlrtMCI = { 32, 13, "cat",
+static emlrtRTEInfo ad_emlrtRTEI = { 1, 14, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
-static emlrtMCInfo vb_emlrtMCI = { 31, 23, "cat",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
-
-static emlrtRTEInfo ed_emlrtRTEI = { 26, 5, "cat",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
-
-static emlrtRSInfo kj_emlrtRSI = { 32, "cat",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
-
-static emlrtRSInfo ek_emlrtRSI = { 31, "cat",
+static emlrtRTEInfo cf_emlrtRTEI = { 38, 23, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
 /* Function Definitions */
@@ -42,60 +36,45 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
          emxArray_real_T *varargin_2, emxArray_real_T *y)
 {
   uint32_T sz1[2];
-  int32_T i;
+  int32_T iy;
   uint32_T ysize[2];
   int32_T exitg2;
   boolean_T p;
-  const mxArray *b_y;
-  static const int32_T iv81[2] = { 1, 39 };
-
-  const mxArray *m35;
-  char_T cv120[39];
-  static const char_T cv121[39] = { 'C', 'o', 'd', 'e', 'r', ':', 'M', 'A', 'T',
-    'L', 'A', 'B', ':', 'c', 'a', 't', 'e', 'n', 'a', 't', 'e', '_', 'd', 'i',
-    'm', 'e', 'n', 's', 'i', 'o', 'n', 'M', 'i', 's', 'm', 'a', 't', 'c', 'h' };
-
   int32_T exitg1;
-  const mxArray *c_y;
-  static const int32_T iv82[2] = { 1, 39 };
-
-  int32_T iy;
+  int32_T i;
   int32_T ix;
   int32_T l;
   emlrtStack st;
-  emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
-  b_st.prev = sp;
-  b_st.tls = sp->tls;
-  for (i = 0; i < 2; i++) {
-    sz1[i] = (uint32_T)varargin_1->size[i];
+  for (iy = 0; iy < 2; iy++) {
+    sz1[iy] = (uint32_T)varargin_1->size[iy];
   }
 
-  for (i = 0; i < 2; i++) {
-    ysize[i] = sz1[i];
+  for (iy = 0; iy < 2; iy++) {
+    ysize[iy] = sz1[iy];
   }
 
   ysize[0] += 3U;
-  i = y->size[0] * y->size[1];
+  iy = y->size[0] * y->size[1];
   y->size[0] = (int32_T)ysize[0];
   y->size[1] = (int32_T)ysize[1];
-  emxEnsureCapacity(sp, (emxArray__common *)y, i, (int32_T)sizeof(real_T),
-                    &ed_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)y, iy, (int32_T)sizeof(real_T),
+                    &ad_emlrtRTEI);
   if (varargin_1->size[1] == 0) {
-    st.site = &ti_emlrtRSI;
-    e_eml_error(&st);
+    st.site = &ij_emlrtRSI;
+    k_error(&st);
   }
 
-  i = 0;
+  iy = 0;
   do {
     exitg2 = 0;
-    if (i < 2) {
-      if ((i + 1 != 1) && ((int32_T)ysize[1] != varargin_1->size[1])) {
+    if (iy < 2) {
+      if ((!(1 == 1 + iy)) && (y->size[iy] != varargin_1->size[iy])) {
         p = false;
         exitg2 = 1;
       } else {
-        i++;
+        iy++;
       }
     } else {
       p = true;
@@ -105,33 +84,24 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
 
   if (p) {
   } else {
-    b_y = NULL;
-    m35 = emlrtCreateCharArray(2, iv81);
-    for (i = 0; i < 39; i++) {
-      cv120[i] = cv121[i];
-    }
-
-    emlrtInitCharArrayR2013a(sp, 39, m35, cv120);
-    emlrtAssign(&b_y, m35);
-    st.site = &ek_emlrtRSI;
-    b_st.site = &kj_emlrtRSI;
-    f_error(&st, b_message(&b_st, b_y, &ub_emlrtMCI), &vb_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(sp, &cf_emlrtRTEI,
+      "Coder:MATLAB:catenate_dimensionMismatch", 0);
   }
 
   if (varargin_2->size[1] == 0) {
-    st.site = &ti_emlrtRSI;
-    e_eml_error(&st);
+    st.site = &ij_emlrtRSI;
+    k_error(&st);
   }
 
-  i = 0;
+  iy = 0;
   do {
     exitg1 = 0;
-    if (i < 2) {
-      if ((i + 1 != 1) && ((int32_T)ysize[1] != varargin_2->size[1])) {
+    if (iy < 2) {
+      if ((!(1 == 1 + iy)) && (y->size[iy] != varargin_2->size[iy])) {
         p = false;
         exitg1 = 1;
       } else {
-        i++;
+        iy++;
       }
     } else {
       p = true;
@@ -141,20 +111,14 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
 
   if (p) {
   } else {
-    c_y = NULL;
-    m35 = emlrtCreateCharArray(2, iv82);
-    for (i = 0; i < 39; i++) {
-      cv120[i] = cv121[i];
-    }
-
-    emlrtInitCharArrayR2013a(sp, 39, m35, cv120);
-    emlrtAssign(&c_y, m35);
-    st.site = &ek_emlrtRSI;
-    b_st.site = &kj_emlrtRSI;
-    f_error(&st, b_message(&b_st, c_y, &ub_emlrtMCI), &vb_emlrtMCI);
+    emlrtErrorWithMessageIdR2012b(sp, &cf_emlrtRTEI,
+      "Coder:MATLAB:catenate_dimensionMismatch", 0);
   }
 
-  ysize[1] = ysize[1];
+  for (iy = 0; iy < 2; iy++) {
+    ysize[iy] = (uint32_T)y->size[iy];
+  }
+
   iy = 0;
   for (i = 0; i < (int32_T)ysize[1]; i++) {
     ix = i * 3;

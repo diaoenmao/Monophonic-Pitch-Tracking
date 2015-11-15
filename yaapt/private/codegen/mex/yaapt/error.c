@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * error.c
  *
  * Code generation for function 'error'
@@ -9,8 +13,10 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "error.h"
+#include "nonlinear.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Function Definitions */
 
@@ -19,30 +25,30 @@
  */
 void b_error(const emlrtStack *sp)
 {
-  const mxArray *y;
-  static const int32_T iv8[2] = { 1, 40 };
-
-  const mxArray *m2;
-  char_T cv11[40];
-  int32_T i;
-  static const char_T cv12[40] = { 'F', 'r', 'e', 'q', 'u', 'e', 'n', 'c', 'i',
-    'e', 's', ' ', 'i', 'n', ' ', 'F', ' ', 'm', 'u', 's', 't', ' ', 'b', 'e',
-    ' ', 'i', 'n', ' ', 'r', 'a', 'n', 'g', 'e', ' ', '[', '0', ',', '1', ']',
+  int32_T i2;
+  static const char_T varargin_1[39] = { 'F', 'r', 'e', 'q', 'u', 'e', 'n', 'c',
+    'i', 'e', 's', ' ', 'i', 'n', ' ', 'F', ' ', 'm', 'u', 's', 't', ' ', 'b',
+    'e', ' ', 'n', 'o', 'n', 'd', 'e', 'c', 'r', 'e', 'a', 's', 'i', 'n', 'g',
     '.' };
 
+  char_T u[39];
+  const mxArray *y;
+  static const int32_T iv7[2] = { 1, 39 };
+
+  const mxArray *m2;
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  y = NULL;
-  m2 = emlrtCreateCharArray(2, iv8);
-  for (i = 0; i < 40; i++) {
-    cv11[i] = cv12[i];
+  for (i2 = 0; i2 < 39; i2++) {
+    u[i2] = varargin_1[i2];
   }
 
-  emlrtInitCharArrayR2013a(sp, 40, m2, cv11);
+  y = NULL;
+  m2 = emlrtCreateCharArray(2, iv7);
+  emlrtInitCharArrayR2013a(sp, 39, m2, &u[0]);
   emlrtAssign(&y, m2);
   st.site = &dk_emlrtRSI;
-  f_error(&st, y, &emlrtMCI);
+  m_error(&st, y, &emlrtMCI);
 }
 
 /*
@@ -50,119 +56,120 @@ void b_error(const emlrtStack *sp)
  */
 void c_error(const emlrtStack *sp)
 {
+  int32_T i3;
+  static const char_T varargin_1[40] = { 'F', 'r', 'e', 'q', 'u', 'e', 'n', 'c',
+    'i', 'e', 's', ' ', 'i', 'n', ' ', 'F', ' ', 'm', 'u', 's', 't', ' ', 'b',
+    'e', ' ', 'i', 'n', ' ', 'r', 'a', 'n', 'g', 'e', ' ', '[', '0', ',', '1',
+    ']', '.' };
+
+  char_T u[40];
   const mxArray *y;
-  static const int32_T iv56[2] = { 1, 29 };
+  static const int32_T iv8[2] = { 1, 40 };
 
-  const mxArray *m27;
-  char_T cv88[29];
-  int32_T i;
-  static const char_T cv89[29] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ', 'D',
-    'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o', ' ', 'N',
-    '>', '1', '0', '0', '0' };
-
+  const mxArray *m3;
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  y = NULL;
-  m27 = emlrtCreateCharArray(2, iv56);
-  for (i = 0; i < 29; i++) {
-    cv88[i] = cv89[i];
+  for (i3 = 0; i3 < 40; i3++) {
+    u[i3] = varargin_1[i3];
   }
 
-  emlrtInitCharArrayR2013a(sp, 29, m27, cv88);
-  emlrtAssign(&y, m27);
+  y = NULL;
+  m3 = emlrtCreateCharArray(2, iv8);
+  emlrtInitCharArrayR2013a(sp, 40, m3, &u[0]);
+  emlrtAssign(&y, m3);
   st.site = &dk_emlrtRSI;
-  f_error(&st, y, &emlrtMCI);
+  m_error(&st, y, &emlrtMCI);
 }
 
 /*
  *
  */
-void d_error(const emlrtStack *sp)
+void g_error(const emlrtStack *sp)
 {
+  int32_T i22;
+  static const char_T varargin_1[29] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ',
+    'D', 'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o', ' ',
+    'N', '>', '1', '0', '0', '0' };
+
+  char_T u[29];
   const mxArray *y;
-  static const int32_T iv57[2] = { 1, 30 };
+  static const int32_T iv25[2] = { 1, 29 };
 
-  const mxArray *m28;
-  char_T cv90[30];
-  int32_T i;
-  static const char_T cv91[30] = { 'C', 'C', 'O', 'S', 'T', '>', '1', '.', '0',
-    'E', '+', '5', '0', ',', ' ', 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ', 'D',
-    'y', 'n', 'a', 'm', 'i', 'c' };
-
+  const mxArray *m6;
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  y = NULL;
-  m28 = emlrtCreateCharArray(2, iv57);
-  for (i = 0; i < 30; i++) {
-    cv90[i] = cv91[i];
+  for (i22 = 0; i22 < 29; i22++) {
+    u[i22] = varargin_1[i22];
   }
 
-  emlrtInitCharArrayR2013a(sp, 30, m28, cv90);
-  emlrtAssign(&y, m28);
+  y = NULL;
+  m6 = emlrtCreateCharArray(2, iv25);
+  emlrtInitCharArrayR2013a(sp, 29, m6, &u[0]);
+  emlrtAssign(&y, m6);
   st.site = &dk_emlrtRSI;
-  f_error(&st, y, &emlrtMCI);
+  m_error(&st, y, &emlrtMCI);
 }
 
 /*
  *
  */
-void e_error(const emlrtStack *sp)
+void h_error(const emlrtStack *sp)
 {
+  int32_T i23;
+  static const char_T varargin_1[30] = { 'C', 'C', 'O', 'S', 'T', '>', '1', '.',
+    '0', 'E', '+', '5', '0', ',', ' ', 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ',
+    'D', 'y', 'n', 'a', 'm', 'i', 'c' };
+
+  char_T u[30];
   const mxArray *y;
-  static const int32_T iv83[2] = { 1, 28 };
+  static const int32_T iv26[2] = { 1, 30 };
 
-  const mxArray *m36;
-  char_T cv122[28];
-  int32_T i;
-  static const char_T cv123[28] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ', 'D',
-    'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o', ' ', 'M',
-    '>', '1', '0', '0' };
-
+  const mxArray *m7;
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  y = NULL;
-  m36 = emlrtCreateCharArray(2, iv83);
-  for (i = 0; i < 28; i++) {
-    cv122[i] = cv123[i];
+  for (i23 = 0; i23 < 30; i23++) {
+    u[i23] = varargin_1[i23];
   }
 
-  emlrtInitCharArrayR2013a(sp, 28, m36, cv122);
-  emlrtAssign(&y, m36);
+  y = NULL;
+  m7 = emlrtCreateCharArray(2, iv26);
+  emlrtInitCharArrayR2013a(sp, 30, m7, &u[0]);
+  emlrtAssign(&y, m7);
   st.site = &dk_emlrtRSI;
-  f_error(&st, y, &emlrtMCI);
+  m_error(&st, y, &emlrtMCI);
 }
 
 /*
  *
  */
-void error(const emlrtStack *sp)
+void l_error(const emlrtStack *sp)
 {
+  int32_T i39;
+  static const char_T varargin_1[28] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ',
+    'D', 'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o', ' ',
+    'M', '>', '1', '0', '0' };
+
+  char_T u[28];
   const mxArray *y;
-  static const int32_T iv7[2] = { 1, 39 };
+  static const int32_T iv34[2] = { 1, 28 };
 
-  const mxArray *m1;
-  char_T cv9[39];
-  int32_T i;
-  static const char_T cv10[39] = { 'F', 'r', 'e', 'q', 'u', 'e', 'n', 'c', 'i',
-    'e', 's', ' ', 'i', 'n', ' ', 'F', ' ', 'm', 'u', 's', 't', ' ', 'b', 'e',
-    ' ', 'n', 'o', 'n', 'd', 'e', 'c', 'r', 'e', 'a', 's', 'i', 'n', 'g', '.' };
-
+  const mxArray *m8;
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  y = NULL;
-  m1 = emlrtCreateCharArray(2, iv7);
-  for (i = 0; i < 39; i++) {
-    cv9[i] = cv10[i];
+  for (i39 = 0; i39 < 28; i39++) {
+    u[i39] = varargin_1[i39];
   }
 
-  emlrtInitCharArrayR2013a(sp, 39, m1, cv9);
-  emlrtAssign(&y, m1);
+  y = NULL;
+  m8 = emlrtCreateCharArray(2, iv34);
+  emlrtInitCharArrayR2013a(sp, 28, m8, &u[0]);
+  emlrtAssign(&y, m8);
   st.site = &dk_emlrtRSI;
-  f_error(&st, y, &emlrtMCI);
+  m_error(&st, y, &emlrtMCI);
 }
 
 /* End of code generation (error.c) */

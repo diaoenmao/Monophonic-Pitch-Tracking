@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * yaapt_mexutil.c
  *
  * Code generation for function 'yaapt_mexutil'
@@ -9,41 +13,85 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_mexutil.h"
+#include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Function Definitions */
-const mxArray *b_message(const emlrtStack *sp, const mxArray *b, emlrtMCInfo
-  *location)
+int32_T asr_s32(int32_T u, uint32_T n)
 {
-  const mxArray *pArray;
-  const mxArray *m40;
-  pArray = b;
-  return emlrtCallMATLABR2012b(sp, 1, &m40, 1, &pArray, "message", true,
-    location);
+  int32_T y;
+  if (u >= 0) {
+    y = (int32_T)((uint32_T)u >> n);
+  } else {
+    y = -(int32_T)((uint32_T)-(u + 1) >> n) - 1;
+  }
+
+  return y;
 }
 
-const mxArray *c_message(const emlrtStack *sp, const mxArray *b, const mxArray
-  *c, const mxArray *d, emlrtMCInfo *location)
+int32_T div_s32(const emlrtStack *sp, int32_T numerator, int32_T denominator)
 {
-  const mxArray *pArrays[3];
-  const mxArray *m41;
-  pArrays[0] = b;
-  pArrays[1] = c;
-  pArrays[2] = d;
-  return emlrtCallMATLABR2012b(sp, 1, &m41, 3, pArrays, "message", true,
-    location);
+  int32_T quotient;
+  uint32_T absNumerator;
+  uint32_T absDenominator;
+  boolean_T quotientNeedsNegation;
+  if (denominator == 0) {
+    if (numerator >= 0) {
+      quotient = MAX_int32_T;
+    } else {
+      quotient = MIN_int32_T;
+    }
+
+    emlrtDivisionByZeroErrorR2012b(NULL, sp);
+  } else {
+    if (numerator >= 0) {
+      absNumerator = (uint32_T)numerator;
+    } else {
+      absNumerator = (uint32_T)-numerator;
+    }
+
+    if (denominator >= 0) {
+      absDenominator = (uint32_T)denominator;
+    } else {
+      absDenominator = (uint32_T)-denominator;
+    }
+
+    quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+    absNumerator /= absDenominator;
+    if (quotientNeedsNegation) {
+      quotient = -(int32_T)absNumerator;
+    } else {
+      quotient = (int32_T)absNumerator;
+    }
+  }
+
+  return quotient;
+}
+
+emlrtCTX emlrtGetRootTLSGlobal(void)
+{
+  return emlrtRootTLSGlobal;
+}
+
+void emlrtLockerFunction(EmlrtLockeeFunction aLockee, const emlrtConstCTX aTLS,
+  void *aData)
+{
+  omp_set_lock(&emlrtLockGlobal);
+  emlrtCallLockeeFunction(aLockee, aTLS, aData);
+  omp_unset_lock(&emlrtLockGlobal);
 }
 
 const mxArray *emlrt_marshallOut(const real_T u)
 {
   const mxArray *y;
-  const mxArray *m37;
+  const mxArray *m9;
   y = NULL;
-  m37 = emlrtCreateDoubleScalar(u);
-  emlrtAssign(&y, m37);
+  m9 = emlrtCreateDoubleScalar(u);
+  emlrtAssign(&y, m9);
   return y;
 }
 
-void f_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
+void m_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
 {
   const mxArray *pArray;
   pArray = b;

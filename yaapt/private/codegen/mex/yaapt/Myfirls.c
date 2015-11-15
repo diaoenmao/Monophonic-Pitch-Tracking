@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * Myfirls.c
  *
  * Code generation for function 'Myfirls'
@@ -17,6 +21,7 @@
 #include "any.h"
 #include "diff.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Variable Definitions */
 static emlrtRSInfo q_emlrtRSI = { 88, "Myfirls",
@@ -25,7 +30,19 @@ static emlrtRSInfo q_emlrtRSI = { 88, "Myfirls",
 static emlrtRSInfo r_emlrtRSI = { 91, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo s_emlrtRSI = { 136, "Myfirls",
+static emlrtRSInfo s_emlrtRSI = { 123, "Myfirls",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
+
+static emlrtRSInfo t_emlrtRSI = { 124, "Myfirls",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
+
+static emlrtRSInfo u_emlrtRSI = { 126, "Myfirls",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
+
+static emlrtRSInfo v_emlrtRSI = { 127, "Myfirls",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
+
+static emlrtRSInfo w_emlrtRSI = { 136, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
 static emlrtDCInfo emlrtDCI = { 128, 28, "Myfirls",
@@ -47,7 +64,7 @@ static emlrtDCInfo d_emlrtDCI = { 120, 28, "Myfirls",
  */
 void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151])
 {
-  int32_T i;
+  int32_T ixstart;
   real_T dv1[5];
   boolean_T bv0[5];
   real_T mtmp;
@@ -58,11 +75,12 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   real_T b0;
   real_T b[75];
   int32_T s;
+  int32_T b_s;
   static const int8_T M[6] = { 0, 0, 1, 1, 0, 0 };
 
   real_T m;
   real_T b1;
-  real_T dv2[75];
+  real_T b_b[75];
   static const real_T a[75] = { 6.2831853071795862, 12.566370614359172,
     18.849555921538759, 25.132741228718345, 31.415926535897931,
     37.699111843077517, 43.982297150257104, 50.26548245743669,
@@ -88,9 +106,9 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
     446.10615680975064, 452.38934211693021, 458.67252742410977,
     464.9557127312894, 471.23889803846896 };
 
-  real_T dv3[75];
+  real_T c_b[75];
   real_T y[75];
-  static const real_T dv4[75] = { 1.0, 4.0, 9.0, 16.0, 25.0, 36.0, 49.0, 64.0,
+  static const real_T dv2[75] = { 1.0, 4.0, 9.0, 16.0, 25.0, 36.0, 49.0, 64.0,
     81.0, 100.0, 121.0, 144.0, 169.0, 196.0, 225.0, 256.0, 289.0, 324.0, 361.0,
     400.0, 441.0, 484.0, 529.0, 576.0, 625.0, 676.0, 729.0, 784.0, 841.0, 900.0,
     961.0, 1024.0, 1089.0, 1156.0, 1225.0, 1296.0, 1369.0, 1444.0, 1521.0,
@@ -812,7 +830,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
     -52, -50, -48, -46, -44, -42, -40, -38, -36, -34, -32, -30, -28, -26, -24,
     -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0 };
 
-  real_T dv8[5776];
+  real_T d_b[5776];
   real_T e_a[76];
   emlrtStack st;
   st.prev = sp;
@@ -893,8 +911,8 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   /* 'Myfirls:76' N = N+1; */
   /*  filter length */
   /* 'Myfirls:77' F=F(:)/2; */
-  for (i = 0; i < 6; i++) {
-    F[i] /= 2.0;
+  for (ixstart = 0; ixstart < 6; ixstart++) {
+    F[ixstart] /= 2.0;
   }
 
   /* 'Myfirls:77' M=M(:); */
@@ -905,23 +923,23 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   /* 'Myfirls:84' if (length(F)~=length(W)*2) */
   /* 'Myfirls:87' if any(diff(F)<0) */
   diff(F, dv1);
-  for (i = 0; i < 5; i++) {
-    bv0[i] = (dv1[i] < 0.0);
+  for (ixstart = 0; ixstart < 5; ixstart++) {
+    bv0[ixstart] = (dv1[ixstart] < 0.0);
   }
 
-  if (any(bv0)) {
+  if (b_any(bv0)) {
     st.site = &q_emlrtRSI;
-    error(&st);
+    b_error(&st);
   }
 
   /* 'Myfirls:90' if (max(F)>1)|(min(F)<0) */
-  i = 1;
+  ixstart = 1;
   mtmp = F[0];
   if (muDoubleScalarIsNaN(F[0])) {
     ix = 2;
     exitg2 = false;
     while ((!exitg2) && (ix < 7)) {
-      i = ix;
+      ixstart = ix;
       if (!muDoubleScalarIsNaN(F[ix - 1])) {
         mtmp = F[ix - 1];
         exitg2 = true;
@@ -931,13 +949,13 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
     }
   }
 
-  if (i < 6) {
-    while (i + 1 < 7) {
-      if (F[i] > mtmp) {
-        mtmp = F[i];
+  if (ixstart < 6) {
+    while (ixstart + 1 < 7) {
+      if (F[ixstart] > mtmp) {
+        mtmp = F[ixstart];
       }
 
-      i++;
+      ixstart++;
     }
   }
 
@@ -945,13 +963,13 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   if (mtmp > 1.0) {
     guard1 = true;
   } else {
-    i = 1;
+    ixstart = 1;
     mtmp = F[0];
     if (muDoubleScalarIsNaN(F[0])) {
       ix = 2;
       exitg1 = false;
       while ((!exitg1) && (ix < 7)) {
-        i = ix;
+        ixstart = ix;
         if (!muDoubleScalarIsNaN(F[ix - 1])) {
           mtmp = F[ix - 1];
           exitg1 = true;
@@ -961,13 +979,13 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       }
     }
 
-    if (i < 6) {
-      while (i + 1 < 7) {
-        if (F[i] < mtmp) {
-          mtmp = F[i];
+    if (ixstart < 6) {
+      while (ixstart + 1 < 7) {
+        if (F[ixstart] < mtmp) {
+          mtmp = F[ixstart];
         }
 
-        i++;
+        ixstart++;
       }
     }
 
@@ -978,7 +996,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
 
   if (guard1) {
     st.site = &r_emlrtRSI;
-    b_error(&st);
+    c_error(&st);
   }
 
   /* 'Myfirls:94' L=(N-1)/2; */
@@ -1008,101 +1026,125 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   memset(&b[0], 0, 75U * sizeof(real_T));
 
   /* 'Myfirls:116' for s=1:2:length(F) */
-  for (ix = 0; ix < 3; ix++) {
-    s = 1 + (ix << 1);
+  s = 0;
+  while (s < 3) {
+    b_s = 1 + (s << 1);
 
     /* 'Myfirls:117' m=(M(s+1)-M(s))/(F(s+1)-F(s)); */
-    m = (real_T)(M[s] - M[s - 1]) / (F[s] - F[s - 1]);
+    m = (real_T)(M[b_s] - M[b_s - 1]) / (F[b_s] - F[b_s - 1]);
 
     /*   slope */
     /* 'Myfirls:118' b1=M(s)-m*F(s); */
-    b1 = (real_T)M[s - 1] - m * F[s - 1];
+    b1 = (real_T)M[b_s - 1] - m * F[b_s - 1];
 
     /*   y-intercept */
     /* 'Myfirls:119' b0 = b0 + (b1*(F(s+1)-F(s)) + m/2*(F(s+1)*F(s+1)-F(s)*F(s)))... */
     /* 'Myfirls:120'                      * abs(W((s+1)/2)^2) ; */
-    mtmp = ((real_T)s + 1.0) / 2.0;
-    emlrtIntegerCheckFastR2012b(mtmp, &d_emlrtDCI, sp);
-    b0 += b1 * (F[s] - F[s - 1]) + m / 2.0 * (F[s] * F[s] - F[s - 1] * F[s - 1]);
+    mtmp = ((real_T)b_s + 1.0) / 2.0;
+    if (mtmp != muDoubleScalarFloor(mtmp)) {
+      emlrtIntegerCheckR2012b(mtmp, &d_emlrtDCI, sp);
+    }
+
+    b0 += b1 * (F[b_s] - F[b_s - 1]) + m / 2.0 * (F[b_s] * F[b_s] - F[b_s - 1] *
+      F[b_s - 1]);
 
     /* 'Myfirls:121' b = b+(m/(4*pi*pi)*(cos(2*pi*k*F(s+1))-cos(2*pi*k*F(s)))./(k.*k))... */
     /* 'Myfirls:122'                      * abs(W((s+1)/2)^2); */
-    mtmp = ((real_T)s + 1.0) / 2.0;
-    emlrtIntegerCheckFastR2012b(mtmp, &c_emlrtDCI, sp);
+    mtmp = ((real_T)b_s + 1.0) / 2.0;
+    if (mtmp != muDoubleScalarFloor(mtmp)) {
+      emlrtIntegerCheckR2012b(mtmp, &c_emlrtDCI, sp);
+    }
+
     mtmp = m / 39.478417604357432;
-    for (i = 0; i < 75; i++) {
-      dv2[i] = a[i] * F[s];
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      b_b[ixstart] = a[ixstart] * F[b_s];
     }
 
-    b_cos(dv2);
-    for (i = 0; i < 75; i++) {
-      dv3[i] = a[i] * F[s - 1];
+    b_cos(b_b);
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      c_b[ixstart] = a[ixstart] * F[b_s - 1];
     }
 
-    b_cos(dv3);
-    for (i = 0; i < 75; i++) {
-      y[i] = mtmp * (dv2[i] - dv3[i]);
+    b_cos(c_b);
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      y[ixstart] = mtmp * (b_b[ixstart] - c_b[ixstart]);
     }
 
-    rdivide(y, dv4, dv2);
-    for (i = 0; i < 75; i++) {
-      b[i] += dv2[i];
+    rdivide(y, dv2, b_b);
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      b[ixstart] += b_b[ixstart];
     }
 
     /* 'Myfirls:123' b = b + (F(s+1)*(m*F(s+1)+b1)*sinc(2*k*F(s+1)) ... */
     /* 'Myfirls:124'                    - F(s)*(m*F(s)+b1)*sinc(2*k*F(s))) ... */
     /* 'Myfirls:125'                      * abs(W((s+1)/2)^2); */
-    mtmp = ((real_T)s + 1.0) / 2.0;
-    emlrtIntegerCheckFastR2012b(mtmp, &b_emlrtDCI, sp);
-    b_a = F[s] * (m * F[s] + b1);
-    mtmp = F[s - 1] * (m * F[s - 1] + b1);
-    for (i = 0; i < 75; i++) {
-      dv3[i] = (2.0 + 2.0 * (real_T)i) * F[s];
+    mtmp = ((real_T)b_s + 1.0) / 2.0;
+    if (mtmp != muDoubleScalarFloor(mtmp)) {
+      emlrtIntegerCheckR2012b(mtmp, &b_emlrtDCI, sp);
     }
 
-    sinc(dv3, dv2);
-    for (i = 0; i < 75; i++) {
-      y[i] = (2.0 + 2.0 * (real_T)i) * F[s - 1];
+    b_a = F[b_s] * (m * F[b_s] + b1);
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      y[ixstart] = (2.0 + 2.0 * (real_T)ixstart) * F[b_s];
     }
 
-    sinc(y, dv3);
-    for (i = 0; i < 75; i++) {
-      b[i] += b_a * dv2[i] - mtmp * dv3[i];
+    st.site = &s_emlrtRSI;
+    sinc(&st, y, b_b);
+    mtmp = F[b_s - 1] * (m * F[b_s - 1] + b1);
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      y[ixstart] = (2.0 + 2.0 * (real_T)ixstart) * F[b_s - 1];
+    }
+
+    st.site = &t_emlrtRSI;
+    sinc(&st, y, c_b);
+    for (ixstart = 0; ixstart < 75; ixstart++) {
+      b[ixstart] += b_a * b_b[ixstart] - mtmp * c_b[ixstart];
     }
 
     /* 'Myfirls:126' G = G + (.5*F(s+1)*(sinc(2*I1*F(s+1))+sinc(2*I2*F(s+1))) ... */
     /* 'Myfirls:127'                - .5*F(s)*(sinc(2*I1*F(s))+sinc(2*I2*F(s))) ) ... */
     /* 'Myfirls:128'                      * abs(W((s+1)/2)^2); */
-    mtmp = ((real_T)s + 1.0) / 2.0;
-    emlrtIntegerCheckFastR2012b(mtmp, &emlrtDCI, sp);
-    b_a = 0.5 * F[s];
-    mtmp = 0.5 * F[s - 1];
-    for (i = 0; i < 5776; i++) {
-      SD->u1.f1.a[i] = (real_T)c_a[i] * F[s];
+    mtmp = ((real_T)b_s + 1.0) / 2.0;
+    if (mtmp != muDoubleScalarFloor(mtmp)) {
+      emlrtIntegerCheckR2012b(mtmp, &emlrtDCI, sp);
     }
 
-    b_sinc(SD->u1.f1.a, SD->u1.f1.dv5);
-    for (i = 0; i < 5776; i++) {
-      SD->u1.f1.a[i] = (real_T)d_a[i] * F[s];
+    b_a = 0.5 * F[b_s];
+    for (ixstart = 0; ixstart < 5776; ixstart++) {
+      SD->u1.f1.a[ixstart] = (real_T)c_a[ixstart] * F[b_s];
     }
 
-    b_sinc(SD->u1.f1.a, SD->u1.f1.dv6);
-    for (i = 0; i < 5776; i++) {
-      SD->u1.f1.a[i] = (real_T)c_a[i] * F[s - 1];
+    st.site = &u_emlrtRSI;
+    b_sinc(&st, SD->u1.f1.a, SD->u1.f1.b);
+    for (ixstart = 0; ixstart < 5776; ixstart++) {
+      SD->u1.f1.a[ixstart] = (real_T)d_a[ixstart] * F[b_s];
     }
 
-    b_sinc(SD->u1.f1.a, SD->u1.f1.dv7);
-    for (i = 0; i < 5776; i++) {
-      SD->u1.f1.a[i] = (real_T)d_a[i] * F[s - 1];
+    st.site = &u_emlrtRSI;
+    b_sinc(&st, SD->u1.f1.a, SD->u1.f1.dv3);
+    mtmp = 0.5 * F[b_s - 1];
+    for (ixstart = 0; ixstart < 5776; ixstart++) {
+      SD->u1.f1.a[ixstart] = (real_T)c_a[ixstart] * F[b_s - 1];
+      SD->u1.f1.b[ixstart] += SD->u1.f1.dv3[ixstart];
     }
 
-    b_sinc(SD->u1.f1.a, dv8);
-    for (i = 0; i < 5776; i++) {
-      SD->u1.f1.G[i] += b_a * (SD->u1.f1.dv5[i] + SD->u1.f1.dv6[i]) - mtmp *
-        (SD->u1.f1.dv7[i] + dv8[i]);
+    st.site = &v_emlrtRSI;
+    b_sinc(&st, SD->u1.f1.a, d_b);
+    for (ixstart = 0; ixstart < 5776; ixstart++) {
+      SD->u1.f1.a[ixstart] = (real_T)d_a[ixstart] * F[b_s - 1];
     }
 
-    emlrtBreakCheckFastR2012b(emlrtBreakCheckR2012bFlagVar, sp);
+    st.site = &v_emlrtRSI;
+    b_sinc(&st, SD->u1.f1.a, SD->u1.f1.dv3);
+    for (ixstart = 0; ixstart < 5776; ixstart++) {
+      SD->u1.f1.G[ixstart] += b_a * SD->u1.f1.b[ixstart] - mtmp * (d_b[ixstart]
+        + SD->u1.f1.dv3[ixstart]);
+    }
+
+    s++;
+    if (*emlrtBreakCheckR2012bFlagVar != 0) {
+      emlrtBreakCheckR2012b(sp);
+    }
   }
 
   /* 'Myfirls:130' if (rem(N,2)~=0) */
@@ -1110,18 +1152,18 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   /* 'Myfirls:136' a=G\p; */
   e_a[0] = b0;
   memcpy(&e_a[1], &b[0], 75U * sizeof(real_T));
-  st.site = &s_emlrtRSI;
+  st.site = &w_emlrtRSI;
   mldivide(&st, SD->u1.f1.G, e_a);
 
   /* 'Myfirls:137' if (rem(N,2)~=0) */
   /* 'Myfirls:138' h=[a(L+1:-1:2)/2; a(1); a(2:L+1)/2].'; */
-  for (i = 0; i < 75; i++) {
-    h[i] = e_a[75 - i] / 2.0;
+  for (ixstart = 0; ixstart < 75; ixstart++) {
+    h[ixstart] = e_a[75 - ixstart] / 2.0;
   }
 
   h[75] = e_a[0];
-  for (i = 0; i < 75; i++) {
-    h[i + 76] = e_a[1 + i] / 2.0;
+  for (ixstart = 0; ixstart < 75; ixstart++) {
+    h[ixstart + 76] = e_a[1 + ixstart] / 2.0;
   }
 
   /*  elseif (ftype == 1),  % Type III and Type IV linear phase FIR */

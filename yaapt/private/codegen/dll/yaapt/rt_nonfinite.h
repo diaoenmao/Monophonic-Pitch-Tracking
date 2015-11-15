@@ -1,16 +1,19 @@
-/* 
- * File: rt_nonfinite.h 
- *  
- * MATLAB Coder version            : 2.6 
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02 
+/*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ * File: rt_nonfinite.h
+ *
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
 #ifndef __RT_NONFINITE_H__
 #define __RT_NONFINITE_H__
-
 #if defined(_MSC_VER) && (_MSC_VER <= 1200)
 #include <float.h>
 #endif
+
 #include <stddef.h>
 #include "rtwtypes.h"
 
@@ -25,7 +28,6 @@ extern boolean_T rtIsInf(real_T value);
 extern boolean_T rtIsInfF(real32_T value);
 extern boolean_T rtIsNaN(real_T value);
 extern boolean_T rtIsNaNF(real32_T value);
-
 typedef struct {
   struct {
     uint32_T wordH;
@@ -48,8 +50,9 @@ typedef struct {
 } IEEESingle;
 
 #endif
-/* 
- * File trailer for rt_nonfinite.h 
- *  
- * [EOF] 
+
+/*
+ * File trailer for rt_nonfinite.h
+ *
+ * [EOF]
  */

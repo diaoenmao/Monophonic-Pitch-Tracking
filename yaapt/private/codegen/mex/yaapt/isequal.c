@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * isequal.c
  *
  * Code generation for function 'isequal'
@@ -9,6 +13,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "isequal.h"
+#include "lapacke.h"
 
 /* Function Definitions */
 
@@ -55,7 +60,7 @@ boolean_T c_isequal(const emxArray_boolean_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i17;
+  int32_T i15;
   p = false;
   b_p = false;
   k = 0;
@@ -63,12 +68,12 @@ boolean_T c_isequal(const emxArray_boolean_T *varargin_1)
     exitg1 = 0;
     if (k < 2) {
       if (k + 1 <= 1) {
-        i17 = varargin_1->size[0];
+        i15 = varargin_1->size[0];
       } else {
-        i17 = 1;
+        i15 = 1;
       }
 
-      if (i17 != 0) {
+      if (i15 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -96,7 +101,7 @@ boolean_T isequal(const emxArray_real_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i12;
+  int32_T i11;
   p = false;
   b_p = false;
   k = 0;
@@ -104,12 +109,12 @@ boolean_T isequal(const emxArray_real_T *varargin_1)
     exitg1 = 0;
     if (k < 2) {
       if (k + 1 <= 1) {
-        i12 = varargin_1->size[0];
+        i11 = varargin_1->size[0];
       } else {
-        i12 = 1;
+        i11 = 1;
       }
 
-      if (i12 != 0) {
+      if (i11 != 0) {
         exitg1 = 1;
       } else {
         k++;

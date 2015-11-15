@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * _coder_yaapt_api.c
  *
  * Code generation for function '_coder_yaapt_api'
@@ -12,14 +16,15 @@
 #include "yaapt_emxutil.h"
 #include "peaks.h"
 #include "yaapt_mexutil.h"
+#include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo qd_emlrtRTEI = { 1, 1, "_coder_yaapt_api", "" };
+static emlrtRTEInfo gd_emlrtRTEI = { 1, 1, "_coder_yaapt_api", "" };
 
 /* Function Declarations */
 static void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
   emlrtMsgIdentifier *parentId, emxArray_real_T *y);
-static const mxArray *b_emlrt_marshallOut(const emxArray_real_T *u);
 static real_T c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Fs, const
   char_T *identifier);
 static real_T d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
@@ -30,6 +35,7 @@ static void emlrt_marshallIn(const emlrtStack *sp, const mxArray *Data, const
   char_T *identifier, emxArray_real_T *y);
 static real_T f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
   emlrtMsgIdentifier *msgId);
+static const mxArray *f_emlrt_marshallOut(const emxArray_real_T *u);
 
 /* Function Definitions */
 static void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
@@ -39,20 +45,6 @@ static void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
   emlrtDestroyArray(&u);
 }
 
-static const mxArray *b_emlrt_marshallOut(const emxArray_real_T *u)
-{
-  const mxArray *y;
-  static const int32_T iv84[2] = { 0, 0 };
-
-  const mxArray *m38;
-  y = NULL;
-  m38 = emlrtCreateNumericArray(2, iv84, mxDOUBLE_CLASS, mxREAL);
-  mxSetData((mxArray *)m38, (void *)u->data);
-  emlrtSetDimensions((mxArray *)m38, u->size, 2);
-  emlrtAssign(&y, m38);
-  return y;
-}
-
 static real_T c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Fs, const
   char_T *identifier)
 {
@@ -60,6 +52,7 @@ static real_T c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Fs, const
   emlrtMsgIdentifier thisId;
   thisId.fIdentifier = identifier;
   thisId.fParent = NULL;
+  thisId.bParentIsCell = false;
   y = d_emlrt_marshallIn(sp, emlrtAlias(Fs), &thisId);
   emlrtDestroyArray(&Fs);
   return y;
@@ -77,20 +70,15 @@ static real_T d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
 static void e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
   emlrtMsgIdentifier *msgId, emxArray_real_T *ret)
 {
-  int32_T iv85[2];
-  boolean_T bv1[2];
-  int32_T i40;
-  static const boolean_T bv2[2] = { false, true };
+  int32_T iv38[2];
+  boolean_T bv1[2] = { false, true };
 
-  int32_T iv86[2];
-  for (i40 = 0; i40 < 2; i40++) {
-    iv85[i40] = 1 + -2 * i40;
-    bv1[i40] = bv2[i40];
-  }
+  static const int32_T dims[2] = { 1, -1 };
 
-  emlrtCheckVsBuiltInR2012b(sp, msgId, src, "double", false, 2U, iv85, bv1, iv86);
-  ret->size[0] = iv86[0];
-  ret->size[1] = iv86[1];
+  emlrtCheckVsBuiltInR2012b(sp, msgId, src, "double", false, 2U, dims, &bv1[0],
+    iv38);
+  ret->size[0] = iv38[0];
+  ret->size[1] = iv38[1];
   ret->allocatedSize = ret->size[0] * ret->size[1];
   ret->data = (real_T *)mxGetData(src);
   ret->canFreeData = false;
@@ -103,6 +91,7 @@ static void emlrt_marshallIn(const emlrtStack *sp, const mxArray *Data, const
   emlrtMsgIdentifier thisId;
   thisId.fIdentifier = identifier;
   thisId.fParent = NULL;
+  thisId.bParentIsCell = false;
   b_emlrt_marshallIn(sp, emlrtAlias(Data), &thisId, y);
   emlrtDestroyArray(&Data);
 }
@@ -111,10 +100,25 @@ static real_T f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
   emlrtMsgIdentifier *msgId)
 {
   real_T ret;
-  emlrtCheckBuiltInR2012b(sp, msgId, src, "double", false, 0U, 0);
+  static const int32_T dims = 0;
+  emlrtCheckBuiltInR2012b(sp, msgId, src, "double", false, 0U, &dims);
   ret = *(real_T *)mxGetData(src);
   emlrtDestroyArray(&src);
   return ret;
+}
+
+static const mxArray *f_emlrt_marshallOut(const emxArray_real_T *u)
+{
+  const mxArray *y;
+  static const int32_T iv37[2] = { 0, 0 };
+
+  const mxArray *m14;
+  y = NULL;
+  m14 = emlrtCreateNumericArray(2, iv37, mxDOUBLE_CLASS, mxREAL);
+  mxSetData((mxArray *)m14, (void *)u->data);
+  emlrtSetDimensions((mxArray *)m14, u->size, 2);
+  emlrtAssign(&y, m14);
+  return y;
 }
 
 void yaapt_api(yaaptStackData *SD, const mxArray * const prhs[2], const mxArray *
@@ -129,8 +133,8 @@ void yaapt_api(yaaptStackData *SD, const mxArray * const prhs[2], const mxArray 
 
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &Data, 2, &qd_emlrtRTEI, true);
-  emxInit_real_T(&st, &Pitch, 2, &qd_emlrtRTEI, true);
+  emxInit_real_T(&st, &Data, 2, &gd_emlrtRTEI, true);
+  emxInit_real_T(&st, &Pitch, 2, &gd_emlrtRTEI, true);
 
   /* Marshall function inputs */
   emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Data", Data);
@@ -140,7 +144,7 @@ void yaapt_api(yaaptStackData *SD, const mxArray * const prhs[2], const mxArray 
   yaapt(SD, &st, Data, Fs, Pitch, &numfrms, &frmrate);
 
   /* Marshall function outputs */
-  plhs[0] = b_emlrt_marshallOut(Pitch);
+  plhs[0] = f_emlrt_marshallOut(Pitch);
   plhs[1] = emlrt_marshallOut(numfrms);
   plhs[2] = emlrt_marshallOut(frmrate);
   Pitch->canFreeData = false;

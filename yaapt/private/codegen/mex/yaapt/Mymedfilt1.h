@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * Mymedfilt1.h
  *
  * Code generation for function 'Mymedfilt1'
@@ -10,6 +14,7 @@
 
 /* Include files */
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "mwmathutil.h"
@@ -18,12 +23,15 @@
 #include "emlrt.h"
 #include "blas.h"
 #include "rtwtypes.h"
+#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */
 extern void Mymedfilt1(const emlrtStack *sp, emxArray_real_T *s, emxArray_real_T
   *m);
 extern void b_Mymedfilt1(const emlrtStack *sp, const emxArray_real_T *s,
+  emxArray_real_T *m);
+extern void c_Mymedfilt1(const emlrtStack *sp, emxArray_real_T *s,
   emxArray_real_T *m);
 
 #endif

@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * Mykaiser.c
  *
  * Code generation for function 'Mykaiser'
@@ -9,30 +13,31 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "Mykaiser.h"
+#include "spec_trk.h"
 #include "yaapt_emxutil.h"
-#include "eml_warning.h"
 #include "Mybesseli.h"
 #include "sqrt.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ce_emlrtRSI = { 48, "Mykaiser",
+static emlrtRSInfo de_emlrtRSI = { 48, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtRSInfo de_emlrtRSI = { 49, "Mykaiser",
+static emlrtRSInfo ee_emlrtRSI = { 49, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtRSInfo ee_emlrtRSI = { 50, "Mykaiser",
+static emlrtRSInfo fe_emlrtRSI = { 50, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtRTEInfo mb_emlrtRTEI = { 41, 14, "Mykaiser",
+static emlrtRTEInfo hb_emlrtRTEI = { 41, 14, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtRTEInfo nb_emlrtRTEI = { 48, 5, "Mykaiser",
+static emlrtRTEInfo ib_emlrtRTEI = { 48, 5, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtECInfo t_emlrtECI = { -1, 49, 30, "Mykaiser",
+static emlrtECInfo p_emlrtECI = { -1, 49, 30, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
 /* Function Definitions */
@@ -44,37 +49,37 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 {
   int32_T k;
   int32_T b_n;
-  real_T p;
+  real_T anew;
   real_T apnd;
   boolean_T n_too_large;
   real_T ndbl;
   real_T cdiff;
-  const mxArray *y;
-  static const int32_T iv28[2] = { 1, 21 };
-
-  const mxArray *m13;
-  char_T cv43[21];
-  int32_T i;
-  static const char_T cv44[21] = { 'C', 'o', 'd', 'e', 'r', ':', 'M', 'A', 'T',
-    'L', 'A', 'B', ':', 'p', 'm', 'a', 'x', 's', 'i', 'z', 'e' };
-
-  emxArray_real_T *b_y;
+  emxArray_real_T *y;
+  int32_T nm1d2;
   emxArray_real_T *b_k;
-  real_T c_y;
   real_T c_n;
   real_T en;
+  real_T p;
+  real_T a;
+  int32_T count;
+  real_T pold;
+  real_T tempa;
+  real_T em;
+  real_T empal;
+  real_T emp2al;
   real_T c_sum;
   real_T nend;
   real_T kk;
+  int32_T count2;
+  int32_T l;
   boolean_T exitg1;
   real_T tempc;
-  emxArray_real_T *d_y;
+  emxArray_real_T *b_y;
+  real_T b;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
-  emlrtStack e_st;
-  emlrtStack f_st;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
@@ -83,10 +88,6 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
-  e_st.prev = &d_st;
-  e_st.tls = d_st.tls;
-  f_st.prev = &d_st;
-  f_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
 
   /*  Copyright (C) 1995, 1996, 1997  Kurt Hornik */
@@ -133,32 +134,32 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     w->size[0] = 1;
     w->size[1] = 1;
     emxEnsureCapacity(sp, (emxArray__common *)w, k, (int32_T)sizeof(real_T),
-                      &mb_emlrtRTEI);
+                      &hb_emlrtRTEI);
     w->data[0] = 1.0;
   } else {
     /* 'Mykaiser:46' else */
     /* 'Mykaiser:47' m = n - 1; */
     /* 'Mykaiser:48' k = (0 : m)'; */
-    st.site = &ce_emlrtRSI;
-    b_st.site = &ic_emlrtRSI;
-    c_st.site = &jc_emlrtRSI;
+    st.site = &de_emlrtRSI;
+    b_st.site = &kc_emlrtRSI;
+    c_st.site = &lc_emlrtRSI;
     if (muDoubleScalarIsNaN(n - 1.0)) {
-      b_n = 0;
-      p = rtNaN;
+      b_n = 1;
+      anew = rtNaN;
       apnd = n - 1.0;
       n_too_large = false;
     } else if (n - 1.0 < 0.0) {
-      b_n = -1;
-      p = 0.0;
+      b_n = 0;
+      anew = 0.0;
       apnd = n - 1.0;
       n_too_large = false;
     } else if (muDoubleScalarIsInf(n - 1.0)) {
-      b_n = 0;
-      p = rtNaN;
+      b_n = 1;
+      anew = rtNaN;
       apnd = n - 1.0;
       n_too_large = !(0.0 == n - 1.0);
     } else {
-      p = 0.0;
+      anew = 0.0;
       ndbl = muDoubleScalarFloor((n - 1.0) + 0.5);
       apnd = ndbl;
       cdiff = ndbl - (n - 1.0);
@@ -174,90 +175,79 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 
       n_too_large = (2.147483647E+9 < ndbl);
       if (ndbl >= 0.0) {
-        b_n = (int32_T)ndbl - 1;
+        b_n = (int32_T)ndbl;
       } else {
-        b_n = -1;
+        b_n = 0;
       }
     }
 
-    d_st.site = &kc_emlrtRSI;
+    d_st.site = &mc_emlrtRSI;
     if (!n_too_large) {
     } else {
-      y = NULL;
-      m13 = emlrtCreateCharArray(2, iv28);
-      for (i = 0; i < 21; i++) {
-        cv43[i] = cv44[i];
-      }
-
-      emlrtInitCharArrayR2013a(&d_st, 21, m13, cv43);
-      emlrtAssign(&y, m13);
-      e_st.site = &wk_emlrtRSI;
-      f_st.site = &bk_emlrtRSI;
-      f_error(&e_st, b_message(&f_st, y, &h_emlrtMCI), &i_emlrtMCI);
+      emlrtErrorWithMessageIdR2012b(&d_st, &td_emlrtRTEI,
+        "Coder:MATLAB:pmaxsize", 0);
     }
 
-    emxInit_real_T(&d_st, &b_y, 2, &mb_emlrtRTEI, true);
-    k = b_y->size[0] * b_y->size[1];
-    b_y->size[0] = 1;
-    b_y->size[1] = b_n + 1;
-    emxEnsureCapacity(&c_st, (emxArray__common *)b_y, k, (int32_T)sizeof(real_T),
-                      &m_emlrtRTEI);
-    if (b_n + 1 > 0) {
-      b_y->data[0] = p;
-      if (b_n + 1 > 1) {
-        b_y->data[b_n] = apnd;
-        k = b_n + (b_n < 0);
-        if (k >= 0) {
-          i = (int32_T)((uint32_T)k >> 1);
-        } else {
-          i = ~(int32_T)((uint32_T)~k >> 1);
+    emxInit_real_T(&d_st, &y, 2, &hb_emlrtRTEI, true);
+    k = y->size[0] * y->size[1];
+    y->size[0] = 1;
+    y->size[1] = b_n;
+    emxEnsureCapacity(&c_st, (emxArray__common *)y, k, (int32_T)sizeof(real_T),
+                      &hb_emlrtRTEI);
+    if (b_n > 0) {
+      y->data[0] = anew;
+      if (b_n > 1) {
+        y->data[b_n - 1] = apnd;
+        k = b_n - 1;
+        nm1d2 = asr_s32(k, 1U);
+        d_st.site = &nc_emlrtRSI;
+        for (k = 1; k < nm1d2; k++) {
+          y->data[k] = anew + (real_T)k;
+          y->data[(b_n - k) - 1] = apnd - (real_T)k;
         }
 
-        d_st.site = &lc_emlrtRSI;
-        for (k = 1; k < i; k++) {
-          b_y->data[k] = p + (real_T)k;
-          b_y->data[b_n - k] = apnd - (real_T)k;
-        }
-
-        if (i << 1 == b_n) {
-          b_y->data[i] = (p + apnd) / 2.0;
+        if (nm1d2 << 1 == b_n - 1) {
+          y->data[nm1d2] = (anew + apnd) / 2.0;
         } else {
-          b_y->data[i] = p + (real_T)i;
-          b_y->data[i + 1] = apnd - (real_T)i;
+          y->data[nm1d2] = anew + (real_T)nm1d2;
+          y->data[nm1d2 + 1] = apnd - (real_T)nm1d2;
         }
       }
     }
 
-    b_emxInit_real_T(&c_st, &b_k, 1, &nb_emlrtRTEI, true);
+    emxInit_real_T1(&c_st, &b_k, 1, &ib_emlrtRTEI, true);
     k = b_k->size[0];
-    b_k->size[0] = b_y->size[1];
+    b_k->size[0] = y->size[1];
     emxEnsureCapacity(sp, (emxArray__common *)b_k, k, (int32_T)sizeof(real_T),
-                      &mb_emlrtRTEI);
-    i = b_y->size[1];
-    for (k = 0; k < i; k++) {
-      b_k->data[k] = b_y->data[b_y->size[0] * k];
+                      &hb_emlrtRTEI);
+    nm1d2 = y->size[1];
+    for (k = 0; k < nm1d2; k++) {
+      b_k->data[k] = y->data[y->size[0] * k];
     }
 
-    emxFree_real_T(&b_y);
+    emxFree_real_T(&y);
 
     /* 'Mykaiser:49' k = 2 * beta / m * sqrt (k .* (m - k)); */
     k = b_k->size[0];
-    i = b_k->size[0];
-    emlrtSizeEqCheck1DFastR2012b(k, i, &t_emlrtECI, sp);
-    c_y = 1.0 / (n - 1.0);
+    nm1d2 = b_k->size[0];
+    if (k != nm1d2) {
+      emlrtSizeEqCheck1DR2012b(k, nm1d2, &p_emlrtECI, sp);
+    }
+
+    anew = 1.0 / (n - 1.0);
     k = b_k->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)b_k, k, (int32_T)sizeof(real_T),
-                      &mb_emlrtRTEI);
-    i = b_k->size[0];
-    for (k = 0; k < i; k++) {
+                      &hb_emlrtRTEI);
+    nm1d2 = b_k->size[0];
+    for (k = 0; k < nm1d2; k++) {
       b_k->data[k] *= (n - 1.0) - b_k->data[k];
     }
 
-    st.site = &de_emlrtRSI;
+    st.site = &ee_emlrtRSI;
     b_sqrt(&st, b_k);
 
     /* 'Mykaiser:50' w = Mybesseli (0, k) / Mybesseli (0, beta); */
-    st.site = &ee_emlrtRSI;
+    st.site = &fe_emlrtRSI;
 
     /* BESSELI Modified Bessel functions of the first kind. */
     /* 	I = BESSELI(ALPHA,X) computes modified Bessel functions of the */
@@ -431,13 +421,13 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     /*      Calculate p-sequence until significance test passed. */
     /*  */
     /* 'Mybesseli:188' a = p; */
-    ndbl = 4.0;
+    a = 4.0;
 
     /* 'Mybesseli:189' count = 0; */
-    i = 0;
+    count = 0;
 
     /* 'Mybesseli:190' while any(p < test) */
-    while (!((p < 9.007199254740992E+15) == 0)) {
+    while (!!(p < 9.007199254740992E+15)) {
       /* 'Mybesseli:191' n = n + 1; */
       c_n++;
 
@@ -445,23 +435,23 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
       en += 2.0;
 
       /* 'Mybesseli:193' if count == 1 */
-      if (i == 1) {
+      if (count == 1) {
         /* 'Mybesseli:194' plast = a; */
         /* 'Mybesseli:195' pold = plast; */
-        apnd = ndbl;
+        pold = a;
 
         /* 'Mybesseli:196' a = p; */
-        ndbl = p;
+        a = p;
 
         /* 'Mybesseli:197' p = en * a./x + pold; */
-        p = en * p / 0.5 + apnd;
+        p = en * p / 0.5 + pold;
       } else {
         /* 'Mybesseli:198' else */
         /* 'Mybesseli:199' count = 1; */
-        i = 1;
+        count = 1;
 
         /* 'Mybesseli:200' a = p; */
-        ndbl = p;
+        a = p;
 
         /* 'Mybesseli:201' p = en * a./x + ones(length(a),1); */
         p = en * p / 0.5 + 1.0;
@@ -469,7 +459,9 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 
       /*           a = p; */
       /*           p = en * a./x + pold; */
-      emlrtBreakCheckFastR2012b(emlrtBreakCheckR2012bFlagVar, &st);
+      if (*emlrtBreakCheckR2012bFlagVar != 0) {
+        emlrtBreakCheckR2012b(&st);
+      }
     }
 
     /*  */
@@ -483,19 +475,19 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 
     /* 'Mybesseli:211' tempb = 0; */
     /* 'Mybesseli:212' tempa = 1 ./ p; */
-    ndbl = 1.0 / p;
+    tempa = 1.0 / p;
 
     /* 'Mybesseli:213' em = n - 1; */
-    apnd = c_n - 1.0;
+    em = c_n - 1.0;
 
     /* 'Mybesseli:214' empal = em + alpha; */
-    cdiff = c_n - 1.0;
+    empal = c_n - 1.0;
 
     /* 'Mybesseli:215' emp2al = (em - 1) + (alpha + alpha); */
-    p = (c_n - 1.0) - 1.0;
+    emp2al = (c_n - 1.0) - 1.0;
 
     /* 'Mybesseli:216' sum = tempa * empal * emp2al / em; */
-    c_sum = ndbl * (c_n - 1.0) * ((c_n - 1.0) - 1.0) / (c_n - 1.0);
+    c_sum = tempa * (c_n - 1.0) * ((c_n - 1.0) - 1.0) / (c_n - 1.0);
 
     /* 'Mybesseli:217' nend = n - nb; */
     nend = c_n - 1.0;
@@ -509,17 +501,17 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     /*            (but not storing) b(n), until n = nb. */
     /*  */
     /* 'Mybesseli:229' kk= tempa; */
-    kk = ndbl;
+    kk = tempa;
 
     /* 'Mybesseli:230' count2 = 0; */
-    i = 0;
+    count2 = 0;
 
     /* 'Mybesseli:231' for l = 1:nend */
     emlrtForLoopVectorCheckR2012b(1.0, 1.0, c_n - 1.0, mxDOUBLE_CLASS, (int32_T)
-                                  (c_n - 1.0), &ud_emlrtRTEI, &st);
-    k = 0;
+      (c_n - 1.0), &ee_emlrtRTEI, &st);
+    l = 0;
     exitg1 = false;
-    while ((!exitg1) && (k <= (int32_T)nend - 1)) {
+    while ((!exitg1) && (l <= (int32_T)nend - 1)) {
       /* 'Mybesseli:232' n = n - 1; */
       c_n--;
 
@@ -527,36 +519,36 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
       en -= 2.0;
 
       /* 'Mybesseli:234' if count2 == 1 */
-      if (i == 1) {
+      if (count2 == 1) {
         /* 'Mybesseli:235' tempb = kk; */
         /* 'Mybesseli:236' tempc = tempb; */
         tempc = kk;
 
         /* 'Mybesseli:237' kk = tempa; */
-        kk = ndbl;
+        kk = tempa;
 
         /* 'Mybesseli:238' tempa = (en*kk) ./ x + tempc; */
-        ndbl = en * ndbl / 0.5 + tempc;
+        tempa = en * tempa / 0.5 + tempc;
       } else {
         /* 'Mybesseli:239' else */
         /* 'Mybesseli:240' count2 = 1; */
-        i = 1;
+        count2 = 1;
 
         /* 'Mybesseli:241' kk = tempa; */
-        kk = ndbl;
+        kk = tempa;
 
         /* 'Mybesseli:242' tempa = (en*kk) ./ x; */
-        ndbl = en * ndbl / 0.5;
+        tempa = en * tempa / 0.5;
       }
 
       /*                 tempc = tempb; */
       /*                 kk = tempa; */
       /*                 tempa = (en*kk) ./ x + tempc; */
       /* 'Mybesseli:247' em = em - 1; */
-      apnd--;
+      em--;
 
       /* 'Mybesseli:248' emp2al = emp2al - 1; */
-      p--;
+      emp2al--;
 
       /* 'Mybesseli:249' if (n == 1) */
       if (c_n == 1.0) {
@@ -565,31 +557,35 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
         /* 'Mybesseli:250' if (n == 2) */
         if (c_n == 2.0) {
           /* 'Mybesseli:250' emp2al = 1; */
-          p = 1.0;
+          emp2al = 1.0;
         }
 
         /* 'Mybesseli:251' empal = empal - 1; */
-        cdiff--;
+        empal--;
 
         /* 'Mybesseli:252' sum = (sum + tempa*empal) * emp2al / em; */
-        c_sum = (c_sum + ndbl * cdiff) * p / apnd;
-        k++;
-        emlrtBreakCheckFastR2012b(emlrtBreakCheckR2012bFlagVar, &st);
+        c_sum = (c_sum + tempa * empal) * emp2al / em;
+        l++;
+        if (*emlrtBreakCheckR2012bFlagVar != 0) {
+          emlrtBreakCheckR2012b(&st);
+        }
       }
     }
 
-    b_emxInit_real_T(&st, &d_y, 1, &mb_emlrtRTEI, true);
+    emxInit_real_T1(&st, &b_y, 1, &hb_emlrtRTEI, true);
 
     /*  */
     /*         Store b(nb). */
     /*  */
     /* 'Mybesseli:258' b(v,n) = tempa; */
     k = (int32_T)c_n;
-    emlrtDynamicBoundsCheckFastR2012b(k, 1, 1, &ud_emlrtBCI, &st);
+    if (!((k >= 1) && (k <= 1))) {
+      emlrtDynamicBoundsCheckR2012b(k, 1, 1, &qd_emlrtBCI, &st);
+    }
 
     /* 'Mybesseli:259' if (nb <= 1) */
     /* 'Mybesseli:260' sum = (sum + sum) + tempa; */
-    c_sum = (c_sum + c_sum) + ndbl;
+    c_sum = (c_sum + c_sum) + tempa;
 
     /* 'Mybesseli:261' skip = -1; */
     /* 'Mybesseli:280' if skip == 0 */
@@ -612,7 +608,7 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 
     /* 'Mybesseli:314' for n = 1:nb */
     /* 'Mybesseli:315' b(v,n) = b(v,n) ./ sum; */
-    p = ndbl / c_sum;
+    b = tempa / c_sum;
 
     /*  */
     /*   Two-term ascending series for small x. */
@@ -631,28 +627,28 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     /*     if resize */
     /* 'Mybesseli:360' if resize_flag */
     /* 'Mybesseli:361' output = reshape(b,resize(1),resize(2)); */
-    k = d_y->size[0];
-    d_y->size[0] = b_k->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)d_y, k, (int32_T)sizeof(real_T),
-                      &mb_emlrtRTEI);
-    i = b_k->size[0];
-    for (k = 0; k < i; k++) {
-      d_y->data[k] = c_y * b_k->data[k];
+    k = b_y->size[0];
+    b_y->size[0] = b_k->size[0];
+    emxEnsureCapacity(sp, (emxArray__common *)b_y, k, (int32_T)sizeof(real_T),
+                      &hb_emlrtRTEI);
+    nm1d2 = b_k->size[0];
+    for (k = 0; k < nm1d2; k++) {
+      b_y->data[k] = anew * b_k->data[k];
     }
 
     emxFree_real_T(&b_k);
-    st.site = &ee_emlrtRSI;
-    Mybesseli(&st, d_y, w);
+    st.site = &fe_emlrtRSI;
+    Mybesseli(&st, b_y, w);
     k = w->size[0] * w->size[1];
     w->size[1] = 1;
     emxEnsureCapacity(sp, (emxArray__common *)w, k, (int32_T)sizeof(real_T),
-                      &mb_emlrtRTEI);
-    i = w->size[0];
+                      &hb_emlrtRTEI);
+    nm1d2 = w->size[0];
     k = w->size[1];
-    i *= k;
-    emxFree_real_T(&d_y);
-    for (k = 0; k < i; k++) {
-      w->data[k] /= p;
+    nm1d2 *= k;
+    emxFree_real_T(&b_y);
+    for (k = 0; k < nm1d2; k++) {
+      w->data[k] /= b;
     }
 
     /*      w_test = besseli (0, k) / besseli (0, beta); */

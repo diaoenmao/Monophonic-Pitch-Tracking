@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: dynamic5.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "dynamic5.h"
@@ -32,16 +35,26 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
               *Merit_array, double k1, emxArray_real_T *FinPitch)
 {
   emxArray_real_T *Local;
+  int numframes;
   int Trans;
   int loop_ub;
   emxArray_real_T *b_Trans;
+  int i;
+  int j;
+  int k;
   int c_Trans;
   emxArray_real_T *PRED;
+  int N;
   double P_data[4999];
   double p_data[4999];
   double CCOST[4];
   double PCOST[4];
+  int J;
+  int I;
+  int K;
   double b_CCOST;
+  int b_I;
+  int n;
   emxInit_real_T(&Local, 2);
 
   /*    Creation date:   Spring 2001 */
@@ -59,6 +72,8 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   /*    June 2008. */
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   /*  some initializations. */
+  numframes = Pitch_array->size[1] - 1;
+
   /* The following weighting factors are used to differentially weight */
   /*  the various types of transitions which can occur, as well as weight */
   /*  the relative value of transition costs and local costs */
@@ -72,16 +87,13 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
     Local->data[Trans] = 1.0 - Merit_array->data[Trans];
   }
 
-  c_emxInit_real_T(&b_Trans, 3);
+  emxInit_real_T2(&b_Trans, 3);
 
   /* initialization for the formation of the transition cost matrix */
   Trans = b_Trans->size[0] * b_Trans->size[1] * b_Trans->size[2];
   b_Trans->size[0] = 4;
   b_Trans->size[1] = 4;
-  emxEnsureCapacity((emxArray__common *)b_Trans, Trans, (int)sizeof(double));
-  loop_ub = Pitch_array->size[1];
-  Trans = b_Trans->size[0] * b_Trans->size[1] * b_Trans->size[2];
-  b_Trans->size[2] = loop_ub;
+  b_Trans->size[2] = Pitch_array->size[1];
   emxEnsureCapacity((emxArray__common *)b_Trans, Trans, (int)sizeof(double));
   loop_ub = 16 * Pitch_array->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
@@ -90,20 +102,18 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
 
   /* the transition cost matrix is proportional to frequency differences */
   /* between successive candidates. */
-  for (loop_ub = 1; loop_ub - 1 <= Pitch_array->size[1] - 2; loop_ub++) {
-    for (Trans = 0; Trans < 4; Trans++) {
-      for (c_Trans = 0; c_Trans < 4; c_Trans++) {
-        b_Trans->data[(c_Trans + b_Trans->size[0] * Trans) + b_Trans->size[0] *
-          b_Trans->size[1] * loop_ub] = fabs(Pitch_array->data[Trans +
-          Pitch_array->size[0] * loop_ub] - Pitch_array->data[c_Trans +
-          Pitch_array->size[0] * (loop_ub - 1)]) / 60.0;
-        b_Trans->data[(c_Trans + b_Trans->size[0] * Trans) + b_Trans->size[0] *
-          b_Trans->size[1] * loop_ub] = 0.05 * b_Trans->data[(c_Trans +
-          b_Trans->size[0] * Trans) + b_Trans->size[0] * b_Trans->size[1] *
-          loop_ub] + b_Trans->data[(c_Trans + b_Trans->size[0] * Trans) +
-          b_Trans->size[0] * b_Trans->size[1] * loop_ub] * b_Trans->data
-          [(c_Trans + b_Trans->size[0] * Trans) + b_Trans->size[0] *
-          b_Trans->size[1] * loop_ub];
+  for (i = 1; i - 1 < numframes; i++) {
+    for (j = 0; j < 4; j++) {
+      for (k = 0; k < 4; k++) {
+        b_Trans->data[(k + b_Trans->size[0] * j) + b_Trans->size[0] *
+          b_Trans->size[1] * i] = fabs(Pitch_array->data[j + Pitch_array->size[0]
+          * i] - Pitch_array->data[k + Pitch_array->size[0] * (i - 1)]) / 60.0;
+        b_Trans->data[(k + b_Trans->size[0] * j) + b_Trans->size[0] *
+          b_Trans->size[1] * i] = 0.05 * b_Trans->data[(k + b_Trans->size[0] * j)
+          + b_Trans->size[0] * b_Trans->size[1] * i] + b_Trans->data[(k +
+          b_Trans->size[0] * j) + b_Trans->size[0] * b_Trans->size[1] * i] *
+          b_Trans->data[(k + b_Trans->size[0] * j) + b_Trans->size[0] *
+          b_Trans->size[1] * i];
       }
     }
   }
@@ -113,10 +123,10 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   b_Trans->size[0] = 4;
   b_Trans->size[1] = 4;
   emxEnsureCapacity((emxArray__common *)b_Trans, Trans, (int)sizeof(double));
-  loop_ub = b_Trans->size[0];
-  Trans = b_Trans->size[1];
+  Trans = b_Trans->size[0];
+  loop_ub = b_Trans->size[1];
   c_Trans = b_Trans->size[2];
-  loop_ub = loop_ub * Trans * c_Trans;
+  loop_ub = Trans * loop_ub * c_Trans;
   for (Trans = 0; Trans < loop_ub; Trans++) {
     b_Trans->data[Trans] *= k1;
   }
@@ -147,13 +157,12 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   /*    method for robust fundamental frequency tracking," J.Acosut.Soc.Am. 123(6),  */
   /*    June 2008. */
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+  N = Local->size[1];
+
   /* getting the size of the local matrix; */
   Trans = PRED->size[0] * PRED->size[1];
   PRED->size[0] = 4;
-  emxEnsureCapacity((emxArray__common *)PRED, Trans, (int)sizeof(double));
-  loop_ub = Local->size[1];
-  Trans = PRED->size[0] * PRED->size[1];
-  PRED->size[1] = loop_ub;
+  PRED->size[1] = Local->size[1];
   emxEnsureCapacity((emxArray__common *)PRED, Trans, (int)sizeof(double));
   loop_ub = Local->size[1] << 2;
   for (Trans = 0; Trans < loop_ub; Trans++) {
@@ -176,49 +185,49 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
     CCOST[Trans] = 0.0;
   }
 
-  for (loop_ub = 0; loop_ub < 4; loop_ub++) {
+  for (J = 0; J < 4; J++) {
     /* initializing the previous costs; */
-    PCOST[loop_ub] = Local->data[loop_ub];
+    PCOST[J] = Local->data[J];
   }
 
-  for (c_Trans = 1; c_Trans - 1 <= Local->size[1] - 2; c_Trans++) {
+  for (I = 1; I - 1 <= N - 2; I++) {
     /* this loop is doing the heart work of this routine. That means to */
-    for (loop_ub = 0; loop_ub < 4; loop_ub++) {
-      CCOST[loop_ub] = 1.0E+30;
+    for (J = 0; J < 4; J++) {
+      CCOST[J] = 1.0E+30;
 
       /* get the lowest cost path; */
-      for (Trans = 0; Trans < 4; Trans++) {
-        b_CCOST = CCOST[loop_ub];
-        if (PCOST[Trans] + b_Trans->data[(Trans + b_Trans->size[0] * loop_ub) +
-            b_Trans->size[0] * b_Trans->size[1] * c_Trans] <= CCOST[loop_ub]) {
+      for (K = 0; K < 4; K++) {
+        b_CCOST = CCOST[J];
+        if (PCOST[K] + b_Trans->data[(K + b_Trans->size[0] * J) + b_Trans->size
+            [0] * b_Trans->size[1] * I] <= CCOST[J]) {
           /* deciding the optimal path between two points in two next column;  */
-          b_CCOST = PCOST[Trans] + b_Trans->data[(Trans + b_Trans->size[0] *
-            loop_ub) + b_Trans->size[0] * b_Trans->size[1] * c_Trans];
-          PRED->data[loop_ub + PRED->size[0] * c_Trans] = 1.0 + (double)Trans;
+          b_CCOST = PCOST[K] + b_Trans->data[(K + b_Trans->size[0] * J) +
+            b_Trans->size[0] * b_Trans->size[1] * I];
+          PRED->data[J + PRED->size[0] * I] = 1.0 + (double)K;
 
           /* this line is very importent, used to mark the chosen points; */
         }
 
-        CCOST[loop_ub] = b_CCOST;
+        CCOST[J] = b_CCOST;
       }
 
-      CCOST[loop_ub] += Local->data[loop_ub + Local->size[0] * c_Trans];
+      CCOST[J] += Local->data[J + Local->size[0] * I];
 
       /* new cost is gotten by the adding of Local cost and current cost; */
     }
 
-    for (loop_ub = 0; loop_ub < 4; loop_ub++) {
-      PCOST[loop_ub] = CCOST[loop_ub];
+    for (J = 0; J < 4; J++) {
+      PCOST[J] = CCOST[J];
 
       /* using the new current cost to update the previous cost; */
     }
 
-    p_data[c_Trans] = 1.0;
-    for (loop_ub = 0; loop_ub < 3; loop_ub++) {
+    p_data[I] = 1.0;
+    for (J = 0; J < 3; J++) {
       /* obtaining the points with lowest cost in every column; */
-      if (CCOST[loop_ub + 1] <= CCOST[0]) {
-        CCOST[0] = CCOST[loop_ub + 1];
-        p_data[c_Trans] = 2.0 + (double)loop_ub;
+      if (CCOST[J + 1] <= CCOST[0]) {
+        CCOST[0] = CCOST[J + 1];
+        p_data[I] = 2.0 + (double)J;
       }
     }
   }
@@ -239,12 +248,11 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   /*      end */
   /*    end */
   P_data[Local->size[1] - 1] = p_data[Local->size[1] - 1];
-  for (c_Trans = 0; c_Trans <= Local->size[1] - 2; c_Trans++) {
-    loop_ub = (Local->size[1] - c_Trans) - 1;
+  for (I = 0; I <= Local->size[1] - 2; I++) {
+    b_I = (N - I) - 1;
 
     /* using this loop to get the path finally; from the last point going */
-    P_data[loop_ub - 1] = PRED->data[((int)P_data[loop_ub] + PRED->size[0] *
-      loop_ub) - 1];
+    P_data[b_I - 1] = PRED->data[((int)P_data[b_I] + PRED->size[0] * b_I) - 1];
 
     /* backward to find the previous points, etc; */
   }
@@ -257,19 +265,16 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   /*  At this point, VSpec_F0 is the spectral pitch track for voiced frames */
   Trans = FinPitch->size[0] * FinPitch->size[1];
   FinPitch->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)FinPitch, Trans, (int)sizeof(double));
-  loop_ub = Pitch_array->size[1];
-  Trans = FinPitch->size[0] * FinPitch->size[1];
-  FinPitch->size[1] = loop_ub;
+  FinPitch->size[1] = Pitch_array->size[1];
   emxEnsureCapacity((emxArray__common *)FinPitch, Trans, (int)sizeof(double));
   loop_ub = Pitch_array->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
     FinPitch->data[Trans] = 0.0;
   }
 
-  for (loop_ub = 0; loop_ub < Pitch_array->size[1]; loop_ub++) {
-    FinPitch->data[loop_ub] = Pitch_array->data[((int)P_data[loop_ub] +
-      Pitch_array->size[0] * loop_ub) - 1];
+  for (n = 0; n <= numframes; n++) {
+    FinPitch->data[n] = Pitch_array->data[((int)P_data[n] + Pitch_array->size[0]
+      * n) - 1];
   }
 }
 

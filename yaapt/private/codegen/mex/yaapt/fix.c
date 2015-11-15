@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * fix.c
  *
  * Code generation for function 'fix'
@@ -9,6 +13,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "fix.h"
+#include "lapacke.h"
 
 /* Function Definitions */
 
@@ -21,26 +26,6 @@ void b_fix(real_T *x)
     *x = muDoubleScalarCeil(*x);
   } else {
     *x = muDoubleScalarFloor(*x);
-  }
-}
-
-/*
- *
- */
-void c_fix(emxArray_real_T *x)
-{
-  int32_T i43;
-  int32_T k;
-  real_T b_x;
-  i43 = x->size[0];
-  for (k = 0; k < i43; k++) {
-    if (x->data[k] < 0.0) {
-      b_x = muDoubleScalarCeil(x->data[k]);
-    } else {
-      b_x = muDoubleScalarFloor(x->data[k]);
-    }
-
-    x->data[k] = b_x;
   }
 }
 

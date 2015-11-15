@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: repmat.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "repmat.h"
@@ -27,8 +30,7 @@ void b_repmat(double varargin_2, emxArray_real_T *b)
   b->size[0] = 4;
   b->size[1] = (int)varargin_2;
   emxEnsureCapacity((emxArray__common *)b, jtilecol, (int)sizeof(double));
-  if ((int)varargin_2 == 0) {
-  } else {
+  if (!((int)varargin_2 == 0)) {
     for (jtilecol = 1; jtilecol <= (int)varargin_2; jtilecol++) {
       ibtile = (jtilecol - 1) << 2;
       for (k = 0; k < 4; k++) {
@@ -45,20 +47,19 @@ void b_repmat(double varargin_2, emxArray_real_T *b)
  */
 void repmat(const emxArray_real_T *a, emxArray_real_T *b)
 {
-  int unnamed_idx_1;
+  int outsize_idx_1;
   int ibmat;
   int itilerow;
-  unnamed_idx_1 = b->size[0] * b->size[1];
+  outsize_idx_1 = a->size[1];
+  ibmat = b->size[0] * b->size[1];
   b->size[0] = 4;
-  b->size[1] = a->size[1];
-  emxEnsureCapacity((emxArray__common *)b, unnamed_idx_1, (int)sizeof(double));
-  unnamed_idx_1 = a->size[1];
-  if (unnamed_idx_1 == 0) {
-  } else {
-    for (unnamed_idx_1 = 0; unnamed_idx_1 + 1 <= a->size[1]; unnamed_idx_1++) {
-      ibmat = unnamed_idx_1 << 2;
+  b->size[1] = outsize_idx_1;
+  emxEnsureCapacity((emxArray__common *)b, ibmat, (int)sizeof(double));
+  if ((!(a->size[1] == 0)) && (!(outsize_idx_1 == 0))) {
+    for (outsize_idx_1 = 0; outsize_idx_1 + 1 <= a->size[1]; outsize_idx_1++) {
+      ibmat = outsize_idx_1 << 2;
       for (itilerow = 0; itilerow < 4; itilerow++) {
-        b->data[ibmat + itilerow] = a->data[unnamed_idx_1];
+        b->data[ibmat + itilerow] = a->data[outsize_idx_1];
       }
     }
   }

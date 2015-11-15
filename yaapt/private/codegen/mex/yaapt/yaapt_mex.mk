@@ -12,39 +12,50 @@ SRC_FILES =  \
 	yaapt_initialize.c \
 	yaapt_terminate.c \
 	yaapt.c \
+	nonlinear.c \
 	rdivide.c \
 	error.c \
+	eml_int_forloop_overflow_check.c \
 	abs.c \
+	scalexpAlloc.c \
 	any.c \
 	isequal.c \
 	diff.c \
 	Myfirls.c \
 	sqrt.c \
-	eml_error.c \
-	eml_int_forloop_overflow_check.c \
+	error1.c \
 	cos.c \
 	sinc.c \
+	find.c \
+	indexShapeCheck.c \
 	sin.c \
 	mldivide.c \
-	eml_warning.c \
+	lusolve.c \
+	xgetrf.c \
+	repmat.c \
+	assertValidSizeArg.c \
+	warning.c \
+	xtrsm.c \
 	mean.c \
-	sum.c \
+	combine_vector_elements.c \
 	exp.c \
 	filter.c \
+	xaxpy.c \
 	fix.c \
 	nlfer.c \
 	Myspecgram.c \
 	Myhanning.c \
 	fft.c \
+	sum.c \
 	spec_trk.c \
 	mod.c \
 	Mykaiser.c \
 	Mybesseli.c \
-	repmat.c \
 	all.c \
 	prod.c \
 	peaks.c \
-	eml_sort.c \
+	sort1.c \
+	sortIdx.c \
 	std.c \
 	Mymedfilt1.c \
 	median.c \
@@ -56,16 +67,16 @@ SRC_FILES =  \
 	cmp_rate.c \
 	cat.c \
 	dynamic.c \
+	_coder_yaapt_info.c \
 	_coder_yaapt_api.c \
-	yaapt_emxutil.c \
 	_coder_yaapt_mex.c \
-	_coder_yaapt_info.c
+	yaapt_emxutil.c
 
 MEX_FILE_NAME_WO_EXT = yaapt_mex
 MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexw64
 TARGET = $(MEX_FILE_NAME)
 
-SYS_LIBS = 
+SYS_LIBS = libmwlapack.lib 
 
 
 #
@@ -102,7 +113,7 @@ SYS_INCLUDE = $(MATLAB_INCLUDES)
 
 SYS_INCLUDE += /I "$(START_DIR)"
 SYS_INCLUDE += /I "$(START_DIR)\codegen\mex\yaapt"
-SYS_INCLUDE += /I "$(START_DIR)\codegen\mex\yaapt\interface"
+SYS_INCLUDE += /I ".\interface"
 SYS_INCLUDE += /I "$(MATLAB_ROOT)\extern\include"
 SYS_INCLUDE += /I "."
 
@@ -119,9 +130,9 @@ else
 endif
 LINK_FLAGS += $(OMPLINKFLAGS)
 LINK_FLAGS += /OUT:$(TARGET)
-LINK_FLAGS += 
+LINK_FLAGS +=  /LIBPATH:"$(MATLAB_ROOT)\extern\lib\win64\microsoft"
 
-CFLAGS =  $(COMP_FLAGS) $(USER_INCLUDE) $(SYS_INCLUDE)
+CFLAGS =  -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS $(COMP_FLAGS) $(USER_INCLUDE) $(SYS_INCLUDE)
 CPPFLAGS =  $(CFLAGS)
 
 %.$(OBJEXT) : %.c

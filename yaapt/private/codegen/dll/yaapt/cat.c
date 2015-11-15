@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: cat.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "cat.h"
@@ -41,7 +44,10 @@ void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
   y->size[0] = (int)ysize[0];
   y->size[1] = (int)ysize[1];
   emxEnsureCapacity((emxArray__common *)y, iy, (int)sizeof(double));
-  ysize[1] = ysize[1];
+  for (iy = 0; iy < 2; iy++) {
+    ysize[iy] = (unsigned int)y->size[iy];
+  }
+
   iy = 0;
   for (i = 0; i < (int)ysize[1]; i++) {
     ix = i * 3;

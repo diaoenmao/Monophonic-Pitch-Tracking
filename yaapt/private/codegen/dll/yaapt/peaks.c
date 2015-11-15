@@ -1,15 +1,18 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: peaks.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "peaks.h"
-#include "eml_sort.h"
+#include "sort1.h"
 #include "yaapt_emxutil.h"
 #include "mean.h"
 
@@ -43,27 +46,27 @@
 void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
            Pitch_size[2], double Merit_data[], int Merit_size[2])
 {
-  double max_lag;
+  double mtmp;
   double width;
   double center;
   double min_lag;
+  double max_lag;
   double Pitch[100];
   double Merit[100];
-  int i8;
   int i9;
+  int i10;
   int ixstart;
-  double mtmp;
+  int n;
   int ix;
   boolean_T exitg2;
-  int loop_ub;
   emxArray_real_T *b_Data;
-  int unnamed_idx_1;
+  int i11;
   double avg_data;
   int numpeaks;
-  double n;
+  double b_n;
+  int c_n;
   int itmp;
   boolean_T exitg1;
-  double b_Merit[100];
   int iidx[100];
   double b_Pitch[100];
   double b_Pitch_data[15];
@@ -88,11 +91,11 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
   /*  Threshold for available peaks */
   /* -- COMPUTED VARIABLES -------------------------------------------------------- */
   /*  Length in Hz of range(must be largest to be a peak) */
-  max_lag = 50.0 / delta;
-  if (max_lag < 0.0) {
-    width = ceil(max_lag);
+  mtmp = 50.0 / delta;
+  if (mtmp < 0.0) {
+    width = ceil(mtmp);
   } else {
-    width = floor(max_lag);
+    width = floor(mtmp);
   }
 
   /*  Window width in sample */
@@ -104,19 +107,19 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
   center = ceil(width / 2.0);
 
   /*  Lowest frequency at which F0 is allowed */
-  max_lag = 60.0 / delta - width / 4.0;
-  if (max_lag < 0.0) {
-    min_lag = ceil(max_lag);
+  mtmp = 60.0 / delta - width / 4.0;
+  if (mtmp < 0.0) {
+    min_lag = ceil(mtmp);
   } else {
-    min_lag = floor(max_lag);
+    min_lag = floor(mtmp);
   }
 
   /*  Highest frequency at which F0 is allowed */
-  max_lag = 400.0 / delta + width / 4.0;
-  if (max_lag < 0.0) {
-    max_lag = ceil(max_lag);
+  mtmp = 400.0 / delta + width / 4.0;
+  if (mtmp < 0.0) {
+    max_lag = ceil(mtmp);
   } else {
-    max_lag = floor(max_lag);
+    max_lag = floor(mtmp);
   }
 
   if (min_lag < 1.0) {
@@ -128,34 +131,34 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
   }
 
   /* -- INITIALIZATION ----------------------------------------------------------- */
-  for (i8 = 0; i8 < 100; i8++) {
-    Pitch[i8] = 0.0;
-
-    /*  Peak(Pitch) candidates */
-    Merit[i8] = 0.0;
+  /*  Peak(Pitch) candidates */
+  for (i9 = 0; i9 < 100; i9++) {
+    Pitch[i9] = 0.0;
+    Merit[i9] = 0.0;
   }
 
   /*  Merits for peaks */
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*  Normalize the signal so that peak value = 1 */
   if (min_lag > max_lag) {
-    i8 = 0;
-    i9 = 0;
+    i9 = 1;
+    i10 = 1;
   } else {
-    i8 = (int)min_lag - 1;
-    i9 = (int)max_lag;
+    i9 = (int)min_lag;
+    i10 = (int)max_lag + 1;
   }
 
   ixstart = 1;
-  mtmp = Data->data[i8];
-  if (i9 - i8 > 1) {
+  n = i10 - i9;
+  mtmp = Data->data[i9 - 1];
+  if (i10 - i9 > 1) {
     if (rtIsNaN(mtmp)) {
       ix = 2;
       exitg2 = false;
-      while ((!exitg2) && (ix <= i9 - i8)) {
+      while ((!exitg2) && (ix <= n)) {
         ixstart = ix;
-        if (!rtIsNaN(Data->data[(i8 + ix) - 1])) {
-          mtmp = Data->data[(i8 + ix) - 1];
+        if (!rtIsNaN(Data->data[(i9 + ix) - 2])) {
+          mtmp = Data->data[(i9 + ix) - 2];
           exitg2 = true;
         } else {
           ix++;
@@ -163,45 +166,44 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
       }
     }
 
-    if (ixstart < i9 - i8) {
-      for (ix = ixstart - 1; ix + 2 <= i9 - i8; ix++) {
-        if (Data->data[(i8 + ix) + 1] > mtmp) {
-          mtmp = Data->data[(i8 + ix) + 1];
+    if (ixstart < i10 - i9) {
+      for (ix = ixstart - 1; ix + 2 <= n; ix++) {
+        if (Data->data[i9 + ix] > mtmp) {
+          mtmp = Data->data[i9 + ix];
         }
       }
     }
   }
 
   if (mtmp > 1.0E-14) {
-    i8 = Data->size[0] * Data->size[1];
+    i9 = Data->size[0] * Data->size[1];
     Data->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)Data, i8, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)Data, i9, (int)sizeof(double));
     ixstart = Data->size[0];
-    ix = Data->size[1];
-    loop_ub = ixstart * ix;
-    for (i8 = 0; i8 < loop_ub; i8++) {
-      Data->data[i8] /= mtmp;
+    n = Data->size[1];
+    ix = ixstart * n;
+    for (i9 = 0; i9 < ix; i9++) {
+      Data->data[i9] /= mtmp;
     }
   }
 
   /*  If true there are no large peaks and we assume that signal is unvoiced */
   if (min_lag > max_lag) {
-    i8 = 0;
     i9 = 0;
+    i10 = 0;
   } else {
-    i8 = (int)min_lag - 1;
-    i9 = (int)max_lag;
+    i9 = (int)min_lag - 1;
+    i10 = (int)max_lag;
   }
 
   emxInit_real_T(&b_Data, 2);
-  unnamed_idx_1 = b_Data->size[0] * b_Data->size[1];
+  i11 = b_Data->size[0] * b_Data->size[1];
   b_Data->size[0] = 1;
-  b_Data->size[1] = i9 - i8;
-  emxEnsureCapacity((emxArray__common *)b_Data, unnamed_idx_1, (int)sizeof
-                    (double));
-  loop_ub = i9 - i8;
-  for (i9 = 0; i9 < loop_ub; i9++) {
-    b_Data->data[b_Data->size[0] * i9] = Data->data[i8 + i9];
+  b_Data->size[1] = i10 - i9;
+  emxEnsureCapacity((emxArray__common *)b_Data, i11, (int)sizeof(double));
+  ix = i10 - i9;
+  for (i10 = 0; i10 < ix; i10++) {
+    b_Data->data[b_Data->size[0] * i10] = Data->data[i9 + i10];
   }
 
   avg_data = mean(b_Data);
@@ -212,9 +214,9 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
     Pitch_size[1] = 4;
     Merit_size[0] = 1;
     Merit_size[1] = 4;
-    for (i8 = 0; i8 < 4; i8++) {
-      Pitch_data[i8] = 0.0;
-      Merit_data[i8] = 1.0;
+    for (i9 = 0; i9 < 4; i9++) {
+      Pitch_data[i9] = 0.0;
+      Merit_data[i9] = 1.0;
     }
 
     /*  force an early end for unoviced frame  */
@@ -226,29 +228,30 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
     /*  up, to retain only best peaks i.e. peaks which do not meet certain */
     /*  criteria are eliminated. */
     numpeaks = 0;
-    i8 = (int)(max_lag + (1.0 - min_lag));
-    for (loop_ub = 0; loop_ub < i8; loop_ub++) {
-      n = min_lag + (double)loop_ub;
-      max_lag = (n + width) - 1.0;
-      if (n > max_lag) {
-        i9 = 0;
-        unnamed_idx_1 = 0;
+    i9 = (int)(max_lag + (1.0 - min_lag));
+    for (n = 0; n < i9; n++) {
+      b_n = min_lag + (double)n;
+      mtmp = (b_n + width) - 1.0;
+      if (b_n > mtmp) {
+        i10 = 1;
+        i11 = 1;
       } else {
-        i9 = (int)n - 1;
-        unnamed_idx_1 = (int)max_lag;
+        i10 = (int)b_n;
+        i11 = (int)mtmp + 1;
       }
 
       ixstart = 1;
-      mtmp = Data->data[i9];
+      c_n = i11 - i10;
+      mtmp = Data->data[i10 - 1];
       itmp = 1;
-      if (unnamed_idx_1 - i9 > 1) {
+      if (i11 - i10 > 1) {
         if (rtIsNaN(mtmp)) {
           ix = 2;
           exitg1 = false;
-          while ((!exitg1) && (ix <= unnamed_idx_1 - i9)) {
+          while ((!exitg1) && (ix <= c_n)) {
             ixstart = ix;
-            if (!rtIsNaN(Data->data[(i9 + ix) - 1])) {
-              mtmp = Data->data[(i9 + ix) - 1];
+            if (!rtIsNaN(Data->data[(i10 + ix) - 2])) {
+              mtmp = Data->data[(i10 + ix) - 2];
               itmp = ix;
               exitg1 = true;
             } else {
@@ -257,10 +260,10 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
           }
         }
 
-        if (ixstart < unnamed_idx_1 - i9) {
-          for (ix = ixstart + 1; ix <= unnamed_idx_1 - i9; ix++) {
-            if (Data->data[(i9 + ix) - 1] > mtmp) {
-              mtmp = Data->data[(i9 + ix) - 1];
+        if (ixstart < i11 - i10) {
+          for (ix = ixstart + 1; ix <= c_n; ix++) {
+            if (Data->data[(i10 + ix) - 2] > mtmp) {
+              mtmp = Data->data[(i10 + ix) - 2];
               itmp = ix;
             }
           }
@@ -272,7 +275,7 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
         /*  Note Pitch(1) = delta, Pitch(2) = 2*delta */
         /*  Convert FFT indices to Pitch in Hz */
         numpeaks++;
-        Pitch[numpeaks - 1] = ((n + center) - 1.0) * delta;
+        Pitch[numpeaks - 1] = ((b_n + center) - 1.0) * delta;
         Merit[numpeaks - 1] = mtmp;
       }
     }
@@ -292,17 +295,16 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
       Pitch_size[1] = 4;
       Merit_size[0] = 1;
       Merit_size[1] = 4;
-      for (i8 = 0; i8 < 4; i8++) {
-        Pitch_data[i8] = 0.0;
-        Merit_data[i8] = 1.0;
+      for (i9 = 0; i9 < 4; i9++) {
+        Pitch_data[i9] = 0.0;
+        Merit_data[i9] = 1.0;
       }
     } else {
       /*  Step 3     */
       /*  Order the peaks according to size,  considering at most maxpeaks */
-      memcpy(&b_Merit[0], &Merit[0], 100U * sizeof(double));
-      eml_sort(b_Merit, Merit, iidx);
-      for (i8 = 0; i8 < 100; i8++) {
-        b_Pitch[i8] = Pitch[iidx[i8] - 1];
+      sort(Merit, iidx);
+      for (i9 = 0; i9 < 100; i9++) {
+        b_Pitch[i9] = Pitch[iidx[i9] - 1];
       }
 
       memcpy(&Pitch[0], &b_Pitch[0], 100U * sizeof(double));
@@ -314,71 +316,55 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
       }
 
       if (1 > numpeaks) {
-        loop_ub = 0;
-      } else {
-        loop_ub = numpeaks;
-      }
-
-      Pitch_size[0] = 1;
-      Pitch_size[1] = loop_ub;
-      for (i8 = 0; i8 < loop_ub; i8++) {
-        Pitch_data[i8] = Pitch[i8];
-      }
-
-      if (1 > numpeaks) {
         ix = 0;
       } else {
         ix = numpeaks;
       }
 
+      Pitch_size[0] = 1;
+      Pitch_size[1] = ix;
+      for (i9 = 0; i9 < ix; i9++) {
+        Pitch_data[i9] = Pitch[i9];
+      }
+
+      if (1 > numpeaks) {
+        ixstart = 0;
+      } else {
+        ixstart = numpeaks;
+      }
+
       Merit_size[0] = 1;
-      Merit_size[1] = ix;
-      for (i8 = 0; i8 < ix; i8++) {
-        Merit_data[i8] = Merit[i8];
+      Merit_size[1] = ixstart;
+      for (i9 = 0; i9 < ixstart; i9++) {
+        Merit_data[i9] = Merit[i9];
       }
 
       /*  Step 4 */
       /*  Insert candidates to reduce pitch doubling and pitch halving, if needed */
       if (numpeaks > 0) {
         /*  if best peak has F < this, insert peak at 2F */
-        if (Pitch_data[0] > 150.0) {
+        for (i9 = 0; i9 < ix; i9++) {
+          b_Pitch_data[i9] = Pitch[i9];
+        }
+
+        if (b_Pitch_data[0] > 150.0) {
           if (numpeaks + 1 <= 4) {
             numpeaks++;
           } else {
             numpeaks = 4;
           }
 
-          if (numpeaks > loop_ub) {
-            unnamed_idx_1 = numpeaks - loop_ub;
-            ixstart = loop_ub + unnamed_idx_1;
-            for (i8 = 0; i8 < loop_ub; i8++) {
-              b_Pitch_data[i8] = Pitch_data[i8];
+          if (numpeaks > ix) {
+            n = numpeaks - ix;
+            Pitch_size[1] = (ix + numpeaks) - ix;
+            for (i9 = 0; i9 < n; i9++) {
+              Pitch_data[ix + i9] = 0.0;
             }
 
-            for (i8 = 0; i8 < unnamed_idx_1; i8++) {
-              b_Pitch_data[i8 + loop_ub] = 0.0;
-            }
-
-            Pitch_size[0] = 1;
-            Pitch_size[1] = ixstart;
-            for (i8 = 0; i8 < ixstart; i8++) {
-              Pitch_data[i8] = b_Pitch_data[i8];
-            }
-
-            unnamed_idx_1 = numpeaks - ix;
-            ixstart = ix + unnamed_idx_1;
-            for (i8 = 0; i8 < ix; i8++) {
-              b_Pitch_data[i8] = Merit_data[i8];
-            }
-
-            for (i8 = 0; i8 < unnamed_idx_1; i8++) {
-              b_Pitch_data[i8 + ix] = 0.0;
-            }
-
-            Merit_size[0] = 1;
-            Merit_size[1] = ixstart;
-            for (i8 = 0; i8 < ixstart; i8++) {
-              Merit_data[i8] = b_Pitch_data[i8];
+            n = numpeaks - ixstart;
+            Merit_size[1] = (ixstart + numpeaks) - ixstart;
+            for (i9 = 0; i9 < n; i9++) {
+              Merit_data[ixstart + i9] = 0.0;
             }
           }
 
@@ -397,38 +383,38 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
           }
 
           if (numpeaks > Pitch_size[1]) {
-            unnamed_idx_1 = numpeaks - Pitch_size[1];
-            ixstart = Pitch_size[1] + unnamed_idx_1;
-            loop_ub = Pitch_size[1];
-            for (i8 = 0; i8 < loop_ub; i8++) {
-              b_Pitch_data[i8] = Pitch_data[i8];
+            n = numpeaks - Pitch_size[1];
+            ixstart = Pitch_size[1] + n;
+            ix = Pitch_size[1];
+            for (i9 = 0; i9 < ix; i9++) {
+              b_Pitch_data[i9] = Pitch_data[i9];
             }
 
-            for (i8 = 0; i8 < unnamed_idx_1; i8++) {
-              b_Pitch_data[i8 + Pitch_size[1]] = 0.0;
+            for (i9 = 0; i9 < n; i9++) {
+              b_Pitch_data[i9 + Pitch_size[1]] = 0.0;
             }
 
             Pitch_size[0] = 1;
             Pitch_size[1] = ixstart;
-            for (i8 = 0; i8 < ixstart; i8++) {
-              Pitch_data[i8] = b_Pitch_data[i8];
+            for (i9 = 0; i9 < ixstart; i9++) {
+              Pitch_data[i9] = b_Pitch_data[i9];
             }
 
-            unnamed_idx_1 = numpeaks - Merit_size[1];
-            ixstart = Merit_size[1] + unnamed_idx_1;
-            loop_ub = Merit_size[1];
-            for (i8 = 0; i8 < loop_ub; i8++) {
-              b_Pitch_data[i8] = Merit_data[i8];
+            n = numpeaks - Merit_size[1];
+            ixstart = Merit_size[1] + n;
+            ix = Merit_size[1];
+            for (i9 = 0; i9 < ix; i9++) {
+              b_Pitch_data[i9] = Merit_data[i9];
             }
 
-            for (i8 = 0; i8 < unnamed_idx_1; i8++) {
-              b_Pitch_data[i8 + Merit_size[1]] = 0.0;
+            for (i9 = 0; i9 < n; i9++) {
+              b_Pitch_data[i9 + Merit_size[1]] = 0.0;
             }
 
             Merit_size[0] = 1;
             Merit_size[1] = ixstart;
-            for (i8 = 0; i8 < ixstart; i8++) {
-              Merit_data[i8] = b_Pitch_data[i8];
+            for (i9 = 0; i9 < ixstart; i9++) {
+              Merit_data[i9] = b_Pitch_data[i9];
             }
           }
 
@@ -439,39 +425,39 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
         /*  Fill in  frames with less than maxpeaks with best choice */
         if (numpeaks < 4) {
           ixstart = Pitch_size[1];
-          ix = 4 - numpeaks;
+          n = 4 - numpeaks;
           Pitch_size[1] = (Pitch_size[1] - numpeaks) + 4;
-          for (i8 = 0; i8 < ix; i8++) {
-            Pitch_data[ixstart + i8] = 0.0;
+          for (i9 = 0; i9 < n; i9++) {
+            Pitch_data[ixstart + i9] = 0.0;
           }
 
           ixstart = Merit_size[1];
-          ix = 4 - numpeaks;
+          n = 4 - numpeaks;
           Merit_size[1] = (Merit_size[1] - numpeaks) + 4;
-          for (i8 = 0; i8 < ix; i8++) {
-            Merit_data[ixstart + i8] = 0.0;
+          for (i9 = 0; i9 < n; i9++) {
+            Merit_data[ixstart + i9] = 0.0;
           }
 
-          loop_ub = -numpeaks;
-          for (i8 = 0; i8 <= loop_ub + 3; i8++) {
-            tmp_data[i8] = (signed char)(numpeaks + i8);
+          ix = -numpeaks;
+          for (i9 = 0; i9 <= ix + 3; i9++) {
+            tmp_data[i9] = (signed char)(numpeaks + i9);
           }
 
-          max_lag = Pitch_data[0];
-          loop_ub = 4 - numpeaks;
-          for (i8 = 0; i8 < loop_ub; i8++) {
-            Pitch_data[tmp_data[i8]] = max_lag;
+          mtmp = Pitch_data[0];
+          ix = 4 - numpeaks;
+          for (i9 = 0; i9 < ix; i9++) {
+            Pitch_data[tmp_data[i9]] = mtmp;
           }
 
-          loop_ub = -numpeaks;
-          for (i8 = 0; i8 <= loop_ub + 3; i8++) {
-            tmp_data[i8] = (signed char)(numpeaks + i8);
+          ix = -numpeaks;
+          for (i9 = 0; i9 <= ix + 3; i9++) {
+            tmp_data[i9] = (signed char)(numpeaks + i9);
           }
 
-          max_lag = Merit_data[0];
-          loop_ub = 4 - numpeaks;
-          for (i8 = 0; i8 < loop_ub; i8++) {
-            Merit_data[tmp_data[i8]] = max_lag;
+          mtmp = Merit_data[0];
+          ix = 4 - numpeaks;
+          for (i9 = 0; i9 < ix; i9++) {
+            Merit_data[tmp_data[i9]] = mtmp;
           }
         }
       } else {
@@ -479,9 +465,9 @@ void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
         Pitch_size[1] = 4;
         Merit_size[0] = 1;
         Merit_size[1] = 4;
-        for (i8 = 0; i8 < 4; i8++) {
-          Pitch_data[i8] = 0.0;
-          Merit_data[i8] = 1.0;
+        for (i9 = 0; i9 < 4; i9++) {
+          Pitch_data[i9] = 0.0;
+          Merit_data[i9] = 1.0;
         }
       }
     }

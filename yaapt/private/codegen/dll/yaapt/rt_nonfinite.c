@@ -1,8 +1,11 @@
-/* 
- * File: rt_nonfinite.c 
- *  
- * MATLAB Coder version            : 2.6 
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02 
+/*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ * File: rt_nonfinite.c
+ *
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
 /*
@@ -61,11 +64,17 @@ boolean_T rtIsInfF(real32_T value)
  */
 boolean_T rtIsNaN(real_T value)
 {
+
 #if defined(_MSC_VER) && (_MSC_VER <= 1200)
+
   return _isnan(value)? TRUE:FALSE;
+
 #else
+
   return (value!=value)? 1U:0U;
+
 #endif
+
 }
 
 /* Function: rtIsNaNF =================================================
@@ -74,16 +83,21 @@ boolean_T rtIsNaN(real_T value)
  */
 boolean_T rtIsNaNF(real32_T value)
 {
+
 #if defined(_MSC_VER) && (_MSC_VER <= 1200)
+
   return _isnan((real_T)value)? true:false;
+
 #else
+
   return (value!=value)? 1U:0U;
+
 #endif
+
 }
 
-
-/* 
- * File trailer for rt_nonfinite.c 
- *  
- * [EOF] 
+/*
+ * File trailer for rt_nonfinite.c
+ *
+ * [EOF]
  */

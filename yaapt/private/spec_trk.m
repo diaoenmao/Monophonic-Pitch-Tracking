@@ -181,9 +181,10 @@ if (Num_VCands >2)
 else
      
     if (Num_VCands > 0) 
-      for i = 1:Num_VCands   % assume at least 1 voiced candidate
-       VPitch (i) = 150;   %   Not really correct,  but should prevent hang up if only  0,1,2,3 voiced candidates
-      end; 
+%       for i = 1:Num_VCands   % assume at least 1 voiced candidate
+%        VPitch (i) = 150;   %   Not really correct,  but should prevent hang up if only  0,1,2,3 voiced candidates
+%       end; 
+        VPitch(1:Num_VCands) = 150;
                 %   This should only occur for very short pitch tracks, and even then rarely
     else
         VPitch(1) = 150;    % to handle when no real voiced candidates

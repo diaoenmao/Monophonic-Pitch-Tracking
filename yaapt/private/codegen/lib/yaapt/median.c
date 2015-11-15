@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: median.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "median.h"
@@ -20,72 +23,66 @@
  */
 void median(const emxArray_real_T *x, emxArray_real_T *y)
 {
-  unsigned int sz[2];
-  int i1;
-  int i2;
-  int iy;
+  int ub_loop;
   int i;
-  double vwork[5];
+  int b_i;
+  int idx[5];
+  int c_i;
+  int iwork[5];
   int k;
-  signed char idx[5];
   boolean_T p;
-  signed char idx0[5];
-  int b_i2;
+  int i2;
   int j;
   int pEnd;
   int b_p;
   int q;
   int qEnd;
   int kEnd;
-  for (i1 = 0; i1 < 2; i1++) {
-    sz[i1] = (unsigned int)x->size[i1];
-  }
-
-  i1 = y->size[0] * y->size[1];
+  double m;
+  ub_loop = y->size[0] * y->size[1];
   y->size[0] = 1;
-  y->size[1] = (int)sz[1];
-  emxEnsureCapacity((emxArray__common *)y, i1, (int)sizeof(double));
-  i2 = 0;
-  iy = -1;
-  for (i = 1; i <= x->size[1]; i++) {
-    i1 = i2;
-    i2 += 5;
-    for (k = 0; k < 5; k++) {
-      vwork[k] = x->data[i1];
-      i1++;
+  y->size[1] = x->size[1];
+  emxEnsureCapacity((emxArray__common *)y, ub_loop, (int)sizeof(double));
+  ub_loop = x->size[1];
+
+#pragma omp parallel for \
+ num_threads(omp_get_max_threads()) \
+ private(b_i,c_i,k,p,i2,j,pEnd,b_p,q,qEnd,kEnd,m) \
+ firstprivate(idx,iwork)
+
+  for (i = 1; i <= ub_loop; i++) {
+    b_i = i;
+    for (c_i = 0; c_i < 5; c_i++) {
+      idx[c_i] = 0;
     }
 
-    iy++;
-    for (k = 0; k < 5; k++) {
-      idx[k] = (signed char)(k + 1);
-    }
-
-    for (k = 0; k < 3; k += 2) {
-      if ((vwork[k] <= vwork[k + 1]) || rtIsNaN(vwork[k + 1])) {
+    for (k = 0; k <= 2; k += 2) {
+      if ((x->data[k + x->size[0] * (b_i - 1)] <= x->data[(k + x->size[0] * (b_i
+             - 1)) + 1]) || rtIsNaN(x->data[(k + x->size[0] * (b_i - 1)) + 1]))
+      {
         p = true;
       } else {
         p = false;
       }
 
       if (p) {
+        idx[k] = k + 1;
+        idx[k + 1] = k + 2;
       } else {
-        idx[k] = (signed char)(k + 2);
-        idx[k + 1] = (signed char)(k + 1);
+        idx[k] = k + 2;
+        idx[k + 1] = k + 1;
       }
     }
 
-    for (i1 = 0; i1 < 5; i1++) {
-      idx0[i1] = 1;
-    }
-
-    i1 = 2;
-    while (i1 < 5) {
-      b_i2 = i1 << 1;
+    idx[4] = 5;
+    c_i = 2;
+    while (c_i < 5) {
+      i2 = c_i << 1;
       j = 1;
-      for (pEnd = 1 + i1; pEnd < 6; pEnd = qEnd + i1) {
+      for (pEnd = 1 + c_i; pEnd < 6; pEnd = qEnd + c_i) {
         b_p = j;
         q = pEnd - 1;
-        qEnd = j + b_i2;
+        qEnd = j + i2;
         if (qEnd > 6) {
           qEnd = 6;
         }
@@ -93,30 +90,31 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
         k = 0;
         kEnd = qEnd - j;
         while (k + 1 <= kEnd) {
-          if ((vwork[idx[b_p - 1] - 1] <= vwork[idx[q] - 1]) || rtIsNaN
-              (vwork[idx[q] - 1])) {
+          if ((x->data[(idx[b_p - 1] + x->size[0] * (b_i - 1)) - 1] <= x->data
+               [(idx[q] + x->size[0] * (b_i - 1)) - 1]) || rtIsNaN(x->data
+               [(idx[q] + x->size[0] * (b_i - 1)) - 1])) {
             p = true;
           } else {
             p = false;
           }
 
           if (p) {
-            idx0[k] = idx[b_p - 1];
+            iwork[k] = idx[b_p - 1];
             b_p++;
             if (b_p == pEnd) {
               while (q + 1 < qEnd) {
                 k++;
-                idx0[k] = idx[q];
+                iwork[k] = idx[q];
                 q++;
               }
             }
           } else {
-            idx0[k] = idx[q];
+            iwork[k] = idx[q];
             q++;
             if (q + 1 == qEnd) {
               while (b_p < pEnd) {
                 k++;
-                idx0[k] = idx[b_p - 1];
+                iwork[k] = idx[b_p - 1];
                 b_p++;
               }
             }
@@ -126,20 +124,22 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
         }
 
         for (k = 0; k + 1 <= kEnd; k++) {
-          idx[(j + k) - 1] = idx0[k];
+          idx[(j + k) - 1] = iwork[k];
         }
 
         j = qEnd;
       }
 
-      i1 = b_i2;
+      c_i = i2;
     }
 
-    if (rtIsNaN(vwork[idx[4] - 1])) {
-      y->data[iy] = vwork[idx[4] - 1];
+    if (rtIsNaN(x->data[(idx[4] + x->size[0] * (b_i - 1)) - 1])) {
+      m = x->data[(idx[4] + x->size[0] * (b_i - 1)) - 1];
     } else {
-      y->data[iy] = vwork[idx[2] - 1];
+      m = x->data[(idx[2] + x->size[0] * (b_i - 1)) - 1];
     }
+
+    y->data[b_i - 1] = m;
   }
 }
 

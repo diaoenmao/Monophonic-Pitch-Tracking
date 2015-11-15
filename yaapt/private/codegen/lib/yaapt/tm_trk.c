@@ -1,17 +1,19 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: tm_trk.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "tm_trk.h"
 #include "yaapt_emxutil.h"
-#include "eml_sort.h"
-#include "crs_corr.h"
+#include "cmp_rate.h"
 #include "fix.h"
 
 /* Function Definitions */
@@ -52,43 +54,41 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
   double nframesize;
   double nframejump;
   double numframes;
-  int i15;
-  int ixstart;
+  int i17;
+  int loop_ub;
   double freq_thresh_data[1];
   emxArray_real_T *SRange;
-  int unnamed_idx_1;
   emxArray_real_T *temp_max;
   emxArray_real_T *temp_min;
   int i;
-  emxArray_real_T *b_y;
-  unsigned int uv3[2];
-  emxArray_real_T *c_y;
-  double firstp;
-  int n;
-  emxArray_real_T *r6;
   emxArray_real_T *b_Data;
-  emxArray_real_T *r7;
-  double mtmp;
-  int tmp_size_idx_1;
+  emxArray_real_T *b_y;
+  int unnamed_idx_1;
+  int k;
+  double X;
+  int n;
+  emxArray_real_T *x_j;
+  emxArray_real_T *x_jr;
+  double firstp;
   double x;
-  int j;
-  int numpeaks;
-  double b_Pitch[3];
-  double b_Merit[3];
-  boolean_T exitg2;
-  int ix;
-  boolean_T exitg3;
-  boolean_T guard1 = false;
-  double c_Merit[3];
-  int iidx[3];
+  double b_x;
+  int i18;
+  double N;
+  double p;
+  double b_k;
+  int i19;
+  double formula_nume;
+  double q;
+  int tmp_size[2];
   double tmp_data[6];
+  int b_tmp_size[2];
   double b_tmp_data[6];
-  boolean_T exitg1;
   emxArray_real_T *diff;
-  emxArray_real_T *r8;
+  emxArray_real_T *r7;
+  int j;
   signed char c_tmp_data[1];
   double y_data[1];
-  b_emxInit_real_T(&y, 1);
+  emxInit_real_T1(&y, 1);
 
   /*    Creation :   Jun 20, 2006, July 27, 2007 */
   /*    Programers:  Hongbing Hu */
@@ -115,217 +115,200 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
 
   /*  The maximum number of pitch candidates */
   /* freq_thresh = pAvg;  % seems too large */
-  i15 = y->size[0];
+  i17 = y->size[0];
   y->size[0] = pStd_size[0];
-  emxEnsureCapacity((emxArray__common *)y, i15, (int)sizeof(double));
-  ixstart = pStd_size[0];
-  for (i15 = 0; i15 < ixstart; i15++) {
-    y->data[i15] = 5.0 * pStd_data[i15];
+  emxEnsureCapacity((emxArray__common *)y, i17, (int)sizeof(double));
+  loop_ub = pStd_size[0];
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    y->data[i17] = 5.0 * pStd_data[i17];
   }
 
-  ixstart = pStd_size[0];
-  for (i15 = 0; i15 < ixstart; i15++) {
-    freq_thresh_data[i15] = 5.0 * pStd_data[i15];
+  loop_ub = pStd_size[0];
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    freq_thresh_data[i17] = 5.0 * pStd_data[i17];
   }
 
   emxInit_real_T(&SRange, 2);
-  i15 = SRange->size[0] * SRange->size[1];
+  i17 = SRange->size[0] * SRange->size[1];
   SRange->size[0] = 2;
-  emxEnsureCapacity((emxArray__common *)SRange, i15, (int)sizeof(double));
-  unnamed_idx_1 = SPitch->size[1];
-  i15 = SRange->size[0] * SRange->size[1];
-  SRange->size[1] = unnamed_idx_1;
-  emxEnsureCapacity((emxArray__common *)SRange, i15, (int)sizeof(double));
-  ixstart = SPitch->size[1] << 1;
-  for (i15 = 0; i15 < ixstart; i15++) {
-    SRange->data[i15] = 0.0;
+  SRange->size[1] = SPitch->size[1];
+  emxEnsureCapacity((emxArray__common *)SRange, i17, (int)sizeof(double));
+  loop_ub = SPitch->size[1] << 1;
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    SRange->data[i17] = 0.0;
   }
 
   emxInit_real_T(&temp_max, 2);
 
   /*  Determine the search range according spectral pitch track */
-  i15 = temp_max->size[0] * temp_max->size[1];
+  i17 = temp_max->size[0] * temp_max->size[1];
   temp_max->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)temp_max, i15, (int)sizeof(double));
-  unnamed_idx_1 = SPitch->size[1];
-  i15 = temp_max->size[0] * temp_max->size[1];
-  temp_max->size[1] = unnamed_idx_1;
-  emxEnsureCapacity((emxArray__common *)temp_max, i15, (int)sizeof(double));
-  ixstart = SPitch->size[1];
-  for (i15 = 0; i15 < ixstart; i15++) {
-    temp_max->data[i15] = 0.0;
+  temp_max->size[1] = SPitch->size[1];
+  emxEnsureCapacity((emxArray__common *)temp_max, i17, (int)sizeof(double));
+  loop_ub = SPitch->size[1];
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    temp_max->data[i17] = 0.0;
   }
 
   emxInit_real_T(&temp_min, 2);
-  i15 = temp_min->size[0] * temp_min->size[1];
+  i17 = temp_min->size[0] * temp_min->size[1];
   temp_min->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)temp_min, i15, (int)sizeof(double));
-  unnamed_idx_1 = SPitch->size[1];
-  i15 = temp_min->size[0] * temp_min->size[1];
-  temp_min->size[1] = unnamed_idx_1;
-  emxEnsureCapacity((emxArray__common *)temp_min, i15, (int)sizeof(double));
-  ixstart = SPitch->size[1];
-  for (i15 = 0; i15 < ixstart; i15++) {
-    temp_min->data[i15] = 0.0;
+  temp_min->size[1] = SPitch->size[1];
+  emxEnsureCapacity((emxArray__common *)temp_min, i17, (int)sizeof(double));
+  loop_ub = SPitch->size[1];
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    temp_min->data[i17] = 0.0;
   }
 
   i = 0;
-  b_emxInit_real_T(&b_y, 1);
+  emxInit_real_T1(&b_Data, 1);
   while (i <= SPitch->size[1] - 1) {
-    i15 = b_y->size[0];
-    b_y->size[0] = pStd_size[0];
-    emxEnsureCapacity((emxArray__common *)b_y, i15, (int)sizeof(double));
-    ixstart = pStd_size[0];
-    for (i15 = 0; i15 < ixstart; i15++) {
-      b_y->data[i15] = 2.0 * pStd_data[i15];
+    i17 = b_Data->size[0];
+    b_Data->size[0] = pStd_size[0];
+    emxEnsureCapacity((emxArray__common *)b_Data, i17, (int)sizeof(double));
+    loop_ub = pStd_size[0];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      b_Data->data[i17] = 2.0 * pStd_data[i17];
     }
 
-    temp_max->data[i] = SPitch->data[i] - b_y->data[0];
-    i15 = b_y->size[0];
-    b_y->size[0] = pStd_size[0];
-    emxEnsureCapacity((emxArray__common *)b_y, i15, (int)sizeof(double));
-    ixstart = pStd_size[0];
-    for (i15 = 0; i15 < ixstart; i15++) {
-      b_y->data[i15] = 2.0 * pStd_data[i15];
+    temp_max->data[i] = SPitch->data[i] - b_Data->data[0];
+    i17 = b_Data->size[0];
+    b_Data->size[0] = pStd_size[0];
+    emxEnsureCapacity((emxArray__common *)b_Data, i17, (int)sizeof(double));
+    loop_ub = pStd_size[0];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      b_Data->data[i17] = 2.0 * pStd_data[i17];
     }
 
-    temp_min->data[i] = SPitch->data[i] + b_y->data[0];
+    temp_min->data[i] = SPitch->data[i] + b_Data->data[0];
     i++;
   }
 
-  emxFree_real_T(&b_y);
-  for (i15 = 0; i15 < 2; i15++) {
-    uv3[i15] = (unsigned int)temp_max->size[i15];
-  }
-
-  emxInit_real_T(&c_y, 2);
-  i15 = c_y->size[0] * c_y->size[1];
-  c_y->size[0] = 1;
-  c_y->size[1] = (int)uv3[1];
-  emxEnsureCapacity((emxArray__common *)c_y, i15, (int)sizeof(double));
-  for (unnamed_idx_1 = 0; unnamed_idx_1 + 1 <= (int)uv3[1]; unnamed_idx_1++) {
-    if (temp_max->data[unnamed_idx_1] >= 60.0) {
-      firstp = temp_max->data[unnamed_idx_1];
+  emxInit_real_T(&b_y, 2);
+  unnamed_idx_1 = temp_max->size[1];
+  i17 = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = 1;
+  b_y->size[1] = temp_max->size[1];
+  emxEnsureCapacity((emxArray__common *)b_y, i17, (int)sizeof(double));
+  for (k = 0; k + 1 <= unnamed_idx_1; k++) {
+    if (temp_max->data[k] >= 60.0) {
+      X = temp_max->data[k];
     } else {
-      firstp = 60.0;
+      X = 60.0;
     }
 
-    c_y->data[unnamed_idx_1] = firstp;
+    b_y->data[k] = X;
   }
 
-  ixstart = c_y->size[1];
-  for (i15 = 0; i15 < ixstart; i15++) {
-    SRange->data[SRange->size[0] * i15] = c_y->data[c_y->size[0] * i15];
+  loop_ub = b_y->size[1];
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    SRange->data[SRange->size[0] * i17] = b_y->data[b_y->size[0] * i17];
   }
 
-  for (i15 = 0; i15 < 2; i15++) {
-    uv3[i15] = (unsigned int)temp_min->size[i15];
-  }
-
-  i15 = c_y->size[0] * c_y->size[1];
-  c_y->size[0] = 1;
-  c_y->size[1] = (int)uv3[1];
-  emxEnsureCapacity((emxArray__common *)c_y, i15, (int)sizeof(double));
-  for (unnamed_idx_1 = 0; unnamed_idx_1 + 1 <= (int)uv3[1]; unnamed_idx_1++) {
-    if (temp_min->data[unnamed_idx_1] <= 400.0) {
-      firstp = temp_min->data[unnamed_idx_1];
+  unnamed_idx_1 = temp_min->size[1];
+  i17 = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = 1;
+  b_y->size[1] = temp_min->size[1];
+  emxEnsureCapacity((emxArray__common *)b_y, i17, (int)sizeof(double));
+  for (k = 0; k + 1 <= unnamed_idx_1; k++) {
+    if (temp_min->data[k] <= 400.0) {
+      X = temp_min->data[k];
     } else {
-      firstp = 400.0;
+      X = 400.0;
     }
 
-    c_y->data[unnamed_idx_1] = firstp;
+    b_y->data[k] = X;
   }
 
-  ixstart = c_y->size[1];
-  for (i15 = 0; i15 < ixstart; i15++) {
-    SRange->data[1 + SRange->size[0] * i15] = c_y->data[c_y->size[0] * i15];
+  loop_ub = b_y->size[1];
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    SRange->data[1 + SRange->size[0] * i17] = b_y->data[b_y->size[0] * i17];
   }
 
   /* -- INITIALIZATION ----------------------------------------------------------- */
-  i15 = Pitch->size[0] * Pitch->size[1];
+  i17 = Pitch->size[0] * Pitch->size[1];
   Pitch->size[0] = 3;
   Pitch->size[1] = (int)numframes;
-  emxEnsureCapacity((emxArray__common *)Pitch, i15, (int)sizeof(double));
-  ixstart = 3 * (int)numframes;
-  for (i15 = 0; i15 < ixstart; i15++) {
-    Pitch->data[i15] = 0.0;
+  emxEnsureCapacity((emxArray__common *)Pitch, i17, (int)sizeof(double));
+  loop_ub = 3 * (int)numframes;
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    Pitch->data[i17] = 0.0;
   }
 
-  i15 = Merit->size[0] * Merit->size[1];
+  i17 = Merit->size[0] * Merit->size[1];
   Merit->size[0] = 3;
   Merit->size[1] = (int)numframes;
-  emxEnsureCapacity((emxArray__common *)Merit, i15, (int)sizeof(double));
-  ixstart = 3 * (int)numframes;
-  for (i15 = 0; i15 < ixstart; i15++) {
-    Merit->data[i15] = 0.0;
+  emxEnsureCapacity((emxArray__common *)Merit, i17, (int)sizeof(double));
+  loop_ub = 3 * (int)numframes;
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    Merit->data[i17] = 0.0;
   }
 
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   n = 0;
-  emxInit_real_T(&r6, 2);
-  b_emxInit_real_T(&b_Data, 1);
-  emxInit_real_T(&r7, 2);
+  emxInit_real_T1(&x_j, 1);
+  emxInit_real_T1(&x_jr, 1);
   while (n <= (int)numframes - 1) {
     firstp = 1.0 + ((1.0 + (double)n) - 1.0) * nframejump;
-    mtmp = (firstp + nframesize) - 1.0;
-    if (firstp > mtmp) {
-      i15 = 0;
-      tmp_size_idx_1 = 0;
+    X = (firstp + nframesize) - 1.0;
+    if (firstp > X) {
+      i17 = 0;
+      unnamed_idx_1 = 0;
     } else {
-      i15 = (int)firstp - 1;
-      tmp_size_idx_1 = (int)mtmp;
+      i17 = (int)firstp - 1;
+      unnamed_idx_1 = (int)X;
     }
 
     /*  Compute pitch candidates,  and correspnding "merit" values, */
     /*  up to maxcands per frame Merit values are normalized (0 to */
     /*  1),  and depend mainly on size of correlation peaks */
-    firstp = Fs / SRange->data[1 + SRange->size[0] * n];
-    if (firstp < 0.0) {
-      x = ceil(firstp);
+    X = Fs / SRange->data[1 + SRange->size[0] * n];
+    if (X < 0.0) {
+      x = ceil(X);
     } else {
-      x = floor(firstp);
+      x = floor(X);
     }
 
-    firstp = Fs / SRange->data[SRange->size[0] * n];
-    if (firstp < 0.0) {
-      firstp = ceil(firstp);
+    X = Fs / SRange->data[SRange->size[0] * n];
+    if (X < 0.0) {
+      b_x = ceil(X);
     } else {
-      firstp = floor(firstp);
+      b_x = floor(X);
     }
 
     /*  Compute correaltion */
-    j = b_Data->size[0];
-    b_Data->size[0] = tmp_size_idx_1 - i15;
-    emxEnsureCapacity((emxArray__common *)b_Data, j, (int)sizeof(double));
-    ixstart = tmp_size_idx_1 - i15;
-    for (tmp_size_idx_1 = 0; tmp_size_idx_1 < ixstart; tmp_size_idx_1++) {
-      b_Data->data[tmp_size_idx_1] = Data->data[i15 + tmp_size_idx_1];
+    i18 = b_Data->size[0];
+    b_Data->size[0] = unnamed_idx_1 - i17;
+    emxEnsureCapacity((emxArray__common *)b_Data, i18, (int)sizeof(double));
+    loop_ub = unnamed_idx_1 - i17;
+    for (unnamed_idx_1 = 0; unnamed_idx_1 < loop_ub; unnamed_idx_1++) {
+      b_Data->data[unnamed_idx_1] = Data->data[i17 + unnamed_idx_1];
     }
 
-    crs_corr(b_Data, x - 3.0, firstp + 3.0, temp_max);
-
-    /*  The Max_cand pitch candidates are collected into Pitch and */
-    /*  Merit arraies  */
-    /*  CMP_RATE compute rate and merit from the autocorrelation sequence */
+    /*  CRS_CORR compute NCCF (Normalized cross correlation Function)  */
     /*  */
-    /*  [Pitch, Merit] = cmp_rate(Phi,Fs,maxcands,lag_min,lag_max,Prm); */
-    /*   This routine computes Pitch estimates and the corresponding Merit values  */
-    /*   associated with the peaks found in each frame based on the correlation sequence. */
+    /*    [Phi] = crs_corr(Data, lag_min, lag_max) computes the */
+    /*    normalized cross correlation sequence based on the RAPT algorithm  */
+    /*    discussed by DAVID TALKIN. */
+    /*    "Assume that "S" is the input signal sequence, "Phi" is correlation sequence, */
+    /*        Phi(k)=SUM((S[j])*(S[j+k]))/sqrt((SUM(s[j]^2)*(S[j+k]^2))) */
+    /*        where 1 <= k <= Lag_max and 1 <= j <= N. Summation is based on j only */
+    /*        Phi(k) should range from -1 to 1". */
     /*  */
-    /*   INPUTS: */
-    /*    Phi     : The input signal(either auto correlated/normalized cross correlated). */
-    /*    Fs      : The sampling frequency. */
-    /*    lag_min : The lowest lag(== 1/F0_max) involved in the F0 estimation. */
-    /*    F0_max  : The highest lag(== 1/F0_min)  involved in the F0 estimation. */
-    /*              greater than the peak at F0 during the first pass of search. */
-    /*    maxcands: The maximum number of top candidates to be considered. */
+    /*  INPUTS:    */
+    /*    Data:     Data array of signal values. */
+    /*    lag_min:  minimum value of lag to consider */
+    /*    lag_max:  maximum value of lag to consider */
+    /*    Note that calculations will be based on (len-----lag_max)  points */
     /*  */
-    /*   OUTPUTS: */
-    /*     Pitch  : The Rate/Pitch values for the peaks found for each frame. */
-    /*     Merit  : The Merit values of the peaks found in each frame. */
-    /*   Creation date:   2002 */
-    /*   Revision dates:   March 26, 2002, December 24, 2005 */
-    /*   Programmer: S.A.Zahorian,Kasi Kavita */
+    /*  OUTPUTS: */
+    /*    Phi     : The normalized cross correlated */
+    /*  */
+    /*    Note: The index of the first reasonable peak value of Phi is considered */
+    /*    to be the period of the input signal. */
+    /*   Programmer: S.A.Zahorian,Kasi Kavita. */
+    /*   Creation date:  2000 */
+    /*   Revision date:  March 26, 2002 */
     /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
     /*      This file is a part of the YAAPT program, designed for a fundamental  */
     /*    frequency tracking algorithm that is extermely robust for both high quality  */
@@ -337,219 +320,179 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
     /*    method for robust fundamental frequency tracking," J.Acosut.Soc.Am. 123(6),  */
     /*    June 2008. */
     /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-    /* -- PARAMETERS: set up all of these parameters -------------------------------- */
-    /* Width of the window used in first pass of peak picking. */
-    /*  The center of the window is defined as the peak location. */
-    /*  The threshold value used for the first pass of */
-    /*  peak picking for each frame.any peaks found greater than this */
-    /*  are chosen in the first pass. */
-    /*   The threshold value used to limit peak searching. */
-    /*   If a peak is found at least this great, no further  searching is */
-    /*   done increased from prev. value of 0.85. */
-    /* -- INITIALIZATION ----------------------------------------------------------- */
-    numpeaks = 0;
-    for (i15 = 0; i15 < 3; i15++) {
-      b_Pitch[i15] = 0.0;
-      b_Merit[i15] = 0.0;
+    /*  Some initialization */
+    /*  The length of data */
+    N = (double)b_Data->size[0] - (b_x + 3.0);
+
+    /*  range */
+    i17 = temp_max->size[0] * temp_max->size[1];
+    temp_max->size[0] = 1;
+    temp_max->size[1] = b_Data->size[0];
+    emxEnsureCapacity((emxArray__common *)temp_max, i17, (int)sizeof(double));
+    loop_ub = b_Data->size[0];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      temp_max->data[i17] = 0.0;
     }
 
-    /* -- MAIN ROUTINE -------------------------------------------------------------- */
-    /*   Find all peaks for a (lag_min--to--lag_max) search range */
-    /*    a "peak" must be the higher than a specfied number of */
-    /*    points on either side of point.  Peaks are later "cleaned" */
-    /*    up, to retain only best peaks i.e. peaks which do not meet certain */
-    /*    criteria are eliminated. */
-    /*    and allowing only the peaks which are a certain amplitude over the rest. */
-    i15 = (int)((firstp + 3.0) + (1.0 - ((x - 3.0) - 3.0)));
-    unnamed_idx_1 = 0;
-    exitg2 = false;
-    while ((!exitg2) && (unnamed_idx_1 <= i15 - 1)) {
-      firstp = ((x - 3.0) - 3.0) + (double)unnamed_idx_1;
-      if (firstp > (firstp + 5.0) - 1.0) {
-        tmp_size_idx_1 = 1;
-        j = 1;
-      } else {
-        tmp_size_idx_1 = (int)firstp;
-        j = (int)(unsigned int)firstp + 5;
-      }
-
-      ixstart = 1;
-      mtmp = temp_max->data[tmp_size_idx_1 - 1];
-      i = 1;
-      if (j - tmp_size_idx_1 > 1) {
-        if (rtIsNaN(mtmp)) {
-          ix = 2;
-          exitg3 = false;
-          while ((!exitg3) && (ix <= j - tmp_size_idx_1)) {
-            ixstart = ix;
-            if (!rtIsNaN(temp_max->data[(tmp_size_idx_1 + ix) - 2])) {
-              mtmp = temp_max->data[(tmp_size_idx_1 + ix) - 2];
-              i = ix;
-              exitg3 = true;
-            } else {
-              ix++;
-            }
-          }
-        }
-
-        if (ixstart < j - tmp_size_idx_1) {
-          for (ix = ixstart + 1; ix <= j - tmp_size_idx_1; ix++) {
-            if (temp_max->data[(tmp_size_idx_1 + ix) - 2] > mtmp) {
-              mtmp = temp_max->data[(tmp_size_idx_1 + ix) - 2];
-              i = ix;
-            }
-          }
-        }
-      }
-
-      guard1 = false;
-      if ((i == 3) && (mtmp > 0.25)) {
-        numpeaks++;
-        b_Pitch[numpeaks - 1] = Fs / ((firstp + 3.0) - 1.0);
-        b_Merit[numpeaks - 1] = mtmp;
-        if (mtmp > 0.9) {
-          exitg2 = true;
-        } else {
-          guard1 = true;
-        }
-      } else {
-        guard1 = true;
-      }
-
-      if (guard1) {
-        unnamed_idx_1++;
-      }
-    }
-
-    /*  consider the case when the number of peaks are more than the maxcands. */
-    /*  Then take only the best maxcands peaks based on the Merit values . */
-    for (i15 = 0; i15 < 3; i15++) {
-      c_Merit[i15] = b_Merit[i15];
-    }
-
-    c_eml_sort(c_Merit, b_Merit, iidx);
-    for (i15 = 0; i15 < 3; i15++) {
-      c_Merit[i15] = b_Pitch[iidx[i15] - 1];
-    }
-
-    for (i15 = 0; i15 < 3; i15++) {
-      b_Pitch[i15] = c_Merit[i15];
-    }
-
-    if (1 > numpeaks) {
-      ixstart = 0;
+    /*  Remove DC level */
+    if (b_Data->size[0] == 0) {
+      X = 0.0;
     } else {
-      ixstart = numpeaks;
+      X = b_Data->data[0];
+      for (k = 2; k <= b_Data->size[0]; k++) {
+        X += b_Data->data[k - 1];
+      }
     }
 
-    tmp_size_idx_1 = ixstart;
-    for (i15 = 0; i15 < ixstart; i15++) {
-      tmp_data[i15] = b_Merit[i15];
+    X /= (double)b_Data->size[0];
+    i17 = b_Data->size[0];
+    emxEnsureCapacity((emxArray__common *)b_Data, i17, (int)sizeof(double));
+    loop_ub = b_Data->size[0];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      b_Data->data[i17] -= X;
     }
 
-    if (1 > numpeaks) {
-      j = 0;
+    if (1.0 > N) {
+      loop_ub = 0;
     } else {
-      j = numpeaks;
+      loop_ub = (int)N;
     }
 
-    for (i15 = 0; i15 < j; i15++) {
-      b_tmp_data[i15] = b_Pitch[i15];
+    i17 = x_j->size[0];
+    x_j->size[0] = loop_ub;
+    emxEnsureCapacity((emxArray__common *)x_j, i17, (int)sizeof(double));
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      x_j->data[i17] = b_Data->data[i17];
     }
 
-    /*  if the number of peaks in the frame are less than the maxcands, then we  */
-    /*  assign "null" values to remainder of peak and merit values in arrays */
-    if (numpeaks < 3) {
-      if (j == 0) {
-        tmp_size_idx_1 = 3;
-        for (i15 = 0; i15 < 3; i15++) {
-          b_tmp_data[i15] = 0.0;
-          tmp_data[i15] = 0.001;
-        }
+    /*  s[j]   1 <= j <= N. */
+    i17 = temp_min->size[0] * temp_min->size[1];
+    temp_min->size[0] = 1;
+    temp_min->size[1] = x_j->size[0];
+    emxEnsureCapacity((emxArray__common *)temp_min, i17, (int)sizeof(double));
+    unnamed_idx_1 = x_j->size[0];
+    for (i17 = 0; i17 < unnamed_idx_1; i17++) {
+      temp_min->data[temp_min->size[0] * i17] = x_j->data[i17];
+    }
+
+    if ((temp_min->size[1] == 1) || (loop_ub == 1)) {
+      X = 0.0;
+      for (i17 = 0; i17 < temp_min->size[1]; i17++) {
+        X += temp_min->data[temp_min->size[0] * i17] * x_j->data[i17];
+      }
+
+      p = X;
+    } else {
+      X = 0.0;
+      for (i17 = 0; i17 < temp_min->size[1]; i17++) {
+        X += temp_min->data[temp_min->size[0] * i17] * x_j->data[i17];
+      }
+
+      p = X;
+    }
+
+    i17 = (int)((b_x + 3.0) + (1.0 - (x - 3.0)));
+    for (k = 0; k < i17; k++) {
+      b_k = (x - 3.0) + (double)k;
+
+      /*   to calculate the dot product of the signal and displaced version. */
+      X = (b_k + N) - 1.0;
+      if (b_k > X) {
+        unnamed_idx_1 = 0;
+        i18 = 0;
       } else {
-        i = 3 - numpeaks;
-        for (i15 = 0; i15 < i; i15++) {
-          b_tmp_data[j + i15] = 0.0;
-        }
-
-        i15 = r6->size[0] * r6->size[1];
-        r6->size[0] = 1;
-        r6->size[1] = 3 - numpeaks;
-        emxEnsureCapacity((emxArray__common *)r6, i15, (int)sizeof(double));
-        j = 3 - numpeaks;
-        for (i15 = 0; i15 < j; i15++) {
-          r6->data[i15] = 0.001;
-        }
-
-        i = r6->size[1];
-        tmp_size_idx_1 = ixstart + i;
-        unnamed_idx_1 = 3 - numpeaks;
-        i15 = r7->size[0] * r7->size[1];
-        r7->size[0] = 1;
-        r7->size[1] = unnamed_idx_1;
-        emxEnsureCapacity((emxArray__common *)r7, i15, (int)sizeof(double));
-        for (i15 = 0; i15 < unnamed_idx_1; i15++) {
-          r7->data[r7->size[0] * i15] = 0.001;
-        }
-
-        for (i15 = 0; i15 < i; i15++) {
-          tmp_data[ixstart + i15] = r7->data[i15];
-        }
-
-        /*      Pitch(numpeaks+1:maxcands) = 0; */
-        /*      Merit(numpeaks+1:maxcands) = 0.001; */
-      }
-    }
-
-    /*  Normlize merits */
-    ixstart = 1;
-    mtmp = tmp_data[0];
-    if (tmp_size_idx_1 > 1) {
-      if (rtIsNaN(tmp_data[0])) {
-        ix = 2;
-        exitg1 = false;
-        while ((!exitg1) && (ix <= tmp_size_idx_1)) {
-          ixstart = ix;
-          if (!rtIsNaN(tmp_data[ix - 1])) {
-            mtmp = tmp_data[ix - 1];
-            exitg1 = true;
-          } else {
-            ix++;
-          }
-        }
+        unnamed_idx_1 = (int)b_k - 1;
+        i18 = (int)X;
       }
 
-      if (ixstart < tmp_size_idx_1) {
-        while (ixstart + 1 <= tmp_size_idx_1) {
-          if (tmp_data[ixstart] > mtmp) {
-            mtmp = tmp_data[ixstart];
-          }
+      i19 = x_jr->size[0];
+      x_jr->size[0] = i18 - unnamed_idx_1;
+      emxEnsureCapacity((emxArray__common *)x_jr, i19, (int)sizeof(double));
+      loop_ub = i18 - unnamed_idx_1;
+      for (i19 = 0; i19 < loop_ub; i19++) {
+        x_jr->data[i19] = b_Data->data[unnamed_idx_1 + i19];
+      }
 
-          ixstart++;
+      /*  s[j]   -k <= j <= N+K-k-1. */
+      i19 = temp_min->size[0] * temp_min->size[1];
+      temp_min->size[0] = 1;
+      temp_min->size[1] = x_j->size[0];
+      emxEnsureCapacity((emxArray__common *)temp_min, i19, (int)sizeof(double));
+      loop_ub = x_j->size[0];
+      for (i19 = 0; i19 < loop_ub; i19++) {
+        temp_min->data[temp_min->size[0] * i19] = x_j->data[i19];
+      }
+
+      if ((temp_min->size[1] == 1) || (i18 - unnamed_idx_1 == 1)) {
+        X = 0.0;
+        for (i19 = 0; i19 < temp_min->size[1]; i19++) {
+          X += temp_min->data[temp_min->size[0] * i19] * x_jr->data[i19];
         }
+
+        formula_nume = X;
+      } else {
+        X = 0.0;
+        for (i19 = 0; i19 < temp_min->size[1]; i19++) {
+          X += temp_min->data[temp_min->size[0] * i19] * x_jr->data[i19];
+        }
+
+        formula_nume = X;
       }
-    }
 
-    if (mtmp > 1.0) {
-      for (i15 = 0; i15 < tmp_size_idx_1; i15++) {
-        tmp_data[i15] /= mtmp;
+      /*  the normalization factor for the denominator. */
+      i19 = temp_min->size[0] * temp_min->size[1];
+      temp_min->size[0] = 1;
+      temp_min->size[1] = x_jr->size[0];
+      emxEnsureCapacity((emxArray__common *)temp_min, i19, (int)sizeof(double));
+      loop_ub = x_jr->size[0];
+      for (i19 = 0; i19 < loop_ub; i19++) {
+        temp_min->data[temp_min->size[0] * i19] = x_jr->data[i19];
       }
+
+      if ((temp_min->size[1] == 1) || (i18 - unnamed_idx_1 == 1)) {
+        X = 0.0;
+        for (unnamed_idx_1 = 0; unnamed_idx_1 < temp_min->size[1]; unnamed_idx_1
+             ++) {
+          X += temp_min->data[temp_min->size[0] * unnamed_idx_1] * x_jr->
+            data[unnamed_idx_1];
+        }
+
+        q = X;
+      } else {
+        X = 0.0;
+        for (unnamed_idx_1 = 0; unnamed_idx_1 < temp_min->size[1]; unnamed_idx_1
+             ++) {
+          X += temp_min->data[temp_min->size[0] * unnamed_idx_1] * x_jr->
+            data[unnamed_idx_1];
+        }
+
+        q = X;
+      }
+
+      /*  calculate the normalized crosscorrelation value using the TALKIN FORMULA. */
+      temp_max->data[(int)b_k - 1] = formula_nume / sqrt(p * q);
     }
 
-    for (i15 = 0; i15 < 3; i15++) {
-      Pitch->data[i15 + Pitch->size[0] * n] = b_tmp_data[i15];
+    /*    To test using autocorrelation */
+    /*     Phi = xcorr(s); */
+    /*  The Max_cand pitch candidates are collected into Pitch and */
+    /*  Merit arraies  */
+    cmp_rate(temp_max, Fs, x - 3.0, b_x + 3.0, b_tmp_data, b_tmp_size, tmp_data,
+             tmp_size);
+    for (i17 = 0; i17 < 3; i17++) {
+      Pitch->data[i17 + Pitch->size[0] * n] = b_tmp_data[i17];
     }
 
-    for (i15 = 0; i15 < 3; i15++) {
-      Merit->data[i15 + Merit->size[0] * n] = tmp_data[i15];
+    for (i17 = 0; i17 < 3; i17++) {
+      Merit->data[i17 + Merit->size[0] * n] = tmp_data[i17];
     }
 
     n++;
   }
 
-  emxFree_real_T(&r7);
+  emxFree_real_T(&x_jr);
+  emxFree_real_T(&x_j);
   emxFree_real_T(&b_Data);
-  emxFree_real_T(&r6);
   emxFree_real_T(&SRange);
 
   /*    The following lines increase merit for peaks which are very */
@@ -558,109 +501,95 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
   /*    which are not close to the smoothed F0 track obtained from */
   /*    spectrogram */
   emxInit_real_T(&diff, 2);
-  emxInit_real_T(&r8, 2);
+  emxInit_real_T(&r7, 2);
   for (i = 0; i < 3; i++) {
-    ixstart = Pitch->size[1];
-    i15 = temp_max->size[0] * temp_max->size[1];
+    loop_ub = Pitch->size[1];
+    i17 = temp_max->size[0] * temp_max->size[1];
     temp_max->size[0] = 1;
-    temp_max->size[1] = ixstart;
-    emxEnsureCapacity((emxArray__common *)temp_max, i15, (int)sizeof(double));
-    for (i15 = 0; i15 < ixstart; i15++) {
-      temp_max->data[temp_max->size[0] * i15] = Pitch->data[i + Pitch->size[0] *
-        i15] - SPitch->data[SPitch->size[0] * i15];
+    temp_max->size[1] = loop_ub;
+    emxEnsureCapacity((emxArray__common *)temp_max, i17, (int)sizeof(double));
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      temp_max->data[temp_max->size[0] * i17] = Pitch->data[i + Pitch->size[0] *
+        i17] - SPitch->data[SPitch->size[0] * i17];
     }
 
-    for (i15 = 0; i15 < 2; i15++) {
-      uv3[i15] = (unsigned int)temp_max->size[i15];
-    }
-
-    i15 = diff->size[0] * diff->size[1];
+    i17 = diff->size[0] * diff->size[1];
     diff->size[0] = 1;
-    diff->size[1] = (int)uv3[1];
-    emxEnsureCapacity((emxArray__common *)diff, i15, (int)sizeof(double));
-    for (unnamed_idx_1 = 0; unnamed_idx_1 < temp_max->size[1]; unnamed_idx_1++)
-    {
-      diff->data[unnamed_idx_1] = fabs(temp_max->data[unnamed_idx_1]);
+    diff->size[1] = temp_max->size[1];
+    emxEnsureCapacity((emxArray__common *)diff, i17, (int)sizeof(double));
+    for (k = 0; k + 1 <= temp_max->size[1]; k++) {
+      diff->data[k] = fabs(temp_max->data[k]);
     }
 
-    i15 = temp_max->size[0] * temp_max->size[1];
+    i17 = temp_max->size[0] * temp_max->size[1];
     temp_max->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)temp_max, i15, (int)sizeof(double));
-    unnamed_idx_1 = diff->size[1];
-    i15 = temp_max->size[0] * temp_max->size[1];
-    temp_max->size[1] = unnamed_idx_1;
-    emxEnsureCapacity((emxArray__common *)temp_max, i15, (int)sizeof(double));
-    ixstart = diff->size[1];
-    for (i15 = 0; i15 < ixstart; i15++) {
-      temp_max->data[i15] = 0.0;
+    temp_max->size[1] = diff->size[1];
+    emxEnsureCapacity((emxArray__common *)temp_max, i17, (int)sizeof(double));
+    loop_ub = diff->size[1];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      temp_max->data[i17] = 0.0;
     }
 
     for (j = 0; j < diff->size[1]; j++) {
-      firstp = diff->data[j];
-      ixstart = y->size[0];
-      for (i15 = 0; i15 < ixstart; i15++) {
-        c_tmp_data[i15] = (signed char)(firstp < y->data[i15]);
+      X = diff->data[j];
+      loop_ub = y->size[0];
+      for (i17 = 0; i17 < loop_ub; i17++) {
+        c_tmp_data[i17] = (signed char)(X < y->data[i17]);
       }
 
       temp_max->data[j] = c_tmp_data[0];
     }
 
     /*      match1 =  (diff < freq_thresh); */
-    i15 = temp_min->size[0] * temp_min->size[1];
+    i17 = temp_min->size[0] * temp_min->size[1];
     temp_min->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)temp_min, i15, (int)sizeof(double));
-    unnamed_idx_1 = diff->size[1];
-    i15 = temp_min->size[0] * temp_min->size[1];
-    temp_min->size[1] = unnamed_idx_1;
-    emxEnsureCapacity((emxArray__common *)temp_min, i15, (int)sizeof(double));
-    ixstart = diff->size[1];
-    for (i15 = 0; i15 < ixstart; i15++) {
-      temp_min->data[i15] = 0.0;
+    temp_min->size[1] = diff->size[1];
+    emxEnsureCapacity((emxArray__common *)temp_min, i17, (int)sizeof(double));
+    loop_ub = diff->size[1];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      temp_min->data[i17] = 0.0;
     }
 
     for (j = 0; j < diff->size[1]; j++) {
       if (y->size[0] == 0) {
         unnamed_idx_1 = 0;
       } else {
-        firstp = 1.0 / freq_thresh_data[0] * diff->data[j];
+        X = 1.0 / freq_thresh_data[0] * diff->data[j];
         unnamed_idx_1 = 1;
-        y_data[0] = firstp;
+        y_data[0] = X;
       }
 
-      i15 = c_y->size[0] * c_y->size[1];
-      c_y->size[0] = 1;
-      c_y->size[1] = unnamed_idx_1;
-      emxEnsureCapacity((emxArray__common *)c_y, i15, (int)sizeof(double));
-      firstp = temp_max->data[j];
-      ixstart = unnamed_idx_1;
-      i15 = 0;
-      while (i15 <= ixstart - 1) {
-        c_y->data[0] = (1.0 - y_data[0]) * firstp;
-        i15 = 1;
+      i17 = b_y->size[0] * b_y->size[1];
+      b_y->size[0] = 1;
+      b_y->size[1] = unnamed_idx_1;
+      emxEnsureCapacity((emxArray__common *)b_y, i17, (int)sizeof(double));
+      X = temp_max->data[j];
+      for (i17 = 0; i17 < unnamed_idx_1; i17++) {
+        b_y->data[i17] = (1.0 - y_data[i17]) * X;
       }
 
-      temp_min->data[j] = c_y->data[0];
+      temp_min->data[j] = b_y->data[0];
     }
 
     /*      match  =  ((1 - (diff./freq_thresh)) .* match1); */
     unnamed_idx_1 = Merit->size[1];
-    i15 = r8->size[0] * r8->size[1];
-    r8->size[0] = 1;
-    r8->size[1] = unnamed_idx_1;
-    emxEnsureCapacity((emxArray__common *)r8, i15, (int)sizeof(double));
-    for (i15 = 0; i15 < unnamed_idx_1; i15++) {
-      r8->data[r8->size[0] * i15] = 1.2 * Merit->data[i + Merit->size[0] * i15] *
-        temp_min->data[temp_min->size[0] * i15];
+    i17 = r7->size[0] * r7->size[1];
+    r7->size[0] = 1;
+    r7->size[1] = unnamed_idx_1;
+    emxEnsureCapacity((emxArray__common *)r7, i17, (int)sizeof(double));
+    for (i17 = 0; i17 < unnamed_idx_1; i17++) {
+      r7->data[r7->size[0] * i17] = 1.2 * Merit->data[i + Merit->size[0] * i17] *
+        temp_min->data[temp_min->size[0] * i17];
     }
 
-    ixstart = r8->size[1];
-    for (i15 = 0; i15 < ixstart; i15++) {
-      Merit->data[i + Merit->size[0] * i15] = r8->data[r8->size[0] * i15];
+    loop_ub = r7->size[1];
+    for (i17 = 0; i17 < loop_ub; i17++) {
+      Merit->data[i + Merit->size[0] * i17] = r7->data[r7->size[0] * i17];
     }
   }
 
-  emxFree_real_T(&r8);
-  emxFree_real_T(&c_y);
+  emxFree_real_T(&r7);
+  emxFree_real_T(&b_y);
   emxFree_real_T(&y);
   emxFree_real_T(&diff);
   emxFree_real_T(&temp_min);

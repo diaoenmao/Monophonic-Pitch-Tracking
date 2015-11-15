@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: mean.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "mean.h"
@@ -22,22 +25,17 @@
  */
 void b_mean(const emxArray_real_T *x, double y_data[], int y_size[1])
 {
-  unsigned int sz[2];
   int ix;
   int k;
   double s;
-  emxArray_real_T *r4;
+  emxArray_real_T *r5;
   emxArray_real_T b_y_data;
-  for (ix = 0; ix < 2; ix++) {
-    sz[ix] = (unsigned int)x->size[ix];
-  }
-
-  y_size[0] = (int)sz[0];
+  y_size[0] = x->size[0];
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
-    y_size[0] = (int)sz[0];
-    k = (int)sz[0];
-    for (ix = 0; ix < k; ix++) {
-      y_data[ix] = 0.0;
+    ix = y_size[0];
+    y_size[0] = ix;
+    for (k = 0; k < ix; k++) {
+      y_data[k] = 0.0;
     }
   } else {
     ix = 0;
@@ -50,20 +48,20 @@ void b_mean(const emxArray_real_T *x, double y_data[], int y_size[1])
     y_data[0] = s;
   }
 
-  b_emxInit_real_T(&r4, 1);
+  emxInit_real_T1(&r5, 1);
   b_y_data.data = (double *)y_data;
   b_y_data.size = (int *)y_size;
   b_y_data.allocatedSize = -1;
   b_y_data.numDimensions = 1;
   b_y_data.canFreeData = false;
-  c_rdivide(&b_y_data, x->size[1], r4);
-  y_size[0] = r4->size[0];
-  k = r4->size[0];
-  for (ix = 0; ix < k; ix++) {
-    y_data[ix] = r4->data[ix];
+  c_rdivide(&b_y_data, x->size[1], r5);
+  y_size[0] = r5->size[0];
+  ix = r5->size[0];
+  for (k = 0; k < ix; k++) {
+    y_data[k] = r5->data[k];
   }
 
-  emxFree_real_T(&r4);
+  emxFree_real_T(&r5);
 }
 
 /*

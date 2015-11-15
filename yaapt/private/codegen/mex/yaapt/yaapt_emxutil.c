@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * yaapt_emxutil.c
  *
  * Code generation for function 'yaapt_emxutil'
@@ -9,134 +13,9 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_emxutil.h"
+#include "lapacke.h"
 
 /* Function Definitions */
-void b_emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
-  int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T doPush)
-{
-  emxArray_boolean_T *emxArray;
-  int32_T i;
-  *pEmxArray = (emxArray_boolean_T *)emlrtMallocMex(sizeof(emxArray_boolean_T));
-  if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_boolean_T);
-  }
-
-  emxArray = *pEmxArray;
-  emxArray->data = (boolean_T *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
-    * numDimensions));
-  if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
-void b_emxInit_int32_T(const emlrtStack *sp, emxArray_int32_T **pEmxArray,
-  int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T doPush)
-{
-  emxArray_int32_T *emxArray;
-  int32_T i;
-  *pEmxArray = (emxArray_int32_T *)emlrtMallocMex(sizeof(emxArray_int32_T));
-  if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_int32_T);
-  }
-
-  emxArray = *pEmxArray;
-  emxArray->data = (int32_T *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
-    * numDimensions));
-  if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
-void b_emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
-                      numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                      doPush)
-{
-  emxArray_real_T *emxArray;
-  int32_T i;
-  *pEmxArray = (emxArray_real_T *)emlrtMallocMex(sizeof(emxArray_real_T));
-  if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_real_T);
-  }
-
-  emxArray = *pEmxArray;
-  emxArray->data = (real_T *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
-    * numDimensions));
-  if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
-void c_emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
-                      numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                      doPush)
-{
-  emxArray_real_T *emxArray;
-  int32_T i;
-  *pEmxArray = (emxArray_real_T *)emlrtMallocMex(sizeof(emxArray_real_T));
-  if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_real_T);
-  }
-
-  emxArray = *pEmxArray;
-  emxArray->data = (real_T *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
-    * numDimensions));
-  if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
 void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
   oldNumel, int32_T elementSize, const emlrtRTEInfo *srcLocation)
 {
@@ -175,6 +54,12 @@ void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
   }
+}
+
+void emxFreeStruct_struct_T(struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->breaks);
+  emxFree_real_T(&pStruct->coefs);
 }
 
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
@@ -230,7 +115,45 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
   }
 }
 
+void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct, const
+  emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  emxInit_real_T(sp, &pStruct->breaks, 2, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->coefs, 2, srcLocation, doPush);
+}
+
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
+  int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  emxArray_boolean_T *emxArray;
+  int32_T i;
+  *pEmxArray = (emxArray_boolean_T *)emlrtMallocMex(sizeof(emxArray_boolean_T));
+  if ((void *)*pEmxArray == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  if (doPush) {
+    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
+      emxFree_boolean_T);
+  }
+
+  emxArray = *pEmxArray;
+  emxArray->data = (boolean_T *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
+    * numDimensions));
+  if ((void *)emxArray->size == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+void emxInit_boolean_T1(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
   int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T doPush)
 {
   emxArray_boolean_T *emxArray;
@@ -325,9 +248,105 @@ void emxInit_int32_T(const emlrtStack *sp, emxArray_int32_T **pEmxArray, int32_T
   }
 }
 
+void emxInit_int32_T1(const emlrtStack *sp, emxArray_int32_T **pEmxArray,
+                      int32_T numDimensions, const emlrtRTEInfo *srcLocation,
+                      boolean_T doPush)
+{
+  emxArray_int32_T *emxArray;
+  int32_T i;
+  *pEmxArray = (emxArray_int32_T *)emlrtMallocMex(sizeof(emxArray_int32_T));
+  if ((void *)*pEmxArray == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  if (doPush) {
+    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
+      emxFree_int32_T);
+  }
+
+  emxArray = *pEmxArray;
+  emxArray->data = (int32_T *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
+    * numDimensions));
+  if ((void *)emxArray->size == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
 void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
                     numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
                     doPush)
+{
+  emxArray_real_T *emxArray;
+  int32_T i;
+  *pEmxArray = (emxArray_real_T *)emlrtMallocMex(sizeof(emxArray_real_T));
+  if ((void *)*pEmxArray == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  if (doPush) {
+    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
+      emxFree_real_T);
+  }
+
+  emxArray = *pEmxArray;
+  emxArray->data = (real_T *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
+    * numDimensions));
+  if ((void *)emxArray->size == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+void emxInit_real_T1(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
+                     numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
+                     doPush)
+{
+  emxArray_real_T *emxArray;
+  int32_T i;
+  *pEmxArray = (emxArray_real_T *)emlrtMallocMex(sizeof(emxArray_real_T));
+  if ((void *)*pEmxArray == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  if (doPush) {
+    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
+      emxFree_real_T);
+  }
+
+  emxArray = *pEmxArray;
+  emxArray->data = (real_T *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
+    * numDimensions));
+  if ((void *)emxArray->size == NULL) {
+    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+  }
+
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+void emxInit_real_T2(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
+                     numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
+                     doPush)
 {
   emxArray_real_T *emxArray;
   int32_T i;

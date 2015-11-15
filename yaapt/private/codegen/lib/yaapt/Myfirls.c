@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: Myfirls.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "Myfirls.h"
@@ -950,12 +953,9 @@ void Myfirls(double F[6], double h[151])
   f_a[0] = b0;
   memcpy(&f_a[1], &b[0], 75U * sizeof(double));
   mldivide(G, f_a);
-  for (i = 0; i < 75; i++) {
-    h[i] = f_a[75 - i] / 2.0;
-  }
-
   h[75] = f_a[0];
   for (i = 0; i < 75; i++) {
+    h[i] = f_a[75 - i] / 2.0;
     h[i + 76] = f_a[1 + i] / 2.0;
   }
 

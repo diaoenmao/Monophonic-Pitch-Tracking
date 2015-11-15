@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: interp1.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "interp1.h"
@@ -25,130 +28,150 @@ void interp1(const emxArray_real_T *varargin_1, const emxArray_real_T
              *varargin_2, const emxArray_real_T *varargin_3, emxArray_real_T *Vq)
 {
   emxArray_real_T *y;
-  int high_i;
+  int j2;
   int nd2;
   emxArray_real_T *x;
+  int nx;
   unsigned int outsize[2];
-  int k;
-  emxArray_real_T *pp_breaks;
-  emxArray_real_T *pp_coefs;
+  emxArray_real_T *xi;
+  struct_T pp;
   emxArray_real_T *b_y;
-  int32_T exitg1;
+  int exitg1;
+  int b_j1;
+  double xtmp;
+  int k;
+  int b_k;
+  double v;
+  int low_i;
+  int low_ip1;
+  int high_i;
   int mid_i;
   double xloc;
-  double yit;
-  int low_i;
   emxInit_real_T(&y, 2);
-  high_i = y->size[0] * y->size[1];
+  j2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = varargin_2->size[1];
-  emxEnsureCapacity((emxArray__common *)y, high_i, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)y, j2, (int)sizeof(double));
   nd2 = varargin_2->size[0] * varargin_2->size[1];
-  for (high_i = 0; high_i < nd2; high_i++) {
-    y->data[high_i] = varargin_2->data[high_i];
+  for (j2 = 0; j2 < nd2; j2++) {
+    y->data[j2] = varargin_2->data[j2];
   }
 
   emxInit_real_T(&x, 2);
-  high_i = x->size[0] * x->size[1];
+  j2 = x->size[0] * x->size[1];
   x->size[0] = 1;
   x->size[1] = varargin_1->size[1];
-  emxEnsureCapacity((emxArray__common *)x, high_i, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)x, j2, (int)sizeof(double));
   nd2 = varargin_1->size[0] * varargin_1->size[1];
-  for (high_i = 0; high_i < nd2; high_i++) {
-    x->data[high_i] = varargin_1->data[high_i];
+  for (j2 = 0; j2 < nd2; j2++) {
+    x->data[j2] = varargin_1->data[j2];
   }
 
-  for (high_i = 0; high_i < 2; high_i++) {
-    outsize[high_i] = (unsigned int)varargin_3->size[high_i];
+  nx = varargin_1->size[1];
+  for (j2 = 0; j2 < 2; j2++) {
+    outsize[j2] = (unsigned int)varargin_3->size[j2];
   }
 
-  high_i = Vq->size[0] * Vq->size[1];
+  j2 = Vq->size[0] * Vq->size[1];
   Vq->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)Vq, high_i, (int)sizeof(double));
-  high_i = Vq->size[0] * Vq->size[1];
   Vq->size[1] = (int)outsize[1];
-  emxEnsureCapacity((emxArray__common *)Vq, high_i, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)Vq, j2, (int)sizeof(double));
   nd2 = (int)outsize[1];
-  for (high_i = 0; high_i < nd2; high_i++) {
-    Vq->data[high_i] = 0.0;
+  for (j2 = 0; j2 < nd2; j2++) {
+    Vq->data[j2] = 0.0;
   }
 
   if (varargin_3->size[1] == 0) {
   } else {
-    k = 1;
-    emxInit_real_T(&pp_breaks, 2);
-    emxInit_real_T(&pp_coefs, 2);
+    nd2 = 1;
+    emxInit_real_T(&xi, 2);
+    emxInitStruct_struct_T(&pp);
     emxInit_real_T(&b_y, 2);
     do {
       exitg1 = 0;
-      if (k <= varargin_1->size[1]) {
-        if (rtIsNaN(varargin_1->data[k - 1])) {
+      if (nd2 <= nx) {
+        if (rtIsNaN(varargin_1->data[nd2 - 1])) {
           exitg1 = 1;
         } else {
-          k++;
+          nd2++;
         }
       } else {
         if (varargin_1->data[1] < varargin_1->data[0]) {
-          high_i = varargin_1->size[1] >> 1;
-          for (mid_i = 1; mid_i <= high_i; mid_i++) {
-            xloc = x->data[mid_i - 1];
-            x->data[mid_i - 1] = x->data[varargin_1->size[1] - mid_i];
-            x->data[varargin_1->size[1] - mid_i] = xloc;
+          j2 = nx >> 1;
+          for (b_j1 = 1; b_j1 <= j2; b_j1++) {
+            xtmp = x->data[b_j1 - 1];
+            x->data[b_j1 - 1] = x->data[nx - b_j1];
+            x->data[nx - b_j1] = xtmp;
           }
 
-          high_i = varargin_2->size[1];
-          nd2 = high_i / 2;
-          for (mid_i = 1; mid_i <= nd2; mid_i++) {
-            high_i = varargin_2->size[1] - mid_i;
-            xloc = y->data[y->size[0] * (mid_i - 1)];
-            y->data[y->size[0] * (mid_i - 1)] = y->data[y->size[0] * high_i];
-            y->data[y->size[0] * high_i] = xloc;
+          nd2 = varargin_2->size[1] >> 1;
+          for (b_j1 = 1; b_j1 <= nd2; b_j1++) {
+            j2 = varargin_2->size[1] - b_j1;
+            xtmp = y->data[b_j1 - 1];
+            y->data[b_j1 - 1] = y->data[j2];
+            y->data[j2] = xtmp;
           }
+        }
+
+        j2 = xi->size[0] * xi->size[1];
+        xi->size[0] = 1;
+        xi->size[1] = varargin_3->size[1];
+        emxEnsureCapacity((emxArray__common *)xi, j2, (int)sizeof(double));
+        nd2 = varargin_3->size[0] * varargin_3->size[1];
+        for (j2 = 0; j2 < nd2; j2++) {
+          xi->data[j2] = varargin_3->data[j2];
         }
 
         nd2 = y->size[1];
-        high_i = b_y->size[0] * b_y->size[1];
+        j2 = b_y->size[0] * b_y->size[1];
         b_y->size[0] = 1;
         b_y->size[1] = nd2;
-        emxEnsureCapacity((emxArray__common *)b_y, high_i, (int)sizeof(double));
-        for (high_i = 0; high_i < nd2; high_i++) {
-          b_y->data[b_y->size[0] * high_i] = y->data[high_i];
+        emxEnsureCapacity((emxArray__common *)b_y, j2, (int)sizeof(double));
+        for (j2 = 0; j2 < nd2; j2++) {
+          b_y->data[b_y->size[0] * j2] = y->data[j2];
         }
 
-        pchip(x, b_y, pp_breaks, pp_coefs);
-        for (k = 0; k + 1 <= varargin_3->size[1]; k++) {
-          if (rtIsNaN(varargin_3->data[k])) {
-            Vq->data[k] = rtNaN;
+        pchip(x, b_y, pp.breaks, pp.coefs);
+        nd2 = varargin_3->size[1];
+
+#pragma omp parallel for \
+ num_threads(omp_get_max_threads()) \
+ private(b_k,low_i,v,low_ip1,high_i,xloc,mid_i)
+
+        for (k = 1; k <= nd2; k++) {
+          b_k = k;
+          if (rtIsNaN(xi->data[b_k - 1])) {
+            Vq->data[b_k - 1] = rtNaN;
           } else {
-            if (rtIsNaN(varargin_3->data[k])) {
-              yit = varargin_3->data[k];
+            if (rtIsNaN(xi->data[b_k - 1])) {
+              v = xi->data[b_k - 1];
             } else {
               low_i = 1;
-              nd2 = 2;
-              high_i = pp_breaks->size[1];
-              while (high_i > nd2) {
+              low_ip1 = 2;
+              high_i = pp.breaks->size[1];
+              while (high_i > low_ip1) {
                 mid_i = (low_i >> 1) + (high_i >> 1);
                 if (((low_i & 1) == 1) && ((high_i & 1) == 1)) {
                   mid_i++;
                 }
 
-                if (varargin_3->data[k] >= pp_breaks->data[mid_i - 1]) {
+                if (xi->data[b_k - 1] >= pp.breaks->data[mid_i - 1]) {
                   low_i = mid_i;
-                  nd2 = mid_i + 1;
+                  low_ip1 = mid_i + 1;
                 } else {
                   high_i = mid_i;
                 }
               }
 
-              xloc = varargin_3->data[k] - pp_breaks->data[low_i - 1];
-              yit = pp_coefs->data[low_i - 1];
-              for (nd2 = 0; nd2 < 3; nd2++) {
-                yit = xloc * yit + pp_coefs->data[(low_i + (nd2 + 1) *
-                  (pp_breaks->size[1] - 1)) - 1];
+              xloc = xi->data[b_k - 1] - pp.breaks->data[low_i - 1];
+              v = pp.coefs->data[low_i - 1];
+              for (low_ip1 = 0; low_ip1 < 3; low_ip1++) {
+                v = xloc * v + pp.coefs->data[(low_i + (low_ip1 + 1) *
+                  (pp.breaks->size[1] - 1)) - 1];
               }
             }
 
-            Vq->data[k] = yit;
+            Vq->data[b_k - 1] = v;
           }
         }
 
@@ -157,8 +180,8 @@ void interp1(const emxArray_real_T *varargin_1, const emxArray_real_T
     } while (exitg1 == 0);
 
     emxFree_real_T(&b_y);
-    emxFree_real_T(&pp_coefs);
-    emxFree_real_T(&pp_breaks);
+    emxFreeStruct_struct_T(&pp);
+    emxFree_real_T(&xi);
   }
 
   emxFree_real_T(&x);

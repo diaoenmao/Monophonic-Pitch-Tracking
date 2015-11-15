@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * yaapt_initialize.c
  *
  * Code generation for function 'yaapt_initialize'
@@ -9,15 +13,17 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_initialize.h"
+#include "_coder_yaapt_mex.h"
 #include "yaapt_data.h"
+#include "lapacke.h"
 
 /* Function Definitions */
-void yaapt_initialize(emlrtContext *aContext)
+void yaapt_initialize(void)
 {
   emlrtStack st = { NULL, NULL, NULL };
 
+  mexFunctionCreateRootTLS();
   emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2012b();
-  emlrtCreateRootTLS(&emlrtRootTLSGlobal, aContext, NULL, 1);
   st.tls = emlrtRootTLSGlobal;
   emlrtClearAllocCountR2012b(&st, false, 0U, 0);
   emlrtEnterRtStackR2012b(&st);

@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: pchip.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "pchip.h"
@@ -82,53 +85,50 @@ void pchip(const emxArray_real_T *x, const emxArray_real_T *y, emxArray_real_T
            *v_breaks, emxArray_real_T *v_coefs)
 {
   emxArray_real_T *h;
+  int nx;
+  int i16;
   int k;
   int szdel[2];
   emxArray_real_T *del;
-  unsigned int uv2[2];
   emxArray_real_T *slopes;
   double hs;
   double hs3;
   double w1;
-  int x_idx_0;
   emxInit_real_T(&h, 2);
-  k = h->size[0] * h->size[1];
+  nx = x->size[1] - 1;
+  i16 = h->size[0] * h->size[1];
   h->size[0] = 1;
   h->size[1] = x->size[1] - 1;
-  emxEnsureCapacity((emxArray__common *)h, k, (int)sizeof(double));
-  for (k = 1; k < x->size[1]; k++) {
+  emxEnsureCapacity((emxArray__common *)h, i16, (int)sizeof(double));
+  for (k = 1; k <= nx; k++) {
     h->data[k - 1] = x->data[k] - x->data[k - 1];
   }
 
-  for (k = 0; k < 2; k++) {
-    szdel[k] = y->size[k];
+  for (i16 = 0; i16 < 2; i16++) {
+    szdel[i16] = y->size[i16];
   }
 
   emxInit_real_T(&del, 2);
   szdel[1]--;
-  k = del->size[0] * del->size[1];
+  i16 = del->size[0] * del->size[1];
   del->size[0] = 1;
   del->size[1] = szdel[1];
-  emxEnsureCapacity((emxArray__common *)del, k, (int)sizeof(double));
-  for (k = 0; k + 1 < x->size[1]; k++) {
+  emxEnsureCapacity((emxArray__common *)del, i16, (int)sizeof(double));
+  for (k = 0; k + 1 <= nx; k++) {
     del->data[k] = (y->data[k + 1] - y->data[k]) / h->data[k];
   }
 
-  for (k = 0; k < 2; k++) {
-    uv2[k] = (unsigned int)y->size[k];
-  }
-
   emxInit_real_T(&slopes, 2);
-  k = slopes->size[0] * slopes->size[1];
+  i16 = slopes->size[0] * slopes->size[1];
   slopes->size[0] = 1;
-  slopes->size[1] = (int)uv2[1];
-  emxEnsureCapacity((emxArray__common *)slopes, k, (int)sizeof(double));
+  slopes->size[1] = y->size[1];
+  emxEnsureCapacity((emxArray__common *)slopes, i16, (int)sizeof(double));
   if (x->size[1] == 2) {
     for (k = 0; k < 2; k++) {
       slopes->data[k] = del->data[0];
     }
   } else {
-    for (k = 1; k <= x->size[1] - 2; k++) {
+    for (k = 1; k < nx; k++) {
       hs = h->data[k - 1] + h->data[k];
       hs3 = 3.0 * hs;
       w1 = (h->data[k - 1] + hs) / hs3;
@@ -164,26 +164,27 @@ void pchip(const emxArray_real_T *x, const emxArray_real_T *y, emxArray_real_T
       del->data[x->size[1] - 3], h->data[x->size[1] - 2], h->data[x->size[1] - 3]);
   }
 
-  x_idx_0 = x->size[1];
-  k = v_breaks->size[0] * v_breaks->size[1];
+  k = x->size[1];
+  i16 = v_breaks->size[0] * v_breaks->size[1];
   v_breaks->size[0] = 1;
-  v_breaks->size[1] = x_idx_0;
-  emxEnsureCapacity((emxArray__common *)v_breaks, k, (int)sizeof(double));
-  for (k = 0; k < x_idx_0; k++) {
-    v_breaks->data[v_breaks->size[0] * k] = x->data[k];
+  v_breaks->size[1] = k;
+  emxEnsureCapacity((emxArray__common *)v_breaks, i16, (int)sizeof(double));
+  for (i16 = 0; i16 < k; i16++) {
+    v_breaks->data[v_breaks->size[0] * i16] = x->data[i16];
   }
 
-  k = v_coefs->size[0] * v_coefs->size[1];
+  nx = slopes->size[1] - 1;
+  i16 = v_coefs->size[0] * v_coefs->size[1];
   v_coefs->size[0] = slopes->size[1] - 1;
   v_coefs->size[1] = 4;
-  emxEnsureCapacity((emxArray__common *)v_coefs, k, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)v_coefs, i16, (int)sizeof(double));
   for (k = 0; k + 1 < x->size[1]; k++) {
     hs = (del->data[k] - slopes->data[k]) / h->data[k];
     hs3 = (slopes->data[k + 1] - del->data[k]) / h->data[k];
     v_coefs->data[k] = (hs3 - hs) / h->data[k];
-    v_coefs->data[(slopes->size[1] + k) - 1] = 2.0 * hs - hs3;
-    v_coefs->data[((slopes->size[1] - 1) << 1) + k] = slopes->data[k];
-    v_coefs->data[3 * (slopes->size[1] - 1) + k] = y->data[k];
+    v_coefs->data[nx + k] = 2.0 * hs - hs3;
+    v_coefs->data[(nx << 1) + k] = slopes->data[k];
+    v_coefs->data[3 * nx + k] = y->data[k];
   }
 
   emxFree_real_T(&slopes);

@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: spec_trk.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "spec_trk.h"
@@ -16,7 +19,7 @@
 #include "abs.h"
 #include "fft.h"
 #include "mean.h"
-#include "dynamic.h"
+#include "filter.h"
 #include "interp1.h"
 #include "all.h"
 #include "rdivide.h"
@@ -74,57 +77,67 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   double half_winlen;
   double max_SHC;
   double min_SHC;
-  int itmp;
-  int loop_ub;
+  int ix;
+  int iy;
   emxArray_real_T *CandsMerit;
   emxArray_real_T *b_Data;
-  int ix;
+  int nm1d2;
   emxArray_real_T *Kaiser_window;
   emxArray_real_T *SHC;
-  double Num_VCands;
+  int cindx;
+  double anew;
   double apnd;
   double ndbl;
   double cdiff;
-  emxArray_real_T *Signal;
-  int nm1d2;
-  int cindx;
+  emxArray_real_T *VMerit_minmrt;
+  int k;
   emxArray_real_T *winix;
   emxArray_real_T *rowix;
+  int frame;
+  emxArray_real_T *Signal;
   emxArray_real_T *Magnit;
   emxArray_real_T *b_SHC;
   emxArray_real_T *b_Magnit;
-  int i;
+  double firstp;
   static creal_T dcv0[8192];
-  double dv6[8192];
+  double dv7[8192];
+  double b_k;
   int tmp_size[2];
   double tmp_data[15];
   int b_tmp_size[2];
   double b_tmp_data[15];
   emxArray_boolean_T *Idx_voiced;
   emxArray_int32_T *iindx;
-  emxArray_real_T *VCandsMerit;
-  emxArray_real_T *b_rowix;
-  emxArray_real_T *c_rowix;
-  emxArray_real_T *d_rowix;
-  unsigned int outsz[2];
-  unsigned int b_outsz;
+  int i;
+  emxArray_boolean_T *b_SPitch;
+  double Num_VCands;
+  emxArray_real_T *b_CandsPitch;
+  emxArray_int32_T *b_iindx;
+  emxArray_real_T *c_CandsPitch;
+  double avg_voiced;
+  emxArray_real_T *d_CandsPitch;
+  emxArray_int32_T *c_iindx;
+  emxArray_real_T *e_CandsPitch;
+  double std_voiced;
+  emxArray_real_T *f_CandsPitch;
+  emxArray_real_T *r3;
+  emxArray_real_T *delta1;
+  unsigned int uv1[2];
   int b_ix;
   boolean_T exitg2;
-  emxArray_real_T *VMerit_minmrt;
   emxArray_real_T *c_SHC;
   emxArray_real_T *VPitch;
-  emxArray_boolean_T *b_SPitch;
+  emxArray_boolean_T *c_SPitch;
+  double SPitch_temp_end;
   emxArray_real_T b_pAvg_data;
-  emxArray_boolean_T *SPitch_temp_end;
+  emxArray_boolean_T *b_SPitch_temp_end;
   emxArray_real_T c_pAvg_data;
   emxArray_int32_T *jj;
+  unsigned int unnamed_idx_1;
   boolean_T exitg1;
   boolean_T guard1 = false;
-  emxArray_int32_T *b_jj;
-  emxArray_real_T *d_SHC;
-  emxArray_real_T *c_jj;
-  double dbuffer[3];
-  emxArray_boolean_T *b_VUVEnergy;
+  emxArray_real_T *b_jj;
+  emxArray_real_T *d_SPitch;
 
   /*    Creation date:  Feb 20, 2006 */
   /*    Revision dates: Feb 22, 2006,  March 11, 2006, April 5, 2006, */
@@ -181,23 +194,23 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
 
   /*  Number of harmomics considered */
   /* -- INITIALIZATION ----------------------------------------------------------- */
-  itmp = CandsPitch->size[0] * CandsPitch->size[1];
+  ix = CandsPitch->size[0] * CandsPitch->size[1];
   CandsPitch->size[0] = 4;
   CandsPitch->size[1] = (int)numframes;
-  emxEnsureCapacity((emxArray__common *)CandsPitch, itmp, (int)sizeof(double));
-  loop_ub = (int)numframes << 2;
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    CandsPitch->data[itmp] = 0.0;
+  emxEnsureCapacity((emxArray__common *)CandsPitch, ix, (int)sizeof(double));
+  iy = (int)numframes << 2;
+  for (ix = 0; ix < iy; ix++) {
+    CandsPitch->data[ix] = 0.0;
   }
 
   emxInit_real_T(&CandsMerit, 2);
-  itmp = CandsMerit->size[0] * CandsMerit->size[1];
+  ix = CandsMerit->size[0] * CandsMerit->size[1];
   CandsMerit->size[0] = 4;
   CandsMerit->size[1] = (int)numframes;
-  emxEnsureCapacity((emxArray__common *)CandsMerit, itmp, (int)sizeof(double));
-  loop_ub = (int)numframes << 2;
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    CandsMerit->data[itmp] = 1.0;
+  emxEnsureCapacity((emxArray__common *)CandsMerit, ix, (int)sizeof(double));
+  iy = (int)numframes << 2;
+  for (ix = 0; ix < iy; ix++) {
+    CandsMerit->data[ix] = 1.0;
   }
 
   emxInit_real_T(&b_Data, 2);
@@ -206,28 +219,28 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   /*  a = Data; */
   /*  Data(end:(numframes-1)*nframejump+nframesize) = 0; */
   Data->data[Data->size[1] - 1] = 0.0;
-  ix = Data->size[1];
-  ix = (int)(((numframes - 1.0) * nframejump + nframesize) - (double)ix);
-  itmp = b_Data->size[0] * b_Data->size[1];
+  nm1d2 = Data->size[1];
+  nm1d2 = (int)(((numframes - 1.0) * nframejump + nframesize) - (double)nm1d2);
+  ix = b_Data->size[0] * b_Data->size[1];
   b_Data->size[0] = 1;
-  b_Data->size[1] = Data->size[1] + ix;
-  emxEnsureCapacity((emxArray__common *)b_Data, itmp, (int)sizeof(double));
-  loop_ub = Data->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    b_Data->data[b_Data->size[0] * itmp] = Data->data[Data->size[0] * itmp];
+  b_Data->size[1] = Data->size[1] + nm1d2;
+  emxEnsureCapacity((emxArray__common *)b_Data, ix, (int)sizeof(double));
+  iy = Data->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    b_Data->data[b_Data->size[0] * ix] = Data->data[Data->size[0] * ix];
   }
 
-  for (itmp = 0; itmp < ix; itmp++) {
-    b_Data->data[b_Data->size[0] * (itmp + Data->size[1])] = 0.0;
+  for (ix = 0; ix < nm1d2; ix++) {
+    b_Data->data[b_Data->size[0] * (ix + Data->size[1])] = 0.0;
   }
 
-  itmp = Data->size[0] * Data->size[1];
+  ix = Data->size[0] * Data->size[1];
   Data->size[0] = 1;
   Data->size[1] = b_Data->size[1];
-  emxEnsureCapacity((emxArray__common *)Data, itmp, (int)sizeof(double));
-  loop_ub = b_Data->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    Data->data[Data->size[0] * itmp] = b_Data->data[b_Data->size[0] * itmp];
+  emxEnsureCapacity((emxArray__common *)Data, ix, (int)sizeof(double));
+  iy = b_Data->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    Data->data[Data->size[0] * ix] = b_Data->data[b_Data->size[0] * ix];
   }
 
   emxFree_real_T(&b_Data);
@@ -239,29 +252,29 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   Mykaiser(nframesize, Kaiser_window);
 
   /*  Kaiser_window_test = kaiser(nframesize); */
-  itmp = SHC->size[0] * SHC->size[1];
+  ix = SHC->size[0] * SHC->size[1];
   SHC->size[0] = 1;
   SHC->size[1] = (int)max_SHC;
-  emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
-  loop_ub = (int)max_SHC;
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    SHC->data[itmp] = 0.0;
+  emxEnsureCapacity((emxArray__common *)SHC, ix, (int)sizeof(double));
+  iy = (int)max_SHC;
+  for (ix = 0; ix < iy; ix++) {
+    SHC->data[ix] = 0.0;
   }
 
   if (rtIsNaN(window_length)) {
-    ix = 0;
-    Num_VCands = rtNaN;
+    cindx = 1;
+    anew = rtNaN;
     apnd = window_length;
   } else if (window_length < 1.0) {
-    ix = -1;
-    Num_VCands = 1.0;
+    cindx = 0;
+    anew = 1.0;
     apnd = window_length;
   } else if (rtIsInf(window_length)) {
-    ix = 0;
-    Num_VCands = rtNaN;
+    cindx = 1;
+    anew = rtNaN;
     apnd = window_length;
   } else {
-    Num_VCands = 1.0;
+    anew = 1.0;
     ndbl = floor((window_length - 1.0) + 0.5);
     apnd = 1.0 + ndbl;
     cdiff = (1.0 + ndbl) - window_length;
@@ -275,137 +288,140 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
     }
 
     if (ndbl >= 0.0) {
-      ix = (int)ndbl - 1;
+      cindx = (int)ndbl;
     } else {
-      ix = -1;
+      cindx = 0;
     }
   }
 
-  emxInit_real_T(&Signal, 2);
-  itmp = Signal->size[0] * Signal->size[1];
-  Signal->size[0] = 1;
-  Signal->size[1] = ix + 1;
-  emxEnsureCapacity((emxArray__common *)Signal, itmp, (int)sizeof(double));
-  if (ix + 1 > 0) {
-    Signal->data[0] = Num_VCands;
-    if (ix + 1 > 1) {
-      Signal->data[ix] = apnd;
+  emxInit_real_T(&VMerit_minmrt, 2);
+  ix = VMerit_minmrt->size[0] * VMerit_minmrt->size[1];
+  VMerit_minmrt->size[0] = 1;
+  VMerit_minmrt->size[1] = cindx;
+  emxEnsureCapacity((emxArray__common *)VMerit_minmrt, ix, (int)sizeof(double));
+  if (cindx > 0) {
+    VMerit_minmrt->data[0] = anew;
+    if (cindx > 1) {
+      VMerit_minmrt->data[cindx - 1] = apnd;
+      ix = cindx - 1;
       nm1d2 = ix / 2;
-      for (cindx = 1; cindx < nm1d2; cindx++) {
-        Signal->data[cindx] = Num_VCands + (double)cindx;
-        Signal->data[ix - cindx] = apnd - (double)cindx;
+      for (k = 1; k < nm1d2; k++) {
+        VMerit_minmrt->data[k] = anew + (double)k;
+        VMerit_minmrt->data[(cindx - k) - 1] = apnd - (double)k;
       }
 
-      if (nm1d2 << 1 == ix) {
-        Signal->data[nm1d2] = (Num_VCands + apnd) / 2.0;
+      if (nm1d2 << 1 == cindx - 1) {
+        VMerit_minmrt->data[nm1d2] = (anew + apnd) / 2.0;
       } else {
-        Signal->data[nm1d2] = Num_VCands + (double)nm1d2;
-        Signal->data[nm1d2 + 1] = apnd - (double)nm1d2;
+        VMerit_minmrt->data[nm1d2] = anew + (double)nm1d2;
+        VMerit_minmrt->data[nm1d2 + 1] = apnd - (double)nm1d2;
       }
     }
   }
 
   emxInit_real_T(&winix, 2);
   emxInit_real_T(&rowix, 2);
-  repmat(Signal, winix);
+  repmat(VMerit_minmrt, winix);
   b_repmat(window_length, rowix);
-  nm1d2 = 0;
-  b_emxInit_real_T(&Magnit, 1);
+  frame = 0;
+  emxInit_real_T(&Signal, 2);
+  emxInit_real_T1(&Magnit, 1);
   emxInit_real_T(&b_SHC, 2);
   emxInit_real_T(&b_Magnit, 2);
-  while (nm1d2 <= (int)numframes - 1) {
-    if ((int)VUVEnergy->data[nm1d2] > 0) {
-      window_length = 1.0 + ((1.0 + (double)nm1d2) - 1.0) * nframejump;
-      cdiff = (window_length + nframesize) - 1.0;
-      if (window_length > cdiff) {
-        itmp = 0;
-        i = 0;
+  while (frame <= (int)numframes - 1) {
+    if ((int)VUVEnergy->data[frame] > 0) {
+      firstp = 1.0 + ((1.0 + (double)frame) - 1.0) * nframejump;
+      anew = (firstp + nframesize) - 1.0;
+      if (firstp > anew) {
+        ix = 0;
+        cindx = 0;
       } else {
-        itmp = (int)window_length - 1;
-        i = (int)cdiff;
+        ix = (int)firstp - 1;
+        cindx = (int)anew;
       }
 
+      nm1d2 = Signal->size[0] * Signal->size[1];
+      Signal->size[0] = 1;
+      Signal->size[1] = cindx - ix;
+      emxEnsureCapacity((emxArray__common *)Signal, nm1d2, (int)sizeof(double));
+      iy = cindx - ix;
+      for (cindx = 0; cindx < iy; cindx++) {
+        Signal->data[Signal->size[0] * cindx] = Data->data[ix + cindx] *
+          Kaiser_window->data[cindx];
+      }
+
+      anew = mean(Signal);
       ix = Signal->size[0] * Signal->size[1];
       Signal->size[0] = 1;
-      Signal->size[1] = i - itmp;
       emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
-      loop_ub = i - itmp;
-      for (i = 0; i < loop_ub; i++) {
-        Signal->data[Signal->size[0] * i] = Data->data[itmp + i] *
-          Kaiser_window->data[i];
-      }
-
-      cdiff = mean(Signal);
-      itmp = Signal->size[0] * Signal->size[1];
-      Signal->size[0] = 1;
-      emxEnsureCapacity((emxArray__common *)Signal, itmp, (int)sizeof(double));
-      loop_ub = Signal->size[1];
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        Signal->data[Signal->size[0] * itmp] -= cdiff;
+      iy = Signal->size[1];
+      for (ix = 0; ix < iy; ix++) {
+        Signal->data[Signal->size[0] * ix] -= anew;
       }
 
       /*             Magnit = [zeros(half_winlen, 1); abs(fft(Signal , nfftlength))]; */
       fft(Signal, dcv0);
-      b_abs(dcv0, dv6);
-      itmp = Magnit->size[0];
+      b_abs(dcv0, dv7);
+      ix = Magnit->size[0];
       Magnit->size[0] = (int)half_winlen + 8192;
-      emxEnsureCapacity((emxArray__common *)Magnit, itmp, (int)sizeof(double));
-      loop_ub = (int)half_winlen;
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        Magnit->data[itmp] = 0.0;
+      emxEnsureCapacity((emxArray__common *)Magnit, ix, (int)sizeof(double));
+      iy = (int)half_winlen;
+      for (ix = 0; ix < iy; ix++) {
+        Magnit->data[ix] = 0.0;
       }
 
-      for (itmp = 0; itmp < 8192; itmp++) {
-        Magnit->data[itmp + (int)half_winlen] = dv6[itmp];
+      for (ix = 0; ix < 8192; ix++) {
+        Magnit->data[ix + (int)half_winlen] = dv7[ix];
       }
 
       /*  Compute SHC (Spectral Harmonic Correlation) */
-      itmp = (int)(max_SHC + (1.0 - min_SHC));
-      for (cindx = 0; cindx < itmp; cindx++) {
-        window_length = min_SHC + (double)cindx;
-        i = b_Magnit->size[0] * b_Magnit->size[1];
+      ix = (int)(max_SHC + (1.0 - min_SHC));
+      for (k = 0; k < ix; k++) {
+        b_k = min_SHC + (double)k;
+        cindx = b_Magnit->size[0] * b_Magnit->size[1];
         b_Magnit->size[0] = 4;
         b_Magnit->size[1] = winix->size[1];
-        emxEnsureCapacity((emxArray__common *)b_Magnit, i, (int)sizeof(double));
-        loop_ub = winix->size[0] * winix->size[1];
-        for (i = 0; i < loop_ub; i++) {
-          b_Magnit->data[i] = Magnit->data[(int)(winix->data[i] + window_length *
-            rowix->data[i]) - 1];
+        emxEnsureCapacity((emxArray__common *)b_Magnit, cindx, (int)sizeof
+                          (double));
+        iy = winix->size[0] * winix->size[1];
+        for (cindx = 0; cindx < iy; cindx++) {
+          b_Magnit->data[cindx] = Magnit->data[(int)(winix->data[cindx] + b_k *
+            rowix->data[cindx]) - 1];
         }
 
         prod(b_Magnit, Signal);
-        SHC->data[(int)window_length - 1] = sum(Signal);
+        SHC->data[(int)b_k - 1] = sum(Signal);
       }
 
-      itmp = b_SHC->size[0] * b_SHC->size[1];
+      ix = b_SHC->size[0] * b_SHC->size[1];
       b_SHC->size[0] = 1;
       b_SHC->size[1] = SHC->size[1];
-      emxEnsureCapacity((emxArray__common *)b_SHC, itmp, (int)sizeof(double));
-      loop_ub = SHC->size[0] * SHC->size[1];
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        b_SHC->data[itmp] = SHC->data[itmp];
+      emxEnsureCapacity((emxArray__common *)b_SHC, ix, (int)sizeof(double));
+      iy = SHC->size[0] * SHC->size[1];
+      for (ix = 0; ix < iy; ix++) {
+        b_SHC->data[ix] = SHC->data[ix];
       }
 
       peaks(b_SHC, delta, b_tmp_data, b_tmp_size, tmp_data, tmp_size);
-      for (itmp = 0; itmp < 4; itmp++) {
-        CandsPitch->data[itmp + CandsPitch->size[0] * nm1d2] = b_tmp_data[itmp];
+      for (ix = 0; ix < 4; ix++) {
+        CandsPitch->data[ix + CandsPitch->size[0] * frame] = b_tmp_data[ix];
       }
 
-      for (itmp = 0; itmp < 4; itmp++) {
-        CandsMerit->data[itmp + CandsMerit->size[0] * nm1d2] = tmp_data[itmp];
+      for (ix = 0; ix < 4; ix++) {
+        CandsMerit->data[ix + CandsMerit->size[0] * frame] = tmp_data[ix];
       }
     } else {
       /*  if energy is low,  let frame be considered as unvoiced */
-      for (itmp = 0; itmp < 4; itmp++) {
-        CandsPitch->data[itmp + CandsPitch->size[0] * nm1d2] = 0.0;
+      for (ix = 0; ix < 4; ix++) {
+        CandsPitch->data[ix + CandsPitch->size[0] * frame] = 0.0;
       }
 
-      for (itmp = 0; itmp < 4; itmp++) {
-        CandsMerit->data[itmp + CandsMerit->size[0] * nm1d2] = 1.0;
+      for (ix = 0; ix < 4; ix++) {
+        CandsMerit->data[ix + CandsMerit->size[0] * frame] = 1.0;
       }
     }
 
-    nm1d2++;
+    frame++;
   }
 
   emxFree_real_T(&b_Magnit);
@@ -445,216 +461,439 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   /*      end */
   /*  end */
   /*  Extract the Pitch candidates of voiced frames for the future Pitch selection  */
-  loop_ub = CandsPitch->size[1];
-  itmp = SPitch->size[0] * SPitch->size[1];
+  iy = CandsPitch->size[1];
+  ix = SPitch->size[0] * SPitch->size[1];
   SPitch->size[0] = 1;
-  SPitch->size[1] = loop_ub;
-  emxEnsureCapacity((emxArray__common *)SPitch, itmp, (int)sizeof(double));
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    SPitch->data[SPitch->size[0] * itmp] = CandsPitch->data[CandsPitch->size[0] *
-      itmp];
+  SPitch->size[1] = iy;
+  emxEnsureCapacity((emxArray__common *)SPitch, ix, (int)sizeof(double));
+  for (ix = 0; ix < iy; ix++) {
+    SPitch->data[SPitch->size[0] * ix] = CandsPitch->data[CandsPitch->size[0] *
+      ix];
   }
 
   emxInit_boolean_T(&Idx_voiced, 2);
-  itmp = Idx_voiced->size[0] * Idx_voiced->size[1];
+  ix = Idx_voiced->size[0] * Idx_voiced->size[1];
   Idx_voiced->size[0] = 1;
   Idx_voiced->size[1] = SPitch->size[1];
-  emxEnsureCapacity((emxArray__common *)Idx_voiced, itmp, (int)sizeof(boolean_T));
-  loop_ub = SPitch->size[0] * SPitch->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    Idx_voiced->data[itmp] = (SPitch->data[itmp] > 0.0);
+  emxEnsureCapacity((emxArray__common *)Idx_voiced, ix, (int)sizeof(boolean_T));
+  iy = SPitch->size[0] * SPitch->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    Idx_voiced->data[ix] = (SPitch->data[ix] > 0.0);
   }
 
   emxInit_int32_T(&iindx, 2);
-  eml_li_find(Idx_voiced, iindx);
-  itmp = rowix->size[0] * rowix->size[1];
+  iy = CandsPitch->size[1] - 1;
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      nm1d2++;
+    }
+  }
+
+  ix = iindx->size[0] * iindx->size[1];
+  iindx->size[0] = 1;
+  iindx->size[1] = nm1d2;
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      iindx->data[nm1d2] = i + 1;
+      nm1d2++;
+    }
+  }
+
+  ix = winix->size[0] * winix->size[1];
+  winix->size[0] = 4;
+  winix->size[1] = iindx->size[1];
+  emxEnsureCapacity((emxArray__common *)winix, ix, (int)sizeof(double));
+  iy = iindx->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    for (cindx = 0; cindx < 4; cindx++) {
+      winix->data[cindx + winix->size[0] * ix] = CandsPitch->data[cindx +
+        CandsPitch->size[0] * (iindx->data[iindx->size[0] * ix] - 1)];
+    }
+  }
+
+  iy = CandsPitch->size[1] - 1;
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      nm1d2++;
+    }
+  }
+
+  ix = iindx->size[0] * iindx->size[1];
+  iindx->size[0] = 1;
+  iindx->size[1] = nm1d2;
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      iindx->data[nm1d2] = i + 1;
+      nm1d2++;
+    }
+  }
+
+  ix = rowix->size[0] * rowix->size[1];
   rowix->size[0] = 4;
   rowix->size[1] = iindx->size[1];
-  emxEnsureCapacity((emxArray__common *)rowix, itmp, (int)sizeof(double));
-  loop_ub = iindx->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    for (i = 0; i < 4; i++) {
-      rowix->data[i + rowix->size[0] * itmp] = CandsPitch->data[i +
-        CandsPitch->size[0] * (iindx->data[iindx->size[0] * itmp] - 1)];
+  emxEnsureCapacity((emxArray__common *)rowix, ix, (int)sizeof(double));
+  iy = iindx->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    for (cindx = 0; cindx < 4; cindx++) {
+      rowix->data[cindx + rowix->size[0] * ix] = CandsMerit->data[cindx +
+        CandsMerit->size[0] * (iindx->data[iindx->size[0] * ix] - 1)];
     }
   }
 
-  emxInit_real_T(&VCandsMerit, 2);
-  eml_li_find(Idx_voiced, iindx);
-  itmp = VCandsMerit->size[0] * VCandsMerit->size[1];
-  VCandsMerit->size[0] = 4;
-  VCandsMerit->size[1] = iindx->size[1];
-  emxEnsureCapacity((emxArray__common *)VCandsMerit, itmp, (int)sizeof(double));
-  loop_ub = iindx->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    for (i = 0; i < 4; i++) {
-      VCandsMerit->data[i + VCandsMerit->size[0] * itmp] = CandsMerit->data[i +
-        CandsMerit->size[0] * (iindx->data[iindx->size[0] * itmp] - 1)];
-    }
+  emxInit_boolean_T(&b_SPitch, 2);
+  ix = b_SPitch->size[0] * b_SPitch->size[1];
+  b_SPitch->size[0] = 1;
+  b_SPitch->size[1] = SPitch->size[1];
+  emxEnsureCapacity((emxArray__common *)b_SPitch, ix, (int)sizeof(boolean_T));
+  iy = SPitch->size[0] * SPitch->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    b_SPitch->data[ix] = (SPitch->data[ix] > 0.0);
   }
 
-  emxFree_real_T(&CandsMerit);
-  emxInit_real_T(&b_rowix, 2);
-  Num_VCands = b_sum(Idx_voiced);
+  Num_VCands = b_sum(b_SPitch);
 
   /*  Average, STD of the first choice candidates */
-  loop_ub = rowix->size[1];
-  itmp = b_rowix->size[0] * b_rowix->size[1];
-  b_rowix->size[0] = 1;
-  b_rowix->size[1] = loop_ub;
-  emxEnsureCapacity((emxArray__common *)b_rowix, itmp, (int)sizeof(double));
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    b_rowix->data[b_rowix->size[0] * itmp] = rowix->data[rowix->size[0] * itmp];
+  iy = CandsPitch->size[1] - 1;
+  nm1d2 = 0;
+  emxFree_boolean_T(&b_SPitch);
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      nm1d2++;
+    }
   }
 
-  emxInit_real_T(&c_rowix, 2);
-  ndbl = mean(b_rowix);
-  loop_ub = rowix->size[1];
-  itmp = c_rowix->size[0] * c_rowix->size[1];
-  c_rowix->size[0] = 1;
-  c_rowix->size[1] = loop_ub;
-  emxEnsureCapacity((emxArray__common *)c_rowix, itmp, (int)sizeof(double));
-  emxFree_real_T(&b_rowix);
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    c_rowix->data[c_rowix->size[0] * itmp] = rowix->data[rowix->size[0] * itmp];
+  ix = iindx->size[0] * iindx->size[1];
+  iindx->size[0] = 1;
+  iindx->size[1] = nm1d2;
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      iindx->data[nm1d2] = i + 1;
+      nm1d2++;
+    }
   }
 
-  emxInit_real_T(&d_rowix, 2);
-  apnd = b_std(c_rowix);
+  emxInit_real_T(&b_CandsPitch, 2);
+  emxInit_int32_T1(&b_iindx, 1);
+  ix = b_iindx->size[0];
+  b_iindx->size[0] = iindx->size[1];
+  emxEnsureCapacity((emxArray__common *)b_iindx, ix, (int)sizeof(int));
+  iy = iindx->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    b_iindx->data[ix] = iindx->data[iindx->size[0] * ix];
+  }
+
+  emxInit_real_T(&c_CandsPitch, 2);
+  iy = b_iindx->size[0];
+  ix = c_CandsPitch->size[0] * c_CandsPitch->size[1];
+  c_CandsPitch->size[0] = 4;
+  c_CandsPitch->size[1] = iindx->size[1];
+  emxEnsureCapacity((emxArray__common *)c_CandsPitch, ix, (int)sizeof(double));
+  nm1d2 = iindx->size[1];
+  emxFree_int32_T(&b_iindx);
+  for (ix = 0; ix < nm1d2; ix++) {
+    for (cindx = 0; cindx < 4; cindx++) {
+      c_CandsPitch->data[cindx + c_CandsPitch->size[0] * ix] = CandsPitch->
+        data[cindx + CandsPitch->size[0] * (iindx->data[iindx->size[0] * ix] - 1)];
+    }
+  }
+
+  ix = b_CandsPitch->size[0] * b_CandsPitch->size[1];
+  b_CandsPitch->size[0] = 1;
+  b_CandsPitch->size[1] = iy;
+  emxEnsureCapacity((emxArray__common *)b_CandsPitch, ix, (int)sizeof(double));
+  for (ix = 0; ix < iy; ix++) {
+    b_CandsPitch->data[b_CandsPitch->size[0] * ix] = c_CandsPitch->
+      data[c_CandsPitch->size[0] * ix];
+  }
+
+  emxFree_real_T(&c_CandsPitch);
+  avg_voiced = mean(b_CandsPitch);
+  iy = CandsPitch->size[1] - 1;
+  nm1d2 = 0;
+  emxFree_real_T(&b_CandsPitch);
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      nm1d2++;
+    }
+  }
+
+  ix = iindx->size[0] * iindx->size[1];
+  iindx->size[0] = 1;
+  iindx->size[1] = nm1d2;
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      iindx->data[nm1d2] = i + 1;
+      nm1d2++;
+    }
+  }
+
+  emxInit_real_T(&d_CandsPitch, 2);
+  emxInit_int32_T1(&c_iindx, 1);
+  ix = c_iindx->size[0];
+  c_iindx->size[0] = iindx->size[1];
+  emxEnsureCapacity((emxArray__common *)c_iindx, ix, (int)sizeof(int));
+  iy = iindx->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    c_iindx->data[ix] = iindx->data[iindx->size[0] * ix];
+  }
+
+  emxInit_real_T(&e_CandsPitch, 2);
+  iy = c_iindx->size[0];
+  ix = e_CandsPitch->size[0] * e_CandsPitch->size[1];
+  e_CandsPitch->size[0] = 4;
+  e_CandsPitch->size[1] = iindx->size[1];
+  emxEnsureCapacity((emxArray__common *)e_CandsPitch, ix, (int)sizeof(double));
+  nm1d2 = iindx->size[1];
+  emxFree_int32_T(&c_iindx);
+  for (ix = 0; ix < nm1d2; ix++) {
+    for (cindx = 0; cindx < 4; cindx++) {
+      e_CandsPitch->data[cindx + e_CandsPitch->size[0] * ix] = CandsPitch->
+        data[cindx + CandsPitch->size[0] * (iindx->data[iindx->size[0] * ix] - 1)];
+    }
+  }
+
+  ix = d_CandsPitch->size[0] * d_CandsPitch->size[1];
+  d_CandsPitch->size[0] = 1;
+  d_CandsPitch->size[1] = iy;
+  emxEnsureCapacity((emxArray__common *)d_CandsPitch, ix, (int)sizeof(double));
+  for (ix = 0; ix < iy; ix++) {
+    d_CandsPitch->data[d_CandsPitch->size[0] * ix] = e_CandsPitch->
+      data[e_CandsPitch->size[0] * ix];
+  }
+
+  emxFree_real_T(&e_CandsPitch);
+  std_voiced = b_std(d_CandsPitch);
 
   /*  Weight the deltas, so that higher merit candidates are considered */
   /*  more favorably */
-  itmp = d_rowix->size[0] * d_rowix->size[1];
-  d_rowix->size[0] = 4;
-  d_rowix->size[1] = rowix->size[1];
-  emxEnsureCapacity((emxArray__common *)d_rowix, itmp, (int)sizeof(double));
-  cdiff = 0.8 * ndbl;
-  loop_ub = rowix->size[0] * rowix->size[1];
-  emxFree_real_T(&c_rowix);
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    d_rowix->data[itmp] = rowix->data[itmp] - cdiff;
+  iy = CandsPitch->size[1] - 1;
+  nm1d2 = 0;
+  emxFree_real_T(&d_CandsPitch);
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      nm1d2++;
+    }
   }
 
-  c_abs(d_rowix, winix);
-  itmp = winix->size[0] * winix->size[1];
-  winix->size[0] = 4;
-  emxEnsureCapacity((emxArray__common *)winix, itmp, (int)sizeof(double));
-  ix = winix->size[0];
-  nm1d2 = winix->size[1];
-  loop_ub = ix * nm1d2;
-  emxFree_real_T(&d_rowix);
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    winix->data[itmp] *= 3.0 - VCandsMerit->data[itmp];
+  ix = iindx->size[0] * iindx->size[1];
+  iindx->size[0] = 1;
+  iindx->size[1] = nm1d2;
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      iindx->data[nm1d2] = i + 1;
+      nm1d2++;
+    }
   }
+
+  emxInit_real_T(&f_CandsPitch, 2);
+  anew = 0.8 * avg_voiced;
+  ix = f_CandsPitch->size[0] * f_CandsPitch->size[1];
+  f_CandsPitch->size[0] = 4;
+  f_CandsPitch->size[1] = iindx->size[1];
+  emxEnsureCapacity((emxArray__common *)f_CandsPitch, ix, (int)sizeof(double));
+  iy = iindx->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    for (cindx = 0; cindx < 4; cindx++) {
+      f_CandsPitch->data[cindx + f_CandsPitch->size[0] * ix] = CandsPitch->
+        data[cindx + CandsPitch->size[0] * (iindx->data[iindx->size[0] * ix] - 1)]
+        - anew;
+    }
+  }
+
+  emxInit_real_T(&r3, 2);
+  c_abs(f_CandsPitch, r3);
+  iy = CandsPitch->size[1] - 1;
+  nm1d2 = 0;
+  emxFree_real_T(&f_CandsPitch);
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      nm1d2++;
+    }
+  }
+
+  ix = iindx->size[0] * iindx->size[1];
+  iindx->size[0] = 1;
+  iindx->size[1] = nm1d2;
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  nm1d2 = 0;
+  for (i = 0; i <= iy; i++) {
+    if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+      iindx->data[nm1d2] = i + 1;
+      nm1d2++;
+    }
+  }
+
+  emxInit_real_T(&delta1, 2);
+  ix = delta1->size[0] * delta1->size[1];
+  delta1->size[0] = 4;
+  delta1->size[1] = r3->size[1];
+  emxEnsureCapacity((emxArray__common *)delta1, ix, (int)sizeof(double));
+  iy = r3->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    for (cindx = 0; cindx < 4; cindx++) {
+      delta1->data[cindx + delta1->size[0] * ix] = r3->data[cindx + r3->size[0] *
+        ix] * (3.0 - CandsMerit->data[cindx + CandsMerit->size[0] * (iindx->
+                data[iindx->size[0] * ix] - 1)]);
+    }
+  }
+
+  emxFree_real_T(&r3);
 
   /*  Interpolation of the weigthed candidates */
-  for (itmp = 0; itmp < 2; itmp++) {
-    outsz[itmp] = (unsigned int)winix->size[itmp];
+  ix = Signal->size[0] * Signal->size[1];
+  Signal->size[0] = 1;
+  Signal->size[1] = delta1->size[1];
+  emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
+  for (ix = 0; ix < 2; ix++) {
+    uv1[ix] = (unsigned int)Signal->size[ix];
   }
 
-  b_outsz = outsz[1];
-  outsz[1] = outsz[1];
-  itmp = iindx->size[0] * iindx->size[1];
+  ix = iindx->size[0] * iindx->size[1];
   iindx->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)iindx, itmp, (int)sizeof(int));
-  itmp = iindx->size[0] * iindx->size[1];
-  iindx->size[1] = (int)outsz[1];
-  emxEnsureCapacity((emxArray__common *)iindx, itmp, (int)sizeof(int));
-  loop_ub = (int)b_outsz;
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    iindx->data[itmp] = 1;
+  iindx->size[1] = (int)uv1[1];
+  emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+  iy = (int)uv1[1];
+  for (ix = 0; ix < iy; ix++) {
+    iindx->data[ix] = 1;
   }
 
-  ix = 4;
-  nm1d2 = -1;
-  for (i = 1; i <= winix->size[1]; i++) {
-    loop_ub = ix - 3;
-    window_length = winix->data[ix - 4];
-    itmp = 1;
+  nm1d2 = 4;
+  iy = -1;
+  for (i = 1; i <= delta1->size[1]; i++) {
+    b_ix = nm1d2 - 3;
+    anew = delta1->data[nm1d2 - 4];
+    k = 1;
     cindx = 1;
-    if (rtIsNaN(winix->data[ix - 4])) {
-      b_ix = ix - 2;
+    if (rtIsNaN(delta1->data[nm1d2 - 4])) {
+      ix = nm1d2 - 2;
       exitg2 = false;
-      while ((!exitg2) && (b_ix <= ix)) {
+      while ((!exitg2) && (ix <= nm1d2)) {
         cindx++;
-        loop_ub = b_ix;
-        if (!rtIsNaN(winix->data[b_ix - 1])) {
-          window_length = winix->data[b_ix - 1];
-          itmp = cindx;
+        b_ix = ix;
+        if (!rtIsNaN(delta1->data[ix - 1])) {
+          anew = delta1->data[ix - 1];
+          k = cindx;
           exitg2 = true;
         } else {
-          b_ix++;
+          ix++;
         }
       }
     }
 
-    if (loop_ub < ix) {
-      while (loop_ub + 1 <= ix) {
+    if (b_ix < nm1d2) {
+      while (b_ix + 1 <= nm1d2) {
         cindx++;
-        if (winix->data[loop_ub] < window_length) {
-          window_length = winix->data[loop_ub];
-          itmp = cindx;
+        if (delta1->data[b_ix] < anew) {
+          anew = delta1->data[b_ix];
+          k = cindx;
         }
 
-        loop_ub++;
+        b_ix++;
       }
     }
 
-    nm1d2++;
-    iindx->data[nm1d2] = itmp;
-    ix += 4;
+    iy++;
+    iindx->data[iy] = k;
+    nm1d2 += 4;
   }
 
-  emxFree_real_T(&winix);
-  itmp = Signal->size[0] * Signal->size[1];
+  emxFree_real_T(&delta1);
+  ix = Signal->size[0] * Signal->size[1];
   Signal->size[0] = 1;
   Signal->size[1] = iindx->size[1];
-  emxEnsureCapacity((emxArray__common *)Signal, itmp, (int)sizeof(double));
-  loop_ub = iindx->size[0] * iindx->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    Signal->data[itmp] = iindx->data[itmp];
+  emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
+  iy = iindx->size[0] * iindx->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    Signal->data[ix] = iindx->data[ix];
   }
 
-  itmp = SHC->size[0] * SHC->size[1];
+  ix = SHC->size[0] * SHC->size[1];
   SHC->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
-  ix = Signal->size[1];
-  itmp = SHC->size[0] * SHC->size[1];
-  SHC->size[1] = ix;
-  emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
-  loop_ub = Signal->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    SHC->data[itmp] = 0.0;
+  SHC->size[1] = Signal->size[1];
+  emxEnsureCapacity((emxArray__common *)SHC, ix, (int)sizeof(double));
+  iy = Signal->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    SHC->data[ix] = 0.0;
   }
 
-  emxInit_real_T(&VMerit_minmrt, 2);
-  itmp = VMerit_minmrt->size[0] * VMerit_minmrt->size[1];
+  ix = VMerit_minmrt->size[0] * VMerit_minmrt->size[1];
   VMerit_minmrt->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)VMerit_minmrt, itmp, (int)sizeof(double));
-  ix = Signal->size[1];
-  itmp = VMerit_minmrt->size[0] * VMerit_minmrt->size[1];
-  VMerit_minmrt->size[1] = ix;
-  emxEnsureCapacity((emxArray__common *)VMerit_minmrt, itmp, (int)sizeof(double));
-  loop_ub = Signal->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    VMerit_minmrt->data[itmp] = 0.0;
+  VMerit_minmrt->size[1] = Signal->size[1];
+  emxEnsureCapacity((emxArray__common *)VMerit_minmrt, ix, (int)sizeof(double));
+  iy = Signal->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    VMerit_minmrt->data[ix] = 0.0;
   }
 
-  for (ix = 0; ix < Signal->size[1]; ix++) {
-    SHC->data[ix] = rowix->data[((int)Signal->data[ix] + rowix->size[0] * ix) -
-      1];
-    VMerit_minmrt->data[ix] = VCandsMerit->data[((int)Signal->data[ix] +
-      VCandsMerit->size[0] * ix) - 1];
+  for (cindx = 0; cindx < Signal->size[1]; cindx++) {
+    iy = CandsPitch->size[1] - 1;
+    nm1d2 = 0;
+    for (i = 0; i <= iy; i++) {
+      if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+        nm1d2++;
+      }
+    }
+
+    ix = iindx->size[0] * iindx->size[1];
+    iindx->size[0] = 1;
+    iindx->size[1] = nm1d2;
+    emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+    nm1d2 = 0;
+    for (i = 0; i <= iy; i++) {
+      if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+        iindx->data[nm1d2] = i + 1;
+        nm1d2++;
+      }
+    }
+
+    SHC->data[cindx] = CandsPitch->data[((int)Signal->data[cindx] +
+      CandsPitch->size[0] * (iindx->data[iindx->size[0] * cindx] - 1)) - 1];
+    iy = CandsPitch->size[1] - 1;
+    nm1d2 = 0;
+    for (i = 0; i <= iy; i++) {
+      if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+        nm1d2++;
+      }
+    }
+
+    ix = iindx->size[0] * iindx->size[1];
+    iindx->size[0] = 1;
+    iindx->size[1] = nm1d2;
+    emxEnsureCapacity((emxArray__common *)iindx, ix, (int)sizeof(int));
+    nm1d2 = 0;
+    for (i = 0; i <= iy; i++) {
+      if (CandsPitch->data[CandsPitch->size[0] * i] > 0.0) {
+        iindx->data[nm1d2] = i + 1;
+        nm1d2++;
+      }
+    }
+
+    VMerit_minmrt->data[cindx] = CandsMerit->data[((int)Signal->data[cindx] +
+      CandsMerit->size[0] * (iindx->data[iindx->size[0] * cindx] - 1)) - 1];
   }
 
+  emxFree_int32_T(&iindx);
+  emxFree_real_T(&CandsMerit);
   emxInit_real_T(&c_SHC, 2);
-  itmp = c_SHC->size[0] * c_SHC->size[1];
+  ix = c_SHC->size[0] * c_SHC->size[1];
   c_SHC->size[0] = 1;
   c_SHC->size[1] = SHC->size[1];
-  emxEnsureCapacity((emxArray__common *)c_SHC, itmp, (int)sizeof(double));
-  loop_ub = SHC->size[0] * SHC->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    c_SHC->data[itmp] = SHC->data[itmp];
+  emxEnsureCapacity((emxArray__common *)c_SHC, ix, (int)sizeof(double));
+  iy = SHC->size[0] * SHC->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    c_SHC->data[ix] = SHC->data[ix];
   }
 
   Mymedfilt1(c_SHC, SHC);
@@ -662,57 +901,55 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   /*  VPeak_minmrt_test = medfilt1(VPeak_minmrt, max(1,Prm.median_value-2)); */
   /*  Replace the lowest merit candidates by the median smoothed ones */
   /*  computed from highest merit peaks above */
-  ix = 0;
+  cindx = 0;
   emxFree_real_T(&c_SHC);
-  while (ix <= Signal->size[1] - 1) {
-    rowix->data[((int)Signal->data[ix] + rowix->size[0] * ix) - 1] = SHC->
-      data[ix];
+  while (cindx <= Signal->size[1] - 1) {
+    winix->data[((int)Signal->data[cindx] + winix->size[0] * cindx) - 1] =
+      SHC->data[cindx];
 
     /*  Assign merit for the smoothed peaks */
-    VCandsMerit->data[((int)Signal->data[ix] + VCandsMerit->size[0] * ix) - 1] =
-      VMerit_minmrt->data[ix];
-    ix++;
+    rowix->data[((int)Signal->data[cindx] + rowix->size[0] * cindx) - 1] =
+      VMerit_minmrt->data[cindx];
+    cindx++;
   }
 
-  emxFree_real_T(&VMerit_minmrt);
+  emxFree_real_T(&SHC);
   emxInit_real_T(&VPitch, 2);
 
   /*  Use dynamic programming to find best overal path among pitch candidates */
   /*  Dynamic weight for transition costs */
   /*  balance between local and transition costs */
-  itmp = VPitch->size[0] * VPitch->size[1];
+  ix = VPitch->size[0] * VPitch->size[1];
   VPitch->size[0] = 0;
   VPitch->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)VPitch, itmp, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)VPitch, ix, (int)sizeof(double));
   if (Num_VCands > 2.0) {
-    dynamic5(rowix, VCandsMerit, 11.0 * apnd / ndbl, Signal);
-    itmp = VPitch->size[0] * VPitch->size[1];
+    dynamic5(winix, rowix, 11.0 * std_voiced / avg_voiced, Signal);
+    ix = VPitch->size[0] * VPitch->size[1];
     VPitch->size[0] = 1;
     VPitch->size[1] = Signal->size[1];
-    emxEnsureCapacity((emxArray__common *)VPitch, itmp, (int)sizeof(double));
-    loop_ub = Signal->size[0] * Signal->size[1];
-    for (itmp = 0; itmp < loop_ub; itmp++) {
-      VPitch->data[itmp] = Signal->data[itmp];
+    emxEnsureCapacity((emxArray__common *)VPitch, ix, (int)sizeof(double));
+    iy = Signal->size[0] * Signal->size[1];
+    for (ix = 0; ix < iy; ix++) {
+      VPitch->data[ix] = Signal->data[ix];
     }
 
     b_Mymedfilt1(VPitch, Signal);
-    itmp = VPitch->size[0] * VPitch->size[1];
+    ix = VPitch->size[0] * VPitch->size[1];
     VPitch->size[0] = 1;
     VPitch->size[1] = Signal->size[1];
-    emxEnsureCapacity((emxArray__common *)VPitch, itmp, (int)sizeof(double));
-    loop_ub = Signal->size[0] * Signal->size[1];
-    for (itmp = 0; itmp < loop_ub; itmp++) {
-      VPitch->data[itmp] = Signal->data[itmp];
+    emxEnsureCapacity((emxArray__common *)VPitch, ix, (int)sizeof(double));
+    iy = Signal->size[0] * Signal->size[1];
+    for (ix = 0; ix < iy; ix++) {
+      VPitch->data[ix] = Signal->data[ix];
     }
 
     /*     VPitch_test = medfilt1(VPitch, max(Prm.median_value-2, 1)); */
   } else if (Num_VCands > 0.0) {
-    for (i = 0; i < (int)Num_VCands; i++) {
-      /*  assume at least 1 voiced candidate */
-      VPitch->data[0] = 150.0;
-
-      /*    Not really correct,  but should prevent hang up if only  0,1,2,3 voiced candidates */
-    }
+    /*        for i = 1:Num_VCands   % assume at least 1 voiced candidate */
+    /*         VPitch (i) = 150;   %   Not really correct,  but should prevent hang up if only  0,1,2,3 voiced candidates */
+    /*        end;  */
+    VPitch->data[0] = 150.0;
 
     /*    This should only occur for very short pitch tracks, and even then rarely */
   } else {
@@ -722,99 +959,102 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
     Idx_voiced->data[0] = true;
   }
 
-  emxFree_real_T(&VCandsMerit);
   emxFree_real_T(&rowix);
+  emxFree_real_T(&winix);
+  emxFree_real_T(&CandsPitch);
 
   /*  Computing some statistics from the voiced frames */
   b_mean(VPitch, pAvg_data, pAvg_size);
   c_std(VPitch, pStd_data, pStd_size);
 
   /*  Streching out the smoothed pitch track */
-  eml_li_find(Idx_voiced, iindx);
-  loop_ub = iindx->size[0] * iindx->size[1];
-  emxFree_boolean_T(&Idx_voiced);
-  emxFree_real_T(&CandsPitch);
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    SPitch->data[iindx->data[itmp] - 1] = VPitch->data[itmp];
+  iy = Idx_voiced->size[1];
+  nm1d2 = 0;
+  for (i = 0; i < iy; i++) {
+    if (Idx_voiced->data[i]) {
+      SPitch->data[i] = VPitch->data[nm1d2];
+      nm1d2++;
+    }
   }
 
   emxFree_real_T(&VPitch);
-  b_emxInit_boolean_T(&b_SPitch, 1);
+  emxFree_boolean_T(&Idx_voiced);
+  emxInit_boolean_T1(&c_SPitch, 1);
 
   /*  Interpolating thru unvoiced frames */
-  window_length = SPitch->data[SPitch->size[1] - 1];
+  SPitch_temp_end = SPitch->data[SPitch->size[1] - 1];
   b_pAvg_data.data = (double *)pAvg_data;
   b_pAvg_data.size = (int *)pAvg_size;
   b_pAvg_data.allocatedSize = -1;
   b_pAvg_data.numDimensions = 1;
   b_pAvg_data.canFreeData = false;
   c_rdivide(&b_pAvg_data, 2.0, Magnit);
-  Num_VCands = SPitch->data[0];
-  itmp = b_SPitch->size[0];
-  b_SPitch->size[0] = Magnit->size[0];
-  emxEnsureCapacity((emxArray__common *)b_SPitch, itmp, (int)sizeof(boolean_T));
-  loop_ub = Magnit->size[0];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    b_SPitch->data[itmp] = (Num_VCands < Magnit->data[itmp]);
+  anew = SPitch->data[0];
+  ix = c_SPitch->size[0];
+  c_SPitch->size[0] = Magnit->size[0];
+  emxEnsureCapacity((emxArray__common *)c_SPitch, ix, (int)sizeof(boolean_T));
+  iy = Magnit->size[0];
+  for (ix = 0; ix < iy; ix++) {
+    c_SPitch->data[ix] = (anew < Magnit->data[ix]);
   }
 
-  if (all(b_SPitch)) {
+  if (all(c_SPitch)) {
     SPitch->data[0] = pAvg_data[0];
   }
 
-  emxFree_boolean_T(&b_SPitch);
-  b_emxInit_boolean_T(&SPitch_temp_end, 1);
+  emxFree_boolean_T(&c_SPitch);
+  emxInit_boolean_T1(&b_SPitch_temp_end, 1);
   c_pAvg_data.data = (double *)pAvg_data;
   c_pAvg_data.size = (int *)pAvg_size;
   c_pAvg_data.allocatedSize = -1;
   c_pAvg_data.numDimensions = 1;
   c_pAvg_data.canFreeData = false;
   c_rdivide(&c_pAvg_data, 2.0, Magnit);
-  itmp = SPitch_temp_end->size[0];
-  SPitch_temp_end->size[0] = Magnit->size[0];
-  emxEnsureCapacity((emxArray__common *)SPitch_temp_end, itmp, (int)sizeof
+  ix = b_SPitch_temp_end->size[0];
+  b_SPitch_temp_end->size[0] = Magnit->size[0];
+  emxEnsureCapacity((emxArray__common *)b_SPitch_temp_end, ix, (int)sizeof
                     (boolean_T));
-  loop_ub = Magnit->size[0];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    SPitch_temp_end->data[itmp] = (window_length < Magnit->data[itmp]);
+  iy = Magnit->size[0];
+  for (ix = 0; ix < iy; ix++) {
+    b_SPitch_temp_end->data[ix] = (SPitch_temp_end < Magnit->data[ix]);
   }
 
   emxFree_real_T(&Magnit);
-  if (all(SPitch_temp_end)) {
+  if (all(b_SPitch_temp_end)) {
     SPitch->data[SPitch->size[1] - 1] = pAvg_data[0];
   }
 
-  emxFree_boolean_T(&SPitch_temp_end);
+  emxFree_boolean_T(&b_SPitch_temp_end);
   emxInit_int32_T(&jj, 2);
-  nm1d2 = 0;
-  itmp = jj->size[0] * jj->size[1];
+  iy = 0;
+  ix = jj->size[0] * jj->size[1];
   jj->size[0] = 1;
   jj->size[1] = SPitch->size[1];
-  emxEnsureCapacity((emxArray__common *)jj, itmp, (int)sizeof(int));
-  ix = SPitch->size[1];
-  itmp = SHC->size[0] * SHC->size[1];
-  SHC->size[0] = 1;
-  SHC->size[1] = ix;
-  emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)jj, ix, (int)sizeof(int));
+  unnamed_idx_1 = (unsigned int)SPitch->size[1];
+  ix = Signal->size[0] * Signal->size[1];
+  Signal->size[0] = 1;
+  Signal->size[1] = (int)unnamed_idx_1;
+  emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
   if (SPitch->size[1] == 0) {
-    itmp = jj->size[0] * jj->size[1];
+    ix = jj->size[0] * jj->size[1];
     jj->size[0] = 1;
     jj->size[1] = 0;
-    emxEnsureCapacity((emxArray__common *)jj, itmp, (int)sizeof(int));
-    itmp = SHC->size[0] * SHC->size[1];
-    SHC->size[0] = 1;
-    SHC->size[1] = 0;
-    emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)jj, ix, (int)sizeof(int));
+    ix = Signal->size[0] * Signal->size[1];
+    Signal->size[0] = 1;
+    Signal->size[1] = 0;
+    emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
   } else {
-    ix = 1;
+    nm1d2 = 1;
     exitg1 = false;
-    while ((!exitg1) && (ix <= SPitch->size[1])) {
+    while ((!exitg1) && (nm1d2 <= SPitch->size[1])) {
       guard1 = false;
-      if (SPitch->data[SPitch->size[0] * (ix - 1)] != 0.0) {
-        nm1d2++;
-        jj->data[nm1d2 - 1] = ix;
-        SHC->data[nm1d2 - 1] = SPitch->data[SPitch->size[0] * (ix - 1)];
-        if (nm1d2 >= SPitch->size[1]) {
+      if (SPitch->data[SPitch->size[0] * (nm1d2 - 1)] != 0.0) {
+        iy++;
+        jj->data[iy - 1] = nm1d2;
+        Signal->data[iy - 1] = SPitch->data[SPitch->size[0] * (nm1d2 - 1)];
+        if (iy >= SPitch->size[1]) {
           exitg1 = true;
         } else {
           guard1 = true;
@@ -824,85 +1064,51 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
       }
 
       if (guard1) {
-        ix++;
+        nm1d2++;
       }
     }
 
     if (SPitch->size[1] == 1) {
-      if (nm1d2 == 0) {
-        itmp = jj->size[0] * jj->size[1];
+      if (iy == 0) {
+        ix = jj->size[0] * jj->size[1];
         jj->size[0] = 1;
         jj->size[1] = 0;
-        emxEnsureCapacity((emxArray__common *)jj, itmp, (int)sizeof(int));
-        itmp = SHC->size[0] * SHC->size[1];
-        SHC->size[0] = 1;
-        SHC->size[1] = 0;
-        emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
+        emxEnsureCapacity((emxArray__common *)jj, ix, (int)sizeof(int));
+        ix = Signal->size[0] * Signal->size[1];
+        Signal->size[0] = 1;
+        Signal->size[1] = 0;
+        emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
       }
     } else {
-      if (1 > nm1d2) {
-        loop_ub = 0;
+      ix = jj->size[0] * jj->size[1];
+      if (1 > iy) {
+        jj->size[1] = 0;
       } else {
-        loop_ub = nm1d2;
+        jj->size[1] = iy;
       }
 
-      emxInit_int32_T(&b_jj, 2);
-      itmp = b_jj->size[0] * b_jj->size[1];
-      b_jj->size[0] = 1;
-      b_jj->size[1] = loop_ub;
-      emxEnsureCapacity((emxArray__common *)b_jj, itmp, (int)sizeof(int));
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        b_jj->data[b_jj->size[0] * itmp] = jj->data[itmp];
-      }
-
-      itmp = jj->size[0] * jj->size[1];
-      jj->size[0] = 1;
-      jj->size[1] = b_jj->size[1];
-      emxEnsureCapacity((emxArray__common *)jj, itmp, (int)sizeof(int));
-      loop_ub = b_jj->size[1];
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        jj->data[jj->size[0] * itmp] = b_jj->data[b_jj->size[0] * itmp];
-      }
-
-      emxFree_int32_T(&b_jj);
-      if (1 > nm1d2) {
-        loop_ub = 0;
+      emxEnsureCapacity((emxArray__common *)jj, ix, (int)sizeof(int));
+      ix = Signal->size[0] * Signal->size[1];
+      if (1 > iy) {
+        Signal->size[1] = 0;
       } else {
-        loop_ub = nm1d2;
+        Signal->size[1] = iy;
       }
 
-      emxInit_real_T(&d_SHC, 2);
-      itmp = d_SHC->size[0] * d_SHC->size[1];
-      d_SHC->size[0] = 1;
-      d_SHC->size[1] = loop_ub;
-      emxEnsureCapacity((emxArray__common *)d_SHC, itmp, (int)sizeof(double));
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        d_SHC->data[d_SHC->size[0] * itmp] = SHC->data[itmp];
-      }
-
-      itmp = SHC->size[0] * SHC->size[1];
-      SHC->size[0] = 1;
-      SHC->size[1] = d_SHC->size[1];
-      emxEnsureCapacity((emxArray__common *)SHC, itmp, (int)sizeof(double));
-      loop_ub = d_SHC->size[1];
-      for (itmp = 0; itmp < loop_ub; itmp++) {
-        SHC->data[SHC->size[0] * itmp] = d_SHC->data[d_SHC->size[0] * itmp];
-      }
-
-      emxFree_real_T(&d_SHC);
+      emxEnsureCapacity((emxArray__common *)Signal, ix, (int)sizeof(double));
     }
   }
 
   if (numframes < 1.0) {
-    ix = -1;
-    Num_VCands = 1.0;
+    cindx = 0;
+    anew = 1.0;
     apnd = 0.0;
   } else if (rtIsInf(numframes)) {
-    ix = 0;
-    Num_VCands = rtNaN;
+    cindx = 1;
+    anew = rtNaN;
     apnd = numframes;
   } else {
-    Num_VCands = 1.0;
+    anew = 1.0;
     ndbl = floor((numframes - 1.0) + 0.5);
     apnd = 1.0 + ndbl;
     cdiff = (1.0 + ndbl) - numframes;
@@ -915,102 +1121,59 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
       ndbl++;
     }
 
-    ix = (int)ndbl - 1;
+    cindx = (int)ndbl;
   }
 
-  itmp = Signal->size[0] * Signal->size[1];
-  Signal->size[0] = 1;
-  Signal->size[1] = ix + 1;
-  emxEnsureCapacity((emxArray__common *)Signal, itmp, (int)sizeof(double));
-  if (ix + 1 > 0) {
-    Signal->data[0] = Num_VCands;
-    if (ix + 1 > 1) {
-      Signal->data[ix] = apnd;
+  ix = VMerit_minmrt->size[0] * VMerit_minmrt->size[1];
+  VMerit_minmrt->size[0] = 1;
+  VMerit_minmrt->size[1] = cindx;
+  emxEnsureCapacity((emxArray__common *)VMerit_minmrt, ix, (int)sizeof(double));
+  if (cindx > 0) {
+    VMerit_minmrt->data[0] = anew;
+    if (cindx > 1) {
+      VMerit_minmrt->data[cindx - 1] = apnd;
+      ix = cindx - 1;
       nm1d2 = ix / 2;
-      for (cindx = 1; cindx < nm1d2; cindx++) {
-        Signal->data[cindx] = Num_VCands + (double)cindx;
-        Signal->data[ix - cindx] = apnd - (double)cindx;
+      for (k = 1; k < nm1d2; k++) {
+        VMerit_minmrt->data[k] = anew + (double)k;
+        VMerit_minmrt->data[(cindx - k) - 1] = apnd - (double)k;
       }
 
-      if (nm1d2 << 1 == ix) {
-        Signal->data[nm1d2] = (Num_VCands + apnd) / 2.0;
+      if (nm1d2 << 1 == cindx - 1) {
+        VMerit_minmrt->data[nm1d2] = (anew + apnd) / 2.0;
       } else {
-        Signal->data[nm1d2] = Num_VCands + (double)nm1d2;
-        Signal->data[nm1d2 + 1] = apnd - (double)nm1d2;
+        VMerit_minmrt->data[nm1d2] = anew + (double)nm1d2;
+        VMerit_minmrt->data[nm1d2 + 1] = apnd - (double)nm1d2;
       }
     }
   }
 
-  emxInit_real_T(&c_jj, 2);
-  itmp = c_jj->size[0] * c_jj->size[1];
-  c_jj->size[0] = 1;
-  c_jj->size[1] = jj->size[1];
-  emxEnsureCapacity((emxArray__common *)c_jj, itmp, (int)sizeof(double));
-  loop_ub = jj->size[0] * jj->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    c_jj->data[itmp] = jj->data[itmp];
+  emxInit_real_T(&b_jj, 2);
+  ix = b_jj->size[0] * b_jj->size[1];
+  b_jj->size[0] = 1;
+  b_jj->size[1] = jj->size[1];
+  emxEnsureCapacity((emxArray__common *)b_jj, ix, (int)sizeof(double));
+  iy = jj->size[0] * jj->size[1];
+  for (ix = 0; ix < iy; ix++) {
+    b_jj->data[ix] = jj->data[ix];
   }
 
   emxFree_int32_T(&jj);
-  interp1(c_jj, SHC, Signal, SPitch);
-  itmp = Signal->size[0] * Signal->size[1];
-  Signal->size[0] = 1;
-  Signal->size[1] = SPitch->size[1];
-  emxEnsureCapacity((emxArray__common *)Signal, itmp, (int)sizeof(double));
-  loop_ub = SPitch->size[0] * SPitch->size[1];
-  emxFree_real_T(&c_jj);
-  emxFree_real_T(&SHC);
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    Signal->data[itmp] = SPitch->data[itmp];
-  }
-
-  for (itmp = 0; itmp < 2; itmp++) {
-    outsz[itmp] = (unsigned int)SPitch->size[itmp];
-  }
-
-  itmp = SPitch->size[0] * SPitch->size[1];
-  SPitch->size[0] = 1;
-  SPitch->size[1] = (int)outsz[1];
-  emxEnsureCapacity((emxArray__common *)SPitch, itmp, (int)sizeof(double));
-  if (Signal->size[1] >= 6) {
-    itmp = SPitch->size[0] * SPitch->size[1];
-    SPitch->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)SPitch, itmp, (int)sizeof(double));
-    itmp = SPitch->size[0] * SPitch->size[1];
-    SPitch->size[1] = (int)outsz[1];
-    emxEnsureCapacity((emxArray__common *)SPitch, itmp, (int)sizeof(double));
-    loop_ub = (int)outsz[1];
-    for (itmp = 0; itmp < loop_ub; itmp++) {
-      SPitch->data[itmp] = 0.0;
-    }
-
-    for (cindx = 0; cindx < 3; cindx++) {
-      nm1d2 = (cindx + Signal->size[1]) - cindx;
-      for (ix = cindx; ix + 1 <= nm1d2; ix++) {
-        SPitch->data[ix] += 0.33333333333333331 * Signal->data[ix - cindx];
-      }
-    }
-  } else {
-    for (cindx = 0; cindx < 2; cindx++) {
-      dbuffer[cindx + 1] = 0.0;
-    }
-
-    for (ix = 0; ix + 1 <= Signal->size[1]; ix++) {
-      for (cindx = 0; cindx < 2; cindx++) {
-        dbuffer[cindx] = dbuffer[cindx + 1];
-      }
-
-      dbuffer[2] = 0.0;
-      for (cindx = 0; cindx < 3; cindx++) {
-        window_length = dbuffer[cindx] + Signal->data[ix] * 0.33333333333333331;
-        dbuffer[cindx] = window_length;
-      }
-
-      SPitch->data[ix] = dbuffer[0];
-    }
-  }
-
+  emxInit_real_T(&d_SPitch, 2);
+  interp1(b_jj, Signal, VMerit_minmrt, SPitch);
+  ix = d_SPitch->size[0] * d_SPitch->size[1];
+  d_SPitch->size[0] = 1;
+  d_SPitch->size[1] = SPitch->size[1];
+  emxEnsureCapacity((emxArray__common *)d_SPitch, ix, (int)sizeof(double));
+  iy = SPitch->size[0] * SPitch->size[1];
+  emxFree_real_T(&b_jj);
+  emxFree_real_T(&VMerit_minmrt);
   emxFree_real_T(&Signal);
+  for (ix = 0; ix < iy; ix++) {
+    d_SPitch->data[ix] = SPitch->data[ix];
+  }
+
+  b_filter(d_SPitch, SPitch);
 
   /*   above messes up  first few values of SPitch  ---  simple fix up */
   /*   Note--   this fix up should be based on above filter order */
@@ -1018,33 +1181,22 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   SPitch->data[1] = SPitch->data[3];
 
   /*  Create pitch track with Voiced/Unvoiced decision */
-  itmp = VUVSPitch->size[0] * VUVSPitch->size[1];
+  ix = VUVSPitch->size[0] * VUVSPitch->size[1];
   VUVSPitch->size[0] = 1;
   VUVSPitch->size[1] = SPitch->size[1];
-  emxEnsureCapacity((emxArray__common *)VUVSPitch, itmp, (int)sizeof(double));
-  loop_ub = SPitch->size[0] * SPitch->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    VUVSPitch->data[itmp] = SPitch->data[itmp];
+  emxEnsureCapacity((emxArray__common *)VUVSPitch, ix, (int)sizeof(double));
+  iy = SPitch->size[0] * SPitch->size[1];
+  emxFree_real_T(&d_SPitch);
+  for (ix = 0; ix < iy; ix++) {
+    VUVSPitch->data[ix] = SPitch->data[ix];
   }
 
-  emxInit_boolean_T(&b_VUVEnergy, 2);
-  itmp = b_VUVEnergy->size[0] * b_VUVEnergy->size[1];
-  b_VUVEnergy->size[0] = 1;
-  b_VUVEnergy->size[1] = VUVEnergy->size[1];
-  emxEnsureCapacity((emxArray__common *)b_VUVEnergy, itmp, (int)sizeof(boolean_T));
-  loop_ub = VUVEnergy->size[0] * VUVEnergy->size[1];
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    b_VUVEnergy->data[itmp] = (VUVEnergy->data[itmp] == 0);
+  iy = VUVEnergy->size[1];
+  for (i = 0; i < iy; i++) {
+    if (!VUVEnergy->data[i]) {
+      VUVSPitch->data[i] = 0.0;
+    }
   }
-
-  eml_li_find(b_VUVEnergy, iindx);
-  loop_ub = iindx->size[0] * iindx->size[1];
-  emxFree_boolean_T(&b_VUVEnergy);
-  for (itmp = 0; itmp < loop_ub; itmp++) {
-    VUVSPitch->data[iindx->data[itmp] - 1] = 0.0;
-  }
-
-  emxFree_int32_T(&iindx);
 
   /*  SPitch = SPitch - delta; */
 }

@@ -1,15 +1,19 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: Myhanning.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "Myhanning.h"
 #include "yaapt_emxutil.h"
+#include "cos.h"
 #include "rdivide.h"
 #include "yaapt_rtwutil.h"
 
@@ -127,7 +131,6 @@ static double rt_remd_snf(double u0, double u1)
 void Myhanning(double order, emxArray_real_T *w)
 {
   emxArray_real_T *y;
-  emxArray_real_T *b_y;
   double half;
   int n;
   double anew;
@@ -171,20 +174,19 @@ void Myhanning(double order, emxArray_real_T *w)
   /*  Does not include the first and last zero sample */
   /*     w = sym_hanning(n); */
   emxInit_real_T(&y, 2);
-  b_emxInit_real_T(&b_y, 1);
   if (!(rt_remd_snf(order, 2.0) != 0.0)) {
     /*  Even length window */
     half = order / 2.0;
     if (rtIsNaN(half)) {
-      n = 0;
+      n = 1;
       anew = rtNaN;
       apnd = half;
     } else if (half < 1.0) {
-      n = -1;
+      n = 0;
       anew = 1.0;
       apnd = half;
     } else if (rtIsInf(half)) {
-      n = 0;
+      n = 1;
       anew = rtNaN;
       apnd = half;
     } else {
@@ -202,27 +204,28 @@ void Myhanning(double order, emxArray_real_T *w)
       }
 
       if (ndbl >= 0.0) {
-        n = (int)ndbl - 1;
+        n = (int)ndbl;
       } else {
-        n = -1;
+        n = 0;
       }
     }
 
     i2 = y->size[0] * y->size[1];
     y->size[0] = 1;
-    y->size[1] = n + 1;
+    y->size[1] = n;
     emxEnsureCapacity((emxArray__common *)y, i2, (int)sizeof(double));
-    if (n + 1 > 0) {
+    if (n > 0) {
       y->data[0] = anew;
-      if (n + 1 > 1) {
-        y->data[n] = apnd;
-        nm1d2 = n / 2;
+      if (n > 1) {
+        y->data[n - 1] = apnd;
+        i2 = n - 1;
+        nm1d2 = i2 / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
-          y->data[n - k] = apnd - (double)k;
+          y->data[(n - k) - 1] = apnd - (double)k;
         }
 
-        if (nm1d2 << 1 == n) {
+        if (nm1d2 << 1 == n - 1) {
           y->data[nm1d2] = (anew + apnd) / 2.0;
         } else {
           y->data[nm1d2] = anew + (double)nm1d2;
@@ -231,7 +234,7 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    b_emxInit_real_T(&r2, 1);
+    emxInit_real_T1(&r2, 1);
     i2 = r2->size[0];
     r2->size[0] = y->size[1];
     emxEnsureCapacity((emxArray__common *)r2, i2, (int)sizeof(double));
@@ -240,25 +243,21 @@ void Myhanning(double order, emxArray_real_T *w)
       r2->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
     }
 
-    c_rdivide(r2, order + 1.0, b_y);
+    c_rdivide(r2, order + 1.0, w);
+    c_cos(w);
     i2 = w->size[0];
-    w->size[0] = b_y->size[0];
     emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
-    nm1d2 = b_y->size[0];
+    nm1d2 = w->size[0];
     emxFree_real_T(&r2);
     for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = b_y->data[i2];
-    }
-
-    for (k = 0; k < b_y->size[0]; k++) {
-      w->data[k] = cos(w->data[k]);
+      w->data[i2] = 1.0 - w->data[i2];
     }
 
     i2 = w->size[0];
     emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
     nm1d2 = w->size[0];
     for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = 0.5 * (1.0 - w->data[i2]);
+      w->data[i2] *= 0.5;
     }
 
     if (1 > w->size[0]) {
@@ -271,7 +270,7 @@ void Myhanning(double order, emxArray_real_T *w)
       n = 1;
     }
 
-    b_emxInit_real_T(&b_w, 1);
+    emxInit_real_T1(&b_w, 1);
     i3 = b_w->size[0];
     b_w->size[0] = (w->size[0] + div_s32_floor(n - i2, k)) + 1;
     emxEnsureCapacity((emxArray__common *)b_w, i3, (int)sizeof(double));
@@ -298,15 +297,15 @@ void Myhanning(double order, emxArray_real_T *w)
     /*  Odd length window */
     half = (order + 1.0) / 2.0;
     if (rtIsNaN(half)) {
-      n = 0;
+      n = 1;
       anew = rtNaN;
       apnd = half;
     } else if (half < 1.0) {
-      n = -1;
+      n = 0;
       anew = 1.0;
       apnd = half;
     } else if (rtIsInf(half)) {
-      n = 0;
+      n = 1;
       anew = rtNaN;
       apnd = half;
     } else {
@@ -324,27 +323,28 @@ void Myhanning(double order, emxArray_real_T *w)
       }
 
       if (ndbl >= 0.0) {
-        n = (int)ndbl - 1;
+        n = (int)ndbl;
       } else {
-        n = -1;
+        n = 0;
       }
     }
 
     i2 = y->size[0] * y->size[1];
     y->size[0] = 1;
-    y->size[1] = n + 1;
+    y->size[1] = n;
     emxEnsureCapacity((emxArray__common *)y, i2, (int)sizeof(double));
-    if (n + 1 > 0) {
+    if (n > 0) {
       y->data[0] = anew;
-      if (n + 1 > 1) {
-        y->data[n] = apnd;
-        nm1d2 = n / 2;
+      if (n > 1) {
+        y->data[n - 1] = apnd;
+        i2 = n - 1;
+        nm1d2 = i2 / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
-          y->data[n - k] = apnd - (double)k;
+          y->data[(n - k) - 1] = apnd - (double)k;
         }
 
-        if (nm1d2 << 1 == n) {
+        if (nm1d2 << 1 == n - 1) {
           y->data[nm1d2] = (anew + apnd) / 2.0;
         } else {
           y->data[nm1d2] = anew + (double)nm1d2;
@@ -353,7 +353,7 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    b_emxInit_real_T(&r2, 1);
+    emxInit_real_T1(&r2, 1);
     i2 = r2->size[0];
     r2->size[0] = y->size[1];
     emxEnsureCapacity((emxArray__common *)r2, i2, (int)sizeof(double));
@@ -362,38 +362,34 @@ void Myhanning(double order, emxArray_real_T *w)
       r2->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
     }
 
-    c_rdivide(r2, order + 1.0, b_y);
+    c_rdivide(r2, order + 1.0, w);
+    c_cos(w);
     i2 = w->size[0];
-    w->size[0] = b_y->size[0];
     emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
-    nm1d2 = b_y->size[0];
+    nm1d2 = w->size[0];
     emxFree_real_T(&r2);
     for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = b_y->data[i2];
-    }
-
-    for (k = 0; k < b_y->size[0]; k++) {
-      w->data[k] = cos(w->data[k]);
+      w->data[i2] = 1.0 - w->data[i2];
     }
 
     i2 = w->size[0];
     emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
     nm1d2 = w->size[0];
     for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = 0.5 * (1.0 - w->data[i2]);
+      w->data[i2] *= 0.5;
     }
 
-    if (1 > w->size[0] - 1) {
+    if (1.0 > (double)w->size[0] - 1.0) {
       i2 = 1;
       k = 1;
       n = 0;
     } else {
-      i2 = w->size[0] - 1;
+      i2 = (int)((double)w->size[0] - 1.0);
       k = -1;
       n = 1;
     }
 
-    b_emxInit_real_T(&b_w, 1);
+    emxInit_real_T1(&b_w, 1);
     i3 = b_w->size[0];
     b_w->size[0] = (w->size[0] + div_s32_floor(n - i2, k)) + 1;
     emxEnsureCapacity((emxArray__common *)b_w, i3, (int)sizeof(double));
@@ -418,7 +414,6 @@ void Myhanning(double order, emxArray_real_T *w)
     emxFree_real_T(&b_w);
   }
 
-  emxFree_real_T(&b_y);
   emxFree_real_T(&y);
 
   /* --------------------------------------------------------------------- */

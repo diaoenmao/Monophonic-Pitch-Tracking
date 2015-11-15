@@ -1,4 +1,8 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
  * sinc.c
  *
  * Code generation for function 'sinc'
@@ -11,100 +15,112 @@
 #include "sinc.h"
 #include "rdivide.h"
 #include "sin.h"
+#include "find.h"
+#include "indexShapeCheck.h"
+#include "yaapt_data.h"
+#include "lapacke.h"
+
+/* Variable Definitions */
+static emlrtRSInfo x_emlrtRSI = { 24, "sinc",
+  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
+
+static emlrtBCInfo pb_emlrtBCI = { 1, 5776, 25, 1, "", "sinc",
+  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m", 0 };
 
 /* Function Definitions */
 
 /*
  *
  */
-void b_sinc(real_T x[5776], real_T y[5776])
+void b_sinc(const emlrtStack *sp, real_T x[5776], real_T y[5776])
 {
-  int32_T idx;
-  int16_T ii_data[5776];
-  int32_T ii;
-  boolean_T exitg1;
-  boolean_T guard1 = false;
-  int16_T b_ii_data[5776];
-  int16_T i_data[5776];
-  real_T dv9[5776];
-  real_T dv10[5776];
-  idx = 0;
-  ii = 1;
-  exitg1 = false;
-  while ((!exitg1) && (ii < 5777)) {
-    guard1 = false;
-    if (x[ii - 1] == 0.0) {
-      idx++;
-      ii_data[idx - 1] = (int16_T)ii;
-      if (idx >= 5776) {
-        exitg1 = true;
-      } else {
-        guard1 = true;
-      }
-    } else {
-      guard1 = true;
+  boolean_T b_x[5776];
+  int32_T i4;
+  int32_T ii_size[1];
+  int32_T ii_data[5776];
+  int32_T loop_ub;
+  int32_T i_data[5776];
+  int32_T i5;
+  real_T dv4[5776];
+  real_T dv5[5776];
+  emlrtStack st;
+  emlrtStack b_st;
+  st.prev = sp;
+  st.tls = sp->tls;
+  st.site = &x_emlrtRSI;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  for (i4 = 0; i4 < 5776; i4++) {
+    b_x[i4] = (x[i4] == 0.0);
+  }
+
+  b_st.site = &y_emlrtRSI;
+  eml_find(&b_st, b_x, ii_data, ii_size);
+  loop_ub = ii_size[0];
+  for (i4 = 0; i4 < loop_ub; i4++) {
+    i_data[i4] = ii_data[i4];
+  }
+
+  loop_ub = ii_size[0];
+  for (i4 = 0; i4 < loop_ub; i4++) {
+    i5 = i_data[i4];
+    if (!((i5 >= 1) && (i5 <= 5776))) {
+      emlrtDynamicBoundsCheckR2012b(i5, 1, 5776, &pb_emlrtBCI, sp);
     }
 
-    if (guard1) {
-      ii++;
-    }
+    ii_data[i4] = i5;
   }
 
-  if (1 > idx) {
-    idx = 0;
+  loop_ub = ii_size[0];
+  for (i4 = 0; i4 < loop_ub; i4++) {
+    x[ii_data[i4] - 1] = 1.0;
   }
 
-  for (ii = 0; ii < idx; ii++) {
-    b_ii_data[ii] = ii_data[ii];
+  for (i4 = 0; i4 < 5776; i4++) {
+    dv4[i4] = 3.1415926535897931 * x[i4];
   }
 
-  for (ii = 0; ii < idx; ii++) {
-    ii_data[ii] = b_ii_data[ii];
+  b_sin(dv4);
+  for (i4 = 0; i4 < 5776; i4++) {
+    dv5[i4] = 3.1415926535897931 * x[i4];
   }
 
-  for (ii = 0; ii < idx; ii++) {
-    i_data[ii] = ii_data[ii];
+  b_rdivide(dv4, dv5, y);
+  loop_ub = ii_size[0];
+  for (i4 = 0; i4 < loop_ub; i4++) {
+    ii_data[i4] = i_data[i4];
   }
 
-  for (ii = 0; ii < idx; ii++) {
-    ii_data[ii] = i_data[ii];
-  }
-
-  for (ii = 0; ii < idx; ii++) {
-    x[ii_data[ii] - 1] = 1.0;
-  }
-
-  for (ii = 0; ii < 5776; ii++) {
-    dv9[ii] = 3.1415926535897931 * x[ii];
-  }
-
-  b_sin(dv9);
-  for (ii = 0; ii < 5776; ii++) {
-    dv10[ii] = 3.1415926535897931 * x[ii];
-  }
-
-  b_rdivide(dv9, dv10, y);
-  for (ii = 0; ii < idx; ii++) {
-    ii_data[ii] = i_data[ii];
-  }
-
-  for (ii = 0; ii < idx; ii++) {
-    y[ii_data[ii] - 1] = 1.0;
+  loop_ub = ii_size[0];
+  for (i4 = 0; i4 < loop_ub; i4++) {
+    y[ii_data[i4] - 1] = 1.0;
   }
 }
 
 /*
  *
  */
-void sinc(real_T x[75], real_T y[75])
+void sinc(const emlrtStack *sp, real_T x[75], real_T y[75])
 {
   int32_T idx;
   int8_T ii_data[75];
   int32_T ii;
   boolean_T exitg1;
   boolean_T guard1 = false;
-  int8_T b_ii_data[75];
+  int32_T loop_ub;
+  int32_T iv9[2];
   int8_T i_data[75];
+  emlrtStack st;
+  emlrtStack b_st;
+  emlrtStack c_st;
+  st.prev = sp;
+  st.tls = sp->tls;
+  st.site = &x_emlrtRSI;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  c_st.prev = &b_st;
+  c_st.tls = b_st.tls;
+  b_st.site = &y_emlrtRSI;
   idx = 0;
   ii = 1;
   exitg1 = false;
@@ -128,28 +144,25 @@ void sinc(real_T x[75], real_T y[75])
   }
 
   if (1 > idx) {
-    ii = 0;
+    loop_ub = 0;
   } else {
-    ii = idx;
+    loop_ub = idx;
   }
 
-  for (idx = 0; idx < ii; idx++) {
-    b_ii_data[idx] = ii_data[idx];
-  }
-
-  for (idx = 0; idx < ii; idx++) {
-    ii_data[idx] = b_ii_data[idx];
-  }
-
-  for (idx = 0; idx < ii; idx++) {
+  iv9[0] = 1;
+  iv9[1] = loop_ub;
+  c_st.site = &ab_emlrtRSI;
+  indexShapeCheck(&c_st, 75, iv9);
+  for (idx = 0; idx < loop_ub; idx++) {
     i_data[idx] = ii_data[idx];
   }
 
-  for (idx = 0; idx < ii; idx++) {
-    ii_data[idx] = i_data[idx];
+  for (idx = 0; idx < loop_ub; idx++) {
+    ii = i_data[idx];
+    ii_data[idx] = (int8_T)ii;
   }
 
-  for (idx = 0; idx < ii; idx++) {
+  for (idx = 0; idx < loop_ub; idx++) {
     x[ii_data[idx] - 1] = 1.0;
   }
 
@@ -158,11 +171,11 @@ void sinc(real_T x[75], real_T y[75])
       (3.1415926535897931 * x[idx]);
   }
 
-  for (idx = 0; idx < ii; idx++) {
+  for (idx = 0; idx < loop_ub; idx++) {
     ii_data[idx] = i_data[idx];
   }
 
-  for (idx = 0; idx < ii; idx++) {
+  for (idx = 0; idx < loop_ub; idx++) {
     y[ii_data[idx] - 1] = 1.0;
   }
 }

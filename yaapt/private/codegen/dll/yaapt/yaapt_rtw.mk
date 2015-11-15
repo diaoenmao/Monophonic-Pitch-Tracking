@@ -2,8 +2,8 @@
 ## Makefile generated for MATLAB file/project 'yaapt'. 
 ## 
 ## Makefile     : yaapt_rtw.mk
-## Generated on : Fri Nov 13 04:11:45 2015
-## MATLAB Coder version: 2.6 (R2014a)
+## Generated on : Sun Nov 15 00:16:21 2015
+## MATLAB Coder version: 3.0 (R2015b)
 ## 
 ## Build Info:
 ## 
@@ -47,7 +47,7 @@ NODEBUG                   = 1
 
 # Toolchain Name:          Microsoft Visual C++ 2013 v12.0 | nmake (64-bit Windows)
 # Supported Version(s):    12.0
-# ToolchainInfo Version:   R2014a
+# ToolchainInfo Version:   R2015b
 # Specification Revision:  1.0
 # 
 
@@ -70,7 +70,7 @@ NODEBUG                   = 1
 # MACROS
 #-----------
 
-MEX_OPTS_FILE       = $(MATLAB_ROOT)\bin\$(ARCH)\mexopts\msvc2013-$(ARCH).xml
+MEX_OPTS_FILE       = $(MATLAB_ROOT)\bin\$(ARCH)\mexopts\msvc2013.xml
 MW_EXTERNLIB_DIR    = $(MATLAB_ROOT)\extern\lib\win64\microsoft
 MW_LIB_DIR          = $(MATLAB_ROOT)\lib\win64
 MEX_ARCH            = -win64
@@ -206,7 +206,7 @@ DEFINES = $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)\codegen\dll\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\dll\yaapt\yaapt_initialize.c $(START_DIR)\codegen\dll\yaapt\yaapt_terminate.c $(START_DIR)\codegen\dll\yaapt\yaapt.c $(START_DIR)\codegen\dll\yaapt\rdivide.c $(START_DIR)\codegen\dll\yaapt\abs.c $(START_DIR)\codegen\dll\yaapt\any.c $(START_DIR)\codegen\dll\yaapt\Myfirls.c $(START_DIR)\codegen\dll\yaapt\sqrt.c $(START_DIR)\codegen\dll\yaapt\cos.c $(START_DIR)\codegen\dll\yaapt\sinc.c $(START_DIR)\codegen\dll\yaapt\sin.c $(START_DIR)\codegen\dll\yaapt\mldivide.c $(START_DIR)\codegen\dll\yaapt\mean.c $(START_DIR)\codegen\dll\yaapt\sum.c $(START_DIR)\codegen\dll\yaapt\exp.c $(START_DIR)\codegen\dll\yaapt\filter.c $(START_DIR)\codegen\dll\yaapt\fix.c $(START_DIR)\codegen\dll\yaapt\Myspecgram.c $(START_DIR)\codegen\dll\yaapt\Myhanning.c $(START_DIR)\codegen\dll\yaapt\fft.c $(START_DIR)\codegen\dll\yaapt\spec_trk.c $(START_DIR)\codegen\dll\yaapt\mod.c $(START_DIR)\codegen\dll\yaapt\Mykaiser.c $(START_DIR)\codegen\dll\yaapt\Mybesseli.c $(START_DIR)\codegen\dll\yaapt\repmat.c $(START_DIR)\codegen\dll\yaapt\all.c $(START_DIR)\codegen\dll\yaapt\prod.c $(START_DIR)\codegen\dll\yaapt\peaks.c $(START_DIR)\codegen\dll\yaapt\eml_sort.c $(START_DIR)\codegen\dll\yaapt\std.c $(START_DIR)\codegen\dll\yaapt\Mymedfilt1.c $(START_DIR)\codegen\dll\yaapt\median.c $(START_DIR)\codegen\dll\yaapt\dynamic5.c $(START_DIR)\codegen\dll\yaapt\interp1.c $(START_DIR)\codegen\dll\yaapt\pchip.c $(START_DIR)\codegen\dll\yaapt\tm_trk.c $(START_DIR)\codegen\dll\yaapt\crs_corr.c $(START_DIR)\codegen\dll\yaapt\cat.c $(START_DIR)\codegen\dll\yaapt\dynamic.c $(START_DIR)\codegen\dll\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\dll\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\dll\yaapt\rt_nonfinite.c $(START_DIR)\codegen\dll\yaapt\rtGetNaN.c $(START_DIR)\codegen\dll\yaapt\rtGetInf.c
+SRCS = $(START_DIR)\codegen\dll\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\dll\yaapt\yaapt_data.c $(START_DIR)\codegen\dll\yaapt\yaapt_initialize.c $(START_DIR)\codegen\dll\yaapt\yaapt_terminate.c $(START_DIR)\codegen\dll\yaapt\yaapt.c $(START_DIR)\codegen\dll\yaapt\nonlinear.c $(START_DIR)\codegen\dll\yaapt\rdivide.c $(START_DIR)\codegen\dll\yaapt\abs.c $(START_DIR)\codegen\dll\yaapt\any.c $(START_DIR)\codegen\dll\yaapt\Myfirls.c $(START_DIR)\codegen\dll\yaapt\sqrt.c $(START_DIR)\codegen\dll\yaapt\cos.c $(START_DIR)\codegen\dll\yaapt\sinc.c $(START_DIR)\codegen\dll\yaapt\sin.c $(START_DIR)\codegen\dll\yaapt\mldivide.c $(START_DIR)\codegen\dll\yaapt\xgetrf.c $(START_DIR)\codegen\dll\yaapt\xswap.c $(START_DIR)\codegen\dll\yaapt\xtrsm.c $(START_DIR)\codegen\dll\yaapt\mean.c $(START_DIR)\codegen\dll\yaapt\exp.c $(START_DIR)\codegen\dll\yaapt\filter.c $(START_DIR)\codegen\dll\yaapt\fix.c $(START_DIR)\codegen\dll\yaapt\Myspecgram.c $(START_DIR)\codegen\dll\yaapt\Myhanning.c $(START_DIR)\codegen\dll\yaapt\fft.c $(START_DIR)\codegen\dll\yaapt\sum.c $(START_DIR)\codegen\dll\yaapt\spec_trk.c $(START_DIR)\codegen\dll\yaapt\mod.c $(START_DIR)\codegen\dll\yaapt\Mykaiser.c $(START_DIR)\codegen\dll\yaapt\Mybesseli.c $(START_DIR)\codegen\dll\yaapt\repmat.c $(START_DIR)\codegen\dll\yaapt\all.c $(START_DIR)\codegen\dll\yaapt\prod.c $(START_DIR)\codegen\dll\yaapt\peaks.c $(START_DIR)\codegen\dll\yaapt\sort1.c $(START_DIR)\codegen\dll\yaapt\sortIdx.c $(START_DIR)\codegen\dll\yaapt\std.c $(START_DIR)\codegen\dll\yaapt\Mymedfilt1.c $(START_DIR)\codegen\dll\yaapt\median.c $(START_DIR)\codegen\dll\yaapt\dynamic5.c $(START_DIR)\codegen\dll\yaapt\interp1.c $(START_DIR)\codegen\dll\yaapt\pchip.c $(START_DIR)\codegen\dll\yaapt\tm_trk.c $(START_DIR)\codegen\dll\yaapt\cmp_rate.c $(START_DIR)\codegen\dll\yaapt\cat.c $(START_DIR)\codegen\dll\yaapt\dynamic.c $(START_DIR)\codegen\dll\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\dll\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\dll\yaapt\rt_nonfinite.c $(START_DIR)\codegen\dll\yaapt\rtGetNaN.c $(START_DIR)\codegen\dll\yaapt\rtGetInf.c
 
 ALL_SRCS = $(SRCS)
 
@@ -214,7 +214,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = yaapt_rtwutil.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj rdivide.obj abs.obj any.obj Myfirls.obj sqrt.obj cos.obj sinc.obj sin.obj mldivide.obj mean.obj sum.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj eml_sort.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj crs_corr.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
+OBJS = yaapt_rtwutil.obj yaapt_data.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj nonlinear.obj rdivide.obj abs.obj any.obj Myfirls.obj sqrt.obj cos.obj sinc.obj sin.obj mldivide.obj xgetrf.obj xswap.obj xtrsm.obj mean.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj sum.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj sort1.obj sortIdx.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj cmp_rate.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -244,17 +244,51 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
+CFLAGS_ = /openmp
 CFLAGS_BASIC = $(DEFINES) 
 
-CFLAGS = $(CFLAGS) $(CFLAGS_BASIC)
+CFLAGS = $(CFLAGS) $(CFLAGS_) $(CFLAGS_BASIC)
 
 #-----------------
 # C++ Compiler
 #-----------------
 
+CPPFLAGS_ = /openmp
 CPPFLAGS_BASIC = $(DEFINES) 
 
-CPPFLAGS = $(CPPFLAGS) $(CPPFLAGS_BASIC)
+CPPFLAGS = $(CPPFLAGS) $(CPPFLAGS_) $(CPPFLAGS_BASIC)
+
+#---------------
+# C++ Linker
+#---------------
+
+CPP_LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
+
+CPP_LDFLAGS = $(CPP_LDFLAGS) $(CPP_LDFLAGS_)
+
+#------------------------------
+# C++ Shared Library Linker
+#------------------------------
+
+CPP_SHAREDLIB_LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
+
+CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS) $(CPP_SHAREDLIB_LDFLAGS_)
+
+#-----------
+# Linker
+#-----------
+
+LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
+
+LDFLAGS = $(LDFLAGS) $(LDFLAGS_)
+
+#--------------------------
+# Shared Library Linker
+#--------------------------
+
+SHAREDLIB_LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
+
+SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS) $(SHAREDLIB_LDFLAGS_)
 
 ###########################################################################
 ## PHONY TARGETS
@@ -295,7 +329,7 @@ set_environment_variables :
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(PERL) $(GEN_LNK_SCRIPT) $(CMD_FILE) $(OBJS)
 	@cmd /C "@echo ### Creating dynamic library "$(PRODUCT)" ..."
-	$(LD) $(SHAREDLIB_LDFLAGS) -out:$(PRODUCT) @$(CMD_FILE) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
+	$(CPP_LD) $(CPP_SHAREDLIB_LDFLAGS) -out:$(PRODUCT) @$(CMD_FILE) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
 	@cmd /C "@echo ### Created: $(PRODUCT)"
 	$(RM) $(CMD_FILE)
 
@@ -324,14 +358,6 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 
-{$(MATLAB_ROOT)\rtw\c\src}.c.obj :
-	$(CC) $(CFLAGS) -Fo"$@" "$<"
-
-
-{$(MATLAB_ROOT)\rtw\c\src}.cpp.obj :
-	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
-
-
 {$(START_DIR)}.c.obj :
 	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
@@ -345,6 +371,14 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 
 
 {$(START_DIR)\codegen\dll\yaapt}.cpp.obj :
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+
+
+{$(MATLAB_ROOT)\rtw\c\src}.c.obj :
+	$(CC) $(CFLAGS) -Fo"$@" "$<"
+
+
+{$(MATLAB_ROOT)\rtw\c\src}.cpp.obj :
 	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 

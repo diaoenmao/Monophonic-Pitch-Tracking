@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: Mykaiser.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "Mykaiser.h"
@@ -24,22 +27,32 @@ void Mykaiser(double n, emxArray_real_T *w)
 {
   int k;
   int b_n;
-  double p;
+  double anew;
   double apnd;
   double ndbl;
   double cdiff;
   emxArray_real_T *y;
   int nm1d2;
   emxArray_real_T *b_k;
-  double b_y;
   double c_n;
   double en;
+  double p;
+  double a;
+  int count;
+  double pold;
+  double tempa;
+  double em;
+  double empal;
+  double emp2al;
   double c_sum;
   double nend;
   double kk;
+  int count2;
+  int l;
   boolean_T exitg1;
   double tempc;
-  emxArray_real_T *c_y;
+  emxArray_real_T *b_y;
+  double b;
 
   /*  Copyright (C) 1995, 1996, 1997  Kurt Hornik */
   /*   */
@@ -85,19 +98,19 @@ void Mykaiser(double n, emxArray_real_T *w)
     w->data[0] = 1.0;
   } else {
     if (rtIsNaN(n - 1.0)) {
-      b_n = 0;
-      p = rtNaN;
+      b_n = 1;
+      anew = rtNaN;
       apnd = n - 1.0;
     } else if (n - 1.0 < 0.0) {
-      b_n = -1;
-      p = 0.0;
+      b_n = 0;
+      anew = 0.0;
       apnd = n - 1.0;
     } else if (rtIsInf(n - 1.0)) {
-      b_n = 0;
-      p = rtNaN;
+      b_n = 1;
+      anew = rtNaN;
       apnd = n - 1.0;
     } else {
-      p = 0.0;
+      anew = 0.0;
       ndbl = floor((n - 1.0) + 0.5);
       apnd = ndbl;
       cdiff = ndbl - (n - 1.0);
@@ -111,37 +124,38 @@ void Mykaiser(double n, emxArray_real_T *w)
       }
 
       if (ndbl >= 0.0) {
-        b_n = (int)ndbl - 1;
+        b_n = (int)ndbl;
       } else {
-        b_n = -1;
+        b_n = 0;
       }
     }
 
     emxInit_real_T(&y, 2);
     k = y->size[0] * y->size[1];
     y->size[0] = 1;
-    y->size[1] = b_n + 1;
+    y->size[1] = b_n;
     emxEnsureCapacity((emxArray__common *)y, k, (int)sizeof(double));
-    if (b_n + 1 > 0) {
-      y->data[0] = p;
-      if (b_n + 1 > 1) {
-        y->data[b_n] = apnd;
-        nm1d2 = b_n / 2;
+    if (b_n > 0) {
+      y->data[0] = anew;
+      if (b_n > 1) {
+        y->data[b_n - 1] = apnd;
+        k = b_n - 1;
+        nm1d2 = k / 2;
         for (k = 1; k < nm1d2; k++) {
-          y->data[k] = p + (double)k;
-          y->data[b_n - k] = apnd - (double)k;
+          y->data[k] = anew + (double)k;
+          y->data[(b_n - k) - 1] = apnd - (double)k;
         }
 
-        if (nm1d2 << 1 == b_n) {
-          y->data[nm1d2] = (p + apnd) / 2.0;
+        if (nm1d2 << 1 == b_n - 1) {
+          y->data[nm1d2] = (anew + apnd) / 2.0;
         } else {
-          y->data[nm1d2] = p + (double)nm1d2;
+          y->data[nm1d2] = anew + (double)nm1d2;
           y->data[nm1d2 + 1] = apnd - (double)nm1d2;
         }
       }
     }
 
-    b_emxInit_real_T(&b_k, 1);
+    emxInit_real_T1(&b_k, 1);
     k = b_k->size[0];
     b_k->size[0] = y->size[1];
     emxEnsureCapacity((emxArray__common *)b_k, k, (int)sizeof(double));
@@ -151,7 +165,7 @@ void Mykaiser(double n, emxArray_real_T *w)
     }
 
     emxFree_real_T(&y);
-    b_y = 1.0 / (n - 1.0);
+    anew = 1.0 / (n - 1.0);
     k = b_k->size[0];
     emxEnsureCapacity((emxArray__common *)b_k, k, (int)sizeof(double));
     nm1d2 = b_k->size[0];
@@ -304,18 +318,18 @@ void Mykaiser(double n, emxArray_real_T *w)
     /*  */
     /*      Calculate p-sequence until significance test passed. */
     /*  */
-    ndbl = 4.0;
-    nm1d2 = 0;
-    while (!((p < 9.007199254740992E+15) == 0)) {
+    a = 4.0;
+    count = 0;
+    while (!!(p < 9.007199254740992E+15)) {
       c_n++;
       en += 2.0;
-      if (nm1d2 == 1) {
-        apnd = ndbl;
-        ndbl = p;
-        p = en * p / 0.5 + apnd;
+      if (count == 1) {
+        pold = a;
+        a = p;
+        p = en * p / 0.5 + pold;
       } else {
-        nm1d2 = 1;
-        ndbl = p;
+        count = 1;
+        a = p;
         p = en * p / 0.5 + 1.0;
       }
 
@@ -328,58 +342,58 @@ void Mykaiser(double n, emxArray_real_T *w)
     /*  */
     c_n++;
     en += 2.0;
-    ndbl = 1.0 / p;
-    apnd = c_n - 1.0;
-    cdiff = c_n - 1.0;
-    p = (c_n - 1.0) - 1.0;
-    c_sum = ndbl * (c_n - 1.0) * ((c_n - 1.0) - 1.0) / (c_n - 1.0);
+    tempa = 1.0 / p;
+    em = c_n - 1.0;
+    empal = c_n - 1.0;
+    emp2al = (c_n - 1.0) - 1.0;
+    c_sum = tempa * (c_n - 1.0) * ((c_n - 1.0) - 1.0) / (c_n - 1.0);
     nend = c_n - 1.0;
 
     /*  */
     /*            Recur backward via difference equation, calculating  */
     /*            (but not storing) b(n), until n = nb. */
     /*  */
-    kk = ndbl;
-    nm1d2 = 0;
-    k = 0;
+    kk = tempa;
+    count2 = 0;
+    l = 0;
     exitg1 = false;
-    while ((!exitg1) && (k <= (int)nend - 1)) {
+    while ((!exitg1) && (l <= (int)nend - 1)) {
       c_n--;
       en -= 2.0;
-      if (nm1d2 == 1) {
+      if (count2 == 1) {
         tempc = kk;
-        kk = ndbl;
-        ndbl = en * ndbl / 0.5 + tempc;
+        kk = tempa;
+        tempa = en * tempa / 0.5 + tempc;
       } else {
-        nm1d2 = 1;
-        kk = ndbl;
-        ndbl = en * ndbl / 0.5;
+        count2 = 1;
+        kk = tempa;
+        tempa = en * tempa / 0.5;
       }
 
       /*                 tempc = tempb; */
       /*                 kk = tempa; */
       /*                 tempa = (en*kk) ./ x + tempc; */
-      apnd--;
-      p--;
+      em--;
+      emp2al--;
       if (c_n == 1.0) {
         exitg1 = true;
       } else {
         if (c_n == 2.0) {
-          p = 1.0;
+          emp2al = 1.0;
         }
 
-        cdiff--;
-        c_sum = (c_sum + ndbl * cdiff) * p / apnd;
-        k++;
+        empal--;
+        c_sum = (c_sum + tempa * empal) * emp2al / em;
+        l++;
       }
     }
 
-    b_emxInit_real_T(&c_y, 1);
+    emxInit_real_T1(&b_y, 1);
 
     /*  */
     /*         Store b(nb). */
     /*  */
-    c_sum = (c_sum + c_sum) + ndbl;
+    c_sum = (c_sum + c_sum) + tempa;
 
     /*  */
     /*      Calculate b(1) */
@@ -394,7 +408,7 @@ void Mykaiser(double n, emxArray_real_T *w)
     /*      Normalize.  Divide all b(n) by sum. */
     /*  */
     c_sum *= 0.60653065971263342;
-    p = ndbl / c_sum;
+    b = tempa / c_sum;
 
     /*  */
     /*   Two-term ascending series for small x. */
@@ -406,25 +420,25 @@ void Mykaiser(double n, emxArray_real_T *w)
     /*   Return the requested index range */
     /*  */
     /*     if resize */
-    k = c_y->size[0];
-    c_y->size[0] = b_k->size[0];
-    emxEnsureCapacity((emxArray__common *)c_y, k, (int)sizeof(double));
+    k = b_y->size[0];
+    b_y->size[0] = b_k->size[0];
+    emxEnsureCapacity((emxArray__common *)b_y, k, (int)sizeof(double));
     nm1d2 = b_k->size[0];
     for (k = 0; k < nm1d2; k++) {
-      c_y->data[k] = b_y * b_k->data[k];
+      b_y->data[k] = anew * b_k->data[k];
     }
 
     emxFree_real_T(&b_k);
-    Mybesseli(c_y, w);
+    Mybesseli(b_y, w);
     k = w->size[0] * w->size[1];
     w->size[1] = 1;
     emxEnsureCapacity((emxArray__common *)w, k, (int)sizeof(double));
     nm1d2 = w->size[0];
     k = w->size[1];
     nm1d2 *= k;
-    emxFree_real_T(&c_y);
+    emxFree_real_T(&b_y);
     for (k = 0; k < nm1d2; k++) {
-      w->data[k] /= p;
+      w->data[k] /= b;
     }
 
     /*      w_test = besseli (0, k) / besseli (0, beta); */

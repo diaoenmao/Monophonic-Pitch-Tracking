@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: prod.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:43:17
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:14:51
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "prod.h"
@@ -20,31 +23,23 @@
  */
 void prod(const emxArray_real_T *x, emxArray_real_T *y)
 {
-  unsigned int sz[2];
   int ixstart;
   int k;
   int ix;
   int iy;
   int i;
-  double p;
-  for (ixstart = 0; ixstart < 2; ixstart++) {
-    sz[ixstart] = (unsigned int)x->size[ixstart];
-  }
-
+  double s;
   ixstart = y->size[0] * y->size[1];
   y->size[0] = 1;
-  y->size[1] = (int)sz[1];
+  y->size[1] = x->size[1];
   emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
   if (x->size[1] == 0) {
     ixstart = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
-    ixstart = y->size[0] * y->size[1];
-    y->size[1] = (int)sz[1];
-    emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
-    k = (int)sz[1];
+    k = y->size[1];
     for (ixstart = 0; ixstart < k; ixstart++) {
-      y->data[ixstart] = 1.0;
+      y->data[y->size[0] * ixstart] = 1.0;
     }
   } else {
     ix = -1;
@@ -52,14 +47,14 @@ void prod(const emxArray_real_T *x, emxArray_real_T *y)
     for (i = 1; i <= x->size[1]; i++) {
       ixstart = ix + 1;
       ix++;
-      p = x->data[ixstart];
+      s = x->data[ixstart];
       for (k = 0; k < 3; k++) {
         ix++;
-        p *= x->data[ix];
+        s *= x->data[ix];
       }
 
       iy++;
-      y->data[iy] = p;
+      y->data[iy] = s;
     }
   }
 }

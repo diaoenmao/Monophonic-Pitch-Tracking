@@ -1,11 +1,14 @@
 /*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  * File: sinc.c
  *
- * MATLAB Coder version            : 2.6
- * C/C++ source code generated on  : 13-Nov-2015 04:42:02
+ * MATLAB Coder version            : 3.0
+ * C/C++ source code generated on  : 15-Nov-2015 00:15:57
  */
 
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "sinc.h"
@@ -26,7 +29,6 @@ void b_sinc(double x[5776], double y[5776])
   int ii;
   boolean_T exitg1;
   boolean_T guard1 = false;
-  short b_ii_data[5776];
   short i_data[5776];
   double dv3[5776];
   double dv4[5776];
@@ -54,14 +56,6 @@ void b_sinc(double x[5776], double y[5776])
 
   if (1 > idx) {
     idx = 0;
-  }
-
-  for (ii = 0; ii < idx; ii++) {
-    b_ii_data[ii] = ii_data[ii];
-  }
-
-  for (ii = 0; ii < idx; ii++) {
-    ii_data[ii] = b_ii_data[ii];
   }
 
   for (ii = 0; ii < idx; ii++) {
@@ -107,7 +101,6 @@ void sinc(double x[75], double y[75])
   int ii;
   boolean_T exitg1;
   boolean_T guard1 = false;
-  signed char b_ii_data[75];
   signed char i_data[75];
   idx = 0;
   ii = 1;
@@ -135,14 +128,6 @@ void sinc(double x[75], double y[75])
     ii = 0;
   } else {
     ii = idx;
-  }
-
-  for (idx = 0; idx < ii; idx++) {
-    b_ii_data[idx] = ii_data[idx];
-  }
-
-  for (idx = 0; idx < ii; idx++) {
-    ii_data[idx] = b_ii_data[idx];
   }
 
   for (idx = 0; idx < ii; idx++) {
