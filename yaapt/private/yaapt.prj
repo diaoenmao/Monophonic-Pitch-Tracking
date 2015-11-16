@@ -1,16 +1,16 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2015b">
-  <configuration build-checksum="2848165502" file="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.prj" location="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" name="yaapt" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="3975171932" file="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.prj" location="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" name="yaapt" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
-      <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
+      <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
       <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
       <param.SpecifiedBuildFolder />
       <param.SearchPaths />
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
-      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.ResponsivenessChecks />
+      <param.ExtrinsicCalls />
+      <param.IntegrityChecks />
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
@@ -21,7 +21,7 @@
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>true</param.MATLABSourceComments>
       <param.ReservedNameArray />
-      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.EnableDebugging />
       <param.GenerateReport>true</param.GenerateReport>
       <param.LaunchReport>false</param.LaunchReport>
       <param.DefaultTestFile />
@@ -41,7 +41,7 @@
       <param.RecursionLimit>100</param.RecursionLimit>
       <param.PreserveVariableNames>option.PreserveVariableNames.UserNames</param.PreserveVariableNames>
       <param.TargetLang>option.TargetLang.C</param.TargetLang>
-      <param.EchoExpressions>true</param.EchoExpressions>
+      <param.EchoExpressions />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>4000</param.InlineStackLimit>
@@ -49,7 +49,7 @@
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
-      <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
+      <param.ConstantInputs />
       <unset>
         <param.BuiltInstrumentedMex />
         <param.RanInstrumentedMex />
@@ -664,7 +664,7 @@
     </param.TestSnippets>
     <param.DefaultImportExportVariable>config</param.DefaultImportExportVariable>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\codegen\dll\yaapt\yaapt.dll</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\yaapt\yaapt.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.globals>
@@ -687,8 +687,8 @@
     <var.redirectedInputTypeData />
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen\dll\yaapt</var.gc.lastOutputRoot>
-    <var.gc.preBuildChecksum>2848165502</var.gc.preBuildChecksum>
+    <var.gc.lastOutputRoot>codegen\lib\yaapt</var.gc.lastOutputRoot>
+    <var.gc.preBuildChecksum>302507603</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\yaapt</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>3160206592</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>test</var.lastCfiTestSnippet>
@@ -700,8 +700,8 @@
     <var.boundToGui>true</var.boundToGui>
     <param.mex.outputfile>yaapt_mex</param.mex.outputfile>
     <param.grt.outputfile>yaapt</param.grt.outputfile>
-    <param.artifact>option.target.artifact.dll</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\codegen\dll\yaapt\yaapt.dll</param.outputfile>
+    <param.artifact>option.target.artifact.lib</param.artifact>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\yaapt\yaapt.lib</param.outputfile>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.UsePreconditions>false</param.UsePreconditions>
     <param.FeatureFlags />
@@ -829,7 +829,7 @@
       <file>${PROJECT_ROOT}\test.m</file>
     </fileset.testbench>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\codegen\dll\yaapt" name="yaapt.dll" optional="false">D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\dll\yaapt\yaapt.dll</file>
+      <file location="${PROJECT_ROOT}\codegen\lib\yaapt" name="yaapt.lib" optional="false">D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>

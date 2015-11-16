@@ -1,11 +1,8 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
  * File: rtGetNaN.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 14-Nov-2015 18:45:41
+ * C/C++ source code generated on  : 15-Nov-2015 19:57:34
  */
 
 /*

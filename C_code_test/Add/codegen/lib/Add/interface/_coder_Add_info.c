@@ -1,11 +1,8 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
  * File: _coder_Add_info.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 14-Nov-2015 18:45:41
+ * C/C++ source code generated on  : 15-Nov-2015 19:57:34
  */
 
 /* Include Files */
@@ -41,7 +38,8 @@ static void info_helper(const mxArray **info)
   const mxArray *rhs0 = NULL;
   const mxArray *lhs0 = NULL;
   emlrtAddField(*info, emlrt_marshallOut(
-    "[E]D:/GitHub/Monophonic-Pitch-Tracking/SimpleTest/Add.m"), "context", 0);
+    "[E]D:/GitHub/Monophonic-Pitch-Tracking/C_code_test/Add/Add.m"), "context",
+                0);
   emlrtAddField(*info, emlrt_marshallOut("coder.internal.length"), "name", 0);
   emlrtAddField(*info, emlrt_marshallOut(""), "dominantType", 0);
   emlrtAddField(*info, emlrt_marshallOut(

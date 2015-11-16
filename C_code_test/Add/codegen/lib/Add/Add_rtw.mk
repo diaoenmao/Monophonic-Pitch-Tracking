@@ -2,7 +2,7 @@
 ## Makefile generated for MATLAB file/project 'Add'. 
 ## 
 ## Makefile     : Add_rtw.mk
-## Generated on : Sat Nov 14 18:45:42 2015
+## Generated on : Sun Nov 15 19:57:35 2015
 ## MATLAB Coder version: 3.0 (R2015b)
 ## 
 ## Build Info:
@@ -31,7 +31,7 @@ MATLAB_ROOT               = F:\MATLAB
 MATLAB_BIN                = F:\MATLAB\bin
 MATLAB_ARCH_BIN           = F:\MATLAB\bin\win64
 MASTER_ANCHOR_DIR         = 
-START_DIR                 = D:\GitHub\Monophonic-Pitch-Tracking\SimpleTest
+START_DIR                 = D:\GitHub\Monophonic-Pitch-Tracking\C_code_test\Add
 ARCH                      = win64
 RELATIVE_PATH_TO_ANCHOR   = .
 PERL                      = $(MATLAB_ROOT)\sys\perl\win32\bin\perl.exe
