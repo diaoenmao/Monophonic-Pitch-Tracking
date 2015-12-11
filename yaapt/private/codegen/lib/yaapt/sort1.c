@@ -2,7 +2,7 @@
  * File: sort1.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Nov-2015 19:51:15
+ * C/C++ source code generated on  : 11-Dec-2015 06:07:48
  */
 
 /* Include Files */
@@ -14,7 +14,7 @@
 
 /* Function Declarations */
 static void b_sort(double x[100], int idx[100]);
-static void d_sort(double x[3], int idx[3]);
+static void d_sort(double x[20], int idx[20]);
 static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx);
 
 /* Function Definitions */
@@ -209,97 +209,215 @@ static void b_sort(double x[100], int idx[100])
 }
 
 /*
- * Arguments    : double x[3]
- *                int idx[3]
+ * Arguments    : double x[20]
+ *                int idx[20]
  * Return Type  : void
  */
-static void d_sort(double x[3], int idx[3])
+static void d_sort(double x[20], int idx[20])
 {
-  double b_x[3];
-  int i24;
-  boolean_T p;
-  for (i24 = 0; i24 < 3; i24++) {
-    b_x[i24] = x[i24];
+  double x4[4];
+  signed char idx4[4];
+  int m;
+  double xwork[20];
+  int nNaNs;
+  int ib;
+  int k;
+  int bLen;
+  int nPairs;
+  int i4;
+  signed char perm[4];
+  int iwork[20];
+  memset(&idx[0], 0, 20U * sizeof(int));
+  for (m = 0; m < 4; m++) {
+    x4[m] = 0.0;
+    idx4[m] = 0;
   }
 
-  if ((x[0] >= x[1]) || rtIsNaN(x[0])) {
-    p = true;
-  } else {
-    p = false;
+  memset(&xwork[0], 0, 20U * sizeof(double));
+  nNaNs = 0;
+  ib = 0;
+  for (k = 0; k < 20; k++) {
+    if (rtIsNaN(x[k])) {
+      idx[19 - nNaNs] = k + 1;
+      xwork[19 - nNaNs] = x[k];
+      nNaNs++;
+    } else {
+      ib++;
+      idx4[ib - 1] = (signed char)(k + 1);
+      x4[ib - 1] = x[k];
+      if (ib == 4) {
+        ib = k - nNaNs;
+        if (x4[0] >= x4[1]) {
+          m = 1;
+          bLen = 2;
+        } else {
+          m = 2;
+          bLen = 1;
+        }
+
+        if (x4[2] >= x4[3]) {
+          nPairs = 3;
+          i4 = 4;
+        } else {
+          nPairs = 4;
+          i4 = 3;
+        }
+
+        if (x4[m - 1] >= x4[nPairs - 1]) {
+          if (x4[bLen - 1] >= x4[nPairs - 1]) {
+            perm[0] = (signed char)m;
+            perm[1] = (signed char)bLen;
+            perm[2] = (signed char)nPairs;
+            perm[3] = (signed char)i4;
+          } else if (x4[bLen - 1] >= x4[i4 - 1]) {
+            perm[0] = (signed char)m;
+            perm[1] = (signed char)nPairs;
+            perm[2] = (signed char)bLen;
+            perm[3] = (signed char)i4;
+          } else {
+            perm[0] = (signed char)m;
+            perm[1] = (signed char)nPairs;
+            perm[2] = (signed char)i4;
+            perm[3] = (signed char)bLen;
+          }
+        } else if (x4[m - 1] >= x4[i4 - 1]) {
+          if (x4[bLen - 1] >= x4[i4 - 1]) {
+            perm[0] = (signed char)nPairs;
+            perm[1] = (signed char)m;
+            perm[2] = (signed char)bLen;
+            perm[3] = (signed char)i4;
+          } else {
+            perm[0] = (signed char)nPairs;
+            perm[1] = (signed char)m;
+            perm[2] = (signed char)i4;
+            perm[3] = (signed char)bLen;
+          }
+        } else {
+          perm[0] = (signed char)nPairs;
+          perm[1] = (signed char)i4;
+          perm[2] = (signed char)m;
+          perm[3] = (signed char)bLen;
+        }
+
+        idx[ib - 3] = idx4[perm[0] - 1];
+        idx[ib - 2] = idx4[perm[1] - 1];
+        idx[ib - 1] = idx4[perm[2] - 1];
+        idx[ib] = idx4[perm[3] - 1];
+        x[ib - 3] = x4[perm[0] - 1];
+        x[ib - 2] = x4[perm[1] - 1];
+        x[ib - 1] = x4[perm[2] - 1];
+        x[ib] = x4[perm[3] - 1];
+        ib = 0;
+      }
+    }
   }
 
-  if (p) {
-    if ((x[1] >= x[2]) || rtIsNaN(x[1])) {
-      p = true;
-    } else {
-      p = false;
+  if (ib > 0) {
+    for (m = 0; m < 4; m++) {
+      perm[m] = 0;
     }
 
-    if (p) {
-      idx[0] = 1;
-      idx[1] = 2;
-      idx[2] = 3;
+    if (ib == 1) {
+      perm[0] = 1;
+    } else if (ib == 2) {
+      if (x4[0] >= x4[1]) {
+        perm[0] = 1;
+        perm[1] = 2;
+      } else {
+        perm[0] = 2;
+        perm[1] = 1;
+      }
+    } else if (x4[0] >= x4[1]) {
+      if (x4[1] >= x4[2]) {
+        perm[0] = 1;
+        perm[1] = 2;
+        perm[2] = 3;
+      } else if (x4[0] >= x4[2]) {
+        perm[0] = 1;
+        perm[1] = 3;
+        perm[2] = 2;
+      } else {
+        perm[0] = 3;
+        perm[1] = 1;
+        perm[2] = 2;
+      }
+    } else if (x4[0] >= x4[2]) {
+      perm[0] = 2;
+      perm[1] = 1;
+      perm[2] = 3;
+    } else if (x4[1] >= x4[2]) {
+      perm[0] = 2;
+      perm[1] = 3;
+      perm[2] = 1;
     } else {
-      if ((x[0] >= x[2]) || rtIsNaN(x[0])) {
-        p = true;
-      } else {
-        p = false;
-      }
-
-      if (p) {
-        idx[0] = 1;
-        idx[1] = 3;
-        idx[2] = 2;
-        b_x[1] = x[2];
-        b_x[2] = x[1];
-      } else {
-        idx[0] = 3;
-        idx[1] = 1;
-        idx[2] = 2;
-        b_x[2] = x[1];
-        b_x[1] = x[0];
-        b_x[0] = x[2];
-      }
+      perm[0] = 3;
+      perm[1] = 2;
+      perm[2] = 1;
     }
-  } else {
-    if ((x[0] >= x[2]) || rtIsNaN(x[0])) {
-      p = true;
-    } else {
-      p = false;
-    }
 
-    if (p) {
-      idx[0] = 2;
-      idx[1] = 1;
-      idx[2] = 3;
-      b_x[0] = x[1];
-      b_x[1] = x[0];
-    } else {
-      if ((x[1] >= x[2]) || rtIsNaN(x[1])) {
-        p = true;
-      } else {
-        p = false;
-      }
-
-      if (p) {
-        idx[0] = 2;
-        idx[1] = 3;
-        idx[2] = 1;
-        b_x[0] = x[1];
-        b_x[1] = x[2];
-        b_x[2] = x[0];
-      } else {
-        idx[0] = 3;
-        idx[1] = 2;
-        idx[2] = 1;
-        b_x[0] = x[2];
-        b_x[2] = x[0];
-      }
+    for (k = 20; k - 19 <= ib; k++) {
+      idx[(k - nNaNs) - ib] = idx4[perm[k - 20] - 1];
+      x[(k - nNaNs) - ib] = x4[perm[k - 20] - 1];
     }
   }
 
-  for (i24 = 0; i24 < 3; i24++) {
-    x[i24] = b_x[i24];
+  m = nNaNs >> 1;
+  for (k = 20; k - 19 <= m; k++) {
+    ib = (signed char)idx[k - nNaNs];
+    idx[k - nNaNs] = (signed char)idx[39 - k];
+    idx[39 - k] = ib;
+    x[k - nNaNs] = xwork[39 - k];
+    x[39 - k] = xwork[k - nNaNs];
+  }
+
+  if ((nNaNs & 1) != 0) {
+    x[(m - nNaNs) + 20] = xwork[(m - nNaNs) + 20];
+  }
+
+  memset(&iwork[0], 0, 20U * sizeof(int));
+  if (20 - nNaNs > 1) {
+    memset(&iwork[0], 0, 20U * sizeof(int));
+    nPairs = (20 - nNaNs) >> 2;
+    bLen = 4;
+    while (nPairs > 1) {
+      if ((nPairs & 1) != 0) {
+        nPairs--;
+        ib = bLen * nPairs;
+        m = 20 - (nNaNs + ib);
+        if (m > bLen) {
+          b_merge(idx, x, ib, bLen, m - bLen, iwork, xwork);
+        }
+      }
+
+      ib = bLen << 1;
+      nPairs >>= 1;
+      for (k = 1; k <= nPairs; k++) {
+        b_merge(idx, x, (k - 1) * ib, bLen, bLen, iwork, xwork);
+      }
+
+      bLen = ib;
+    }
+
+    if (20 - nNaNs > bLen) {
+      b_merge(idx, x, 0, bLen, 20 - (nNaNs + bLen), iwork, xwork);
+    }
+  }
+
+  if ((nNaNs > 0) && (20 - nNaNs > 0)) {
+    for (k = 20; k - 19 <= nNaNs; k++) {
+      xwork[k - 20] = x[k - nNaNs];
+      iwork[k - 20] = idx[k - nNaNs];
+    }
+
+    for (k = 19 - nNaNs; k + 1 > 0; k--) {
+      x[nNaNs + k] = x[k];
+      idx[nNaNs + k] = idx[k];
+    }
+
+    for (k = 0; k + 1 <= nNaNs; k++) {
+      x[k] = xwork[k];
+      idx[k] = iwork[k];
+    }
   }
 }
 
@@ -312,7 +430,7 @@ static void d_sort(double x[3], int idx[3])
 static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
 {
   emxArray_real_T *vwork;
-  int i25;
+  int i24;
   int vstride;
   int k;
   int iv1[2];
@@ -324,7 +442,7 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
   int j;
   int idx0;
   emxInit_real_T1(&vwork, 1);
-  i25 = x->size[dim - 1];
+  i24 = x->size[dim - 1];
   vstride = x->size[dim - 1];
   k = vwork->size[0];
   vwork->size[0] = vstride;
@@ -358,12 +476,12 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
     pageoffset = (i - 1) * pagesize;
     for (j = 0; j + 1 <= vstride; j++) {
       idx0 = pageoffset + j;
-      for (k = 0; k + 1 <= i25; k++) {
+      for (k = 0; k + 1 <= i24; k++) {
         vwork->data[k] = x->data[idx0 + k * vstride];
       }
 
       sortIdx(vwork, iidx);
-      for (k = 0; k + 1 <= i25; k++) {
+      for (k = 0; k + 1 <= i24; k++) {
         x->data[idx0 + k * vstride] = vwork->data[k];
         idx->data[idx0 + k * vstride] = iidx->data[k];
       }
@@ -377,11 +495,11 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
 }
 
 /*
- * Arguments    : double x[3]
- *                int idx[3]
+ * Arguments    : double x[20]
+ *                int idx[20]
  * Return Type  : void
  */
-void c_sort(double x[3], int idx[3])
+void c_sort(double x[20], int idx[20])
 {
   d_sort(x, idx);
 }

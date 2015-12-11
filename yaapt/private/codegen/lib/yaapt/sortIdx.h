@@ -2,7 +2,7 @@
  * File: sortIdx.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Nov-2015 19:51:15
+ * C/C++ source code generated on  : 11-Dec-2015 06:07:48
  */
 
 #ifndef __SORTIDX_H__
@@ -20,6 +20,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
+extern void b_merge(int idx[20], double x[20], int offset, int np, int nq, int
+                    iwork[20], double xwork[20]);
 extern void merge_block(int idx[100], double x[100], int n, int iwork[100],
   double xwork[100]);
 extern void sortIdx(emxArray_real_T *x, emxArray_int32_T *idx);

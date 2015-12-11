@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: sort1.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 15-Nov-2015 19:51:15</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 11-Dec-2015 06:07:48</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -26,7 +26,7 @@
 <a name="14"><font color="#888888 "><i>   14   </i></font></a>
 <a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_b_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sort');" target="_self"><font color="#1122aa">b_sort</font></a>(<font color="#112266"><b>double</b></font> x[100], <font color="#112266"><b>int</b></font> idx[100]);
-<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_d_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_sort');" target="_self"><font color="#1122aa">d_sort</font></a>(<font color="#112266"><b>double</b></font> x[3], <font color="#112266"><b>int</b></font> idx[3]);
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_d_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_sort');" target="_self"><font color="#1122aa">d_sort</font></a>(<font color="#112266"><b>double</b></font> x[20], <font color="#112266"><b>int</b></font> idx[20]);
 <a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_f_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_f_sort');" target="_self"><font color="#1122aa">f_sort</font></a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>int</b></font> dim, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx);
 <a name="19"><font color="#888888 "><i>   19   </i></font></a>
 <a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
@@ -221,209 +221,327 @@
 <a name="209"><font color="#888888 "><i>  209   </i></font></a><b>}</b>
 <a name="210"><font color="#888888 "><i>  210   </i></font></a>
 <a name="211"><font color="#888888 "><i>  211   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="212"><font color="#888888 "><i>  212   </i></font></a><font color="#117755"><I> * Arguments    : double x[3]</i></font>
-<a name="213"><font color="#888888 "><i>  213   </i></font></a><font color="#117755"><I> *                int idx[3]</i></font>
+<a name="212"><font color="#888888 "><i>  212   </i></font></a><font color="#117755"><I> * Arguments    : double x[20]</i></font>
+<a name="213"><font color="#888888 "><i>  213   </i></font></a><font color="#117755"><I> *                int idx[20]</i></font>
 <a name="214"><font color="#888888 "><i>  214   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
 <a name="215"><font color="#888888 "><i>  215   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="216"><font color="#888888 "><i>  216   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_d_sort">d_sort</a>(<font color="#112266"><b>double</b></font> x[3], <font color="#112266"><b>int</b></font> idx[3])
+<a name="216"><font color="#888888 "><i>  216   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_d_sort">d_sort</a>(<font color="#112266"><b>double</b></font> x[20], <font color="#112266"><b>int</b></font> idx[20])
 <a name="217"><font color="#888888 "><i>  217   </i></font></a><b>{</b>
-<a name="218"><font color="#888888 "><i>  218   </i></font></a>  <font color="#112266"><b>double</b></font> b_x[3];
-<a name="219"><font color="#888888 "><i>  219   </i></font></a>  <font color="#112266"><b>int</b></font> i24;
-<a name="220"><font color="#888888 "><i>  220   </i></font></a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> p;
-<a name="221"><font color="#888888 "><i>  221   </i></font></a>  <font color="#112266"><b>for</b></font> (i24 = 0; i24 &lt; 3; i24++) <b>{</b>
-<a name="222"><font color="#888888 "><i>  222   </i></font></a>    b_x[i24] = x[i24];
-<a name="223"><font color="#888888 "><i>  223   </i></font></a>  <b>}</b>
-<a name="224"><font color="#888888 "><i>  224   </i></font></a>
-<a name="225"><font color="#888888 "><i>  225   </i></font></a>  <font color="#112266"><b>if</b></font> ((x[0] &gt;= x[1]) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(x[0])) <b>{</b>
-<a name="226"><font color="#888888 "><i>  226   </i></font></a>    p = true;
-<a name="227"><font color="#888888 "><i>  227   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="228"><font color="#888888 "><i>  228   </i></font></a>    p = false;
-<a name="229"><font color="#888888 "><i>  229   </i></font></a>  <b>}</b>
-<a name="230"><font color="#888888 "><i>  230   </i></font></a>
-<a name="231"><font color="#888888 "><i>  231   </i></font></a>  <font color="#112266"><b>if</b></font> (p) <b>{</b>
-<a name="232"><font color="#888888 "><i>  232   </i></font></a>    <font color="#112266"><b>if</b></font> ((x[1] &gt;= x[2]) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(x[1])) <b>{</b>
-<a name="233"><font color="#888888 "><i>  233   </i></font></a>      p = true;
-<a name="234"><font color="#888888 "><i>  234   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="235"><font color="#888888 "><i>  235   </i></font></a>      p = false;
-<a name="236"><font color="#888888 "><i>  236   </i></font></a>    <b>}</b>
-<a name="237"><font color="#888888 "><i>  237   </i></font></a>
-<a name="238"><font color="#888888 "><i>  238   </i></font></a>    <font color="#112266"><b>if</b></font> (p) <b>{</b>
-<a name="239"><font color="#888888 "><i>  239   </i></font></a>      idx[0] = 1;
-<a name="240"><font color="#888888 "><i>  240   </i></font></a>      idx[1] = 2;
-<a name="241"><font color="#888888 "><i>  241   </i></font></a>      idx[2] = 3;
-<a name="242"><font color="#888888 "><i>  242   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="243"><font color="#888888 "><i>  243   </i></font></a>      <font color="#112266"><b>if</b></font> ((x[0] &gt;= x[2]) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(x[0])) <b>{</b>
-<a name="244"><font color="#888888 "><i>  244   </i></font></a>        p = true;
-<a name="245"><font color="#888888 "><i>  245   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="246"><font color="#888888 "><i>  246   </i></font></a>        p = false;
-<a name="247"><font color="#888888 "><i>  247   </i></font></a>      <b>}</b>
-<a name="248"><font color="#888888 "><i>  248   </i></font></a>
-<a name="249"><font color="#888888 "><i>  249   </i></font></a>      <font color="#112266"><b>if</b></font> (p) <b>{</b>
-<a name="250"><font color="#888888 "><i>  250   </i></font></a>        idx[0] = 1;
-<a name="251"><font color="#888888 "><i>  251   </i></font></a>        idx[1] = 3;
-<a name="252"><font color="#888888 "><i>  252   </i></font></a>        idx[2] = 2;
-<a name="253"><font color="#888888 "><i>  253   </i></font></a>        b_x[1] = x[2];
-<a name="254"><font color="#888888 "><i>  254   </i></font></a>        b_x[2] = x[1];
-<a name="255"><font color="#888888 "><i>  255   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="256"><font color="#888888 "><i>  256   </i></font></a>        idx[0] = 3;
-<a name="257"><font color="#888888 "><i>  257   </i></font></a>        idx[1] = 1;
-<a name="258"><font color="#888888 "><i>  258   </i></font></a>        idx[2] = 2;
-<a name="259"><font color="#888888 "><i>  259   </i></font></a>        b_x[2] = x[1];
-<a name="260"><font color="#888888 "><i>  260   </i></font></a>        b_x[1] = x[0];
-<a name="261"><font color="#888888 "><i>  261   </i></font></a>        b_x[0] = x[2];
-<a name="262"><font color="#888888 "><i>  262   </i></font></a>      <b>}</b>
-<a name="263"><font color="#888888 "><i>  263   </i></font></a>    <b>}</b>
-<a name="264"><font color="#888888 "><i>  264   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="265"><font color="#888888 "><i>  265   </i></font></a>    <font color="#112266"><b>if</b></font> ((x[0] &gt;= x[2]) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(x[0])) <b>{</b>
-<a name="266"><font color="#888888 "><i>  266   </i></font></a>      p = true;
-<a name="267"><font color="#888888 "><i>  267   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="268"><font color="#888888 "><i>  268   </i></font></a>      p = false;
-<a name="269"><font color="#888888 "><i>  269   </i></font></a>    <b>}</b>
-<a name="270"><font color="#888888 "><i>  270   </i></font></a>
-<a name="271"><font color="#888888 "><i>  271   </i></font></a>    <font color="#112266"><b>if</b></font> (p) <b>{</b>
-<a name="272"><font color="#888888 "><i>  272   </i></font></a>      idx[0] = 2;
-<a name="273"><font color="#888888 "><i>  273   </i></font></a>      idx[1] = 1;
-<a name="274"><font color="#888888 "><i>  274   </i></font></a>      idx[2] = 3;
-<a name="275"><font color="#888888 "><i>  275   </i></font></a>      b_x[0] = x[1];
-<a name="276"><font color="#888888 "><i>  276   </i></font></a>      b_x[1] = x[0];
-<a name="277"><font color="#888888 "><i>  277   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="278"><font color="#888888 "><i>  278   </i></font></a>      <font color="#112266"><b>if</b></font> ((x[1] &gt;= x[2]) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(x[1])) <b>{</b>
-<a name="279"><font color="#888888 "><i>  279   </i></font></a>        p = true;
-<a name="280"><font color="#888888 "><i>  280   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="281"><font color="#888888 "><i>  281   </i></font></a>        p = false;
-<a name="282"><font color="#888888 "><i>  282   </i></font></a>      <b>}</b>
-<a name="283"><font color="#888888 "><i>  283   </i></font></a>
-<a name="284"><font color="#888888 "><i>  284   </i></font></a>      <font color="#112266"><b>if</b></font> (p) <b>{</b>
-<a name="285"><font color="#888888 "><i>  285   </i></font></a>        idx[0] = 2;
-<a name="286"><font color="#888888 "><i>  286   </i></font></a>        idx[1] = 3;
-<a name="287"><font color="#888888 "><i>  287   </i></font></a>        idx[2] = 1;
-<a name="288"><font color="#888888 "><i>  288   </i></font></a>        b_x[0] = x[1];
-<a name="289"><font color="#888888 "><i>  289   </i></font></a>        b_x[1] = x[2];
-<a name="290"><font color="#888888 "><i>  290   </i></font></a>        b_x[2] = x[0];
-<a name="291"><font color="#888888 "><i>  291   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="292"><font color="#888888 "><i>  292   </i></font></a>        idx[0] = 3;
-<a name="293"><font color="#888888 "><i>  293   </i></font></a>        idx[1] = 2;
-<a name="294"><font color="#888888 "><i>  294   </i></font></a>        idx[2] = 1;
-<a name="295"><font color="#888888 "><i>  295   </i></font></a>        b_x[0] = x[2];
-<a name="296"><font color="#888888 "><i>  296   </i></font></a>        b_x[2] = x[0];
-<a name="297"><font color="#888888 "><i>  297   </i></font></a>      <b>}</b>
-<a name="298"><font color="#888888 "><i>  298   </i></font></a>    <b>}</b>
-<a name="299"><font color="#888888 "><i>  299   </i></font></a>  <b>}</b>
-<a name="300"><font color="#888888 "><i>  300   </i></font></a>
-<a name="301"><font color="#888888 "><i>  301   </i></font></a>  <font color="#112266"><b>for</b></font> (i24 = 0; i24 &lt; 3; i24++) <b>{</b>
-<a name="302"><font color="#888888 "><i>  302   </i></font></a>    x[i24] = b_x[i24];
-<a name="303"><font color="#888888 "><i>  303   </i></font></a>  <b>}</b>
-<a name="304"><font color="#888888 "><i>  304   </i></font></a><b>}</b>
-<a name="305"><font color="#888888 "><i>  305   </i></font></a>
-<a name="306"><font color="#888888 "><i>  306   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="307"><font color="#888888 "><i>  307   </i></font></a><font color="#117755"><I> * Arguments    : emxArray_real_T *x</i></font>
-<a name="308"><font color="#888888 "><i>  308   </i></font></a><font color="#117755"><I> *                int dim</i></font>
-<a name="309"><font color="#888888 "><i>  309   </i></font></a><font color="#117755"><I> *                emxArray_int32_T *idx</i></font>
-<a name="310"><font color="#888888 "><i>  310   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
-<a name="311"><font color="#888888 "><i>  311   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="312"><font color="#888888 "><i>  312   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_f_sort">f_sort</a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>int</b></font> dim, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx)
-<a name="313"><font color="#888888 "><i>  313   </i></font></a><b>{</b>
-<a name="314"><font color="#888888 "><i>  314   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *vwork;
-<a name="315"><font color="#888888 "><i>  315   </i></font></a>  <font color="#112266"><b>int</b></font> i25;
-<a name="316"><font color="#888888 "><i>  316   </i></font></a>  <font color="#112266"><b>int</b></font> vstride;
-<a name="317"><font color="#888888 "><i>  317   </i></font></a>  <font color="#112266"><b>int</b></font> k;
-<a name="318"><font color="#888888 "><i>  318   </i></font></a>  <font color="#112266"><b>int</b></font> iv1[2];
-<a name="319"><font color="#888888 "><i>  319   </i></font></a>  <font color="#112266"><b>int</b></font> npages;
-<a name="320"><font color="#888888 "><i>  320   </i></font></a>  <font color="#112266"><b>int</b></font> pagesize;
-<a name="321"><font color="#888888 "><i>  321   </i></font></a>  <font color="#112266"><b>int</b></font> i;
-<a name="322"><font color="#888888 "><i>  322   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *iidx;
-<a name="323"><font color="#888888 "><i>  323   </i></font></a>  <font color="#112266"><b>int</b></font> pageoffset;
-<a name="324"><font color="#888888 "><i>  324   </i></font></a>  <font color="#112266"><b>int</b></font> j;
-<a name="325"><font color="#888888 "><i>  325   </i></font></a>  <font color="#112266"><b>int</b></font> idx0;
-<a name="326"><font color="#888888 "><i>  326   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T1');" target="_self"><font color="#1122aa">emxInit_real_T1</font></a>(&amp;vwork, 1);
-<a name="327"><font color="#888888 "><i>  327   </i></font></a>  i25 = x-&gt;size[dim - 1];
-<a name="328"><font color="#888888 "><i>  328   </i></font></a>  vstride = x-&gt;size[dim - 1];
-<a name="329"><font color="#888888 "><i>  329   </i></font></a>  k = vwork-&gt;size[0];
-<a name="330"><font color="#888888 "><i>  330   </i></font></a>  vwork-&gt;size[0] = vstride;
-<a name="331"><font color="#888888 "><i>  331   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)vwork, k, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
-<a name="332"><font color="#888888 "><i>  332   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k &lt; 2; k++) <b>{</b>
-<a name="333"><font color="#888888 "><i>  333   </i></font></a>    iv1[k] = x-&gt;size[k];
-<a name="334"><font color="#888888 "><i>  334   </i></font></a>  <b>}</b>
-<a name="335"><font color="#888888 "><i>  335   </i></font></a>
-<a name="336"><font color="#888888 "><i>  336   </i></font></a>  k = idx-&gt;size[0] * idx-&gt;size[1];
-<a name="337"><font color="#888888 "><i>  337   </i></font></a>  idx-&gt;size[0] = iv1[0];
-<a name="338"><font color="#888888 "><i>  338   </i></font></a>  idx-&gt;size[1] = iv1[1];
-<a name="339"><font color="#888888 "><i>  339   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)idx, k, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
-<a name="340"><font color="#888888 "><i>  340   </i></font></a>  vstride = 1;
-<a name="341"><font color="#888888 "><i>  341   </i></font></a>  k = 1;
-<a name="342"><font color="#888888 "><i>  342   </i></font></a>  <font color="#112266"><b>while</b></font> (k &lt;= dim - 1) <b>{</b>
-<a name="343"><font color="#888888 "><i>  343   </i></font></a>    vstride *= x-&gt;size[0];
-<a name="344"><font color="#888888 "><i>  344   </i></font></a>    k = 2;
-<a name="345"><font color="#888888 "><i>  345   </i></font></a>  <b>}</b>
-<a name="346"><font color="#888888 "><i>  346   </i></font></a>
-<a name="347"><font color="#888888 "><i>  347   </i></font></a>  npages = 1;
-<a name="348"><font color="#888888 "><i>  348   </i></font></a>  k = dim + 1;
-<a name="349"><font color="#888888 "><i>  349   </i></font></a>  <font color="#112266"><b>while</b></font> (k &lt; 3) <b>{</b>
-<a name="350"><font color="#888888 "><i>  350   </i></font></a>    npages *= x-&gt;size[1];
-<a name="351"><font color="#888888 "><i>  351   </i></font></a>    k = 3;
-<a name="352"><font color="#888888 "><i>  352   </i></font></a>  <b>}</b>
-<a name="353"><font color="#888888 "><i>  353   </i></font></a>
-<a name="354"><font color="#888888 "><i>  354   </i></font></a>  pagesize = x-&gt;size[dim - 1] * vstride;
-<a name="355"><font color="#888888 "><i>  355   </i></font></a>  i = 1;
-<a name="356"><font color="#888888 "><i>  356   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T1');" target="_self"><font color="#1122aa">emxInit_int32_T1</font></a>(&amp;iidx, 1);
-<a name="357"><font color="#888888 "><i>  357   </i></font></a>  <font color="#112266"><b>while</b></font> (i &lt;= npages) <b>{</b>
-<a name="358"><font color="#888888 "><i>  358   </i></font></a>    pageoffset = (i - 1) * pagesize;
-<a name="359"><font color="#888888 "><i>  359   </i></font></a>    <font color="#112266"><b>for</b></font> (j = 0; j + 1 &lt;= vstride; j++) <b>{</b>
-<a name="360"><font color="#888888 "><i>  360   </i></font></a>      idx0 = pageoffset + j;
-<a name="361"><font color="#888888 "><i>  361   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i25; k++) <b>{</b>
-<a name="362"><font color="#888888 "><i>  362   </i></font></a>        vwork-&gt;data[k] = x-&gt;data[idx0 + k * vstride];
-<a name="363"><font color="#888888 "><i>  363   </i></font></a>      <b>}</b>
-<a name="364"><font color="#888888 "><i>  364   </i></font></a>
-<a name="365"><font color="#888888 "><i>  365   </i></font></a>      <a href="sortIdx_c.html#fcn_sortIdx" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_sortIdx');" target="_self"><font color="#1122aa">sortIdx</font></a>(vwork, iidx);
-<a name="366"><font color="#888888 "><i>  366   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i25; k++) <b>{</b>
-<a name="367"><font color="#888888 "><i>  367   </i></font></a>        x-&gt;data[idx0 + k * vstride] = vwork-&gt;data[k];
-<a name="368"><font color="#888888 "><i>  368   </i></font></a>        idx-&gt;data[idx0 + k * vstride] = iidx-&gt;data[k];
-<a name="369"><font color="#888888 "><i>  369   </i></font></a>      <b>}</b>
-<a name="370"><font color="#888888 "><i>  370   </i></font></a>    <b>}</b>
-<a name="371"><font color="#888888 "><i>  371   </i></font></a>
-<a name="372"><font color="#888888 "><i>  372   </i></font></a>    i++;
-<a name="373"><font color="#888888 "><i>  373   </i></font></a>  <b>}</b>
-<a name="374"><font color="#888888 "><i>  374   </i></font></a>
-<a name="375"><font color="#888888 "><i>  375   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>(&amp;iidx);
-<a name="376"><font color="#888888 "><i>  376   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;vwork);
-<a name="377"><font color="#888888 "><i>  377   </i></font></a><b>}</b>
-<a name="378"><font color="#888888 "><i>  378   </i></font></a>
-<a name="379"><font color="#888888 "><i>  379   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="380"><font color="#888888 "><i>  380   </i></font></a><font color="#117755"><I> * Arguments    : double x[3]</i></font>
-<a name="381"><font color="#888888 "><i>  381   </i></font></a><font color="#117755"><I> *                int idx[3]</i></font>
-<a name="382"><font color="#888888 "><i>  382   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
-<a name="383"><font color="#888888 "><i>  383   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="384"><font color="#888888 "><i>  384   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_c_sort">c_sort</a>(<font color="#112266"><b>double</b></font> x[3], <font color="#112266"><b>int</b></font> idx[3])
-<a name="385"><font color="#888888 "><i>  385   </i></font></a><b>{</b>
-<a name="386"><font color="#888888 "><i>  386   </i></font></a>  <a href="#fcn_d_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_sort');" target="_self"><font color="#1122aa">d_sort</font></a>(x, idx);
-<a name="387"><font color="#888888 "><i>  387   </i></font></a><b>}</b>
-<a name="388"><font color="#888888 "><i>  388   </i></font></a>
-<a name="389"><font color="#888888 "><i>  389   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="390"><font color="#888888 "><i>  390   </i></font></a><font color="#117755"><I> * Arguments    : emxArray_real_T *x</i></font>
-<a name="391"><font color="#888888 "><i>  391   </i></font></a><font color="#117755"><I> *                emxArray_int32_T *idx</i></font>
-<a name="392"><font color="#888888 "><i>  392   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
-<a name="393"><font color="#888888 "><i>  393   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="394"><font color="#888888 "><i>  394   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_e_sort">e_sort</a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx)
-<a name="395"><font color="#888888 "><i>  395   </i></font></a><b>{</b>
-<a name="396"><font color="#888888 "><i>  396   </i></font></a>  <a href="#fcn_f_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_f_sort');" target="_self"><font color="#1122aa">f_sort</font></a>(x, 1, idx);
-<a name="397"><font color="#888888 "><i>  397   </i></font></a><b>}</b>
-<a name="398"><font color="#888888 "><i>  398   </i></font></a>
-<a name="399"><font color="#888888 "><i>  399   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="400"><font color="#888888 "><i>  400   </i></font></a><font color="#117755"><I> * Arguments    : double x[100]</i></font>
-<a name="401"><font color="#888888 "><i>  401   </i></font></a><font color="#117755"><I> *                int idx[100]</i></font>
-<a name="402"><font color="#888888 "><i>  402   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
-<a name="403"><font color="#888888 "><i>  403   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="404"><font color="#888888 "><i>  404   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_sort">sort</a>(<font color="#112266"><b>double</b></font> x[100], <font color="#112266"><b>int</b></font> idx[100])
-<a name="405"><font color="#888888 "><i>  405   </i></font></a><b>{</b>
-<a name="406"><font color="#888888 "><i>  406   </i></font></a>  <a href="#fcn_b_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sort');" target="_self"><font color="#1122aa">b_sort</font></a>(x, idx);
-<a name="407"><font color="#888888 "><i>  407   </i></font></a><b>}</b>
-<a name="408"><font color="#888888 "><i>  408   </i></font></a>
-<a name="409"><font color="#888888 "><i>  409   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="410"><font color="#888888 "><i>  410   </i></font></a><font color="#117755"><I> * File trailer for sort1.c</i></font>
-<a name="411"><font color="#888888 "><i>  411   </i></font></a><font color="#117755"><I> *</i></font>
-<a name="412"><font color="#888888 "><i>  412   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
-<a name="413"><font color="#888888 "><i>  413   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="414"><font color="#888888 "><i>  414   </i></font></a></pre>
+<a name="218"><font color="#888888 "><i>  218   </i></font></a>  <font color="#112266"><b>double</b></font> x4[4];
+<a name="219"><font color="#888888 "><i>  219   </i></font></a>  <font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font> idx4[4];
+<a name="220"><font color="#888888 "><i>  220   </i></font></a>  <font color="#112266"><b>int</b></font> m;
+<a name="221"><font color="#888888 "><i>  221   </i></font></a>  <font color="#112266"><b>double</b></font> xwork[20];
+<a name="222"><font color="#888888 "><i>  222   </i></font></a>  <font color="#112266"><b>int</b></font> nNaNs;
+<a name="223"><font color="#888888 "><i>  223   </i></font></a>  <font color="#112266"><b>int</b></font> ib;
+<a name="224"><font color="#888888 "><i>  224   </i></font></a>  <font color="#112266"><b>int</b></font> k;
+<a name="225"><font color="#888888 "><i>  225   </i></font></a>  <font color="#112266"><b>int</b></font> bLen;
+<a name="226"><font color="#888888 "><i>  226   </i></font></a>  <font color="#112266"><b>int</b></font> nPairs;
+<a name="227"><font color="#888888 "><i>  227   </i></font></a>  <font color="#112266"><b>int</b></font> i4;
+<a name="228"><font color="#888888 "><i>  228   </i></font></a>  <font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font> perm[4];
+<a name="229"><font color="#888888 "><i>  229   </i></font></a>  <font color="#112266"><b>int</b></font> iwork[20];
+<a name="230"><font color="#888888 "><i>  230   </i></font></a>  memset(&amp;idx[0], 0, 20U * <font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
+<a name="231"><font color="#888888 "><i>  231   </i></font></a>  <font color="#112266"><b>for</b></font> (m = 0; m &lt; 4; m++) <b>{</b>
+<a name="232"><font color="#888888 "><i>  232   </i></font></a>    x4[m] = 0.0;
+<a name="233"><font color="#888888 "><i>  233   </i></font></a>    idx4[m] = 0;
+<a name="234"><font color="#888888 "><i>  234   </i></font></a>  <b>}</b>
+<a name="235"><font color="#888888 "><i>  235   </i></font></a>
+<a name="236"><font color="#888888 "><i>  236   </i></font></a>  memset(&amp;xwork[0], 0, 20U * <font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="237"><font color="#888888 "><i>  237   </i></font></a>  nNaNs = 0;
+<a name="238"><font color="#888888 "><i>  238   </i></font></a>  ib = 0;
+<a name="239"><font color="#888888 "><i>  239   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k &lt; 20; k++) <b>{</b>
+<a name="240"><font color="#888888 "><i>  240   </i></font></a>    <font color="#112266"><b>if</b></font> (<a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(x[k])) <b>{</b>
+<a name="241"><font color="#888888 "><i>  241   </i></font></a>      idx[19 - nNaNs] = k + 1;
+<a name="242"><font color="#888888 "><i>  242   </i></font></a>      xwork[19 - nNaNs] = x[k];
+<a name="243"><font color="#888888 "><i>  243   </i></font></a>      nNaNs++;
+<a name="244"><font color="#888888 "><i>  244   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="245"><font color="#888888 "><i>  245   </i></font></a>      ib++;
+<a name="246"><font color="#888888 "><i>  246   </i></font></a>      idx4[ib - 1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)(k + 1);
+<a name="247"><font color="#888888 "><i>  247   </i></font></a>      x4[ib - 1] = x[k];
+<a name="248"><font color="#888888 "><i>  248   </i></font></a>      <font color="#112266"><b>if</b></font> (ib == 4) <b>{</b>
+<a name="249"><font color="#888888 "><i>  249   </i></font></a>        ib = k - nNaNs;
+<a name="250"><font color="#888888 "><i>  250   </i></font></a>        <font color="#112266"><b>if</b></font> (x4[0] &gt;= x4[1]) <b>{</b>
+<a name="251"><font color="#888888 "><i>  251   </i></font></a>          m = 1;
+<a name="252"><font color="#888888 "><i>  252   </i></font></a>          bLen = 2;
+<a name="253"><font color="#888888 "><i>  253   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="254"><font color="#888888 "><i>  254   </i></font></a>          m = 2;
+<a name="255"><font color="#888888 "><i>  255   </i></font></a>          bLen = 1;
+<a name="256"><font color="#888888 "><i>  256   </i></font></a>        <b>}</b>
+<a name="257"><font color="#888888 "><i>  257   </i></font></a>
+<a name="258"><font color="#888888 "><i>  258   </i></font></a>        <font color="#112266"><b>if</b></font> (x4[2] &gt;= x4[3]) <b>{</b>
+<a name="259"><font color="#888888 "><i>  259   </i></font></a>          nPairs = 3;
+<a name="260"><font color="#888888 "><i>  260   </i></font></a>          i4 = 4;
+<a name="261"><font color="#888888 "><i>  261   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="262"><font color="#888888 "><i>  262   </i></font></a>          nPairs = 4;
+<a name="263"><font color="#888888 "><i>  263   </i></font></a>          i4 = 3;
+<a name="264"><font color="#888888 "><i>  264   </i></font></a>        <b>}</b>
+<a name="265"><font color="#888888 "><i>  265   </i></font></a>
+<a name="266"><font color="#888888 "><i>  266   </i></font></a>        <font color="#112266"><b>if</b></font> (x4[m - 1] &gt;= x4[nPairs - 1]) <b>{</b>
+<a name="267"><font color="#888888 "><i>  267   </i></font></a>          <font color="#112266"><b>if</b></font> (x4[bLen - 1] &gt;= x4[nPairs - 1]) <b>{</b>
+<a name="268"><font color="#888888 "><i>  268   </i></font></a>            perm[0] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)m;
+<a name="269"><font color="#888888 "><i>  269   </i></font></a>            perm[1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)bLen;
+<a name="270"><font color="#888888 "><i>  270   </i></font></a>            perm[2] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)nPairs;
+<a name="271"><font color="#888888 "><i>  271   </i></font></a>            perm[3] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)i4;
+<a name="272"><font color="#888888 "><i>  272   </i></font></a>          <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (x4[bLen - 1] &gt;= x4[i4 - 1]) <b>{</b>
+<a name="273"><font color="#888888 "><i>  273   </i></font></a>            perm[0] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)m;
+<a name="274"><font color="#888888 "><i>  274   </i></font></a>            perm[1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)nPairs;
+<a name="275"><font color="#888888 "><i>  275   </i></font></a>            perm[2] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)bLen;
+<a name="276"><font color="#888888 "><i>  276   </i></font></a>            perm[3] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)i4;
+<a name="277"><font color="#888888 "><i>  277   </i></font></a>          <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="278"><font color="#888888 "><i>  278   </i></font></a>            perm[0] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)m;
+<a name="279"><font color="#888888 "><i>  279   </i></font></a>            perm[1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)nPairs;
+<a name="280"><font color="#888888 "><i>  280   </i></font></a>            perm[2] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)i4;
+<a name="281"><font color="#888888 "><i>  281   </i></font></a>            perm[3] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)bLen;
+<a name="282"><font color="#888888 "><i>  282   </i></font></a>          <b>}</b>
+<a name="283"><font color="#888888 "><i>  283   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (x4[m - 1] &gt;= x4[i4 - 1]) <b>{</b>
+<a name="284"><font color="#888888 "><i>  284   </i></font></a>          <font color="#112266"><b>if</b></font> (x4[bLen - 1] &gt;= x4[i4 - 1]) <b>{</b>
+<a name="285"><font color="#888888 "><i>  285   </i></font></a>            perm[0] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)nPairs;
+<a name="286"><font color="#888888 "><i>  286   </i></font></a>            perm[1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)m;
+<a name="287"><font color="#888888 "><i>  287   </i></font></a>            perm[2] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)bLen;
+<a name="288"><font color="#888888 "><i>  288   </i></font></a>            perm[3] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)i4;
+<a name="289"><font color="#888888 "><i>  289   </i></font></a>          <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="290"><font color="#888888 "><i>  290   </i></font></a>            perm[0] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)nPairs;
+<a name="291"><font color="#888888 "><i>  291   </i></font></a>            perm[1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)m;
+<a name="292"><font color="#888888 "><i>  292   </i></font></a>            perm[2] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)i4;
+<a name="293"><font color="#888888 "><i>  293   </i></font></a>            perm[3] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)bLen;
+<a name="294"><font color="#888888 "><i>  294   </i></font></a>          <b>}</b>
+<a name="295"><font color="#888888 "><i>  295   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="296"><font color="#888888 "><i>  296   </i></font></a>          perm[0] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)nPairs;
+<a name="297"><font color="#888888 "><i>  297   </i></font></a>          perm[1] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)i4;
+<a name="298"><font color="#888888 "><i>  298   </i></font></a>          perm[2] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)m;
+<a name="299"><font color="#888888 "><i>  299   </i></font></a>          perm[3] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)bLen;
+<a name="300"><font color="#888888 "><i>  300   </i></font></a>        <b>}</b>
+<a name="301"><font color="#888888 "><i>  301   </i></font></a>
+<a name="302"><font color="#888888 "><i>  302   </i></font></a>        idx[ib - 3] = idx4[perm[0] - 1];
+<a name="303"><font color="#888888 "><i>  303   </i></font></a>        idx[ib - 2] = idx4[perm[1] - 1];
+<a name="304"><font color="#888888 "><i>  304   </i></font></a>        idx[ib - 1] = idx4[perm[2] - 1];
+<a name="305"><font color="#888888 "><i>  305   </i></font></a>        idx[ib] = idx4[perm[3] - 1];
+<a name="306"><font color="#888888 "><i>  306   </i></font></a>        x[ib - 3] = x4[perm[0] - 1];
+<a name="307"><font color="#888888 "><i>  307   </i></font></a>        x[ib - 2] = x4[perm[1] - 1];
+<a name="308"><font color="#888888 "><i>  308   </i></font></a>        x[ib - 1] = x4[perm[2] - 1];
+<a name="309"><font color="#888888 "><i>  309   </i></font></a>        x[ib] = x4[perm[3] - 1];
+<a name="310"><font color="#888888 "><i>  310   </i></font></a>        ib = 0;
+<a name="311"><font color="#888888 "><i>  311   </i></font></a>      <b>}</b>
+<a name="312"><font color="#888888 "><i>  312   </i></font></a>    <b>}</b>
+<a name="313"><font color="#888888 "><i>  313   </i></font></a>  <b>}</b>
+<a name="314"><font color="#888888 "><i>  314   </i></font></a>
+<a name="315"><font color="#888888 "><i>  315   </i></font></a>  <font color="#112266"><b>if</b></font> (ib &gt; 0) <b>{</b>
+<a name="316"><font color="#888888 "><i>  316   </i></font></a>    <font color="#112266"><b>for</b></font> (m = 0; m &lt; 4; m++) <b>{</b>
+<a name="317"><font color="#888888 "><i>  317   </i></font></a>      perm[m] = 0;
+<a name="318"><font color="#888888 "><i>  318   </i></font></a>    <b>}</b>
+<a name="319"><font color="#888888 "><i>  319   </i></font></a>
+<a name="320"><font color="#888888 "><i>  320   </i></font></a>    <font color="#112266"><b>if</b></font> (ib == 1) <b>{</b>
+<a name="321"><font color="#888888 "><i>  321   </i></font></a>      perm[0] = 1;
+<a name="322"><font color="#888888 "><i>  322   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (ib == 2) <b>{</b>
+<a name="323"><font color="#888888 "><i>  323   </i></font></a>      <font color="#112266"><b>if</b></font> (x4[0] &gt;= x4[1]) <b>{</b>
+<a name="324"><font color="#888888 "><i>  324   </i></font></a>        perm[0] = 1;
+<a name="325"><font color="#888888 "><i>  325   </i></font></a>        perm[1] = 2;
+<a name="326"><font color="#888888 "><i>  326   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="327"><font color="#888888 "><i>  327   </i></font></a>        perm[0] = 2;
+<a name="328"><font color="#888888 "><i>  328   </i></font></a>        perm[1] = 1;
+<a name="329"><font color="#888888 "><i>  329   </i></font></a>      <b>}</b>
+<a name="330"><font color="#888888 "><i>  330   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (x4[0] &gt;= x4[1]) <b>{</b>
+<a name="331"><font color="#888888 "><i>  331   </i></font></a>      <font color="#112266"><b>if</b></font> (x4[1] &gt;= x4[2]) <b>{</b>
+<a name="332"><font color="#888888 "><i>  332   </i></font></a>        perm[0] = 1;
+<a name="333"><font color="#888888 "><i>  333   </i></font></a>        perm[1] = 2;
+<a name="334"><font color="#888888 "><i>  334   </i></font></a>        perm[2] = 3;
+<a name="335"><font color="#888888 "><i>  335   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (x4[0] &gt;= x4[2]) <b>{</b>
+<a name="336"><font color="#888888 "><i>  336   </i></font></a>        perm[0] = 1;
+<a name="337"><font color="#888888 "><i>  337   </i></font></a>        perm[1] = 3;
+<a name="338"><font color="#888888 "><i>  338   </i></font></a>        perm[2] = 2;
+<a name="339"><font color="#888888 "><i>  339   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="340"><font color="#888888 "><i>  340   </i></font></a>        perm[0] = 3;
+<a name="341"><font color="#888888 "><i>  341   </i></font></a>        perm[1] = 1;
+<a name="342"><font color="#888888 "><i>  342   </i></font></a>        perm[2] = 2;
+<a name="343"><font color="#888888 "><i>  343   </i></font></a>      <b>}</b>
+<a name="344"><font color="#888888 "><i>  344   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (x4[0] &gt;= x4[2]) <b>{</b>
+<a name="345"><font color="#888888 "><i>  345   </i></font></a>      perm[0] = 2;
+<a name="346"><font color="#888888 "><i>  346   </i></font></a>      perm[1] = 1;
+<a name="347"><font color="#888888 "><i>  347   </i></font></a>      perm[2] = 3;
+<a name="348"><font color="#888888 "><i>  348   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (x4[1] &gt;= x4[2]) <b>{</b>
+<a name="349"><font color="#888888 "><i>  349   </i></font></a>      perm[0] = 2;
+<a name="350"><font color="#888888 "><i>  350   </i></font></a>      perm[1] = 3;
+<a name="351"><font color="#888888 "><i>  351   </i></font></a>      perm[2] = 1;
+<a name="352"><font color="#888888 "><i>  352   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="353"><font color="#888888 "><i>  353   </i></font></a>      perm[0] = 3;
+<a name="354"><font color="#888888 "><i>  354   </i></font></a>      perm[1] = 2;
+<a name="355"><font color="#888888 "><i>  355   </i></font></a>      perm[2] = 1;
+<a name="356"><font color="#888888 "><i>  356   </i></font></a>    <b>}</b>
+<a name="357"><font color="#888888 "><i>  357   </i></font></a>
+<a name="358"><font color="#888888 "><i>  358   </i></font></a>    <font color="#112266"><b>for</b></font> (k = 20; k - 19 &lt;= ib; k++) <b>{</b>
+<a name="359"><font color="#888888 "><i>  359   </i></font></a>      idx[(k - nNaNs) - ib] = idx4[perm[k - 20] - 1];
+<a name="360"><font color="#888888 "><i>  360   </i></font></a>      x[(k - nNaNs) - ib] = x4[perm[k - 20] - 1];
+<a name="361"><font color="#888888 "><i>  361   </i></font></a>    <b>}</b>
+<a name="362"><font color="#888888 "><i>  362   </i></font></a>  <b>}</b>
+<a name="363"><font color="#888888 "><i>  363   </i></font></a>
+<a name="364"><font color="#888888 "><i>  364   </i></font></a>  m = nNaNs &gt;&gt; 1;
+<a name="365"><font color="#888888 "><i>  365   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 20; k - 19 &lt;= m; k++) <b>{</b>
+<a name="366"><font color="#888888 "><i>  366   </i></font></a>    ib = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)idx[k - nNaNs];
+<a name="367"><font color="#888888 "><i>  367   </i></font></a>    idx[k - nNaNs] = (<font color="#112266"><b>signed</b></font> <font color="#112266"><b>char</b></font>)idx[39 - k];
+<a name="368"><font color="#888888 "><i>  368   </i></font></a>    idx[39 - k] = ib;
+<a name="369"><font color="#888888 "><i>  369   </i></font></a>    x[k - nNaNs] = xwork[39 - k];
+<a name="370"><font color="#888888 "><i>  370   </i></font></a>    x[39 - k] = xwork[k - nNaNs];
+<a name="371"><font color="#888888 "><i>  371   </i></font></a>  <b>}</b>
+<a name="372"><font color="#888888 "><i>  372   </i></font></a>
+<a name="373"><font color="#888888 "><i>  373   </i></font></a>  <font color="#112266"><b>if</b></font> ((nNaNs &amp; 1) != 0) <b>{</b>
+<a name="374"><font color="#888888 "><i>  374   </i></font></a>    x[(m - nNaNs) + 20] = xwork[(m - nNaNs) + 20];
+<a name="375"><font color="#888888 "><i>  375   </i></font></a>  <b>}</b>
+<a name="376"><font color="#888888 "><i>  376   </i></font></a>
+<a name="377"><font color="#888888 "><i>  377   </i></font></a>  memset(&amp;iwork[0], 0, 20U * <font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
+<a name="378"><font color="#888888 "><i>  378   </i></font></a>  <font color="#112266"><b>if</b></font> (20 - nNaNs &gt; 1) <b>{</b>
+<a name="379"><font color="#888888 "><i>  379   </i></font></a>    memset(&amp;iwork[0], 0, 20U * <font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
+<a name="380"><font color="#888888 "><i>  380   </i></font></a>    nPairs = (20 - nNaNs) &gt;&gt; 2;
+<a name="381"><font color="#888888 "><i>  381   </i></font></a>    bLen = 4;
+<a name="382"><font color="#888888 "><i>  382   </i></font></a>    <font color="#112266"><b>while</b></font> (nPairs &gt; 1) <b>{</b>
+<a name="383"><font color="#888888 "><i>  383   </i></font></a>      <font color="#112266"><b>if</b></font> ((nPairs &amp; 1) != 0) <b>{</b>
+<a name="384"><font color="#888888 "><i>  384   </i></font></a>        nPairs--;
+<a name="385"><font color="#888888 "><i>  385   </i></font></a>        ib = bLen * nPairs;
+<a name="386"><font color="#888888 "><i>  386   </i></font></a>        m = 20 - (nNaNs + ib);
+<a name="387"><font color="#888888 "><i>  387   </i></font></a>        <font color="#112266"><b>if</b></font> (m &gt; bLen) <b>{</b>
+<a name="388"><font color="#888888 "><i>  388   </i></font></a>          <a href="sortIdx_c.html#fcn_b_merge" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_merge');" target="_self"><font color="#1122aa">b_merge</font></a>(idx, x, ib, bLen, m - bLen, iwork, xwork);
+<a name="389"><font color="#888888 "><i>  389   </i></font></a>        <b>}</b>
+<a name="390"><font color="#888888 "><i>  390   </i></font></a>      <b>}</b>
+<a name="391"><font color="#888888 "><i>  391   </i></font></a>
+<a name="392"><font color="#888888 "><i>  392   </i></font></a>      ib = bLen &lt;&lt; 1;
+<a name="393"><font color="#888888 "><i>  393   </i></font></a>      nPairs &gt;&gt;= 1;
+<a name="394"><font color="#888888 "><i>  394   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 1; k &lt;= nPairs; k++) <b>{</b>
+<a name="395"><font color="#888888 "><i>  395   </i></font></a>        <a href="sortIdx_c.html#fcn_b_merge" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_merge');" target="_self"><font color="#1122aa">b_merge</font></a>(idx, x, (k - 1) * ib, bLen, bLen, iwork, xwork);
+<a name="396"><font color="#888888 "><i>  396   </i></font></a>      <b>}</b>
+<a name="397"><font color="#888888 "><i>  397   </i></font></a>
+<a name="398"><font color="#888888 "><i>  398   </i></font></a>      bLen = ib;
+<a name="399"><font color="#888888 "><i>  399   </i></font></a>    <b>}</b>
+<a name="400"><font color="#888888 "><i>  400   </i></font></a>
+<a name="401"><font color="#888888 "><i>  401   </i></font></a>    <font color="#112266"><b>if</b></font> (20 - nNaNs &gt; bLen) <b>{</b>
+<a name="402"><font color="#888888 "><i>  402   </i></font></a>      <a href="sortIdx_c.html#fcn_b_merge" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_merge');" target="_self"><font color="#1122aa">b_merge</font></a>(idx, x, 0, bLen, 20 - (nNaNs + bLen), iwork, xwork);
+<a name="403"><font color="#888888 "><i>  403   </i></font></a>    <b>}</b>
+<a name="404"><font color="#888888 "><i>  404   </i></font></a>  <b>}</b>
+<a name="405"><font color="#888888 "><i>  405   </i></font></a>
+<a name="406"><font color="#888888 "><i>  406   </i></font></a>  <font color="#112266"><b>if</b></font> ((nNaNs &gt; 0) &amp;&amp; (20 - nNaNs &gt; 0)) <b>{</b>
+<a name="407"><font color="#888888 "><i>  407   </i></font></a>    <font color="#112266"><b>for</b></font> (k = 20; k - 19 &lt;= nNaNs; k++) <b>{</b>
+<a name="408"><font color="#888888 "><i>  408   </i></font></a>      xwork[k - 20] = x[k - nNaNs];
+<a name="409"><font color="#888888 "><i>  409   </i></font></a>      iwork[k - 20] = idx[k - nNaNs];
+<a name="410"><font color="#888888 "><i>  410   </i></font></a>    <b>}</b>
+<a name="411"><font color="#888888 "><i>  411   </i></font></a>
+<a name="412"><font color="#888888 "><i>  412   </i></font></a>    <font color="#112266"><b>for</b></font> (k = 19 - nNaNs; k + 1 &gt; 0; k--) <b>{</b>
+<a name="413"><font color="#888888 "><i>  413   </i></font></a>      x[nNaNs + k] = x[k];
+<a name="414"><font color="#888888 "><i>  414   </i></font></a>      idx[nNaNs + k] = idx[k];
+<a name="415"><font color="#888888 "><i>  415   </i></font></a>    <b>}</b>
+<a name="416"><font color="#888888 "><i>  416   </i></font></a>
+<a name="417"><font color="#888888 "><i>  417   </i></font></a>    <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= nNaNs; k++) <b>{</b>
+<a name="418"><font color="#888888 "><i>  418   </i></font></a>      x[k] = xwork[k];
+<a name="419"><font color="#888888 "><i>  419   </i></font></a>      idx[k] = iwork[k];
+<a name="420"><font color="#888888 "><i>  420   </i></font></a>    <b>}</b>
+<a name="421"><font color="#888888 "><i>  421   </i></font></a>  <b>}</b>
+<a name="422"><font color="#888888 "><i>  422   </i></font></a><b>}</b>
+<a name="423"><font color="#888888 "><i>  423   </i></font></a>
+<a name="424"><font color="#888888 "><i>  424   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="425"><font color="#888888 "><i>  425   </i></font></a><font color="#117755"><I> * Arguments    : emxArray_real_T *x</i></font>
+<a name="426"><font color="#888888 "><i>  426   </i></font></a><font color="#117755"><I> *                int dim</i></font>
+<a name="427"><font color="#888888 "><i>  427   </i></font></a><font color="#117755"><I> *                emxArray_int32_T *idx</i></font>
+<a name="428"><font color="#888888 "><i>  428   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="429"><font color="#888888 "><i>  429   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="430"><font color="#888888 "><i>  430   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_f_sort">f_sort</a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>int</b></font> dim, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx)
+<a name="431"><font color="#888888 "><i>  431   </i></font></a><b>{</b>
+<a name="432"><font color="#888888 "><i>  432   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *vwork;
+<a name="433"><font color="#888888 "><i>  433   </i></font></a>  <font color="#112266"><b>int</b></font> i24;
+<a name="434"><font color="#888888 "><i>  434   </i></font></a>  <font color="#112266"><b>int</b></font> vstride;
+<a name="435"><font color="#888888 "><i>  435   </i></font></a>  <font color="#112266"><b>int</b></font> k;
+<a name="436"><font color="#888888 "><i>  436   </i></font></a>  <font color="#112266"><b>int</b></font> iv1[2];
+<a name="437"><font color="#888888 "><i>  437   </i></font></a>  <font color="#112266"><b>int</b></font> npages;
+<a name="438"><font color="#888888 "><i>  438   </i></font></a>  <font color="#112266"><b>int</b></font> pagesize;
+<a name="439"><font color="#888888 "><i>  439   </i></font></a>  <font color="#112266"><b>int</b></font> i;
+<a name="440"><font color="#888888 "><i>  440   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *iidx;
+<a name="441"><font color="#888888 "><i>  441   </i></font></a>  <font color="#112266"><b>int</b></font> pageoffset;
+<a name="442"><font color="#888888 "><i>  442   </i></font></a>  <font color="#112266"><b>int</b></font> j;
+<a name="443"><font color="#888888 "><i>  443   </i></font></a>  <font color="#112266"><b>int</b></font> idx0;
+<a name="444"><font color="#888888 "><i>  444   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T1');" target="_self"><font color="#1122aa">emxInit_real_T1</font></a>(&amp;vwork, 1);
+<a name="445"><font color="#888888 "><i>  445   </i></font></a>  i24 = x-&gt;size[dim - 1];
+<a name="446"><font color="#888888 "><i>  446   </i></font></a>  vstride = x-&gt;size[dim - 1];
+<a name="447"><font color="#888888 "><i>  447   </i></font></a>  k = vwork-&gt;size[0];
+<a name="448"><font color="#888888 "><i>  448   </i></font></a>  vwork-&gt;size[0] = vstride;
+<a name="449"><font color="#888888 "><i>  449   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)vwork, k, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="450"><font color="#888888 "><i>  450   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k &lt; 2; k++) <b>{</b>
+<a name="451"><font color="#888888 "><i>  451   </i></font></a>    iv1[k] = x-&gt;size[k];
+<a name="452"><font color="#888888 "><i>  452   </i></font></a>  <b>}</b>
+<a name="453"><font color="#888888 "><i>  453   </i></font></a>
+<a name="454"><font color="#888888 "><i>  454   </i></font></a>  k = idx-&gt;size[0] * idx-&gt;size[1];
+<a name="455"><font color="#888888 "><i>  455   </i></font></a>  idx-&gt;size[0] = iv1[0];
+<a name="456"><font color="#888888 "><i>  456   </i></font></a>  idx-&gt;size[1] = iv1[1];
+<a name="457"><font color="#888888 "><i>  457   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)idx, k, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
+<a name="458"><font color="#888888 "><i>  458   </i></font></a>  vstride = 1;
+<a name="459"><font color="#888888 "><i>  459   </i></font></a>  k = 1;
+<a name="460"><font color="#888888 "><i>  460   </i></font></a>  <font color="#112266"><b>while</b></font> (k &lt;= dim - 1) <b>{</b>
+<a name="461"><font color="#888888 "><i>  461   </i></font></a>    vstride *= x-&gt;size[0];
+<a name="462"><font color="#888888 "><i>  462   </i></font></a>    k = 2;
+<a name="463"><font color="#888888 "><i>  463   </i></font></a>  <b>}</b>
+<a name="464"><font color="#888888 "><i>  464   </i></font></a>
+<a name="465"><font color="#888888 "><i>  465   </i></font></a>  npages = 1;
+<a name="466"><font color="#888888 "><i>  466   </i></font></a>  k = dim + 1;
+<a name="467"><font color="#888888 "><i>  467   </i></font></a>  <font color="#112266"><b>while</b></font> (k &lt; 3) <b>{</b>
+<a name="468"><font color="#888888 "><i>  468   </i></font></a>    npages *= x-&gt;size[1];
+<a name="469"><font color="#888888 "><i>  469   </i></font></a>    k = 3;
+<a name="470"><font color="#888888 "><i>  470   </i></font></a>  <b>}</b>
+<a name="471"><font color="#888888 "><i>  471   </i></font></a>
+<a name="472"><font color="#888888 "><i>  472   </i></font></a>  pagesize = x-&gt;size[dim - 1] * vstride;
+<a name="473"><font color="#888888 "><i>  473   </i></font></a>  i = 1;
+<a name="474"><font color="#888888 "><i>  474   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T1');" target="_self"><font color="#1122aa">emxInit_int32_T1</font></a>(&amp;iidx, 1);
+<a name="475"><font color="#888888 "><i>  475   </i></font></a>  <font color="#112266"><b>while</b></font> (i &lt;= npages) <b>{</b>
+<a name="476"><font color="#888888 "><i>  476   </i></font></a>    pageoffset = (i - 1) * pagesize;
+<a name="477"><font color="#888888 "><i>  477   </i></font></a>    <font color="#112266"><b>for</b></font> (j = 0; j + 1 &lt;= vstride; j++) <b>{</b>
+<a name="478"><font color="#888888 "><i>  478   </i></font></a>      idx0 = pageoffset + j;
+<a name="479"><font color="#888888 "><i>  479   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i24; k++) <b>{</b>
+<a name="480"><font color="#888888 "><i>  480   </i></font></a>        vwork-&gt;data[k] = x-&gt;data[idx0 + k * vstride];
+<a name="481"><font color="#888888 "><i>  481   </i></font></a>      <b>}</b>
+<a name="482"><font color="#888888 "><i>  482   </i></font></a>
+<a name="483"><font color="#888888 "><i>  483   </i></font></a>      <a href="sortIdx_c.html#fcn_sortIdx" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_sortIdx');" target="_self"><font color="#1122aa">sortIdx</font></a>(vwork, iidx);
+<a name="484"><font color="#888888 "><i>  484   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i24; k++) <b>{</b>
+<a name="485"><font color="#888888 "><i>  485   </i></font></a>        x-&gt;data[idx0 + k * vstride] = vwork-&gt;data[k];
+<a name="486"><font color="#888888 "><i>  486   </i></font></a>        idx-&gt;data[idx0 + k * vstride] = iidx-&gt;data[k];
+<a name="487"><font color="#888888 "><i>  487   </i></font></a>      <b>}</b>
+<a name="488"><font color="#888888 "><i>  488   </i></font></a>    <b>}</b>
+<a name="489"><font color="#888888 "><i>  489   </i></font></a>
+<a name="490"><font color="#888888 "><i>  490   </i></font></a>    i++;
+<a name="491"><font color="#888888 "><i>  491   </i></font></a>  <b>}</b>
+<a name="492"><font color="#888888 "><i>  492   </i></font></a>
+<a name="493"><font color="#888888 "><i>  493   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>(&amp;iidx);
+<a name="494"><font color="#888888 "><i>  494   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;vwork);
+<a name="495"><font color="#888888 "><i>  495   </i></font></a><b>}</b>
+<a name="496"><font color="#888888 "><i>  496   </i></font></a>
+<a name="497"><font color="#888888 "><i>  497   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="498"><font color="#888888 "><i>  498   </i></font></a><font color="#117755"><I> * Arguments    : double x[20]</i></font>
+<a name="499"><font color="#888888 "><i>  499   </i></font></a><font color="#117755"><I> *                int idx[20]</i></font>
+<a name="500"><font color="#888888 "><i>  500   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="501"><font color="#888888 "><i>  501   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="502"><font color="#888888 "><i>  502   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_c_sort">c_sort</a>(<font color="#112266"><b>double</b></font> x[20], <font color="#112266"><b>int</b></font> idx[20])
+<a name="503"><font color="#888888 "><i>  503   </i></font></a><b>{</b>
+<a name="504"><font color="#888888 "><i>  504   </i></font></a>  <a href="#fcn_d_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_sort');" target="_self"><font color="#1122aa">d_sort</font></a>(x, idx);
+<a name="505"><font color="#888888 "><i>  505   </i></font></a><b>}</b>
+<a name="506"><font color="#888888 "><i>  506   </i></font></a>
+<a name="507"><font color="#888888 "><i>  507   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="508"><font color="#888888 "><i>  508   </i></font></a><font color="#117755"><I> * Arguments    : emxArray_real_T *x</i></font>
+<a name="509"><font color="#888888 "><i>  509   </i></font></a><font color="#117755"><I> *                emxArray_int32_T *idx</i></font>
+<a name="510"><font color="#888888 "><i>  510   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="511"><font color="#888888 "><i>  511   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="512"><font color="#888888 "><i>  512   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_e_sort">e_sort</a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx)
+<a name="513"><font color="#888888 "><i>  513   </i></font></a><b>{</b>
+<a name="514"><font color="#888888 "><i>  514   </i></font></a>  <a href="#fcn_f_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_f_sort');" target="_self"><font color="#1122aa">f_sort</font></a>(x, 1, idx);
+<a name="515"><font color="#888888 "><i>  515   </i></font></a><b>}</b>
+<a name="516"><font color="#888888 "><i>  516   </i></font></a>
+<a name="517"><font color="#888888 "><i>  517   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="518"><font color="#888888 "><i>  518   </i></font></a><font color="#117755"><I> * Arguments    : double x[100]</i></font>
+<a name="519"><font color="#888888 "><i>  519   </i></font></a><font color="#117755"><I> *                int idx[100]</i></font>
+<a name="520"><font color="#888888 "><i>  520   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="521"><font color="#888888 "><i>  521   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="522"><font color="#888888 "><i>  522   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_sort">sort</a>(<font color="#112266"><b>double</b></font> x[100], <font color="#112266"><b>int</b></font> idx[100])
+<a name="523"><font color="#888888 "><i>  523   </i></font></a><b>{</b>
+<a name="524"><font color="#888888 "><i>  524   </i></font></a>  <a href="#fcn_b_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sort');" target="_self"><font color="#1122aa">b_sort</font></a>(x, idx);
+<a name="525"><font color="#888888 "><i>  525   </i></font></a><b>}</b>
+<a name="526"><font color="#888888 "><i>  526   </i></font></a>
+<a name="527"><font color="#888888 "><i>  527   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="528"><font color="#888888 "><i>  528   </i></font></a><font color="#117755"><I> * File trailer for sort1.c</i></font>
+<a name="529"><font color="#888888 "><i>  529   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="530"><font color="#888888 "><i>  530   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
+<a name="531"><font color="#888888 "><i>  531   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="532"><font color="#888888 "><i>  532   </i></font></a></pre>
 </td></tr></table>
 </p>
 </body>

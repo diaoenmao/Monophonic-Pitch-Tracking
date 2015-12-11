@@ -2,7 +2,7 @@
  * File: sortIdx.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Nov-2015 19:51:15
+ * C/C++ source code generated on  : 11-Dec-2015 06:07:48
  */
 
 /* Include Files */
@@ -12,14 +12,58 @@
 #include "yaapt_emxutil.h"
 
 /* Function Declarations */
-static void b_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int
-                    np, int nq, emxArray_int32_T *iwork, emxArray_real_T *xwork);
 static void b_merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
   int n, int preSortLevel, emxArray_int32_T *iwork, emxArray_real_T *xwork);
+static void c_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int
+                    np, int nq, emxArray_int32_T *iwork, emxArray_real_T *xwork);
 static void merge(int idx[100], double x[100], int offset, int np, int nq, int
                   iwork[100], double xwork[100]);
 
 /* Function Definitions */
+
+/*
+ * Arguments    : emxArray_int32_T *idx
+ *                emxArray_real_T *x
+ *                int offset
+ *                int n
+ *                int preSortLevel
+ *                emxArray_int32_T *iwork
+ *                emxArray_real_T *xwork
+ * Return Type  : void
+ */
+static void b_merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
+  int n, int preSortLevel, emxArray_int32_T *iwork, emxArray_real_T *xwork)
+{
+  int nPairs;
+  int bLen;
+  int tailOffset;
+  int nTail;
+  nPairs = n >> preSortLevel;
+  bLen = 1 << preSortLevel;
+  while (nPairs > 1) {
+    if ((nPairs & 1) != 0) {
+      nPairs--;
+      tailOffset = bLen * nPairs;
+      nTail = n - tailOffset;
+      if (nTail > bLen) {
+        c_merge(idx, x, offset + tailOffset, bLen, nTail - bLen, iwork, xwork);
+      }
+    }
+
+    tailOffset = bLen << 1;
+    nPairs >>= 1;
+    for (nTail = 1; nTail <= nPairs; nTail++) {
+      c_merge(idx, x, offset + (nTail - 1) * tailOffset, bLen, bLen, iwork,
+              xwork);
+    }
+
+    bLen = tailOffset;
+  }
+
+  if (n > bLen) {
+    c_merge(idx, x, offset, bLen, n - bLen, iwork, xwork);
+  }
+}
 
 /*
  * Arguments    : emxArray_int32_T *idx
@@ -31,7 +75,7 @@ static void merge(int idx[100], double x[100], int offset, int np, int nq, int
  *                emxArray_real_T *xwork
  * Return Type  : void
  */
-static void b_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int
+static void c_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int
                     np, int nq, emxArray_int32_T *iwork, emxArray_real_T *xwork)
 {
   int n;
@@ -83,50 +127,6 @@ static void b_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int
 }
 
 /*
- * Arguments    : emxArray_int32_T *idx
- *                emxArray_real_T *x
- *                int offset
- *                int n
- *                int preSortLevel
- *                emxArray_int32_T *iwork
- *                emxArray_real_T *xwork
- * Return Type  : void
- */
-static void b_merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
-  int n, int preSortLevel, emxArray_int32_T *iwork, emxArray_real_T *xwork)
-{
-  int nPairs;
-  int bLen;
-  int tailOffset;
-  int nTail;
-  nPairs = n >> preSortLevel;
-  bLen = 1 << preSortLevel;
-  while (nPairs > 1) {
-    if ((nPairs & 1) != 0) {
-      nPairs--;
-      tailOffset = bLen * nPairs;
-      nTail = n - tailOffset;
-      if (nTail > bLen) {
-        b_merge(idx, x, offset + tailOffset, bLen, nTail - bLen, iwork, xwork);
-      }
-    }
-
-    tailOffset = bLen << 1;
-    nPairs >>= 1;
-    for (nTail = 1; nTail <= nPairs; nTail++) {
-      b_merge(idx, x, offset + (nTail - 1) * tailOffset, bLen, bLen, iwork,
-              xwork);
-    }
-
-    bLen = tailOffset;
-  }
-
-  if (n > bLen) {
-    b_merge(idx, x, offset, bLen, n - bLen, iwork, xwork);
-  }
-}
-
-/*
  * Arguments    : int idx[100]
  *                double x[100]
  *                int offset
@@ -138,6 +138,67 @@ static void b_merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
  */
 static void merge(int idx[100], double x[100], int offset, int np, int nq, int
                   iwork[100], double xwork[100])
+{
+  int n;
+  int qend;
+  int p;
+  int iout;
+  int exitg1;
+  if (nq == 0) {
+  } else {
+    n = np + nq;
+    for (qend = 0; qend + 1 <= n; qend++) {
+      iwork[qend] = idx[offset + qend];
+      xwork[qend] = x[offset + qend];
+    }
+
+    p = 0;
+    n = np;
+    qend = np + nq;
+    iout = offset - 1;
+    do {
+      exitg1 = 0;
+      iout++;
+      if (xwork[p] >= xwork[n]) {
+        idx[iout] = iwork[p];
+        x[iout] = xwork[p];
+        if (p + 1 < np) {
+          p++;
+        } else {
+          exitg1 = 1;
+        }
+      } else {
+        idx[iout] = iwork[n];
+        x[iout] = xwork[n];
+        if (n + 1 < qend) {
+          n++;
+        } else {
+          n = (iout - p) + 1;
+          while (p + 1 <= np) {
+            idx[n + p] = iwork[p];
+            x[n + p] = xwork[p];
+            p++;
+          }
+
+          exitg1 = 1;
+        }
+      }
+    } while (exitg1 == 0);
+  }
+}
+
+/*
+ * Arguments    : int idx[20]
+ *                double x[20]
+ *                int offset
+ *                int np
+ *                int nq
+ *                int iwork[20]
+ *                double xwork[20]
+ * Return Type  : void
+ */
+void b_merge(int idx[20], double x[20], int offset, int np, int nq, int iwork[20],
+             double xwork[20])
 {
   int n;
   int qend;

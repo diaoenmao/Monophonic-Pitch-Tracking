@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2015b">
-  <configuration build-checksum="3975171932" file="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.prj" location="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" name="yaapt" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="2769698240" file="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.prj" location="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" name="yaapt" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -63,7 +63,6 @@
         <param.IntegrityChecks />
         <param.SaturateOnIntegerOverflow />
         <param.EnableVariableSizing />
-        <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
         <param.StackUsageMax />
         <param.FilePartitionMethod />
@@ -158,8 +157,8 @@
       <param.BuildConfiguration>Faster Builds</param.BuildConfiguration>
       <param.CustomToolchainOptions />
       <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
-      <param.target.Data />
-      <param.target.ActiveType>option.target.TargetType.Custom</param.target.ActiveType>
+      <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware/&gt;&lt;/ctdata&gt;</param.target.Data>
+      <param.target.ActiveType>option.target.TargetType.MatlabHost</param.target.ActiveType>
       <param.target.ActiveTarget />
       <param.HardwareVendor.Production>Generic</param.HardwareVendor.Production>
       <param.HardwareType.Production>MATLAB Host Computer</param.HardwareType.Production>
@@ -234,7 +233,6 @@
         <param.PurelyIntegerCode />
         <param.SupportNonFinite />
         <param.EnableVariableSizing />
-        <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
         <param.StackUsageMax />
         <param.MultiInstanceCode />
@@ -248,16 +246,7 @@
         <param.PreserveExternInFcnDecls />
         <param.EnableSignedLeftShifts />
         <param.EnableSignedRightShifts />
-        <param.ParenthesesLevel />
         <param.MaxIdLength />
-        <param.CustomSymbolStrGlobalVar />
-        <param.CustomSymbolStrType />
-        <param.CustomSymbolStrField />
-        <param.CustomSymbolStrFcn />
-        <param.CustomSymbolStrTmpVar />
-        <param.CustomSymbolStrMacro />
-        <param.CustomSymbolStrEMXArray />
-        <param.CustomSymbolStrEMXArrayFcn />
         <param.ReservedNameArray />
         <param.RuntimeChecks />
         <param.Verbose />
@@ -282,14 +271,9 @@
         <param.BuildConfiguration />
         <param.CustomToolchainOptions />
         <var.ToolchainSettingsVisible />
-        <param.target.Data />
         <param.target.ActiveTarget />
-        <param.HardwareVendor.Production />
-        <param.HardwareType.Production />
         <param.HWDeviceType.Production />
         <var.instance.enabled.Production />
-        <param.HardwareVendor.Target />
-        <param.HardwareType.Target />
         <param.HWDeviceType.Target />
         <var.instance.enabled.Target />
         <param.CastingMode />
@@ -688,12 +672,12 @@
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\yaapt</var.gc.lastOutputRoot>
-    <var.gc.preBuildChecksum>302507603</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>1706387897</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\yaapt</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>3160206592</var.cfi.preBuildChecksum>
+    <var.cfi.preBuildChecksum>4000409305</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>test</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\cmp_rate.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\crs_corr.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic5.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mybesseli.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfir1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfirls.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myhanning.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mykaiser.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mymedfilt1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myspecgram.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nlfer.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nonlinear.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\path1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\peaks.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\refine.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\spec_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\tm_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;4008302840&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\cmp_rate.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\crs_corr.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic5.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mybesseli.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfir1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfirls.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myhanning.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mykaiser.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mymedfilt1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myspecgram.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nlfer.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nonlinear.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\path1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\peaks.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\refine.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\spec_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\tm_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;539354884&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\cmp_rate.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\crs_corr.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic5.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mybesseli.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfir1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfirls.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myhanning.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mykaiser.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mymedfilt1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myspecgram.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nlfer.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nonlinear.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\path1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\peaks.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\refine.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\spec_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\tm_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.configImportActive>false</param.configImportActive>
@@ -748,7 +732,6 @@
       <param.outputfile />
       <param.version />
       <param.HasECoderFeatures />
-      <param.CallGeneratedCodeFromTest />
       <param.AutoInferDefaultFile />
       <param.AutoInferUseVariableSize />
       <param.AutoInferVariableSizeThreshold />

@@ -52,9 +52,10 @@ Merit_thresh2 = Prm.nccf_thresh2;
 
 %-- INITIALIZATION -----------------------------------------------------------
 numpeaks  = 0;
-Pitch     = zeros(1, maxcands);
-Merit     = zeros(1, maxcands);
-
+% Pitch     = zeros(1, maxcands);
+% Merit     = zeros(1, maxcands);
+Pitch     = zeros(1, 20);
+Merit     = zeros(1, 20);
 
 %-- MAIN ROUTINE --------------------------------------------------------------
 %  Find all peaks for a (lag_min--to--lag_max) search range
@@ -71,6 +72,15 @@ for n = lag_min-center:lag_max
         numpeaks = numpeaks + 1;
         Pitch(numpeaks) = Fs/(n+lag-1);
         Merit(numpeaks) = y;
+%         if(numpeaks > length(Pitch))
+%             tempPitch = [tempPitch Fs/(n+lag-1)];
+%             tempMerit = [Merit y];
+%             Pitch = tempPitch;
+%             Merit = tempMerit;
+%         else
+%             Pitch(numpeaks) = Fs/(n+lag-1);
+%             Merit(numpeaks) = y;
+%         end
         
         if (y > Merit_thresh2)
             break;
@@ -104,6 +114,7 @@ end;
 Max_Merit = max(Merit);
 if (Max_Merit > 1.0)
     Merit = Merit/Max_Merit;
+end
 end
 
 

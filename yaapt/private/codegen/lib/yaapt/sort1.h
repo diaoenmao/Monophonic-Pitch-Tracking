@@ -2,7 +2,7 @@
  * File: sort1.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Nov-2015 19:51:15
+ * C/C++ source code generated on  : 11-Dec-2015 06:07:48
  */
 
 #ifndef __SORT1_H__
@@ -20,7 +20,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void c_sort(double x[3], int idx[3]);
+extern void c_sort(double x[20], int idx[20]);
 extern void e_sort(emxArray_real_T *x, emxArray_int32_T *idx);
 extern void sort(double x[100], int idx[100]);
 

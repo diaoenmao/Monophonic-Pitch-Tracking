@@ -2,7 +2,7 @@
  * File: cmp_rate.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Nov-2015 19:51:15
+ * C/C++ source code generated on  : 11-Dec-2015 06:07:48
  */
 
 /* Include Files */
@@ -47,8 +47,8 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
               Merit_data[], int Merit_size[2])
 {
   int numpeaks;
-  double Pitch[3];
-  double Merit[3];
+  double Pitch[20];
+  double Merit[20];
   int i20;
   int n;
   boolean_T exitg2;
@@ -62,8 +62,8 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
   int ix;
   boolean_T exitg3;
   boolean_T guard1 = false;
-  int iidx[3];
-  double b_Pitch[3];
+  int iidx[20];
+  double b_Pitch[20];
   emxArray_real_T *r8;
   emxArray_real_T *r9;
   boolean_T exitg1;
@@ -93,7 +93,10 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
   /*   done increased from prev. value of 0.85. */
   /* -- INITIALIZATION ----------------------------------------------------------- */
   numpeaks = 0;
-  for (i20 = 0; i20 < 3; i20++) {
+
+  /*  Pitch     = zeros(1, maxcands); */
+  /*  Merit     = zeros(1, maxcands); */
+  for (i20 = 0; i20 < 20; i20++) {
     Pitch[i20] = 0.0;
     Merit[i20] = 0.0;
   }
@@ -139,11 +142,13 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
       }
 
       if (ixstart < b_loop_ub - loop_ub) {
-        for (ix = ixstart + 1; ix <= c_n; ix++) {
-          if (Phi->data[(loop_ub + ix) - 2] > mtmp) {
-            mtmp = Phi->data[(loop_ub + ix) - 2];
-            itmp = ix;
+        while (ixstart + 1 <= c_n) {
+          if (Phi->data[(loop_ub + ixstart) - 1] > mtmp) {
+            mtmp = Phi->data[(loop_ub + ixstart) - 1];
+            itmp = ixstart + 1;
           }
+
+          ixstart++;
         }
       }
     }
@@ -153,6 +158,16 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
       numpeaks++;
       Pitch[numpeaks - 1] = Fs / ((b_n + 3.0) - 1.0);
       Merit[numpeaks - 1] = mtmp;
+
+      /*          if(numpeaks > length(Pitch)) */
+      /*              tempPitch = [tempPitch Fs/(n+lag-1)]; */
+      /*              tempMerit = [Merit y]; */
+      /*              Pitch = tempPitch; */
+      /*              Merit = tempMerit; */
+      /*          else */
+      /*              Pitch(numpeaks) = Fs/(n+lag-1); */
+      /*              Merit(numpeaks) = y; */
+      /*          end */
       if (mtmp > 0.9) {
         exitg2 = true;
       } else {
@@ -170,12 +185,14 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
   /*  consider the case when the number of peaks are more than the maxcands. */
   /*  Then take only the best maxcands peaks based on the Merit values . */
   c_sort(Merit, iidx);
-  for (i20 = 0; i20 < 3; i20++) {
+  for (i20 = 0; i20 < 20; i20++) {
     b_Pitch[i20] = Pitch[iidx[i20] - 1];
   }
 
-  for (i20 = 0; i20 < 3; i20++) {
-    Pitch[i20] = b_Pitch[i20];
+  memcpy(&Pitch[0], &b_Pitch[0], 20U * sizeof(double));
+  if (numpeaks <= 3) {
+  } else {
+    numpeaks = 3;
   }
 
   if (1 > numpeaks) {
