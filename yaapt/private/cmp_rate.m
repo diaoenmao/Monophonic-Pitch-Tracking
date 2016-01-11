@@ -98,6 +98,7 @@ Pitch  = Pitch(1:numpeaks);
 
 % if the number of peaks in the frame are less than the maxcands, then we 
 % assign "null" values to remainder of peak and merit values in arrays
+
 if (numpeaks < maxcands)
     if(isempty(Pitch))
         Pitch=zeros(1,maxcands);

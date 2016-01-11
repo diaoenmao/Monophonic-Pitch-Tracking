@@ -2,7 +2,7 @@
  * File: yaapt.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 11-Dec-2015 06:07:48
+ * C/C++ source code generated on  : 12-Jan-2016 01:25:12
  */
 
 #ifndef __YAAPT_H__
@@ -16,7 +16,6 @@
 #include <string.h>
 #include "rt_nonfinite.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */

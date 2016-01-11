@@ -2,7 +2,7 @@
  * File: std.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 11-Dec-2015 06:07:48
+ * C/C++ source code generated on  : 12-Jan-2016 01:25:12
  */
 
 /* Include Files */

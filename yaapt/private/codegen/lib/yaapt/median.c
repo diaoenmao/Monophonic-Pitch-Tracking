@@ -2,7 +2,7 @@
  * File: median.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 11-Dec-2015 06:07:48
+ * C/C++ source code generated on  : 12-Jan-2016 01:25:12
  */
 
 /* Include Files */
@@ -20,11 +20,9 @@
  */
 void median(const emxArray_real_T *x, emxArray_real_T *y)
 {
-  int ub_loop;
   int i;
-  int b_i;
   int idx[5];
-  int c_i;
+  int b_i;
   int iwork[5];
   int k;
   boolean_T p;
@@ -36,27 +34,18 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
   int qEnd;
   int kEnd;
   double m;
-  ub_loop = y->size[0] * y->size[1];
+  i = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = x->size[1];
-  emxEnsureCapacity((emxArray__common *)y, ub_loop, (int)sizeof(double));
-  ub_loop = x->size[1];
-
-#pragma omp parallel for \
- num_threads(omp_get_max_threads()) \
- private(b_i,c_i,k,p,i2,j,pEnd,b_p,q,qEnd,kEnd,m) \
- firstprivate(idx,iwork)
-
-  for (i = 1; i <= ub_loop; i++) {
-    b_i = i;
-    for (c_i = 0; c_i < 5; c_i++) {
-      idx[c_i] = 0;
+  emxEnsureCapacity((emxArray__common *)y, i, (int)sizeof(double));
+  for (i = 0; i + 1 <= x->size[1]; i++) {
+    for (b_i = 0; b_i < 5; b_i++) {
+      idx[b_i] = 0;
     }
 
     for (k = 0; k <= 2; k += 2) {
-      if ((x->data[k + x->size[0] * (b_i - 1)] <= x->data[(k + x->size[0] * (b_i
-             - 1)) + 1]) || rtIsNaN(x->data[(k + x->size[0] * (b_i - 1)) + 1]))
-      {
+      if ((x->data[k + x->size[0] * i] <= x->data[(k + x->size[0] * i) + 1]) ||
+          rtIsNaN(x->data[(k + x->size[0] * i) + 1])) {
         p = true;
       } else {
         p = false;
@@ -72,11 +61,11 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
     }
 
     idx[4] = 5;
-    c_i = 2;
-    while (c_i < 5) {
-      i2 = c_i << 1;
+    b_i = 2;
+    while (b_i < 5) {
+      i2 = b_i << 1;
       j = 1;
-      for (pEnd = 1 + c_i; pEnd < 6; pEnd = qEnd + c_i) {
+      for (pEnd = 1 + b_i; pEnd < 6; pEnd = qEnd + b_i) {
         b_p = j;
         q = pEnd - 1;
         qEnd = j + i2;
@@ -87,9 +76,9 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
         k = 0;
         kEnd = qEnd - j;
         while (k + 1 <= kEnd) {
-          if ((x->data[(idx[b_p - 1] + x->size[0] * (b_i - 1)) - 1] <= x->data
-               [(idx[q] + x->size[0] * (b_i - 1)) - 1]) || rtIsNaN(x->data
-               [(idx[q] + x->size[0] * (b_i - 1)) - 1])) {
+          if ((x->data[(idx[b_p - 1] + x->size[0] * i) - 1] <= x->data[(idx[q] +
+                x->size[0] * i) - 1]) || rtIsNaN(x->data[(idx[q] + x->size[0] *
+                i) - 1])) {
             p = true;
           } else {
             p = false;
@@ -127,16 +116,16 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
         j = qEnd;
       }
 
-      c_i = i2;
+      b_i = i2;
     }
 
-    if (rtIsNaN(x->data[(idx[4] + x->size[0] * (b_i - 1)) - 1])) {
-      m = x->data[(idx[4] + x->size[0] * (b_i - 1)) - 1];
+    if (rtIsNaN(x->data[(idx[4] + x->size[0] * i) - 1])) {
+      m = x->data[(idx[4] + x->size[0] * i) - 1];
     } else {
-      m = x->data[(idx[2] + x->size[0] * (b_i - 1)) - 1];
+      m = x->data[(idx[2] + x->size[0] * i) - 1];
     }
 
-    y->data[b_i - 1] = m;
+    y->data[i] = m;
   }
 }
 

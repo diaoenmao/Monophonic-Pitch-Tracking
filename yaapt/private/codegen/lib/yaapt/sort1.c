@@ -2,7 +2,7 @@
  * File: sort1.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 11-Dec-2015 06:07:48
+ * C/C++ source code generated on  : 12-Jan-2016 01:25:12
  */
 
 /* Include Files */
@@ -430,7 +430,7 @@ static void d_sort(double x[20], int idx[20])
 static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
 {
   emxArray_real_T *vwork;
-  int i24;
+  int i22;
   int vstride;
   int k;
   int iv1[2];
@@ -442,7 +442,7 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
   int j;
   int idx0;
   emxInit_real_T1(&vwork, 1);
-  i24 = x->size[dim - 1];
+  i22 = x->size[dim - 1];
   vstride = x->size[dim - 1];
   k = vwork->size[0];
   vwork->size[0] = vstride;
@@ -476,12 +476,12 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
     pageoffset = (i - 1) * pagesize;
     for (j = 0; j + 1 <= vstride; j++) {
       idx0 = pageoffset + j;
-      for (k = 0; k + 1 <= i24; k++) {
+      for (k = 0; k + 1 <= i22; k++) {
         vwork->data[k] = x->data[idx0 + k * vstride];
       }
 
       sortIdx(vwork, iidx);
-      for (k = 0; k + 1 <= i24; k++) {
+      for (k = 0; k + 1 <= i22; k++) {
         x->data[idx0 + k * vstride] = vwork->data[k];
         idx->data[idx0 + k * vstride] = iidx->data[k];
       }

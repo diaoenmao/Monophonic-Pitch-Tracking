@@ -1,0 +1,26 @@
+LIBRARY yaapt_mex.mexw64
+EXPORTS
+mexFunction
+emlrtMexFcnProperties
+yaapt
+asr_s32
+emlrt_marshallOut
+m_error
+emxEnsureCapacity
+emxFree_boolean_T
+emxFree_creal_T
+emxFree_int32_T
+emxFree_ptrdiff_t
+emxFree_real_T
+emxInit_boolean_T
+emxInit_boolean_T1
+emxInit_creal_T
+emxInit_int32_T
+emxInit_int32_T1
+emxInit_ptrdiff_t
+emxInit_real_T
+emxInit_real_T1
+emxInit_real_T2
+yaapt_initialize
+yaapt_terminate
+yaapt_atexit

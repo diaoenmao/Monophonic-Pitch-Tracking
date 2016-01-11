@@ -1,0 +1,25 @@
+yaapt_mex.mexw64
+asr_s32		asr_s32
+emlrtMexFcnProperties		emlrtMexFcnProperties
+emlrt_marshallOut		emlrt_marshallOut
+emxEnsureCapacity		emxEnsureCapacity
+emxFree_boolean_T		emxFree_boolean_T
+emxFree_creal_T		emxFree_creal_T
+emxFree_int32_T		emxFree_int32_T
+emxFree_ptrdiff_t		emxFree_ptrdiff_t
+emxFree_real_T		emxFree_real_T
+emxInit_boolean_T		emxInit_boolean_T
+emxInit_boolean_T1		emxInit_boolean_T1
+emxInit_creal_T		emxInit_creal_T
+emxInit_int32_T		emxInit_int32_T
+emxInit_int32_T1		emxInit_int32_T1
+emxInit_ptrdiff_t		emxInit_ptrdiff_t
+emxInit_real_T		emxInit_real_T
+emxInit_real_T1		emxInit_real_T1
+emxInit_real_T2		emxInit_real_T2
+m_error		m_error
+mexFunction		mexFunction
+yaapt		yaapt
+yaapt_atexit		yaapt_atexit
+yaapt_initialize		yaapt_initialize
+yaapt_terminate		yaapt_terminate

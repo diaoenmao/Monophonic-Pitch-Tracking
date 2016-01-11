@@ -2,12 +2,12 @@
 ## Makefile generated for MATLAB file/project 'yaapt'. 
 ## 
 ## Makefile     : yaapt_rtw.mk
-## Generated on : Fri Dec 11 06:08:15 2015
+## Generated on : Tue Jan 12 01:26:01 2016
 ## MATLAB Coder version: 3.0 (R2015b)
 ## 
 ## Build Info:
 ## 
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)\yaapt.lib
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/yaapt.lib
 ## Product type : static-library
 ## 
 ###########################################################################
@@ -27,57 +27,39 @@
 PRODUCT_NAME              = yaapt
 MAKEFILE                  = yaapt_rtw.mk
 COMPUTER                  = PCWIN64
-MATLAB_ROOT               = F:\MATLAB
-MATLAB_BIN                = F:\MATLAB\bin
-MATLAB_ARCH_BIN           = F:\MATLAB\bin\win64
+MATLAB_ROOT               = F:/MATLAB~2
+MATLAB_BIN                = F:/MATLAB~2/bin
+MATLAB_ARCH_BIN           = F:/MATLAB~2/bin/win64
 MASTER_ANCHOR_DIR         = 
-START_DIR                 = D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private
+START_DIR                 = D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private
 ARCH                      = win64
 RELATIVE_PATH_TO_ANCHOR   = .
-PERL                      = $(MATLAB_ROOT)\sys\perl\win32\bin\perl.exe
-GEN_LNK_SCRIPT            = $(MATLAB_ROOT)\rtw\c\tools\mkvc_lnk.pl
+PERL                      = $(MATLAB_ROOT)/sys/perl/win32/bin/perl.exe
+GEN_LNK_SCRIPT            = $(MATLAB_ROOT)/rtw/c/tools/mkvc_lnk.pl
 CMD_FILE                  = $(PRODUCT_NAME).lnk
-NODEBUG                   = 1
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          Microsoft Visual C++ 2013 v12.0 | nmake (64-bit Windows)
-# Supported Version(s):    12.0
+# Toolchain Name:          LCC-win64 v2.4.1 | gmake (64-bit Windows)
+# Supported Version(s):    2.4.1
 # ToolchainInfo Version:   R2015b
 # Specification Revision:  1.0
 # 
-
-!include $(MATLAB_ROOT)\rtw\c\tools\vcdefs.mak
-
-
-#-------------------------------------------
-# Macros assumed to be defined elsewhere
-#-------------------------------------------
-
-# NODEBUG
-# cvarsdll
-# cvarsmt
-# conlibsmt
-# ldebug
-# conflags
-# cflags
 
 #-----------
 # MACROS
 #-----------
 
-MEX_OPTS_FILE       = $(MATLAB_ROOT)\bin\$(ARCH)\mexopts\msvc2013.xml
-MW_EXTERNLIB_DIR    = $(MATLAB_ROOT)\extern\lib\win64\microsoft
-MW_LIB_DIR          = $(MATLAB_ROOT)\lib\win64
-MEX_ARCH            = -win64
-CPU                 = AMD64
-APPVER              = 5.02
-CVARSFLAG           = $(cvarsmt)
-CFLAGS_ADDITIONAL   = -D_CRT_SECURE_NO_WARNINGS
-CPPFLAGS_ADDITIONAL = -EHs -D_CRT_SECURE_NO_WARNINGS
-LIBS_TOOLCHAIN      = $(conlibs)
+SHELL              = cmd
+LCC_ROOT           = $(MATLAB_ROOT)/sys/lcc64/lcc64
+LCC_BUILDLIB       = $(LCC_ROOT)/bin/buildlib
+LCC_LIB            = $(LCC_ROOT)/lib64
+MW_EXTERNLIB_DIR   = $(MATLAB_ROOT)/extern/lib/win64/microsoft
+MW_LIB_DIR         = $(MATLAB_ROOT)/lib/win64
+TOOLCHAIN_INCLUDES = -I$(LCC_ROOT)/include64
+MEX_OPTS_FILE      = $(MATLAB_ROOT/rtw/c/tools/lcc-win64.xml
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
@@ -87,24 +69,21 @@ TOOLCHAIN_LIBS =
 # BUILD TOOL COMMANDS
 #------------------------
 
-# C Compiler: Microsoft Visual C Compiler
-CC = cl
+# C Compiler: Lcc-win64 C Compiler
+CC_PATH = $(LCC_ROOT)/bin
+CC = $(CC_PATH)/lcc64
 
-# Linker: Microsoft Visual C Linker
-LD = link
+# Linker: Lcc-win64 Linker
+LD_PATH = $(LCC_ROOT)/bin
+LD = $(LD_PATH)/lcclnk64
 
-# C++ Compiler: Microsoft Visual C++ Compiler
-CPP = cl
-
-# C++ Linker: Microsoft Visual C++ Linker
-CPP_LD = link
-
-# Archiver: Microsoft Visual C/C++ Archiver
-AR = lib
+# Archiver: Lcc-win64 Archiver
+AR_PATH = $(LCC_ROOT)/bin
+AR = $(AR_PATH)/lcclib64
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_BIN)
-MEX = $(MEX_PATH)\mex
+MEX = $(MEX_PATH)/mex
 
 # Download: Download
 DOWNLOAD =
@@ -112,50 +91,40 @@ DOWNLOAD =
 # Execute: Execute
 EXECUTE = $(PRODUCT)
 
-# Builder: NMAKE Utility
-MAKE = nmake
+# Builder: GMAKE Utility
+MAKE_PATH = %MATLAB%\bin\win64
+MAKE = $(MAKE_PATH)/gmake
 
 
 #-------------------------
 # Directives/Utilities
 #-------------------------
 
-CDEBUG              = -Zi
+CDEBUG              = -g
 C_OUTPUT_FLAG       = -Fo
-LDDEBUG             = /DEBUG
-OUTPUT_FLAG         = -out:
-CPPDEBUG            = -Zi
-CPP_OUTPUT_FLAG     = -Fo
-CPPLDDEBUG          = /DEBUG
-OUTPUT_FLAG         = -out:
+LDDEBUG             =
+OUTPUT_FLAG         = -o
 ARDEBUG             =
-STATICLIB_OUTPUT_FLAG = -out:
+STATICLIB_OUTPUT_FLAG = /out:
 MEX_DEBUG           = -g
-RM                  = @del
+RM                  = @del /F
 ECHO                = @echo
-MV                  = @ren
-RUN                 = @cmd /C
+MV                  = @move
+RUN                 =
 
 #----------------------------------------
 # "Faster Builds" Build Configuration
 #----------------------------------------
 
-ARFLAGS              = /nologo
-CFLAGS               = $(cflags) $(CVARSFLAG) $(CFLAGS_ADDITIONAL) \
-                       /Od /Oy-
-CPPFLAGS             = /TP $(cflags) $(CVARSFLAG) $(CPPFLAGS_ADDITIONAL) \
-                       /Od /Oy-
-CPP_LDFLAGS          = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN)
-CPP_SHAREDLIB_LDFLAGS  = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) \
-                         -dll -def:$(DEF_FILE)
+ARFLAGS              =
+CFLAGS               = -c -w -noregistrylookup -nodeclspec -I$(LCC_ROOT)/include64
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN)
-MEX_CFLAGS           = $(MEX_ARCH) OPTIMFLAGS="/Od /Oy- $(MDFLAG) $(DEFINES)" $(MEX_OPTS_FLAG)
-MEX_LDFLAGS          = LDFLAGS=='$$LDFLAGS'
+LDFLAGS              = -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL)
+MEX_CFLAGS           = -win64 $(MEX_SRC) $(MEX_OPT_FILE)$(INCLUDES) -outdir $(RELATIVE_PATH_TO_ANCHOR)
+MEX_LDFLAGS          = LINKFLAGS="$$LINKFLAGS $(LDFLAGS_ADDITIONAL)"
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) \
-                       -dll -def:$(DEF_FILE)
+SHAREDLIB_LDFLAGS    = -dll -entry LibMain -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL) $(DEF_FILE)
 
 #--------------------
 # File extensions
@@ -164,11 +133,6 @@ SHAREDLIB_LDFLAGS    = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) \
 H_EXT               = .h
 OBJ_EXT             = .obj
 C_EXT               = .c
-EXE_EXT             = .exe
-SHAREDLIB_EXT       = .dll
-HPP_EXT             = .hpp
-OBJ_EXT             = .obj
-CPP_EXT             = .cpp
 EXE_EXT             = .exe
 SHAREDLIB_EXT       = .dll
 STATICLIB_EXT       = .lib
@@ -180,7 +144,7 @@ MAKE_EXT            = .mk
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)\yaapt.lib
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/yaapt.lib
 PRODUCT_TYPE = "static-library"
 BUILD_TYPE = "Static Library"
 
@@ -188,7 +152,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = $(START_DIR);$(START_DIR)\codegen\lib\yaapt;$(MATLAB_ROOT)\extern\include;$(MATLAB_ROOT)\simulink\include;$(MATLAB_ROOT)\rtw\c\src;$(MATLAB_ROOT)\rtw\c\src\ext_mode\common;$(MATLAB_ROOT)\rtw\c\ert
+INCLUDES_BUILDINFO = -I$(START_DIR) -I$(START_DIR)/codegen/lib/yaapt -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -204,7 +168,7 @@ DEFINES = $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)\codegen\lib\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_data.c $(START_DIR)\codegen\lib\yaapt\yaapt_initialize.c $(START_DIR)\codegen\lib\yaapt\yaapt_terminate.c $(START_DIR)\codegen\lib\yaapt\yaapt.c $(START_DIR)\codegen\lib\yaapt\nonlinear.c $(START_DIR)\codegen\lib\yaapt\rdivide.c $(START_DIR)\codegen\lib\yaapt\abs.c $(START_DIR)\codegen\lib\yaapt\any.c $(START_DIR)\codegen\lib\yaapt\Myfirls.c $(START_DIR)\codegen\lib\yaapt\sqrt.c $(START_DIR)\codegen\lib\yaapt\cos.c $(START_DIR)\codegen\lib\yaapt\sinc.c $(START_DIR)\codegen\lib\yaapt\sin.c $(START_DIR)\codegen\lib\yaapt\mldivide.c $(START_DIR)\codegen\lib\yaapt\xgetrf.c $(START_DIR)\codegen\lib\yaapt\xswap.c $(START_DIR)\codegen\lib\yaapt\xtrsm.c $(START_DIR)\codegen\lib\yaapt\mean.c $(START_DIR)\codegen\lib\yaapt\exp.c $(START_DIR)\codegen\lib\yaapt\filter.c $(START_DIR)\codegen\lib\yaapt\fix.c $(START_DIR)\codegen\lib\yaapt\Myspecgram.c $(START_DIR)\codegen\lib\yaapt\Myhanning.c $(START_DIR)\codegen\lib\yaapt\fft.c $(START_DIR)\codegen\lib\yaapt\sum.c $(START_DIR)\codegen\lib\yaapt\spec_trk.c $(START_DIR)\codegen\lib\yaapt\mod.c $(START_DIR)\codegen\lib\yaapt\Mykaiser.c $(START_DIR)\codegen\lib\yaapt\Mybesseli.c $(START_DIR)\codegen\lib\yaapt\repmat.c $(START_DIR)\codegen\lib\yaapt\all.c $(START_DIR)\codegen\lib\yaapt\prod.c $(START_DIR)\codegen\lib\yaapt\peaks.c $(START_DIR)\codegen\lib\yaapt\sort1.c $(START_DIR)\codegen\lib\yaapt\sortIdx.c $(START_DIR)\codegen\lib\yaapt\std.c $(START_DIR)\codegen\lib\yaapt\Mymedfilt1.c $(START_DIR)\codegen\lib\yaapt\median.c $(START_DIR)\codegen\lib\yaapt\dynamic5.c $(START_DIR)\codegen\lib\yaapt\interp1.c $(START_DIR)\codegen\lib\yaapt\pchip.c $(START_DIR)\codegen\lib\yaapt\tm_trk.c $(START_DIR)\codegen\lib\yaapt\cmp_rate.c $(START_DIR)\codegen\lib\yaapt\cat.c $(START_DIR)\codegen\lib\yaapt\dynamic.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\lib\yaapt\rt_nonfinite.c $(START_DIR)\codegen\lib\yaapt\rtGetNaN.c $(START_DIR)\codegen\lib\yaapt\rtGetInf.c
+SRCS = $(START_DIR)/codegen/lib/yaapt/yaapt_rtwutil.c $(START_DIR)/codegen/lib/yaapt/yaapt_initialize.c $(START_DIR)/codegen/lib/yaapt/yaapt_terminate.c $(START_DIR)/codegen/lib/yaapt/yaapt.c $(START_DIR)/codegen/lib/yaapt/nonlinear.c $(START_DIR)/codegen/lib/yaapt/rdivide.c $(START_DIR)/codegen/lib/yaapt/abs.c $(START_DIR)/codegen/lib/yaapt/any.c $(START_DIR)/codegen/lib/yaapt/Myfirls.c $(START_DIR)/codegen/lib/yaapt/sqrt.c $(START_DIR)/codegen/lib/yaapt/cos.c $(START_DIR)/codegen/lib/yaapt/sinc.c $(START_DIR)/codegen/lib/yaapt/sin.c $(START_DIR)/codegen/lib/yaapt/mldivide.c $(START_DIR)/codegen/lib/yaapt/xgetrf.c $(START_DIR)/codegen/lib/yaapt/xswap.c $(START_DIR)/codegen/lib/yaapt/xtrsm.c $(START_DIR)/codegen/lib/yaapt/mean.c $(START_DIR)/codegen/lib/yaapt/exp.c $(START_DIR)/codegen/lib/yaapt/filter.c $(START_DIR)/codegen/lib/yaapt/fix.c $(START_DIR)/codegen/lib/yaapt/Myspecgram.c $(START_DIR)/codegen/lib/yaapt/Myhanning.c $(START_DIR)/codegen/lib/yaapt/fft.c $(START_DIR)/codegen/lib/yaapt/sum.c $(START_DIR)/codegen/lib/yaapt/spec_trk.c $(START_DIR)/codegen/lib/yaapt/mod.c $(START_DIR)/codegen/lib/yaapt/Mykaiser.c $(START_DIR)/codegen/lib/yaapt/Mybesseli.c $(START_DIR)/codegen/lib/yaapt/repmat.c $(START_DIR)/codegen/lib/yaapt/all.c $(START_DIR)/codegen/lib/yaapt/prod.c $(START_DIR)/codegen/lib/yaapt/peaks.c $(START_DIR)/codegen/lib/yaapt/sort1.c $(START_DIR)/codegen/lib/yaapt/sortIdx.c $(START_DIR)/codegen/lib/yaapt/std.c $(START_DIR)/codegen/lib/yaapt/Mymedfilt1.c $(START_DIR)/codegen/lib/yaapt/median.c $(START_DIR)/codegen/lib/yaapt/dynamic5.c $(START_DIR)/codegen/lib/yaapt/interp1.c $(START_DIR)/codegen/lib/yaapt/pchip.c $(START_DIR)/codegen/lib/yaapt/tm_trk.c $(START_DIR)/codegen/lib/yaapt/cmp_rate.c $(START_DIR)/codegen/lib/yaapt/cat.c $(START_DIR)/codegen/lib/yaapt/dynamic.c $(START_DIR)/codegen/lib/yaapt/yaapt_emxutil.c $(START_DIR)/codegen/lib/yaapt/yaapt_emxAPI.c $(START_DIR)/codegen/lib/yaapt/rt_nonfinite.c $(START_DIR)/codegen/lib/yaapt/rtGetNaN.c $(START_DIR)/codegen/lib/yaapt/rtGetInf.c
 
 ALL_SRCS = $(SRCS)
 
@@ -212,7 +176,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = yaapt_rtwutil.obj yaapt_data.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj nonlinear.obj rdivide.obj abs.obj any.obj Myfirls.obj sqrt.obj cos.obj sinc.obj sin.obj mldivide.obj xgetrf.obj xswap.obj xtrsm.obj mean.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj sum.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj sort1.obj sortIdx.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj cmp_rate.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
+OBJS = yaapt_rtwutil.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj nonlinear.obj rdivide.obj abs.obj any.obj Myfirls.obj sqrt.obj cos.obj sinc.obj sin.obj mldivide.obj xgetrf.obj xswap.obj xtrsm.obj mean.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj sum.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj sort1.obj sortIdx.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj interp1.obj pchip.obj tm_trk.obj cmp_rate.obj cat.obj dynamic.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -242,64 +206,22 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_ = /openmp
-CFLAGS_BASIC = $(DEFINES) 
+CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
-CFLAGS = $(CFLAGS) $(CFLAGS_) $(CFLAGS_BASIC)
-
-#-----------------
-# C++ Compiler
-#-----------------
-
-CPPFLAGS_ = /openmp
-CPPFLAGS_BASIC = $(DEFINES) 
-
-CPPFLAGS = $(CPPFLAGS) $(CPPFLAGS_) $(CPPFLAGS_BASIC)
-
-#---------------
-# C++ Linker
-#---------------
-
-CPP_LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
-
-CPP_LDFLAGS = $(CPP_LDFLAGS) $(CPP_LDFLAGS_)
-
-#------------------------------
-# C++ Shared Library Linker
-#------------------------------
-
-CPP_SHAREDLIB_LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
-
-CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS) $(CPP_SHAREDLIB_LDFLAGS_)
-
-#-----------
-# Linker
-#-----------
-
-LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
-
-LDFLAGS = $(LDFLAGS) $(LDFLAGS_)
-
-#--------------------------
-# Shared Library Linker
-#--------------------------
-
-SHAREDLIB_LDFLAGS_ = /nodefaultlib:vcomp /LIBPATH:$(MATLAB_ROOT)\bin\$(ARCH) libiomp5md.lib
-
-SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS) $(SHAREDLIB_LDFLAGS_)
+CFLAGS += $(CFLAGS_BASIC)
 
 ###########################################################################
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build clean info prebuild download execute set_environment_variables
+.PHONY : all build clean info prebuild download execute
 
 
 all : build
-	@cmd /C "@echo ### Successfully generated all binary outputs."
+	@echo "### Successfully generated all binary outputs."
 
 
-build : set_environment_variables prebuild $(PRODUCT)
+build : prebuild $(PRODUCT)
 
 
 prebuild : 
@@ -311,11 +233,6 @@ download : build
 execute : download
 
 
-set_environment_variables : 
-	@set INCLUDE=$(INCLUDES);$(INCLUDE)
-	@set LIB=$(LIB)
-
-
 ###########################################################################
 ## FINAL TARGET
 ###########################################################################
@@ -325,10 +242,10 @@ set_environment_variables :
 #---------------------------------
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
-	$(PERL) $(GEN_LNK_SCRIPT) $(CMD_FILE) $(OBJS)
-	@cmd /C "@echo ### Creating static library "$(PRODUCT)" ..."
-	$(AR) $(ARFLAGS) -out:$(PRODUCT) @$(CMD_FILE)
-	@cmd /C "@echo ### Created: $(PRODUCT)"
+	$(PERL) $(GEN_LNK_SCRIPT) $(CMD_FILE) $(subst /,\,$(OBJS))
+	@echo "### Creating static library "$(PRODUCT)" ..."
+	$(AR) $(ARFLAGS) /out:$(PRODUCT) @$(CMD_FILE)
+	@echo "### Created: $(PRODUCT)"
 	$(RM) $(CMD_FILE)
 
 
@@ -340,44 +257,24 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-.c.obj :
-	$(CC) $(CFLAGS) -Fo"$@" "$<"
+%.obj : %.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-.cpp.obj :
-	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-{$(RELATIVE_PATH_TO_ANCHOR)}.c.obj :
-	$(CC) $(CFLAGS) -Fo"$@" "$<"
+%.obj : $(START_DIR)/%.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-{$(RELATIVE_PATH_TO_ANCHOR)}.cpp.obj :
-	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+%.obj : $(START_DIR)/codegen/lib/yaapt/%.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-{$(START_DIR)}.c.obj :
-	$(CC) $(CFLAGS) -Fo"$@" "$<"
-
-
-{$(START_DIR)}.cpp.obj :
-	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
-
-
-{$(START_DIR)\codegen\lib\yaapt}.c.obj :
-	$(CC) $(CFLAGS) -Fo"$@" "$<"
-
-
-{$(START_DIR)\codegen\lib\yaapt}.cpp.obj :
-	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
-
-
-{$(MATLAB_ROOT)\rtw\c\src}.c.obj :
-	$(CC) $(CFLAGS) -Fo"$@" "$<"
-
-
-{$(MATLAB_ROOT)\rtw\c\src}.cpp.obj :
-	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 ###########################################################################
@@ -392,35 +289,32 @@ $(ALL_OBJS) : $(MAKEFILE) rtw_proj.tmw
 ###########################################################################
 
 info : 
-	@cmd /C "@echo ### PRODUCT = $(PRODUCT)"
-	@cmd /C "@echo ### PRODUCT_TYPE = $(PRODUCT_TYPE)"
-	@cmd /C "@echo ### BUILD_TYPE = $(BUILD_TYPE)"
-	@cmd /C "@echo ### INCLUDES = $(INCLUDES)"
-	@cmd /C "@echo ### DEFINES = $(DEFINES)"
-	@cmd /C "@echo ### ALL_SRCS = $(ALL_SRCS)"
-	@cmd /C "@echo ### ALL_OBJS = $(ALL_OBJS)"
-	@cmd /C "@echo ### LIBS = $(LIBS)"
-	@cmd /C "@echo ### MODELREF_LIBS = $(MODELREF_LIBS)"
-	@cmd /C "@echo ### SYSTEM_LIBS = $(SYSTEM_LIBS)"
-	@cmd /C "@echo ### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
-	@cmd /C "@echo ### CFLAGS = $(CFLAGS)"
-	@cmd /C "@echo ### LDFLAGS = $(LDFLAGS)"
-	@cmd /C "@echo ### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
-	@cmd /C "@echo ### CPPFLAGS = $(CPPFLAGS)"
-	@cmd /C "@echo ### CPP_LDFLAGS = $(CPP_LDFLAGS)"
-	@cmd /C "@echo ### CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS)"
-	@cmd /C "@echo ### ARFLAGS = $(ARFLAGS)"
-	@cmd /C "@echo ### MEX_CFLAGS = $(MEX_CFLAGS)"
-	@cmd /C "@echo ### MEX_LDFLAGS = $(MEX_LDFLAGS)"
-	@cmd /C "@echo ### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
-	@cmd /C "@echo ### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
-	@cmd /C "@echo ### MAKE_FLAGS = $(MAKE_FLAGS)"
+	@echo "### PRODUCT = $(PRODUCT)"
+	@echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
+	@echo "### BUILD_TYPE = $(BUILD_TYPE)"
+	@echo "### INCLUDES = $(INCLUDES)"
+	@echo "### DEFINES = $(DEFINES)"
+	@echo "### ALL_SRCS = $(ALL_SRCS)"
+	@echo "### ALL_OBJS = $(ALL_OBJS)"
+	@echo "### LIBS = $(LIBS)"
+	@echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
+	@echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
+	@echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
+	@echo "### CFLAGS = $(CFLAGS)"
+	@echo "### LDFLAGS = $(LDFLAGS)"
+	@echo "### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
+	@echo "### ARFLAGS = $(ARFLAGS)"
+	@echo "### MEX_CFLAGS = $(MEX_CFLAGS)"
+	@echo "### MEX_LDFLAGS = $(MEX_LDFLAGS)"
+	@echo "### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
+	@echo "### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
+	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
 clean : 
 	$(ECHO) "### Deleting all derived files..."
-	@if exist $(PRODUCT) $(RM) $(PRODUCT)
-	$(RM) $(ALL_OBJS)
+	$(RM) $(subst /,\,$(PRODUCT))
+	$(RM) $(subst /,\,$(ALL_OBJS))
 	$(ECHO) "### Deleted all derived files."
 
 

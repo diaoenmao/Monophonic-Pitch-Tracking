@@ -1,10 +1,10 @@
 @echo off
 
-call "%VS120COMNTOOLS%..\..\VC\vcvarsall.bat" AMD64
+set MATLAB=F:\Matlab2015b
 
 cd .
 
-if "%1"=="" (nmake -f yaapt_rtw.mk all) else (nmake -f yaapt_rtw.mk %1)
+if "%1"=="" (F:\MATLAB~2\bin\win64\gmake -f yaapt_rtw.mk all) else (F:\MATLAB~2\bin\win64\gmake -f yaapt_rtw.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0

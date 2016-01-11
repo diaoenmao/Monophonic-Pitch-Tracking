@@ -2,7 +2,7 @@
  * File: Mymedfilt1.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 11-Dec-2015 06:07:48
+ * C/C++ source code generated on  : 12-Jan-2016 01:25:12
  */
 
 /* Include Files */
@@ -251,29 +251,22 @@ void b_Mymedfilt1(const emxArray_real_T *s, emxArray_real_T *m)
 void c_Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m)
 {
   emxArray_real_T *b_s;
-  int c_s;
-  int i21;
-  emxArray_real_T *b_m;
-  int n;
   int i;
-  double d_s;
-  double e_s;
+  int i2;
+  emxArray_real_T *b_m;
   int b_i;
-  int c_i;
+  double c_m;
+  double c_s;
   int idx[7];
-  int d_i;
   int iwork[7];
   int k;
   boolean_T p;
-  int i2;
   int j;
   int pEnd;
   int b_p;
   int q;
   int qEnd;
   int kEnd;
-  double c_m;
-  int i22;
   emxArray_real_T *d_m;
   emxInit_real_T(&b_s, 2);
 
@@ -299,75 +292,65 @@ void c_Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m)
   /*   */
   /*  You should have received a copy of the GNU Leser General Public License */
   /*  along with MVTB.  If not, see <http://www.gnu.org/licenses/>. */
-  c_s = s->size[1];
-  i21 = b_s->size[0] * b_s->size[1];
+  i = s->size[1];
+  i2 = b_s->size[0] * b_s->size[1];
   b_s->size[0] = 1;
-  b_s->size[1] = c_s;
-  emxEnsureCapacity((emxArray__common *)b_s, i21, (int)sizeof(double));
-  for (i21 = 0; i21 < c_s; i21++) {
-    b_s->data[b_s->size[0] * i21] = s->data[i21];
+  b_s->size[1] = i;
+  emxEnsureCapacity((emxArray__common *)b_s, i2, (int)sizeof(double));
+  for (i2 = 0; i2 < i; i2++) {
+    b_s->data[b_s->size[0] * i2] = s->data[i2];
   }
 
-  i21 = s->size[0] * s->size[1];
+  i2 = s->size[0] * s->size[1];
   s->size[0] = 1;
   s->size[1] = b_s->size[1];
-  emxEnsureCapacity((emxArray__common *)s, i21, (int)sizeof(double));
-  c_s = b_s->size[1];
-  for (i21 = 0; i21 < c_s; i21++) {
-    s->data[s->size[0] * i21] = b_s->data[b_s->size[0] * i21];
+  emxEnsureCapacity((emxArray__common *)s, i2, (int)sizeof(double));
+  i = b_s->size[1];
+  for (i2 = 0; i2 < i; i2++) {
+    s->data[s->size[0] * i2] = b_s->data[b_s->size[0] * i2];
   }
 
   emxFree_real_T(&b_s);
   emxInit_real_T(&b_m, 2);
-  n = s->size[1];
-  i21 = b_m->size[0] * b_m->size[1];
+  i2 = b_m->size[0] * b_m->size[1];
   b_m->size[0] = 7;
   b_m->size[1] = (int)(((double)s->size[1] + 7.0) - 1.0);
-  emxEnsureCapacity((emxArray__common *)b_m, i21, (int)sizeof(double));
-  c_s = 7 * (int)(((double)s->size[1] + 7.0) - 1.0);
-  for (i21 = 0; i21 < c_s; i21++) {
-    b_m->data[i21] = 0.0;
+  emxEnsureCapacity((emxArray__common *)b_m, i2, (int)sizeof(double));
+  i = 7 * (int)(((double)s->size[1] + 7.0) - 1.0);
+  for (i2 = 0; i2 < i; i2++) {
+    b_m->data[i2] = 0.0;
   }
 
-  for (i = 0; i < 7; i++) {
-    d_s = s->data[0];
-    e_s = s->data[s->size[1] - 1];
-    for (i21 = 0; i21 < i; i21++) {
-      b_m->data[i + b_m->size[0] * i21] = d_s;
+  for (b_i = 0; b_i < 7; b_i++) {
+    c_m = s->data[0];
+    c_s = s->data[s->size[1] - 1];
+    for (i2 = 0; i2 < b_i; i2++) {
+      b_m->data[b_i + b_m->size[0] * i2] = c_m;
     }
 
-    c_s = s->size[1];
-    for (i21 = 0; i21 < c_s; i21++) {
-      b_m->data[i + b_m->size[0] * (i21 + i)] = s->data[s->size[0] * i21];
+    i = s->size[1];
+    for (i2 = 0; i2 < i; i2++) {
+      b_m->data[b_i + b_m->size[0] * (i2 + b_i)] = s->data[s->size[0] * i2];
     }
 
-    c_s = 6 - i;
-    for (i21 = 0; i21 < c_s; i21++) {
-      b_m->data[i + b_m->size[0] * ((i21 + i) + s->size[1])] = e_s;
+    i = 6 - b_i;
+    for (i2 = 0; i2 < i; i2++) {
+      b_m->data[b_i + b_m->size[0] * ((i2 + b_i) + s->size[1])] = c_s;
     }
   }
 
-  i21 = m->size[0] * m->size[1];
+  i2 = m->size[0] * m->size[1];
   m->size[0] = 1;
   m->size[1] = b_m->size[1];
-  emxEnsureCapacity((emxArray__common *)m, i21, (int)sizeof(double));
-  c_s = b_m->size[1];
-
-#pragma omp parallel for \
- num_threads(omp_get_max_threads()) \
- private(c_i,d_i,k,p,i2,j,pEnd,b_p,q,qEnd,kEnd,c_m) \
- firstprivate(idx,iwork)
-
-  for (b_i = 1; b_i <= c_s; b_i++) {
-    c_i = b_i;
-    for (d_i = 0; d_i < 7; d_i++) {
-      idx[d_i] = 0;
+  emxEnsureCapacity((emxArray__common *)m, i2, (int)sizeof(double));
+  for (b_i = 0; b_i + 1 <= b_m->size[1]; b_i++) {
+    for (i = 0; i < 7; i++) {
+      idx[i] = 0;
     }
 
     for (k = 0; k <= 4; k += 2) {
-      if ((b_m->data[k + b_m->size[0] * (c_i - 1)] <= b_m->data[(k + b_m->size[0]
-            * (c_i - 1)) + 1]) || rtIsNaN(b_m->data[(k + b_m->size[0] * (c_i - 1))
-           + 1])) {
+      if ((b_m->data[k + b_m->size[0] * b_i] <= b_m->data[(k + b_m->size[0] *
+            b_i) + 1]) || rtIsNaN(b_m->data[(k + b_m->size[0] * b_i) + 1])) {
         p = true;
       } else {
         p = false;
@@ -383,11 +366,11 @@ void c_Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m)
     }
 
     idx[6] = 7;
-    d_i = 2;
-    while (d_i < 7) {
-      i2 = d_i << 1;
+    i = 2;
+    while (i < 7) {
+      i2 = i << 1;
       j = 1;
-      for (pEnd = 1 + d_i; pEnd < 8; pEnd = qEnd + d_i) {
+      for (pEnd = 1 + i; pEnd < 8; pEnd = qEnd + i) {
         b_p = j;
         q = pEnd - 1;
         qEnd = j + i2;
@@ -398,9 +381,9 @@ void c_Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m)
         k = 0;
         kEnd = qEnd - j;
         while (k + 1 <= kEnd) {
-          if ((b_m->data[(idx[b_p - 1] + b_m->size[0] * (c_i - 1)) - 1] <=
-               b_m->data[(idx[q] + b_m->size[0] * (c_i - 1)) - 1]) || rtIsNaN
-              (b_m->data[(idx[q] + b_m->size[0] * (c_i - 1)) - 1])) {
+          if ((b_m->data[(idx[b_p - 1] + b_m->size[0] * b_i) - 1] <= b_m->data
+               [(idx[q] + b_m->size[0] * b_i) - 1]) || rtIsNaN(b_m->data[(idx[q]
+                + b_m->size[0] * b_i) - 1])) {
             p = true;
           } else {
             p = false;
@@ -438,44 +421,44 @@ void c_Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m)
         j = qEnd;
       }
 
-      d_i = i2;
+      i = i2;
     }
 
-    if (rtIsNaN(b_m->data[(idx[6] + b_m->size[0] * (c_i - 1)) - 1])) {
-      c_m = b_m->data[(idx[6] + b_m->size[0] * (c_i - 1)) - 1];
+    if (rtIsNaN(b_m->data[(idx[6] + b_m->size[0] * b_i) - 1])) {
+      c_m = b_m->data[(idx[6] + b_m->size[0] * b_i) - 1];
     } else {
-      c_m = b_m->data[(idx[3] + b_m->size[0] * (c_i - 1)) - 1];
+      c_m = b_m->data[(idx[3] + b_m->size[0] * b_i) - 1];
     }
 
-    m->data[c_i - 1] = c_m;
+    m->data[b_i] = c_m;
   }
 
   emxFree_real_T(&b_m);
-  if (4U > 3U + n) {
-    i21 = 0;
-    i22 = 0;
+  if (4U > 3U + s->size[1]) {
+    i2 = 0;
+    k = 0;
   } else {
-    i21 = 3;
-    i22 = (int)(3U + n);
+    i2 = 3;
+    k = (int)(3U + s->size[1]);
   }
 
   emxInit_real_T(&d_m, 2);
-  c_s = d_m->size[0] * d_m->size[1];
+  i = d_m->size[0] * d_m->size[1];
   d_m->size[0] = 1;
-  d_m->size[1] = i22 - i21;
-  emxEnsureCapacity((emxArray__common *)d_m, c_s, (int)sizeof(double));
-  c_s = i22 - i21;
-  for (i22 = 0; i22 < c_s; i22++) {
-    d_m->data[d_m->size[0] * i22] = m->data[i21 + i22];
+  d_m->size[1] = k - i2;
+  emxEnsureCapacity((emxArray__common *)d_m, i, (int)sizeof(double));
+  i = k - i2;
+  for (k = 0; k < i; k++) {
+    d_m->data[d_m->size[0] * k] = m->data[i2 + k];
   }
 
-  i21 = m->size[0] * m->size[1];
+  i2 = m->size[0] * m->size[1];
   m->size[0] = 1;
   m->size[1] = d_m->size[1];
-  emxEnsureCapacity((emxArray__common *)m, i21, (int)sizeof(double));
-  c_s = d_m->size[1];
-  for (i21 = 0; i21 < c_s; i21++) {
-    m->data[m->size[0] * i21] = d_m->data[d_m->size[0] * i21];
+  emxEnsureCapacity((emxArray__common *)m, i2, (int)sizeof(double));
+  i = d_m->size[1];
+  for (i2 = 0; i2 < i; i2++) {
+    m->data[m->size[0] * i2] = d_m->data[d_m->size[0] * i2];
   }
 
   emxFree_real_T(&d_m);
