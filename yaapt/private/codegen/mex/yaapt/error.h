@@ -19,6 +19,7 @@
 #include "emlrt.h"
 #include "blas.h"
 #include "rtwtypes.h"
+#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */

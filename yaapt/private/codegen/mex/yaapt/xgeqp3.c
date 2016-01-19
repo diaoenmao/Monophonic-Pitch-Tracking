@@ -16,52 +16,50 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fk_emlrtRSI = { 241, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
+static emlrtRSInfo gk_emlrtRSI = { 241, "colon",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo gk_emlrtRSI = { 268, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
+static emlrtRSInfo hk_emlrtRSI = { 268, "colon",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo kk_emlrtRSI = { 14, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
+static emlrtRSInfo lk_emlrtRSI = { 14, "xgeqp3",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo lk_emlrtRSI = { 40, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
+static emlrtRSInfo mk_emlrtRSI = { 40, "xgeqp3",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo mk_emlrtRSI = { 75, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
+static emlrtRSInfo nk_emlrtRSI = { 75, "xgeqp3",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo nk_emlrtRSI = { 78, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
+static emlrtRSInfo ok_emlrtRSI = { 78, "xgeqp3",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo ok_emlrtRSI = { 75, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
+static emlrtRSInfo pk_emlrtRSI = { 75, "colon",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo pk_emlrtRSI = { 112, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
+static emlrtRSInfo qk_emlrtRSI = { 112, "colon",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo qk_emlrtRSI = { 151, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
+static emlrtRSInfo rk_emlrtRSI = { 151, "colon",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo rk_emlrtRSI = { 156, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
+static emlrtRSInfo sk_emlrtRSI = { 156, "colon",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRTEInfo yc_emlrtRTEI = { 1, 25, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
+static emlrtRTEInfo cd_emlrtRTEI = { 1, 25, "xgeqp3",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRTEInfo md_emlrtRTEI = { 44, 5, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
+static emlrtRTEInfo sd_emlrtRTEI = { 44, 5, "xgeqp3",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
 static emlrtDCInfo pb_emlrtDCI = { 42, 32, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m", 4
-};
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m", 4 };
 
 static emlrtDCInfo qb_emlrtDCI = { 44, 57, "xgeqp3",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m", 4
-};
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m", 4 };
 
 static emlrtDCInfo rb_emlrtDCI = { 152, 28, "colon",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\colon.m", 4 };
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m", 4 };
 
 /* Function Definitions */
 
@@ -104,27 +102,27 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   h_st.prev = &g_st;
   h_st.tls = g_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &kk_emlrtRSI;
+  st.site = &lk_emlrtRSI;
   n = A->size[1];
   if (A->size[1] == 0) {
     k = tau->size[0];
     tau->size[0] = 0;
     emxEnsureCapacity(&st, (emxArray__common *)tau, k, (int32_T)sizeof(real_T),
-                      &yc_emlrtRTEI);
-    b_st.site = &lk_emlrtRSI;
-    c_st.site = &bd_emlrtRSI;
-    d_st.site = &ok_emlrtRSI;
-    e_st.site = &pk_emlrtRSI;
-    f_st.site = &qk_emlrtRSI;
-    g_st.site = &fk_emlrtRSI;
+                      &cd_emlrtRTEI);
+    b_st.site = &mk_emlrtRSI;
+    c_st.site = &cd_emlrtRSI;
+    d_st.site = &pk_emlrtRSI;
+    e_st.site = &qk_emlrtRSI;
+    f_st.site = &rk_emlrtRSI;
+    g_st.site = &gk_emlrtRSI;
     if (A->size[1] < 1) {
       n = 0;
     } else {
       p = (A->size[1] - 1 < MAX_int32_T);
-      h_st.site = &gk_emlrtRSI;
+      h_st.site = &hk_emlrtRSI;
       if (p) {
       } else {
-        emlrtErrorWithMessageIdR2012b(&h_st, &xd_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&h_st, &ee_emlrtRTEI,
           "Coder:MATLAB:pmaxsize", 0);
       }
 
@@ -139,11 +137,11 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
 
     jpvt->size[1] = n;
     emxEnsureCapacity(&e_st, (emxArray__common *)jpvt, k, (int32_T)sizeof
-                      (int32_T), &yc_emlrtRTEI);
+                      (int32_T), &cd_emlrtRTEI);
     if (n > 0) {
       jpvt->data[0] = 1;
       info = 1;
-      f_st.site = &rk_emlrtRSI;
+      f_st.site = &sk_emlrtRSI;
       if (2 > n) {
         b20 = false;
       } else {
@@ -151,7 +149,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
       }
 
       if (b20) {
-        g_st.site = &ib_emlrtRSI;
+        g_st.site = &jb_emlrtRSI;
         check_forloop_overflow_error(&g_st, true);
       }
 
@@ -161,7 +159,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
       }
     }
   } else {
-    emxInit_ptrdiff_t(&st, &jpvt_t, 1, &md_emlrtRTEI, true);
+    emxInit_ptrdiff_t(&st, &jpvt_t, 1, &sd_emlrtRTEI, true);
     k = muIntScalarMin_sint32(1, n);
     if (!(k > 0)) {
       emlrtNonNegativeCheckR2012b(k, &pb_emlrtDCI, &st);
@@ -170,7 +168,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
     k = tau->size[0];
     tau->size[0] = muIntScalarMin_sint32(1, n);
     emxEnsureCapacity(&st, (emxArray__common *)tau, k, (int32_T)sizeof(real_T),
-                      &yc_emlrtRTEI);
+                      &cd_emlrtRTEI);
     k = jpvt_t->size[0];
     info = A->size[1];
     if (!(info > 0)) {
@@ -179,7 +177,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
 
     jpvt_t->size[0] = info;
     emxEnsureCapacity(&st, (emxArray__common *)jpvt_t, k, (int32_T)sizeof
-                      (ptrdiff_t), &yc_emlrtRTEI);
+                      (ptrdiff_t), &cd_emlrtRTEI);
     info = A->size[1];
     if (!(info > 0)) {
       emlrtNonNegativeCheckR2012b(info, &qb_emlrtDCI, &st);
@@ -193,7 +191,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
     m_t = LAPACKE_dgeqp3(102, m_t, (ptrdiff_t)A->size[1], &A->data[0], m_t,
                          &jpvt_t->data[0], &tau->data[0]);
     info = (int32_T)m_t;
-    b_st.site = &mk_emlrtRSI;
+    b_st.site = &nk_emlrtRSI;
     if (info != 0) {
       p = false;
       if (info == -4) {
@@ -202,10 +200,10 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
 
       if (!p) {
         if (info == -1010) {
-          c_st.site = &ac_emlrtRSI;
+          c_st.site = &bc_emlrtRSI;
           e_error(&c_st);
         } else {
-          c_st.site = &bc_emlrtRSI;
+          c_st.site = &cc_emlrtRSI;
           j_error(&c_st, info);
         }
       }
@@ -219,7 +217,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
       k = A->size[0] * A->size[1];
       A->size[0] = 1;
       emxEnsureCapacity(&st, (emxArray__common *)A, k, (int32_T)sizeof(real_T),
-                        &yc_emlrtRTEI);
+                        &cd_emlrtRTEI);
       info = A->size[1];
       for (k = 0; k < info; k++) {
         A->data[A->size[0] * k] = rtNaN;
@@ -229,32 +227,32 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
       k = tau->size[0];
       tau->size[0] = info;
       emxEnsureCapacity(&st, (emxArray__common *)tau, k, (int32_T)sizeof(real_T),
-                        &yc_emlrtRTEI);
+                        &cd_emlrtRTEI);
       for (k = 0; k < info; k++) {
         tau->data[k] = rtNaN;
       }
 
-      b_st.site = &nk_emlrtRSI;
-      c_st.site = &bd_emlrtRSI;
-      d_st.site = &ok_emlrtRSI;
-      e_st.site = &pk_emlrtRSI;
-      f_st.site = &qk_emlrtRSI;
-      g_st.site = &fk_emlrtRSI;
+      b_st.site = &ok_emlrtRSI;
+      c_st.site = &cd_emlrtRSI;
+      d_st.site = &pk_emlrtRSI;
+      e_st.site = &qk_emlrtRSI;
+      f_st.site = &rk_emlrtRSI;
+      g_st.site = &gk_emlrtRSI;
       if (n < 1) {
         n = 0;
       } else {
-        h_st.site = &gk_emlrtRSI;
+        h_st.site = &hk_emlrtRSI;
       }
 
       k = jpvt->size[0] * jpvt->size[1];
       jpvt->size[0] = 1;
       jpvt->size[1] = n;
       emxEnsureCapacity(&e_st, (emxArray__common *)jpvt, k, (int32_T)sizeof
-                        (int32_T), &yc_emlrtRTEI);
+                        (int32_T), &cd_emlrtRTEI);
       if (n > 0) {
         jpvt->data[0] = 1;
         info = 1;
-        f_st.site = &rk_emlrtRSI;
+        f_st.site = &sk_emlrtRSI;
         if (2 > n) {
           b21 = false;
         } else {
@@ -262,7 +260,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
         }
 
         if (b21) {
-          g_st.site = &ib_emlrtRSI;
+          g_st.site = &jb_emlrtRSI;
           check_forloop_overflow_error(&g_st, true);
         }
 
@@ -276,7 +274,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
       jpvt->size[0] = 1;
       jpvt->size[1] = jpvt_t->size[0];
       emxEnsureCapacity(&st, (emxArray__common *)jpvt, k, (int32_T)sizeof
-                        (int32_T), &yc_emlrtRTEI);
+                        (int32_T), &cd_emlrtRTEI);
       info = jpvt_t->size[0];
       for (k = 0; k < info; k++) {
         jpvt->data[jpvt->size[0] * k] = (int32_T)jpvt_t->data[k];

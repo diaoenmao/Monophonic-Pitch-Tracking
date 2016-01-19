@@ -19,16 +19,20 @@
 #include "emlrt.h"
 #include "blas.h"
 #include "rtwtypes.h"
+#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */
 extern void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray,
   int32_T oldNumel, int32_T elementSize, const emlrtRTEInfo *srcLocation);
+extern void emxFreeStruct_struct_T(struct_T *pStruct);
 extern void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
 extern void emxFree_creal_T(emxArray_creal_T **pEmxArray);
 extern void emxFree_int32_T(emxArray_int32_T **pEmxArray);
 extern void emxFree_ptrdiff_t(emxArray_ptrdiff_t **pEmxArray);
 extern void emxFree_real_T(emxArray_real_T **pEmxArray);
+extern void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
+  const emlrtRTEInfo *srcLocation, boolean_T doPush);
 extern void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T
   **pEmxArray, int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
   doPush);

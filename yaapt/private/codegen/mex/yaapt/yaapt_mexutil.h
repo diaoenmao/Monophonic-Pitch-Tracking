@@ -19,12 +19,16 @@
 #include "emlrt.h"
 #include "blas.h"
 #include "rtwtypes.h"
+#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */
 extern int32_T asr_s32(int32_T u, uint32_T n);
+extern emlrtCTX emlrtGetRootTLSGlobal(void);
+extern void emlrtLockerFunction(EmlrtLockeeFunction aLockee, const emlrtConstCTX
+  aTLS, void *aData);
 extern const mxArray *emlrt_marshallOut(const real_T u);
-extern void m_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo
+extern void n_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo
                     *location);
 
 #endif

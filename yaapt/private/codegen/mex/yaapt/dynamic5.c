@@ -17,19 +17,19 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo xh_emlrtRSI = { 49, "dynamic5",
+static emlrtRSInfo yh_emlrtRSI = { 49, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
-static emlrtRSInfo yh_emlrtRSI = { 58, "dynamic5",
+static emlrtRSInfo ai_emlrtRSI = { 58, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
-static emlrtRTEInfo yb_emlrtRTEI = { 1, 23, "dynamic5",
+static emlrtRTEInfo bc_emlrtRTEI = { 1, 23, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
-static emlrtRTEInfo ac_emlrtRTEI = { 37, 1, "dynamic5",
+static emlrtRTEInfo cc_emlrtRTEI = { 37, 1, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
-static emlrtRTEInfo bc_emlrtRTEI = { 40, 1, "dynamic5",
+static emlrtRTEInfo dc_emlrtRTEI = { 40, 1, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
 static emlrtBCInfo md_emlrtBCI = { -1, -1, 48, 67, "Pitch_array", "dynamic5",
@@ -120,7 +120,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &Local, 2, &ac_emlrtRTEI, true);
+  emxInit_real_T(sp, &Local, 2, &cc_emlrtRTEI, true);
 
   /*   Dynamic programming on speech processing */
   /*  */
@@ -158,13 +158,13 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   Local->size[0] = 4;
   Local->size[1] = Merit_array->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)Local, Trans, (int32_T)sizeof(real_T),
-                    &yb_emlrtRTEI);
+                    &bc_emlrtRTEI);
   loop_ub = Merit_array->size[0] * Merit_array->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
     Local->data[Trans] = 1.0 - Merit_array->data[Trans];
   }
 
-  emxInit_real_T2(sp, &b_Trans, 3, &bc_emlrtRTEI, true);
+  emxInit_real_T2(sp, &b_Trans, 3, &dc_emlrtRTEI, true);
 
   /* initialization for the formation of the transition cost matrix */
   /* 'dynamic5:40' Trans  = zeros(numcands, numcands, numframes); */
@@ -173,7 +173,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   b_Trans->size[1] = 4;
   b_Trans->size[2] = Pitch_array->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)b_Trans, Trans, (int32_T)sizeof
-                    (real_T), &yb_emlrtRTEI);
+                    (real_T), &bc_emlrtRTEI);
   loop_ub = 16 * Pitch_array->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
     b_Trans->data[Trans] = 0.0;
@@ -229,7 +229,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
           emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &ie_emlrtBCI, sp);
         }
 
-        st.site = &xh_emlrtRSI;
+        st.site = &yh_emlrtRSI;
         b_Trans->data[(k + b_Trans->size[0] * j) + b_Trans->size[0] *
           b_Trans->size[1] * (i + 1)] = 0.05 * b_Trans->data[(k + b_Trans->size
           [0] * j) + b_Trans->size[0] * b_Trans->size[1] * (i + 1)] + mpower
@@ -259,7 +259,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   b_Trans->size[0] = 4;
   b_Trans->size[1] = 4;
   emxEnsureCapacity(sp, (emxArray__common *)b_Trans, Trans, (int32_T)sizeof
-                    (real_T), &yb_emlrtRTEI);
+                    (real_T), &bc_emlrtRTEI);
   loop_ub = b_Trans->size[0];
   c_Trans = b_Trans->size[1];
   Trans = b_Trans->size[2];
@@ -270,7 +270,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
 
   /*  search the best path */
   /* 'dynamic5:58' Path = path1(Local, Trans); */
-  st.site = &yh_emlrtRSI;
+  st.site = &ai_emlrtRSI;
 
   /* PATH1 find optimal path with the lowest cost */
   /*  */
@@ -303,7 +303,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   /* 'path1:33' if N>=5000 */
   if (Local->size[1] >= 5000) {
     /* if N is greater than 1000, stop the routine; */
-    b_st.site = &ai_emlrtRSI;
+    b_st.site = &bi_emlrtRSI;
     for (Trans = 0; Trans < 29; Trans++) {
       u[Trans] = varargin_1[Trans];
     }
@@ -312,24 +312,24 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
     m6 = emlrtCreateCharArray(2, iv23);
     emlrtInitCharArrayR2013a(&b_st, 29, m6, &u[0]);
     emlrtAssign(&y, m6);
-    c_st.site = &fm_emlrtRSI;
-    m_error(&c_st, y, &emlrtMCI);
+    c_st.site = &mm_emlrtRSI;
+    n_error(&c_st, y, &emlrtMCI);
   }
 
-  emxInit_real_T(&st, &PRED, 2, &cc_emlrtRTEI, true);
+  emxInit_real_T(&st, &PRED, 2, &ec_emlrtRTEI, true);
 
   /* 'path1:38' PRED=ones(M,N); */
   Trans = PRED->size[0] * PRED->size[1];
   PRED->size[0] = 4;
   PRED->size[1] = Local->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)PRED, Trans, (int32_T)sizeof(real_T),
-                    &yb_emlrtRTEI);
+                    &bc_emlrtRTEI);
   loop_ub = Local->size[1] << 2;
   for (Trans = 0; Trans < loop_ub; Trans++) {
     PRED->data[Trans] = 1.0;
   }
 
-  emxInit_real_T(&st, &P, 2, &dc_emlrtRTEI, true);
+  emxInit_real_T(&st, &P, 2, &fc_emlrtRTEI, true);
 
   /* initializing several desired matrix; */
   /* 'path1:39' P=ones(1,N); */
@@ -337,20 +337,20 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   P->size[0] = 1;
   P->size[1] = Local->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)P, Trans, (int32_T)sizeof(real_T),
-                    &yb_emlrtRTEI);
+                    &bc_emlrtRTEI);
   loop_ub = Local->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
     P->data[Trans] = 1.0;
   }
 
-  emxInit_real_T(&st, &p, 2, &ec_emlrtRTEI, true);
+  emxInit_real_T(&st, &p, 2, &gc_emlrtRTEI, true);
 
   /* 'path1:40' p=zeros(1,N); */
   Trans = p->size[0] * p->size[1];
   p->size[0] = 1;
   p->size[1] = Local->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)p, Trans, (int32_T)sizeof(real_T),
-                    &yb_emlrtRTEI);
+                    &bc_emlrtRTEI);
   loop_ub = Local->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
     p->data[Trans] = 0.0;
@@ -432,7 +432,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
 
       /* 'path1:60' if CCOST(J)>=1.0E+30 */
       if (CCOST[J] >= 1.0E+30) {
-        b_st.site = &bi_emlrtRSI;
+        b_st.site = &ci_emlrtRSI;
         for (Trans = 0; Trans < 30; Trans++) {
           b_u[Trans] = b_varargin_1[Trans];
         }
@@ -441,8 +441,8 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
         m6 = emlrtCreateCharArray(2, iv24);
         emlrtInitCharArrayR2013a(&b_st, 30, m6, &b_u[0]);
         emlrtAssign(&b_y, m6);
-        c_st.site = &fm_emlrtRSI;
-        m_error(&c_st, b_y, &emlrtMCI);
+        c_st.site = &mm_emlrtRSI;
+        n_error(&c_st, b_y, &emlrtMCI);
       }
 
       /* 'path1:64' CCOST(J)=CCOST(J)+Local(J,I); */
@@ -543,7 +543,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
 
   /* 'path1:99' for I=N-1:-1:1 */
   emlrtForLoopVectorCheckR2012b((real_T)Local->size[1] - 1.0, -1.0, 1.0,
-    mxDOUBLE_CLASS, Local->size[1] - 1, &ue_emlrtRTEI, &st);
+    mxDOUBLE_CLASS, Local->size[1] - 1, &bf_emlrtRTEI, &st);
   I = 0;
   emxFree_real_T(&p);
   while (I <= Local->size[1] - 2) {
@@ -593,7 +593,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   FinPitch->size[0] = 1;
   FinPitch->size[1] = Pitch_array->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)FinPitch, Trans, (int32_T)sizeof
-                    (real_T), &yb_emlrtRTEI);
+                    (real_T), &bc_emlrtRTEI);
   loop_ub = Pitch_array->size[1];
   for (Trans = 0; Trans < loop_ub; Trans++) {
     FinPitch->data[Trans] = 0.0;

@@ -13,11 +13,11 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo q_emlrtRTEI = { 1, 14, "rdivide",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\rdivide.m" };
+static emlrtRTEInfo s_emlrtRTEI = { 1, 14, "rdivide",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\rdivide.m" };
 
-static emlrtRTEInfo ne_emlrtRTEI = { 13, 15, "rdivide",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\rdivide.m" };
+static emlrtRTEInfo te_emlrtRTEI = { 13, 15, "rdivide",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\rdivide.m" };
 
 /* Function Definitions */
 
@@ -32,7 +32,7 @@ void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
   i13 = z->size[0];
   z->size[0] = x->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)z, i13, (int32_T)sizeof(real_T),
-                    &q_emlrtRTEI);
+                    &s_emlrtRTEI);
   loop_ub = x->size[0];
   for (i13 = 0; i13 < loop_ub; i13++) {
     z->data[i13] = x->data[i13] / y;
@@ -42,25 +42,44 @@ void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
 /*
  *
  */
-void c_rdivide(const emlrtStack *sp, real_T x, const emxArray_real_T *y,
+void c_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
                emxArray_real_T *z)
 {
-  int32_T i18;
+  int32_T i16;
   int32_T loop_ub;
-  i18 = z->size[0];
-  z->size[0] = y->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i18, (int32_T)sizeof(real_T),
-                    &q_emlrtRTEI);
-  loop_ub = y->size[0];
-  for (i18 = 0; i18 < loop_ub; i18++) {
-    z->data[i18] = x / y->data[i18];
+  i16 = z->size[0] * z->size[1];
+  z->size[0] = 1;
+  z->size[1] = x->size[1];
+  emxEnsureCapacity(sp, (emxArray__common *)z, i16, (int32_T)sizeof(real_T),
+                    &s_emlrtRTEI);
+  loop_ub = x->size[0] * x->size[1];
+  for (i16 = 0; i16 < loop_ub; i16++) {
+    z->data[i16] = x->data[i16] / y;
   }
 }
 
 /*
  *
  */
-void d_rdivide(const emlrtStack *sp, const emxArray_real_T *x, const
+void d_rdivide(const emlrtStack *sp, real_T x, const emxArray_real_T *y,
+               emxArray_real_T *z)
+{
+  int32_T i19;
+  int32_T loop_ub;
+  i19 = z->size[0];
+  z->size[0] = y->size[0];
+  emxEnsureCapacity(sp, (emxArray__common *)z, i19, (int32_T)sizeof(real_T),
+                    &s_emlrtRTEI);
+  loop_ub = y->size[0];
+  for (i19 = 0; i19 < loop_ub; i19++) {
+    z->data[i19] = x / y->data[i19];
+  }
+}
+
+/*
+ *
+ */
+void e_rdivide(const emlrtStack *sp, const emxArray_real_T *x, const
                emxArray_real_T *y, emxArray_real_T *z)
 {
   uint32_T varargin_1[2];
@@ -94,13 +113,13 @@ void d_rdivide(const emlrtStack *sp, const emxArray_real_T *x, const
 
   if (p) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ne_emlrtRTEI, "MATLAB:dimagree", 0);
+    emlrtErrorWithMessageIdR2012b(sp, &te_emlrtRTEI, "MATLAB:dimagree", 0);
   }
 
   k = z->size[0];
   z->size[0] = x->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)z, k, (int32_T)sizeof(real_T),
-                    &q_emlrtRTEI);
+                    &s_emlrtRTEI);
   loop_ub = x->size[0];
   for (k = 0; k < loop_ub; k++) {
     z->data[k] = x->data[k] / y->data[k];

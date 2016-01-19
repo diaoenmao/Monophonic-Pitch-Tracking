@@ -15,11 +15,11 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo jg_emlrtRSI = { 11, "prod",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\prod.m" };
+static emlrtRSInfo kg_emlrtRSI = { 11, "prod",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\prod.m" };
 
-static emlrtRTEInfo sb_emlrtRTEI = { 1, 14, "prod",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\prod.m" };
+static emlrtRTEInfo ub_emlrtRTEI = { 1, 14, "prod",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\prod.m" };
 
 /* Function Definitions */
 
@@ -43,7 +43,7 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &jg_emlrtRSI;
+  st.site = &kg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -75,11 +75,11 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
 
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &wd_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &de_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  b_st.site = &sd_emlrtRSI;
+  b_st.site = &td_emlrtRSI;
   for (ix = 0; ix < 2; ix++) {
     sz[ix] = (uint32_T)x->size[ix];
   }
@@ -88,12 +88,12 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   y->size[0] = 1;
   y->size[1] = (int32_T)sz[1];
   emxEnsureCapacity(&b_st, (emxArray__common *)y, ix, (int32_T)sizeof(real_T),
-                    &sb_emlrtRTEI);
+                    &ub_emlrtRTEI);
   if (x->size[1] == 0) {
     ix = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity(&b_st, (emxArray__common *)y, ix, (int32_T)sizeof(real_T),
-                      &sb_emlrtRTEI);
+                      &ub_emlrtRTEI);
     ixstart = y->size[1];
     for (ix = 0; ix < ixstart; ix++) {
       y->data[y->size[0] * ix] = 1.0;
@@ -101,10 +101,10 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   } else {
     ix = -1;
     iy = -1;
-    c_st.site = &td_emlrtRSI;
+    c_st.site = &ud_emlrtRSI;
     overflow = (x->size[1] > 2147483646);
     if (overflow) {
-      d_st.site = &ib_emlrtRSI;
+      d_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 

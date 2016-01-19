@@ -19,6 +19,7 @@
 #include "emlrt.h"
 #include "blas.h"
 #include "rtwtypes.h"
+#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */
@@ -32,6 +33,7 @@ extern void i_error(const emlrtStack *sp);
 extern void j_error(const emlrtStack *sp, int32_T varargin_2);
 extern void k_error(const emlrtStack *sp, int32_T varargin_2);
 extern void l_error(const emlrtStack *sp);
+extern void m_error(const emlrtStack *sp);
 
 #endif
 

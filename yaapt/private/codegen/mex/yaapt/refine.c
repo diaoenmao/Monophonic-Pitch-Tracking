@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "refine.h"
+#include "rdivide.h"
 #include "yaapt_emxutil.h"
 #include "median.h"
 #include "sort1.h"
@@ -17,22 +18,22 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo bl_emlrtRSI = { 45, "refine",
+static emlrtRSInfo cl_emlrtRSI = { 45, "refine",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\refine.m" };
 
-static emlrtRSInfo cl_emlrtRSI = { 46, "refine",
+static emlrtRSInfo dl_emlrtRSI = { 46, "refine",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\refine.m" };
 
-static emlrtRSInfo dl_emlrtRSI = { 51, "refine",
+static emlrtRSInfo el_emlrtRSI = { 51, "refine",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\refine.m" };
 
-static emlrtRSInfo el_emlrtRSI = { 57, "refine",
+static emlrtRSInfo fl_emlrtRSI = { 57, "refine",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\refine.m" };
 
-static emlrtRTEInfo bd_emlrtRTEI = { 1, 26, "refine",
+static emlrtRTEInfo ed_emlrtRTEI = { 1, 26, "refine",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\refine.m" };
 
-static emlrtRTEInfo cd_emlrtRTEI = { 57, 1, "refine",
+static emlrtRTEInfo fd_emlrtRTEI = { 57, 1, "refine",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\refine.m" };
 
 static emlrtECInfo rb_emlrtECI = { -1, 107, 1, "refine",
@@ -197,13 +198,13 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   emxArray_int32_T *iidx;
   int32_T numframes;
   int32_T maxcands;
-  int32_T i38;
+  int32_T i40;
   int32_T loop_ub;
   int32_T n;
   emxArray_real_T *r25;
   emxArray_int32_T *r26;
   emxArray_real_T *b_Pitch;
-  int32_T i39;
+  int32_T i41;
   int32_T c_Pitch;
   int32_T b_loop_ub;
   int32_T BestPitch;
@@ -230,8 +231,8 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &Idx, 2, &bd_emlrtRTEI, true);
-  emxInit_int32_T1(sp, &iidx, 2, &bd_emlrtRTEI, true);
+  emxInit_real_T(sp, &Idx, 2, &ed_emlrtRTEI, true);
+  emxInit_int32_T1(sp, &iidx, 2, &ed_emlrtRTEI, true);
 
   /*  REFINE Refine pitch candidates for YAAPT Pitch tracking */
   /*  */
@@ -272,11 +273,11 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*  Merge pitch candidates and their merits from two types of the signal */
   /* 'refine:45' Pitch = cat(1,TPitch1, TPitch2); */
-  st.site = &bl_emlrtRSI;
+  st.site = &cl_emlrtRSI;
   cat(&st, TPitch1, TPitch2, Pitch);
 
   /* 'refine:46' Merit = cat(1,TMerit1, TMerit2); */
-  st.site = &cl_emlrtRSI;
+  st.site = &dl_emlrtRSI;
   cat(&st, TMerit1, TMerit2, Merit);
 
   /*   The rate/pitch arrays and the merit arrays are now arranged */
@@ -286,87 +287,87 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   maxcands = Pitch->size[0];
 
   /* 'refine:51' [Merit, Idx] = sort(Merit, 'descend'); */
-  st.site = &dl_emlrtRSI;
-  b_st.site = &rg_emlrtRSI;
+  st.site = &el_emlrtRSI;
+  b_st.site = &sg_emlrtRSI;
   e_sort(&b_st, Merit, iidx);
-  i38 = Idx->size[0] * Idx->size[1];
+  i40 = Idx->size[0] * Idx->size[1];
   Idx->size[0] = iidx->size[0];
   Idx->size[1] = iidx->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)Idx, i38, (int32_T)sizeof(real_T),
-                    &bd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)Idx, i40, (int32_T)sizeof(real_T),
+                    &ed_emlrtRTEI);
   loop_ub = iidx->size[0] * iidx->size[1];
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    Idx->data[i38] = iidx->data[i38];
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    Idx->data[i40] = iidx->data[i40];
   }
 
   emxFree_int32_T(&iidx);
 
   /* 'refine:52' for n=1:numframes */
   n = 0;
-  emxInit_real_T1(sp, &r25, 1, &bd_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r26, 1, &bd_emlrtRTEI, true);
-  emxInit_real_T1(sp, &b_Pitch, 1, &bd_emlrtRTEI, true);
+  emxInit_real_T1(sp, &r25, 1, &ed_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r26, 1, &ed_emlrtRTEI, true);
+  emxInit_real_T1(sp, &b_Pitch, 1, &ed_emlrtRTEI, true);
   while (n <= numframes) {
     /* 'refine:53' Pitch(:,n) = Pitch(Idx(:,n),n); */
     loop_ub = Pitch->size[0];
-    i38 = r26->size[0];
+    i40 = r26->size[0];
     r26->size[0] = loop_ub;
-    emxEnsureCapacity(sp, (emxArray__common *)r26, i38, (int32_T)sizeof(int32_T),
-                      &bd_emlrtRTEI);
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      r26->data[i38] = i38;
+    emxEnsureCapacity(sp, (emxArray__common *)r26, i40, (int32_T)sizeof(int32_T),
+                      &ed_emlrtRTEI);
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      r26->data[i40] = i40;
     }
 
-    i38 = Pitch->size[1];
-    i39 = n + 1;
-    if (!((i39 >= 1) && (i39 <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &ag_emlrtBCI, sp);
+    i40 = Pitch->size[1];
+    i41 = n + 1;
+    if (!((i41 >= 1) && (i41 <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &ag_emlrtBCI, sp);
     }
 
     loop_ub = Idx->size[0];
-    i38 = Idx->size[1];
-    i39 = 1 + n;
-    if (!((i39 >= 1) && (i39 <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &cg_emlrtBCI, sp);
+    i40 = Idx->size[1];
+    i41 = 1 + n;
+    if (!((i41 >= 1) && (i41 <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &cg_emlrtBCI, sp);
     }
 
     c_Pitch = Pitch->size[0];
-    i38 = Pitch->size[1];
+    i40 = Pitch->size[1];
     b_loop_ub = 1 + n;
-    if (!((b_loop_ub >= 1) && (b_loop_ub <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(b_loop_ub, 1, i38, &bg_emlrtBCI, sp);
+    if (!((b_loop_ub >= 1) && (b_loop_ub <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(b_loop_ub, 1, i40, &bg_emlrtBCI, sp);
     }
 
-    i38 = r25->size[0];
+    i40 = r25->size[0];
     r25->size[0] = loop_ub;
-    emxEnsureCapacity(sp, (emxArray__common *)r25, i38, (int32_T)sizeof(real_T),
-                      &bd_emlrtRTEI);
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      BestPitch = (int32_T)Idx->data[i38 + Idx->size[0] * (i39 - 1)];
+    emxEnsureCapacity(sp, (emxArray__common *)r25, i40, (int32_T)sizeof(real_T),
+                      &ed_emlrtRTEI);
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      BestPitch = (int32_T)Idx->data[i40 + Idx->size[0] * (i41 - 1)];
       if (!((BestPitch >= 1) && (BestPitch <= c_Pitch))) {
         emlrtDynamicBoundsCheckR2012b(BestPitch, 1, c_Pitch, &ch_emlrtBCI, sp);
       }
 
-      r25->data[i38] = Pitch->data[(BestPitch + Pitch->size[0] * (b_loop_ub - 1))
+      r25->data[i40] = Pitch->data[(BestPitch + Pitch->size[0] * (b_loop_ub - 1))
         - 1];
     }
 
     iv38[0] = r26->size[0];
     loop_ub = Idx->size[0];
-    i38 = b_Pitch->size[0];
+    i40 = b_Pitch->size[0];
     b_Pitch->size[0] = loop_ub;
-    emxEnsureCapacity(sp, (emxArray__common *)b_Pitch, i38, (int32_T)sizeof
-                      (real_T), &bd_emlrtRTEI);
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      b_Pitch->data[i38] = Pitch->data[((int32_T)Idx->data[i38 + Idx->size[0] *
+    emxEnsureCapacity(sp, (emxArray__common *)b_Pitch, i40, (int32_T)sizeof
+                      (real_T), &ed_emlrtRTEI);
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      b_Pitch->data[i40] = Pitch->data[((int32_T)Idx->data[i40 + Idx->size[0] *
         n] + Pitch->size[0] * n) - 1];
     }
 
     d_Pitch[0] = b_Pitch->size[0];
     emlrtSubAssignSizeCheckR2012b(iv38, 1, d_Pitch, 1, &ub_emlrtECI, sp);
     loop_ub = r25->size[0];
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      Pitch->data[r26->data[i38] + Pitch->size[0] * n] = r25->data[i38];
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      Pitch->data[r26->data[i40] + Pitch->size[0] * n] = r25->data[i40];
     }
 
     n++;
@@ -378,14 +379,14 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   emxFree_real_T(&b_Pitch);
   emxFree_real_T(&r25);
   emxFree_real_T(&Idx);
-  emxInit_real_T(sp, &e_Pitch, 2, &bd_emlrtRTEI, true);
+  emxInit_real_T(sp, &e_Pitch, 2, &ed_emlrtRTEI, true);
 
   /*  A best pitch track is generated from the best candidates */
   /* 'refine:57' BestPitch = Mymedfilt1(Pitch(1,:), Prm.median_value).*VUVEnergy; */
-  st.site = &el_emlrtRSI;
-  i38 = Pitch->size[0];
-  if (!(1 <= i38)) {
-    emlrtDynamicBoundsCheckR2012b(1, 1, i38, &yf_emlrtBCI, &st);
+  st.site = &fl_emlrtRSI;
+  i40 = Pitch->size[0];
+  if (!(1 <= i40)) {
+    emlrtDynamicBoundsCheckR2012b(1, 1, i40, &yf_emlrtBCI, &st);
   }
 
   /* MEDFILT1       One-dimensional median filter */
@@ -414,89 +415,89 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   /* 'Mymedfilt1:29' s = s(:)'; */
   loop_ub = Pitch->size[1];
   b_loop_ub = Pitch->size[1];
-  i38 = e_Pitch->size[0] * e_Pitch->size[1];
+  i40 = e_Pitch->size[0] * e_Pitch->size[1];
   e_Pitch->size[0] = 1;
   e_Pitch->size[1] = b_loop_ub;
-  emxEnsureCapacity(&st, (emxArray__common *)e_Pitch, i38, (int32_T)sizeof
-                    (real_T), &bd_emlrtRTEI);
-  for (i38 = 0; i38 < b_loop_ub; i38++) {
-    e_Pitch->data[e_Pitch->size[0] * i38] = Pitch->data[Pitch->size[0] * i38];
+  emxEnsureCapacity(&st, (emxArray__common *)e_Pitch, i40, (int32_T)sizeof
+                    (real_T), &ed_emlrtRTEI);
+  for (i40 = 0; i40 < b_loop_ub; i40++) {
+    e_Pitch->data[e_Pitch->size[0] * i40] = Pitch->data[Pitch->size[0] * i40];
   }
 
-  emxInit_real_T(&st, &s, 2, &bd_emlrtRTEI, true);
-  i38 = s->size[0] * s->size[1];
+  emxInit_real_T(&st, &s, 2, &ed_emlrtRTEI, true);
+  i40 = s->size[0] * s->size[1];
   s->size[0] = 1;
   s->size[1] = loop_ub;
-  emxEnsureCapacity(&st, (emxArray__common *)s, i38, (int32_T)sizeof(real_T),
-                    &bd_emlrtRTEI);
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    s->data[s->size[0] * i38] = e_Pitch->data[i38];
+  emxEnsureCapacity(&st, (emxArray__common *)s, i40, (int32_T)sizeof(real_T),
+                    &ed_emlrtRTEI);
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    s->data[s->size[0] * i40] = e_Pitch->data[i40];
   }
 
   emxFree_real_T(&e_Pitch);
-  emxInit_real_T(&st, &m, 2, &wb_emlrtRTEI, true);
+  emxInit_real_T(&st, &m, 2, &yb_emlrtRTEI, true);
 
   /* 'Mymedfilt1:30' w2 = floor(w/2); */
   /* 'Mymedfilt1:31' w = 2*w2 + 1; */
   /* 'Mymedfilt1:33' n = length(s); */
   /* 'Mymedfilt1:34' m = zeros(w,n+w-1); */
-  i38 = m->size[0] * m->size[1];
+  i40 = m->size[0] * m->size[1];
   m->size[0] = 7;
   m->size[1] = (int32_T)(((real_T)s->size[1] + 7.0) - 1.0);
-  emxEnsureCapacity(&st, (emxArray__common *)m, i38, (int32_T)sizeof(real_T),
-                    &bd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)m, i40, (int32_T)sizeof(real_T),
+                    &ed_emlrtRTEI);
   loop_ub = 7 * (int32_T)(((real_T)s->size[1] + 7.0) - 1.0);
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    m->data[i38] = 0.0;
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    m->data[i40] = 0.0;
   }
 
   /* 'Mymedfilt1:35' s0 = s(1); */
-  i38 = s->size[1];
-  if (!(1 <= i38)) {
-    emlrtDynamicBoundsCheckR2012b(1, 1, i38, &id_emlrtBCI, &st);
+  i40 = s->size[1];
+  if (!(1 <= i40)) {
+    emlrtDynamicBoundsCheckR2012b(1, 1, i40, &id_emlrtBCI, &st);
   }
 
   /* 'Mymedfilt1:35' sl = s(n); */
-  i38 = s->size[1];
-  i39 = s->size[1];
-  if (!((i39 >= 1) && (i39 <= i38))) {
-    emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &jd_emlrtBCI, &st);
+  i40 = s->size[1];
+  i41 = s->size[1];
+  if (!((i41 >= 1) && (i41 <= i40))) {
+    emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &jd_emlrtBCI, &st);
   }
 
   /* 'Mymedfilt1:37' for i=0:(w-1) */
   i = 0;
-  emxInit_real_T(&st, &b_BestPitch, 2, &cd_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_BestPitch, 2, &fd_emlrtRTEI, true);
   while (i < 7) {
     /* 'Mymedfilt1:38' m(i+1,:) = [s0*ones(1,i) s sl*ones(1,w-i-1)]; */
     loop_ub = m->size[1];
-    i38 = r26->size[0];
+    i40 = r26->size[0];
     r26->size[0] = loop_ub;
-    emxEnsureCapacity(&st, (emxArray__common *)r26, i38, (int32_T)sizeof(int32_T),
-                      &bd_emlrtRTEI);
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      r26->data[i38] = i38;
+    emxEnsureCapacity(&st, (emxArray__common *)r26, i40, (int32_T)sizeof(int32_T),
+                      &ed_emlrtRTEI);
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      r26->data[i40] = i40;
     }
 
     b_Merit = s->data[0];
     b_s = s->data[s->size[1] - 1];
     BestPitch = 6 - i;
-    i38 = b_BestPitch->size[0] * b_BestPitch->size[1];
+    i40 = b_BestPitch->size[0] * b_BestPitch->size[1];
     b_BestPitch->size[0] = 1;
     b_BestPitch->size[1] = (i + s->size[1]) + BestPitch;
-    emxEnsureCapacity(&st, (emxArray__common *)b_BestPitch, i38, (int32_T)sizeof
-                      (real_T), &bd_emlrtRTEI);
-    for (i38 = 0; i38 < i; i38++) {
-      b_BestPitch->data[b_BestPitch->size[0] * i38] = b_Merit;
+    emxEnsureCapacity(&st, (emxArray__common *)b_BestPitch, i40, (int32_T)sizeof
+                      (real_T), &ed_emlrtRTEI);
+    for (i40 = 0; i40 < i; i40++) {
+      b_BestPitch->data[b_BestPitch->size[0] * i40] = b_Merit;
     }
 
     loop_ub = s->size[1];
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      b_BestPitch->data[b_BestPitch->size[0] * (i38 + i)] = s->data[s->size[0] *
-        i38];
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      b_BestPitch->data[b_BestPitch->size[0] * (i40 + i)] = s->data[s->size[0] *
+        i40];
     }
 
-    for (i38 = 0; i38 < BestPitch; i38++) {
-      b_BestPitch->data[b_BestPitch->size[0] * ((i38 + i) + s->size[1])] = b_s;
+    for (i40 = 0; i40 < BestPitch; i40++) {
+      b_BestPitch->data[b_BestPitch->size[0] * ((i40 + i) + s->size[1])] = b_s;
     }
 
     iv39[0] = 1;
@@ -504,9 +505,9 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
     emlrtSubAssignSizeCheckR2012b(iv39, 2, *(int32_T (*)[2])b_BestPitch->size, 2,
       &fb_emlrtECI, &st);
     loop_ub = b_BestPitch->size[1];
-    for (i38 = 0; i38 < loop_ub; i38++) {
-      m->data[i + m->size[0] * r26->data[i38]] = b_BestPitch->data
-        [b_BestPitch->size[0] * i38];
+    for (i40 = 0; i40 < loop_ub; i40++) {
+      m->data[i + m->size[0] * r26->data[i40]] = b_BestPitch->data
+        [b_BestPitch->size[0] * i40];
     }
 
     i++;
@@ -516,58 +517,58 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   }
 
   /* 'Mymedfilt1:40' m = median(m); */
-  b_st.site = &rh_emlrtRSI;
+  b_st.site = &sh_emlrtRSI;
   b_median(&b_st, m, b_BestPitch);
 
   /* 'Mymedfilt1:41' m = m(w2+1:w2+n); */
   emxFree_real_T(&m);
   if (4U > 3U + s->size[1]) {
-    i38 = 0;
+    i40 = 0;
     b_loop_ub = 0;
   } else {
-    i38 = b_BestPitch->size[1];
-    if (!(4 <= i38)) {
-      emlrtDynamicBoundsCheckR2012b(4, 1, i38, &kd_emlrtBCI, &st);
+    i40 = b_BestPitch->size[1];
+    if (!(4 <= i40)) {
+      emlrtDynamicBoundsCheckR2012b(4, 1, i40, &kd_emlrtBCI, &st);
     }
 
-    i38 = 3;
-    i39 = b_BestPitch->size[1];
+    i40 = 3;
+    i41 = b_BestPitch->size[1];
     b_loop_ub = (int32_T)(3U + s->size[1]);
-    if (!((b_loop_ub >= 1) && (b_loop_ub <= i39))) {
-      emlrtDynamicBoundsCheckR2012b(b_loop_ub, 1, i39, &kd_emlrtBCI, &st);
+    if (!((b_loop_ub >= 1) && (b_loop_ub <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(b_loop_ub, 1, i41, &kd_emlrtBCI, &st);
     }
   }
 
   emxFree_real_T(&s);
-  emxInit_real_T(&st, &c_BestPitch, 2, &bd_emlrtRTEI, true);
-  i39 = c_BestPitch->size[0] * c_BestPitch->size[1];
+  emxInit_real_T(&st, &c_BestPitch, 2, &ed_emlrtRTEI, true);
+  i41 = c_BestPitch->size[0] * c_BestPitch->size[1];
   c_BestPitch->size[0] = 1;
-  c_BestPitch->size[1] = b_loop_ub - i38;
-  emxEnsureCapacity(&st, (emxArray__common *)c_BestPitch, i39, (int32_T)sizeof
-                    (real_T), &bd_emlrtRTEI);
-  loop_ub = b_loop_ub - i38;
-  for (i39 = 0; i39 < loop_ub; i39++) {
-    c_BestPitch->data[c_BestPitch->size[0] * i39] = b_BestPitch->data[i38 + i39];
+  c_BestPitch->size[1] = b_loop_ub - i40;
+  emxEnsureCapacity(&st, (emxArray__common *)c_BestPitch, i41, (int32_T)sizeof
+                    (real_T), &ed_emlrtRTEI);
+  loop_ub = b_loop_ub - i40;
+  for (i41 = 0; i41 < loop_ub; i41++) {
+    c_BestPitch->data[c_BestPitch->size[0] * i41] = b_BestPitch->data[i40 + i41];
   }
 
-  i38 = b_BestPitch->size[0] * b_BestPitch->size[1];
+  i40 = b_BestPitch->size[0] * b_BestPitch->size[1];
   b_BestPitch->size[0] = 1;
   b_BestPitch->size[1] = c_BestPitch->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)b_BestPitch, i38, (int32_T)sizeof
-                    (real_T), &bd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)b_BestPitch, i40, (int32_T)sizeof
+                    (real_T), &ed_emlrtRTEI);
   loop_ub = c_BestPitch->size[1];
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    b_BestPitch->data[b_BestPitch->size[0] * i38] = c_BestPitch->
-      data[c_BestPitch->size[0] * i38];
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    b_BestPitch->data[b_BestPitch->size[0] * i40] = c_BestPitch->
+      data[c_BestPitch->size[0] * i40];
   }
 
   emxFree_real_T(&c_BestPitch);
-  for (i38 = 0; i38 < 2; i38++) {
-    d_BestPitch[i38] = b_BestPitch->size[i38];
+  for (i40 = 0; i40 < 2; i40++) {
+    d_BestPitch[i40] = b_BestPitch->size[i40];
   }
 
-  for (i38 = 0; i38 < 2; i38++) {
-    b_VUVEnergy[i38] = VUVEnergy->size[i38];
+  for (i40 = 0; i40 < 2; i40++) {
+    b_VUVEnergy[i40] = VUVEnergy->size[i40];
   }
 
   if ((d_BestPitch[0] != b_VUVEnergy[0]) || (d_BestPitch[1] != b_VUVEnergy[1]))
@@ -575,15 +576,15 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
     emlrtSizeEqCheckNDR2012b(&d_BestPitch[0], &b_VUVEnergy[0], &tb_emlrtECI, sp);
   }
 
-  i38 = b_BestPitch->size[0] * b_BestPitch->size[1];
+  i40 = b_BestPitch->size[0] * b_BestPitch->size[1];
   b_BestPitch->size[0] = 1;
-  emxEnsureCapacity(sp, (emxArray__common *)b_BestPitch, i38, (int32_T)sizeof
-                    (real_T), &bd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)b_BestPitch, i40, (int32_T)sizeof
+                    (real_T), &ed_emlrtRTEI);
   b_loop_ub = b_BestPitch->size[0];
   BestPitch = b_BestPitch->size[1];
   loop_ub = b_loop_ub * BestPitch;
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    b_BestPitch->data[i38] *= (real_T)VUVEnergy->data[i38];
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    b_BestPitch->data[i40] *= (real_T)VUVEnergy->data[i40];
   }
 
   /*  BestPitch_test = medfilt1(Pitch(1,:), Prm.median_value).*VUVEnergy; */
@@ -592,9 +593,9 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   i = 1;
   while (i - 1 <= numframes) {
     /* 'refine:62' if (Energy(i)<=nlfer_thresh2) */
-    i38 = Energy->size[1];
-    if (!((i >= 1) && (i <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i38, &mg_emlrtBCI, sp);
+    i40 = Energy->size[1];
+    if (!((i >= 1) && (i <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i40, &mg_emlrtBCI, sp);
     }
 
     if (Energy->data[i - 1] <= 0.1) {
@@ -606,8 +607,8 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
         emlrtDynamicBoundsCheckR2012b(i, 1, c_Pitch, &xf_emlrtBCI, sp);
       }
 
-      for (i38 = 0; i38 < loop_ub; i38++) {
-        Pitch->data[i38 + Pitch->size[0] * (i - 1)] = 0.0;
+      for (i40 = 0; i40 < loop_ub; i40++) {
+        Pitch->data[i40 + Pitch->size[0] * (i - 1)] = 0.0;
       }
 
       /* 'refine:65' Merit(:,i) = Merit_pivot; */
@@ -617,57 +618,57 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
         emlrtDynamicBoundsCheckR2012b(i, 1, BestPitch, &vf_emlrtBCI, sp);
       }
 
-      for (i38 = 0; i38 < loop_ub; i38++) {
-        Merit->data[i38 + Merit->size[0] * (i - 1)] = 0.99;
+      for (i40 = 0; i40 < loop_ub; i40++) {
+        Merit->data[i40 + Merit->size[0] * (i - 1)] = 0.99;
       }
     } else {
       /* 'refine:66' else */
       /* 'refine:67' if (Pitch(1,i) > 0) */
-      i38 = Pitch->size[0];
-      if (!(1 <= i38)) {
-        emlrtDynamicBoundsCheckR2012b(1, 1, i38, &wf_emlrtBCI, sp);
+      i40 = Pitch->size[0];
+      if (!(1 <= i40)) {
+        emlrtDynamicBoundsCheckR2012b(1, 1, i40, &wf_emlrtBCI, sp);
       }
 
-      i38 = Pitch->size[1];
-      if (!((i >= 1) && (i <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i, 1, i38, &ng_emlrtBCI, sp);
+      i40 = Pitch->size[1];
+      if (!((i >= 1) && (i <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i, 1, i40, &ng_emlrtBCI, sp);
       }
 
       if (Pitch->data[Pitch->size[0] * (i - 1)] > 0.0) {
         /*  already have the voiced candidate, Want to have at */
         /*  least one unvoiced candidate */
         /* 'refine:70' Pitch(maxcands,i) = 0.0; */
-        i38 = Pitch->size[0];
-        if (!((maxcands >= 1) && (maxcands <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(maxcands, 1, i38, &sg_emlrtBCI, sp);
+        i40 = Pitch->size[0];
+        if (!((maxcands >= 1) && (maxcands <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(maxcands, 1, i40, &sg_emlrtBCI, sp);
         }
 
-        i38 = Pitch->size[1];
-        if (!((i >= 1) && (i <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, i38, &tg_emlrtBCI, sp);
+        i40 = Pitch->size[1];
+        if (!((i >= 1) && (i <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i40, &tg_emlrtBCI, sp);
         }
 
         Pitch->data[(maxcands + Pitch->size[0] * (i - 1)) - 1] = 0.0;
 
         /* 'refine:71' Merit(maxcands,i) = (1 - Merit(1,i)) ; */
-        i38 = Merit->size[0];
-        if (!(1 <= i38)) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, i38, &uf_emlrtBCI, sp);
+        i40 = Merit->size[0];
+        if (!(1 <= i40)) {
+          emlrtDynamicBoundsCheckR2012b(1, 1, i40, &uf_emlrtBCI, sp);
         }
 
-        i38 = Merit->size[1];
-        if (!((i >= 1) && (i <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, i38, &ug_emlrtBCI, sp);
+        i40 = Merit->size[1];
+        if (!((i >= 1) && (i <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i40, &ug_emlrtBCI, sp);
         }
 
-        i38 = Merit->size[0];
-        if (!((maxcands >= 1) && (maxcands <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(maxcands, 1, i38, &vg_emlrtBCI, sp);
+        i40 = Merit->size[0];
+        if (!((maxcands >= 1) && (maxcands <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(maxcands, 1, i40, &vg_emlrtBCI, sp);
         }
 
-        i38 = Merit->size[1];
-        if (!((i >= 1) && (i <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, i38, &wg_emlrtBCI, sp);
+        i40 = Merit->size[1];
+        if (!((i >= 1) && (i <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i40, &wg_emlrtBCI, sp);
         }
 
         Merit->data[(maxcands + Merit->size[0] * (i - 1)) - 1] = 1.0 -
@@ -677,26 +678,26 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
         j = 2;
         while (j - 2 <= maxcands - 3) {
           /* 'refine:73' if (Pitch(j,i) == 0) */
-          i38 = Pitch->size[0];
-          if (!((j >= 1) && (j <= i38))) {
-            emlrtDynamicBoundsCheckR2012b(j, 1, i38, &xg_emlrtBCI, sp);
+          i40 = Pitch->size[0];
+          if (!((j >= 1) && (j <= i40))) {
+            emlrtDynamicBoundsCheckR2012b(j, 1, i40, &xg_emlrtBCI, sp);
           }
 
-          i38 = Pitch->size[1];
-          if (!((i >= 1) && (i <= i38))) {
-            emlrtDynamicBoundsCheckR2012b(i, 1, i38, &yg_emlrtBCI, sp);
+          i40 = Pitch->size[1];
+          if (!((i >= 1) && (i <= i40))) {
+            emlrtDynamicBoundsCheckR2012b(i, 1, i40, &yg_emlrtBCI, sp);
           }
 
           if (Pitch->data[(j + Pitch->size[0] * (i - 1)) - 1] == 0.0) {
             /* 'refine:74' Merit(j,i) = 0.0; */
-            i38 = Merit->size[0];
-            if (!((j >= 1) && (j <= i38))) {
-              emlrtDynamicBoundsCheckR2012b(j, 1, i38, &ah_emlrtBCI, sp);
+            i40 = Merit->size[0];
+            if (!((j >= 1) && (j <= i40))) {
+              emlrtDynamicBoundsCheckR2012b(j, 1, i40, &ah_emlrtBCI, sp);
             }
 
-            i38 = Merit->size[1];
-            if (!((i >= 1) && (i <= i38))) {
-              emlrtDynamicBoundsCheckR2012b(i, 1, i38, &bh_emlrtBCI, sp);
+            i40 = Merit->size[1];
+            if (!((i >= 1) && (i <= i40))) {
+              emlrtDynamicBoundsCheckR2012b(i, 1, i40, &bh_emlrtBCI, sp);
             }
 
             Merit->data[(j + Merit->size[0] * (i - 1)) - 1] = 0.0;
@@ -712,38 +713,38 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
         /*  there was no voiced candidate from nccf fill in */
         /*  option for F0 from spectrogram */
         /* 'refine:80' Pitch(1,i)  = SPitch(i); */
-        i38 = Pitch->size[0];
-        if (!(1 <= i38)) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, i38, &tf_emlrtBCI, sp);
+        i40 = Pitch->size[0];
+        if (!(1 <= i40)) {
+          emlrtDynamicBoundsCheckR2012b(1, 1, i40, &tf_emlrtBCI, sp);
         }
 
-        i38 = SPitch->size[1];
-        if (!((i >= 1) && (i <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, i38, &og_emlrtBCI, sp);
+        i40 = SPitch->size[1];
+        if (!((i >= 1) && (i <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i40, &og_emlrtBCI, sp);
         }
 
-        i38 = Pitch->size[1];
-        if (!((i >= 1) && (i <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, i38, &pg_emlrtBCI, sp);
+        i40 = Pitch->size[1];
+        if (!((i >= 1) && (i <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i40, &pg_emlrtBCI, sp);
         }
 
         Pitch->data[Pitch->size[0] * (i - 1)] = SPitch->data[i - 1];
 
         /* 'refine:81' Merit(1,i) = min(1, Energy(i)/2); */
-        i38 = Energy->size[1];
-        i39 = (i - 1) + 1;
-        if (!((i39 >= 1) && (i39 <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &sf_emlrtBCI, sp);
+        i40 = Energy->size[1];
+        i41 = (i - 1) + 1;
+        if (!((i41 >= 1) && (i41 <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &sf_emlrtBCI, sp);
         }
 
-        i38 = Merit->size[0];
-        if (!(1 <= i38)) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, i38, &rf_emlrtBCI, sp);
+        i40 = Merit->size[0];
+        if (!(1 <= i40)) {
+          emlrtDynamicBoundsCheckR2012b(1, 1, i40, &rf_emlrtBCI, sp);
         }
 
-        i38 = Merit->size[1];
-        if (!((i >= 1) && (i <= i38))) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, i38, &qg_emlrtBCI, sp);
+        i40 = Merit->size[1];
+        if (!((i >= 1) && (i <= i40))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i40, &qg_emlrtBCI, sp);
         }
 
         Merit->data[Merit->size[0] * (i - 1)] = muDoubleScalarMin(1.0,
@@ -753,21 +754,21 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
         /*  with low merit */
         /* 'refine:85' Pitch(2:maxcands,i) = 0.0; */
         if (2 > maxcands) {
-          i38 = 0;
-          i39 = 0;
+          i40 = 0;
+          i41 = 0;
         } else {
-          i38 = Pitch->size[0];
-          if (!(2 <= i38)) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, i38, &qf_emlrtBCI, sp);
+          i40 = Pitch->size[0];
+          if (!(2 <= i40)) {
+            emlrtDynamicBoundsCheckR2012b(2, 1, i40, &qf_emlrtBCI, sp);
           }
 
-          i38 = 1;
-          i39 = Pitch->size[0];
-          if (!(maxcands <= i39)) {
-            emlrtDynamicBoundsCheckR2012b(maxcands, 1, i39, &qf_emlrtBCI, sp);
+          i40 = 1;
+          i41 = Pitch->size[0];
+          if (!(maxcands <= i41)) {
+            emlrtDynamicBoundsCheckR2012b(maxcands, 1, i41, &qf_emlrtBCI, sp);
           }
 
-          i39 = maxcands;
+          i41 = maxcands;
         }
 
         c_Pitch = Pitch->size[1];
@@ -775,28 +776,28 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
           emlrtDynamicBoundsCheckR2012b(i, 1, c_Pitch, &pf_emlrtBCI, sp);
         }
 
-        loop_ub = i39 - i38;
-        for (i39 = 0; i39 < loop_ub; i39++) {
-          Pitch->data[(i38 + i39) + Pitch->size[0] * (i - 1)] = 0.0;
+        loop_ub = i41 - i40;
+        for (i41 = 0; i41 < loop_ub; i41++) {
+          Pitch->data[(i40 + i41) + Pitch->size[0] * (i - 1)] = 0.0;
         }
 
         /* 'refine:86' Merit(2:maxcands,i) = 1 - Merit(1,i); */
         if (2 > maxcands) {
-          i38 = 0;
-          i39 = 0;
+          i40 = 0;
+          i41 = 0;
         } else {
-          i38 = Merit->size[0];
-          if (!(2 <= i38)) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, i38, &nf_emlrtBCI, sp);
+          i40 = Merit->size[0];
+          if (!(2 <= i40)) {
+            emlrtDynamicBoundsCheckR2012b(2, 1, i40, &nf_emlrtBCI, sp);
           }
 
-          i38 = 1;
-          i39 = Merit->size[0];
-          if (!(maxcands <= i39)) {
-            emlrtDynamicBoundsCheckR2012b(maxcands, 1, i39, &nf_emlrtBCI, sp);
+          i40 = 1;
+          i41 = Merit->size[0];
+          if (!(maxcands <= i41)) {
+            emlrtDynamicBoundsCheckR2012b(maxcands, 1, i41, &nf_emlrtBCI, sp);
           }
 
-          i39 = maxcands;
+          i41 = maxcands;
         }
 
         b_loop_ub = Merit->size[0];
@@ -815,9 +816,9 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
           emlrtDynamicBoundsCheckR2012b(i, 1, BestPitch, &mf_emlrtBCI, sp);
         }
 
-        loop_ub = i39 - i38;
-        for (i39 = 0; i39 < loop_ub; i39++) {
-          Merit->data[(i38 + i39) + Merit->size[0] * (i - 1)] = 1.0 - b_Merit;
+        loop_ub = i41 - i40;
+        for (i41 = 0; i41 < loop_ub; i41++) {
+          Merit->data[(i40 + i41) + Merit->size[0] * (i - 1)] = 1.0 - b_Merit;
         }
       }
     }
@@ -834,81 +835,81 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   i = 1;
   while (i - 1 <= numframes) {
     /* 'refine:94' Pitch(maxcands-1,i) = BestPitch(1,i); */
-    i38 = b_BestPitch->size[1];
-    if (!((i >= 1) && (i <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i38, &dg_emlrtBCI, sp);
+    i40 = b_BestPitch->size[1];
+    if (!((i >= 1) && (i <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i40, &dg_emlrtBCI, sp);
     }
 
-    i38 = Pitch->size[0];
-    i39 = maxcands - 1;
-    if (!((i39 >= 1) && (i39 <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &eg_emlrtBCI, sp);
+    i40 = Pitch->size[0];
+    i41 = maxcands - 1;
+    if (!((i41 >= 1) && (i41 <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &eg_emlrtBCI, sp);
     }
 
-    i38 = Pitch->size[1];
-    if (!((i >= 1) && (i <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i38, &fg_emlrtBCI, sp);
+    i40 = Pitch->size[1];
+    if (!((i >= 1) && (i <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i40, &fg_emlrtBCI, sp);
     }
 
-    Pitch->data[(i39 + Pitch->size[0] * (i - 1)) - 1] = b_BestPitch->
+    Pitch->data[(i41 + Pitch->size[0] * (i - 1)) - 1] = b_BestPitch->
       data[b_BestPitch->size[0] * (i - 1)];
 
     /*   if this candidate was voiced, already have it, along with merit */
     /*   if unvoiced, need to assign appropriate merit */
     /* 'refine:98' if (BestPitch(1,i) > 0) */
-    i38 = b_BestPitch->size[1];
-    if (!((i >= 1) && (i <= i38))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i38, &gg_emlrtBCI, sp);
+    i40 = b_BestPitch->size[1];
+    if (!((i >= 1) && (i <= i40))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i40, &gg_emlrtBCI, sp);
     }
 
     if (b_BestPitch->data[b_BestPitch->size[0] * (i - 1)] > 0.0) {
       /*  voiced */
       /* 'refine:99' Merit(maxcands-1,i) = Merit(1,i); */
-      i38 = Merit->size[0];
-      if (!(1 <= i38)) {
-        emlrtDynamicBoundsCheckR2012b(1, 1, i38, &lf_emlrtBCI, sp);
+      i40 = Merit->size[0];
+      if (!(1 <= i40)) {
+        emlrtDynamicBoundsCheckR2012b(1, 1, i40, &lf_emlrtBCI, sp);
       }
 
-      i38 = Merit->size[1];
-      if (!((i >= 1) && (i <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i, 1, i38, &jg_emlrtBCI, sp);
+      i40 = Merit->size[1];
+      if (!((i >= 1) && (i <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i, 1, i40, &jg_emlrtBCI, sp);
       }
 
-      i38 = Merit->size[0];
-      i39 = maxcands - 1;
-      if (!((i39 >= 1) && (i39 <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &kg_emlrtBCI, sp);
+      i40 = Merit->size[0];
+      i41 = maxcands - 1;
+      if (!((i41 >= 1) && (i41 <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &kg_emlrtBCI, sp);
       }
 
-      i38 = Merit->size[1];
-      if (!((i >= 1) && (i <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i, 1, i38, &lg_emlrtBCI, sp);
+      i40 = Merit->size[1];
+      if (!((i >= 1) && (i <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i, 1, i40, &lg_emlrtBCI, sp);
       }
 
-      Merit->data[(i39 + Merit->size[0] * (i - 1)) - 1] = Merit->data
+      Merit->data[(i41 + Merit->size[0] * (i - 1)) - 1] = Merit->data
         [Merit->size[0] * (i - 1)];
     } else {
       /* 'refine:100' else */
       /*  unvoiced */
       /* 'refine:101' Merit(maxcands-1,i) = 1-min(1, Energy(i)/2); */
-      i38 = Energy->size[1];
-      i39 = (i - 1) + 1;
-      if (!((i39 >= 1) && (i39 <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &kf_emlrtBCI, sp);
+      i40 = Energy->size[1];
+      i41 = (i - 1) + 1;
+      if (!((i41 >= 1) && (i41 <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &kf_emlrtBCI, sp);
       }
 
-      i38 = Merit->size[0];
-      i39 = maxcands - 1;
-      if (!((i39 >= 1) && (i39 <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &hg_emlrtBCI, sp);
+      i40 = Merit->size[0];
+      i41 = maxcands - 1;
+      if (!((i41 >= 1) && (i41 <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &hg_emlrtBCI, sp);
       }
 
-      i38 = Merit->size[1];
-      if (!((i >= 1) && (i <= i38))) {
-        emlrtDynamicBoundsCheckR2012b(i, 1, i38, &ig_emlrtBCI, sp);
+      i40 = Merit->size[1];
+      if (!((i >= 1) && (i <= i40))) {
+        emlrtDynamicBoundsCheckR2012b(i, 1, i40, &ig_emlrtBCI, sp);
       }
 
-      Merit->data[(i39 + Merit->size[0] * (i - 1)) - 1] = 1.0 -
+      Merit->data[(i41 + Merit->size[0] * (i - 1)) - 1] = 1.0 -
         muDoubleScalarMin(1.0, Energy->data[i - 1] / 2.0);
     }
 
@@ -920,19 +921,19 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
 
   /*   Copy over the SPitch array */
   /* 'refine:106' Pitch(maxcands-2,:) = SPitch; */
-  i38 = Pitch->size[0];
-  i39 = (int32_T)((real_T)maxcands - 2.0);
-  if (!((i39 >= 1) && (i39 <= i38))) {
-    emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &jf_emlrtBCI, sp);
+  i40 = Pitch->size[0];
+  i41 = (int32_T)((real_T)maxcands - 2.0);
+  if (!((i41 >= 1) && (i41 <= i40))) {
+    emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &jf_emlrtBCI, sp);
   }
 
   loop_ub = Pitch->size[1];
-  i38 = r26->size[0];
+  i40 = r26->size[0];
   r26->size[0] = loop_ub;
-  emxEnsureCapacity(sp, (emxArray__common *)r26, i38, (int32_T)sizeof(int32_T),
-                    &bd_emlrtRTEI);
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    r26->data[i38] = i38;
+  emxEnsureCapacity(sp, (emxArray__common *)r26, i40, (int32_T)sizeof(int32_T),
+                    &ed_emlrtRTEI);
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    r26->data[i40] = i40;
   }
 
   iv40[0] = 1;
@@ -940,45 +941,36 @@ void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
   emlrtSubAssignSizeCheckR2012b(iv40, 2, *(int32_T (*)[2])SPitch->size, 2,
     &sb_emlrtECI, sp);
   loop_ub = SPitch->size[1];
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    Pitch->data[(maxcands + Pitch->size[0] * r26->data[i38]) - 3] = SPitch->
-      data[SPitch->size[0] * i38];
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    Pitch->data[(maxcands + Pitch->size[0] * r26->data[i40]) - 3] = SPitch->
+      data[SPitch->size[0] * i40];
   }
 
   /* 'refine:107' Merit(maxcands-2,:) = Energy/5; */
-  i38 = Merit->size[0];
-  i39 = (int32_T)((real_T)maxcands - 2.0);
-  if (!((i39 >= 1) && (i39 <= i38))) {
-    emlrtDynamicBoundsCheckR2012b(i39, 1, i38, &if_emlrtBCI, sp);
+  i40 = Merit->size[0];
+  i41 = (int32_T)((real_T)maxcands - 2.0);
+  if (!((i41 >= 1) && (i41 <= i40))) {
+    emlrtDynamicBoundsCheckR2012b(i41, 1, i40, &if_emlrtBCI, sp);
   }
 
   loop_ub = Merit->size[1];
-  i38 = r26->size[0];
+  i40 = r26->size[0];
   r26->size[0] = loop_ub;
-  emxEnsureCapacity(sp, (emxArray__common *)r26, i38, (int32_T)sizeof(int32_T),
-                    &bd_emlrtRTEI);
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    r26->data[i38] = i38;
+  emxEnsureCapacity(sp, (emxArray__common *)r26, i40, (int32_T)sizeof(int32_T),
+                    &ed_emlrtRTEI);
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    r26->data[i40] = i40;
   }
 
-  i38 = b_BestPitch->size[0] * b_BestPitch->size[1];
-  b_BestPitch->size[0] = 1;
-  b_BestPitch->size[1] = Energy->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b_BestPitch, i38, (int32_T)sizeof
-                    (real_T), &bd_emlrtRTEI);
-  loop_ub = Energy->size[0] * Energy->size[1];
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    b_BestPitch->data[i38] = Energy->data[i38] / 5.0;
-  }
-
+  c_rdivide(sp, Energy, 5.0, b_BestPitch);
   iv41[0] = 1;
   iv41[1] = r26->size[0];
   emlrtSubAssignSizeCheckR2012b(iv41, 2, *(int32_T (*)[2])b_BestPitch->size, 2,
     &rb_emlrtECI, sp);
   loop_ub = b_BestPitch->size[1];
-  for (i38 = 0; i38 < loop_ub; i38++) {
-    Merit->data[(maxcands + Merit->size[0] * r26->data[i38]) - 3] =
-      b_BestPitch->data[b_BestPitch->size[0] * i38];
+  for (i40 = 0; i40 < loop_ub; i40++) {
+    Merit->data[(maxcands + Merit->size[0] * r26->data[i40]) - 3] =
+      b_BestPitch->data[b_BestPitch->size[0] * i40];
   }
 
   emxFree_int32_T(&r26);

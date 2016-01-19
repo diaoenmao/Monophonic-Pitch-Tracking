@@ -2,7 +2,7 @@
  * File: sort1.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -430,10 +430,10 @@ static void d_sort(double x[20], int idx[20])
 static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
 {
   emxArray_real_T *vwork;
-  int i22;
+  int i25;
   int vstride;
   int k;
-  int iv1[2];
+  int iv0[2];
   int npages;
   int pagesize;
   int i;
@@ -442,18 +442,18 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
   int j;
   int idx0;
   emxInit_real_T1(&vwork, 1);
-  i22 = x->size[dim - 1];
+  i25 = x->size[dim - 1];
   vstride = x->size[dim - 1];
   k = vwork->size[0];
   vwork->size[0] = vstride;
   emxEnsureCapacity((emxArray__common *)vwork, k, (int)sizeof(double));
   for (k = 0; k < 2; k++) {
-    iv1[k] = x->size[k];
+    iv0[k] = x->size[k];
   }
 
   k = idx->size[0] * idx->size[1];
-  idx->size[0] = iv1[0];
-  idx->size[1] = iv1[1];
+  idx->size[0] = iv0[0];
+  idx->size[1] = iv0[1];
   emxEnsureCapacity((emxArray__common *)idx, k, (int)sizeof(int));
   vstride = 1;
   k = 1;
@@ -476,12 +476,12 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
     pageoffset = (i - 1) * pagesize;
     for (j = 0; j + 1 <= vstride; j++) {
       idx0 = pageoffset + j;
-      for (k = 0; k + 1 <= i22; k++) {
+      for (k = 0; k + 1 <= i25; k++) {
         vwork->data[k] = x->data[idx0 + k * vstride];
       }
 
       sortIdx(vwork, iidx);
-      for (k = 0; k + 1 <= i22; k++) {
+      for (k = 0; k + 1 <= i25; k++) {
         x->data[idx0 + k * vstride] = vwork->data[k];
         idx->data[idx0 + k * vstride] = iidx->data[k];
       }

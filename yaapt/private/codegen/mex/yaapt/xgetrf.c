@@ -30,7 +30,7 @@ void xgetrf(const emlrtStack *sp, real_T A[5776], int32_T ipiv[76], int32_T
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &xb_emlrtRSI;
+  st.site = &yb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -38,13 +38,13 @@ void xgetrf(const emlrtStack *sp, real_T A[5776], int32_T ipiv[76], int32_T
   info_t = LAPACKE_dgetrf_work(102, (ptrdiff_t)76, (ptrdiff_t)76, &A[0],
     (ptrdiff_t)76, &ipiv_t[0]);
   *info = (int32_T)info_t;
-  b_st.site = &yb_emlrtRSI;
+  b_st.site = &ac_emlrtRSI;
   if (*info < 0) {
     if (*info == -1010) {
-      c_st.site = &ac_emlrtRSI;
+      c_st.site = &bc_emlrtRSI;
       e_error(&c_st);
     } else {
-      c_st.site = &bc_emlrtRSI;
+      c_st.site = &cc_emlrtRSI;
       f_error(&c_st, *info);
     }
 

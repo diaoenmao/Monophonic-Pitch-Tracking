@@ -52,8 +52,8 @@ end
 
 % Default values for the tracking with voiced/unvoiced decision
 Prm = struct(...
-    'frame_length',   25, ... % Length of each analysis frame (ms)
-    'frame_space',    10, ... % Spacing between analysis frame (ms)
+    'frame_length',   20, ... % Length of each analysis frame (ms)
+    'frame_space',    30, ... % Spacing between analysis frame (ms)
     'f0_min',         60, ... % Minimum F0 searched (Hz)
     'f0_max',        400, ... % Maximum F0 searached (Hz)
     'fft_length',   8192, ... % FFT length
@@ -68,8 +68,8 @@ Prm = struct(...
     'shc_pwidth',     50, ... % Window width in SHC peak picking (Hz)
     'shc_thresh1',   5.0, ... % Threshold 1 for SHC peak picking
     'shc_thresh2',  1.25, ... % Threshold 2 for SHC peak picking
-    'f0_double',     150, ... % F0 doubling decision threshold (Hz)
-    'f0_half',       150, ... % F0 halving decision threshold (Hz)
+    'f0_double',     300, ... % F0 doubling decision threshold (Hz)
+    'f0_half',       300, ... % F0 halving decision threshold (Hz)
     'dp5_k1',         11, ... % Weight used in dynaimc program
     'dec_factor',      1, ... % Factor for signal resampling
     'nccf_thresh1', 0.25, ... % Threshold for considering a peak in NCCF
@@ -117,7 +117,8 @@ Prm = struct(...
 %-- MAIN ROUTINE --------------------------------------------------------------
 %  Step 1. Preprocessing
 %  Create the squared or absolute values of filtered speech data
-[DataB, DataC, DataD, nFs] = nonlinear(Data, Fs, Prm);
+Data_after = Preprocess(Data);
+[DataB, DataC, DataD, nFs] = nonlinear(Data_after, Fs, Prm);
 
 %  Check frame size, frame jump and the number of frames for nonlinear singal
 nframesize = fix(Prm.frame_length*nFs/1000);    
@@ -150,11 +151,13 @@ end
                         Energy, VUVEnergy, Prm);
 
 % Step 5. Use dyanamic programming to determine the final pitch
-Pitch  = dynamic(RPitch, Merit, Energy, Prm);
-numfrms = length(Pitch);
+Pitch_before  = dynamic(RPitch, Merit, Energy, Prm);
+numfrms = length(Pitch_before);
 frmrate = Prm.frame_space; 
 
-   %figure(3)
+[Pitch_Freq,~] = freqSelect(Pitch_before);
+Pitch = Pitch_Optimization(Pitch_Freq);
+  %figure(3)
   % plot(SPitch, 'b')
   % hold on
   % plot(Pitch, 'r')

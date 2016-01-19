@@ -14,14 +14,14 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fl_emlrtRSI = { 36, "cat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
+static emlrtRSInfo gl_emlrtRSI = { 36, "cat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
-static emlrtRTEInfo dd_emlrtRTEI = { 1, 14, "cat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
+static emlrtRTEInfo gd_emlrtRTEI = { 1, 14, "cat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
-static emlrtRTEInfo hf_emlrtRTEI = { 38, 23, "cat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
+static emlrtRTEInfo nf_emlrtRTEI = { 38, 23, "cat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
 /* Function Declarations */
 static boolean_T isconsistent(int32_T dim, const emxArray_real_T *y, const
@@ -39,17 +39,17 @@ static boolean_T isconsistent(int32_T dim, const emxArray_real_T *y, const
   int32_T j;
   int32_T exitg1;
   boolean_T guard1 = false;
-  int32_T i40;
-  int32_T i41;
+  int32_T i42;
+  int32_T i43;
   j = 0;
   do {
     exitg1 = 0;
     if (j < 2) {
       guard1 = false;
       if (!(dim == 1 + j)) {
-        i40 = y->size[j];
-        i41 = x->size[j];
-        if (i40 != i41) {
+        i42 = y->size[j];
+        i43 = x->size[j];
+        if (i42 != i43) {
           p = false;
           exitg1 = 1;
         } else {
@@ -99,26 +99,26 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   y->size[0] = (int32_T)ysize[0];
   y->size[1] = (int32_T)ysize[1];
   emxEnsureCapacity(sp, (emxArray__common *)y, iy, (int32_T)sizeof(real_T),
-                    &dd_emlrtRTEI);
+                    &gd_emlrtRTEI);
   if (varargin_1->size[1] == 0) {
-    st.site = &fl_emlrtRSI;
+    st.site = &gl_emlrtRSI;
     l_error(&st);
   }
 
   if (isconsistent(1, y, varargin_1)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &hf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &nf_emlrtRTEI,
       "Coder:MATLAB:catenate_dimensionMismatch", 0);
   }
 
   if (varargin_2->size[1] == 0) {
-    st.site = &fl_emlrtRSI;
+    st.site = &gl_emlrtRSI;
     l_error(&st);
   }
 
   if (isconsistent(1, y, varargin_2)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &hf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &nf_emlrtRTEI,
       "Coder:MATLAB:catenate_dimensionMismatch", 0);
   }
 

@@ -27,11 +27,11 @@
 <a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a>
 <a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_xe_emlrtRSI">xe_emlrtRSI</a> = <b>{</b> 11, <font color="#1122ff">&quot;sqrt&quot;</font>,
-<a name="19"><font color="#888888 "><i>   19   </i></font></a>  <font color="#1122ff">&quot;F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m&quot;</font> <b>}</b>;
+<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_ye_emlrtRSI">ye_emlrtRSI</a> = <b>{</b> 11, <font color="#1122ff">&quot;sqrt&quot;</font>,
+<a name="19"><font color="#888888 "><i>   19   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m&quot;</font> <b>}</b>;
 <a name="20"><font color="#888888 "><i>   20   </i></font></a>
-<a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_af_emlrtRSI">af_emlrtRSI</a> = <b>{</b> 15, <font color="#1122ff">&quot;sqrt&quot;</font>,
-<a name="22"><font color="#888888 "><i>   22   </i></font></a>  <font color="#1122ff">&quot;F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m&quot;</font> <b>}</b>;
+<a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_bf_emlrtRSI">bf_emlrtRSI</a> = <b>{</b> 15, <font color="#1122ff">&quot;sqrt&quot;</font>,
+<a name="22"><font color="#888888 "><i>   22   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m&quot;</font> <b>}</b>;
 <a name="23"><font color="#888888 "><i>   23   </i></font></a>
 <a name="24"><font color="#888888 "><i>   24   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
 <a name="25"><font color="#888888 "><i>   25   </i></font></a>
@@ -48,7 +48,7 @@
 <a name="36"><font color="#888888 "><i>   36   </i></font></a>  emlrtStack c_st;
 <a name="37"><font color="#888888 "><i>   37   </i></font></a>  st.prev = sp;
 <a name="38"><font color="#888888 "><i>   38   </i></font></a>  st.tls = sp-&gt;tls;
-<a name="39"><font color="#888888 "><i>   39   </i></font></a>  st.site = &amp;<a href="#var_xe_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_xe_emlrtRSI');" target="_self"><font color="#1122aa">xe_emlrtRSI</font></a>;
+<a name="39"><font color="#888888 "><i>   39   </i></font></a>  st.site = &amp;<a href="#var_ye_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ye_emlrtRSI');" target="_self"><font color="#1122aa">ye_emlrtRSI</font></a>;
 <a name="40"><font color="#888888 "><i>   40   </i></font></a>  b_st.prev = &amp;st;
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>  b_st.tls = st.tls;
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>  c_st.prev = &amp;b_st;
@@ -63,13 +63,13 @@
 <a name="51"><font color="#888888 "><i>   51   </i></font></a>  <b>}</b>
 <a name="52"><font color="#888888 "><i>   52   </i></font></a>
 <a name="53"><font color="#888888 "><i>   53   </i></font></a>  <font color="#112266"><b>if</b></font> (overflow) <b>{</b>
-<a name="54"><font color="#888888 "><i>   54   </i></font></a>    st.site = &amp;<a href="yaapt_data_c.html#var_ye_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ye_emlrtRSI');" target="_self"><font color="#1122aa">ye_emlrtRSI</font></a>;
+<a name="54"><font color="#888888 "><i>   54   </i></font></a>    st.site = &amp;<a href="yaapt_data_c.html#var_af_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_af_emlrtRSI');" target="_self"><font color="#1122aa">af_emlrtRSI</font></a>;
 <a name="55"><font color="#888888 "><i>   55   </i></font></a>    <a href="error1_c.html#fcn_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_error');" target="_self"><font color="#1122aa">error</font></a>(&amp;st);
 <a name="56"><font color="#888888 "><i>   56   </i></font></a>  <b>}</b>
 <a name="57"><font color="#888888 "><i>   57   </i></font></a>
-<a name="58"><font color="#888888 "><i>   58   </i></font></a>  st.site = &amp;<a href="#var_af_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_af_emlrtRSI');" target="_self"><font color="#1122aa">af_emlrtRSI</font></a>;
+<a name="58"><font color="#888888 "><i>   58   </i></font></a>  st.site = &amp;<a href="#var_bf_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_bf_emlrtRSI');" target="_self"><font color="#1122aa">bf_emlrtRSI</font></a>;
 <a name="59"><font color="#888888 "><i>   59   </i></font></a>  nx = x-&gt;size[0];
-<a name="60"><font color="#888888 "><i>   60   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_gd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_gd_emlrtRSI');" target="_self"><font color="#1122aa">gd_emlrtRSI</font></a>;
+<a name="60"><font color="#888888 "><i>   60   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_hd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_hd_emlrtRSI');" target="_self"><font color="#1122aa">hd_emlrtRSI</font></a>;
 <a name="61"><font color="#888888 "><i>   61   </i></font></a>  <font color="#112266"><b>if</b></font> (1 &gt; x-&gt;size[0]) <b>{</b>
 <a name="62"><font color="#888888 "><i>   62   </i></font></a>    overflow = false;
 <a name="63"><font color="#888888 "><i>   63   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
@@ -77,7 +77,7 @@
 <a name="65"><font color="#888888 "><i>   65   </i></font></a>  <b>}</b>
 <a name="66"><font color="#888888 "><i>   66   </i></font></a>
 <a name="67"><font color="#888888 "><i>   67   </i></font></a>  <font color="#112266"><b>if</b></font> (overflow) <b>{</b>
-<a name="68"><font color="#888888 "><i>   68   </i></font></a>    c_st.site = &amp;<a href="yaapt_data_c.html#var_ib_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ib_emlrtRSI');" target="_self"><font color="#1122aa">ib_emlrtRSI</font></a>;
+<a name="68"><font color="#888888 "><i>   68   </i></font></a>    c_st.site = &amp;<a href="yaapt_data_c.html#var_jb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_jb_emlrtRSI');" target="_self"><font color="#1122aa">jb_emlrtRSI</font></a>;
 <a name="69"><font color="#888888 "><i>   69   </i></font></a>    <a href="eml_int_forloop_overflow_check_c.html#fcn_check_forloop_overflow_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_check_forloop_overflow_error');" target="_self"><font color="#1122aa">check_forloop_overflow_error</font></a>(&amp;c_st, true);
 <a name="70"><font color="#888888 "><i>   70   </i></font></a>  <b>}</b>
 <a name="71"><font color="#888888 "><i>   71   </i></font></a>
@@ -95,7 +95,7 @@
 <a name="83"><font color="#888888 "><i>   83   </i></font></a>  st.prev = sp;
 <a name="84"><font color="#888888 "><i>   84   </i></font></a>  st.tls = sp-&gt;tls;
 <a name="85"><font color="#888888 "><i>   85   </i></font></a>  <font color="#112266"><b>if</b></font> (*x &lt; 0.0) <b>{</b>
-<a name="86"><font color="#888888 "><i>   86   </i></font></a>    st.site = &amp;<a href="yaapt_data_c.html#var_ye_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ye_emlrtRSI');" target="_self"><font color="#1122aa">ye_emlrtRSI</font></a>;
+<a name="86"><font color="#888888 "><i>   86   </i></font></a>    st.site = &amp;<a href="yaapt_data_c.html#var_af_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_af_emlrtRSI');" target="_self"><font color="#1122aa">af_emlrtRSI</font></a>;
 <a name="87"><font color="#888888 "><i>   87   </i></font></a>    <a href="error1_c.html#fcn_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_error');" target="_self"><font color="#1122aa">error</font></a>(&amp;st);
 <a name="88"><font color="#888888 "><i>   88   </i></font></a>  <b>}</b>
 <a name="89"><font color="#888888 "><i>   89   </i></font></a>

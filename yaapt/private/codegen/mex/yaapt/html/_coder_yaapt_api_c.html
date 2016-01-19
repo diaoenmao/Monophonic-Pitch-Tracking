@@ -28,7 +28,7 @@
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="17"><font color="#888888 "><i>   17   </i></font></a>
 <a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="19"><font color="#888888 "><i>   19   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_ld_emlrtRTEI">ld_emlrtRTEI</a> = <b>{</b> 1, 1, <font color="#1122ff">&quot;_coder_yaapt_api&quot;</font>, <font color="#1122ff">&quot;&quot;</font> <b>}</b>;
+<a name="19"><font color="#888888 "><i>   19   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_rd_emlrtRTEI">rd_emlrtRTEI</a> = <b>{</b> 1, 1, <font color="#1122ff">&quot;_coder_yaapt_api&quot;</font>, <font color="#1122ff">&quot;&quot;</font> <b>}</b>;
 <a name="20"><font color="#888888 "><i>   20   </i></font></a>
 <a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
 <a name="22"><font color="#888888 "><i>   22   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_c_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_c_emlrt_marshallIn');" target="_self"><font color="#1122aa">c_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Data, <font color="#112266"><b>const</b></font>
@@ -141,8 +141,8 @@
 <a name="129"><font color="#888888 "><i>  129   </i></font></a>
 <a name="130"><font color="#888888 "><i>  130   </i></font></a>  st.tls = emlrtRootTLSGlobal;
 <a name="131"><font color="#888888 "><i>  131   </i></font></a>  emlrtHeapReferenceStackEnterFcnR2012b(&amp;st);
-<a name="132"><font color="#888888 "><i>  132   </i></font></a>  emxInit_real_T(&amp;st, &amp;Data, 2, &amp;<a href="#var_ld_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ld_emlrtRTEI');" target="_self"><font color="#1122aa">ld_emlrtRTEI</font></a>, true);
-<a name="133"><font color="#888888 "><i>  133   </i></font></a>  emxInit_real_T(&amp;st, &amp;Pitch, 2, &amp;<a href="#var_ld_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ld_emlrtRTEI');" target="_self"><font color="#1122aa">ld_emlrtRTEI</font></a>, true);
+<a name="132"><font color="#888888 "><i>  132   </i></font></a>  emxInit_real_T(&amp;st, &amp;Data, 2, &amp;<a href="#var_rd_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_rd_emlrtRTEI');" target="_self"><font color="#1122aa">rd_emlrtRTEI</font></a>, true);
+<a name="133"><font color="#888888 "><i>  133   </i></font></a>  emxInit_real_T(&amp;st, &amp;Pitch, 2, &amp;<a href="#var_rd_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_rd_emlrtRTEI');" target="_self"><font color="#1122aa">rd_emlrtRTEI</font></a>, true);
 <a name="134"><font color="#888888 "><i>  134   </i></font></a>
 <a name="135"><font color="#888888 "><i>  135   </i></font></a>  <font color="#117755"><i>/* Marshall function inputs */</i></font>
 <a name="136"><font color="#888888 "><i>  136   </i></font></a>  <a href="#fcn_c_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_c_emlrt_marshallIn');" target="_self"><font color="#1122aa">c_emlrt_marshallIn</font></a>(&amp;st, emlrtAlias(prhs[0]), <font color="#1122ff">&quot;Data&quot;</font>, Data);

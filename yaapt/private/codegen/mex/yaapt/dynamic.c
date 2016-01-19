@@ -17,28 +17,28 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo bm_emlrtRSI = { 50, "dynamic",
+static emlrtRSInfo cm_emlrtRSI = { 50, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRSInfo cm_emlrtRSI = { 96, "dynamic",
+static emlrtRSInfo dm_emlrtRSI = { 96, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRSInfo dm_emlrtRSI = { 31, "path1",
+static emlrtRSInfo em_emlrtRSI = { 31, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo gd_emlrtRTEI = { 1, 23, "dynamic",
+static emlrtRTEInfo jd_emlrtRTEI = { 1, 23, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRTEInfo hd_emlrtRTEI = { 63, 1, "dynamic",
+static emlrtRTEInfo kd_emlrtRTEI = { 63, 1, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRTEInfo id_emlrtRTEI = { 66, 1, "dynamic",
+static emlrtRTEInfo ld_emlrtRTEI = { 66, 1, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRTEInfo jd_emlrtRTEI = { 42, 1, "path1",
+static emlrtRTEInfo md_emlrtRTEI = { 42, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo kd_emlrtRTEI = { 43, 1, "path1",
+static emlrtRTEInfo nd_emlrtRTEI = { 43, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
 static emlrtBCInfo dh_emlrtBCI = { -1, -1, 75, 13, "CCOST", "path1",
@@ -233,8 +233,8 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   emxArray_int32_T *r27;
   int32_T numframes;
   int32_T numcands;
-  int32_T i42;
-  int32_T i43;
+  int32_T i45;
+  int32_T i46;
   int32_T end;
   int32_T trueCount;
   int32_T i;
@@ -294,7 +294,7 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_int32_T1(sp, &r27, 2, &gd_emlrtRTEI, true);
+  emxInit_int32_T1(sp, &r27, 2, &jd_emlrtRTEI, true);
 
   /* DYNAMIC Dynamic programming for YAAPT pitch tracking */
   /*  */
@@ -341,10 +341,10 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
   /* Copy some arrays */
   /* 'dynamic:49' BestPitch  = Pitch(numcands-1,:); */
-  i42 = Pitch->size[0];
-  i43 = (int32_T)((real_T)Pitch->size[0] - 1.0);
-  if (!((i43 >= 1) && (i43 <= i42))) {
-    emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &lh_emlrtBCI, sp);
+  i45 = Pitch->size[0];
+  i46 = (int32_T)((real_T)Pitch->size[0] - 1.0);
+  if (!((i46 >= 1) && (i46 <= i45))) {
+    emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &lh_emlrtBCI, sp);
   }
 
   /* 'dynamic:50' mean_pitch = mean(BestPitch(BestPitch>0)); */
@@ -356,11 +356,11 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     }
   }
 
-  i42 = r27->size[0] * r27->size[1];
+  i45 = r27->size[0] * r27->size[1];
   r27->size[0] = 1;
   r27->size[1] = trueCount;
-  emxEnsureCapacity(sp, (emxArray__common *)r27, i42, (int32_T)sizeof(int32_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)r27, i45, (int32_T)sizeof(int32_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = 0;
   for (i = 0; i <= end; i++) {
     if (Pitch->data[(numcands + Pitch->size[0] * i) - 1] > 0.0) {
@@ -369,40 +369,40 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     }
   }
 
-  emxInit_real_T(sp, &b_Pitch, 2, &gd_emlrtRTEI, true);
-  emxInit_real_T(sp, &c_Pitch, 2, &gd_emlrtRTEI, true);
-  i42 = Pitch->size[1];
+  emxInit_real_T(sp, &b_Pitch, 2, &jd_emlrtRTEI, true);
+  emxInit_real_T(sp, &c_Pitch, 2, &jd_emlrtRTEI, true);
+  i45 = Pitch->size[1];
   partialTrueCount = Pitch->size[1];
   end = Pitch->size[0];
-  i43 = c_Pitch->size[0] * c_Pitch->size[1];
+  i46 = c_Pitch->size[0] * c_Pitch->size[1];
   c_Pitch->size[0] = 1;
   c_Pitch->size[1] = partialTrueCount;
-  emxEnsureCapacity(sp, (emxArray__common *)c_Pitch, i43, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
-  for (i43 = 0; i43 < partialTrueCount; i43++) {
-    c_Pitch->data[c_Pitch->size[0] * i43] = Pitch->data[(end + Pitch->size[0] *
-      i43) - 2];
+  emxEnsureCapacity(sp, (emxArray__common *)c_Pitch, i46, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
+  for (i46 = 0; i46 < partialTrueCount; i46++) {
+    c_Pitch->data[c_Pitch->size[0] * i46] = Pitch->data[(end + Pitch->size[0] *
+      i46) - 2];
   }
 
-  i43 = b_Pitch->size[0] * b_Pitch->size[1];
+  i46 = b_Pitch->size[0] * b_Pitch->size[1];
   b_Pitch->size[0] = 1;
   b_Pitch->size[1] = r27->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b_Pitch, i43, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)b_Pitch, i46, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = r27->size[1];
-  for (i43 = 0; i43 < partialTrueCount; i43++) {
-    trueCount = r27->data[r27->size[0] * i43];
-    if (!((trueCount >= 1) && (trueCount <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(trueCount, 1, i42, &mh_emlrtBCI, sp);
+  for (i46 = 0; i46 < partialTrueCount; i46++) {
+    trueCount = r27->data[r27->size[0] * i46];
+    if (!((trueCount >= 1) && (trueCount <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(trueCount, 1, i45, &mh_emlrtBCI, sp);
     }
 
-    b_Pitch->data[b_Pitch->size[0] * i43] = c_Pitch->data[trueCount - 1];
+    b_Pitch->data[b_Pitch->size[0] * i46] = c_Pitch->data[trueCount - 1];
   }
 
   emxFree_real_T(&c_Pitch);
   emxFree_int32_T(&r27);
-  emxInit_real_T(sp, &Local, 2, &hd_emlrtRTEI, true);
-  st.site = &bm_emlrtRSI;
+  emxInit_real_T(sp, &Local, 2, &kd_emlrtRTEI, true);
+  st.site = &cm_emlrtRSI;
   mean_pitch = mean(&st, b_Pitch);
 
   /* The following weighting factors are used to differentially weight */
@@ -415,30 +415,30 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*  Forming the local cost matrix */
   /* 'dynamic:63' Local = 1 - Merit; */
-  i42 = Local->size[0] * Local->size[1];
+  i45 = Local->size[0] * Local->size[1];
   Local->size[0] = Merit->size[0];
   Local->size[1] = Merit->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)Local, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)Local, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Merit->size[0] * Merit->size[1];
   emxFree_real_T(&b_Pitch);
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    Local->data[i42] = 1.0 - Merit->data[i42];
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    Local->data[i45] = 1.0 - Merit->data[i45];
   }
 
-  emxInit_real_T2(sp, &Trans, 3, &id_emlrtRTEI, true);
+  emxInit_real_T2(sp, &Trans, 3, &ld_emlrtRTEI, true);
 
   /*  Initialization for the formation of the transition cost matrix */
   /* 'dynamic:66' Trans  = ones(numcands,numcands,numframes); */
-  i42 = Trans->size[0] * Trans->size[1] * Trans->size[2];
+  i45 = Trans->size[0] * Trans->size[1] * Trans->size[2];
   Trans->size[0] = Pitch->size[0];
   Trans->size[1] = Pitch->size[0];
   Trans->size[2] = Pitch->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)Trans, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)Trans, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Pitch->size[0] * Pitch->size[0] * Pitch->size[1];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    Trans->data[i42] = 1.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    Trans->data[i45] = 1.0;
   }
 
   /*  The transition cost matrix is proportional to frequency differences */
@@ -454,66 +454,66 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
       while (k - 1 <= numcands) {
         /*  both candidates voiced */
         /* 'dynamic:74' if ((Pitch(j,i) > 0) && (Pitch(k,i-1) > 0) ) */
-        i42 = Pitch->size[0];
-        if (!((j >= 1) && (j <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(j, 1, i42, &ni_emlrtBCI, sp);
+        i45 = Pitch->size[0];
+        if (!((j >= 1) && (j <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(j, 1, i45, &ni_emlrtBCI, sp);
         }
 
-        i42 = Pitch->size[1];
-        if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &oi_emlrtBCI, sp);
+        i45 = Pitch->size[1];
+        if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &oi_emlrtBCI, sp);
         }
 
         if (Pitch->data[(j + Pitch->size[0] * (i + 1)) - 1] > 0.0) {
-          i42 = Pitch->size[0];
-          if (!((k >= 1) && (k <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(k, 1, i42, &pi_emlrtBCI, sp);
+          i45 = Pitch->size[0];
+          if (!((k >= 1) && (k <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(k, 1, i45, &pi_emlrtBCI, sp);
           }
 
-          i42 = Pitch->size[1];
-          if (!((i + 1 >= 1) && (i + 1 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i + 1, 1, i42, &qi_emlrtBCI, sp);
+          i45 = Pitch->size[1];
+          if (!((i + 1 >= 1) && (i + 1 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i + 1, 1, i45, &qi_emlrtBCI, sp);
           }
 
           if (Pitch->data[(k + Pitch->size[0] * i) - 1] > 0.0) {
             /* 'dynamic:75' Trans(k,j,i) = dp_w1*(abs(Pitch(j,i)-Pitch(k,i-1))/mean_pitch); */
-            i42 = Pitch->size[0];
-            i43 = (j - 1) + 1;
-            if (!((i43 >= 1) && (i43 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &kh_emlrtBCI, sp);
+            i45 = Pitch->size[0];
+            i46 = (j - 1) + 1;
+            if (!((i46 >= 1) && (i46 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &kh_emlrtBCI, sp);
             }
 
-            i42 = Pitch->size[1];
-            i43 = (int32_T)(2.0 + (real_T)i);
-            if (!((i43 >= 1) && (i43 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &jh_emlrtBCI, sp);
+            i45 = Pitch->size[1];
+            i46 = (int32_T)(2.0 + (real_T)i);
+            if (!((i46 >= 1) && (i46 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &jh_emlrtBCI, sp);
             }
 
-            i42 = Pitch->size[0];
-            i43 = (k - 1) + 1;
-            if (!((i43 >= 1) && (i43 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &ih_emlrtBCI, sp);
+            i45 = Pitch->size[0];
+            i46 = (k - 1) + 1;
+            if (!((i46 >= 1) && (i46 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &ih_emlrtBCI, sp);
             }
 
-            i42 = Pitch->size[1];
-            i43 = (int32_T)((2.0 + (real_T)i) - 1.0);
-            if (!((i43 >= 1) && (i43 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &hh_emlrtBCI, sp);
+            i45 = Pitch->size[1];
+            i46 = (int32_T)((2.0 + (real_T)i) - 1.0);
+            if (!((i46 >= 1) && (i46 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &hh_emlrtBCI, sp);
             }
 
-            i42 = Trans->size[0];
-            if (!((k >= 1) && (k <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(k, 1, i42, &ri_emlrtBCI, sp);
+            i45 = Trans->size[0];
+            if (!((k >= 1) && (k <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(k, 1, i45, &ri_emlrtBCI, sp);
             }
 
-            i42 = Trans->size[1];
-            if (!((j >= 1) && (j <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(j, 1, i42, &si_emlrtBCI, sp);
+            i45 = Trans->size[1];
+            if (!((j >= 1) && (j <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(j, 1, i45, &si_emlrtBCI, sp);
             }
 
-            i42 = Trans->size[2];
-            if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &ti_emlrtBCI, sp);
+            i45 = Trans->size[2];
+            if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &ti_emlrtBCI, sp);
             }
 
             Trans->data[((k + Trans->size[0] * (j - 1)) + Trans->size[0] *
@@ -526,27 +526,27 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
         /*  one candiate is unvoiced */
         /* 'dynamic:79' if (Pitch(j,i)==0 && Pitch(k,i-1)>0) || (Pitch(j,i)>0 && Pitch(k,i-1)==0) */
-        i42 = Pitch->size[0];
-        if (!((j >= 1) && (j <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(j, 1, i42, &ui_emlrtBCI, sp);
+        i45 = Pitch->size[0];
+        if (!((j >= 1) && (j <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(j, 1, i45, &ui_emlrtBCI, sp);
         }
 
-        i42 = Pitch->size[1];
-        if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &vi_emlrtBCI, sp);
+        i45 = Pitch->size[1];
+        if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &vi_emlrtBCI, sp);
         }
 
         guard1 = false;
         guard2 = false;
         if (Pitch->data[(j + Pitch->size[0] * (i + 1)) - 1] == 0.0) {
-          i42 = Pitch->size[0];
-          if (!((k >= 1) && (k <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(k, 1, i42, &wi_emlrtBCI, sp);
+          i45 = Pitch->size[0];
+          if (!((k >= 1) && (k <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(k, 1, i45, &wi_emlrtBCI, sp);
           }
 
-          i42 = Pitch->size[1];
-          if (!((i + 1 >= 1) && (i + 1 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i + 1, 1, i42, &xi_emlrtBCI, sp);
+          i45 = Pitch->size[1];
+          if (!((i + 1 >= 1) && (i + 1 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i + 1, 1, i45, &xi_emlrtBCI, sp);
           }
 
           if (Pitch->data[(k + Pitch->size[0] * i) - 1] > 0.0) {
@@ -559,25 +559,25 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
         }
 
         if (guard2) {
-          i42 = Pitch->size[0];
-          if (!((j >= 1) && (j <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(j, 1, i42, &yi_emlrtBCI, sp);
+          i45 = Pitch->size[0];
+          if (!((j >= 1) && (j <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(j, 1, i45, &yi_emlrtBCI, sp);
           }
 
-          i42 = Pitch->size[1];
-          if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &aj_emlrtBCI, sp);
+          i45 = Pitch->size[1];
+          if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &aj_emlrtBCI, sp);
           }
 
           if (Pitch->data[(j + Pitch->size[0] * (i + 1)) - 1] > 0.0) {
-            i42 = Pitch->size[0];
-            if (!((k >= 1) && (k <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(k, 1, i42, &bj_emlrtBCI, sp);
+            i45 = Pitch->size[0];
+            if (!((k >= 1) && (k <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(k, 1, i45, &bj_emlrtBCI, sp);
             }
 
-            i42 = Pitch->size[1];
-            if (!((i + 1 >= 1) && (i + 1 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i + 1, 1, i42, &cj_emlrtBCI, sp);
+            i45 = Pitch->size[1];
+            if (!((i + 1 >= 1) && (i + 1 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i + 1, 1, i45, &cj_emlrtBCI, sp);
             }
 
             if (Pitch->data[(k + Pitch->size[0] * i) - 1] == 0.0) {
@@ -588,32 +588,32 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
         if (guard1) {
           /* 'dynamic:80' benefit = min(1, abs(Energy(i-1)-Energy(i))); */
-          i42 = Energy->size[1];
-          i43 = (int32_T)((2.0 + (real_T)i) - 1.0);
-          if (!((i43 >= 1) && (i43 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &gh_emlrtBCI, sp);
+          i45 = Energy->size[1];
+          i46 = (int32_T)((2.0 + (real_T)i) - 1.0);
+          if (!((i46 >= 1) && (i46 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &gh_emlrtBCI, sp);
           }
 
-          i42 = Energy->size[1];
-          i43 = (int32_T)(2.0 + (real_T)i);
-          if (!((i43 >= 1) && (i43 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &fh_emlrtBCI, sp);
+          i45 = Energy->size[1];
+          i46 = (int32_T)(2.0 + (real_T)i);
+          if (!((i46 >= 1) && (i46 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &fh_emlrtBCI, sp);
           }
 
           /* 'dynamic:81' Trans(k,j,i) =  dp_w2*(1-benefit); */
-          i42 = Trans->size[0];
-          if (!((k >= 1) && (k <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(k, 1, i42, &dj_emlrtBCI, sp);
+          i45 = Trans->size[0];
+          if (!((k >= 1) && (k <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(k, 1, i45, &dj_emlrtBCI, sp);
           }
 
-          i42 = Trans->size[1];
-          if (!((j >= 1) && (j <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(j, 1, i42, &ej_emlrtBCI, sp);
+          i45 = Trans->size[1];
+          if (!((j >= 1) && (j <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(j, 1, i45, &ej_emlrtBCI, sp);
           }
 
-          i42 = Trans->size[2];
-          if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &fj_emlrtBCI, sp);
+          i45 = Trans->size[2];
+          if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &fj_emlrtBCI, sp);
           }
 
           Trans->data[((k + Trans->size[0] * (j - 1)) + Trans->size[0] *
@@ -624,42 +624,42 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
         /*  both candidates are unvoiced */
         /* 'dynamic:85' if ((Pitch(j,i) == 0) && (Pitch(k,i-1) == 0)) */
-        i42 = Pitch->size[0];
-        if (!((j >= 1) && (j <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(j, 1, i42, &gj_emlrtBCI, sp);
+        i45 = Pitch->size[0];
+        if (!((j >= 1) && (j <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(j, 1, i45, &gj_emlrtBCI, sp);
         }
 
-        i42 = Pitch->size[1];
-        if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &hj_emlrtBCI, sp);
+        i45 = Pitch->size[1];
+        if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &hj_emlrtBCI, sp);
         }
 
         if (Pitch->data[(j + Pitch->size[0] * (i + 1)) - 1] == 0.0) {
-          i42 = Pitch->size[0];
-          if (!((k >= 1) && (k <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(k, 1, i42, &ij_emlrtBCI, sp);
+          i45 = Pitch->size[0];
+          if (!((k >= 1) && (k <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(k, 1, i45, &ij_emlrtBCI, sp);
           }
 
-          i42 = Pitch->size[1];
-          if (!((i + 1 >= 1) && (i + 1 <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(i + 1, 1, i42, &jj_emlrtBCI, sp);
+          i45 = Pitch->size[1];
+          if (!((i + 1 >= 1) && (i + 1 <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(i + 1, 1, i45, &jj_emlrtBCI, sp);
           }
 
           if (Pitch->data[(k + Pitch->size[0] * i) - 1] == 0.0) {
             /* 'dynamic:86' Trans(k,j,i) =  dp_w3; */
-            i42 = Trans->size[0];
-            if (!((k >= 1) && (k <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(k, 1, i42, &kj_emlrtBCI, sp);
+            i45 = Trans->size[0];
+            if (!((k >= 1) && (k <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(k, 1, i45, &kj_emlrtBCI, sp);
             }
 
-            i42 = Trans->size[1];
-            if (!((j >= 1) && (j <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(j, 1, i42, &lj_emlrtBCI, sp);
+            i45 = Trans->size[1];
+            if (!((j >= 1) && (j <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(j, 1, i45, &lj_emlrtBCI, sp);
             }
 
-            i42 = Trans->size[2];
-            if (!((i + 2 >= 1) && (i + 2 <= i42))) {
-              emlrtDynamicBoundsCheckR2012b(i + 2, 1, i42, &mj_emlrtBCI, sp);
+            i45 = Trans->size[2];
+            if (!((i + 2 >= 1) && (i + 2 <= i45))) {
+              emlrtDynamicBoundsCheckR2012b(i + 2, 1, i45, &mj_emlrtBCI, sp);
             }
 
             Trans->data[((k + Trans->size[0] * (j - 1)) + Trans->size[0] *
@@ -687,20 +687,20 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
   /*  Overal balance between Local and Transition costs */
   /* 'dynamic:93' Trans = Trans/dp_w4; */
-  i42 = Trans->size[0] * Trans->size[1] * Trans->size[2];
-  emxEnsureCapacity(sp, (emxArray__common *)Trans, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  i45 = Trans->size[0] * Trans->size[1] * Trans->size[2];
+  emxEnsureCapacity(sp, (emxArray__common *)Trans, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Trans->size[0];
   trueCount = Trans->size[1];
   end = Trans->size[2];
   partialTrueCount = partialTrueCount * trueCount * end;
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    Trans->data[i42] /= 0.9;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    Trans->data[i45] /= 0.9;
   }
 
   /*  Find the minimum cost path thru Pitch_Array using the Local and Trans costs */
   /* 'dynamic:96' Path = path1(Local,Trans); */
-  st.site = &cm_emlrtRSI;
+  st.site = &dm_emlrtRSI;
 
   /* PATH1 find optimal path with the lowest cost */
   /*  */
@@ -733,100 +733,100 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   /* 'path1:30' if M>=500 */
   if (Local->size[0] >= 500) {
     /* if M is greater than 100, stop the routine; */
-    b_st.site = &dm_emlrtRSI;
-    for (i42 = 0; i42 < 28; i42++) {
-      u[i42] = varargin_1[i42];
+    b_st.site = &em_emlrtRSI;
+    for (i45 = 0; i45 < 28; i45++) {
+      u[i45] = varargin_1[i45];
     }
 
     y = NULL;
     m9 = emlrtCreateCharArray(2, iv42);
     emlrtInitCharArrayR2013a(&b_st, 28, m9, &u[0]);
     emlrtAssign(&y, m9);
-    c_st.site = &fm_emlrtRSI;
-    m_error(&c_st, y, &emlrtMCI);
+    c_st.site = &mm_emlrtRSI;
+    n_error(&c_st, y, &emlrtMCI);
   }
 
   /* 'path1:33' if N>=5000 */
   if (Local->size[1] >= 5000) {
     /* if N is greater than 1000, stop the routine; */
-    b_st.site = &ai_emlrtRSI;
-    for (i42 = 0; i42 < 29; i42++) {
-      b_u[i42] = b_varargin_1[i42];
+    b_st.site = &bi_emlrtRSI;
+    for (i45 = 0; i45 < 29; i45++) {
+      b_u[i45] = b_varargin_1[i45];
     }
 
     b_y = NULL;
     m9 = emlrtCreateCharArray(2, iv43);
     emlrtInitCharArrayR2013a(&b_st, 29, m9, &b_u[0]);
     emlrtAssign(&b_y, m9);
-    c_st.site = &fm_emlrtRSI;
-    m_error(&c_st, b_y, &emlrtMCI);
+    c_st.site = &mm_emlrtRSI;
+    n_error(&c_st, b_y, &emlrtMCI);
   }
 
-  emxInit_real_T(&st, &PRED, 2, &cc_emlrtRTEI, true);
+  emxInit_real_T(&st, &PRED, 2, &ec_emlrtRTEI, true);
 
   /* 'path1:38' PRED=ones(M,N); */
-  i42 = PRED->size[0] * PRED->size[1];
+  i45 = PRED->size[0] * PRED->size[1];
   PRED->size[0] = Local->size[0];
   PRED->size[1] = Local->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)PRED, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)PRED, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Local->size[0] * Local->size[1];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    PRED->data[i42] = 1.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    PRED->data[i45] = 1.0;
   }
 
-  emxInit_real_T(&st, &P, 2, &dc_emlrtRTEI, true);
+  emxInit_real_T(&st, &P, 2, &fc_emlrtRTEI, true);
 
   /* initializing several desired matrix; */
   /* 'path1:39' P=ones(1,N); */
-  i42 = P->size[0] * P->size[1];
+  i45 = P->size[0] * P->size[1];
   P->size[0] = 1;
   P->size[1] = Local->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)P, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)P, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Local->size[1];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    P->data[i42] = 1.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    P->data[i45] = 1.0;
   }
 
-  emxInit_real_T(&st, &p, 2, &ec_emlrtRTEI, true);
+  emxInit_real_T(&st, &p, 2, &gc_emlrtRTEI, true);
 
   /* 'path1:40' p=zeros(1,N); */
-  i42 = p->size[0] * p->size[1];
+  i45 = p->size[0] * p->size[1];
   p->size[0] = 1;
   p->size[1] = Local->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)p, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)p, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Local->size[1];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    p->data[i42] = 0.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    p->data[i45] = 0.0;
   }
 
-  emxInit_real_T(&st, &PCOST, 2, &jd_emlrtRTEI, true);
+  emxInit_real_T(&st, &PCOST, 2, &md_emlrtRTEI, true);
 
   /* PATH=zeros(1,N); */
   /* 'path1:42' PCOST = zeros(1,M); */
-  i42 = PCOST->size[0] * PCOST->size[1];
+  i45 = PCOST->size[0] * PCOST->size[1];
   PCOST->size[0] = 1;
   PCOST->size[1] = Local->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)PCOST, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)PCOST, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Local->size[0];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    PCOST->data[i42] = 0.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    PCOST->data[i45] = 0.0;
   }
 
-  emxInit_real_T(&st, &CCOST, 2, &kd_emlrtRTEI, true);
+  emxInit_real_T(&st, &CCOST, 2, &nd_emlrtRTEI, true);
 
   /* 'path1:43' CCOST = zeros(1,M); */
-  i42 = CCOST->size[0] * CCOST->size[1];
+  i45 = CCOST->size[0] * CCOST->size[1];
   CCOST->size[0] = 1;
   CCOST->size[1] = Local->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)CCOST, i42, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)CCOST, i45, (int32_T)sizeof(real_T),
+                    &jd_emlrtRTEI);
   partialTrueCount = Local->size[0];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    CCOST->data[i42] = 0.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    CCOST->data[i45] = 0.0;
   }
 
   /* 'path1:45' for J=1:M */
@@ -834,19 +834,19 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   while (J - 1 <= M) {
     /* initializing the previous costs; */
     /* 'path1:46' PCOST(J)=Local(J,1); */
-    i42 = Local->size[1];
-    if (!(1 <= i42)) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, i42, &ld_emlrtBCI, &st);
+    i45 = Local->size[1];
+    if (!(1 <= i45)) {
+      emlrtDynamicBoundsCheckR2012b(1, 1, i45, &ld_emlrtBCI, &st);
     }
 
-    i42 = Local->size[0];
-    if (!((J >= 1) && (J <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(J, 1, i42, &li_emlrtBCI, &st);
+    i45 = Local->size[0];
+    if (!((J >= 1) && (J <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(J, 1, i45, &li_emlrtBCI, &st);
     }
 
-    i42 = PCOST->size[1];
-    if (!((J >= 1) && (J <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(J, 1, i42, &mi_emlrtBCI, &st);
+    i45 = PCOST->size[1];
+    if (!((J >= 1) && (J <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(J, 1, i45, &mi_emlrtBCI, &st);
     }
 
     PCOST->data[J - 1] = Local->data[J - 1];
@@ -864,9 +864,9 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     J = 1;
     while (J - 1 <= M) {
       /* 'path1:51' CCOST(J)=1.0E+30; */
-      i42 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &wh_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &wh_emlrtBCI, &st);
       }
 
       CCOST->data[J - 1] = 1.0E+30;
@@ -876,29 +876,29 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
       K = 1;
       while (K - 1 <= M) {
         /* 'path1:54' if PCOST(K)+Trans(K,J,I)<=CCOST(J) */
-        i42 = PCOST->size[1];
-        if (!((K >= 1) && (K <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(K, 1, i42, &ci_emlrtBCI, &st);
+        i45 = PCOST->size[1];
+        if (!((K >= 1) && (K <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(K, 1, i45, &ci_emlrtBCI, &st);
         }
 
-        i42 = Trans->size[0];
-        if (!((K >= 1) && (K <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(K, 1, i42, &di_emlrtBCI, &st);
+        i45 = Trans->size[0];
+        if (!((K >= 1) && (K <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(K, 1, i45, &di_emlrtBCI, &st);
         }
 
-        i42 = Trans->size[1];
-        if (!((J >= 1) && (J <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(J, 1, i42, &ei_emlrtBCI, &st);
+        i45 = Trans->size[1];
+        if (!((J >= 1) && (J <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(J, 1, i45, &ei_emlrtBCI, &st);
         }
 
-        i42 = Trans->size[2];
-        if (!((I >= 1) && (I <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(I, 1, i42, &ce_emlrtBCI, &st);
+        i45 = Trans->size[2];
+        if (!((I >= 1) && (I <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(I, 1, i45, &ce_emlrtBCI, &st);
         }
 
-        i42 = CCOST->size[1];
-        if (!((J >= 1) && (J <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(J, 1, i42, &fi_emlrtBCI, &st);
+        i45 = CCOST->size[1];
+        if (!((J >= 1) && (J <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(J, 1, i45, &fi_emlrtBCI, &st);
         }
 
         if (PCOST->data[K - 1] + Trans->data[((K + Trans->size[0] * (J - 1)) +
@@ -906,29 +906,29 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
             1]) {
           /* deciding the optimal path between two points in two next column;  */
           /* 'path1:55' CCOST(J)=PCOST(K)+Trans(K,J,I); */
-          i42 = PCOST->size[1];
-          if (!((K >= 1) && (K <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(K, 1, i42, &gi_emlrtBCI, &st);
+          i45 = PCOST->size[1];
+          if (!((K >= 1) && (K <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(K, 1, i45, &gi_emlrtBCI, &st);
           }
 
-          i42 = Trans->size[0];
-          if (!((K >= 1) && (K <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(K, 1, i42, &hi_emlrtBCI, &st);
+          i45 = Trans->size[0];
+          if (!((K >= 1) && (K <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(K, 1, i45, &hi_emlrtBCI, &st);
           }
 
-          i42 = Trans->size[1];
-          if (!((J >= 1) && (J <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(J, 1, i42, &ii_emlrtBCI, &st);
+          i45 = Trans->size[1];
+          if (!((J >= 1) && (J <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(J, 1, i45, &ii_emlrtBCI, &st);
           }
 
-          i42 = Trans->size[2];
-          if (!((I >= 1) && (I <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(I, 1, i42, &de_emlrtBCI, &st);
+          i45 = Trans->size[2];
+          if (!((I >= 1) && (I <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(I, 1, i45, &de_emlrtBCI, &st);
           }
 
-          i42 = CCOST->size[1];
-          if (!((J >= 1) && (J <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(J, 1, i42, &ji_emlrtBCI, &st);
+          i45 = CCOST->size[1];
+          if (!((J >= 1) && (J <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(J, 1, i45, &ji_emlrtBCI, &st);
           }
 
           CCOST->data[J - 1] = PCOST->data[K - 1] + Trans->data[((K +
@@ -936,14 +936,14 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
             - 1];
 
           /* 'path1:56' PRED(J,I)=K; */
-          i42 = PRED->size[0];
-          if (!((J >= 1) && (J <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(J, 1, i42, &ki_emlrtBCI, &st);
+          i45 = PRED->size[0];
+          if (!((J >= 1) && (J <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(J, 1, i45, &ki_emlrtBCI, &st);
           }
 
-          i42 = PRED->size[1];
-          if (!((I >= 1) && (I <= i42))) {
-            emlrtDynamicBoundsCheckR2012b(I, 1, i42, &ee_emlrtBCI, &st);
+          i45 = PRED->size[1];
+          if (!((I >= 1) && (I <= i45))) {
+            emlrtDynamicBoundsCheckR2012b(I, 1, i45, &ee_emlrtBCI, &st);
           }
 
           PRED->data[(J + PRED->size[0] * (I - 1)) - 1] = 1.0 + (real_T)(K - 1);
@@ -958,44 +958,44 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
       }
 
       /* 'path1:60' if CCOST(J)>=1.0E+30 */
-      i42 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &xh_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &xh_emlrtBCI, &st);
       }
 
       if (CCOST->data[J - 1] >= 1.0E+30) {
-        b_st.site = &bi_emlrtRSI;
-        for (i42 = 0; i42 < 30; i42++) {
-          c_u[i42] = c_varargin_1[i42];
+        b_st.site = &ci_emlrtRSI;
+        for (i45 = 0; i45 < 30; i45++) {
+          c_u[i45] = c_varargin_1[i45];
         }
 
         c_y = NULL;
         m9 = emlrtCreateCharArray(2, iv44);
         emlrtInitCharArrayR2013a(&b_st, 30, m9, &c_u[0]);
         emlrtAssign(&c_y, m9);
-        c_st.site = &fm_emlrtRSI;
-        m_error(&c_st, c_y, &emlrtMCI);
+        c_st.site = &mm_emlrtRSI;
+        n_error(&c_st, c_y, &emlrtMCI);
       }
 
       /* 'path1:64' CCOST(J)=CCOST(J)+Local(J,I); */
-      i42 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &yh_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &yh_emlrtBCI, &st);
       }
 
-      i42 = Local->size[0];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &ai_emlrtBCI, &st);
+      i45 = Local->size[0];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &ai_emlrtBCI, &st);
       }
 
-      i42 = Local->size[1];
-      if (!((I >= 1) && (I <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(I, 1, i42, &be_emlrtBCI, &st);
+      i45 = Local->size[1];
+      if (!((I >= 1) && (I <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(I, 1, i45, &be_emlrtBCI, &st);
       }
 
-      i42 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &bi_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &bi_emlrtBCI, &st);
       }
 
       CCOST->data[J - 1] += Local->data[(J + Local->size[0] * (I - 1)) - 1];
@@ -1011,14 +1011,14 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     J = 1;
     while (J - 1 <= M) {
       /* 'path1:69' PCOST(J)=CCOST(J); */
-      i42 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &uh_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &uh_emlrtBCI, &st);
       }
 
-      i42 = PCOST->size[1];
-      if (!((J >= 1) && (J <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i42, &vh_emlrtBCI, &st);
+      i45 = PCOST->size[1];
+      if (!((J >= 1) && (J <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i45, &vh_emlrtBCI, &st);
       }
 
       PCOST->data[J - 1] = CCOST->data[J - 1];
@@ -1031,9 +1031,9 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     }
 
     /* 'path1:72' p(I)=1; */
-    i42 = p->size[1];
-    if (!((I >= 1) && (I <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(I, 1, i42, &yd_emlrtBCI, &st);
+    i45 = p->size[1];
+    if (!((I >= 1) && (I <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(I, 1, i45, &yd_emlrtBCI, &st);
     }
 
     p->data[I - 1] = 1.0;
@@ -1043,34 +1043,34 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
     while (J <= M - 1) {
       /* obtaining the points with lowest cost in every column; */
       /* 'path1:74' if CCOST(J)<=CCOST(1) */
-      i42 = CCOST->size[1];
-      if (!(1 <= i42)) {
-        emlrtDynamicBoundsCheckR2012b(1, 1, i42, &eh_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!(1 <= i45)) {
+        emlrtDynamicBoundsCheckR2012b(1, 1, i45, &eh_emlrtBCI, &st);
       }
 
-      i42 = CCOST->size[1];
-      if (!((J + 2 >= 1) && (J + 2 <= i42))) {
-        emlrtDynamicBoundsCheckR2012b(J + 2, 1, i42, &sh_emlrtBCI, &st);
+      i45 = CCOST->size[1];
+      if (!((J + 2 >= 1) && (J + 2 <= i45))) {
+        emlrtDynamicBoundsCheckR2012b(J + 2, 1, i45, &sh_emlrtBCI, &st);
       }
 
       if (CCOST->data[J + 1] <= CCOST->data[0]) {
         /* 'path1:75' CCOST(1)=CCOST(J); */
-        i42 = CCOST->size[1];
-        if (!(1 <= i42)) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, i42, &dh_emlrtBCI, &st);
+        i45 = CCOST->size[1];
+        if (!(1 <= i45)) {
+          emlrtDynamicBoundsCheckR2012b(1, 1, i45, &dh_emlrtBCI, &st);
         }
 
-        i42 = CCOST->size[1];
-        if (!((J + 2 >= 1) && (J + 2 <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(J + 2, 1, i42, &th_emlrtBCI, &st);
+        i45 = CCOST->size[1];
+        if (!((J + 2 >= 1) && (J + 2 <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(J + 2, 1, i45, &th_emlrtBCI, &st);
         }
 
         CCOST->data[0] = CCOST->data[J + 1];
 
         /* 'path1:75' p(I)=J; */
-        i42 = p->size[1];
-        if (!((I >= 1) && (I <= i42))) {
-          emlrtDynamicBoundsCheckR2012b(I, 1, i42, &ae_emlrtBCI, &st);
+        i45 = p->size[1];
+        if (!((I >= 1) && (I <= i45))) {
+          emlrtDynamicBoundsCheckR2012b(I, 1, i45, &ae_emlrtBCI, &st);
         }
 
         p->data[I - 1] = 2.0 + (real_T)J;
@@ -1107,22 +1107,22 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   /*    end */
   /* 'path1:97' P(N)=p(N); */
   trueCount = Local->size[1];
-  i42 = p->size[1];
-  i43 = Local->size[1];
-  if (!((i43 >= 1) && (i43 <= i42))) {
-    emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &od_emlrtBCI, &st);
+  i45 = p->size[1];
+  i46 = Local->size[1];
+  if (!((i46 >= 1) && (i46 <= i45))) {
+    emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &od_emlrtBCI, &st);
   }
 
-  i42 = Local->size[1];
-  if (!((i42 >= 1) && (i42 <= trueCount))) {
-    emlrtDynamicBoundsCheckR2012b(i42, 1, trueCount, &pd_emlrtBCI, &st);
+  i45 = Local->size[1];
+  if (!((i45 >= 1) && (i45 <= trueCount))) {
+    emlrtDynamicBoundsCheckR2012b(i45, 1, trueCount, &pd_emlrtBCI, &st);
   }
 
-  P->data[i42 - 1] = p->data[i43 - 1];
+  P->data[i45 - 1] = p->data[i46 - 1];
 
   /* 'path1:99' for I=N-1:-1:1 */
   emlrtForLoopVectorCheckR2012b((real_T)Local->size[1] - 1.0, -1.0, 1.0,
-    mxDOUBLE_CLASS, Local->size[1] - 1, &ue_emlrtRTEI, &st);
+    mxDOUBLE_CLASS, Local->size[1] - 1, &bf_emlrtRTEI, &st);
   I = 0;
   emxFree_real_T(&p);
   while (I <= Local->size[1] - 2) {
@@ -1130,29 +1130,29 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
 
     /* using this loop to get the path finally; from the last point going */
     /* 'path1:100' P(I)=PRED(P(I+1),I+1); */
-    i42 = PRED->size[0];
-    i43 = P->size[1];
-    if (!((b_I >= 1) && (b_I <= i43))) {
-      emlrtDynamicBoundsCheckR2012b(b_I, 1, i43, &vd_emlrtBCI, &st);
+    i45 = PRED->size[0];
+    i46 = P->size[1];
+    if (!((b_I >= 1) && (b_I <= i46))) {
+      emlrtDynamicBoundsCheckR2012b(b_I, 1, i46, &vd_emlrtBCI, &st);
     }
 
-    i43 = (int32_T)P->data[b_I - 1];
-    if (!((i43 >= 1) && (i43 <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &rh_emlrtBCI, &st);
+    i46 = (int32_T)P->data[b_I - 1];
+    if (!((i46 >= 1) && (i46 <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &rh_emlrtBCI, &st);
     }
 
-    i42 = PRED->size[1];
-    if (!((b_I >= 1) && (b_I <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(b_I, 1, i42, &wd_emlrtBCI, &st);
+    i45 = PRED->size[1];
+    if (!((b_I >= 1) && (b_I <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(b_I, 1, i45, &wd_emlrtBCI, &st);
     }
 
-    i42 = P->size[1];
+    i45 = P->size[1];
     trueCount = b_I - 1;
-    if (!((trueCount >= 1) && (trueCount <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(trueCount, 1, i42, &xd_emlrtBCI, &st);
+    if (!((trueCount >= 1) && (trueCount <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(trueCount, 1, i45, &xd_emlrtBCI, &st);
     }
 
-    P->data[trueCount - 1] = PRED->data[(i43 + PRED->size[0] * (b_I - 1)) - 1];
+    P->data[trueCount - 1] = PRED->data[(i46 + PRED->size[0] * (b_I - 1)) - 1];
 
     /* backward to find the previous points, etc; */
     I++;
@@ -1168,42 +1168,42 @@ void dynamic(const emlrtStack *sp, const emxArray_real_T *Pitch, const
   /* getting the final path.  */
   /* extracting the pitch, using Path */
   /* 'dynamic:99' FinPitch = zeros(1,numframes); */
-  i42 = FinPitch->size[0] * FinPitch->size[1];
+  i45 = FinPitch->size[0] * FinPitch->size[1];
   FinPitch->size[0] = 1;
   FinPitch->size[1] = Pitch->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)FinPitch, i42, (int32_T)sizeof
-                    (real_T), &gd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)FinPitch, i45, (int32_T)sizeof
+                    (real_T), &jd_emlrtRTEI);
   partialTrueCount = Pitch->size[1];
-  for (i42 = 0; i42 < partialTrueCount; i42++) {
-    FinPitch->data[i42] = 0.0;
+  for (i45 = 0; i45 < partialTrueCount; i45++) {
+    FinPitch->data[i45] = 0.0;
   }
 
   /* 'dynamic:100' for i = 1:numframes */
   i = 1;
   while (i - 1 <= numframes) {
     /* 'dynamic:101' FinPitch(i) = Pitch(Path(i),i); */
-    i42 = Pitch->size[0];
-    i43 = P->size[1];
-    if (!((i >= 1) && (i <= i43))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i43, &oh_emlrtBCI, sp);
+    i45 = Pitch->size[0];
+    i46 = P->size[1];
+    if (!((i >= 1) && (i <= i46))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i46, &oh_emlrtBCI, sp);
     }
 
-    i43 = (int32_T)P->data[i - 1];
-    if (!((i43 >= 1) && (i43 <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(i43, 1, i42, &nh_emlrtBCI, sp);
+    i46 = (int32_T)P->data[i - 1];
+    if (!((i46 >= 1) && (i46 <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(i46, 1, i45, &nh_emlrtBCI, sp);
     }
 
-    i42 = Pitch->size[1];
-    if (!((i >= 1) && (i <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i42, &ph_emlrtBCI, sp);
+    i45 = Pitch->size[1];
+    if (!((i >= 1) && (i <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i45, &ph_emlrtBCI, sp);
     }
 
-    i42 = FinPitch->size[1];
-    if (!((i >= 1) && (i <= i42))) {
-      emlrtDynamicBoundsCheckR2012b(i, 1, i42, &qh_emlrtBCI, sp);
+    i45 = FinPitch->size[1];
+    if (!((i >= 1) && (i <= i45))) {
+      emlrtDynamicBoundsCheckR2012b(i, 1, i45, &qh_emlrtBCI, sp);
     }
 
-    FinPitch->data[i - 1] = Pitch->data[(i43 + Pitch->size[0] * (i - 1)) - 1];
+    FinPitch->data[i - 1] = Pitch->data[(i46 + Pitch->size[0] * (i - 1)) - 1];
     i++;
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
       emlrtBreakCheckR2012b(sp);

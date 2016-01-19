@@ -2,7 +2,7 @@
  * File: yaapt_types.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 #ifndef __YAAPT_TYPES_H__
@@ -116,6 +116,16 @@ struct emxArray_real_T
 typedef struct emxArray_real_T emxArray_real_T;
 
 #endif                                 /*typedef_emxArray_real_T*/
+
+#ifndef typedef_struct_T
+#define typedef_struct_T
+
+typedef struct {
+  emxArray_real_T *breaks;
+  emxArray_real_T *coefs;
+} struct_T;
+
+#endif                                 /*typedef_struct_T*/
 #endif
 
 /*

@@ -52,6 +52,12 @@ void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
   }
 }
 
+void emxFreeStruct_struct_T(struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->breaks);
+  emxFree_real_T(&pStruct->coefs);
+}
+
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_boolean_T *)NULL) {
@@ -117,6 +123,13 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     emlrtFreeMex((void *)*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
+}
+
+void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct, const
+  emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  emxInit_real_T(sp, &pStruct->breaks, 2, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->coefs, 2, srcLocation, doPush);
 }
 
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,

@@ -2,7 +2,7 @@
  * File: spec_trk.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -117,7 +117,7 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   emxArray_real_T *e_CandsPitch;
   double std_voiced;
   emxArray_real_T *f_CandsPitch;
-  emxArray_real_T *r3;
+  emxArray_real_T *r4;
   emxArray_real_T *delta1;
   unsigned int uv1[2];
   int b_ix;
@@ -152,9 +152,9 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   /*    June 2008. */
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   /* -- PARAMETERS: set up all of these parameters -------------------------------- */
-  nframesize = 25.0 * Fs / 1000.0;
+  nframesize = 20.0 * Fs / 1000.0;
   b_fix(&nframesize);
-  nframejump = 10.0 * Fs / 1000.0;
+  nframejump = 30.0 * Fs / 1000.0;
   b_fix(&nframejump);
 
   /*  overlap width in sample  */
@@ -709,8 +709,8 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
     }
   }
 
-  emxInit_real_T(&r3, 2);
-  c_abs(f_CandsPitch, r3);
+  emxInit_real_T(&r4, 2);
+  c_abs(f_CandsPitch, r4);
   iy = CandsPitch->size[1] - 1;
   nm1d2 = 0;
   emxFree_real_T(&f_CandsPitch);
@@ -735,18 +735,18 @@ void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T
   emxInit_real_T(&delta1, 2);
   ix = delta1->size[0] * delta1->size[1];
   delta1->size[0] = 4;
-  delta1->size[1] = r3->size[1];
+  delta1->size[1] = r4->size[1];
   emxEnsureCapacity((emxArray__common *)delta1, ix, (int)sizeof(double));
-  iy = r3->size[1];
+  iy = r4->size[1];
   for (ix = 0; ix < iy; ix++) {
     for (cindx = 0; cindx < 4; cindx++) {
-      delta1->data[cindx + delta1->size[0] * ix] = r3->data[cindx + r3->size[0] *
+      delta1->data[cindx + delta1->size[0] * ix] = r4->data[cindx + r4->size[0] *
         ix] * (3.0 - CandsMerit->data[cindx + CandsMerit->size[0] * (iindx->
                 data[iindx->size[0] * ix] - 1)]);
     }
   }
 
-  emxFree_real_T(&r3);
+  emxFree_real_T(&r4);
 
   /*  Interpolation of the weigthed candidates */
   ix = Signal->size[0] * Signal->size[1];

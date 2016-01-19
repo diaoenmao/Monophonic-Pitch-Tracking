@@ -26,14 +26,14 @@
 <a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="15"><font color="#888888 "><i>   15   </i></font></a>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_fl_emlrtRSI">fl_emlrtRSI</a> = <b>{</b> 36, <font color="#1122ff">&quot;cat&quot;</font>,
-<a name="18"><font color="#888888 "><i>   18   </i></font></a>  <font color="#1122ff">&quot;F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m&quot;</font> <b>}</b>;
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_gl_emlrtRSI">gl_emlrtRSI</a> = <b>{</b> 36, <font color="#1122ff">&quot;cat&quot;</font>,
+<a name="18"><font color="#888888 "><i>   18   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m&quot;</font> <b>}</b>;
 <a name="19"><font color="#888888 "><i>   19   </i></font></a>
-<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_dd_emlrtRTEI">dd_emlrtRTEI</a> = <b>{</b> 1, 14, <font color="#1122ff">&quot;cat&quot;</font>,
-<a name="21"><font color="#888888 "><i>   21   </i></font></a>  <font color="#1122ff">&quot;F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m&quot;</font> <b>}</b>;
+<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_gd_emlrtRTEI">gd_emlrtRTEI</a> = <b>{</b> 1, 14, <font color="#1122ff">&quot;cat&quot;</font>,
+<a name="21"><font color="#888888 "><i>   21   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m&quot;</font> <b>}</b>;
 <a name="22"><font color="#888888 "><i>   22   </i></font></a>
-<a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_hf_emlrtRTEI">hf_emlrtRTEI</a> = <b>{</b> 38, 23, <font color="#1122ff">&quot;cat&quot;</font>,
-<a name="24"><font color="#888888 "><i>   24   </i></font></a>  <font color="#1122ff">&quot;F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m&quot;</font> <b>}</b>;
+<a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_nf_emlrtRTEI">nf_emlrtRTEI</a> = <b>{</b> 38, 23, <font color="#1122ff">&quot;cat&quot;</font>,
+<a name="24"><font color="#888888 "><i>   24   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m&quot;</font> <b>}</b>;
 <a name="25"><font color="#888888 "><i>   25   </i></font></a>
 <a name="26"><font color="#888888 "><i>   26   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
 <a name="27"><font color="#888888 "><i>   27   </i></font></a><font color="#112266"><b>static</b></font> boolean_T <a href="#fcn_isconsistent" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_isconsistent');" target="_self"><font color="#1122aa">isconsistent</font></a>(int32_T dim, <font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *y, <font color="#112266"><b>const</b></font>
@@ -51,17 +51,17 @@
 <a name="39"><font color="#888888 "><i>   39   </i></font></a>  int32_T j;
 <a name="40"><font color="#888888 "><i>   40   </i></font></a>  int32_T exitg1;
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>  boolean_T guard1 = false;
-<a name="42"><font color="#888888 "><i>   42   </i></font></a>  int32_T i40;
-<a name="43"><font color="#888888 "><i>   43   </i></font></a>  int32_T i41;
+<a name="42"><font color="#888888 "><i>   42   </i></font></a>  int32_T i42;
+<a name="43"><font color="#888888 "><i>   43   </i></font></a>  int32_T i43;
 <a name="44"><font color="#888888 "><i>   44   </i></font></a>  j = 0;
 <a name="45"><font color="#888888 "><i>   45   </i></font></a>  <font color="#112266"><b>do</b></font> <b>{</b>
 <a name="46"><font color="#888888 "><i>   46   </i></font></a>    exitg1 = 0;
 <a name="47"><font color="#888888 "><i>   47   </i></font></a>    <font color="#112266"><b>if</b></font> (j &lt; 2) <b>{</b>
 <a name="48"><font color="#888888 "><i>   48   </i></font></a>      guard1 = false;
 <a name="49"><font color="#888888 "><i>   49   </i></font></a>      <font color="#112266"><b>if</b></font> (!(dim == 1 + j)) <b>{</b>
-<a name="50"><font color="#888888 "><i>   50   </i></font></a>        i40 = y-&gt;size[j];
-<a name="51"><font color="#888888 "><i>   51   </i></font></a>        i41 = x-&gt;size[j];
-<a name="52"><font color="#888888 "><i>   52   </i></font></a>        <font color="#112266"><b>if</b></font> (i40 != i41) <b>{</b>
+<a name="50"><font color="#888888 "><i>   50   </i></font></a>        i42 = y-&gt;size[j];
+<a name="51"><font color="#888888 "><i>   51   </i></font></a>        i43 = x-&gt;size[j];
+<a name="52"><font color="#888888 "><i>   52   </i></font></a>        <font color="#112266"><b>if</b></font> (i42 != i43) <b>{</b>
 <a name="53"><font color="#888888 "><i>   53   </i></font></a>          p = false;
 <a name="54"><font color="#888888 "><i>   54   </i></font></a>          exitg1 = 1;
 <a name="55"><font color="#888888 "><i>   55   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
@@ -111,26 +111,26 @@
 <a name="99"><font color="#888888 "><i>   99   </i></font></a>  y-&gt;size[0] = (int32_T)ysize[0];
 <a name="100"><font color="#888888 "><i>  100   </i></font></a>  y-&gt;size[1] = (int32_T)ysize[1];
 <a name="101"><font color="#888888 "><i>  101   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>(sp, (<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)y, iy, (int32_T)<font color="#112266"><b>sizeof</b></font>(real_T),
-<a name="102"><font color="#888888 "><i>  102   </i></font></a>                    &amp;<a href="#var_dd_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_dd_emlrtRTEI');" target="_self"><font color="#1122aa">dd_emlrtRTEI</font></a>);
+<a name="102"><font color="#888888 "><i>  102   </i></font></a>                    &amp;<a href="#var_gd_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_gd_emlrtRTEI');" target="_self"><font color="#1122aa">gd_emlrtRTEI</font></a>);
 <a name="103"><font color="#888888 "><i>  103   </i></font></a>  <font color="#112266"><b>if</b></font> (varargin_1-&gt;size[1] == 0) <b>{</b>
-<a name="104"><font color="#888888 "><i>  104   </i></font></a>    st.site = &amp;<a href="#var_fl_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_fl_emlrtRSI');" target="_self"><font color="#1122aa">fl_emlrtRSI</font></a>;
+<a name="104"><font color="#888888 "><i>  104   </i></font></a>    st.site = &amp;<a href="#var_gl_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_gl_emlrtRSI');" target="_self"><font color="#1122aa">gl_emlrtRSI</font></a>;
 <a name="105"><font color="#888888 "><i>  105   </i></font></a>    <a href="error1_c.html#fcn_l_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_l_error');" target="_self"><font color="#1122aa">l_error</font></a>(&amp;st);
 <a name="106"><font color="#888888 "><i>  106   </i></font></a>  <b>}</b>
 <a name="107"><font color="#888888 "><i>  107   </i></font></a>
 <a name="108"><font color="#888888 "><i>  108   </i></font></a>  <font color="#112266"><b>if</b></font> (<a href="#fcn_isconsistent" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_isconsistent');" target="_self"><font color="#1122aa">isconsistent</font></a>(1, y, varargin_1)) <b>{</b>
 <a name="109"><font color="#888888 "><i>  109   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="110"><font color="#888888 "><i>  110   </i></font></a>    emlrtErrorWithMessageIdR2012b(sp, &amp;<a href="#var_hf_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_hf_emlrtRTEI');" target="_self"><font color="#1122aa">hf_emlrtRTEI</font></a>,
+<a name="110"><font color="#888888 "><i>  110   </i></font></a>    emlrtErrorWithMessageIdR2012b(sp, &amp;<a href="#var_nf_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_nf_emlrtRTEI');" target="_self"><font color="#1122aa">nf_emlrtRTEI</font></a>,
 <a name="111"><font color="#888888 "><i>  111   </i></font></a>      <font color="#1122ff">&quot;Coder:MATLAB:catenate_dimensionMismatch&quot;</font>, 0);
 <a name="112"><font color="#888888 "><i>  112   </i></font></a>  <b>}</b>
 <a name="113"><font color="#888888 "><i>  113   </i></font></a>
 <a name="114"><font color="#888888 "><i>  114   </i></font></a>  <font color="#112266"><b>if</b></font> (varargin_2-&gt;size[1] == 0) <b>{</b>
-<a name="115"><font color="#888888 "><i>  115   </i></font></a>    st.site = &amp;<a href="#var_fl_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_fl_emlrtRSI');" target="_self"><font color="#1122aa">fl_emlrtRSI</font></a>;
+<a name="115"><font color="#888888 "><i>  115   </i></font></a>    st.site = &amp;<a href="#var_gl_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_gl_emlrtRSI');" target="_self"><font color="#1122aa">gl_emlrtRSI</font></a>;
 <a name="116"><font color="#888888 "><i>  116   </i></font></a>    <a href="error1_c.html#fcn_l_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_l_error');" target="_self"><font color="#1122aa">l_error</font></a>(&amp;st);
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>  <b>}</b>
 <a name="118"><font color="#888888 "><i>  118   </i></font></a>
 <a name="119"><font color="#888888 "><i>  119   </i></font></a>  <font color="#112266"><b>if</b></font> (<a href="#fcn_isconsistent" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_isconsistent');" target="_self"><font color="#1122aa">isconsistent</font></a>(1, y, varargin_2)) <b>{</b>
 <a name="120"><font color="#888888 "><i>  120   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="121"><font color="#888888 "><i>  121   </i></font></a>    emlrtErrorWithMessageIdR2012b(sp, &amp;<a href="#var_hf_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_hf_emlrtRTEI');" target="_self"><font color="#1122aa">hf_emlrtRTEI</font></a>,
+<a name="121"><font color="#888888 "><i>  121   </i></font></a>    emlrtErrorWithMessageIdR2012b(sp, &amp;<a href="#var_nf_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_nf_emlrtRTEI');" target="_self"><font color="#1122aa">nf_emlrtRTEI</font></a>,
 <a name="122"><font color="#888888 "><i>  122   </i></font></a>      <font color="#1122ff">&quot;Coder:MATLAB:catenate_dimensionMismatch&quot;</font>, 0);
 <a name="123"><font color="#888888 "><i>  123   </i></font></a>  <b>}</b>
 <a name="124"><font color="#888888 "><i>  124   </i></font></a>

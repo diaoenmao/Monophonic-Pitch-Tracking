@@ -16,7 +16,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo ld_emlrtRTEI = { 1, 1, "_coder_yaapt_api", "" };
+static emlrtRTEInfo rd_emlrtRTEI = { 1, 1, "_coder_yaapt_api", "" };
 
 /* Function Declarations */
 static void c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Data, const
@@ -129,8 +129,8 @@ void yaapt_api(yaaptStackData *SD, const mxArray * const prhs[2], const mxArray 
 
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &Data, 2, &ld_emlrtRTEI, true);
-  emxInit_real_T(&st, &Pitch, 2, &ld_emlrtRTEI, true);
+  emxInit_real_T(&st, &Data, 2, &rd_emlrtRTEI, true);
+  emxInit_real_T(&st, &Pitch, 2, &rd_emlrtRTEI, true);
 
   /* Marshall function inputs */
   c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Data", Data);

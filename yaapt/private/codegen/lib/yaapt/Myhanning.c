@@ -2,7 +2,7 @@
  * File: Myhanning.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -137,7 +137,7 @@ void Myhanning(double order, emxArray_real_T *w)
   int i2;
   int nm1d2;
   int k;
-  emxArray_real_T *r2;
+  emxArray_real_T *r3;
   emxArray_real_T *b_w;
   int i3;
 
@@ -231,21 +231,21 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&r2, 1);
-    i2 = r2->size[0];
-    r2->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r2, i2, (int)sizeof(double));
+    emxInit_real_T1(&r3, 1);
+    i2 = r3->size[0];
+    r3->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)r3, i2, (int)sizeof(double));
     nm1d2 = y->size[1];
     for (i2 = 0; i2 < nm1d2; i2++) {
-      r2->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
+      r3->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
     }
 
-    c_rdivide(r2, order + 1.0, w);
+    c_rdivide(r3, order + 1.0, w);
     c_cos(w);
     i2 = w->size[0];
     emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r2);
+    emxFree_real_T(&r3);
     for (i2 = 0; i2 < nm1d2; i2++) {
       w->data[i2] = 1.0 - w->data[i2];
     }
@@ -350,21 +350,21 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&r2, 1);
-    i2 = r2->size[0];
-    r2->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r2, i2, (int)sizeof(double));
+    emxInit_real_T1(&r3, 1);
+    i2 = r3->size[0];
+    r3->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)r3, i2, (int)sizeof(double));
     nm1d2 = y->size[1];
     for (i2 = 0; i2 < nm1d2; i2++) {
-      r2->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
+      r3->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
     }
 
-    c_rdivide(r2, order + 1.0, w);
+    c_rdivide(r3, order + 1.0, w);
     c_cos(w);
     i2 = w->size[0];
     emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r2);
+    emxFree_real_T(&r3);
     for (i2 = 0; i2 < nm1d2; i2++) {
       w->data[i2] = 1.0 - w->data[i2];
     }

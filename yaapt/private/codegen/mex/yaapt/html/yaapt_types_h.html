@@ -151,28 +151,38 @@
 <a name="139"><font color="#888888 "><i>  139   </i></font></a>
 <a name="140"><font color="#888888 "><i>  140   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>                                 <font color="#117755"><i>/*typedef_emxArray_real_T*/</i></font>
 <a name="141"><font color="#888888 "><i>  141   </i></font></a>
-<a name="142"><font color="#888888 "><i>  142   </i></font></a><font color="#992211">#</font><font color="#992211"><b>ifndef</b></font> typedef_yaaptStackData
-<a name="143"><font color="#888888 "><i>  143   </i></font></a><font color="#992211">#</font><font color="#992211"><b>define</b></font> typedef_yaaptStackData
+<a name="142"><font color="#888888 "><i>  142   </i></font></a><font color="#992211">#</font><font color="#992211"><b>ifndef</b></font> typedef_struct_T
+<a name="143"><font color="#888888 "><i>  143   </i></font></a><font color="#992211">#</font><font color="#992211"><b>define</b></font> typedef_struct_T
 <a name="144"><font color="#888888 "><i>  144   </i></font></a>
 <a name="145"><font color="#888888 "><i>  145   </i></font></a><font color="#112266"><b>typedef</b></font> <font color="#112266"><b>struct</b></font> <b>{</b>
-<a name="146"><font color="#888888 "><i>  146   </i></font></a>  <font color="#112266"><b>union</b></font>
-<a name="147"><font color="#888888 "><i>  147   </i></font></a>  <b>{</b>
-<a name="148"><font color="#888888 "><i>  148   </i></font></a>    <font color="#112266"><b>struct</b></font> <b>{</b>
-<a name="149"><font color="#888888 "><i>  149   </i></font></a>      creal_T dcv0[8192];
-<a name="150"><font color="#888888 "><i>  150   </i></font></a>    <b>}</b> f0;
+<a name="146"><font color="#888888 "><i>  146   </i></font></a>  <a href="#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *breaks;
+<a name="147"><font color="#888888 "><i>  147   </i></font></a>  <a href="#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *coefs;
+<a name="148"><font color="#888888 "><i>  148   </i></font></a><b>}</b> <a name="type_struct_T">struct_T</a>;
+<a name="149"><font color="#888888 "><i>  149   </i></font></a>
+<a name="150"><font color="#888888 "><i>  150   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>                                 <font color="#117755"><i>/*typedef_struct_T*/</i></font>
 <a name="151"><font color="#888888 "><i>  151   </i></font></a>
-<a name="152"><font color="#888888 "><i>  152   </i></font></a>    <font color="#112266"><b>struct</b></font> <b>{</b>
-<a name="153"><font color="#888888 "><i>  153   </i></font></a>      real_T G[5776];
-<a name="154"><font color="#888888 "><i>  154   </i></font></a>      real_T a[5776];
-<a name="155"><font color="#888888 "><i>  155   </i></font></a>    <b>}</b> f1;
-<a name="156"><font color="#888888 "><i>  156   </i></font></a>  <b>}</b> u1;
-<a name="157"><font color="#888888 "><i>  157   </i></font></a><b>}</b> <a name="type_yaaptStackData">yaaptStackData</a>;
-<a name="158"><font color="#888888 "><i>  158   </i></font></a>
-<a name="159"><font color="#888888 "><i>  159   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>                                 <font color="#117755"><i>/*typedef_yaaptStackData*/</i></font>
-<a name="160"><font color="#888888 "><i>  160   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>
+<a name="152"><font color="#888888 "><i>  152   </i></font></a><font color="#992211">#</font><font color="#992211"><b>ifndef</b></font> typedef_yaaptStackData
+<a name="153"><font color="#888888 "><i>  153   </i></font></a><font color="#992211">#</font><font color="#992211"><b>define</b></font> typedef_yaaptStackData
+<a name="154"><font color="#888888 "><i>  154   </i></font></a>
+<a name="155"><font color="#888888 "><i>  155   </i></font></a><font color="#112266"><b>typedef</b></font> <font color="#112266"><b>struct</b></font> <b>{</b>
+<a name="156"><font color="#888888 "><i>  156   </i></font></a>  <font color="#112266"><b>union</b></font>
+<a name="157"><font color="#888888 "><i>  157   </i></font></a>  <b>{</b>
+<a name="158"><font color="#888888 "><i>  158   </i></font></a>    <font color="#112266"><b>struct</b></font> <b>{</b>
+<a name="159"><font color="#888888 "><i>  159   </i></font></a>      creal_T dcv0[8192];
+<a name="160"><font color="#888888 "><i>  160   </i></font></a>    <b>}</b> f0;
 <a name="161"><font color="#888888 "><i>  161   </i></font></a>
-<a name="162"><font color="#888888 "><i>  162   </i></font></a><font color="#117755"><i>/* End of code generation (yaapt_types.h) */</i></font>
-<a name="163"><font color="#888888 "><i>  163   </i></font></a></pre>
+<a name="162"><font color="#888888 "><i>  162   </i></font></a>    <font color="#112266"><b>struct</b></font> <b>{</b>
+<a name="163"><font color="#888888 "><i>  163   </i></font></a>      real_T G[5776];
+<a name="164"><font color="#888888 "><i>  164   </i></font></a>      real_T a[5776];
+<a name="165"><font color="#888888 "><i>  165   </i></font></a>    <b>}</b> f1;
+<a name="166"><font color="#888888 "><i>  166   </i></font></a>  <b>}</b> u1;
+<a name="167"><font color="#888888 "><i>  167   </i></font></a><b>}</b> <a name="type_yaaptStackData">yaaptStackData</a>;
+<a name="168"><font color="#888888 "><i>  168   </i></font></a>
+<a name="169"><font color="#888888 "><i>  169   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>                                 <font color="#117755"><i>/*typedef_yaaptStackData*/</i></font>
+<a name="170"><font color="#888888 "><i>  170   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>
+<a name="171"><font color="#888888 "><i>  171   </i></font></a>
+<a name="172"><font color="#888888 "><i>  172   </i></font></a><font color="#117755"><i>/* End of code generation (yaapt_types.h) */</i></font>
+<a name="173"><font color="#888888 "><i>  173   </i></font></a></pre>
 </td></tr></table>
 </p>
 </body>

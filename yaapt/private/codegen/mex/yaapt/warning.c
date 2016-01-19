@@ -13,16 +13,13 @@
 
 /* Variable Definitions */
 static emlrtMCInfo b_emlrtMCI = { 14, 25, "warning",
-  "F:\\Matlab2015b\\toolbox\\shared\\coder\\coder\\+coder\\+internal\\warning.m"
-};
+  "F:\\MATLAB\\toolbox\\shared\\coder\\coder\\+coder\\+internal\\warning.m" };
 
 static emlrtMCInfo c_emlrtMCI = { 14, 9, "warning",
-  "F:\\Matlab2015b\\toolbox\\shared\\coder\\coder\\+coder\\+internal\\warning.m"
-};
+  "F:\\MATLAB\\toolbox\\shared\\coder\\coder\\+coder\\+internal\\warning.m" };
 
-static emlrtRSInfo em_emlrtRSI = { 14, "warning",
-  "F:\\Matlab2015b\\toolbox\\shared\\coder\\coder\\+coder\\+internal\\warning.m"
-};
+static emlrtRSInfo lm_emlrtRSI = { 14, "warning",
+  "F:\\MATLAB\\toolbox\\shared\\coder\\coder\\+coder\\+internal\\warning.m" };
 
 /* Function Declarations */
 static void b_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
@@ -70,7 +67,7 @@ static const mxArray *feval(const emlrtStack *sp, const mxArray *b, const
 void b_warning(const emlrtStack *sp, int32_T varargin_1, const char_T
                varargin_2[14])
 {
-  int32_T i37;
+  int32_T i39;
   static const char_T cv7[7] = { 'w', 'a', 'r', 'n', 'i', 'n', 'g' };
 
   char_T u[7];
@@ -100,24 +97,24 @@ void b_warning(const emlrtStack *sp, int32_T varargin_1, const char_T
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  for (i37 = 0; i37 < 7; i37++) {
-    u[i37] = cv7[i37];
+  for (i39 = 0; i39 < 7; i39++) {
+    u[i39] = cv7[i39];
   }
 
   y = NULL;
   m8 = emlrtCreateCharArray(2, iv34);
   emlrtInitCharArrayR2013a(sp, 7, m8, &u[0]);
   emlrtAssign(&y, m8);
-  for (i37 = 0; i37 < 7; i37++) {
-    b_u[i37] = cv8[i37];
+  for (i39 = 0; i39 < 7; i39++) {
+    b_u[i39] = cv8[i39];
   }
 
   b_y = NULL;
   m8 = emlrtCreateCharArray(2, iv35);
   emlrtInitCharArrayR2013a(sp, 7, m8, &b_u[0]);
   emlrtAssign(&b_y, m8);
-  for (i37 = 0; i37 < 32; i37++) {
-    c_u[i37] = msgID[i37];
+  for (i39 = 0; i39 < 32; i39++) {
+    c_u[i39] = msgID[i39];
   }
 
   c_y = NULL;
@@ -128,15 +125,15 @@ void b_warning(const emlrtStack *sp, int32_T varargin_1, const char_T
   m8 = emlrtCreateNumericMatrix(1, 1, mxINT32_CLASS, mxREAL);
   *(int32_T *)mxGetData(m8) = varargin_1;
   emlrtAssign(&d_y, m8);
-  for (i37 = 0; i37 < 14; i37++) {
-    d_u[i37] = varargin_2[i37];
+  for (i39 = 0; i39 < 14; i39++) {
+    d_u[i39] = varargin_2[i39];
   }
 
   e_y = NULL;
   m8 = emlrtCreateCharArray(2, iv37);
   emlrtInitCharArrayR2013a(sp, 14, m8, &d_u[0]);
   emlrtAssign(&e_y, m8);
-  st.site = &em_emlrtRSI;
+  st.site = &lm_emlrtRSI;
   b_feval(&st, y, c_feval(&st, b_y, c_y, d_y, e_y, &b_emlrtMCI), &c_emlrtMCI);
 }
 
@@ -194,7 +191,7 @@ void warning(const emlrtStack *sp)
   m4 = emlrtCreateCharArray(2, iv10);
   emlrtInitCharArrayR2013a(sp, 27, m4, &c_u[0]);
   emlrtAssign(&c_y, m4);
-  st.site = &em_emlrtRSI;
+  st.site = &lm_emlrtRSI;
   b_feval(&st, y, feval(&st, b_y, c_y, &b_emlrtMCI), &c_emlrtMCI);
 }
 

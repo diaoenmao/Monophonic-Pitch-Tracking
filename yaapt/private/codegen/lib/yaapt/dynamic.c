@@ -2,7 +2,7 @@
  * File: dynamic.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -43,7 +43,7 @@
 void dynamic(const emxArray_real_T *Pitch, const emxArray_real_T *Merit, const
              emxArray_real_T *Energy, emxArray_real_T *FinPitch)
 {
-  emxArray_int32_T *r10;
+  emxArray_int32_T *r12;
   int numframes;
   int numcands;
   int end;
@@ -70,7 +70,7 @@ void dynamic(const emxArray_real_T *Pitch, const emxArray_real_T *Merit, const
   int I;
   int K;
   int b_I;
-  emxInit_int32_T(&r10, 2);
+  emxInit_int32_T(&r12, 2);
 
   /*  Note:   This routine is intended for more through testing of */
   /*     some thresholds used in dynamic6.   All the dp constants are */
@@ -104,14 +104,14 @@ void dynamic(const emxArray_real_T *Pitch, const emxArray_real_T *Merit, const
     }
   }
 
-  i = r10->size[0] * r10->size[1];
-  r10->size[0] = 1;
-  r10->size[1] = trueCount;
-  emxEnsureCapacity((emxArray__common *)r10, i, (int)sizeof(int));
+  i = r12->size[0] * r12->size[1];
+  r12->size[0] = 1;
+  r12->size[1] = trueCount;
+  emxEnsureCapacity((emxArray__common *)r12, i, (int)sizeof(int));
   partialTrueCount = 0;
   for (i = 0; i <= end; i++) {
     if (Pitch->data[(numcands + Pitch->size[0] * i) - 1] > 0.0) {
-      r10->data[partialTrueCount] = i + 1;
+      r12->data[partialTrueCount] = i + 1;
       partialTrueCount++;
     }
   }
@@ -131,16 +131,16 @@ void dynamic(const emxArray_real_T *Pitch, const emxArray_real_T *Merit, const
 
   i = b_Pitch->size[0] * b_Pitch->size[1];
   b_Pitch->size[0] = 1;
-  b_Pitch->size[1] = r10->size[1];
+  b_Pitch->size[1] = r12->size[1];
   emxEnsureCapacity((emxArray__common *)b_Pitch, i, (int)sizeof(double));
-  partialTrueCount = r10->size[1];
+  partialTrueCount = r12->size[1];
   for (i = 0; i < partialTrueCount; i++) {
-    b_Pitch->data[b_Pitch->size[0] * i] = c_Pitch->data[r10->data[r10->size[0] *
+    b_Pitch->data[b_Pitch->size[0] * i] = c_Pitch->data[r12->data[r12->size[0] *
       i] - 1];
   }
 
   emxFree_real_T(&c_Pitch);
-  emxFree_int32_T(&r10);
+  emxFree_int32_T(&r12);
   emxInit_real_T(&Local, 2);
   mean_pitch = mean(b_Pitch);
 

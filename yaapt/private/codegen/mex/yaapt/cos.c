@@ -14,8 +14,8 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fd_emlrtRSI = { 10, "cos",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elfun\\cos.m" };
+static emlrtRSInfo gd_emlrtRSI = { 10, "cos",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\cos.m" };
 
 /* Function Definitions */
 
@@ -43,13 +43,13 @@ void c_cos(const emlrtStack *sp, emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &fd_emlrtRSI;
+  st.site = &gd_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  b_st.site = &gd_emlrtRSI;
+  b_st.site = &hd_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -57,7 +57,7 @@ void c_cos(const emlrtStack *sp, emxArray_real_T *x)
   }
 
   if (overflow) {
-    c_st.site = &ib_emlrtRSI;
+    c_st.site = &jb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 

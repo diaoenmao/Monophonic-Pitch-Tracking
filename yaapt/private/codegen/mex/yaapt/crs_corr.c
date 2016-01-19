@@ -17,47 +17,47 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo oj_emlrtRSI = { 49, "crs_corr",
+static emlrtRSInfo pj_emlrtRSI = { 49, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo pj_emlrtRSI = { 51, "crs_corr",
+static emlrtRSInfo qj_emlrtRSI = { 51, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo qj_emlrtRSI = { 52, "crs_corr",
+static emlrtRSInfo rj_emlrtRSI = { 52, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo rj_emlrtRSI = { 57, "crs_corr",
+static emlrtRSInfo sj_emlrtRSI = { 57, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo sj_emlrtRSI = { 58, "crs_corr",
+static emlrtRSInfo tj_emlrtRSI = { 58, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo tj_emlrtRSI = { 61, "crs_corr",
+static emlrtRSInfo uj_emlrtRSI = { 61, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo uj_emlrtRSI = { 68, "crs_corr",
+static emlrtRSInfo vj_emlrtRSI = { 68, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRSInfo vj_emlrtRSI = { 61, "eml_mtimes_helper",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
+static emlrtRSInfo wj_emlrtRSI = { 61, "eml_mtimes_helper",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
 
-static emlrtRSInfo wj_emlrtRSI = { 21, "eml_mtimes_helper",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
+static emlrtRSInfo xj_emlrtRSI = { 21, "eml_mtimes_helper",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
 
-static emlrtRTEInfo uc_emlrtRTEI = { 1, 17, "crs_corr",
+static emlrtRTEInfo xc_emlrtRTEI = { 1, 17, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRTEInfo vc_emlrtRTEI = { 51, 1, "crs_corr",
+static emlrtRTEInfo yc_emlrtRTEI = { 51, 1, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRTEInfo wc_emlrtRTEI = { 57, 5, "crs_corr",
+static emlrtRTEInfo ad_emlrtRTEI = { 57, 5, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
-static emlrtRTEInfo df_emlrtRTEI = { 103, 23, "eml_mtimes_helper",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
+static emlrtRTEInfo jf_emlrtRTEI = { 103, 23, "eml_mtimes_helper",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
 
-static emlrtRTEInfo ef_emlrtRTEI = { 98, 23, "eml_mtimes_helper",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
+static emlrtRTEInfo kf_emlrtRTEI = { 98, 23, "eml_mtimes_helper",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m" };
 
 static emlrtBCInfo cf_emlrtBCI = { -1, -1, 57, 12, "Data", "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m", 0 };
@@ -65,7 +65,7 @@ static emlrtBCInfo cf_emlrtBCI = { -1, -1, 57, 12, "Data", "crs_corr",
 static emlrtDCInfo lb_emlrtDCI = { 57, 12, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m", 1 };
 
-static emlrtRTEInfo ff_emlrtRTEI = { 54, 1, "crs_corr",
+static emlrtRTEInfo lf_emlrtRTEI = { 54, 1, "crs_corr",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\crs_corr.m" };
 
 static emlrtBCInfo df_emlrtBCI = { -1, -1, 51, 8, "Data", "crs_corr",
@@ -89,7 +89,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
               real_T lag_max, emxArray_real_T *Phi)
 {
   real_T N;
-  int32_T i31;
+  int32_T i33;
   int32_T loop_ub;
   real_T d1;
   emxArray_real_T *x_j;
@@ -104,8 +104,8 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   int32_T k;
   emxArray_real_T *x_jr;
   real_T b_k;
-  int32_T i32;
-  int32_T i33;
+  int32_T i34;
+  int32_T i35;
   int32_T iv33[2];
   real_T formula_nume;
   real_T q;
@@ -162,97 +162,97 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
 
   /*  range */
   /* 'crs_corr:46' Phi = zeros(1,len)  ; */
-  i31 = Phi->size[0] * Phi->size[1];
+  i33 = Phi->size[0] * Phi->size[1];
   Phi->size[0] = 1;
   Phi->size[1] = Data->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)Phi, i31, (int32_T)sizeof(real_T),
-                    &uc_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)Phi, i33, (int32_T)sizeof(real_T),
+                    &xc_emlrtRTEI);
   loop_ub = Data->size[0];
-  for (i31 = 0; i31 < loop_ub; i31++) {
-    Phi->data[i31] = 0.0;
+  for (i33 = 0; i33 < loop_ub; i33++) {
+    Phi->data[i33] = 0.0;
   }
 
   /*  Remove DC level */
   /* 'crs_corr:49' Data = Data- mean(Data); */
-  st.site = &oj_emlrtRSI;
+  st.site = &pj_emlrtRSI;
   d1 = c_mean(&st, Data);
-  i31 = Data->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)Data, i31, (int32_T)sizeof(real_T),
-                    &uc_emlrtRTEI);
+  i33 = Data->size[0];
+  emxEnsureCapacity(sp, (emxArray__common *)Data, i33, (int32_T)sizeof(real_T),
+                    &xc_emlrtRTEI);
   loop_ub = Data->size[0];
-  for (i31 = 0; i31 < loop_ub; i31++) {
-    Data->data[i31] -= d1;
+  for (i33 = 0; i33 < loop_ub; i33++) {
+    Data->data[i33] -= d1;
   }
 
   /* 'crs_corr:51' x_j =  Data(1:N); */
   if (1.0 > N) {
     loop_ub = 0;
   } else {
-    i31 = Data->size[0];
-    if (!(1 <= i31)) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, i31, &df_emlrtBCI, sp);
+    i33 = Data->size[0];
+    if (!(1 <= i33)) {
+      emlrtDynamicBoundsCheckR2012b(1, 1, i33, &df_emlrtBCI, sp);
     }
 
-    i31 = Data->size[0];
+    i33 = Data->size[0];
     if (N != (int32_T)muDoubleScalarFloor(N)) {
       emlrtIntegerCheckR2012b(N, &mb_emlrtDCI, sp);
     }
 
     loop_ub = (int32_T)N;
-    if (!((loop_ub >= 1) && (loop_ub <= i31))) {
-      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i31, &df_emlrtBCI, sp);
+    if (!((loop_ub >= 1) && (loop_ub <= i33))) {
+      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i33, &df_emlrtBCI, sp);
     }
   }
 
-  emxInit_real_T1(sp, &x_j, 1, &vc_emlrtRTEI, true);
+  emxInit_real_T1(sp, &x_j, 1, &yc_emlrtRTEI, true);
   iv32[0] = 1;
   iv32[1] = loop_ub;
-  st.site = &pj_emlrtRSI;
+  st.site = &qj_emlrtRSI;
   indexShapeCheck(&st, Data->size[0], iv32);
-  i31 = x_j->size[0];
+  i33 = x_j->size[0];
   x_j->size[0] = loop_ub;
-  emxEnsureCapacity(sp, (emxArray__common *)x_j, i31, (int32_T)sizeof(real_T),
-                    &uc_emlrtRTEI);
-  for (i31 = 0; i31 < loop_ub; i31++) {
-    x_j->data[i31] = Data->data[i31];
+  emxEnsureCapacity(sp, (emxArray__common *)x_j, i33, (int32_T)sizeof(real_T),
+                    &xc_emlrtRTEI);
+  for (i33 = 0; i33 < loop_ub; i33++) {
+    x_j->data[i33] = Data->data[i33];
   }
 
-  emxInit_real_T(sp, &a, 2, &uc_emlrtRTEI, true);
+  emxInit_real_T(sp, &a, 2, &xc_emlrtRTEI, true);
 
   /*  s[j]   1 <= j <= N. */
   /* 'crs_corr:52' p = x_j' * x_j; */
-  st.site = &qj_emlrtRSI;
-  i31 = a->size[0] * a->size[1];
+  st.site = &rj_emlrtRSI;
+  i33 = a->size[0] * a->size[1];
   a->size[0] = 1;
   a->size[1] = x_j->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)a, i31, (int32_T)sizeof(real_T),
-                    &uc_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)a, i33, (int32_T)sizeof(real_T),
+                    &xc_emlrtRTEI);
   b_loop_ub = x_j->size[0];
-  for (i31 = 0; i31 < b_loop_ub; i31++) {
-    a->data[a->size[0] * i31] = x_j->data[i31];
+  for (i33 = 0; i33 < b_loop_ub; i33++) {
+    a->data[a->size[0] * i33] = x_j->data[i33];
   }
 
-  b_st.site = &wj_emlrtRSI;
+  b_st.site = &xj_emlrtRSI;
   innerDimOk = (a->size[1] == loop_ub);
   if (!innerDimOk) {
     if ((a->size[1] == 1) || (loop_ub == 1)) {
-      emlrtErrorWithMessageIdR2012b(&b_st, &ef_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&b_st, &kf_emlrtRTEI,
         "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
-      emlrtErrorWithMessageIdR2012b(&b_st, &df_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&b_st, &jf_emlrtRTEI,
         "Coder:MATLAB:innerdim", 0);
     }
   }
 
   if ((a->size[1] == 1) || (loop_ub == 1)) {
     d1 = 0.0;
-    for (i31 = 0; i31 < a->size[1]; i31++) {
-      d1 += a->data[a->size[0] * i31] * x_j->data[i31];
+    for (i33 = 0; i33 < a->size[1]; i33++) {
+      d1 += a->data[a->size[0] * i33] * x_j->data[i33];
     }
 
     p = d1;
   } else {
-    b_st.site = &vj_emlrtRSI;
+    b_st.site = &wj_emlrtRSI;
     if (a->size[1] < 1) {
       p = 0.0;
     } else {
@@ -264,12 +264,12 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
   }
 
   /* 'crs_corr:54' for k = lag_min:lag_max */
-  i31 = (int32_T)(lag_max + (1.0 - lag_min));
-  emlrtForLoopVectorCheckR2012b(lag_min, 1.0, lag_max, mxDOUBLE_CLASS, i31,
-    &ff_emlrtRTEI, sp);
+  i33 = (int32_T)(lag_max + (1.0 - lag_min));
+  emlrtForLoopVectorCheckR2012b(lag_min, 1.0, lag_max, mxDOUBLE_CLASS, i33,
+    &lf_emlrtRTEI, sp);
   k = 0;
-  emxInit_real_T1(sp, &x_jr, 1, &wc_emlrtRTEI, true);
-  while (k <= i31 - 1) {
+  emxInit_real_T1(sp, &x_jr, 1, &ad_emlrtRTEI, true);
+  while (k <= i33 - 1) {
     b_k = lag_min + (real_T)k;
 
     /*   to calculate the dot product of the signal and displaced version. */
@@ -277,77 +277,77 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     d1 = (b_k + N) - 1.0;
     if (b_k > d1) {
       b_loop_ub = 0;
-      i32 = 0;
+      i34 = 0;
     } else {
       b_loop_ub = Data->size[0];
       if (b_k != (int32_T)muDoubleScalarFloor(b_k)) {
         emlrtIntegerCheckR2012b(b_k, &lb_emlrtDCI, sp);
       }
 
-      i33 = (int32_T)b_k;
-      if (!((i33 >= 1) && (i33 <= b_loop_ub))) {
-        emlrtDynamicBoundsCheckR2012b(i33, 1, b_loop_ub, &cf_emlrtBCI, sp);
+      i35 = (int32_T)b_k;
+      if (!((i35 >= 1) && (i35 <= b_loop_ub))) {
+        emlrtDynamicBoundsCheckR2012b(i35, 1, b_loop_ub, &cf_emlrtBCI, sp);
       }
 
-      b_loop_ub = i33 - 1;
-      i33 = Data->size[0];
+      b_loop_ub = i35 - 1;
+      i35 = Data->size[0];
       if (d1 != (int32_T)muDoubleScalarFloor(d1)) {
         emlrtIntegerCheckR2012b(d1, &lb_emlrtDCI, sp);
       }
 
-      i32 = (int32_T)d1;
-      if (!((i32 >= 1) && (i32 <= i33))) {
-        emlrtDynamicBoundsCheckR2012b(i32, 1, i33, &cf_emlrtBCI, sp);
+      i34 = (int32_T)d1;
+      if (!((i34 >= 1) && (i34 <= i35))) {
+        emlrtDynamicBoundsCheckR2012b(i34, 1, i35, &cf_emlrtBCI, sp);
       }
     }
 
     iv33[0] = 1;
-    iv33[1] = i32 - b_loop_ub;
-    st.site = &rj_emlrtRSI;
+    iv33[1] = i34 - b_loop_ub;
+    st.site = &sj_emlrtRSI;
     indexShapeCheck(&st, Data->size[0], iv33);
-    i33 = x_jr->size[0];
-    x_jr->size[0] = i32 - b_loop_ub;
-    emxEnsureCapacity(sp, (emxArray__common *)x_jr, i33, (int32_T)sizeof(real_T),
-                      &uc_emlrtRTEI);
-    loop_ub = i32 - b_loop_ub;
-    for (i33 = 0; i33 < loop_ub; i33++) {
-      x_jr->data[i33] = Data->data[b_loop_ub + i33];
+    i35 = x_jr->size[0];
+    x_jr->size[0] = i34 - b_loop_ub;
+    emxEnsureCapacity(sp, (emxArray__common *)x_jr, i35, (int32_T)sizeof(real_T),
+                      &xc_emlrtRTEI);
+    loop_ub = i34 - b_loop_ub;
+    for (i35 = 0; i35 < loop_ub; i35++) {
+      x_jr->data[i35] = Data->data[b_loop_ub + i35];
     }
 
     /*  s[j]   -k <= j <= N+K-k-1. */
     /* 'crs_corr:58' formula_nume = x_j' * x_jr; */
-    st.site = &sj_emlrtRSI;
-    i33 = a->size[0] * a->size[1];
+    st.site = &tj_emlrtRSI;
+    i35 = a->size[0] * a->size[1];
     a->size[0] = 1;
     a->size[1] = x_j->size[0];
-    emxEnsureCapacity(&st, (emxArray__common *)a, i33, (int32_T)sizeof(real_T),
-                      &uc_emlrtRTEI);
+    emxEnsureCapacity(&st, (emxArray__common *)a, i35, (int32_T)sizeof(real_T),
+                      &xc_emlrtRTEI);
     loop_ub = x_j->size[0];
-    for (i33 = 0; i33 < loop_ub; i33++) {
-      a->data[a->size[0] * i33] = x_j->data[i33];
+    for (i35 = 0; i35 < loop_ub; i35++) {
+      a->data[a->size[0] * i35] = x_j->data[i35];
     }
 
-    b_st.site = &wj_emlrtRSI;
-    innerDimOk = (a->size[1] == i32 - b_loop_ub);
+    b_st.site = &xj_emlrtRSI;
+    innerDimOk = (a->size[1] == i34 - b_loop_ub);
     if (!innerDimOk) {
-      if ((a->size[1] == 1) || (i32 - b_loop_ub == 1)) {
-        emlrtErrorWithMessageIdR2012b(&b_st, &ef_emlrtRTEI,
+      if ((a->size[1] == 1) || (i34 - b_loop_ub == 1)) {
+        emlrtErrorWithMessageIdR2012b(&b_st, &kf_emlrtRTEI,
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
       } else {
-        emlrtErrorWithMessageIdR2012b(&b_st, &df_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&b_st, &jf_emlrtRTEI,
           "Coder:MATLAB:innerdim", 0);
       }
     }
 
-    if ((a->size[1] == 1) || (i32 - b_loop_ub == 1)) {
+    if ((a->size[1] == 1) || (i34 - b_loop_ub == 1)) {
       d1 = 0.0;
-      for (i33 = 0; i33 < a->size[1]; i33++) {
-        d1 += a->data[a->size[0] * i33] * x_jr->data[i33];
+      for (i35 = 0; i35 < a->size[1]; i35++) {
+        d1 += a->data[a->size[0] * i35] * x_jr->data[i35];
       }
 
       formula_nume = d1;
     } else {
-      b_st.site = &vj_emlrtRSI;
+      b_st.site = &wj_emlrtRSI;
       if (a->size[1] < 1) {
         formula_nume = 0.0;
       } else {
@@ -360,30 +360,30 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
 
     /*  the normalization factor for the denominator. */
     /* 'crs_corr:61' q = x_jr' * x_jr; */
-    st.site = &tj_emlrtRSI;
-    i33 = a->size[0] * a->size[1];
+    st.site = &uj_emlrtRSI;
+    i35 = a->size[0] * a->size[1];
     a->size[0] = 1;
     a->size[1] = x_jr->size[0];
-    emxEnsureCapacity(&st, (emxArray__common *)a, i33, (int32_T)sizeof(real_T),
-                      &uc_emlrtRTEI);
+    emxEnsureCapacity(&st, (emxArray__common *)a, i35, (int32_T)sizeof(real_T),
+                      &xc_emlrtRTEI);
     loop_ub = x_jr->size[0];
-    for (i33 = 0; i33 < loop_ub; i33++) {
-      a->data[a->size[0] * i33] = x_jr->data[i33];
+    for (i35 = 0; i35 < loop_ub; i35++) {
+      a->data[a->size[0] * i35] = x_jr->data[i35];
     }
 
-    b_st.site = &wj_emlrtRSI;
-    innerDimOk = (a->size[1] == i32 - b_loop_ub);
+    b_st.site = &xj_emlrtRSI;
+    innerDimOk = (a->size[1] == i34 - b_loop_ub);
     if (!innerDimOk) {
-      if ((a->size[1] == 1) || (i32 - b_loop_ub == 1)) {
-        emlrtErrorWithMessageIdR2012b(&b_st, &ef_emlrtRTEI,
+      if ((a->size[1] == 1) || (i34 - b_loop_ub == 1)) {
+        emlrtErrorWithMessageIdR2012b(&b_st, &kf_emlrtRTEI,
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
       } else {
-        emlrtErrorWithMessageIdR2012b(&b_st, &df_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&b_st, &jf_emlrtRTEI,
           "Coder:MATLAB:innerdim", 0);
       }
     }
 
-    if ((a->size[1] == 1) || (i32 - b_loop_ub == 1)) {
+    if ((a->size[1] == 1) || (i34 - b_loop_ub == 1)) {
       d1 = 0.0;
       for (b_loop_ub = 0; b_loop_ub < a->size[1]; b_loop_ub++) {
         d1 += a->data[a->size[0] * b_loop_ub] * x_jr->data[b_loop_ub];
@@ -391,7 +391,7 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
 
       q = d1;
     } else {
-      b_st.site = &vj_emlrtRSI;
+      b_st.site = &wj_emlrtRSI;
       if (a->size[1] < 1) {
         q = 0.0;
       } else {
@@ -408,9 +408,9 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
     /* 'crs_corr:65' formula_denom = formula_denom+ eps1; */
     /*  calculate the normalized crosscorrelation value using the TALKIN FORMULA. */
     /* 'crs_corr:68' Phi(k)=((formula_nume)/(sqrt(formula_denom))); */
-    st.site = &uj_emlrtRSI;
+    st.site = &vj_emlrtRSI;
     if (formula_denom < 0.0) {
-      b_st.site = &ye_emlrtRSI;
+      b_st.site = &af_emlrtRSI;
       error(&b_st);
     }
 
@@ -419,12 +419,12 @@ void crs_corr(const emlrtStack *sp, emxArray_real_T *Data, real_T lag_min,
       emlrtIntegerCheckR2012b(b_k, &nb_emlrtDCI, sp);
     }
 
-    i33 = (int32_T)b_k;
-    if (!((i33 >= 1) && (i33 <= b_loop_ub))) {
-      emlrtDynamicBoundsCheckR2012b(i33, 1, b_loop_ub, &ef_emlrtBCI, sp);
+    i35 = (int32_T)b_k;
+    if (!((i35 >= 1) && (i35 <= b_loop_ub))) {
+      emlrtDynamicBoundsCheckR2012b(i35, 1, b_loop_ub, &ef_emlrtBCI, sp);
     }
 
-    Phi->data[i33 - 1] = formula_nume / muDoubleScalarSqrt(formula_denom);
+    Phi->data[i35 - 1] = formula_nume / muDoubleScalarSqrt(formula_denom);
     k++;
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
       emlrtBreakCheckR2012b(sp);

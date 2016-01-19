@@ -12,17 +12,17 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo qb_emlrtRSI = { 18, "indexShapeCheck",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRSInfo rb_emlrtRSI = { 18, "indexShapeCheck",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
-static emlrtRSInfo hg_emlrtRSI = { 14, "indexShapeCheck",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRSInfo ig_emlrtRSI = { 14, "indexShapeCheck",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
-static emlrtRSInfo ig_emlrtRSI = { 80, "indexShapeCheck",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRSInfo jg_emlrtRSI = { 80, "indexShapeCheck",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
-static emlrtRTEInfo td_emlrtRTEI = { 85, 5, "indexShapeCheck",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRTEInfo ae_emlrtRTEI = { 85, 5, "indexShapeCheck",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
 /* Function Definitions */
 
@@ -59,17 +59,17 @@ void b_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize, const int32_T
     }
 
     if (nonSingletonDimFound) {
-      st.site = &hg_emlrtRSI;
+      st.site = &ig_emlrtRSI;
       if (((matrixSize == 1) != (indexSize[0] == 1)) || (indexSize[1] != 1)) {
         nonSingletonDimFound = true;
       } else {
         nonSingletonDimFound = false;
       }
 
-      b_st.site = &ig_emlrtRSI;
+      b_st.site = &jg_emlrtRSI;
       if (!nonSingletonDimFound) {
       } else {
-        emlrtErrorWithMessageIdR2012b(&b_st, &td_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&b_st, &ae_emlrtRTEI,
           "Coder:FE:PotentialMatrixMatrix", 0);
       }
     }
@@ -115,10 +115,10 @@ void indexShapeCheck(const emlrtStack *sp, int32_T matrixSize, const int32_T
     nonSingletonDimFound = false;
   }
 
-  st.site = &qb_emlrtRSI;
+  st.site = &rb_emlrtRSI;
   if (!nonSingletonDimFound) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &td_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &ae_emlrtRTEI,
       "Coder:FE:PotentialVectorVector", 0);
   }
 }

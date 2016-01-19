@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "peaks.h"
+#include "rdivide.h"
 #include "yaapt_emxutil.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "sort1.h"
@@ -20,19 +21,19 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo kg_emlrtRSI = { 75, "peaks",
+static emlrtRSInfo lg_emlrtRSI = { 75, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
-static emlrtRSInfo lg_emlrtRSI = { 81, "peaks",
+static emlrtRSInfo mg_emlrtRSI = { 81, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
-static emlrtRSInfo mg_emlrtRSI = { 99, "peaks",
+static emlrtRSInfo ng_emlrtRSI = { 99, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
-static emlrtRSInfo ng_emlrtRSI = { 113, "peaks",
+static emlrtRSInfo og_emlrtRSI = { 113, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
-static emlrtRSInfo og_emlrtRSI = { 122, "peaks",
+static emlrtRSInfo pg_emlrtRSI = { 122, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
 static emlrtMCInfo e_emlrtMCI = { 60, 5, "peaks",
@@ -41,7 +42,7 @@ static emlrtMCInfo e_emlrtMCI = { 60, 5, "peaks",
 static emlrtMCInfo f_emlrtMCI = { 64, 5, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
-static emlrtRTEInfo tb_emlrtRTEI = { 1, 26, "peaks",
+static emlrtRTEInfo vb_emlrtRTEI = { 1, 26, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
 static emlrtBCInfo sc_emlrtBCI = { -1, -1, 160, 9, "Merit", "peaks",
@@ -71,7 +72,7 @@ static emlrtBCInfo ad_emlrtBCI = { -1, -1, 99, 21, "Data", "peaks",
 static emlrtDCInfo y_emlrtDCI = { 99, 21, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m", 1 };
 
-static emlrtRTEInfo qe_emlrtRTEI = { 98, 1, "peaks",
+static emlrtRTEInfo we_emlrtRTEI = { 98, 1, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
 static emlrtBCInfo bd_emlrtBCI = { -1, -1, 81, 17, "Data", "peaks",
@@ -113,10 +114,10 @@ static emlrtBCInfo gd_emlrtBCI = { -1, -1, 151, 9, "Pitch", "peaks",
 static emlrtBCInfo hd_emlrtBCI = { -1, -1, 152, 9, "Merit", "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m", 0 };
 
-static emlrtRSInfo hm_emlrtRSI = { 64, "peaks",
+static emlrtRSInfo om_emlrtRSI = { 64, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
-static emlrtRSInfo im_emlrtRSI = { 60, "peaks",
+static emlrtRSInfo pm_emlrtRSI = { 60, "peaks",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m" };
 
 /* Function Declarations */
@@ -185,9 +186,9 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
   real_T b_Pitch[100];
   real_T b_Merit[100];
-  int32_T i21;
-  int32_T n;
   int32_T i22;
+  int32_T n;
+  int32_T i23;
   boolean_T b8;
   int32_T ixstart;
   int32_T b_n;
@@ -196,12 +197,13 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
   int32_T ix;
   boolean_T exitg2;
   boolean_T b_ixstart;
-  int32_T itmp;
   emxArray_real_T *b_Data;
+  emxArray_real_T *c_Data;
   real_T avg_data;
   int32_T numpeaks;
   real_T c_n;
-  int32_T i23;
+  int32_T i24;
+  int32_T itmp;
   boolean_T b10;
   boolean_T exitg1;
   boolean_T c_ixstart;
@@ -303,7 +305,7 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
     min_lag = 1.0;
 
     /* 'peaks:60' disp('min_lag is too low and adjusted (%d)', min_lag); */
-    st.site = &im_emlrtRSI;
+    st.site = &pm_emlrtRSI;
     disp(&st, b_emlrt_marshallOut(&st, cv4), emlrt_marshallOut(1.0), &e_emlrtMCI);
   }
 
@@ -313,7 +315,7 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
     max_lag = (real_T)Data->size[1] - width;
 
     /* 'peaks:64' disp('max_lag is too high and adjusted (%d)', max_lag); */
-    st.site = &hm_emlrtRSI;
+    st.site = &om_emlrtRSI;
     disp(&st, c_emlrt_marshallOut(&st, cv5), emlrt_marshallOut(max_lag),
          &f_emlrtMCI);
   }
@@ -323,9 +325,9 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
   /* 'peaks:70' Pitch     = zeros(1, max_allow_lags); */
   /*  Peak(Pitch) candidates */
   /* 'peaks:71' Merit     = zeros(1, max_allow_lags); */
-  for (i21 = 0; i21 < 100; i21++) {
-    b_Pitch[i21] = 0.0;
-    b_Merit[i21] = 0.0;
+  for (i22 = 0; i22 < 100; i22++) {
+    b_Pitch[i22] = 0.0;
+    b_Merit[i22] = 0.0;
   }
 
   /*  Merits for peaks */
@@ -333,35 +335,35 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
   /*  Normalize the signal so that peak value = 1 */
   /* 'peaks:75' max_data = max(Data(min_lag:max_lag)); */
   if (min_lag > max_lag) {
-    i21 = 0;
+    i22 = 0;
     n = 0;
   } else {
-    i21 = Data->size[1];
+    i22 = Data->size[1];
     if (min_lag != (int32_T)muDoubleScalarFloor(min_lag)) {
       emlrtIntegerCheckR2012b(min_lag, &bb_emlrtDCI, sp);
     }
 
-    i22 = (int32_T)min_lag;
-    if (!((i22 >= 1) && (i22 <= i21))) {
-      emlrtDynamicBoundsCheckR2012b(i22, 1, i21, &cd_emlrtBCI, sp);
+    i23 = (int32_T)min_lag;
+    if (!((i23 >= 1) && (i23 <= i22))) {
+      emlrtDynamicBoundsCheckR2012b(i23, 1, i22, &cd_emlrtBCI, sp);
     }
 
-    i21 = i22 - 1;
-    i22 = Data->size[1];
+    i22 = i23 - 1;
+    i23 = Data->size[1];
     if (max_lag != (int32_T)muDoubleScalarFloor(max_lag)) {
       emlrtIntegerCheckR2012b(max_lag, &bb_emlrtDCI, sp);
     }
 
     n = (int32_T)max_lag;
-    if (!((n >= 1) && (n <= i22))) {
-      emlrtDynamicBoundsCheckR2012b(n, 1, i22, &cd_emlrtBCI, sp);
+    if (!((n >= 1) && (n <= i23))) {
+      emlrtDynamicBoundsCheckR2012b(n, 1, i23, &cd_emlrtBCI, sp);
     }
   }
 
-  st.site = &kg_emlrtRSI;
-  b_st.site = &db_emlrtRSI;
-  c_st.site = &eb_emlrtRSI;
-  if ((n - i21 == 1) || (n - i21 != 1)) {
+  st.site = &lg_emlrtRSI;
+  b_st.site = &eb_emlrtRSI;
+  c_st.site = &fb_emlrtRSI;
+  if ((n - i22 == 1) || (n - i22 != 1)) {
     b8 = true;
   } else {
     b8 = false;
@@ -369,31 +371,31 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
   if (b8) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&c_st, &le_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&c_st, &re_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
-  if (n - i21 > 0) {
+  if (n - i22 > 0) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&c_st, &ke_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&c_st, &qe_emlrtRTEI,
       "Coder:toolbox:eml_min_or_max_varDimZero", 0);
   }
 
-  d_st.site = &fb_emlrtRSI;
+  d_st.site = &gb_emlrtRSI;
   ixstart = 1;
-  b_n = n - i21;
-  mtmp = Data->data[i21];
-  if (n - i21 > 1) {
+  b_n = n - i22;
+  mtmp = Data->data[i22];
+  if (n - i22 > 1) {
     if (muDoubleScalarIsNaN(mtmp)) {
-      e_st.site = &gb_emlrtRSI;
-      if (2 > n - i21) {
+      e_st.site = &hb_emlrtRSI;
+      if (2 > n - i22) {
         b9 = false;
       } else {
-        b9 = (n - i21 > 2147483646);
+        b9 = (n - i22 > 2147483646);
       }
 
       if (b9) {
-        f_st.site = &ib_emlrtRSI;
+        f_st.site = &jb_emlrtRSI;
         check_forloop_overflow_error(&f_st, true);
       }
 
@@ -401,8 +403,8 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
       exitg2 = false;
       while ((!exitg2) && (ix <= b_n)) {
         ixstart = ix;
-        if (!muDoubleScalarIsNaN(Data->data[(i21 + ix) - 1])) {
-          mtmp = Data->data[(i21 + ix) - 1];
+        if (!muDoubleScalarIsNaN(Data->data[(i22 + ix) - 1])) {
+          mtmp = Data->data[(i22 + ix) - 1];
           exitg2 = true;
         } else {
           ix++;
@@ -410,22 +412,22 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
       }
     }
 
-    if (ixstart < n - i21) {
-      e_st.site = &hb_emlrtRSI;
-      if (ixstart + 1 > n - i21) {
+    if (ixstart < n - i22) {
+      e_st.site = &ib_emlrtRSI;
+      if (ixstart + 1 > n - i22) {
         b_ixstart = false;
       } else {
-        b_ixstart = (n - i21 > 2147483646);
+        b_ixstart = (n - i22 > 2147483646);
       }
 
       if (b_ixstart) {
-        f_st.site = &ib_emlrtRSI;
+        f_st.site = &jb_emlrtRSI;
         check_forloop_overflow_error(&f_st, true);
       }
 
       for (ix = ixstart - 1; ix + 2 <= b_n; ix++) {
-        if (Data->data[(i21 + ix) + 1] > mtmp) {
-          mtmp = Data->data[(i21 + ix) + 1];
+        if (Data->data[(i22 + ix) + 1] > mtmp) {
+          mtmp = Data->data[(i22 + ix) + 1];
         }
       }
     }
@@ -433,83 +435,87 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
   /* 'peaks:76' if (max_data > epsilon) */
   if (mtmp > 1.0E-14) {
+    emxInit_real_T(sp, &b_Data, 2, &vb_emlrtRTEI, true);
+
     /* 'peaks:77' Data = Data/max_data; */
-    i21 = Data->size[0] * Data->size[1];
-    Data->size[0] = 1;
-    emxEnsureCapacity(sp, (emxArray__common *)Data, i21, (int32_T)sizeof(real_T),
-                      &tb_emlrtRTEI);
-    n = Data->size[0];
-    itmp = Data->size[1];
-    n *= itmp;
-    for (i21 = 0; i21 < n; i21++) {
-      Data->data[i21] /= mtmp;
+    i22 = b_Data->size[0] * b_Data->size[1];
+    b_Data->size[0] = 1;
+    b_Data->size[1] = Data->size[1];
+    emxEnsureCapacity(sp, (emxArray__common *)b_Data, i22, (int32_T)sizeof
+                      (real_T), &vb_emlrtRTEI);
+    n = Data->size[0] * Data->size[1];
+    for (i22 = 0; i22 < n; i22++) {
+      b_Data->data[i22] = Data->data[i22];
     }
+
+    c_rdivide(sp, b_Data, mtmp, Data);
+    emxFree_real_T(&b_Data);
   }
 
   /*  If true there are no large peaks and we assume that signal is unvoiced */
   /* 'peaks:81' avg_data = mean(Data(min_lag:max_lag)); */
   if (min_lag > max_lag) {
-    i21 = 0;
+    i22 = 0;
     n = 0;
   } else {
-    i21 = Data->size[1];
+    i22 = Data->size[1];
     if (min_lag != (int32_T)muDoubleScalarFloor(min_lag)) {
       emlrtIntegerCheckR2012b(min_lag, &ab_emlrtDCI, sp);
     }
 
-    i22 = (int32_T)min_lag;
-    if (!((i22 >= 1) && (i22 <= i21))) {
-      emlrtDynamicBoundsCheckR2012b(i22, 1, i21, &bd_emlrtBCI, sp);
+    i23 = (int32_T)min_lag;
+    if (!((i23 >= 1) && (i23 <= i22))) {
+      emlrtDynamicBoundsCheckR2012b(i23, 1, i22, &bd_emlrtBCI, sp);
     }
 
-    i21 = i22 - 1;
-    i22 = Data->size[1];
+    i22 = i23 - 1;
+    i23 = Data->size[1];
     if (max_lag != (int32_T)muDoubleScalarFloor(max_lag)) {
       emlrtIntegerCheckR2012b(max_lag, &ab_emlrtDCI, sp);
     }
 
     n = (int32_T)max_lag;
-    if (!((n >= 1) && (n <= i22))) {
-      emlrtDynamicBoundsCheckR2012b(n, 1, i22, &bd_emlrtBCI, sp);
+    if (!((n >= 1) && (n <= i23))) {
+      emlrtDynamicBoundsCheckR2012b(n, 1, i23, &bd_emlrtBCI, sp);
     }
   }
 
-  emxInit_real_T(sp, &b_Data, 2, &tb_emlrtRTEI, true);
-  i22 = b_Data->size[0] * b_Data->size[1];
-  b_Data->size[0] = 1;
-  b_Data->size[1] = n - i21;
-  emxEnsureCapacity(sp, (emxArray__common *)b_Data, i22, (int32_T)sizeof(real_T),
-                    &tb_emlrtRTEI);
-  n -= i21;
-  for (i22 = 0; i22 < n; i22++) {
-    b_Data->data[b_Data->size[0] * i22] = Data->data[i21 + i22];
+  emxInit_real_T(sp, &c_Data, 2, &vb_emlrtRTEI, true);
+  i23 = c_Data->size[0] * c_Data->size[1];
+  c_Data->size[0] = 1;
+  c_Data->size[1] = n - i22;
+  emxEnsureCapacity(sp, (emxArray__common *)c_Data, i23, (int32_T)sizeof(real_T),
+                    &vb_emlrtRTEI);
+  n -= i22;
+  for (i23 = 0; i23 < n; i23++) {
+    c_Data->data[c_Data->size[0] * i23] = Data->data[i22 + i23];
   }
 
-  st.site = &lg_emlrtRSI;
-  avg_data = mean(&st, b_Data);
+  st.site = &mg_emlrtRSI;
+  avg_data = mean(&st, c_Data);
 
   /* 'peaks:82' if (avg_data > 1/PEAK_THRESH1) */
-  emxFree_real_T(&b_Data);
+  emxFree_real_T(&c_Data);
   if (avg_data > 0.2) {
     /*     numpeaks = 0; */
     /* 'peaks:84' Pitch    = zeros(1, maxpeaks); */
-    i21 = Pitch->size[0] * Pitch->size[1];
+    i22 = Pitch->size[0] * Pitch->size[1];
     Pitch->size[0] = 1;
     Pitch->size[1] = 4;
-    emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)sizeof(real_T),
-                      &tb_emlrtRTEI);
-    for (i21 = 0; i21 < 4; i21++) {
-      Pitch->data[i21] = 0.0;
+    emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)sizeof(real_T),
+                      &vb_emlrtRTEI);
+    for (i22 = 0; i22 < 4; i22++) {
+      Pitch->data[i22] = 0.0;
     }
 
     /* 'peaks:85' Merit    = ones (1, maxpeaks); */
-    i21 = Merit->size[0] * Merit->size[1];
+    i22 = Merit->size[0] * Merit->size[1];
     Merit->size[0] = 1;
     Merit->size[1] = 4;
-    emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)sizeof(real_T),
-                      &tb_emlrtRTEI);
-    for (i21 = 0; i21 < 4; i21++) {
-      Merit->data[i21] = 1.0;
+    emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)sizeof(real_T),
+                      &vb_emlrtRTEI);
+    for (i22 = 0; i22 < 4; i22++) {
+      Merit->data[i22] = 1.0;
     }
 
     /*  force an early end for unoviced frame  */
@@ -524,45 +530,45 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
     numpeaks = 0;
 
     /* 'peaks:98' for n = min_lag:max_lag */
-    i21 = (int32_T)(max_lag + (1.0 - min_lag));
-    emlrtForLoopVectorCheckR2012b(min_lag, 1.0, max_lag, mxDOUBLE_CLASS, i21,
-      &qe_emlrtRTEI, sp);
+    i22 = (int32_T)(max_lag + (1.0 - min_lag));
+    emlrtForLoopVectorCheckR2012b(min_lag, 1.0, max_lag, mxDOUBLE_CLASS, i22,
+      &we_emlrtRTEI, sp);
     b_n = 0;
-    while (b_n <= i21 - 1) {
+    while (b_n <= i22 - 1) {
       c_n = min_lag + (real_T)b_n;
 
       /* 'peaks:99' [y, lag]  = max(Data(n:(n+width-1))); */
       mtmp = (c_n + width) - 1.0;
       if (c_n > mtmp) {
-        i22 = 0;
         i23 = 0;
+        i24 = 0;
       } else {
-        i22 = Data->size[1];
+        i23 = Data->size[1];
         if (c_n != (int32_T)muDoubleScalarFloor(c_n)) {
           emlrtIntegerCheckR2012b(c_n, &y_emlrtDCI, sp);
         }
 
         n = (int32_T)c_n;
-        if (!((n >= 1) && (n <= i22))) {
-          emlrtDynamicBoundsCheckR2012b(n, 1, i22, &ad_emlrtBCI, sp);
+        if (!((n >= 1) && (n <= i23))) {
+          emlrtDynamicBoundsCheckR2012b(n, 1, i23, &ad_emlrtBCI, sp);
         }
 
-        i22 = n - 1;
+        i23 = n - 1;
         n = Data->size[1];
         if (mtmp != (int32_T)muDoubleScalarFloor(mtmp)) {
           emlrtIntegerCheckR2012b(mtmp, &y_emlrtDCI, sp);
         }
 
-        i23 = (int32_T)mtmp;
-        if (!((i23 >= 1) && (i23 <= n))) {
-          emlrtDynamicBoundsCheckR2012b(i23, 1, n, &ad_emlrtBCI, sp);
+        i24 = (int32_T)mtmp;
+        if (!((i24 >= 1) && (i24 <= n))) {
+          emlrtDynamicBoundsCheckR2012b(i24, 1, n, &ad_emlrtBCI, sp);
         }
       }
 
-      st.site = &mg_emlrtRSI;
-      b_st.site = &pg_emlrtRSI;
-      c_st.site = &qg_emlrtRSI;
-      if ((i23 - i22 == 1) || (i23 - i22 != 1)) {
+      st.site = &ng_emlrtRSI;
+      b_st.site = &qg_emlrtRSI;
+      c_st.site = &rg_emlrtRSI;
+      if ((i24 - i23 == 1) || (i24 - i23 != 1)) {
         b8 = true;
       } else {
         b8 = false;
@@ -570,32 +576,32 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
       if (b8) {
       } else {
-        emlrtErrorWithMessageIdR2012b(&c_st, &le_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&c_st, &re_emlrtRTEI,
           "Coder:toolbox:autoDimIncompatibility", 0);
       }
 
-      if (i23 - i22 > 0) {
+      if (i24 - i23 > 0) {
       } else {
-        emlrtErrorWithMessageIdR2012b(&c_st, &ke_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&c_st, &qe_emlrtRTEI,
           "Coder:toolbox:eml_min_or_max_varDimZero", 0);
       }
 
-      d_st.site = &fb_emlrtRSI;
+      d_st.site = &gb_emlrtRSI;
       ixstart = 2;
-      n = i23 - i22;
-      mtmp = Data->data[i22];
+      n = i24 - i23;
+      mtmp = Data->data[i23];
       itmp = 1;
-      if (i23 - i22 > 1) {
+      if (i24 - i23 > 1) {
         if (muDoubleScalarIsNaN(mtmp)) {
-          e_st.site = &gb_emlrtRSI;
-          if (2 > i23 - i22) {
+          e_st.site = &hb_emlrtRSI;
+          if (2 > i24 - i23) {
             b10 = false;
           } else {
-            b10 = (i23 - i22 > 2147483646);
+            b10 = (i24 - i23 > 2147483646);
           }
 
           if (b10) {
-            f_st.site = &ib_emlrtRSI;
+            f_st.site = &jb_emlrtRSI;
             check_forloop_overflow_error(&f_st, true);
           }
 
@@ -603,8 +609,8 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
           exitg1 = false;
           while ((!exitg1) && (ix <= n)) {
             ixstart = ix + 1;
-            if (!muDoubleScalarIsNaN(Data->data[(i22 + ix) - 1])) {
-              mtmp = Data->data[(i22 + ix) - 1];
+            if (!muDoubleScalarIsNaN(Data->data[(i23 + ix) - 1])) {
+              mtmp = Data->data[(i23 + ix) - 1];
               itmp = ix;
               exitg1 = true;
             } else {
@@ -613,22 +619,22 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
           }
         }
 
-        if (ixstart - 1 < i23 - i22) {
-          e_st.site = &hb_emlrtRSI;
-          if (ixstart > i23 - i22) {
+        if (ixstart - 1 < i24 - i23) {
+          e_st.site = &ib_emlrtRSI;
+          if (ixstart > i24 - i23) {
             c_ixstart = false;
           } else {
-            c_ixstart = (i23 - i22 > 2147483646);
+            c_ixstart = (i24 - i23 > 2147483646);
           }
 
           if (c_ixstart) {
-            f_st.site = &ib_emlrtRSI;
+            f_st.site = &jb_emlrtRSI;
             check_forloop_overflow_error(&f_st, true);
           }
 
           while (ixstart <= n) {
-            if (Data->data[(i22 + ixstart) - 1] > mtmp) {
-              mtmp = Data->data[(i22 + ixstart) - 1];
+            if (Data->data[(i23 + ixstart) - 1] > mtmp) {
+              mtmp = Data->data[(i23 + ixstart) - 1];
               itmp = ixstart;
             }
 
@@ -665,12 +671,12 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
     /*  Step 2 */
     /*  Be sure there is large peak */
     /* 'peaks:113' if (max(Merit)/avg_data < PEAK_THRESH1) */
-    st.site = &ng_emlrtRSI;
-    b_st.site = &db_emlrtRSI;
-    c_st.site = &eb_emlrtRSI;
-    d_st.site = &fb_emlrtRSI;
+    st.site = &og_emlrtRSI;
+    b_st.site = &eb_emlrtRSI;
+    c_st.site = &fb_emlrtRSI;
+    d_st.site = &gb_emlrtRSI;
     mtmp = b_Merit[0];
-    e_st.site = &hb_emlrtRSI;
+    e_st.site = &ib_emlrtRSI;
     for (ix = 1; ix + 1 < 101; ix++) {
       if (b_Merit[ix] > mtmp) {
         mtmp = b_Merit[ix];
@@ -680,39 +686,39 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
     if (mtmp / avg_data < 5.0) {
       /*    numpeaks = 0; */
       /* 'peaks:115' Pitch      = zeros(1, maxpeaks); */
-      i21 = Pitch->size[0] * Pitch->size[1];
+      i22 = Pitch->size[0] * Pitch->size[1];
       Pitch->size[0] = 1;
       Pitch->size[1] = 4;
-      emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)sizeof
-                        (real_T), &tb_emlrtRTEI);
-      for (i21 = 0; i21 < 4; i21++) {
-        Pitch->data[i21] = 0.0;
+      emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)sizeof
+                        (real_T), &vb_emlrtRTEI);
+      for (i22 = 0; i22 < 4; i22++) {
+        Pitch->data[i22] = 0.0;
       }
 
       /* 'peaks:116' Merit     = ones (1, maxpeaks); */
-      i21 = Merit->size[0] * Merit->size[1];
+      i22 = Merit->size[0] * Merit->size[1];
       Merit->size[0] = 1;
       Merit->size[1] = 4;
-      emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)sizeof
-                        (real_T), &tb_emlrtRTEI);
-      for (i21 = 0; i21 < 4; i21++) {
-        Merit->data[i21] = 1.0;
+      emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)sizeof
+                        (real_T), &vb_emlrtRTEI);
+      for (i22 = 0; i22 < 4; i22++) {
+        Merit->data[i22] = 1.0;
       }
     } else {
       /*  Step 3     */
       /*  Order the peaks according to size,  considering at most maxpeaks */
       /* 'peaks:122' [Merit, Idx] = sort(Merit, 'descend'); */
-      st.site = &og_emlrtRSI;
-      b_st.site = &rg_emlrtRSI;
+      st.site = &pg_emlrtRSI;
+      b_st.site = &sg_emlrtRSI;
       sort(&b_st, b_Merit, iidx);
 
       /* 'peaks:123' Pitch = Pitch(Idx); */
-      for (i21 = 0; i21 < 100; i21++) {
-        if (!((iidx[i21] >= 1) && (iidx[i21] <= 100))) {
-          emlrtDynamicBoundsCheckR2012b(iidx[i21], 1, 100, &dd_emlrtBCI, sp);
+      for (i22 = 0; i22 < 100; i22++) {
+        if (!((iidx[i22] >= 1) && (iidx[i22] <= 100))) {
+          emlrtDynamicBoundsCheckR2012b(iidx[i22], 1, 100, &dd_emlrtBCI, sp);
         }
 
-        c_Pitch[i21] = b_Pitch[iidx[i21] - 1];
+        c_Pitch[i22] = b_Pitch[iidx[i22] - 1];
       }
 
       memcpy(&b_Pitch[0], &c_Pitch[0], 100U * sizeof(real_T));
@@ -728,13 +734,13 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
         n = numpeaks;
       }
 
-      i21 = Pitch->size[0] * Pitch->size[1];
+      i22 = Pitch->size[0] * Pitch->size[1];
       Pitch->size[0] = 1;
       Pitch->size[1] = n;
-      emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)sizeof
-                        (real_T), &tb_emlrtRTEI);
-      for (i21 = 0; i21 < n; i21++) {
-        Pitch->data[Pitch->size[0] * i21] = b_Pitch[i21];
+      emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)sizeof
+                        (real_T), &vb_emlrtRTEI);
+      for (i22 = 0; i22 < n; i22++) {
+        Pitch->data[Pitch->size[0] * i22] = b_Pitch[i22];
       }
 
       /* 'peaks:128' Merit = Merit(1:numpeaks); */
@@ -744,13 +750,13 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
         itmp = numpeaks;
       }
 
-      i21 = Merit->size[0] * Merit->size[1];
+      i22 = Merit->size[0] * Merit->size[1];
       Merit->size[0] = 1;
       Merit->size[1] = itmp;
-      emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)sizeof
-                        (real_T), &tb_emlrtRTEI);
-      for (i21 = 0; i21 < itmp; i21++) {
-        Merit->data[Merit->size[0] * i21] = b_Merit[i21];
+      emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)sizeof
+                        (real_T), &vb_emlrtRTEI);
+      for (i22 = 0; i22 < itmp; i22++) {
+        Merit->data[Merit->size[0] * i22] = b_Merit[i22];
       }
 
       /*  Step 4 */
@@ -769,7 +775,7 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
           /* 'peaks:135' if(numpeaks>length(Pitch)) */
           if (numpeaks > n) {
-            emxInit_real_T(sp, &r10, 2, &tb_emlrtRTEI, true);
+            emxInit_real_T(sp, &r10, 2, &vb_emlrtRTEI, true);
 
             /* 'peaks:136' Pitch = [Pitch zeros(1,numpeaks-length(Pitch))]; */
             ixstart = numpeaks - n;
@@ -778,30 +784,30 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
             }
 
             b_n = Pitch->size[1];
-            i21 = Pitch->size[0] * Pitch->size[1];
+            i22 = Pitch->size[0] * Pitch->size[1];
             Pitch->size[1] = b_n + ixstart;
-            emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)
-                              sizeof(real_T), &tb_emlrtRTEI);
+            emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)
+                              sizeof(real_T), &vb_emlrtRTEI);
             n = numpeaks - n;
             if (!(n > 0)) {
               emlrtNonNegativeCheckR2012b(n, &cb_emlrtDCI, sp);
             }
 
-            i21 = r10->size[0] * r10->size[1];
+            i22 = r10->size[0] * r10->size[1];
             r10->size[0] = 1;
             r10->size[1] = n;
-            emxEnsureCapacity(sp, (emxArray__common *)r10, i21, (int32_T)sizeof
-                              (real_T), &tb_emlrtRTEI);
-            for (i21 = 0; i21 < n; i21++) {
-              r10->data[r10->size[0] * i21] = 0.0;
+            emxEnsureCapacity(sp, (emxArray__common *)r10, i22, (int32_T)sizeof
+                              (real_T), &vb_emlrtRTEI);
+            for (i22 = 0; i22 < n; i22++) {
+              r10->data[r10->size[0] * i22] = 0.0;
             }
 
-            for (i21 = 0; i21 < ixstart; i21++) {
-              Pitch->data[b_n + i21] = r10->data[i21];
+            for (i22 = 0; i22 < ixstart; i22++) {
+              Pitch->data[b_n + i22] = r10->data[i22];
             }
 
             emxFree_real_T(&r10);
-            emxInit_real_T(sp, &r11, 2, &tb_emlrtRTEI, true);
+            emxInit_real_T(sp, &r11, 2, &vb_emlrtRTEI, true);
 
             /* 'peaks:137' Merit = [Merit zeros(1,numpeaks-length(Merit))]; */
             ixstart = numpeaks - itmp;
@@ -810,49 +816,49 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
             }
 
             b_n = Merit->size[1];
-            i21 = Merit->size[0] * Merit->size[1];
+            i22 = Merit->size[0] * Merit->size[1];
             Merit->size[1] = b_n + ixstart;
-            emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)
-                              sizeof(real_T), &tb_emlrtRTEI);
+            emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)
+                              sizeof(real_T), &vb_emlrtRTEI);
             n = numpeaks - itmp;
             if (!(n > 0)) {
               emlrtNonNegativeCheckR2012b(n, &db_emlrtDCI, sp);
             }
 
-            i21 = r11->size[0] * r11->size[1];
+            i22 = r11->size[0] * r11->size[1];
             r11->size[0] = 1;
             r11->size[1] = n;
-            emxEnsureCapacity(sp, (emxArray__common *)r11, i21, (int32_T)sizeof
-                              (real_T), &tb_emlrtRTEI);
-            for (i21 = 0; i21 < n; i21++) {
-              r11->data[r11->size[0] * i21] = 0.0;
+            emxEnsureCapacity(sp, (emxArray__common *)r11, i22, (int32_T)sizeof
+                              (real_T), &vb_emlrtRTEI);
+            for (i22 = 0; i22 < n; i22++) {
+              r11->data[r11->size[0] * i22] = 0.0;
             }
 
-            for (i21 = 0; i21 < ixstart; i21++) {
-              Merit->data[b_n + i21] = r11->data[i21];
+            for (i22 = 0; i22 < ixstart; i22++) {
+              Merit->data[b_n + i22] = r11->data[i22];
             }
 
             emxFree_real_T(&r11);
           }
 
           /* 'peaks:139' Pitch(numpeaks) = Pitch(1)/2.0; */
-          i21 = Pitch->size[1];
-          if (!(1 <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(1, 1, i21, &wc_emlrtBCI, sp);
+          i22 = Pitch->size[1];
+          if (!(1 <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(1, 1, i22, &wc_emlrtBCI, sp);
           }
 
-          i21 = Pitch->size[1];
-          if (!(numpeaks <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i21, &ed_emlrtBCI, sp);
+          i22 = Pitch->size[1];
+          if (!(numpeaks <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i22, &ed_emlrtBCI, sp);
           }
 
           Pitch->data[numpeaks - 1] = Pitch->data[0] / 2.0;
 
           /*  Set merit for inserted peaks */
           /* 'peaks:141' Merit(numpeaks) = Prm.merit_extra; */
-          i21 = Merit->size[1];
-          if (!(numpeaks <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i21, &fd_emlrtBCI, sp);
+          i22 = Merit->size[1];
+          if (!(numpeaks <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i22, &fd_emlrtBCI, sp);
           }
 
           Merit->data[numpeaks - 1] = 0.4;
@@ -860,9 +866,9 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
         /*  If best peak has F > this, insert peak at half F */
         /* 'peaks:145' if (Pitch(1) < Prm.f0_half) */
-        i21 = Pitch->size[1];
-        if (!(1 <= i21)) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, i21, &vc_emlrtBCI, sp);
+        i22 = Pitch->size[1];
+        if (!(1 <= i22)) {
+          emlrtDynamicBoundsCheckR2012b(1, 1, i22, &vc_emlrtBCI, sp);
         }
 
         if (Pitch->data[0] < 150.0) {
@@ -871,7 +877,7 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
 
           /* 'peaks:147' if(numpeaks>length(Pitch)) */
           if (numpeaks > Pitch->size[1]) {
-            emxInit_real_T(sp, &d_Pitch, 2, &tb_emlrtRTEI, true);
+            emxInit_real_T(sp, &d_Pitch, 2, &vb_emlrtRTEI, true);
 
             /* 'peaks:148' Pitch = [Pitch zeros(1,numpeaks-length(Pitch))]; */
             n = Pitch->size[1];
@@ -880,34 +886,34 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
               emlrtNonNegativeCheckR2012b(ixstart, &eb_emlrtDCI, sp);
             }
 
-            i21 = d_Pitch->size[0] * d_Pitch->size[1];
+            i22 = d_Pitch->size[0] * d_Pitch->size[1];
             d_Pitch->size[0] = 1;
             d_Pitch->size[1] = Pitch->size[1] + ixstart;
-            emxEnsureCapacity(sp, (emxArray__common *)d_Pitch, i21, (int32_T)
-                              sizeof(real_T), &tb_emlrtRTEI);
+            emxEnsureCapacity(sp, (emxArray__common *)d_Pitch, i22, (int32_T)
+                              sizeof(real_T), &vb_emlrtRTEI);
             n = Pitch->size[1];
-            for (i21 = 0; i21 < n; i21++) {
-              d_Pitch->data[d_Pitch->size[0] * i21] = Pitch->data[Pitch->size[0]
-                * i21];
+            for (i22 = 0; i22 < n; i22++) {
+              d_Pitch->data[d_Pitch->size[0] * i22] = Pitch->data[Pitch->size[0]
+                * i22];
             }
 
-            for (i21 = 0; i21 < ixstart; i21++) {
-              d_Pitch->data[d_Pitch->size[0] * (i21 + Pitch->size[1])] = 0.0;
+            for (i22 = 0; i22 < ixstart; i22++) {
+              d_Pitch->data[d_Pitch->size[0] * (i22 + Pitch->size[1])] = 0.0;
             }
 
-            i21 = Pitch->size[0] * Pitch->size[1];
+            i22 = Pitch->size[0] * Pitch->size[1];
             Pitch->size[0] = 1;
             Pitch->size[1] = d_Pitch->size[1];
-            emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)
-                              sizeof(real_T), &tb_emlrtRTEI);
+            emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)
+                              sizeof(real_T), &vb_emlrtRTEI);
             n = d_Pitch->size[1];
-            for (i21 = 0; i21 < n; i21++) {
-              Pitch->data[Pitch->size[0] * i21] = d_Pitch->data[d_Pitch->size[0]
-                * i21];
+            for (i22 = 0; i22 < n; i22++) {
+              Pitch->data[Pitch->size[0] * i22] = d_Pitch->data[d_Pitch->size[0]
+                * i22];
             }
 
             emxFree_real_T(&d_Pitch);
-            emxInit_real_T(sp, &c_Merit, 2, &tb_emlrtRTEI, true);
+            emxInit_real_T(sp, &c_Merit, 2, &vb_emlrtRTEI, true);
 
             /* 'peaks:149' Merit = [Merit zeros(1,numpeaks-length(Merit))]; */
             n = Merit->size[1];
@@ -916,52 +922,52 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
               emlrtNonNegativeCheckR2012b(ixstart, &fb_emlrtDCI, sp);
             }
 
-            i21 = c_Merit->size[0] * c_Merit->size[1];
+            i22 = c_Merit->size[0] * c_Merit->size[1];
             c_Merit->size[0] = 1;
             c_Merit->size[1] = Merit->size[1] + ixstart;
-            emxEnsureCapacity(sp, (emxArray__common *)c_Merit, i21, (int32_T)
-                              sizeof(real_T), &tb_emlrtRTEI);
+            emxEnsureCapacity(sp, (emxArray__common *)c_Merit, i22, (int32_T)
+                              sizeof(real_T), &vb_emlrtRTEI);
             n = Merit->size[1];
-            for (i21 = 0; i21 < n; i21++) {
-              c_Merit->data[c_Merit->size[0] * i21] = Merit->data[Merit->size[0]
-                * i21];
+            for (i22 = 0; i22 < n; i22++) {
+              c_Merit->data[c_Merit->size[0] * i22] = Merit->data[Merit->size[0]
+                * i22];
             }
 
-            for (i21 = 0; i21 < ixstart; i21++) {
-              c_Merit->data[c_Merit->size[0] * (i21 + Merit->size[1])] = 0.0;
+            for (i22 = 0; i22 < ixstart; i22++) {
+              c_Merit->data[c_Merit->size[0] * (i22 + Merit->size[1])] = 0.0;
             }
 
-            i21 = Merit->size[0] * Merit->size[1];
+            i22 = Merit->size[0] * Merit->size[1];
             Merit->size[0] = 1;
             Merit->size[1] = c_Merit->size[1];
-            emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)
-                              sizeof(real_T), &tb_emlrtRTEI);
+            emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)
+                              sizeof(real_T), &vb_emlrtRTEI);
             n = c_Merit->size[1];
-            for (i21 = 0; i21 < n; i21++) {
-              Merit->data[Merit->size[0] * i21] = c_Merit->data[c_Merit->size[0]
-                * i21];
+            for (i22 = 0; i22 < n; i22++) {
+              Merit->data[Merit->size[0] * i22] = c_Merit->data[c_Merit->size[0]
+                * i22];
             }
 
             emxFree_real_T(&c_Merit);
           }
 
           /* 'peaks:151' Pitch(numpeaks) = 2.0*Pitch(1); */
-          i21 = Pitch->size[1];
-          if (!(1 <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(1, 1, i21, &uc_emlrtBCI, sp);
+          i22 = Pitch->size[1];
+          if (!(1 <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(1, 1, i22, &uc_emlrtBCI, sp);
           }
 
-          i21 = Pitch->size[1];
-          if (!(numpeaks <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i21, &gd_emlrtBCI, sp);
+          i22 = Pitch->size[1];
+          if (!(numpeaks <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i22, &gd_emlrtBCI, sp);
           }
 
           Pitch->data[numpeaks - 1] = 2.0 * Pitch->data[0];
 
           /* 'peaks:152' Merit(numpeaks) = Prm.merit_extra; */
-          i21 = Merit->size[1];
-          if (!(numpeaks <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i21, &hd_emlrtBCI, sp);
+          i22 = Merit->size[1];
+          if (!(numpeaks <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(numpeaks, 1, i22, &hd_emlrtBCI, sp);
           }
 
           Merit->data[numpeaks - 1] = 0.4;
@@ -970,110 +976,110 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
         /*  Fill in  frames with less than maxpeaks with best choice */
         /* 'peaks:156' if (numpeaks < maxpeaks) */
         if (numpeaks < 4) {
-          emxInit_real_T(sp, &r12, 2, &tb_emlrtRTEI, true);
+          emxInit_real_T(sp, &r12, 2, &vb_emlrtRTEI, true);
 
           /* 'peaks:157' Pitch = [Pitch zeros(1,maxpeaks-numpeaks)]; */
           b_n = Pitch->size[1];
           n = 4 - numpeaks;
-          i21 = Pitch->size[0] * Pitch->size[1];
+          i22 = Pitch->size[0] * Pitch->size[1];
           Pitch->size[1] = (b_n - numpeaks) + 4;
-          emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)sizeof
-                            (real_T), &tb_emlrtRTEI);
+          emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)sizeof
+                            (real_T), &vb_emlrtRTEI);
           ixstart = 4 - numpeaks;
-          i21 = r12->size[0] * r12->size[1];
+          i22 = r12->size[0] * r12->size[1];
           r12->size[0] = 1;
           r12->size[1] = ixstart;
-          emxEnsureCapacity(sp, (emxArray__common *)r12, i21, (int32_T)sizeof
-                            (real_T), &tb_emlrtRTEI);
-          for (i21 = 0; i21 < ixstart; i21++) {
-            r12->data[r12->size[0] * i21] = 0.0;
+          emxEnsureCapacity(sp, (emxArray__common *)r12, i22, (int32_T)sizeof
+                            (real_T), &vb_emlrtRTEI);
+          for (i22 = 0; i22 < ixstart; i22++) {
+            r12->data[r12->size[0] * i22] = 0.0;
           }
 
-          for (i21 = 0; i21 < n; i21++) {
-            Pitch->data[b_n + i21] = r12->data[i21];
+          for (i22 = 0; i22 < n; i22++) {
+            Pitch->data[b_n + i22] = r12->data[i22];
           }
 
           emxFree_real_T(&r12);
-          emxInit_real_T(sp, &r13, 2, &tb_emlrtRTEI, true);
+          emxInit_real_T(sp, &r13, 2, &vb_emlrtRTEI, true);
 
           /* 'peaks:158' Merit = [Merit zeros(1,maxpeaks-numpeaks)]; */
           b_n = Merit->size[1];
           n = 4 - numpeaks;
-          i21 = Merit->size[0] * Merit->size[1];
+          i22 = Merit->size[0] * Merit->size[1];
           Merit->size[1] = (b_n - numpeaks) + 4;
-          emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)sizeof
-                            (real_T), &tb_emlrtRTEI);
+          emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)sizeof
+                            (real_T), &vb_emlrtRTEI);
           ixstart = 4 - numpeaks;
-          i21 = r13->size[0] * r13->size[1];
+          i22 = r13->size[0] * r13->size[1];
           r13->size[0] = 1;
           r13->size[1] = ixstart;
-          emxEnsureCapacity(sp, (emxArray__common *)r13, i21, (int32_T)sizeof
-                            (real_T), &tb_emlrtRTEI);
-          for (i21 = 0; i21 < ixstart; i21++) {
-            r13->data[r13->size[0] * i21] = 0.0;
+          emxEnsureCapacity(sp, (emxArray__common *)r13, i22, (int32_T)sizeof
+                            (real_T), &vb_emlrtRTEI);
+          for (i22 = 0; i22 < ixstart; i22++) {
+            r13->data[r13->size[0] * i22] = 0.0;
           }
 
-          for (i21 = 0; i21 < n; i21++) {
-            Merit->data[b_n + i21] = r13->data[i21];
+          for (i22 = 0; i22 < n; i22++) {
+            Merit->data[b_n + i22] = r13->data[i22];
           }
 
           emxFree_real_T(&r13);
-          emxInit_int32_T1(sp, &r14, 2, &tb_emlrtRTEI, true);
+          emxInit_int32_T1(sp, &r14, 2, &vb_emlrtRTEI, true);
 
           /* 'peaks:159' Pitch(numpeaks+1:maxpeaks)  = Pitch(1); */
-          i21 = Pitch->size[1];
-          if (!(numpeaks + 1 <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(numpeaks + 1, 1, i21, &tc_emlrtBCI, sp);
-          }
-
-          i21 = numpeaks - 4;
           i22 = Pitch->size[1];
-          if (!(4 <= i22)) {
-            emlrtDynamicBoundsCheckR2012b(4, 1, i22, &tc_emlrtBCI, sp);
+          if (!(numpeaks + 1 <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(numpeaks + 1, 1, i22, &tc_emlrtBCI, sp);
           }
 
-          i22 = r14->size[0] * r14->size[1];
+          i22 = numpeaks - 4;
+          i23 = Pitch->size[1];
+          if (!(4 <= i23)) {
+            emlrtDynamicBoundsCheckR2012b(4, 1, i23, &tc_emlrtBCI, sp);
+          }
+
+          i23 = r14->size[0] * r14->size[1];
           r14->size[0] = 1;
-          r14->size[1] = -i21;
-          emxEnsureCapacity(sp, (emxArray__common *)r14, i22, (int32_T)sizeof
-                            (int32_T), &tb_emlrtRTEI);
-          n = -i21;
-          for (i22 = 0; i22 < n; i22++) {
-            r14->data[r14->size[0] * i22] = (i21 + i22) + 4;
+          r14->size[1] = -i22;
+          emxEnsureCapacity(sp, (emxArray__common *)r14, i23, (int32_T)sizeof
+                            (int32_T), &vb_emlrtRTEI);
+          n = -i22;
+          for (i23 = 0; i23 < n; i23++) {
+            r14->data[r14->size[0] * i23] = (i22 + i23) + 4;
           }
 
           mtmp = Pitch->data[0];
           n = r14->size[0] * r14->size[1];
-          for (i21 = 0; i21 < n; i21++) {
-            Pitch->data[r14->data[i21]] = mtmp;
+          for (i22 = 0; i22 < n; i22++) {
+            Pitch->data[r14->data[i22]] = mtmp;
           }
 
           /* 'peaks:160' Merit(numpeaks+1:maxpeaks) = Merit(1); */
-          i21 = Merit->size[1];
-          if (!(numpeaks + 1 <= i21)) {
-            emlrtDynamicBoundsCheckR2012b(numpeaks + 1, 1, i21, &sc_emlrtBCI, sp);
-          }
-
-          i21 = numpeaks - 4;
           i22 = Merit->size[1];
-          if (!(4 <= i22)) {
-            emlrtDynamicBoundsCheckR2012b(4, 1, i22, &sc_emlrtBCI, sp);
+          if (!(numpeaks + 1 <= i22)) {
+            emlrtDynamicBoundsCheckR2012b(numpeaks + 1, 1, i22, &sc_emlrtBCI, sp);
           }
 
-          i22 = r14->size[0] * r14->size[1];
+          i22 = numpeaks - 4;
+          i23 = Merit->size[1];
+          if (!(4 <= i23)) {
+            emlrtDynamicBoundsCheckR2012b(4, 1, i23, &sc_emlrtBCI, sp);
+          }
+
+          i23 = r14->size[0] * r14->size[1];
           r14->size[0] = 1;
-          r14->size[1] = -i21;
-          emxEnsureCapacity(sp, (emxArray__common *)r14, i22, (int32_T)sizeof
-                            (int32_T), &tb_emlrtRTEI);
-          n = -i21;
-          for (i22 = 0; i22 < n; i22++) {
-            r14->data[r14->size[0] * i22] = (i21 + i22) + 4;
+          r14->size[1] = -i22;
+          emxEnsureCapacity(sp, (emxArray__common *)r14, i23, (int32_T)sizeof
+                            (int32_T), &vb_emlrtRTEI);
+          n = -i22;
+          for (i23 = 0; i23 < n; i23++) {
+            r14->data[r14->size[0] * i23] = (i22 + i23) + 4;
           }
 
           mtmp = Merit->data[0];
           n = r14->size[0] * r14->size[1];
-          for (i21 = 0; i21 < n; i21++) {
-            Merit->data[r14->data[i21]] = mtmp;
+          for (i22 = 0; i22 < n; i22++) {
+            Merit->data[r14->data[i22]] = mtmp;
           }
 
           emxFree_int32_T(&r14);
@@ -1081,23 +1087,23 @@ void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
       } else {
         /* 'peaks:162' else */
         /* 'peaks:163' Pitch    = zeros(1, maxpeaks); */
-        i21 = Pitch->size[0] * Pitch->size[1];
+        i22 = Pitch->size[0] * Pitch->size[1];
         Pitch->size[0] = 1;
         Pitch->size[1] = 4;
-        emxEnsureCapacity(sp, (emxArray__common *)Pitch, i21, (int32_T)sizeof
-                          (real_T), &tb_emlrtRTEI);
-        for (i21 = 0; i21 < 4; i21++) {
-          Pitch->data[i21] = 0.0;
+        emxEnsureCapacity(sp, (emxArray__common *)Pitch, i22, (int32_T)sizeof
+                          (real_T), &vb_emlrtRTEI);
+        for (i22 = 0; i22 < 4; i22++) {
+          Pitch->data[i22] = 0.0;
         }
 
         /* 'peaks:164' Merit    = ones (1, maxpeaks); */
-        i21 = Merit->size[0] * Merit->size[1];
+        i22 = Merit->size[0] * Merit->size[1];
         Merit->size[0] = 1;
         Merit->size[1] = 4;
-        emxEnsureCapacity(sp, (emxArray__common *)Merit, i21, (int32_T)sizeof
-                          (real_T), &tb_emlrtRTEI);
-        for (i21 = 0; i21 < 4; i21++) {
-          Merit->data[i21] = 1.0;
+        emxEnsureCapacity(sp, (emxArray__common *)Merit, i22, (int32_T)sizeof
+                          (real_T), &vb_emlrtRTEI);
+        for (i22 = 0; i22 < 4; i22++) {
+          Merit->data[i22] = 1.0;
         }
       }
     }

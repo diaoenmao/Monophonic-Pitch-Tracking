@@ -43,8 +43,8 @@ void b_error(const emlrtStack *sp)
   m2 = emlrtCreateCharArray(2, iv4);
   emlrtInitCharArrayR2013a(sp, 39, m2, &u[0]);
   emlrtAssign(&y, m2);
-  st.site = &fm_emlrtRSI;
-  m_error(&st, y, &emlrtMCI);
+  st.site = &mm_emlrtRSI;
+  n_error(&st, y, &emlrtMCI);
 }
 
 /*
@@ -74,8 +74,8 @@ void c_error(const emlrtStack *sp)
   m3 = emlrtCreateCharArray(2, iv5);
   emlrtInitCharArrayR2013a(sp, 40, m3, &u[0]);
   emlrtAssign(&y, m3);
-  st.site = &fm_emlrtRSI;
-  m_error(&st, y, &emlrtMCI);
+  st.site = &mm_emlrtRSI;
+  n_error(&st, y, &emlrtMCI);
 }
 
 /* End of code generation (error.c) */

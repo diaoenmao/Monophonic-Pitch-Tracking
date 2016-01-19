@@ -19,45 +19,43 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo j_emlrtRSI = { 54, "nonlinear",
+static emlrtRSInfo k_emlrtRSI = { 54, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo k_emlrtRSI = { 63, "nonlinear",
+static emlrtRSInfo l_emlrtRSI = { 63, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo l_emlrtRSI = { 75, "nonlinear",
+static emlrtRSInfo m_emlrtRSI = { 75, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo m_emlrtRSI = { 79, "nonlinear",
+static emlrtRSInfo n_emlrtRSI = { 79, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo n_emlrtRSI = { 146, "Myfir1",
+static emlrtRSInfo o_emlrtRSI = { 146, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo o_emlrtRSI = { 149, "Myfir1",
+static emlrtRSInfo p_emlrtRSI = { 149, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo p_emlrtRSI = { 156, "Myfir1",
+static emlrtRSInfo q_emlrtRSI = { 156, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo ic_emlrtRSI = { 58, "power",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
+static emlrtRSInfo jc_emlrtRSI = { 58, "power",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
-static emlrtRSInfo jc_emlrtRSI = { 60, "power",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
+static emlrtRSInfo kc_emlrtRSI = { 60, "power",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
-static emlrtRSInfo kc_emlrtRSI = { 73, "applyScalarFunction",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m"
-};
+static emlrtRSInfo lc_emlrtRSI = { 73, "applyScalarFunction",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
 
-static emlrtRSInfo lc_emlrtRSI = { 132, "applyScalarFunction",
-  "F:\\Matlab2015b\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m"
-};
+static emlrtRSInfo mc_emlrtRSI = { 132, "applyScalarFunction",
+  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
 
-static emlrtRTEInfo b_emlrtRTEI = { 1, 40, "nonlinear",
+static emlrtRTEInfo c_emlrtRTEI = { 1, 40, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRTEInfo c_emlrtRTEI = { 63, 1, "nonlinear",
+static emlrtRTEInfo d_emlrtRTEI = { 63, 1, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
 static emlrtBCInfo emlrtBCI = { -1, -1, 82, 9, "tempData", "nonlinear",
@@ -75,6 +73,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
                *DataA, real_T Fs, emxArray_real_T *DataB, emxArray_real_T *DataC,
                emxArray_real_T *DataD, real_T *newFs)
 {
+  int32_T lenDataA;
   real_T w[2];
   boolean_T overflow;
   int32_T k;
@@ -158,6 +157,9 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   real_T y_re;
   emxArray_real_T *tempData;
   int32_T loop_ub;
+  int32_T b_k;
+  int32_T c_k;
+  jmp_buf * volatile emlrtJBStack;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
@@ -212,6 +214,8 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   /* 'nonlinear:40' if (Fs > Fs_min) */
   /*  Creates the bandpass filters */
   /* 'nonlinear:48' lenDataA = length(DataA); */
+  lenDataA = DataA->size[1];
+
   /*  filter F1 */
   /* 'nonlinear:51' w1  = (F_hp / (Fs/2)); */
   /* 'nonlinear:52' w2  = (F_lp / (Fs/2)); */
@@ -220,7 +224,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   w[1] = 1500.0 / (Fs / 2.0);
 
   /* 'nonlinear:54' b_F1 = Myfir1(Filter_order,w); */
-  st.site = &j_emlrtRSI;
+  st.site = &k_emlrtRSI;
 
   /* FIR1   FIR filter design using the window method.  */
   /*    B = FIR1(N,Wn) designs an N'th order lowpass FIR digital filter  */
@@ -361,7 +365,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   }
 
   if (overflow) {
-    b_st.site = &n_emlrtRSI;
+    b_st.site = &o_emlrtRSI;
     for (k = 0; k < 47; k++) {
       u[k] = varargin_1[k];
     }
@@ -370,13 +374,13 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     m1 = emlrtCreateCharArray(2, iv2);
     emlrtInitCharArrayR2013a(&b_st, 47, m1, &u[0]);
     emlrtAssign(&y, m1);
-    c_st.site = &fm_emlrtRSI;
-    m_error(&c_st, y, &emlrtMCI);
+    c_st.site = &mm_emlrtRSI;
+    n_error(&c_st, y, &emlrtMCI);
   }
 
   /* 'Myfir1:148' if  any(diff(Wn)<0) */
   if (!!(w[1] - w[0] < 0.0)) {
-    b_st.site = &o_emlrtRSI;
+    b_st.site = &p_emlrtRSI;
     for (k = 0; k < 30; k++) {
       b_u[k] = b_varargin_1[k];
     }
@@ -385,8 +389,8 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     m1 = emlrtCreateCharArray(2, iv3);
     emlrtInitCharArrayR2013a(&b_st, 30, m1, &b_u[0]);
     emlrtAssign(&b_y, m1);
-    c_st.site = &fm_emlrtRSI;
-    m_error(&c_st, b_y, &emlrtMCI);
+    c_st.site = &mm_emlrtRSI;
+    n_error(&c_st, b_y, &emlrtMCI);
   }
 
   /* 'Myfir1:152' Wn = Wn(:)'; */
@@ -406,7 +410,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     b_ff[k] = ff[k];
   }
 
-  b_st.site = &p_emlrtRSI;
+  b_st.site = &q_emlrtRSI;
   Myfirls(SD, &b_st, b_ff, hh);
 
   /* 'Myfir1:159' b = hh.*Window(:)'; */
@@ -464,7 +468,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     hh[k] /= r;
   }
 
-  emxInit_real_T(&st, &tempData, 2, &c_emlrtRTEI, true);
+  emxInit_real_T(&st, &tempData, 2, &d_emlrtRTEI, true);
 
   /*   b_F1_test = fir1(Filter_order,w); */
   /* 'nonlinear:56' a   = 1; */
@@ -472,7 +476,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   /*  DataA   is original acoustic signal */
   /*  Original signal filtered with F1 */
   /* 'nonlinear:63' tempData = filter(b_F1,a,DataA); */
-  st.site = &k_emlrtRSI;
+  st.site = &l_emlrtRSI;
   filter(&st, hh, DataA, tempData);
 
   /*  LenData_dec = fix ((lenDataA+dec_factor-1)/dec_factor); */
@@ -496,7 +500,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   DataB->size[0] = 1;
   DataB->size[1] = loop_ub;
   emxEnsureCapacity(sp, (emxArray__common *)DataB, k, (int32_T)sizeof(real_T),
-                    &b_emlrtRTEI);
+                    &c_emlrtRTEI);
   for (k = 0; k < loop_ub; k++) {
     DataB->data[DataB->size[0] * k] = tempData->data[k];
   }
@@ -508,11 +512,21 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   /*    DataC =  abs(DataA); */
   /*    Squared value of the signal */
   /* 'nonlinear:75' DataC =  DataA .^2; */
-  st.site = &l_emlrtRSI;
-  b_st.site = &lb_emlrtRSI;
-  c_st.site = &ic_emlrtRSI;
-  d_st.site = &kc_emlrtRSI;
-  e_st.site = &mc_emlrtRSI;
+  st.site = &m_emlrtRSI;
+  b_st.site = &mb_emlrtRSI;
+  c_st.site = &jc_emlrtRSI;
+  k = tempData->size[0] * tempData->size[1];
+  tempData->size[0] = 1;
+  tempData->size[1] = DataA->size[1];
+  emxEnsureCapacity(&c_st, (emxArray__common *)tempData, k, (int32_T)sizeof
+                    (real_T), &c_emlrtRTEI);
+  loop_ub = DataA->size[0] * DataA->size[1];
+  for (k = 0; k < loop_ub; k++) {
+    tempData->data[k] = DataA->data[k];
+  }
+
+  d_st.site = &lc_emlrtRSI;
+  e_st.site = &nc_emlrtRSI;
   for (k = 0; k < 2; k++) {
     w[k] = DataA->size[k];
   }
@@ -521,13 +535,14 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   DataC->size[0] = 1;
   DataC->size[1] = (int32_T)w[1];
   emxEnsureCapacity(&e_st, (emxArray__common *)DataC, k, (int32_T)sizeof(real_T),
-                    &b_emlrtRTEI);
+                    &c_emlrtRTEI);
   if (dimagree(DataC, DataA)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&d_st, &qd_emlrtRTEI, "MATLAB:dimagree", 0);
+    emlrtErrorWithMessageIdR2012b(&d_st, &wd_emlrtRTEI, "MATLAB:dimagree", 0);
   }
 
-  d_st.site = &lc_emlrtRSI;
+  k = DataA->size[1];
+  d_st.site = &mc_emlrtRSI;
   if (1 > DataA->size[1]) {
     overflow = false;
   } else {
@@ -535,25 +550,35 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   }
 
   if (overflow) {
-    e_st.site = &ib_emlrtRSI;
+    e_st.site = &jb_emlrtRSI;
     check_forloop_overflow_error(&e_st, true);
   }
 
-  for (k = 0; k + 1 <= DataA->size[1]; k++) {
-    DataC->data[k] = DataA->data[k] * DataA->data[k];
+  emlrtEnterParallelRegion(&c_st, omp_in_parallel());
+  emlrtPushJmpBuf(&c_st, &emlrtJBStack);
+
+#pragma omp parallel for \
+ num_threads(emlrtAllocRegionTLSs(c_st.tls, omp_in_parallel(), omp_get_max_threads(), omp_get_num_procs())) \
+ private(c_k)
+
+  for (b_k = 1; b_k <= k; b_k++) {
+    c_k = b_k;
+    DataC->data[c_k - 1] = tempData->data[c_k - 1] * tempData->data[c_k - 1];
   }
 
-  c_st.site = &jc_emlrtRSI;
+  emlrtPopJmpBuf(&c_st, &emlrtJBStack);
+  emlrtExitParallelRegion(&c_st, omp_in_parallel());
+  c_st.site = &kc_emlrtRSI;
 
   /*    Nonlinear version filtered with F1 */
   /* 'nonlinear:79' tempData = filter(b_F1,a,DataC); */
-  st.site = &m_emlrtRSI;
+  st.site = &n_emlrtRSI;
   filter(&st, hh, DataC, tempData);
 
   /* 'nonlinear:80' LenData_dec = fix ((lenDataA+dec_factor-1)/dec_factor); */
   /* 'nonlinear:81' DataD = zeros(1, LenData_dec); */
   /* 'nonlinear:82' DataD = tempData(1:dec_factor:lenDataA); */
-  if (1 > DataA->size[1]) {
+  if (1 > lenDataA) {
     loop_ub = 0;
   } else {
     k = tempData->size[1];
@@ -562,17 +587,18 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     }
 
     k = tempData->size[1];
-    loop_ub = DataA->size[1];
-    if (!((loop_ub >= 1) && (loop_ub <= k))) {
-      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, k, &emlrtBCI, sp);
+    if (!(lenDataA <= k)) {
+      emlrtDynamicBoundsCheckR2012b(lenDataA, 1, k, &emlrtBCI, sp);
     }
+
+    loop_ub = lenDataA;
   }
 
   k = DataD->size[0] * DataD->size[1];
   DataD->size[0] = 1;
   DataD->size[1] = loop_ub;
   emxEnsureCapacity(sp, (emxArray__common *)DataD, k, (int32_T)sizeof(real_T),
-                    &b_emlrtRTEI);
+                    &c_emlrtRTEI);
   for (k = 0; k < loop_ub; k++) {
     DataD->data[DataD->size[0] * k] = tempData->data[k];
   }

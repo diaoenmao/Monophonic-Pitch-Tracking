@@ -11,6 +11,7 @@
 #include "yaapt_emxutil.h"
 #include "nonlinear.h"
 #include "spec_trk.h"
+#include "freqSelect.h"
 #include "dynamic.h"
 #include "refine.h"
 #include "tm_trk.h"
@@ -48,15 +49,21 @@ static emlrtRSInfo h_emlrtRSI = { 149, "yaapt",
 static emlrtRSInfo i_emlrtRSI = { 153, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
+static emlrtRSInfo j_emlrtRSI = { 157, "yaapt",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
+
 static emlrtRTEInfo emlrtRTEI = { 1, 37, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
+static emlrtRTEInfo b_emlrtRTEI = { 153, 1, "yaapt",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
+
 /* Function Declarations */
-static void n_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void o_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     emlrtMCInfo *location);
 
 /* Function Definitions */
-static void n_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void o_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     emlrtMCInfo *location)
 {
   const mxArray *pArrays[2];
@@ -100,7 +107,7 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   emxArray_boolean_T *VUVEnergy;
   emxArray_real_T *b_DataD;
   int32_T loop_ub;
-  emxArray_real_T *VUVSPitch;
+  emxArray_real_T *Pitch_before;
   emxArray_real_T *pAvg;
   emxArray_real_T *pStd;
   emxArray_real_T *TPitch1;
@@ -285,8 +292,8 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
     m0 = emlrtCreateCharArray(2, iv0);
     emlrtInitCharArrayR2013a(&st, 34, m0, &u[0]);
     emlrtAssign(&b_y, m0);
-    b_st.site = &fm_emlrtRSI;
-    n_error(&b_st, b_y, emlrt_marshallOut(25.0), &emlrtMCI);
+    b_st.site = &mm_emlrtRSI;
+    o_error(&b_st, b_y, emlrt_marshallOut(25.0), &emlrtMCI);
   }
 
   /* 'yaapt:127' if (nframesize > 2048) */
@@ -301,8 +308,8 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
     m0 = emlrtCreateCharArray(2, iv1);
     emlrtInitCharArrayR2013a(&st, 39, m0, &b_u[0]);
     emlrtAssign(&c_y, m0);
-    b_st.site = &fm_emlrtRSI;
-    n_error(&b_st, c_y, emlrt_marshallOut(25.0), &emlrtMCI);
+    b_st.site = &mm_emlrtRSI;
+    o_error(&b_st, c_y, emlrt_marshallOut(25.0), &emlrtMCI);
   }
 
   emxInit_real_T(sp, &Energy, 2, &emlrtRTEI, true);
@@ -328,7 +335,7 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
     b_DataD->data[i0] = DataD->data[i0];
   }
 
-  emxInit_real_T(sp, &VUVSPitch, 2, &emlrtRTEI, true);
+  emxInit_real_T(sp, &Pitch_before, 2, &b_emlrtRTEI, true);
   emxInit_real_T1(sp, &pAvg, 1, &emlrtRTEI, true);
   emxInit_real_T1(sp, &pStd, 1, &emlrtRTEI, true);
   emxInit_real_T(sp, &TPitch1, 2, &emlrtRTEI, true);
@@ -338,7 +345,7 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   emxInit_real_T(sp, &RPitch, 2, &emlrtRTEI, true);
   emxInit_real_T(sp, &Merit, 2, &emlrtRTEI, true);
   st.site = &e_emlrtRSI;
-  spec_trk(SD, &st, b_DataD, nFs, VUVEnergy, DataC, VUVSPitch, pAvg, pStd);
+  spec_trk(SD, &st, b_DataD, nFs, VUVEnergy, DataC, Pitch_before, pAvg, pStd);
 
   /*   Step 3. Temporal pitch tracking based on NCCF */
   /*   Calculate a pitch track based on time-domain processing */
@@ -360,16 +367,21 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
          RPitch, Merit);
 
   /*  Step 5. Use dyanamic programming to determine the final pitch */
-  /* 'yaapt:153' Pitch  = dynamic(RPitch, Merit, Energy, Prm); */
+  /* 'yaapt:153' Pitch_before  = dynamic(RPitch, Merit, Energy, Prm); */
   st.site = &i_emlrtRSI;
-  dynamic(&st, RPitch, Merit, Energy, Pitch);
+  dynamic(&st, RPitch, Merit, Energy, Pitch_before);
 
-  /* 'yaapt:154' numfrms = length(Pitch); */
-  *numfrms = Pitch->size[1];
+  /* 'yaapt:154' numfrms = length(Pitch_before); */
+  *numfrms = Pitch_before->size[1];
 
   /* 'yaapt:155' frmrate = Prm.frame_space; */
   *frmrate = 10.0;
 
+  /* 'yaapt:157' [Pitch,~] = freqSelect(Pitch_before); */
+  st.site = &j_emlrtRSI;
+  freqSelect(&st, Pitch_before, Pitch, DataC);
+
+  /* 'yaapt:157' ~ */
   /* figure(3) */
   /*  plot(SPitch, 'b') */
   /*  hold on */
@@ -409,12 +421,12 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   emxFree_real_T(&TPitch1);
   emxFree_real_T(&pStd);
   emxFree_real_T(&pAvg);
-  emxFree_real_T(&VUVSPitch);
   emxFree_boolean_T(&VUVEnergy);
   emxFree_real_T(&Energy);
   emxFree_real_T(&DataD);
   emxFree_real_T(&DataC);
   emxFree_real_T(&DataB);
+  emxFree_real_T(&Pitch_before);
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }
 

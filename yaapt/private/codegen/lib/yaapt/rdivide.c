@@ -2,7 +2,7 @@
  * File: rdivide.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -47,21 +47,41 @@ void c_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z)
 }
 
 /*
+ * Arguments    : const emxArray_real_T *x
+ *                double y
+ *                emxArray_real_T *z
+ * Return Type  : void
+ */
+void d_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z)
+{
+  int i5;
+  int loop_ub;
+  i5 = z->size[0] * z->size[1];
+  z->size[0] = 1;
+  z->size[1] = x->size[1];
+  emxEnsureCapacity((emxArray__common *)z, i5, (int)sizeof(double));
+  loop_ub = x->size[0] * x->size[1];
+  for (i5 = 0; i5 < loop_ub; i5++) {
+    z->data[i5] = x->data[i5] / y;
+  }
+}
+
+/*
  * Arguments    : double x
  *                const emxArray_real_T *y
  *                emxArray_real_T *z
  * Return Type  : void
  */
-void d_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z)
+void e_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z)
 {
-  int i6;
+  int i7;
   int loop_ub;
-  i6 = z->size[0];
+  i7 = z->size[0];
   z->size[0] = y->size[0];
-  emxEnsureCapacity((emxArray__common *)z, i6, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)z, i7, (int)sizeof(double));
   loop_ub = y->size[0];
-  for (i6 = 0; i6 < loop_ub; i6++) {
-    z->data[i6] = x / y->data[i6];
+  for (i7 = 0; i7 < loop_ub; i7++) {
+    z->data[i7] = x / y->data[i7];
   }
 }
 
@@ -71,17 +91,17 @@ void d_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z)
  *                emxArray_real_T *z
  * Return Type  : void
  */
-void e_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
+void f_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
                emxArray_real_T *z)
 {
-  int i7;
+  int i8;
   int loop_ub;
-  i7 = z->size[0];
+  i8 = z->size[0];
   z->size[0] = x->size[0];
-  emxEnsureCapacity((emxArray__common *)z, i7, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)z, i8, (int)sizeof(double));
   loop_ub = x->size[0];
-  for (i7 = 0; i7 < loop_ub; i7++) {
-    z->data[i7] = x->data[i7] / y->data[i7];
+  for (i8 = 0; i8 < loop_ub; i8++) {
+    z->data[i8] = x->data[i8] / y->data[i8];
   }
 }
 

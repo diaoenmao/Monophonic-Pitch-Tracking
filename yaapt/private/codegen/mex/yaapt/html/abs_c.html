@@ -27,8 +27,8 @@
 <a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a>
 <a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_ub_emlrtRTEI">ub_emlrtRTEI</a> = <b>{</b> 1, 14, <font color="#1122ff">&quot;abs&quot;</font>,
-<a name="19"><font color="#888888 "><i>   19   </i></font></a>  <font color="#1122ff">&quot;F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elfun\\abs.m&quot;</font> <b>}</b>;
+<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_wb_emlrtRTEI">wb_emlrtRTEI</a> = <b>{</b> 1, 14, <font color="#1122ff">&quot;abs&quot;</font>,
+<a name="19"><font color="#888888 "><i>   19   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\abs.m&quot;</font> <b>}</b>;
 <a name="20"><font color="#888888 "><i>   20   </i></font></a>
 <a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
 <a name="22"><font color="#888888 "><i>   22   </i></font></a>
@@ -57,7 +57,7 @@
 <a name="45"><font color="#888888 "><i>   45   </i></font></a>  emlrtStack c_st;
 <a name="46"><font color="#888888 "><i>   46   </i></font></a>  st.prev = sp;
 <a name="47"><font color="#888888 "><i>   47   </i></font></a>  st.tls = sp-&gt;tls;
-<a name="48"><font color="#888888 "><i>   48   </i></font></a>  st.site = &amp;<a href="yaapt_data_c.html#var_pd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_pd_emlrtRSI');" target="_self"><font color="#1122aa">pd_emlrtRSI</font></a>;
+<a name="48"><font color="#888888 "><i>   48   </i></font></a>  st.site = &amp;<a href="yaapt_data_c.html#var_qd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_qd_emlrtRSI');" target="_self"><font color="#1122aa">qd_emlrtRSI</font></a>;
 <a name="49"><font color="#888888 "><i>   49   </i></font></a>  b_st.prev = &amp;st;
 <a name="50"><font color="#888888 "><i>   50   </i></font></a>  b_st.tls = st.tls;
 <a name="51"><font color="#888888 "><i>   51   </i></font></a>  c_st.prev = &amp;b_st;
@@ -70,9 +70,9 @@
 <a name="58"><font color="#888888 "><i>   58   </i></font></a>  y-&gt;size[0] = 4;
 <a name="59"><font color="#888888 "><i>   59   </i></font></a>  y-&gt;size[1] = (int32_T)uv1[1];
 <a name="60"><font color="#888888 "><i>   60   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>(&amp;st, (<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)y, n, (int32_T)<font color="#112266"><b>sizeof</b></font>(real_T),
-<a name="61"><font color="#888888 "><i>   61   </i></font></a>                    &amp;<a href="#var_ub_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ub_emlrtRTEI');" target="_self"><font color="#1122aa">ub_emlrtRTEI</font></a>);
+<a name="61"><font color="#888888 "><i>   61   </i></font></a>                    &amp;<a href="#var_wb_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_wb_emlrtRTEI');" target="_self"><font color="#1122aa">wb_emlrtRTEI</font></a>);
 <a name="62"><font color="#888888 "><i>   62   </i></font></a>  n = x-&gt;size[1] &lt;&lt; 2;
-<a name="63"><font color="#888888 "><i>   63   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_qd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_qd_emlrtRSI');" target="_self"><font color="#1122aa">qd_emlrtRSI</font></a>;
+<a name="63"><font color="#888888 "><i>   63   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_rd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_rd_emlrtRSI');" target="_self"><font color="#1122aa">rd_emlrtRSI</font></a>;
 <a name="64"><font color="#888888 "><i>   64   </i></font></a>  <font color="#112266"><b>if</b></font> (1 &gt; n) <b>{</b>
 <a name="65"><font color="#888888 "><i>   65   </i></font></a>    b11 = false;
 <a name="66"><font color="#888888 "><i>   66   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
@@ -80,7 +80,7 @@
 <a name="68"><font color="#888888 "><i>   68   </i></font></a>  <b>}</b>
 <a name="69"><font color="#888888 "><i>   69   </i></font></a>
 <a name="70"><font color="#888888 "><i>   70   </i></font></a>  <font color="#112266"><b>if</b></font> (b11) <b>{</b>
-<a name="71"><font color="#888888 "><i>   71   </i></font></a>    c_st.site = &amp;<a href="yaapt_data_c.html#var_ib_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ib_emlrtRSI');" target="_self"><font color="#1122aa">ib_emlrtRSI</font></a>;
+<a name="71"><font color="#888888 "><i>   71   </i></font></a>    c_st.site = &amp;<a href="yaapt_data_c.html#var_jb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_jb_emlrtRSI');" target="_self"><font color="#1122aa">jb_emlrtRSI</font></a>;
 <a name="72"><font color="#888888 "><i>   72   </i></font></a>    <a href="eml_int_forloop_overflow_check_c.html#fcn_check_forloop_overflow_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_check_forloop_overflow_error');" target="_self"><font color="#1122aa">check_forloop_overflow_error</font></a>(&amp;c_st, true);
 <a name="73"><font color="#888888 "><i>   73   </i></font></a>  <b>}</b>
 <a name="74"><font color="#888888 "><i>   74   </i></font></a>
@@ -102,7 +102,7 @@
 <a name="90"><font color="#888888 "><i>   90   </i></font></a>  emlrtStack c_st;
 <a name="91"><font color="#888888 "><i>   91   </i></font></a>  st.prev = sp;
 <a name="92"><font color="#888888 "><i>   92   </i></font></a>  st.tls = sp-&gt;tls;
-<a name="93"><font color="#888888 "><i>   93   </i></font></a>  st.site = &amp;<a href="yaapt_data_c.html#var_pd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_pd_emlrtRSI');" target="_self"><font color="#1122aa">pd_emlrtRSI</font></a>;
+<a name="93"><font color="#888888 "><i>   93   </i></font></a>  st.site = &amp;<a href="yaapt_data_c.html#var_qd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_qd_emlrtRSI');" target="_self"><font color="#1122aa">qd_emlrtRSI</font></a>;
 <a name="94"><font color="#888888 "><i>   94   </i></font></a>  b_st.prev = &amp;st;
 <a name="95"><font color="#888888 "><i>   95   </i></font></a>  b_st.tls = st.tls;
 <a name="96"><font color="#888888 "><i>   96   </i></font></a>  c_st.prev = &amp;b_st;
@@ -115,8 +115,8 @@
 <a name="103"><font color="#888888 "><i>  103   </i></font></a>  y-&gt;size[0] = 1;
 <a name="104"><font color="#888888 "><i>  104   </i></font></a>  y-&gt;size[1] = (int32_T)uv6[1];
 <a name="105"><font color="#888888 "><i>  105   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>(&amp;st, (<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)y, k, (int32_T)<font color="#112266"><b>sizeof</b></font>(real_T),
-<a name="106"><font color="#888888 "><i>  106   </i></font></a>                    &amp;<a href="#var_ub_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ub_emlrtRTEI');" target="_self"><font color="#1122aa">ub_emlrtRTEI</font></a>);
-<a name="107"><font color="#888888 "><i>  107   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_qd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_qd_emlrtRSI');" target="_self"><font color="#1122aa">qd_emlrtRSI</font></a>;
+<a name="106"><font color="#888888 "><i>  106   </i></font></a>                    &amp;<a href="#var_wb_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_wb_emlrtRTEI');" target="_self"><font color="#1122aa">wb_emlrtRTEI</font></a>);
+<a name="107"><font color="#888888 "><i>  107   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_rd_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_rd_emlrtRSI');" target="_self"><font color="#1122aa">rd_emlrtRSI</font></a>;
 <a name="108"><font color="#888888 "><i>  108   </i></font></a>  <font color="#112266"><b>if</b></font> (1 &gt; x-&gt;size[1]) <b>{</b>
 <a name="109"><font color="#888888 "><i>  109   </i></font></a>    overflow = false;
 <a name="110"><font color="#888888 "><i>  110   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
@@ -124,7 +124,7 @@
 <a name="112"><font color="#888888 "><i>  112   </i></font></a>  <b>}</b>
 <a name="113"><font color="#888888 "><i>  113   </i></font></a>
 <a name="114"><font color="#888888 "><i>  114   </i></font></a>  <font color="#112266"><b>if</b></font> (overflow) <b>{</b>
-<a name="115"><font color="#888888 "><i>  115   </i></font></a>    c_st.site = &amp;<a href="yaapt_data_c.html#var_ib_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ib_emlrtRSI');" target="_self"><font color="#1122aa">ib_emlrtRSI</font></a>;
+<a name="115"><font color="#888888 "><i>  115   </i></font></a>    c_st.site = &amp;<a href="yaapt_data_c.html#var_jb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_jb_emlrtRSI');" target="_self"><font color="#1122aa">jb_emlrtRSI</font></a>;
 <a name="116"><font color="#888888 "><i>  116   </i></font></a>    <a href="eml_int_forloop_overflow_check_c.html#fcn_check_forloop_overflow_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_check_forloop_overflow_error');" target="_self"><font color="#1122aa">check_forloop_overflow_error</font></a>(&amp;c_st, true);
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>  <b>}</b>
 <a name="118"><font color="#888888 "><i>  118   </i></font></a>

@@ -2,7 +2,7 @@
  * File: Myspecgram.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -88,7 +88,7 @@ void Myspecgram(emxArray_real_T *x, double window, double noverlap,
   int k;
   emxArray_real_T *y;
   emxArray_real_T *rowindex;
-  emxArray_real_T *r1;
+  emxArray_real_T *r2;
   emxArray_creal_T *b_y;
   emxArray_creal_T *c_y;
   int minval;
@@ -3007,19 +3007,19 @@ void Myspecgram(emxArray_real_T *x, double window, double noverlap,
     /*  zero-pad x */
   }
 
-  emxInit_real_T(&r1, 2);
+  emxInit_real_T(&r2, 2);
 
   /*  put x into columns of y with the proper offset */
   /*  should be able to do this with fancy indexing! */
   apnd = rowindex->size[0];
-  ihi = r1->size[0] * r1->size[1];
-  r1->size[0] = apnd;
-  r1->size[1] = (int)ncol;
-  emxEnsureCapacity((emxArray__common *)r1, ihi, (int)sizeof(double));
+  ihi = r2->size[0] * r2->size[1];
+  r2->size[0] = apnd;
+  r2->size[1] = (int)ncol;
+  emxEnsureCapacity((emxArray__common *)r2, ihi, (int)sizeof(double));
   nm1d2 = (int)ncol;
   for (ihi = 0; ihi < nm1d2; ihi++) {
     for (cdiff = 0; cdiff < apnd; cdiff++) {
-      r1->data[cdiff + r1->size[0] * ihi] = b_x->data[(int)((rowindex->
+      r2->data[cdiff + r2->size[0] * ihi] = b_x->data[(int)((rowindex->
         data[cdiff] + colindex->data[colindex->size[0] * ihi]) - 1.0) - 1];
     }
   }
@@ -3037,13 +3037,13 @@ void Myspecgram(emxArray_real_T *x, double window, double noverlap,
   nm1d2 = (int)ncol;
   for (ihi = 0; ihi < nm1d2; ihi++) {
     for (cdiff = 0; cdiff < apnd; cdiff++) {
-      twid_re = r1->data[cdiff + r1->size[0] * ihi];
+      twid_re = r2->data[cdiff + r2->size[0] * ihi];
       b_y->data[cdiff + b_y->size[0] * ihi].re = b_window->data[cdiff] * twid_re;
       b_y->data[cdiff + b_y->size[0] * ihi].im = b_window->data[cdiff] * 0.0;
     }
   }
 
-  emxFree_real_T(&r1);
+  emxFree_real_T(&r2);
   emxFree_real_T(&b_window);
   emxInit_creal_T(&c_y, 2);
 

@@ -19,19 +19,19 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo wc_emlrtRSI = { 55, "Myhanning",
+static emlrtRSInfo xc_emlrtRSI = { 55, "Myhanning",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhanning.m" };
 
-static emlrtRSInfo xc_emlrtRSI = { 56, "Myhanning",
+static emlrtRSInfo yc_emlrtRSI = { 56, "Myhanning",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhanning.m" };
 
-static emlrtRSInfo yc_emlrtRSI = { 60, "Myhanning",
+static emlrtRSInfo ad_emlrtRSI = { 60, "Myhanning",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhanning.m" };
 
-static emlrtRSInfo ad_emlrtRSI = { 61, "Myhanning",
+static emlrtRSInfo bd_emlrtRSI = { 61, "Myhanning",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhanning.m" };
 
-static emlrtRTEInfo p_emlrtRTEI = { 1, 14, "Myhanning",
+static emlrtRTEInfo r_emlrtRTEI = { 1, 14, "Myhanning",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhanning.m" };
 
 static emlrtBCInfo i_emlrtBCI = { 0, MAX_int32_T, 56, 14, "w(end:-1:1)",
@@ -183,16 +183,16 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
   /*  Does not include the first and last zero sample */
   /*     w = sym_hanning(n); */
   /* 'Myhanning:52' if ~rem(n,2) */
-  emxInit_real_T(sp, &y, 2, &p_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 2, &r_emlrtRTEI, true);
   if (!(muDoubleScalarRem(order, 2.0) != 0.0)) {
     /*  Even length window */
     /* 'Myhanning:54' half = n/2; */
     half = order / 2.0;
 
     /* 'Myhanning:55' w = .5*(1 - cos(2*pi*(1:half)'/(n+1))); */
-    st.site = &wc_emlrtRSI;
-    b_st.site = &bd_emlrtRSI;
-    c_st.site = &cd_emlrtRSI;
+    st.site = &xc_emlrtRSI;
+    b_st.site = &cd_emlrtRSI;
+    c_st.site = &dd_emlrtRSI;
     if (muDoubleScalarIsNaN(half)) {
       n = 1;
       anew = rtNaN;
@@ -230,10 +230,10 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
       }
     }
 
-    d_st.site = &dd_emlrtRSI;
+    d_st.site = &ed_emlrtRSI;
     if (!n_too_large) {
     } else {
-      emlrtErrorWithMessageIdR2012b(&d_st, &xd_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&d_st, &ee_emlrtRTEI,
         "Coder:MATLAB:pmaxsize", 0);
     }
 
@@ -245,14 +245,14 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
 
     y->size[1] = n;
     emxEnsureCapacity(&c_st, (emxArray__common *)y, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     if (n > 0) {
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
         i11 = n - 1;
         nm1d2 = asr_s32(i11, 1U);
-        d_st.site = &ed_emlrtRSI;
+        d_st.site = &fd_emlrtRSI;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (real_T)k;
           y->data[(n - k) - 1] = apnd - (real_T)k;
@@ -267,22 +267,22 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&c_st, &r4, 1, &p_emlrtRTEI, true);
+    emxInit_real_T1(&c_st, &r4, 1, &r_emlrtRTEI, true);
     i11 = r4->size[0];
     r4->size[0] = y->size[1];
     emxEnsureCapacity(sp, (emxArray__common *)r4, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = y->size[1];
     for (i11 = 0; i11 < nm1d2; i11++) {
       r4->data[i11] = 6.2831853071795862 * y->data[y->size[0] * i11];
     }
 
     b_rdivide(sp, r4, order + 1.0, w);
-    st.site = &wc_emlrtRSI;
+    st.site = &xc_emlrtRSI;
     c_cos(&st, w);
     i11 = w->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)w, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = w->size[0];
     emxFree_real_T(&r4);
     for (i11 = 0; i11 < nm1d2; i11++) {
@@ -291,7 +291,7 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
 
     i11 = w->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)w, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = w->size[0];
     for (i11 = 0; i11 < nm1d2; i11++) {
       w->data[i11] *= 0.5;
@@ -318,15 +318,15 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
       n = 1;
     }
 
-    emxInit_real_T1(sp, &b_w, 1, &p_emlrtRTEI, true);
+    emxInit_real_T1(sp, &b_w, 1, &r_emlrtRTEI, true);
     iv12[0] = 1;
     iv12[1] = div_s32_floor(sp, n - k, i11) + 1;
-    st.site = &xc_emlrtRSI;
+    st.site = &yc_emlrtRSI;
     indexShapeCheck(&st, w->size[0], iv12);
     i12 = b_w->size[0];
     b_w->size[0] = (w->size[0] + div_s32_floor(sp, n - k, i11)) + 1;
     emxEnsureCapacity(sp, (emxArray__common *)b_w, i12, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = w->size[0];
     for (i12 = 0; i12 < nm1d2; i12++) {
       b_w->data[i12] = w->data[i12];
@@ -340,7 +340,7 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
     i11 = w->size[0];
     w->size[0] = b_w->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)w, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = b_w->size[0];
     for (i11 = 0; i11 < nm1d2; i11++) {
       w->data[i11] = b_w->data[i11];
@@ -354,9 +354,9 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
     half = (order + 1.0) / 2.0;
 
     /* 'Myhanning:60' w = .5*(1 - cos(2*pi*(1:half)'/(n+1))); */
-    st.site = &yc_emlrtRSI;
-    b_st.site = &bd_emlrtRSI;
-    c_st.site = &cd_emlrtRSI;
+    st.site = &ad_emlrtRSI;
+    b_st.site = &cd_emlrtRSI;
+    c_st.site = &dd_emlrtRSI;
     if (muDoubleScalarIsNaN(half)) {
       n = 1;
       anew = rtNaN;
@@ -394,10 +394,10 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
       }
     }
 
-    d_st.site = &dd_emlrtRSI;
+    d_st.site = &ed_emlrtRSI;
     if (!n_too_large) {
     } else {
-      emlrtErrorWithMessageIdR2012b(&d_st, &xd_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&d_st, &ee_emlrtRTEI,
         "Coder:MATLAB:pmaxsize", 0);
     }
 
@@ -409,14 +409,14 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
 
     y->size[1] = n;
     emxEnsureCapacity(&c_st, (emxArray__common *)y, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     if (n > 0) {
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
         i11 = n - 1;
         nm1d2 = asr_s32(i11, 1U);
-        d_st.site = &ed_emlrtRSI;
+        d_st.site = &fd_emlrtRSI;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (real_T)k;
           y->data[(n - k) - 1] = apnd - (real_T)k;
@@ -431,22 +431,22 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&c_st, &r5, 1, &p_emlrtRTEI, true);
+    emxInit_real_T1(&c_st, &r5, 1, &r_emlrtRTEI, true);
     i11 = r5->size[0];
     r5->size[0] = y->size[1];
     emxEnsureCapacity(sp, (emxArray__common *)r5, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = y->size[1];
     for (i11 = 0; i11 < nm1d2; i11++) {
       r5->data[i11] = 6.2831853071795862 * y->data[y->size[0] * i11];
     }
 
     b_rdivide(sp, r5, order + 1.0, w);
-    st.site = &yc_emlrtRSI;
+    st.site = &ad_emlrtRSI;
     c_cos(&st, w);
     i11 = w->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)w, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = w->size[0];
     emxFree_real_T(&r5);
     for (i11 = 0; i11 < nm1d2; i11++) {
@@ -455,7 +455,7 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
 
     i11 = w->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)w, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = w->size[0];
     for (i11 = 0; i11 < nm1d2; i11++) {
       w->data[i11] *= 0.5;
@@ -487,15 +487,15 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
       n = 1;
     }
 
-    emxInit_real_T1(sp, &c_w, 1, &p_emlrtRTEI, true);
+    emxInit_real_T1(sp, &c_w, 1, &r_emlrtRTEI, true);
     iv12[0] = 1;
     iv12[1] = div_s32_floor(sp, n - k, i11) + 1;
-    st.site = &ad_emlrtRSI;
+    st.site = &bd_emlrtRSI;
     indexShapeCheck(&st, w->size[0], iv12);
     i12 = c_w->size[0];
     c_w->size[0] = (w->size[0] + div_s32_floor(sp, n - k, i11)) + 1;
     emxEnsureCapacity(sp, (emxArray__common *)c_w, i12, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = w->size[0];
     for (i12 = 0; i12 < nm1d2; i12++) {
       c_w->data[i12] = w->data[i12];
@@ -509,7 +509,7 @@ void Myhanning(const emlrtStack *sp, real_T order, emxArray_real_T *w)
     i11 = w->size[0];
     w->size[0] = c_w->size[0];
     emxEnsureCapacity(sp, (emxArray__common *)w, i11, (int32_T)sizeof(real_T),
-                      &p_emlrtRTEI);
+                      &r_emlrtRTEI);
     nm1d2 = c_w->size[0];
     for (i11 = 0; i11 < nm1d2; i11++) {
       w->data[i11] = c_w->data[i11];

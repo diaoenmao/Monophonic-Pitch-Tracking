@@ -58,7 +58,7 @@ boolean_T c_isequal(const emxArray_boolean_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i19;
+  int32_T i20;
   p = false;
   b_p = false;
   k = 0;
@@ -66,12 +66,12 @@ boolean_T c_isequal(const emxArray_boolean_T *varargin_1)
     exitg1 = 0;
     if (k < 2) {
       if (1 + k <= 1) {
-        i19 = varargin_1->size[k];
+        i20 = varargin_1->size[k];
       } else {
-        i19 = 1;
+        i20 = 1;
       }
 
-      if (i19 != 0) {
+      if (i20 != 0) {
         exitg1 = 1;
       } else {
         k++;

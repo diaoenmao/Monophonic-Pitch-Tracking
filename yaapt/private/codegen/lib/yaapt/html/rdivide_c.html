@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: rdivide.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 12-Jan-2016 01:25:12</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 15-Jan-2016 00:47:12</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -59,64 +59,84 @@
 <a name="47"><font color="#888888 "><i>   47   </i></font></a><b>}</b>
 <a name="48"><font color="#888888 "><i>   48   </i></font></a>
 <a name="49"><font color="#888888 "><i>   49   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="50"><font color="#888888 "><i>   50   </i></font></a><font color="#117755"><I> * Arguments    : double x</i></font>
-<a name="51"><font color="#888888 "><i>   51   </i></font></a><font color="#117755"><I> *                const emxArray_real_T *y</i></font>
+<a name="50"><font color="#888888 "><i>   50   </i></font></a><font color="#117755"><I> * Arguments    : const emxArray_real_T *x</i></font>
+<a name="51"><font color="#888888 "><i>   51   </i></font></a><font color="#117755"><I> *                double y</i></font>
 <a name="52"><font color="#888888 "><i>   52   </i></font></a><font color="#117755"><I> *                emxArray_real_T *z</i></font>
 <a name="53"><font color="#888888 "><i>   53   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
 <a name="54"><font color="#888888 "><i>   54   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="55"><font color="#888888 "><i>   55   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_d_rdivide">d_rdivide</a>(<font color="#112266"><b>double</b></font> x, <font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *y, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *z)
+<a name="55"><font color="#888888 "><i>   55   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_d_rdivide">d_rdivide</a>(<font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>double</b></font> y, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *z)
 <a name="56"><font color="#888888 "><i>   56   </i></font></a><b>{</b>
-<a name="57"><font color="#888888 "><i>   57   </i></font></a>  <font color="#112266"><b>int</b></font> i6;
+<a name="57"><font color="#888888 "><i>   57   </i></font></a>  <font color="#112266"><b>int</b></font> i5;
 <a name="58"><font color="#888888 "><i>   58   </i></font></a>  <font color="#112266"><b>int</b></font> loop_ub;
-<a name="59"><font color="#888888 "><i>   59   </i></font></a>  i6 = z-&gt;size[0];
-<a name="60"><font color="#888888 "><i>   60   </i></font></a>  z-&gt;size[0] = y-&gt;size[0];
-<a name="61"><font color="#888888 "><i>   61   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)z, i6, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
-<a name="62"><font color="#888888 "><i>   62   </i></font></a>  loop_ub = y-&gt;size[0];
-<a name="63"><font color="#888888 "><i>   63   </i></font></a>  <font color="#112266"><b>for</b></font> (i6 = 0; i6 &lt; loop_ub; i6++) <b>{</b>
-<a name="64"><font color="#888888 "><i>   64   </i></font></a>    z-&gt;data[i6] = x / y-&gt;data[i6];
-<a name="65"><font color="#888888 "><i>   65   </i></font></a>  <b>}</b>
-<a name="66"><font color="#888888 "><i>   66   </i></font></a><b>}</b>
-<a name="67"><font color="#888888 "><i>   67   </i></font></a>
-<a name="68"><font color="#888888 "><i>   68   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="69"><font color="#888888 "><i>   69   </i></font></a><font color="#117755"><I> * Arguments    : const emxArray_real_T *x</i></font>
-<a name="70"><font color="#888888 "><i>   70   </i></font></a><font color="#117755"><I> *                const emxArray_real_T *y</i></font>
-<a name="71"><font color="#888888 "><i>   71   </i></font></a><font color="#117755"><I> *                emxArray_real_T *z</i></font>
-<a name="72"><font color="#888888 "><i>   72   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
-<a name="73"><font color="#888888 "><i>   73   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="74"><font color="#888888 "><i>   74   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_e_rdivide">e_rdivide</a>(<font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *y,
-<a name="75"><font color="#888888 "><i>   75   </i></font></a>               <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *z)
+<a name="59"><font color="#888888 "><i>   59   </i></font></a>  i5 = z-&gt;size[0] * z-&gt;size[1];
+<a name="60"><font color="#888888 "><i>   60   </i></font></a>  z-&gt;size[0] = 1;
+<a name="61"><font color="#888888 "><i>   61   </i></font></a>  z-&gt;size[1] = x-&gt;size[1];
+<a name="62"><font color="#888888 "><i>   62   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)z, i5, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="63"><font color="#888888 "><i>   63   </i></font></a>  loop_ub = x-&gt;size[0] * x-&gt;size[1];
+<a name="64"><font color="#888888 "><i>   64   </i></font></a>  <font color="#112266"><b>for</b></font> (i5 = 0; i5 &lt; loop_ub; i5++) <b>{</b>
+<a name="65"><font color="#888888 "><i>   65   </i></font></a>    z-&gt;data[i5] = x-&gt;data[i5] / y;
+<a name="66"><font color="#888888 "><i>   66   </i></font></a>  <b>}</b>
+<a name="67"><font color="#888888 "><i>   67   </i></font></a><b>}</b>
+<a name="68"><font color="#888888 "><i>   68   </i></font></a>
+<a name="69"><font color="#888888 "><i>   69   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="70"><font color="#888888 "><i>   70   </i></font></a><font color="#117755"><I> * Arguments    : double x</i></font>
+<a name="71"><font color="#888888 "><i>   71   </i></font></a><font color="#117755"><I> *                const emxArray_real_T *y</i></font>
+<a name="72"><font color="#888888 "><i>   72   </i></font></a><font color="#117755"><I> *                emxArray_real_T *z</i></font>
+<a name="73"><font color="#888888 "><i>   73   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="74"><font color="#888888 "><i>   74   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="75"><font color="#888888 "><i>   75   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_e_rdivide">e_rdivide</a>(<font color="#112266"><b>double</b></font> x, <font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *y, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *z)
 <a name="76"><font color="#888888 "><i>   76   </i></font></a><b>{</b>
 <a name="77"><font color="#888888 "><i>   77   </i></font></a>  <font color="#112266"><b>int</b></font> i7;
 <a name="78"><font color="#888888 "><i>   78   </i></font></a>  <font color="#112266"><b>int</b></font> loop_ub;
 <a name="79"><font color="#888888 "><i>   79   </i></font></a>  i7 = z-&gt;size[0];
-<a name="80"><font color="#888888 "><i>   80   </i></font></a>  z-&gt;size[0] = x-&gt;size[0];
+<a name="80"><font color="#888888 "><i>   80   </i></font></a>  z-&gt;size[0] = y-&gt;size[0];
 <a name="81"><font color="#888888 "><i>   81   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)z, i7, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
-<a name="82"><font color="#888888 "><i>   82   </i></font></a>  loop_ub = x-&gt;size[0];
+<a name="82"><font color="#888888 "><i>   82   </i></font></a>  loop_ub = y-&gt;size[0];
 <a name="83"><font color="#888888 "><i>   83   </i></font></a>  <font color="#112266"><b>for</b></font> (i7 = 0; i7 &lt; loop_ub; i7++) <b>{</b>
-<a name="84"><font color="#888888 "><i>   84   </i></font></a>    z-&gt;data[i7] = x-&gt;data[i7] / y-&gt;data[i7];
+<a name="84"><font color="#888888 "><i>   84   </i></font></a>    z-&gt;data[i7] = x / y-&gt;data[i7];
 <a name="85"><font color="#888888 "><i>   85   </i></font></a>  <b>}</b>
 <a name="86"><font color="#888888 "><i>   86   </i></font></a><b>}</b>
 <a name="87"><font color="#888888 "><i>   87   </i></font></a>
 <a name="88"><font color="#888888 "><i>   88   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="89"><font color="#888888 "><i>   89   </i></font></a><font color="#117755"><I> * Arguments    : const double x[75]</i></font>
-<a name="90"><font color="#888888 "><i>   90   </i></font></a><font color="#117755"><I> *                const double y[75]</i></font>
-<a name="91"><font color="#888888 "><i>   91   </i></font></a><font color="#117755"><I> *                double z[75]</i></font>
+<a name="89"><font color="#888888 "><i>   89   </i></font></a><font color="#117755"><I> * Arguments    : const emxArray_real_T *x</i></font>
+<a name="90"><font color="#888888 "><i>   90   </i></font></a><font color="#117755"><I> *                const emxArray_real_T *y</i></font>
+<a name="91"><font color="#888888 "><i>   91   </i></font></a><font color="#117755"><I> *                emxArray_real_T *z</i></font>
 <a name="92"><font color="#888888 "><i>   92   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
 <a name="93"><font color="#888888 "><i>   93   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="94"><font color="#888888 "><i>   94   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_rdivide">rdivide</a>(<font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> x[75], <font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> y[75], <font color="#112266"><b>double</b></font> z[75])
-<a name="95"><font color="#888888 "><i>   95   </i></font></a><b>{</b>
-<a name="96"><font color="#888888 "><i>   96   </i></font></a>  <font color="#112266"><b>int</b></font> i;
-<a name="97"><font color="#888888 "><i>   97   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; 75; i++) <b>{</b>
-<a name="98"><font color="#888888 "><i>   98   </i></font></a>    z[i] = x[i] / y[i];
-<a name="99"><font color="#888888 "><i>   99   </i></font></a>  <b>}</b>
-<a name="100"><font color="#888888 "><i>  100   </i></font></a><b>}</b>
-<a name="101"><font color="#888888 "><i>  101   </i></font></a>
-<a name="102"><font color="#888888 "><i>  102   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="103"><font color="#888888 "><i>  103   </i></font></a><font color="#117755"><I> * File trailer for rdivide.c</i></font>
-<a name="104"><font color="#888888 "><i>  104   </i></font></a><font color="#117755"><I> *</i></font>
-<a name="105"><font color="#888888 "><i>  105   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
-<a name="106"><font color="#888888 "><i>  106   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="107"><font color="#888888 "><i>  107   </i></font></a></pre>
+<a name="94"><font color="#888888 "><i>   94   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_f_rdivide">f_rdivide</a>(<font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>const</b></font> <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *y,
+<a name="95"><font color="#888888 "><i>   95   </i></font></a>               <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *z)
+<a name="96"><font color="#888888 "><i>   96   </i></font></a><b>{</b>
+<a name="97"><font color="#888888 "><i>   97   </i></font></a>  <font color="#112266"><b>int</b></font> i8;
+<a name="98"><font color="#888888 "><i>   98   </i></font></a>  <font color="#112266"><b>int</b></font> loop_ub;
+<a name="99"><font color="#888888 "><i>   99   </i></font></a>  i8 = z-&gt;size[0];
+<a name="100"><font color="#888888 "><i>  100   </i></font></a>  z-&gt;size[0] = x-&gt;size[0];
+<a name="101"><font color="#888888 "><i>  101   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)z, i8, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="102"><font color="#888888 "><i>  102   </i></font></a>  loop_ub = x-&gt;size[0];
+<a name="103"><font color="#888888 "><i>  103   </i></font></a>  <font color="#112266"><b>for</b></font> (i8 = 0; i8 &lt; loop_ub; i8++) <b>{</b>
+<a name="104"><font color="#888888 "><i>  104   </i></font></a>    z-&gt;data[i8] = x-&gt;data[i8] / y-&gt;data[i8];
+<a name="105"><font color="#888888 "><i>  105   </i></font></a>  <b>}</b>
+<a name="106"><font color="#888888 "><i>  106   </i></font></a><b>}</b>
+<a name="107"><font color="#888888 "><i>  107   </i></font></a>
+<a name="108"><font color="#888888 "><i>  108   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="109"><font color="#888888 "><i>  109   </i></font></a><font color="#117755"><I> * Arguments    : const double x[75]</i></font>
+<a name="110"><font color="#888888 "><i>  110   </i></font></a><font color="#117755"><I> *                const double y[75]</i></font>
+<a name="111"><font color="#888888 "><i>  111   </i></font></a><font color="#117755"><I> *                double z[75]</i></font>
+<a name="112"><font color="#888888 "><i>  112   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="113"><font color="#888888 "><i>  113   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="114"><font color="#888888 "><i>  114   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_rdivide">rdivide</a>(<font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> x[75], <font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> y[75], <font color="#112266"><b>double</b></font> z[75])
+<a name="115"><font color="#888888 "><i>  115   </i></font></a><b>{</b>
+<a name="116"><font color="#888888 "><i>  116   </i></font></a>  <font color="#112266"><b>int</b></font> i;
+<a name="117"><font color="#888888 "><i>  117   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; 75; i++) <b>{</b>
+<a name="118"><font color="#888888 "><i>  118   </i></font></a>    z[i] = x[i] / y[i];
+<a name="119"><font color="#888888 "><i>  119   </i></font></a>  <b>}</b>
+<a name="120"><font color="#888888 "><i>  120   </i></font></a><b>}</b>
+<a name="121"><font color="#888888 "><i>  121   </i></font></a>
+<a name="122"><font color="#888888 "><i>  122   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="123"><font color="#888888 "><i>  123   </i></font></a><font color="#117755"><I> * File trailer for rdivide.c</i></font>
+<a name="124"><font color="#888888 "><i>  124   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="125"><font color="#888888 "><i>  125   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
+<a name="126"><font color="#888888 "><i>  126   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="127"><font color="#888888 "><i>  127   </i></font></a></pre>
 </td></tr></table>
 </p>
 </body>

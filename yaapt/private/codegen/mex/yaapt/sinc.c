@@ -15,14 +15,14 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo nb_emlrtRSI = { 24, "sinc",
-  "F:\\Matlab2015b\\toolbox\\signal\\signal\\sinc.m" };
+static emlrtRSInfo ob_emlrtRSI = { 24, "sinc",
+  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
 
-static emlrtRTEInfo d_emlrtRTEI = { 1, 12, "sinc",
-  "F:\\Matlab2015b\\toolbox\\signal\\signal\\sinc.m" };
+static emlrtRTEInfo e_emlrtRTEI = { 1, 12, "sinc",
+  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
 
-static emlrtRTEInfo f_emlrtRTEI = { 24, 1, "sinc",
-  "F:\\Matlab2015b\\toolbox\\signal\\signal\\sinc.m" };
+static emlrtRTEInfo g_emlrtRTEI = { 24, 1, "sinc",
+  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
 
 /* Function Definitions */
 
@@ -49,14 +49,14 @@ void b_sinc(const emlrtStack *sp, real_T x[5776], real_T y[5776])
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_int32_T(sp, &ii, 1, &g_emlrtRTEI, true);
-  st.site = &nb_emlrtRSI;
-  b_st.site = &ob_emlrtRSI;
+  emxInit_int32_T(sp, &ii, 1, &h_emlrtRTEI, true);
+  st.site = &ob_emlrtRSI;
+  b_st.site = &pb_emlrtRSI;
   idx = 0;
   i4 = ii->size[0];
   ii->size[0] = 5776;
   emxEnsureCapacity(&b_st, (emxArray__common *)ii, i4, (int32_T)sizeof(int32_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   b_ii = 1;
   exitg1 = false;
   while ((!exitg1) && (b_ii < 5777)) {
@@ -84,19 +84,19 @@ void b_sinc(const emlrtStack *sp, real_T x[5776], real_T y[5776])
     i4 = idx;
   }
 
-  emxInit_real_T1(&b_st, &i, 1, &f_emlrtRTEI, true);
+  emxInit_real_T1(&b_st, &i, 1, &g_emlrtRTEI, true);
   iv7[0] = 1;
   iv7[1] = i4;
-  c_st.site = &pb_emlrtRSI;
+  c_st.site = &qb_emlrtRSI;
   indexShapeCheck(&c_st, 5776, iv7);
   b_ii = ii->size[0];
   ii->size[0] = i4;
   emxEnsureCapacity(&b_st, (emxArray__common *)ii, b_ii, (int32_T)sizeof(int32_T),
-                    &e_emlrtRTEI);
+                    &f_emlrtRTEI);
   i4 = i->size[0];
   i->size[0] = ii->size[0];
   emxEnsureCapacity(&st, (emxArray__common *)i, i4, (int32_T)sizeof(real_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   b_ii = ii->size[0];
   for (i4 = 0; i4 < b_ii; i4++) {
     i->data[i4] = ii->data[i4];
@@ -105,7 +105,7 @@ void b_sinc(const emlrtStack *sp, real_T x[5776], real_T y[5776])
   i4 = ii->size[0];
   ii->size[0] = i->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)ii, i4, (int32_T)sizeof(int32_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   b_ii = i->size[0];
   for (i4 = 0; i4 < b_ii; i4++) {
     ii->data[i4] = (int32_T)i->data[i4];
@@ -124,7 +124,7 @@ void b_sinc(const emlrtStack *sp, real_T x[5776], real_T y[5776])
   i4 = ii->size[0];
   ii->size[0] = i->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)ii, i4, (int32_T)sizeof(int32_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   b_ii = i->size[0];
   for (i4 = 0; i4 < b_ii; i4++) {
     ii->data[i4] = (int32_T)i->data[i4];
@@ -163,14 +163,14 @@ void sinc(const emlrtStack *sp, real_T x[75], real_T y[75])
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_int32_T(sp, &ii, 1, &g_emlrtRTEI, true);
-  st.site = &nb_emlrtRSI;
-  b_st.site = &ob_emlrtRSI;
+  emxInit_int32_T(sp, &ii, 1, &h_emlrtRTEI, true);
+  st.site = &ob_emlrtRSI;
+  b_st.site = &pb_emlrtRSI;
   idx = 0;
   i3 = ii->size[0];
   ii->size[0] = 75;
   emxEnsureCapacity(&b_st, (emxArray__common *)ii, i3, (int32_T)sizeof(int32_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   k = 1;
   exitg1 = false;
   while ((!exitg1) && (k < 76)) {
@@ -198,19 +198,19 @@ void sinc(const emlrtStack *sp, real_T x[75], real_T y[75])
     i3 = idx;
   }
 
-  emxInit_real_T1(&b_st, &i, 1, &f_emlrtRTEI, true);
+  emxInit_real_T1(&b_st, &i, 1, &g_emlrtRTEI, true);
   iv6[0] = 1;
   iv6[1] = i3;
-  c_st.site = &pb_emlrtRSI;
+  c_st.site = &qb_emlrtRSI;
   indexShapeCheck(&c_st, 75, iv6);
   k = ii->size[0];
   ii->size[0] = i3;
   emxEnsureCapacity(&b_st, (emxArray__common *)ii, k, (int32_T)sizeof(int32_T),
-                    &e_emlrtRTEI);
+                    &f_emlrtRTEI);
   i3 = i->size[0];
   i->size[0] = ii->size[0];
   emxEnsureCapacity(&st, (emxArray__common *)i, i3, (int32_T)sizeof(real_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   k = ii->size[0];
   for (i3 = 0; i3 < k; i3++) {
     i->data[i3] = ii->data[i3];
@@ -219,7 +219,7 @@ void sinc(const emlrtStack *sp, real_T x[75], real_T y[75])
   i3 = ii->size[0];
   ii->size[0] = i->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)ii, i3, (int32_T)sizeof(int32_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   k = i->size[0];
   for (i3 = 0; i3 < k; i3++) {
     ii->data[i3] = (int32_T)i->data[i3];
@@ -238,7 +238,7 @@ void sinc(const emlrtStack *sp, real_T x[75], real_T y[75])
   i3 = ii->size[0];
   ii->size[0] = i->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)ii, i3, (int32_T)sizeof(int32_T),
-                    &d_emlrtRTEI);
+                    &e_emlrtRTEI);
   k = i->size[0];
   for (i3 = 0; i3 < k; i3++) {
     ii->data[i3] = (int32_T)i->data[i3];

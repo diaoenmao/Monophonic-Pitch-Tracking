@@ -2,7 +2,7 @@
  * File: yaapt_emxutil.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -50,6 +50,16 @@ void emxEnsureCapacity(emxArray__common *emxArray, int oldNumel, int elementSize
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
   }
+}
+
+/*
+ * Arguments    : struct_T *pStruct
+ * Return Type  : void
+ */
+void emxFreeStruct_struct_T(struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->breaks);
+  emxFree_real_T(&pStruct->coefs);
 }
 
 /*
@@ -119,6 +129,16 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     free((void *)*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
+}
+
+/*
+ * Arguments    : struct_T *pStruct
+ * Return Type  : void
+ */
+void emxInitStruct_struct_T(struct_T *pStruct)
+{
+  emxInit_real_T(&pStruct->breaks, 2);
+  emxInit_real_T(&pStruct->coefs, 2);
 }
 
 /*

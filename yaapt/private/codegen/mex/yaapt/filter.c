@@ -16,20 +16,20 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ec_emlrtRSI = { 167, "filter",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
+static emlrtRSInfo fc_emlrtRSI = { 167, "filter",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
 
-static emlrtRSInfo fc_emlrtRSI = { 171, "filter",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
+static emlrtRSInfo gc_emlrtRSI = { 171, "filter",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
 
-static emlrtRSInfo gc_emlrtRSI = { 195, "filter",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
+static emlrtRSInfo hc_emlrtRSI = { 195, "filter",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
 
-static emlrtRTEInfo h_emlrtRTEI = { 1, 19, "filter",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
+static emlrtRTEInfo i_emlrtRTEI = { 1, 19, "filter",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
 
-static emlrtRTEInfo ud_emlrtRTEI = { 42, 19, "filter",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
+static emlrtRTEInfo be_emlrtRTEI = { 42, 19, "filter",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\filter.m" };
 
 /* Function Definitions */
 
@@ -60,7 +60,7 @@ void b_filter(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
 
   if (b14) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ud_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &be_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
@@ -72,13 +72,13 @@ void b_filter(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
   y->size[0] = 1;
   y->size[1] = (int32_T)uv4[1];
   emxEnsureCapacity(sp, (emxArray__common *)y, n, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
+                    &i_emlrtRTEI);
   nx = x->size[1];
   if (x->size[1] >= 6) {
     n = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity(sp, (emxArray__common *)y, n, (int32_T)sizeof(real_T),
-                      &h_emlrtRTEI);
+                      &i_emlrtRTEI);
     k = y->size[1];
     for (n = 0; n < k; n++) {
       y->data[y->size[0] * n] = 0.0;
@@ -87,7 +87,7 @@ void b_filter(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
     for (k = 0; k < 3; k++) {
       n = nx - k;
       if (n < 23) {
-        st.site = &ec_emlrtRSI;
+        st.site = &fc_emlrtRSI;
         if (k + 1 > nx) {
           b_k = false;
         } else {
@@ -95,7 +95,7 @@ void b_filter(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
         }
 
         if (b_k) {
-          b_st.site = &ib_emlrtRSI;
+          b_st.site = &jb_emlrtRSI;
           check_forloop_overflow_error(&b_st, true);
         }
 
@@ -103,7 +103,7 @@ void b_filter(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
           y->data[n] += 0.33333333333333331 * x->data[n - k];
         }
       } else {
-        st.site = &fc_emlrtRSI;
+        st.site = &gc_emlrtRSI;
         xaxpy(n, 0.33333333333333331, x, 1, y, k + 1);
       }
     }
@@ -112,7 +112,7 @@ void b_filter(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
       dbuffer[k + 1] = 0.0;
     }
 
-    st.site = &gc_emlrtRSI;
+    st.site = &hc_emlrtRSI;
     for (n = 0; n + 1 <= nx; n++) {
       for (k = 0; k < 2; k++) {
         dbuffer[k] = dbuffer[k + 1];
@@ -157,7 +157,7 @@ void filter(const emlrtStack *sp, const real_T b[151], const emxArray_real_T *x,
 
   if (b0) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ud_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &be_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
@@ -169,13 +169,13 @@ void filter(const emlrtStack *sp, const real_T b[151], const emxArray_real_T *x,
   y->size[0] = 1;
   y->size[1] = (int32_T)uv0[1];
   emxEnsureCapacity(sp, (emxArray__common *)y, n, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
+                    &i_emlrtRTEI);
   nx = x->size[1];
   if (x->size[1] >= 302) {
     n = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity(sp, (emxArray__common *)y, n, (int32_T)sizeof(real_T),
-                      &h_emlrtRTEI);
+                      &i_emlrtRTEI);
     k = y->size[1];
     for (n = 0; n < k; n++) {
       y->data[y->size[0] * n] = 0.0;
@@ -184,7 +184,7 @@ void filter(const emlrtStack *sp, const real_T b[151], const emxArray_real_T *x,
     for (k = 0; k < 151; k++) {
       n = nx - k;
       if ((b[k] == 0.0) || (n < 23)) {
-        st.site = &ec_emlrtRSI;
+        st.site = &fc_emlrtRSI;
         if (k + 1 > nx) {
           b_k = false;
         } else {
@@ -192,7 +192,7 @@ void filter(const emlrtStack *sp, const real_T b[151], const emxArray_real_T *x,
         }
 
         if (b_k) {
-          b_st.site = &ib_emlrtRSI;
+          b_st.site = &jb_emlrtRSI;
           check_forloop_overflow_error(&b_st, true);
         }
 
@@ -200,13 +200,13 @@ void filter(const emlrtStack *sp, const real_T b[151], const emxArray_real_T *x,
           y->data[n] += b[k] * x->data[n - k];
         }
       } else {
-        st.site = &fc_emlrtRSI;
+        st.site = &gc_emlrtRSI;
         xaxpy(n, b[k], x, 1, y, k + 1);
       }
     }
   } else {
     memset(&dbuffer[1], 0, 150U * sizeof(real_T));
-    st.site = &gc_emlrtRSI;
+    st.site = &hc_emlrtRSI;
     for (n = 0; n + 1 <= nx; n++) {
       for (k = 0; k < 150; k++) {
         dbuffer[k] = dbuffer[k + 1];

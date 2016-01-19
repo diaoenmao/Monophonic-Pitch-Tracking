@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_mexutil.h"
+#include "yaapt_data.h"
 #include "lapacke.h"
 
 /* Function Definitions */
@@ -24,6 +25,19 @@ int32_T asr_s32(int32_T u, uint32_T n)
   return y;
 }
 
+emlrtCTX emlrtGetRootTLSGlobal(void)
+{
+  return emlrtRootTLSGlobal;
+}
+
+void emlrtLockerFunction(EmlrtLockeeFunction aLockee, const emlrtConstCTX aTLS,
+  void *aData)
+{
+  omp_set_lock(&emlrtLockGlobal);
+  emlrtCallLockeeFunction(aLockee, aTLS, aData);
+  omp_unset_lock(&emlrtLockGlobal);
+}
+
 const mxArray *emlrt_marshallOut(const real_T u)
 {
   const mxArray *y;
@@ -34,7 +48,7 @@ const mxArray *emlrt_marshallOut(const real_T u)
   return y;
 }
 
-void m_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
+void n_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
 {
   const mxArray *pArray;
   pArray = b;

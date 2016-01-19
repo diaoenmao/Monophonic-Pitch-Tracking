@@ -31,16 +31,17 @@
 <a name="19"><font color="#888888 "><i>   19   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;emlrt.h&quot;</font>
 <a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;blas.h&quot;</font>
 <a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;rtwtypes.h&quot;</font>
-<a name="22"><font color="#888888 "><i>   22   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_types.h&quot;</font>
-<a name="23"><font color="#888888 "><i>   23   </i></font></a>
-<a name="24"><font color="#888888 "><i>   24   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
-<a name="25"><font color="#888888 "><i>   25   </i></font></a><font color="#112266"><b>extern</b></font> <font color="#112266"><b>void</b></font> <a href="crs_corr_c.html#fcn_crs_corr" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_crs_corr');" target="_self"><font color="#1122aa">crs_corr</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *Data, real_T lag_min,
-<a name="26"><font color="#888888 "><i>   26   </i></font></a>                     real_T lag_max, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *Phi);
-<a name="27"><font color="#888888 "><i>   27   </i></font></a>
-<a name="28"><font color="#888888 "><i>   28   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>
-<a name="29"><font color="#888888 "><i>   29   </i></font></a>
-<a name="30"><font color="#888888 "><i>   30   </i></font></a><font color="#117755"><i>/* End of code generation (crs_corr.h) */</i></font>
-<a name="31"><font color="#888888 "><i>   31   </i></font></a></pre>
+<a name="22"><font color="#888888 "><i>   22   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;omp.h&quot;</font>
+<a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_types.h&quot;</font>
+<a name="24"><font color="#888888 "><i>   24   </i></font></a>
+<a name="25"><font color="#888888 "><i>   25   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
+<a name="26"><font color="#888888 "><i>   26   </i></font></a><font color="#112266"><b>extern</b></font> <font color="#112266"><b>void</b></font> <a href="crs_corr_c.html#fcn_crs_corr" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_crs_corr');" target="_self"><font color="#1122aa">crs_corr</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *Data, real_T lag_min,
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>                     real_T lag_max, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *Phi);
+<a name="28"><font color="#888888 "><i>   28   </i></font></a>
+<a name="29"><font color="#888888 "><i>   29   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>
+<a name="30"><font color="#888888 "><i>   30   </i></font></a>
+<a name="31"><font color="#888888 "><i>   31   </i></font></a><font color="#117755"><i>/* End of code generation (crs_corr.h) */</i></font>
+<a name="32"><font color="#888888 "><i>   32   </i></font></a></pre>
 </td></tr></table>
 </p>
 </body>

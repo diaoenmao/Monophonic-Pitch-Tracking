@@ -2,7 +2,7 @@
  * File: fft.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -2881,16 +2881,16 @@ static void eml_fft(const emxArray_real_T *x, creal_T y[8192])
 void fft(const emxArray_real_T *x, creal_T y[8192])
 {
   emxArray_real_T *b_x;
-  int i8;
+  int i9;
   int loop_ub;
   creal_T b_y1[8192];
   emxInit_real_T1(&b_x, 1);
-  i8 = b_x->size[0];
+  i9 = b_x->size[0];
   b_x->size[0] = x->size[1];
-  emxEnsureCapacity((emxArray__common *)b_x, i8, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)b_x, i9, (int)sizeof(double));
   loop_ub = x->size[1];
-  for (i8 = 0; i8 < loop_ub; i8++) {
-    b_x->data[i8] = x->data[x->size[0] * i8];
+  for (i9 = 0; i9 < loop_ub; i9++) {
+    b_x->data[i9] = x->data[x->size[0] * i9];
   }
 
   eml_fft(b_x, b_y1);

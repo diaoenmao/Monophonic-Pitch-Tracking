@@ -14,8 +14,8 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vf_emlrtRSI = { 10, "fix",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elfun\\fix.m" };
+static emlrtRSInfo wf_emlrtRSI = { 10, "fix",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\fix.m" };
 
 /* Function Definitions */
 
@@ -45,13 +45,13 @@ void c_fix(const emlrtStack *sp, emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &vf_emlrtRSI;
+  st.site = &wf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  b_st.site = &gd_emlrtRSI;
+  b_st.site = &hd_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -59,7 +59,7 @@ void c_fix(const emlrtStack *sp, emxArray_real_T *x)
   }
 
   if (overflow) {
-    c_st.site = &ib_emlrtRSI;
+    c_st.site = &jb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 

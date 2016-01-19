@@ -33,7 +33,7 @@ real_T combine_vector_elements(const emlrtStack *sp, const emxArray_real_T *x)
     y = 0.0;
   } else {
     y = x->data[0];
-    st.site = &wd_emlrtRSI;
+    st.site = &xd_emlrtRSI;
     if (2 > x->size[1]) {
       overflow = false;
     } else {
@@ -41,7 +41,7 @@ real_T combine_vector_elements(const emlrtStack *sp, const emxArray_real_T *x)
     }
 
     if (overflow) {
-      b_st.site = &ib_emlrtRSI;
+      b_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 

@@ -17,26 +17,26 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo dg_emlrtRSI = { 114, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
+static emlrtRSInfo eg_emlrtRSI = { 114, "repmat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRSInfo eg_emlrtRSI = { 18, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
+static emlrtRSInfo fg_emlrtRSI = { 18, "repmat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRSInfo fg_emlrtRSI = { 112, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
+static emlrtRSInfo gg_emlrtRSI = { 112, "repmat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
 static emlrtMCInfo d_emlrtMCI = { 37, 5, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRTEInfo rb_emlrtRTEI = { 1, 14, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
+static emlrtRTEInfo tb_emlrtRTEI = { 1, 14, "repmat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
 static emlrtDCInfo x_emlrtDCI = { 21, 14, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m", 4 };
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m", 4 };
 
-static emlrtRSInfo gm_emlrtRSI = { 37, "repmat",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
+static emlrtRSInfo nm_emlrtRSI = { 37, "repmat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
 /* Function Definitions */
 
@@ -56,7 +56,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
   emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &eg_emlrtRSI;
+  st.site = &fg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((varargin_2 != muDoubleScalarFloor(varargin_2)) || muDoubleScalarIsInf
@@ -89,7 +89,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
 
   if (p) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &oe_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &ue_emlrtRTEI,
       "Coder:MATLAB:NonIntegerInput", 4, 12, MIN_int32_T, 12, MAX_int32_T);
   }
 
@@ -101,7 +101,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
 
   if (2.147483647E+9 >= b_varargin_2) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &pe_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
+    emlrtErrorWithMessageIdR2012b(&st, &ve_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
   }
 
   if (!(varargin_2 > 0.0)) {
@@ -112,9 +112,9 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
   b->size[0] = 4;
   b->size[1] = (int32_T)varargin_2;
   emxEnsureCapacity(sp, (emxArray__common *)b, jtilecol, (int32_T)sizeof(real_T),
-                    &rb_emlrtRTEI);
+                    &tb_emlrtRTEI);
   if (!((int32_T)varargin_2 == 0)) {
-    st.site = &fg_emlrtRSI;
+    st.site = &gg_emlrtRSI;
     if (1 > (int32_T)varargin_2) {
       b5 = false;
     } else {
@@ -122,7 +122,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
     }
 
     if (b5) {
-      b_st.site = &ib_emlrtRSI;
+      b_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 
@@ -169,20 +169,20 @@ void repmat(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *b)
     m5 = emlrtCreateCharArray(2, iv21);
     emlrtInitCharArrayR2013a(sp, 15, m5, &u[0]);
     emlrtAssign(&y, m5);
-    st.site = &gm_emlrtRSI;
-    m_error(&st, y, &d_emlrtMCI);
+    st.site = &nm_emlrtRSI;
+    n_error(&st, y, &d_emlrtMCI);
   }
 
   ibmat = b->size[0] * b->size[1];
   b->size[0] = 4;
   b->size[1] = outsize_idx_1;
   emxEnsureCapacity(sp, (emxArray__common *)b, ibmat, (int32_T)sizeof(real_T),
-                    &rb_emlrtRTEI);
+                    &tb_emlrtRTEI);
   if ((!(a->size[1] == 0)) && (!(outsize_idx_1 == 0))) {
-    st.site = &dg_emlrtRSI;
+    st.site = &eg_emlrtRSI;
     overflow = (a->size[1] > 2147483646);
     if (overflow) {
-      b_st.site = &ib_emlrtRSI;
+      b_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 

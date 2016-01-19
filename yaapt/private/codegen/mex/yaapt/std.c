@@ -18,29 +18,29 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo kh_emlrtRSI = { 12, "std",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\std.m" };
+static emlrtRSInfo lh_emlrtRSI = { 12, "std",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\std.m" };
 
-static emlrtRSInfo lh_emlrtRSI = { 111, "var",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
+static emlrtRSInfo mh_emlrtRSI = { 111, "var",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
 
-static emlrtRSInfo mh_emlrtRSI = { 143, "var",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
+static emlrtRSInfo nh_emlrtRSI = { 143, "var",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
 
-static emlrtRSInfo nh_emlrtRSI = { 150, "var",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
+static emlrtRSInfo oh_emlrtRSI = { 150, "var",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
 
-static emlrtRSInfo di_emlrtRSI = { 108, "var",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
+static emlrtRSInfo ei_emlrtRSI = { 108, "var",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
 
-static emlrtRTEInfo hc_emlrtRTEI = { 1, 14, "std",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\std.m" };
+static emlrtRTEInfo jc_emlrtRTEI = { 1, 14, "std",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\std.m" };
 
-static emlrtRTEInfo re_emlrtRTEI = { 18, 19, "var",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
+static emlrtRTEInfo xe_emlrtRTEI = { 18, 19, "var",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
 
-static emlrtRTEInfo se_emlrtRTEI = { 21, 19, "var",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
+static emlrtRTEInfo ye_emlrtRTEI = { 21, 19, "var",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\var.m" };
 
 /* Function Definitions */
 
@@ -63,7 +63,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &kh_emlrtRSI;
+  st.site = &lh_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -73,7 +73,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
   overflow = !b_isequal(varargin_1);
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &re_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &xe_emlrtRTEI,
       "Coder:toolbox:var_specialEmpty", 0);
   }
 
@@ -85,7 +85,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &se_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &ye_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
@@ -99,10 +99,10 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
   if (varargin_1->size[1] == 0) {
     x = 0.0;
   } else {
-    b_st.site = &lh_emlrtRSI;
+    b_st.site = &mh_emlrtRSI;
     ix = 0;
     xbar = varargin_1->data[0];
-    c_st.site = &mh_emlrtRSI;
+    c_st.site = &nh_emlrtRSI;
     if (2 > varargin_1->size[1]) {
       overflow = false;
     } else {
@@ -110,7 +110,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
     }
 
     if (overflow) {
-      d_st.site = &ib_emlrtRSI;
+      d_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 
@@ -123,7 +123,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
     ix = 0;
     r = varargin_1->data[0] - xbar;
     x = r * r;
-    c_st.site = &nh_emlrtRSI;
+    c_st.site = &oh_emlrtRSI;
     if (2 > varargin_1->size[1]) {
       overflow = false;
     } else {
@@ -131,7 +131,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
     }
 
     if (overflow) {
-      d_st.site = &ib_emlrtRSI;
+      d_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 
@@ -144,9 +144,9 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1)
     x /= (real_T)d;
   }
 
-  st.site = &kh_emlrtRSI;
+  st.site = &lh_emlrtRSI;
   if (x < 0.0) {
-    b_st.site = &ye_emlrtRSI;
+    b_st.site = &af_emlrtRSI;
     error(&b_st);
   }
 
@@ -179,7 +179,7 @@ void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &kh_emlrtRSI;
+  st.site = &lh_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -200,13 +200,13 @@ void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   ix = y->size[0];
   y->size[0] = (int32_T)sz[0];
   emxEnsureCapacity(&st, (emxArray__common *)y, ix, (int32_T)sizeof(real_T),
-                    &hc_emlrtRTEI);
+                    &jc_emlrtRTEI);
   if ((varargin_1->size[0] == 0) || (varargin_1->size[1] == 0)) {
     vstride = y->size[0];
     ix = y->size[0];
     y->size[0] = vstride;
     emxEnsureCapacity(&st, (emxArray__common *)y, ix, (int32_T)sizeof(real_T),
-                      &hc_emlrtRTEI);
+                      &jc_emlrtRTEI);
     for (ix = 0; ix < vstride; ix++) {
       y->data[ix] = 0.0;
     }
@@ -214,20 +214,20 @@ void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
     vstride = varargin_1->size[0];
     ix = -1;
     iy = -1;
-    b_st.site = &di_emlrtRSI;
+    b_st.site = &ei_emlrtRSI;
     overflow = (varargin_1->size[0] > 2147483646);
     if (overflow) {
-      c_st.site = &ib_emlrtRSI;
+      c_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&c_st, true);
     }
 
     for (j = 1; j <= vstride; j++) {
       ix++;
       iy++;
-      b_st.site = &lh_emlrtRSI;
+      b_st.site = &mh_emlrtRSI;
       b_ix = ix;
       xbar = varargin_1->data[ix];
-      c_st.site = &mh_emlrtRSI;
+      c_st.site = &nh_emlrtRSI;
       if (2 > n) {
         b13 = false;
       } else {
@@ -235,7 +235,7 @@ void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
       }
 
       if (b13) {
-        d_st.site = &ib_emlrtRSI;
+        d_st.site = &jb_emlrtRSI;
         check_forloop_overflow_error(&d_st, true);
       }
 
@@ -248,7 +248,7 @@ void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
       b_ix = ix;
       r = varargin_1->data[ix] - xbar;
       b_y = r * r;
-      c_st.site = &nh_emlrtRSI;
+      c_st.site = &oh_emlrtRSI;
       for (k = 2; k <= n; k++) {
         b_ix += vstride;
         r = varargin_1->data[b_ix] - xbar;
@@ -260,7 +260,7 @@ void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
     }
   }
 
-  st.site = &kh_emlrtRSI;
+  st.site = &lh_emlrtRSI;
   b_sqrt(&st, y);
 }
 

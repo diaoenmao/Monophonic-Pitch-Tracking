@@ -23,8 +23,10 @@ void warn_singular(const emlrtStack *sp)
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &cc_emlrtRSI;
-  warning(&st);
+  if (!emlrtSetWarningFlag(sp)) {
+    st.site = &dc_emlrtRSI;
+    warning(&st);
+  }
 }
 
 /* End of code generation (lusolve.c) */

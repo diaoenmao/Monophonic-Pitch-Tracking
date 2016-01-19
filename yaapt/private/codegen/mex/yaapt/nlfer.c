@@ -10,6 +10,7 @@
 #include "yaapt.h"
 #include "nlfer.h"
 #include "yaapt_emxutil.h"
+#include "rdivide.h"
 #include "mean.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "Myspecgram.h"
@@ -17,19 +18,22 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo oc_emlrtRSI = { 46, "nlfer",
+static emlrtRSInfo pc_emlrtRSI = { 46, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRSInfo pc_emlrtRSI = { 49, "nlfer",
+static emlrtRSInfo qc_emlrtRSI = { 49, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRSInfo qc_emlrtRSI = { 50, "nlfer",
+static emlrtRSInfo rc_emlrtRSI = { 50, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRTEInfo i_emlrtRTEI = { 1, 30, "nlfer",
+static emlrtRTEInfo j_emlrtRTEI = { 1, 30, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRTEInfo j_emlrtRTEI = { 46, 1, "nlfer",
+static emlrtRTEInfo k_emlrtRTEI = { 46, 1, "nlfer",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
+
+static emlrtRTEInfo l_emlrtRTEI = { 49, 1, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
 static emlrtDCInfo e_emlrtDCI = { 49, 30, "nlfer",
@@ -68,6 +72,7 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   boolean_T overflow;
   boolean_T p;
   int32_T exitg1;
+  emxArray_real_T *FrmEnergy;
   boolean_T b2;
   real_T avgEnergy;
   emlrtStack st;
@@ -126,7 +131,7 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
 
   /* 'nlfer:34' nframejump = fix(Prm.frame_space*Fs/1000); */
   s = 10.0 * Fs / 1000.0;
-  emxInit_real_T(sp, &b_Data, 2, &i_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Data, 2, &j_emlrtRTEI, true);
 
   /*  If normalized low-frequency energy is below this, assume unvoiced frame */
   /* 'nlfer:37' nlfer_thersh1  = Prm.nlfer_thresh1; */
@@ -144,20 +149,20 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   b_Data->size[0] = 1;
   b_Data->size[1] = Data->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)b_Data, i8, (int32_T)sizeof(real_T),
-                    &i_emlrtRTEI);
+                    &j_emlrtRTEI);
   n = Data->size[0] * Data->size[1];
   for (i8 = 0; i8 < n; i8++) {
     b_Data->data[i8] = Data->data[i8];
   }
 
-  emxInit_creal_T(sp, &SpecData, 2, &j_emlrtRTEI, true);
+  emxInit_creal_T(sp, &SpecData, 2, &k_emlrtRTEI, true);
   if (s < 0.0) {
     b_s = muDoubleScalarCeil(s);
   } else {
     b_s = muDoubleScalarFloor(s);
   }
 
-  st.site = &oc_emlrtRSI;
+  st.site = &pc_emlrtRSI;
   Myspecgram(&st, b_Data, nframesize, nframesize - b_s, SpecData);
 
   /*  SpecData_test = specgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump)); */
@@ -191,14 +196,14 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
     i8 = ix + 1;
   }
 
-  emxInit_creal_T(sp, &x, 2, &i_emlrtRTEI, true);
-  st.site = &pc_emlrtRSI;
+  emxInit_creal_T(sp, &x, 2, &j_emlrtRTEI, true);
+  st.site = &qc_emlrtRSI;
   n = SpecData->size[1];
   ix = x->size[0] * x->size[1];
   x->size[0] = i8 - vlen;
   x->size[1] = n;
   emxEnsureCapacity(&st, (emxArray__common *)x, ix, (int32_T)sizeof(creal_T),
-                    &i_emlrtRTEI);
+                    &j_emlrtRTEI);
   for (ix = 0; ix < n; ix++) {
     iy = i8 - vlen;
     for (i = 0; i < iy; i++) {
@@ -207,14 +212,14 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
     }
   }
 
-  emxInit_creal_T(&st, &b_SpecData, 2, &i_emlrtRTEI, true);
-  b_st.site = &pd_emlrtRSI;
+  emxInit_creal_T(&st, &b_SpecData, 2, &j_emlrtRTEI, true);
+  b_st.site = &qd_emlrtRSI;
   n = SpecData->size[1];
   ix = b_SpecData->size[0] * b_SpecData->size[1];
   b_SpecData->size[0] = i8 - vlen;
   b_SpecData->size[1] = n;
   emxEnsureCapacity(&b_st, (emxArray__common *)b_SpecData, ix, (int32_T)sizeof
-                    (creal_T), &i_emlrtRTEI);
+                    (creal_T), &j_emlrtRTEI);
   for (ix = 0; ix < n; ix++) {
     iy = i8 - vlen;
     for (i = 0; i < iy; i++) {
@@ -228,15 +233,15 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   }
 
   emxFree_creal_T(&b_SpecData);
-  emxInit_real_T(&b_st, &b_x, 2, &i_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &b_x, 2, &j_emlrtRTEI, true);
   ix = b_x->size[0] * b_x->size[1];
   b_x->size[0] = (int32_T)sz[0];
   b_x->size[1] = (int32_T)sz[1];
   emxEnsureCapacity(&b_st, (emxArray__common *)b_x, ix, (int32_T)sizeof(real_T),
-                    &i_emlrtRTEI);
+                    &j_emlrtRTEI);
   ix = SpecData->size[1];
   n = (i8 - vlen) * ix;
-  c_st.site = &qd_emlrtRSI;
+  c_st.site = &rd_emlrtRSI;
   if (1 > n) {
     b1 = false;
   } else {
@@ -244,7 +249,7 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   }
 
   if (b1) {
-    d_st.site = &ib_emlrtRSI;
+    d_st.site = &jb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
@@ -254,8 +259,8 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
 
   emxFree_creal_T(&x);
   emxFree_creal_T(&SpecData);
-  st.site = &pc_emlrtRSI;
-  b_st.site = &rd_emlrtRSI;
+  st.site = &qc_emlrtRSI;
+  b_st.site = &sd_emlrtRSI;
   if (((b_x->size[0] == 1) && (b_x->size[1] == 1)) || (b_x->size[0] != 1)) {
     overflow = true;
   } else {
@@ -264,7 +269,7 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &vd_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &ce_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
@@ -293,37 +298,38 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
 
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &wd_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &de_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  c_st.site = &sd_emlrtRSI;
+  c_st.site = &td_emlrtRSI;
   for (i8 = 0; i8 < 2; i8++) {
     sz[i8] = (uint32_T)b_x->size[i8];
   }
 
-  i8 = Energy->size[0] * Energy->size[1];
-  Energy->size[0] = 1;
-  Energy->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(&c_st, (emxArray__common *)Energy, i8, (int32_T)sizeof
-                    (real_T), &i_emlrtRTEI);
+  emxInit_real_T(&c_st, &FrmEnergy, 2, &l_emlrtRTEI, true);
+  i8 = FrmEnergy->size[0] * FrmEnergy->size[1];
+  FrmEnergy->size[0] = 1;
+  FrmEnergy->size[1] = (int32_T)sz[1];
+  emxEnsureCapacity(&c_st, (emxArray__common *)FrmEnergy, i8, (int32_T)sizeof
+                    (real_T), &j_emlrtRTEI);
   if ((b_x->size[0] == 0) || (b_x->size[1] == 0)) {
-    i8 = Energy->size[0] * Energy->size[1];
-    Energy->size[0] = 1;
-    emxEnsureCapacity(&c_st, (emxArray__common *)Energy, i8, (int32_T)sizeof
-                      (real_T), &i_emlrtRTEI);
-    n = Energy->size[1];
+    i8 = FrmEnergy->size[0] * FrmEnergy->size[1];
+    FrmEnergy->size[0] = 1;
+    emxEnsureCapacity(&c_st, (emxArray__common *)FrmEnergy, i8, (int32_T)sizeof
+                      (real_T), &j_emlrtRTEI);
+    n = FrmEnergy->size[1];
     for (i8 = 0; i8 < n; i8++) {
-      Energy->data[Energy->size[0] * i8] = 0.0;
+      FrmEnergy->data[FrmEnergy->size[0] * i8] = 0.0;
     }
   } else {
     vlen = b_x->size[0];
     ix = -1;
     iy = -1;
-    d_st.site = &td_emlrtRSI;
+    d_st.site = &ud_emlrtRSI;
     overflow = (b_x->size[1] > 2147483646);
     if (overflow) {
-      e_st.site = &ib_emlrtRSI;
+      e_st.site = &jb_emlrtRSI;
       check_forloop_overflow_error(&e_st, true);
     }
 
@@ -331,7 +337,7 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
       n = ix + 1;
       ix++;
       s = b_x->data[n];
-      d_st.site = &ud_emlrtRSI;
+      d_st.site = &vd_emlrtRSI;
       if (2 > vlen) {
         b2 = false;
       } else {
@@ -339,7 +345,7 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
       }
 
       if (b2) {
-        e_st.site = &ib_emlrtRSI;
+        e_st.site = &jb_emlrtRSI;
         check_forloop_overflow_error(&e_st, true);
       }
 
@@ -349,27 +355,18 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
       }
 
       iy++;
-      Energy->data[iy] = s;
+      FrmEnergy->data[iy] = s;
     }
   }
 
   emxFree_real_T(&b_x);
 
   /* 'nlfer:50' avgEnergy = mean(FrmEnergy); */
-  st.site = &qc_emlrtRSI;
-  avgEnergy = mean(&st, Energy);
+  st.site = &rc_emlrtRSI;
+  avgEnergy = mean(&st, FrmEnergy);
 
   /* 'nlfer:52' Energy = FrmEnergy/avgEnergy; */
-  i8 = Energy->size[0] * Energy->size[1];
-  Energy->size[0] = 1;
-  emxEnsureCapacity(sp, (emxArray__common *)Energy, i8, (int32_T)sizeof(real_T),
-                    &i_emlrtRTEI);
-  n = Energy->size[0];
-  vlen = Energy->size[1];
-  n *= vlen;
-  for (i8 = 0; i8 < n; i8++) {
-    Energy->data[i8] /= avgEnergy;
-  }
+  c_rdivide(sp, FrmEnergy, avgEnergy, Energy);
 
   /*  The frame is voiced if NLFER enery > threshold, otherwise is unvoiced. */
   /* 'nlfer:54' VUVEnergy = (Energy > nlfer_thersh1); */
@@ -377,8 +374,9 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
   VUVEnergy->size[0] = 1;
   VUVEnergy->size[1] = Energy->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)VUVEnergy, i8, (int32_T)sizeof
-                    (boolean_T), &i_emlrtRTEI);
+                    (boolean_T), &j_emlrtRTEI);
   n = Energy->size[0] * Energy->size[1];
+  emxFree_real_T(&FrmEnergy);
   for (i8 = 0; i8 < n; i8++) {
     VUVEnergy->data[i8] = (Energy->data[i8] > 0.75);
   }

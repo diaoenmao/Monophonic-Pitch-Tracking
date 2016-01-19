@@ -14,11 +14,11 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo kb_emlrtRSI = { 37, "mpower",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\mpower.m" };
+static emlrtRSInfo lb_emlrtRSI = { 37, "mpower",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\mpower.m" };
 
-static emlrtRSInfo mb_emlrtRSI = { 61, "power",
-  "F:\\Matlab2015b\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
+static emlrtRSInfo nb_emlrtRSI = { 61, "power",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
 /* Function Definitions */
 
@@ -34,12 +34,12 @@ real_T b_mpower(const emlrtStack *sp, real_T a, real_T b)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &kb_emlrtRSI;
+  st.site = &lb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
-  b_st.site = &lb_emlrtRSI;
+  b_st.site = &mb_emlrtRSI;
   c = muDoubleScalarPower(a, b);
   p = false;
   if (a < 0.0) {
@@ -53,7 +53,7 @@ real_T b_mpower(const emlrtStack *sp, real_T a, real_T b)
   }
 
   if (p) {
-    c_st.site = &mb_emlrtRSI;
+    c_st.site = &nb_emlrtRSI;
     d_error(&c_st);
   }
 

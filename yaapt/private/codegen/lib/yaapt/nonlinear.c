@@ -2,7 +2,7 @@
  * File: nonlinear.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 12-Jan-2016 01:25:12
+ * C/C++ source code generated on  : 15-Jan-2016 00:47:12
  */
 
 /* Include Files */
@@ -43,6 +43,7 @@
 void nonlinear(const emxArray_real_T *DataA, double Fs, emxArray_real_T *DataB,
                emxArray_real_T *DataC, emxArray_real_T *DataD, double *newFs)
 {
+  int lenDataA;
   double w[2];
   double ff[6];
   int k;
@@ -106,6 +107,8 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, emxArray_real_T *DataB,
   double y_re;
   emxArray_real_T *tempData;
   int loop_ub;
+  int b_k;
+  int c_k;
 
   /*    Creation date:  Jun. 30, 2006 */
   /*    Programers:     Hongbing Hu, Princy, Zahorian */
@@ -123,6 +126,8 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, emxArray_real_T *DataB,
   /*  Do not decimate if Fs less than this */
   /*   Parameters for filtering original signal, with a broader band */
   /*  Creates the bandpass filters */
+  lenDataA = DataA->size[1];
+
   /*  filter F1 */
   w[0] = 50.0 / (Fs / 2.0);
   w[1] = 1500.0 / (Fs / 2.0);
@@ -325,20 +330,36 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, emxArray_real_T *DataB,
   /*    Absoulte value of the signal */
   /*    DataC =  abs(DataA); */
   /*    Squared value of the signal */
+  k = tempData->size[0] * tempData->size[1];
+  tempData->size[0] = 1;
+  tempData->size[1] = DataA->size[1];
+  emxEnsureCapacity((emxArray__common *)tempData, k, (int)sizeof(double));
+  loop_ub = DataA->size[0] * DataA->size[1];
+  for (k = 0; k < loop_ub; k++) {
+    tempData->data[k] = DataA->data[k];
+  }
+
   k = DataC->size[0] * DataC->size[1];
   DataC->size[0] = 1;
   DataC->size[1] = DataA->size[1];
   emxEnsureCapacity((emxArray__common *)DataC, k, (int)sizeof(double));
-  for (k = 0; k + 1 <= DataA->size[1]; k++) {
-    DataC->data[k] = DataA->data[k] * DataA->data[k];
+  k = DataA->size[1];
+
+#pragma omp parallel for \
+ num_threads(omp_get_max_threads()) \
+ private(c_k)
+
+  for (b_k = 1; b_k <= k; b_k++) {
+    c_k = b_k;
+    DataC->data[c_k - 1] = tempData->data[c_k - 1] * tempData->data[c_k - 1];
   }
 
   /*    Nonlinear version filtered with F1 */
   filter(hh, DataC, tempData);
-  if (1 > DataA->size[1]) {
+  if (1 > lenDataA) {
     loop_ub = 0;
   } else {
-    loop_ub = DataA->size[1];
+    loop_ub = lenDataA;
   }
 
   k = DataD->size[0] * DataD->size[1];

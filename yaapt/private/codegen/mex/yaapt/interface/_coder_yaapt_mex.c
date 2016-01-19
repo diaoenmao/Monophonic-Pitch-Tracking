@@ -15,6 +15,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
+static jmp_buf emlrtJBEnviron;
 static yaaptStackData *yaaptStackDataGlobal = NULL;
 
 /* Function Declarations */
@@ -71,22 +72,38 @@ static void yaapt_mexFunction(yaaptStackData *SD, int32_T nlhs, mxArray *plhs[3]
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const mxArray
                  *prhs[])
 {
+  emlrtStack st = { NULL, NULL, NULL };
+
   yaaptStackDataGlobal = (yaaptStackData *)mxCalloc(1, 1U * sizeof
     (yaaptStackData));
   mexAtExit(yaapt_atexit);
 
   /* Initialize the memory manager. */
+  omp_init_lock(&emlrtLockGlobal);
+  omp_init_nest_lock(&emlrtNestLockGlobal);
+
   /* Module initialization. */
   yaapt_initialize();
+  st.tls = emlrtRootTLSGlobal;
+  emlrtSetJmpBuf(&st, &emlrtJBEnviron);
+  if (setjmp(emlrtJBEnviron) == 0) {
+    /* Dispatch the entry-point. */
+    yaapt_mexFunction(yaaptStackDataGlobal, nlhs, plhs, nrhs, prhs);
+    omp_destroy_lock(&emlrtLockGlobal);
+    omp_destroy_nest_lock(&emlrtNestLockGlobal);
+  } else {
+    omp_destroy_lock(&emlrtLockGlobal);
+    omp_destroy_nest_lock(&emlrtNestLockGlobal);
+    emlrtReportParallelRunTimeError(&st);
+  }
 
-  /* Dispatch the entry-point. */
-  yaapt_mexFunction(yaaptStackDataGlobal, nlhs, plhs, nrhs, prhs);
   mxFree(yaaptStackDataGlobal);
 }
 
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLS(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1);
+  emlrtCreateRootTLS(&emlrtRootTLSGlobal, &emlrtContextGlobal,
+                     emlrtLockerFunction, omp_get_num_procs());
   return emlrtRootTLSGlobal;
 }
 
