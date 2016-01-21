@@ -17,13 +17,13 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo eg_emlrtRSI = { 114, "repmat",
+static emlrtRSInfo fg_emlrtRSI = { 114, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRSInfo fg_emlrtRSI = { 18, "repmat",
+static emlrtRSInfo gg_emlrtRSI = { 18, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
-static emlrtRSInfo gg_emlrtRSI = { 112, "repmat",
+static emlrtRSInfo hg_emlrtRSI = { 112, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
 static emlrtMCInfo d_emlrtMCI = { 37, 5, "repmat",
@@ -35,7 +35,7 @@ static emlrtRTEInfo tb_emlrtRTEI = { 1, 14, "repmat",
 static emlrtDCInfo x_emlrtDCI = { 21, 14, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m", 4 };
 
-static emlrtRSInfo nm_emlrtRSI = { 37, "repmat",
+static emlrtRSInfo om_emlrtRSI = { 37, "repmat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\repmat.m" };
 
 /* Function Definitions */
@@ -56,7 +56,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
   emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &fg_emlrtRSI;
+  st.site = &gg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((varargin_2 != muDoubleScalarFloor(varargin_2)) || muDoubleScalarIsInf
@@ -114,7 +114,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
   emxEnsureCapacity(sp, (emxArray__common *)b, jtilecol, (int32_T)sizeof(real_T),
                     &tb_emlrtRTEI);
   if (!((int32_T)varargin_2 == 0)) {
-    st.site = &gg_emlrtRSI;
+    st.site = &hg_emlrtRSI;
     if (1 > (int32_T)varargin_2) {
       b5 = false;
     } else {
@@ -122,7 +122,7 @@ void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b)
     }
 
     if (b5) {
-      b_st.site = &jb_emlrtRSI;
+      b_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 
@@ -169,7 +169,7 @@ void repmat(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *b)
     m5 = emlrtCreateCharArray(2, iv21);
     emlrtInitCharArrayR2013a(sp, 15, m5, &u[0]);
     emlrtAssign(&y, m5);
-    st.site = &nm_emlrtRSI;
+    st.site = &om_emlrtRSI;
     n_error(&st, y, &d_emlrtMCI);
   }
 
@@ -179,10 +179,10 @@ void repmat(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *b)
   emxEnsureCapacity(sp, (emxArray__common *)b, ibmat, (int32_T)sizeof(real_T),
                     &tb_emlrtRTEI);
   if ((!(a->size[1] == 0)) && (!(outsize_idx_1 == 0))) {
-    st.site = &eg_emlrtRSI;
+    st.site = &fg_emlrtRSI;
     overflow = (a->size[1] > 2147483646);
     if (overflow) {
-      b_st.site = &jb_emlrtRSI;
+      b_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 

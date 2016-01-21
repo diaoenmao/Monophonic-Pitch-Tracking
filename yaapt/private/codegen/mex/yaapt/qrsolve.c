@@ -16,22 +16,22 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vk_emlrtRSI = { 72, "qrsolve",
+static emlrtRSInfo wk_emlrtRSI = { 72, "qrsolve",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\qrsolve.m" };
 
-static emlrtRSInfo wk_emlrtRSI = { 79, "qrsolve",
+static emlrtRSInfo xk_emlrtRSI = { 79, "qrsolve",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\qrsolve.m" };
 
-static emlrtRSInfo xk_emlrtRSI = { 86, "qrsolve",
+static emlrtRSInfo yk_emlrtRSI = { 86, "qrsolve",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\qrsolve.m" };
 
-static emlrtRSInfo yk_emlrtRSI = { 89, "qrsolve",
+static emlrtRSInfo al_emlrtRSI = { 89, "qrsolve",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\qrsolve.m" };
 
-static emlrtRSInfo al_emlrtRSI = { 29, "xunormqr",
+static emlrtRSInfo bl_emlrtRSI = { 29, "xunormqr",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xunormqr.m" };
 
-static emlrtRSInfo bl_emlrtRSI = { 97, "xunormqr",
+static emlrtRSInfo cl_emlrtRSI = { 97, "xunormqr",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xunormqr.m" };
 
 static emlrtRTEInfo dd_emlrtRTEI = { 54, 14, "qrsolve",
@@ -72,21 +72,21 @@ void LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A, const
     Y->data[j] = 0.0;
   }
 
-  st.site = &vk_emlrtRSI;
-  b_st.site = &al_emlrtRSI;
+  st.site = &wk_emlrtRSI;
+  b_st.site = &bl_emlrtRSI;
   mn = muIntScalarMin_sint32(1, A->size[1]);
   if (!(A->size[1] == 0)) {
     nrc_t = (ptrdiff_t)1;
     nrc_t = LAPACKE_dormqr(102, 'L', 'T', nrc_t, (ptrdiff_t)1, (ptrdiff_t)mn,
       &A->data[0], (ptrdiff_t)1, &tau->data[0], &B, nrc_t);
     mn = (int32_T)nrc_t;
-    c_st.site = &bl_emlrtRSI;
+    c_st.site = &cl_emlrtRSI;
     if (mn != 0) {
       if (mn == -1010) {
-        d_st.site = &bc_emlrtRSI;
+        d_st.site = &cc_emlrtRSI;
         e_error(&d_st);
       } else {
-        d_st.site = &cc_emlrtRSI;
+        d_st.site = &dc_emlrtRSI;
         k_error(&d_st, mn);
       }
 
@@ -100,7 +100,7 @@ void LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A, const
     }
   }
 
-  st.site = &wk_emlrtRSI;
+  st.site = &xk_emlrtRSI;
   if (1 > rankA) {
     b17 = false;
   } else {
@@ -108,7 +108,7 @@ void LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A, const
   }
 
   if (b17) {
-    b_st.site = &jb_emlrtRSI;
+    b_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&b_st, true);
   }
 
@@ -116,10 +116,10 @@ void LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A, const
     Y->data[jpvt->data[mn - 1] - 1] = B;
   }
 
-  st.site = &xk_emlrtRSI;
+  st.site = &yk_emlrtRSI;
   for (j = rankA - 1; j + 1 > 0; j--) {
     Y->data[jpvt->data[j] - 1] /= A->data[j + A->size[0] * j];
-    st.site = &yk_emlrtRSI;
+    st.site = &al_emlrtRSI;
     for (mn = 0; mn + 1 <= j; mn++) {
       Y->data[jpvt->data[mn] - 1] -= Y->data[jpvt->data[j] - 1] * A->data[mn +
         A->size[0] * j];

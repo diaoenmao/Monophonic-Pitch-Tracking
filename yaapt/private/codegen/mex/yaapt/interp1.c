@@ -19,37 +19,37 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hi_emlrtRSI = { 41, "interp1",
+static emlrtRSInfo ii_emlrtRSI = { 41, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ii_emlrtRSI = { 153, "interp1",
+static emlrtRSInfo ji_emlrtRSI = { 153, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ji_emlrtRSI = { 155, "interp1",
+static emlrtRSInfo ki_emlrtRSI = { 155, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ki_emlrtRSI = { 162, "interp1",
+static emlrtRSInfo li_emlrtRSI = { 162, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo li_emlrtRSI = { 168, "interp1",
+static emlrtRSInfo mi_emlrtRSI = { 168, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo mi_emlrtRSI = { 173, "interp1",
+static emlrtRSInfo ni_emlrtRSI = { 173, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ni_emlrtRSI = { 175, "interp1",
+static emlrtRSInfo oi_emlrtRSI = { 175, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo oi_emlrtRSI = { 200, "interp1",
+static emlrtRSInfo pi_emlrtRSI = { 200, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo pi_emlrtRSI = { 21, "fliplr",
+static emlrtRSInfo qi_emlrtRSI = { 21, "fliplr",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\fliplr.m" };
 
-static emlrtRSInfo qi_emlrtRSI = { 242, "interp1",
+static emlrtRSInfo ri_emlrtRSI = { 242, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ri_emlrtRSI = { 263, "interp1",
+static emlrtRSInfo si_emlrtRSI = { 263, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
 static emlrtRTEInfo kc_emlrtRTEI = { 1, 15, "interp1",
@@ -113,7 +113,7 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
   emxInit_real_T(sp, &y, 2, &kc_emlrtRTEI, true);
-  st.site = &hi_emlrtRSI;
+  st.site = &ii_emlrtRSI;
   j2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = varargin_2->size[1];
@@ -168,10 +168,10 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
 
   if (varargin_3->size[1] == 0) {
   } else {
-    b_st.site = &ii_emlrtRSI;
+    b_st.site = &ji_emlrtRSI;
     overflow = (varargin_1->size[1] > 2147483646);
     if (overflow) {
-      c_st.site = &jb_emlrtRSI;
+      c_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&c_st, true);
     }
 
@@ -183,7 +183,7 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
       exitg1 = 0;
       if (nd2 <= nx) {
         if (muDoubleScalarIsNaN(varargin_1->data[nd2 - 1])) {
-          b_st.site = &ji_emlrtRSI;
+          b_st.site = &ki_emlrtRSI;
           h_error(&b_st);
         } else {
           nd2++;
@@ -191,16 +191,16 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
       } else {
         if (varargin_1->data[1] < varargin_1->data[0]) {
           nd2 = asr_s32(nx, 1U);
-          b_st.site = &ki_emlrtRSI;
+          b_st.site = &li_emlrtRSI;
           for (b_j1 = 1; b_j1 <= nd2; b_j1++) {
             xtmp = x->data[b_j1 - 1];
             x->data[b_j1 - 1] = x->data[nx - b_j1];
             x->data[nx - b_j1] = xtmp;
           }
 
-          b_st.site = &li_emlrtRSI;
+          b_st.site = &mi_emlrtRSI;
           nd2 = asr_s32(varargin_2->size[1], 1U);
-          c_st.site = &pi_emlrtRSI;
+          c_st.site = &qi_emlrtRSI;
           for (b_j1 = 1; b_j1 <= nd2; b_j1++) {
             j2 = varargin_2->size[1] - b_j1;
             xtmp = y->data[b_j1 - 1];
@@ -209,15 +209,15 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
           }
         }
 
-        b_st.site = &mi_emlrtRSI;
+        b_st.site = &ni_emlrtRSI;
         for (nd2 = 1; nd2 + 1 <= nx; nd2++) {
           if (x->data[nd2] <= x->data[nd2 - 1]) {
-            b_st.site = &ni_emlrtRSI;
+            b_st.site = &oi_emlrtRSI;
             i_error(&b_st);
           }
         }
 
-        b_st.site = &oi_emlrtRSI;
+        b_st.site = &pi_emlrtRSI;
         j2 = xi->size[0] * xi->size[1];
         xi->size[0] = 1;
         xi->size[1] = varargin_3->size[1];
@@ -248,13 +248,13 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
           b_y->data[b_y->size[0] * j2] = y->data[j2];
         }
 
-        c_st.site = &qi_emlrtRSI;
+        c_st.site = &ri_emlrtRSI;
         pchip(&c_st, x, b_y, pp.breaks, pp.coefs);
         nd2 = varargin_3->size[1];
-        c_st.site = &ri_emlrtRSI;
+        c_st.site = &si_emlrtRSI;
         overflow = (varargin_3->size[1] > 2147483646);
         if (overflow) {
-          d_st.site = &jb_emlrtRSI;
+          d_st.site = &kb_emlrtRSI;
           check_forloop_overflow_error(&d_st, true);
         }
 

@@ -12,13 +12,13 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo rb_emlrtRSI = { 18, "indexShapeCheck",
+static emlrtRSInfo sb_emlrtRSI = { 18, "indexShapeCheck",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
-static emlrtRSInfo ig_emlrtRSI = { 14, "indexShapeCheck",
+static emlrtRSInfo jg_emlrtRSI = { 14, "indexShapeCheck",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
-static emlrtRSInfo jg_emlrtRSI = { 80, "indexShapeCheck",
+static emlrtRSInfo kg_emlrtRSI = { 80, "indexShapeCheck",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
 
 static emlrtRTEInfo ae_emlrtRTEI = { 85, 5, "indexShapeCheck",
@@ -59,14 +59,14 @@ void b_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize, const int32_T
     }
 
     if (nonSingletonDimFound) {
-      st.site = &ig_emlrtRSI;
+      st.site = &jg_emlrtRSI;
       if (((matrixSize == 1) != (indexSize[0] == 1)) || (indexSize[1] != 1)) {
         nonSingletonDimFound = true;
       } else {
         nonSingletonDimFound = false;
       }
 
-      b_st.site = &jg_emlrtRSI;
+      b_st.site = &kg_emlrtRSI;
       if (!nonSingletonDimFound) {
       } else {
         emlrtErrorWithMessageIdR2012b(&b_st, &ae_emlrtRTEI,
@@ -115,7 +115,7 @@ void indexShapeCheck(const emlrtStack *sp, int32_T matrixSize, const int32_T
     nonSingletonDimFound = false;
   }
 
-  st.site = &rb_emlrtRSI;
+  st.site = &sb_emlrtRSI;
   if (!nonSingletonDimFound) {
   } else {
     emlrtErrorWithMessageIdR2012b(&st, &ae_emlrtRTEI,

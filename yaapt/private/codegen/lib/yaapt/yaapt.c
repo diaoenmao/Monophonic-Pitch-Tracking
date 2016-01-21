@@ -2,13 +2,14 @@
  * File: yaapt.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Jan-2016 00:47:12
+ * C/C++ source code generated on  : 21-Jan-2016 05:43:25
  */
 
 /* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_emxutil.h"
+#include "Smooth.h"
 #include "freqSelect.h"
 #include "dynamic.h"
 #include "rdivide.h"
@@ -60,22 +61,24 @@
 void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
            double *numfrms, double *frmrate)
 {
+  emxArray_real_T *Data_temp;
+  int i0;
+  int loop_ub;
+  int ixstart;
+  emxArray_int32_T *r0;
+  int n;
+  emxArray_real_T *Pitch_before;
   emxArray_real_T *DataB;
   emxArray_real_T *DataD;
-  emxArray_real_T *FrmEnergy;
   double nFs;
   double s;
   double nframesize;
   emxArray_real_T *b_DataB;
   double N_F0_min;
   double N_F0_max;
-  int i0;
-  int loop_ub;
   emxArray_creal_T *SpecData;
   double b_s;
-  int ixstart;
   emxArray_creal_T *x;
-  int n;
   int iy;
   int i;
   emxArray_creal_T *b_SpecData;
@@ -85,7 +88,6 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
   emxArray_boolean_T *VUVEnergy;
   double avgEnergy;
   emxArray_real_T *b_DataD;
-  emxArray_real_T *Pitch_before;
   emxArray_real_T *TPitch1;
   emxArray_real_T *TMerit1;
   emxArray_real_T *TPitch2;
@@ -100,14 +102,12 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
   double pAvg_data[1];
   int numframes;
   int maxcands;
-  emxArray_real_T *r0;
+  emxArray_real_T *r1;
   emxArray_real_T *b_RPitch;
   int j;
   double d0;
-  emxArray_real_T *r1;
-  emxInit_real_T(&DataB, 2);
-  emxInit_real_T(&DataD, 2);
-  emxInit_real_T(&FrmEnergy, 2);
+  emxArray_real_T *r2;
+  emxInit_real_T(&Data_temp, 2);
 
   /*   Creation Date:  June 2000 */
   /*   Revision date:  Jan 2, 2002 , Jan 13, 2002 Feb 19, 2002, Mar 3, 2002 */
@@ -188,7 +188,52 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*   Step 1. Preprocessing */
   /*   Create the squared or absolute values of filtered speech data */
-  nonlinear(Data, Fs, DataB, FrmEnergy, DataD, &nFs);
+  /*  Preprocess the raw data from android voice recorder */
+  /*  */
+  /*  Data_in = Raw data android voice recorder */
+  /*  Data_out = Head and tail muted data */
+  /*  The noise comes from opening mic and closing mic */
+  i0 = Data_temp->size[0] * Data_temp->size[1];
+  Data_temp->size[0] = 1;
+  Data_temp->size[1] = Data->size[1];
+  emxEnsureCapacity((emxArray__common *)Data_temp, i0, (int)sizeof(double));
+  loop_ub = Data->size[0] * Data->size[1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    Data_temp->data[i0] = Data->data[i0];
+  }
+
+  for (i0 = 0; i0 < 600; i0++) {
+    Data_temp->data[i0] = 0.0;
+  }
+
+  if (Data_temp->size[1] - 2000 > Data_temp->size[1]) {
+    i0 = 1;
+    ixstart = 0;
+  } else {
+    i0 = Data_temp->size[1] - 2000;
+    ixstart = Data_temp->size[1];
+  }
+
+  emxInit_int32_T(&r0, 2);
+  n = r0->size[0] * r0->size[1];
+  r0->size[0] = 1;
+  r0->size[1] = (ixstart - i0) + 1;
+  emxEnsureCapacity((emxArray__common *)r0, n, (int)sizeof(int));
+  loop_ub = (ixstart - i0) + 1;
+  for (ixstart = 0; ixstart < loop_ub; ixstart++) {
+    r0->data[r0->size[0] * ixstart] = (i0 + ixstart) - 1;
+  }
+
+  loop_ub = r0->size[0] * r0->size[1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    Data_temp->data[r0->data[i0]] = 0.0;
+  }
+
+  emxFree_int32_T(&r0);
+  emxInit_real_T(&Pitch_before, 2);
+  emxInit_real_T(&DataB, 2);
+  emxInit_real_T(&DataD, 2);
+  nonlinear(Data_temp, Fs, DataB, Pitch_before, DataD, &nFs);
 
   /*   Check frame size, frame jump and the number of frames for nonlinear singal */
   /*   Step 2. Spectral pitch tracking */
@@ -313,17 +358,17 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
 
   emxFree_creal_T(&x);
   emxFree_creal_T(&SpecData);
-  i0 = FrmEnergy->size[0] * FrmEnergy->size[1];
-  FrmEnergy->size[0] = 1;
-  FrmEnergy->size[1] = y->size[1];
-  emxEnsureCapacity((emxArray__common *)FrmEnergy, i0, (int)sizeof(double));
+  i0 = Data_temp->size[0] * Data_temp->size[1];
+  Data_temp->size[0] = 1;
+  Data_temp->size[1] = y->size[1];
+  emxEnsureCapacity((emxArray__common *)Data_temp, i0, (int)sizeof(double));
   if ((y->size[0] == 0) || (y->size[1] == 0)) {
-    i0 = FrmEnergy->size[0] * FrmEnergy->size[1];
-    FrmEnergy->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)FrmEnergy, i0, (int)sizeof(double));
-    loop_ub = FrmEnergy->size[1];
+    i0 = Data_temp->size[0] * Data_temp->size[1];
+    Data_temp->size[0] = 1;
+    emxEnsureCapacity((emxArray__common *)Data_temp, i0, (int)sizeof(double));
+    loop_ub = Data_temp->size[1];
     for (i0 = 0; i0 < loop_ub; i0++) {
-      FrmEnergy->data[FrmEnergy->size[0] * i0] = 0.0;
+      Data_temp->data[Data_temp->size[0] * i0] = 0.0;
     }
   } else {
     n = 0;
@@ -338,15 +383,15 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
       }
 
       iy++;
-      FrmEnergy->data[iy] = s;
+      Data_temp->data[iy] = s;
     }
   }
 
   emxFree_real_T(&y);
   emxInit_real_T(&Energy, 2);
   emxInit_boolean_T(&VUVEnergy, 2);
-  avgEnergy = mean(FrmEnergy);
-  d_rdivide(FrmEnergy, avgEnergy, Energy);
+  avgEnergy = mean(Data_temp);
+  d_rdivide(Data_temp, avgEnergy, Energy);
 
   /*  The frame is voiced if NLFER enery > threshold, otherwise is unvoiced. */
   i0 = VUVEnergy->size[0] * VUVEnergy->size[1];
@@ -371,7 +416,6 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
     b_DataD->data[i0] = DataD->data[i0];
   }
 
-  emxInit_real_T(&Pitch_before, 2);
   emxInit_real_T(&TPitch1, 2);
   emxInit_real_T(&TMerit1, 2);
   emxInit_real_T(&TPitch2, 2);
@@ -380,7 +424,7 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
   emxInit_real_T(&Merit, 2);
   emxInit_real_T(&Idx, 2);
   emxInit_int32_T(&iidx, 2);
-  spec_trk(b_DataD, nFs, VUVEnergy, Pitch_before, FrmEnergy, pAvg_data,
+  spec_trk(b_DataD, nFs, VUVEnergy, Pitch_before, Data_temp, pAvg_data,
            pAvg_size, pStd_data, pStd_size);
 
   /*   Step 3. Temporal pitch tracking based on NCCF */
@@ -454,26 +498,26 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
 
   emxFree_int32_T(&iidx);
   n = 0;
-  emxInit_real_T1(&r0, 1);
+  emxInit_real_T1(&r1, 1);
   while (n <= numframes) {
     loop_ub = Idx->size[0];
-    i0 = r0->size[0];
-    r0->size[0] = loop_ub;
-    emxEnsureCapacity((emxArray__common *)r0, i0, (int)sizeof(double));
+    i0 = r1->size[0];
+    r1->size[0] = loop_ub;
+    emxEnsureCapacity((emxArray__common *)r1, i0, (int)sizeof(double));
     for (i0 = 0; i0 < loop_ub; i0++) {
-      r0->data[i0] = RPitch->data[((int)Idx->data[i0 + Idx->size[0] * n] +
+      r1->data[i0] = RPitch->data[((int)Idx->data[i0 + Idx->size[0] * n] +
         RPitch->size[0] * n) - 1];
     }
 
-    loop_ub = r0->size[0];
+    loop_ub = r1->size[0];
     for (i0 = 0; i0 < loop_ub; i0++) {
-      RPitch->data[i0 + RPitch->size[0] * n] = r0->data[i0];
+      RPitch->data[i0 + RPitch->size[0] * n] = r1->data[i0];
     }
 
     n++;
   }
 
-  emxFree_real_T(&r0);
+  emxFree_real_T(&r1);
   emxFree_real_T(&Idx);
   emxInit_real_T(&b_RPitch, 2);
 
@@ -487,16 +531,16 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
     b_RPitch->data[b_RPitch->size[0] * i0] = RPitch->data[RPitch->size[0] * i0];
   }
 
-  c_Mymedfilt1(b_RPitch, FrmEnergy);
-  i0 = FrmEnergy->size[0] * FrmEnergy->size[1];
-  FrmEnergy->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)FrmEnergy, i0, (int)sizeof(double));
-  ixstart = FrmEnergy->size[0];
-  n = FrmEnergy->size[1];
+  c_Mymedfilt1(b_RPitch, Data_temp);
+  i0 = Data_temp->size[0] * Data_temp->size[1];
+  Data_temp->size[0] = 1;
+  emxEnsureCapacity((emxArray__common *)Data_temp, i0, (int)sizeof(double));
+  ixstart = Data_temp->size[0];
+  n = Data_temp->size[1];
   loop_ub = ixstart * n;
   emxFree_real_T(&b_RPitch);
   for (i0 = 0; i0 < loop_ub; i0++) {
-    FrmEnergy->data[i0] *= (double)VUVEnergy->data[i0];
+    Data_temp->data[i0] *= (double)VUVEnergy->data[i0];
   }
 
   emxFree_boolean_T(&VUVEnergy);
@@ -553,12 +597,12 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
   /*   Insert some good values  from the track that appears */
   /*    the best, without dp, including both F0   and VUV info */
   for (i = 0; i <= numframes; i++) {
-    RPitch->data[(maxcands + RPitch->size[0] * i) - 1] = FrmEnergy->
-      data[FrmEnergy->size[0] * i];
+    RPitch->data[(maxcands + RPitch->size[0] * i) - 1] = Data_temp->
+      data[Data_temp->size[0] * i];
 
     /*   if this candidate was voiced, already have it, along with merit */
     /*   if unvoiced, need to assign appropriate merit */
-    if (FrmEnergy->data[FrmEnergy->size[0] * i] > 0.0) {
+    if (Data_temp->data[Data_temp->size[0] * i] > 0.0) {
       /*  voiced */
       Merit->data[(maxcands + Merit->size[0] * i) - 1] = Merit->data[Merit->
         size[0] * i];
@@ -582,22 +626,49 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
       data[Pitch_before->size[0] * i0];
   }
 
-  emxInit_real_T(&r1, 2);
-  d_rdivide(Energy, 5.0, r1);
-  loop_ub = r1->size[1];
+  emxInit_real_T(&r2, 2);
+  d_rdivide(Energy, 5.0, r2);
+  loop_ub = r2->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
-    Merit->data[(maxcands + Merit->size[0] * i0) - 2] = r1->data[r1->size[0] *
+    Merit->data[(maxcands + Merit->size[0] * i0) - 2] = r2->data[r2->size[0] *
       i0];
   }
 
-  emxFree_real_T(&r1);
+  emxFree_real_T(&r2);
 
   /* ============================================================================== */
   /*  Step 5. Use dyanamic programming to determine the final pitch */
   dynamic(RPitch, Merit, Energy, Pitch_before);
   *numfrms = Pitch_before->size[1];
   *frmrate = 30.0;
-  freqSelect(Pitch_before, Pitch, FrmEnergy);
+  freqSelect(Pitch_before, Pitch, Data_temp);
+
+  /*  Preprocess the raw data from android voice recorder */
+  /*  */
+  /*  Data_in = Raw data android voice recorder */
+  /*  Data_out = Head and tail muted data */
+  /*  The noise comes from opening mic and closing mic */
+  emxFree_real_T(&Data_temp);
+  emxFree_real_T(&Merit);
+  emxFree_real_T(&RPitch);
+  emxFree_real_T(&Energy);
+  emxFree_real_T(&Pitch_before);
+  for (i0 = 0; i0 < 3; i0++) {
+    Pitch->data[i0] = 0.0;
+  }
+
+  i0 = Pitch->size[1];
+  for (i = 0; i < i0; i++) {
+    if ((i + 2U < (unsigned int)Pitch->size[1]) && (i > 0) && (Pitch->data[i - 1]
+         != Pitch->data[i]) && (Pitch->data[i] != Pitch->data[i + 1])) {
+      Pitch->data[i] = Pitch->data[i - 1];
+    }
+  }
+
+  /*  Pitch_out = Pitch_temp; */
+  Smooth(Pitch);
+  Smooth(Pitch);
+  Smooth(Pitch);
 
   /* figure(3) */
   /*  plot(SPitch, 'b') */
@@ -629,11 +700,6 @@ void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
   /*      pt_figs(DataB, DataD, nFs, SPitch, Energy, VUVEnergy, RPitch, Pitch, Prm); */
   /*  end */
   /* ============================================================================== */
-  emxFree_real_T(&FrmEnergy);
-  emxFree_real_T(&Merit);
-  emxFree_real_T(&RPitch);
-  emxFree_real_T(&Energy);
-  emxFree_real_T(&Pitch_before);
 }
 
 /*

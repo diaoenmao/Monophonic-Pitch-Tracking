@@ -14,7 +14,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo gl_emlrtRSI = { 36, "cat",
+static emlrtRSInfo hl_emlrtRSI = { 36, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
 static emlrtRTEInfo gd_emlrtRTEI = { 1, 14, "cat",
@@ -39,17 +39,17 @@ static boolean_T isconsistent(int32_T dim, const emxArray_real_T *y, const
   int32_T j;
   int32_T exitg1;
   boolean_T guard1 = false;
-  int32_T i42;
   int32_T i43;
+  int32_T i44;
   j = 0;
   do {
     exitg1 = 0;
     if (j < 2) {
       guard1 = false;
       if (!(dim == 1 + j)) {
-        i42 = y->size[j];
-        i43 = x->size[j];
-        if (i42 != i43) {
+        i43 = y->size[j];
+        i44 = x->size[j];
+        if (i43 != i44) {
           p = false;
           exitg1 = 1;
         } else {
@@ -101,7 +101,7 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   emxEnsureCapacity(sp, (emxArray__common *)y, iy, (int32_T)sizeof(real_T),
                     &gd_emlrtRTEI);
   if (varargin_1->size[1] == 0) {
-    st.site = &gl_emlrtRSI;
+    st.site = &hl_emlrtRSI;
     l_error(&st);
   }
 
@@ -112,7 +112,7 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   }
 
   if (varargin_2->size[1] == 0) {
-    st.site = &gl_emlrtRSI;
+    st.site = &hl_emlrtRSI;
     l_error(&st);
   }
 

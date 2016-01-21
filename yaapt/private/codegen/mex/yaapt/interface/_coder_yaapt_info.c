@@ -28,6 +28,7 @@ static void k_info_helper(const mxArray **info);
 static void l_info_helper(const mxArray **info);
 static void m_info_helper(const mxArray **info);
 static void n_info_helper(const mxArray **info);
+static void o_info_helper(const mxArray **info);
 
 /* Function Definitions */
 static void b_info_helper(const mxArray **info)
@@ -16970,6 +16971,8 @@ static void n_info_helper(const mxArray **info)
   const mxArray *lhs893 = NULL;
   const mxArray *rhs894 = NULL;
   const mxArray *lhs894 = NULL;
+  const mxArray *rhs895 = NULL;
+  const mxArray *lhs895 = NULL;
   emlrtAddField(*info, d_emlrt_marshallOut(
     "[ILXE]F:/MATLAB/toolbox/eml/lib/matlab/elmat/isnan.m"), "context", 832);
   emlrtAddField(*info, d_emlrt_marshallOut("coder.internal.isBuiltInNumeric"),
@@ -17980,6 +17983,22 @@ static void n_info_helper(const mxArray **info)
   emlrtAssign(&lhs894, emlrtCreateCellMatrix(0, 1));
   emlrtAddField(*info, emlrtAliasP(rhs894), "rhs", 894);
   emlrtAddField(*info, emlrtAliasP(lhs894), "lhs", 894);
+  emlrtAddField(*info, d_emlrt_marshallOut(
+    "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/yaapt.m"), "context",
+                895);
+  emlrtAddField(*info, d_emlrt_marshallOut("Pitch_Optimization"), "name", 895);
+  emlrtAddField(*info, d_emlrt_marshallOut("double"), "dominantType", 895);
+  emlrtAddField(*info, d_emlrt_marshallOut(
+    "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Pitch_Optimization.m"),
+                "resolved", 895);
+  emlrtAddField(*info, e_emlrt_marshallOut(1453191882U), "fileTimeLo", 895);
+  emlrtAddField(*info, e_emlrt_marshallOut(0U), "fileTimeHi", 895);
+  emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeLo", 895);
+  emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeHi", 895);
+  emlrtAssign(&rhs895, emlrtCreateCellMatrix(0, 1));
+  emlrtAssign(&lhs895, emlrtCreateCellMatrix(0, 1));
+  emlrtAddField(*info, emlrtAliasP(rhs895), "rhs", 895);
+  emlrtAddField(*info, emlrtAliasP(lhs895), "lhs", 895);
   emlrtDestroyArray(&rhs832);
   emlrtDestroyArray(&lhs832);
   emlrtDestroyArray(&rhs833);
@@ -18106,6 +18125,32 @@ static void n_info_helper(const mxArray **info)
   emlrtDestroyArray(&lhs893);
   emlrtDestroyArray(&rhs894);
   emlrtDestroyArray(&lhs894);
+  emlrtDestroyArray(&rhs895);
+  emlrtDestroyArray(&lhs895);
+}
+
+static void o_info_helper(const mxArray **info)
+{
+  const mxArray *rhs896 = NULL;
+  const mxArray *lhs896 = NULL;
+  emlrtAddField(*info, d_emlrt_marshallOut(
+    "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Pitch_Optimization.m"),
+                "context", 896);
+  emlrtAddField(*info, d_emlrt_marshallOut("coder.internal.length"), "name", 896);
+  emlrtAddField(*info, d_emlrt_marshallOut(""), "dominantType", 896);
+  emlrtAddField(*info, d_emlrt_marshallOut(
+    "[ILXE]F:/MATLAB/toolbox/eml/eml/+coder/+internal/length.m"), "resolved",
+                896);
+  emlrtAddField(*info, e_emlrt_marshallOut(1429650858U), "fileTimeLo", 896);
+  emlrtAddField(*info, e_emlrt_marshallOut(0U), "fileTimeHi", 896);
+  emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeLo", 896);
+  emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeHi", 896);
+  emlrtAssign(&rhs896, emlrtCreateCellMatrix(0, 1));
+  emlrtAssign(&lhs896, emlrtCreateCellMatrix(0, 1));
+  emlrtAddField(*info, emlrtAliasP(rhs896), "rhs", 896);
+  emlrtAddField(*info, emlrtAliasP(lhs896), "lhs", 896);
+  emlrtDestroyArray(&rhs896);
+  emlrtDestroyArray(&lhs896);
 }
 
 mxArray *emlrtMexFcnProperties(void)
@@ -18137,7 +18182,7 @@ const mxArray *emlrtMexFcnResolvedFunctionsInfo(void)
 {
   const mxArray *nameCaptureInfo;
   nameCaptureInfo = NULL;
-  emlrtAssign(&nameCaptureInfo, emlrtCreateStructMatrix(895, 1, 0, NULL));
+  emlrtAssign(&nameCaptureInfo, emlrtCreateStructMatrix(897, 1, 0, NULL));
   info_helper(&nameCaptureInfo);
   b_info_helper(&nameCaptureInfo);
   c_info_helper(&nameCaptureInfo);
@@ -18152,6 +18197,7 @@ const mxArray *emlrtMexFcnResolvedFunctionsInfo(void)
   l_info_helper(&nameCaptureInfo);
   m_info_helper(&nameCaptureInfo);
   n_info_helper(&nameCaptureInfo);
+  o_info_helper(&nameCaptureInfo);
   emlrtNameCapturePostProcessR2013b(&nameCaptureInfo);
   return nameCaptureInfo;
 }

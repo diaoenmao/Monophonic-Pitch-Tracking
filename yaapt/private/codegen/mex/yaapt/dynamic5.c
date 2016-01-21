@@ -17,10 +17,10 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo yh_emlrtRSI = { 49, "dynamic5",
+static emlrtRSInfo ai_emlrtRSI = { 49, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
-static emlrtRSInfo ai_emlrtRSI = { 58, "dynamic5",
+static emlrtRSInfo bi_emlrtRSI = { 58, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
 static emlrtRTEInfo bc_emlrtRTEI = { 1, 23, "dynamic5",
@@ -32,37 +32,37 @@ static emlrtRTEInfo cc_emlrtRTEI = { 37, 1, "dynamic5",
 static emlrtRTEInfo dc_emlrtRTEI = { 40, 1, "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m" };
 
-static emlrtBCInfo md_emlrtBCI = { -1, -1, 48, 67, "Pitch_array", "dynamic5",
+static emlrtBCInfo td_emlrtBCI = { -1, -1, 48, 67, "Pitch_array", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo nd_emlrtBCI = { -1, -1, 48, 48, "Pitch_array", "dynamic5",
+static emlrtBCInfo ud_emlrtBCI = { -1, -1, 48, 48, "Pitch_array", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo qd_emlrtBCI = { 1, 4, 64, 31, "Pitch_array", "dynamic5",
+static emlrtBCInfo xd_emlrtBCI = { 1, 4, 64, 31, "Pitch_array", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo rd_emlrtBCI = { -1, -1, 64, 31, "Path", "dynamic5",
+static emlrtBCInfo yd_emlrtBCI = { -1, -1, 64, 31, "Path", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo sd_emlrtBCI = { -1, -1, 64, 40, "Pitch_array", "dynamic5",
+static emlrtBCInfo ae_emlrtBCI = { -1, -1, 64, 40, "Pitch_array", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo td_emlrtBCI = { -1, -1, 64, 5, "FinPitch", "dynamic5",
+static emlrtBCInfo be_emlrtBCI = { -1, -1, 64, 5, "FinPitch", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo ud_emlrtBCI = { 1, 4, 100, 14, "PRED", "path1",
+static emlrtBCInfo ce_emlrtBCI = { 1, 4, 100, 14, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo fe_emlrtBCI = { -1, -1, 48, 23, "Trans", "dynamic5",
+static emlrtBCInfo me_emlrtBCI = { -1, -1, 48, 23, "Trans", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo ge_emlrtBCI = { -1, -1, 49, 44, "Trans", "dynamic5",
+static emlrtBCInfo ne_emlrtBCI = { -1, -1, 49, 44, "Trans", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo he_emlrtBCI = { -1, -1, 49, 59, "Trans", "dynamic5",
+static emlrtBCInfo oe_emlrtBCI = { -1, -1, 49, 59, "Trans", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
-static emlrtBCInfo ie_emlrtBCI = { -1, -1, 49, 23, "Trans", "dynamic5",
+static emlrtBCInfo pe_emlrtBCI = { -1, -1, 49, 23, "Trans", "dynamic5",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic5.m", 0 };
 
 /* Function Definitions */
@@ -194,18 +194,18 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
         Trans = Pitch_array->size[1];
         c_Trans = (int32_T)(2.0 + (real_T)i);
         if (!((c_Trans >= 1) && (c_Trans <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(c_Trans, 1, Trans, &nd_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(c_Trans, 1, Trans, &ud_emlrtBCI, sp);
         }
 
         Trans = Pitch_array->size[1];
         c_Trans = (int32_T)((2.0 + (real_T)i) - 1.0);
         if (!((c_Trans >= 1) && (c_Trans <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(c_Trans, 1, Trans, &md_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(c_Trans, 1, Trans, &td_emlrtBCI, sp);
         }
 
         Trans = b_Trans->size[2];
         if (!((i + 2 >= 1) && (i + 2 <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &fe_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &me_emlrtBCI, sp);
         }
 
         b_Trans->data[(k + b_Trans->size[0] * j) + b_Trans->size[0] *
@@ -216,20 +216,20 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
         /* 'dynamic5:49' Trans(k,j,i) =  0.05*Trans(k,j,i) + Trans(k,j,i)^2; */
         Trans = b_Trans->size[2];
         if (!((i + 2 >= 1) && (i + 2 <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &ge_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &ne_emlrtBCI, sp);
         }
 
         Trans = b_Trans->size[2];
         if (!((i + 2 >= 1) && (i + 2 <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &he_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &oe_emlrtBCI, sp);
         }
 
         Trans = b_Trans->size[2];
         if (!((i + 2 >= 1) && (i + 2 <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &ie_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(i + 2, 1, Trans, &pe_emlrtBCI, sp);
         }
 
-        st.site = &yh_emlrtRSI;
+        st.site = &ai_emlrtRSI;
         b_Trans->data[(k + b_Trans->size[0] * j) + b_Trans->size[0] *
           b_Trans->size[1] * (i + 1)] = 0.05 * b_Trans->data[(k + b_Trans->size
           [0] * j) + b_Trans->size[0] * b_Trans->size[1] * (i + 1)] + mpower
@@ -270,7 +270,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
 
   /*  search the best path */
   /* 'dynamic5:58' Path = path1(Local, Trans); */
-  st.site = &ai_emlrtRSI;
+  st.site = &bi_emlrtRSI;
 
   /* PATH1 find optimal path with the lowest cost */
   /*  */
@@ -303,7 +303,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   /* 'path1:33' if N>=5000 */
   if (Local->size[1] >= 5000) {
     /* if N is greater than 1000, stop the routine; */
-    b_st.site = &bi_emlrtRSI;
+    b_st.site = &ci_emlrtRSI;
     for (Trans = 0; Trans < 29; Trans++) {
       u[Trans] = varargin_1[Trans];
     }
@@ -312,7 +312,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
     m6 = emlrtCreateCharArray(2, iv23);
     emlrtInitCharArrayR2013a(&b_st, 29, m6, &u[0]);
     emlrtAssign(&y, m6);
-    c_st.site = &mm_emlrtRSI;
+    c_st.site = &nm_emlrtRSI;
     n_error(&c_st, y, &emlrtMCI);
   }
 
@@ -371,7 +371,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
     /* 'path1:46' PCOST(J)=Local(J,1); */
     Trans = Local->size[1];
     if (!(1 <= Trans)) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, Trans, &ld_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(1, 1, Trans, &sd_emlrtBCI, &st);
     }
 
     PCOST[J] = Local->data[J];
@@ -398,7 +398,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
         /* 'path1:54' if PCOST(K)+Trans(K,J,I)<=CCOST(J) */
         Trans = b_Trans->size[2];
         if (!((I >= 1) && (I <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &ce_emlrtBCI, &st);
+          emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &je_emlrtBCI, &st);
         }
 
         if (PCOST[K] + b_Trans->data[(K + b_Trans->size[0] * J) + b_Trans->size
@@ -407,7 +407,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
           /* 'path1:55' CCOST(J)=PCOST(K)+Trans(K,J,I); */
           Trans = b_Trans->size[2];
           if (!((I >= 1) && (I <= Trans))) {
-            emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &de_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &ke_emlrtBCI, &st);
           }
 
           CCOST[J] = PCOST[K] + b_Trans->data[(K + b_Trans->size[0] * J) +
@@ -416,7 +416,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
           /* 'path1:56' PRED(J,I)=K; */
           Trans = PRED->size[1];
           if (!((I >= 1) && (I <= Trans))) {
-            emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &ee_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &le_emlrtBCI, &st);
           }
 
           PRED->data[J + PRED->size[0] * (I - 1)] = 1.0 + (real_T)K;
@@ -432,7 +432,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
 
       /* 'path1:60' if CCOST(J)>=1.0E+30 */
       if (CCOST[J] >= 1.0E+30) {
-        b_st.site = &ci_emlrtRSI;
+        b_st.site = &di_emlrtRSI;
         for (Trans = 0; Trans < 30; Trans++) {
           b_u[Trans] = b_varargin_1[Trans];
         }
@@ -441,14 +441,14 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
         m6 = emlrtCreateCharArray(2, iv24);
         emlrtInitCharArrayR2013a(&b_st, 30, m6, &b_u[0]);
         emlrtAssign(&b_y, m6);
-        c_st.site = &mm_emlrtRSI;
+        c_st.site = &nm_emlrtRSI;
         n_error(&c_st, b_y, &emlrtMCI);
       }
 
       /* 'path1:64' CCOST(J)=CCOST(J)+Local(J,I); */
       Trans = Local->size[1];
       if (!((I >= 1) && (I <= Trans))) {
-        emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &be_emlrtBCI, &st);
+        emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &ie_emlrtBCI, &st);
       }
 
       CCOST[J] += Local->data[J + Local->size[0] * (I - 1)];
@@ -476,7 +476,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
     /* 'path1:72' p(I)=1; */
     Trans = p->size[1];
     if (!((I >= 1) && (I <= Trans))) {
-      emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &yd_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &ge_emlrtBCI, &st);
     }
 
     p->data[I - 1] = 1.0;
@@ -493,7 +493,7 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
         /* 'path1:75' p(I)=J; */
         Trans = p->size[1];
         if (!((I >= 1) && (I <= Trans))) {
-          emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &ae_emlrtBCI, &st);
+          emlrtDynamicBoundsCheckR2012b(I, 1, Trans, &he_emlrtBCI, &st);
         }
 
         p->data[I - 1] = 2.0 + (real_T)J;
@@ -531,12 +531,12 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
   Trans = p->size[1];
   c_Trans = Local->size[1];
   if (!((c_Trans >= 1) && (c_Trans <= Trans))) {
-    emlrtDynamicBoundsCheckR2012b(c_Trans, 1, Trans, &od_emlrtBCI, &st);
+    emlrtDynamicBoundsCheckR2012b(c_Trans, 1, Trans, &vd_emlrtBCI, &st);
   }
 
   Trans = Local->size[1];
   if (!((Trans >= 1) && (Trans <= loop_ub))) {
-    emlrtDynamicBoundsCheckR2012b(Trans, 1, loop_ub, &pd_emlrtBCI, &st);
+    emlrtDynamicBoundsCheckR2012b(Trans, 1, loop_ub, &wd_emlrtBCI, &st);
   }
 
   P->data[Trans - 1] = p->data[c_Trans - 1];
@@ -553,23 +553,23 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
     /* 'path1:100' P(I)=PRED(P(I+1),I+1); */
     Trans = P->size[1];
     if (!((b_I >= 1) && (b_I <= Trans))) {
-      emlrtDynamicBoundsCheckR2012b(b_I, 1, Trans, &vd_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(b_I, 1, Trans, &de_emlrtBCI, &st);
     }
 
     Trans = (int32_T)P->data[b_I - 1];
     if (!((Trans >= 1) && (Trans <= 4))) {
-      emlrtDynamicBoundsCheckR2012b(Trans, 1, 4, &ud_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(Trans, 1, 4, &ce_emlrtBCI, &st);
     }
 
     c_Trans = PRED->size[1];
     if (!((b_I >= 1) && (b_I <= c_Trans))) {
-      emlrtDynamicBoundsCheckR2012b(b_I, 1, c_Trans, &wd_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(b_I, 1, c_Trans, &ee_emlrtBCI, &st);
     }
 
     c_Trans = P->size[1];
     loop_ub = b_I - 1;
     if (!((loop_ub >= 1) && (loop_ub <= c_Trans))) {
-      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, c_Trans, &xd_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, c_Trans, &fe_emlrtBCI, &st);
     }
 
     P->data[loop_ub - 1] = PRED->data[(Trans + PRED->size[0] * (b_I - 1)) - 1];
@@ -605,22 +605,22 @@ void dynamic5(const emlrtStack *sp, const emxArray_real_T *Pitch_array, const
     /* 'dynamic5:64' FinPitch(n) = Pitch_array(Path(n), n); */
     Trans = P->size[1];
     if (!((n >= 1) && (n <= Trans))) {
-      emlrtDynamicBoundsCheckR2012b(n, 1, Trans, &rd_emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(n, 1, Trans, &yd_emlrtBCI, sp);
     }
 
     Trans = (int32_T)P->data[n - 1];
     if (!((Trans >= 1) && (Trans <= 4))) {
-      emlrtDynamicBoundsCheckR2012b(Trans, 1, 4, &qd_emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(Trans, 1, 4, &xd_emlrtBCI, sp);
     }
 
     c_Trans = Pitch_array->size[1];
     if (!((n >= 1) && (n <= c_Trans))) {
-      emlrtDynamicBoundsCheckR2012b(n, 1, c_Trans, &sd_emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(n, 1, c_Trans, &ae_emlrtBCI, sp);
     }
 
     c_Trans = FinPitch->size[1];
     if (!((n >= 1) && (n <= c_Trans))) {
-      emlrtDynamicBoundsCheckR2012b(n, 1, c_Trans, &td_emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(n, 1, c_Trans, &be_emlrtBCI, sp);
     }
 
     FinPitch->data[n - 1] = Pitch_array->data[(Trans + Pitch_array->size[0] * (n

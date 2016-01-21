@@ -24,7 +24,7 @@ void warn_singular(const emlrtStack *sp)
   st.prev = sp;
   st.tls = sp->tls;
   if (!emlrtSetWarningFlag(sp)) {
-    st.site = &dc_emlrtRSI;
+    st.site = &ec_emlrtRSI;
     warning(&st);
   }
 }

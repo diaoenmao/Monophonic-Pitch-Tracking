@@ -17,19 +17,19 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo gm_emlrtRSI = { 10, "fq2cnt",
+static emlrtRSInfo hm_emlrtRSI = { 10, "fq2cnt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\fq2cnt.m" };
 
-static emlrtRSInfo hm_emlrtRSI = { 23, "log2",
+static emlrtRSInfo im_emlrtRSI = { 23, "log2",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo im_emlrtRSI = { 24, "log2",
+static emlrtRSInfo jm_emlrtRSI = { 24, "log2",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo jm_emlrtRSI = { 27, "log2",
+static emlrtRSInfo km_emlrtRSI = { 27, "log2",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo km_emlrtRSI = { 53, "applyScalarFunction",
+static emlrtRSInfo lm_emlrtRSI = { 53, "applyScalarFunction",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
 
 static emlrtRTEInfo qd_emlrtRTEI = { 1, 18, "fq2cnt",
@@ -79,8 +79,8 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   /*  */
   /* 'fq2cnt:10' cnt = 1200.*log2((fq./13.75)); */
   c_rdivide(sp, fq, 13.75, x);
-  st.site = &gm_emlrtRSI;
-  b_st.site = &hm_emlrtRSI;
+  st.site = &hm_emlrtRSI;
+  b_st.site = &im_emlrtRSI;
   overflow = false;
   for (k = 0; k < x->size[1]; k++) {
     if (overflow || (x->data[k] < 0.0)) {
@@ -91,11 +91,11 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   }
 
   if (overflow) {
-    b_st.site = &im_emlrtRSI;
+    b_st.site = &jm_emlrtRSI;
     m_error(&b_st);
   }
 
-  b_st.site = &jm_emlrtRSI;
+  b_st.site = &km_emlrtRSI;
   for (b_cnt = 0; b_cnt < 2; b_cnt++) {
     uv7[b_cnt] = (uint32_T)x->size[b_cnt];
   }
@@ -106,7 +106,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   emxEnsureCapacity(&b_st, (emxArray__common *)cnt, b_cnt, (int32_T)sizeof
                     (real_T), &qd_emlrtRTEI);
   k = x->size[1];
-  c_st.site = &km_emlrtRSI;
+  c_st.site = &lm_emlrtRSI;
   if (1 > x->size[1]) {
     overflow = false;
   } else {
@@ -114,7 +114,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   }
 
   if (overflow) {
-    d_st.site = &jb_emlrtRSI;
+    d_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 

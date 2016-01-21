@@ -24,79 +24,79 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo cf_emlrtRSI = { 84, "Mybesseli",
+static emlrtRSInfo df_emlrtRSI = { 84, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo df_emlrtRSI = { 85, "Mybesseli",
+static emlrtRSInfo ef_emlrtRSI = { 85, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo ef_emlrtRSI = { 99, "Mybesseli",
+static emlrtRSInfo ff_emlrtRSI = { 99, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo ff_emlrtRSI = { 100, "Mybesseli",
+static emlrtRSInfo gf_emlrtRSI = { 100, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo gf_emlrtRSI = { 102, "Mybesseli",
+static emlrtRSInfo hf_emlrtRSI = { 102, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo hf_emlrtRSI = { 116, "Mybesseli",
+static emlrtRSInfo if_emlrtRSI = { 116, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo if_emlrtRSI = { 118, "Mybesseli",
+static emlrtRSInfo jf_emlrtRSI = { 118, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo jf_emlrtRSI = { 190, "Mybesseli",
+static emlrtRSInfo kf_emlrtRSI = { 190, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo kf_emlrtRSI = { 197, "Mybesseli",
+static emlrtRSInfo lf_emlrtRSI = { 197, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo lf_emlrtRSI = { 201, "Mybesseli",
+static emlrtRSInfo mf_emlrtRSI = { 201, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo mf_emlrtRSI = { 238, "Mybesseli",
+static emlrtRSInfo nf_emlrtRSI = { 238, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo nf_emlrtRSI = { 242, "Mybesseli",
+static emlrtRSInfo of_emlrtRSI = { 242, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo of_emlrtRSI = { 313, "Mybesseli",
+static emlrtRSInfo pf_emlrtRSI = { 313, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo pf_emlrtRSI = { 315, "Mybesseli",
+static emlrtRSInfo qf_emlrtRSI = { 315, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo qf_emlrtRSI = { 321, "Mybesseli",
+static emlrtRSInfo rf_emlrtRSI = { 321, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo rf_emlrtRSI = { 322, "Mybesseli",
+static emlrtRSInfo sf_emlrtRSI = { 322, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo sf_emlrtRSI = { 349, "Mybesseli",
+static emlrtRSInfo tf_emlrtRSI = { 349, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo tf_emlrtRSI = { 350, "Mybesseli",
+static emlrtRSInfo uf_emlrtRSI = { 350, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo uf_emlrtRSI = { 361, "Mybesseli",
+static emlrtRSInfo vf_emlrtRSI = { 361, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtRSInfo vf_emlrtRSI = { 234, "find",
+static emlrtRSInfo wf_emlrtRSI = { 234, "find",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\find.m" };
 
-static emlrtRSInfo yf_emlrtRSI = { 39, "reshape",
+static emlrtRSInfo ag_emlrtRSI = { 39, "reshape",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\reshape.m" };
 
-static emlrtRSInfo ag_emlrtRSI = { 50, "reshape",
+static emlrtRSInfo bg_emlrtRSI = { 50, "reshape",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\reshape.m" };
 
-static emlrtRSInfo bg_emlrtRSI = { 53, "reshape",
+static emlrtRSInfo cg_emlrtRSI = { 53, "reshape",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\reshape.m" };
 
-static emlrtRSInfo cg_emlrtRSI = { 100, "reshape",
+static emlrtRSInfo dg_emlrtRSI = { 100, "reshape",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\reshape.m" };
 
-static emlrtRSInfo dg_emlrtRSI = { 123, "reshape",
+static emlrtRSInfo eg_emlrtRSI = { 123, "reshape",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\reshape.m" };
 
 static emlrtRTEInfo lb_emlrtRTEI = { 1, 19, "Mybesseli",
@@ -156,7 +156,7 @@ static emlrtECInfo t_emlrtECI = { -1, 313, 24, "Mybesseli",
 static emlrtECInfo u_emlrtECI = { -1, 258, 10, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtBCInfo ec_emlrtBCI = { 1, 1, 258, 14, "b", "Mybesseli",
+static emlrtBCInfo lc_emlrtBCI = { 1, 1, 258, 14, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
 static emlrtDCInfo v_emlrtDCI = { 258, 14, "Mybesseli",
@@ -168,7 +168,7 @@ static emlrtECInfo v_emlrtECI = { -1, 222, 10, "Mybesseli",
 static emlrtECInfo w_emlrtECI = { -1, 220, 10, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtBCInfo fc_emlrtBCI = { 1, 1, 220, 14, "b", "Mybesseli",
+static emlrtBCInfo mc_emlrtBCI = { 1, 1, 220, 14, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
 static emlrtDCInfo w_emlrtDCI = { 220, 14, "Mybesseli",
@@ -198,40 +198,40 @@ static emlrtECInfo db_emlrtECI = { -1, 197, 17, "Mybesseli",
 static emlrtECInfo eb_emlrtECI = { -1, 99, 13, "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m" };
 
-static emlrtBCInfo gc_emlrtBCI = { -1, -1, 86, 11, "xx", "Mybesseli",
+static emlrtBCInfo nc_emlrtBCI = { -1, -1, 86, 11, "xx", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo hc_emlrtBCI = { -1, -1, 93, 12, "b", "Mybesseli",
+static emlrtBCInfo oc_emlrtBCI = { -1, -1, 93, 12, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo ic_emlrtBCI = { -1, -1, 101, 11, "xx", "Mybesseli",
+static emlrtBCInfo pc_emlrtBCI = { -1, -1, 101, 11, "xx", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo jc_emlrtBCI = { -1, -1, 258, 12, "b", "Mybesseli",
+static emlrtBCInfo qc_emlrtBCI = { -1, -1, 258, 12, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo kc_emlrtBCI = { -1, -1, 220, 12, "b", "Mybesseli",
+static emlrtBCInfo rc_emlrtBCI = { -1, -1, 220, 12, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo lc_emlrtBCI = { -1, -1, 222, 12, "b", "Mybesseli",
+static emlrtBCInfo sc_emlrtBCI = { -1, -1, 222, 12, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo mc_emlrtBCI = { -1, -1, 315, 12, "b", "Mybesseli",
+static emlrtBCInfo tc_emlrtBCI = { -1, -1, 315, 12, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo nc_emlrtBCI = { -1, -1, 315, 21, "b", "Mybesseli",
+static emlrtBCInfo uc_emlrtBCI = { -1, -1, 315, 21, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo oc_emlrtBCI = { -1, -1, 323, 11, "xx", "Mybesseli",
+static emlrtBCInfo vc_emlrtBCI = { -1, -1, 323, 11, "xx", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo pc_emlrtBCI = { -1, -1, 330, 9, "b", "Mybesseli",
+static emlrtBCInfo wc_emlrtBCI = { -1, -1, 330, 9, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo qc_emlrtBCI = { -1, -1, 352, 9, "b", "Mybesseli",
+static emlrtBCInfo xc_emlrtBCI = { -1, -1, 352, 9, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
-static emlrtBCInfo rc_emlrtBCI = { -1, -1, 353, 24, "b", "Mybesseli",
+static emlrtBCInfo yc_emlrtBCI = { -1, -1, 353, 24, "b", "Mybesseli",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mybesseli.m", 0 };
 
 /* Function Definitions */
@@ -243,7 +243,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
                *output)
 {
   emxArray_real_T *b;
-  int32_T i18;
+  int32_T i19;
   int32_T nx;
   uint32_T resize_idx_0;
   int32_T ixstart;
@@ -388,13 +388,13 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /* 'Mybesseli:61' nfirst = fix(alpha(1)); */
   /* 'Mybesseli:62' nb = fix(alpha(length(alpha))) + 1; */
   /* 'Mybesseli:63' b = NaN*ones(length(xx),nb); */
-  i18 = b->size[0];
+  i19 = b->size[0];
   b->size[0] = xx->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)b, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)b, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    b->data[i18] = rtNaN;
+  for (i19 = 0; i19 < nx; i19++) {
+    b->data[i19] = rtNaN;
   }
 
   /* 'Mybesseli:64' if ~(nb <= 1001) */
@@ -408,9 +408,9 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
 
   /* 'Mybesseli:78' xx = xx(:); */
   ixstart = xx->size[0];
-  i18 = xx->size[0];
+  i19 = xx->size[0];
   xx->size[0] = ixstart;
-  emxEnsureCapacity(sp, (emxArray__common *)xx, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)xx, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   emxInit_boolean_T1(sp, &x, 1, &lb_emlrtRTEI, true);
 
@@ -420,25 +420,25 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /*   Asymptotic expansion for large x. */
   /*  */
   /* 'Mybesseli:84' v = find(1.e3 < xx); */
-  st.site = &cf_emlrtRSI;
-  i18 = x->size[0];
+  st.site = &df_emlrtRSI;
+  i19 = x->size[0];
   x->size[0] = xx->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)x, i18, (int32_T)sizeof(boolean_T),
+  emxEnsureCapacity(&st, (emxArray__common *)x, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    x->data[i18] = (1000.0 < xx->data[i18]);
+  for (i19 = 0; i19 < nx; i19++) {
+    x->data[i19] = (1000.0 < xx->data[i19]);
   }
 
   emxInit_int32_T(&st, &ii, 1, &h_emlrtRTEI, true);
-  b_st.site = &pb_emlrtRSI;
+  b_st.site = &qb_emlrtRSI;
   nx = x->size[0];
   idx = 0;
-  i18 = ii->size[0];
+  i19 = ii->size[0];
   ii->size[0] = x->size[0];
-  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                     &lb_emlrtRTEI);
-  c_st.site = &vf_emlrtRSI;
+  c_st.site = &wf_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -446,7 +446,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   }
 
   if (overflow) {
-    d_st.site = &jb_emlrtRSI;
+    d_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
@@ -479,49 +479,49 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
 
   if (x->size[0] == 1) {
     if (idx == 0) {
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = 0;
-      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof
+      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof
                         (int32_T), &lb_emlrtRTEI);
     }
   } else {
     if (1 > idx) {
-      i18 = 0;
+      i19 = 0;
     } else {
-      i18 = idx;
+      i19 = idx;
     }
 
     iv17[0] = 1;
-    iv17[1] = i18;
-    c_st.site = &qb_emlrtRSI;
+    iv17[1] = i19;
+    c_st.site = &rb_emlrtRSI;
     indexShapeCheck(&c_st, ii->size[0], iv17);
     idx = ii->size[0];
-    ii->size[0] = i18;
+    ii->size[0] = i19;
     emxEnsureCapacity(&b_st, (emxArray__common *)ii, idx, (int32_T)sizeof
                       (int32_T), &f_emlrtRTEI);
   }
 
   emxInit_real_T1(&b_st, &v, 1, &nb_emlrtRTEI, true);
-  i18 = v->size[0];
+  i19 = v->size[0];
   v->size[0] = ii->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)v, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(&st, (emxArray__common *)v, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   nx = ii->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    v->data[i18] = ii->data[i18];
+  for (i19 = 0; i19 < nx; i19++) {
+    v->data[i19] = ii->data[i19];
   }
 
   /* 'Mybesseli:85' if any(v) */
   emxInit_real_T1(sp, &tempc, 1, &sb_emlrtRTEI, true);
-  st.site = &df_emlrtRSI;
+  st.site = &ef_emlrtRSI;
   if (b_any(&st, v)) {
     /* 'Mybesseli:86' x = xx(v); */
     ixstart = xx->size[0];
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &gc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &nc_emlrtBCI, sp);
       }
     }
 
@@ -529,35 +529,35 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     /* 'Mybesseli:92' else */
     /* 'Mybesseli:93' b(v,:) = Inf*ones(length(v),nb); */
     ixstart = b->size[0];
-    i18 = ii->size[0];
+    i19 = ii->size[0];
     ii->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+    emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &hc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &oc_emlrtBCI, sp);
       }
 
-      ii->data[i18] = idx - 1;
+      ii->data[i19] = idx - 1;
     }
 
-    i18 = tempc->size[0];
+    i19 = tempc->size[0];
     tempc->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      tempc->data[i18] = rtInf;
+    for (i19 = 0; i19 < nx; i19++) {
+      tempc->data[i19] = rtInf;
     }
 
     b_ii[0] = ii->size[0];
     emlrtSubAssignSizeCheckR2012b(b_ii, 1, *(int32_T (*)[1])tempc->size, 1,
       &x_emlrtECI, sp);
     nx = tempc->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      b->data[ii->data[i18]] = tempc->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      b->data[ii->data[i19]] = tempc->data[i19];
     }
   }
 
@@ -565,48 +565,48 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /*   Three-term backward recurrence for most x. */
   /*  */
   /* 'Mybesseli:99' v = find((1.e-4 <= xx) & (xx <= 1.e3)); */
-  i18 = x->size[0];
+  i19 = x->size[0];
   x->size[0] = xx->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)x, i18, (int32_T)sizeof(boolean_T),
+  emxEnsureCapacity(sp, (emxArray__common *)x, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    x->data[i18] = (0.0001 <= xx->data[i18]);
+  for (i19 = 0; i19 < nx; i19++) {
+    x->data[i19] = (0.0001 <= xx->data[i19]);
   }
 
   emxInit_boolean_T1(sp, &r7, 1, &lb_emlrtRTEI, true);
-  i18 = r7->size[0];
+  i19 = r7->size[0];
   r7->size[0] = xx->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)r7, i18, (int32_T)sizeof(boolean_T),
+  emxEnsureCapacity(sp, (emxArray__common *)r7, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    r7->data[i18] = (xx->data[i18] <= 1000.0);
+  for (i19 = 0; i19 < nx; i19++) {
+    r7->data[i19] = (xx->data[i19] <= 1000.0);
   }
 
-  i18 = x->size[0];
+  i19 = x->size[0];
   idx = r7->size[0];
-  if (i18 != idx) {
-    emlrtSizeEqCheck1DR2012b(i18, idx, &eb_emlrtECI, sp);
+  if (i19 != idx) {
+    emlrtSizeEqCheck1DR2012b(i19, idx, &eb_emlrtECI, sp);
   }
 
-  st.site = &ef_emlrtRSI;
-  i18 = x->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)x, i18, (int32_T)sizeof(boolean_T),
+  st.site = &ff_emlrtRSI;
+  i19 = x->size[0];
+  emxEnsureCapacity(&st, (emxArray__common *)x, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = x->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    x->data[i18] = (x->data[i18] && r7->data[i18]);
+  for (i19 = 0; i19 < nx; i19++) {
+    x->data[i19] = (x->data[i19] && r7->data[i19]);
   }
 
-  b_st.site = &pb_emlrtRSI;
+  b_st.site = &qb_emlrtRSI;
   nx = x->size[0];
   idx = 0;
-  i18 = ii->size[0];
+  i19 = ii->size[0];
   ii->size[0] = x->size[0];
-  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                     &lb_emlrtRTEI);
-  c_st.site = &vf_emlrtRSI;
+  c_st.site = &wf_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -614,7 +614,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   }
 
   if (overflow) {
-    d_st.site = &jb_emlrtRSI;
+    d_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
@@ -647,73 +647,73 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
 
   if (x->size[0] == 1) {
     if (idx == 0) {
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = 0;
-      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof
+      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof
                         (int32_T), &lb_emlrtRTEI);
     }
   } else {
     if (1 > idx) {
-      i18 = 0;
+      i19 = 0;
     } else {
-      i18 = idx;
+      i19 = idx;
     }
 
     iv18[0] = 1;
-    iv18[1] = i18;
-    c_st.site = &qb_emlrtRSI;
+    iv18[1] = i19;
+    c_st.site = &rb_emlrtRSI;
     indexShapeCheck(&c_st, ii->size[0], iv18);
     idx = ii->size[0];
-    ii->size[0] = i18;
+    ii->size[0] = i19;
     emxEnsureCapacity(&b_st, (emxArray__common *)ii, idx, (int32_T)sizeof
                       (int32_T), &f_emlrtRTEI);
   }
 
-  i18 = v->size[0];
+  i19 = v->size[0];
   v->size[0] = ii->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)v, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(&st, (emxArray__common *)v, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   nx = ii->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    v->data[i18] = ii->data[i18];
+  for (i19 = 0; i19 < nx; i19++) {
+    v->data[i19] = ii->data[i19];
   }
 
   /* 'Mybesseli:100' if any(v) */
-  st.site = &ff_emlrtRSI;
+  st.site = &gf_emlrtRSI;
   if (b_any(&st, v)) {
     emxInit_real_T1(sp, &b_x, 1, &ob_emlrtRTEI, true);
 
     /* 'Mybesseli:101' x = xx(v); */
     ixstart = xx->size[0];
-    i18 = b_x->size[0];
+    i19 = b_x->size[0];
     b_x->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)b_x, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)b_x, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &ic_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &pc_emlrtBCI, sp);
       }
 
-      b_x->data[i18] = xx->data[idx - 1];
+      b_x->data[i19] = xx->data[idx - 1];
     }
 
     /* 'Mybesseli:102' magx = max(fix(x)); */
-    i18 = tempc->size[0];
+    i19 = tempc->size[0];
     tempc->size[0] = b_x->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = b_x->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      tempc->data[i18] = b_x->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      tempc->data[i19] = b_x->data[i19];
     }
 
-    st.site = &gf_emlrtRSI;
+    st.site = &hf_emlrtRSI;
     c_fix(&st, tempc);
-    st.site = &gf_emlrtRSI;
-    b_st.site = &eb_emlrtRSI;
-    c_st.site = &fb_emlrtRSI;
+    st.site = &hf_emlrtRSI;
+    b_st.site = &fb_emlrtRSI;
+    c_st.site = &gb_emlrtRSI;
     if ((tempc->size[0] == 1) || (tempc->size[0] != 1)) {
       overflow = true;
     } else {
@@ -732,16 +732,16 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
         "Coder:toolbox:eml_min_or_max_varDimZero", 0);
     }
 
-    d_st.site = &gb_emlrtRSI;
+    d_st.site = &hb_emlrtRSI;
     ixstart = 1;
     nx = tempc->size[0];
     mtmp = tempc->data[0];
     if (tempc->size[0] > 1) {
       if (muDoubleScalarIsNaN(tempc->data[0])) {
-        e_st.site = &hb_emlrtRSI;
+        e_st.site = &ib_emlrtRSI;
         overflow = (tempc->size[0] > 2147483646);
         if (overflow) {
-          f_st.site = &jb_emlrtRSI;
+          f_st.site = &kb_emlrtRSI;
           check_forloop_overflow_error(&f_st, true);
         }
 
@@ -759,7 +759,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
       }
 
       if (ixstart < tempc->size[0]) {
-        e_st.site = &ib_emlrtRSI;
+        e_st.site = &jb_emlrtRSI;
         if (ixstart + 1 > tempc->size[0]) {
           overflow = false;
         } else {
@@ -767,7 +767,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
         }
 
         if (overflow) {
-          f_st.site = &jb_emlrtRSI;
+          f_st.site = &kb_emlrtRSI;
           check_forloop_overflow_error(&f_st, true);
         }
 
@@ -804,9 +804,9 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     /* 'Mybesseli:115' if (2*magx > 80) */
     if (2.0 * mtmp > 80.0) {
       /* 'Mybesseli:116' test = sqrt(test*max(p)); */
-      st.site = &hf_emlrtRSI;
-      b_st.site = &eb_emlrtRSI;
-      c_st.site = &fb_emlrtRSI;
+      st.site = &if_emlrtRSI;
+      b_st.site = &fb_emlrtRSI;
+      c_st.site = &gb_emlrtRSI;
       if ((p->size[0] == 1) || (p->size[0] != 1)) {
         overflow = true;
       } else {
@@ -825,16 +825,16 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
           "Coder:toolbox:eml_min_or_max_varDimZero", 0);
       }
 
-      d_st.site = &gb_emlrtRSI;
+      d_st.site = &hb_emlrtRSI;
       ixstart = 1;
       nx = p->size[0];
       mtmp = p->data[0];
       if (p->size[0] > 1) {
         if (muDoubleScalarIsNaN(p->data[0])) {
-          e_st.site = &hb_emlrtRSI;
+          e_st.site = &ib_emlrtRSI;
           overflow = (p->size[0] > 2147483646);
           if (overflow) {
-            f_st.site = &jb_emlrtRSI;
+            f_st.site = &kb_emlrtRSI;
             check_forloop_overflow_error(&f_st, true);
           }
 
@@ -852,7 +852,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
         }
 
         if (ixstart < p->size[0]) {
-          e_st.site = &ib_emlrtRSI;
+          e_st.site = &jb_emlrtRSI;
           if (ixstart + 1 > p->size[0]) {
             overflow = false;
           } else {
@@ -860,7 +860,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
           }
 
           if (overflow) {
-            f_st.site = &jb_emlrtRSI;
+            f_st.site = &kb_emlrtRSI;
             check_forloop_overflow_error(&f_st, true);
           }
 
@@ -875,12 +875,12 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
       }
 
       test = 9.007199254740992E+15 * mtmp;
-      st.site = &hf_emlrtRSI;
+      st.site = &if_emlrtRSI;
       c_sqrt(&st, &test);
     } else {
       /* 'Mybesseli:117' else */
       /* 'Mybesseli:118' test = test / 1.585^magx; */
-      st.site = &if_emlrtRSI;
+      st.site = &jf_emlrtRSI;
       mtmp = b_mpower(&st, 1.585, mtmp);
       test = 9.007199254740992E+15 / mtmp;
     }
@@ -956,13 +956,13 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     /*      Calculate p-sequence until significance test passed. */
     /*  */
     /* 'Mybesseli:188' a = p; */
-    i18 = a->size[0];
+    i19 = a->size[0];
     a->size[0] = p->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)a, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)a, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = p->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      a->data[i18] = p->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      a->data[i19] = p->data[i19];
     }
 
     /* 'Mybesseli:189' count = 0; */
@@ -974,16 +974,16 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     emxInit_real_T1(sp, &c_en, 1, &lb_emlrtRTEI, true);
     do {
       exitg4 = 0;
-      i18 = b_p->size[0];
+      i19 = b_p->size[0];
       b_p->size[0] = p->size[0];
-      emxEnsureCapacity(sp, (emxArray__common *)b_p, i18, (int32_T)sizeof
+      emxEnsureCapacity(sp, (emxArray__common *)b_p, i19, (int32_T)sizeof
                         (boolean_T), &lb_emlrtRTEI);
       nx = p->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        b_p->data[i18] = (p->data[i18] < test);
+      for (i19 = 0; i19 < nx; i19++) {
+        b_p->data[i19] = (p->data[i19] < test);
       }
 
-      st.site = &jf_emlrtRSI;
+      st.site = &kf_emlrtRSI;
       if (c_any(&st, b_p)) {
         /* 'Mybesseli:191' n = n + 1; */
         n++;
@@ -995,49 +995,49 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
         if (count == 1) {
           /* 'Mybesseli:194' plast = a; */
           /* 'Mybesseli:195' pold = plast; */
-          i18 = tempc->size[0];
+          i19 = tempc->size[0];
           tempc->size[0] = a->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)sizeof
+          emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = a->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            tempc->data[i18] = a->data[i18];
+          for (i19 = 0; i19 < nx; i19++) {
+            tempc->data[i19] = a->data[i19];
           }
 
           /* 'Mybesseli:196' a = p; */
-          i18 = a->size[0];
+          i19 = a->size[0];
           a->size[0] = p->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)a, i18, (int32_T)sizeof
+          emxEnsureCapacity(sp, (emxArray__common *)a, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = p->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            a->data[i18] = p->data[i18];
+          for (i19 = 0; i19 < nx; i19++) {
+            a->data[i19] = p->data[i19];
           }
 
           /* 'Mybesseli:197' p = en * a./x + pold; */
-          i18 = c_en->size[0];
+          i19 = c_en->size[0];
           c_en->size[0] = p->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)c_en, i18, (int32_T)sizeof
+          emxEnsureCapacity(sp, (emxArray__common *)c_en, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = p->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            c_en->data[i18] = en * p->data[i18];
+          for (i19 = 0; i19 < nx; i19++) {
+            c_en->data[i19] = en * p->data[i19];
           }
 
-          st.site = &kf_emlrtRSI;
+          st.site = &lf_emlrtRSI;
           e_rdivide(&st, c_en, b_x, p);
-          i18 = p->size[0];
+          i19 = p->size[0];
           idx = tempc->size[0];
-          if (i18 != idx) {
-            emlrtSizeEqCheck1DR2012b(i18, idx, &db_emlrtECI, sp);
+          if (i19 != idx) {
+            emlrtSizeEqCheck1DR2012b(i19, idx, &db_emlrtECI, sp);
           }
 
-          i18 = p->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)p, i18, (int32_T)sizeof
+          i19 = p->size[0];
+          emxEnsureCapacity(sp, (emxArray__common *)p, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = p->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            p->data[i18] += tempc->data[i18];
+          for (i19 = 0; i19 < nx; i19++) {
+            p->data[i19] += tempc->data[i19];
           }
         } else {
           /* 'Mybesseli:198' else */
@@ -1045,40 +1045,40 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
           count = 1;
 
           /* 'Mybesseli:200' a = p; */
-          i18 = a->size[0];
+          i19 = a->size[0];
           a->size[0] = p->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)a, i18, (int32_T)sizeof
+          emxEnsureCapacity(sp, (emxArray__common *)a, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = p->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            a->data[i18] = p->data[i18];
+          for (i19 = 0; i19 < nx; i19++) {
+            a->data[i19] = p->data[i19];
           }
 
           /* 'Mybesseli:201' p = en * a./x + ones(length(a),1); */
-          i18 = b_en->size[0];
+          i19 = b_en->size[0];
           b_en->size[0] = p->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)b_en, i18, (int32_T)sizeof
+          emxEnsureCapacity(sp, (emxArray__common *)b_en, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = p->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            b_en->data[i18] = en * p->data[i18];
+          for (i19 = 0; i19 < nx; i19++) {
+            b_en->data[i19] = en * p->data[i19];
           }
 
-          st.site = &lf_emlrtRSI;
+          st.site = &mf_emlrtRSI;
           e_rdivide(&st, b_en, b_x, tempc);
           ixstart = p->size[0];
-          i18 = tempc->size[0];
-          if (i18 != ixstart) {
-            emlrtSizeEqCheck1DR2012b(i18, ixstart, &cb_emlrtECI, sp);
+          i19 = tempc->size[0];
+          if (i19 != ixstart) {
+            emlrtSizeEqCheck1DR2012b(i19, ixstart, &cb_emlrtECI, sp);
           }
 
-          i18 = p->size[0];
+          i19 = p->size[0];
           p->size[0] = tempc->size[0];
-          emxEnsureCapacity(sp, (emxArray__common *)p, i18, (int32_T)sizeof
+          emxEnsureCapacity(sp, (emxArray__common *)p, i19, (int32_T)sizeof
                             (real_T), &lb_emlrtRTEI);
           nx = tempc->size[0];
-          for (i18 = 0; i18 < nx; i18++) {
-            p->data[i18] = tempc->data[i18] + 1.0;
+          for (i19 = 0; i19 < nx; i19++) {
+            p->data[i19] = tempc->data[i19] + 1.0;
           }
         }
 
@@ -1121,13 +1121,13 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     emp2al = (n - 1.0) - 1.0;
 
     /* 'Mybesseli:216' sum = tempa * empal * emp2al / em; */
-    i18 = b_tempa->size[0];
+    i19 = b_tempa->size[0];
     b_tempa->size[0] = tempa->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)b_tempa, i18, (int32_T)sizeof
+    emxEnsureCapacity(sp, (emxArray__common *)b_tempa, i19, (int32_T)sizeof
                       (real_T), &lb_emlrtRTEI);
     nx = tempa->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      b_tempa->data[i18] = tempa->data[i18] * (n - 1.0) * ((n - 1.0) - 1.0);
+    for (i19 = 0; i19 < nx; i19++) {
+      b_tempa->data[i19] = tempa->data[i19] * (n - 1.0) * ((n - 1.0) - 1.0);
     }
 
     b_rdivide(sp, b_tempa, n - 1.0, a);
@@ -1141,58 +1141,58 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     if (n - 1.0 < 0.0) {
       /* 'Mybesseli:220' b(v,n) = tempa; */
       ixstart = b->size[0];
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = v->size[0];
-      emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+      emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                         &lb_emlrtRTEI);
       nx = v->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        idx = (int32_T)v->data[i18];
+      for (i19 = 0; i19 < nx; i19++) {
+        idx = (int32_T)v->data[i19];
         if (!((idx >= 1) && (idx <= ixstart))) {
-          emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &kc_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &rc_emlrtBCI, sp);
         }
 
-        ii->data[i18] = idx - 1;
+        ii->data[i19] = idx - 1;
       }
 
       if (n != (int32_T)muDoubleScalarFloor(n)) {
         emlrtIntegerCheckR2012b(n, &w_emlrtDCI, sp);
       }
 
-      i18 = (int32_T)n;
-      if (!((i18 >= 1) && (i18 <= 1))) {
-        emlrtDynamicBoundsCheckR2012b(i18, 1, 1, &fc_emlrtBCI, sp);
+      i19 = (int32_T)n;
+      if (!((i19 >= 1) && (i19 <= 1))) {
+        emlrtDynamicBoundsCheckR2012b(i19, 1, 1, &mc_emlrtBCI, sp);
       }
 
       c_ii[0] = ii->size[0];
       emlrtSubAssignSizeCheckR2012b(c_ii, 1, *(int32_T (*)[1])tempa->size, 1,
         &w_emlrtECI, sp);
       nx = tempa->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        b->data[ii->data[i18]] = tempa->data[i18];
+      for (i19 = 0; i19 < nx; i19++) {
+        b->data[ii->data[i19]] = tempa->data[i19];
       }
 
       /* 'Mybesseli:221' nend = -nend; */
       /* 'Mybesseli:222' b(v,n+1:n+nend) = zeros(length(v),nend); */
       ixstart = b->size[0];
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = v->size[0];
-      emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+      emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                         &lb_emlrtRTEI);
       nx = v->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        idx = (int32_T)v->data[i18];
+      for (i19 = 0; i19 < nx; i19++) {
+        idx = (int32_T)v->data[i19];
         if (!((idx >= 1) && (idx <= ixstart))) {
-          emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &lc_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &sc_emlrtBCI, sp);
         }
 
-        ii->data[i18] = idx - 1;
+        ii->data[i19] = idx - 1;
       }
 
       emxInit_int32_T(sp, &r8, 1, &lb_emlrtRTEI, true);
-      i18 = r8->size[0];
+      i19 = r8->size[0];
       r8->size[0] = 0;
-      emxEnsureCapacity(sp, (emxArray__common *)r8, i18, (int32_T)sizeof(int32_T),
+      emxEnsureCapacity(sp, (emxArray__common *)r8, i19, (int32_T)sizeof(int32_T),
                         &lb_emlrtRTEI);
       d_ii[0] = ii->size[0];
       d_ii[1] = 0;
@@ -1209,13 +1209,13 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
         /*            (but not storing) b(n), until n = nb. */
         /*  */
         /* 'Mybesseli:229' kk= tempa; */
-        i18 = p->size[0];
+        i19 = p->size[0];
         p->size[0] = tempa->size[0];
-        emxEnsureCapacity(sp, (emxArray__common *)p, i18, (int32_T)sizeof(real_T),
+        emxEnsureCapacity(sp, (emxArray__common *)p, i19, (int32_T)sizeof(real_T),
                           &lb_emlrtRTEI);
         nx = tempa->size[0];
-        for (i18 = 0; i18 < nx; i18++) {
-          p->data[i18] = tempa->data[i18];
+        for (i19 = 0; i19 < nx; i19++) {
+          p->data[i19] = tempa->data[i19];
         }
 
         /* 'Mybesseli:230' count2 = 0; */
@@ -1240,49 +1240,49 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
           if (count2 == 1) {
             /* 'Mybesseli:235' tempb = kk; */
             /* 'Mybesseli:236' tempc = tempb; */
-            i18 = tempc->size[0];
+            i19 = tempc->size[0];
             tempc->size[0] = p->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)
+            emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)
                               sizeof(real_T), &lb_emlrtRTEI);
             nx = p->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              tempc->data[i18] = p->data[i18];
+            for (i19 = 0; i19 < nx; i19++) {
+              tempc->data[i19] = p->data[i19];
             }
 
             /* 'Mybesseli:237' kk = tempa; */
-            i18 = p->size[0];
+            i19 = p->size[0];
             p->size[0] = tempa->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)p, i18, (int32_T)sizeof
+            emxEnsureCapacity(sp, (emxArray__common *)p, i19, (int32_T)sizeof
                               (real_T), &lb_emlrtRTEI);
             nx = tempa->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              p->data[i18] = tempa->data[i18];
+            for (i19 = 0; i19 < nx; i19++) {
+              p->data[i19] = tempa->data[i19];
             }
 
             /* 'Mybesseli:238' tempa = (en*kk) ./ x + tempc; */
-            i18 = e_en->size[0];
+            i19 = e_en->size[0];
             e_en->size[0] = tempa->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)e_en, i18, (int32_T)sizeof
+            emxEnsureCapacity(sp, (emxArray__common *)e_en, i19, (int32_T)sizeof
                               (real_T), &lb_emlrtRTEI);
             nx = tempa->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              e_en->data[i18] = en * tempa->data[i18];
+            for (i19 = 0; i19 < nx; i19++) {
+              e_en->data[i19] = en * tempa->data[i19];
             }
 
-            st.site = &mf_emlrtRSI;
+            st.site = &nf_emlrtRSI;
             e_rdivide(&st, e_en, b_x, tempa);
-            i18 = tempa->size[0];
+            i19 = tempa->size[0];
             idx = tempc->size[0];
-            if (i18 != idx) {
-              emlrtSizeEqCheck1DR2012b(i18, idx, &bb_emlrtECI, sp);
+            if (i19 != idx) {
+              emlrtSizeEqCheck1DR2012b(i19, idx, &bb_emlrtECI, sp);
             }
 
-            i18 = tempa->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)tempa, i18, (int32_T)
+            i19 = tempa->size[0];
+            emxEnsureCapacity(sp, (emxArray__common *)tempa, i19, (int32_T)
                               sizeof(real_T), &lb_emlrtRTEI);
             nx = tempa->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              tempa->data[i18] += tempc->data[i18];
+            for (i19 = 0; i19 < nx; i19++) {
+              tempa->data[i19] += tempc->data[i19];
             }
           } else {
             /* 'Mybesseli:239' else */
@@ -1290,26 +1290,26 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
             count2 = 1;
 
             /* 'Mybesseli:241' kk = tempa; */
-            i18 = p->size[0];
+            i19 = p->size[0];
             p->size[0] = tempa->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)p, i18, (int32_T)sizeof
+            emxEnsureCapacity(sp, (emxArray__common *)p, i19, (int32_T)sizeof
                               (real_T), &lb_emlrtRTEI);
             nx = tempa->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              p->data[i18] = tempa->data[i18];
+            for (i19 = 0; i19 < nx; i19++) {
+              p->data[i19] = tempa->data[i19];
             }
 
             /* 'Mybesseli:242' tempa = (en*kk) ./ x; */
-            i18 = d_en->size[0];
+            i19 = d_en->size[0];
             d_en->size[0] = tempa->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)d_en, i18, (int32_T)sizeof
+            emxEnsureCapacity(sp, (emxArray__common *)d_en, i19, (int32_T)sizeof
                               (real_T), &lb_emlrtRTEI);
             nx = tempa->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              d_en->data[i18] = en * tempa->data[i18];
+            for (i19 = 0; i19 < nx; i19++) {
+              d_en->data[i19] = en * tempa->data[i19];
             }
 
-            st.site = &nf_emlrtRSI;
+            st.site = &of_emlrtRSI;
             e_rdivide(&st, d_en, b_x, tempa);
           }
 
@@ -1336,28 +1336,28 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
             empal--;
 
             /* 'Mybesseli:252' sum = (sum + tempa*empal) * emp2al / em; */
-            i18 = tempc->size[0];
+            i19 = tempc->size[0];
             tempc->size[0] = tempa->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)
+            emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)
                               sizeof(real_T), &lb_emlrtRTEI);
             nx = tempa->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              tempc->data[i18] = tempa->data[i18] * empal;
+            for (i19 = 0; i19 < nx; i19++) {
+              tempc->data[i19] = tempa->data[i19] * empal;
             }
 
-            i18 = a->size[0];
+            i19 = a->size[0];
             idx = tempc->size[0];
-            if (i18 != idx) {
-              emlrtSizeEqCheck1DR2012b(i18, idx, &ab_emlrtECI, sp);
+            if (i19 != idx) {
+              emlrtSizeEqCheck1DR2012b(i19, idx, &ab_emlrtECI, sp);
             }
 
-            i18 = b_a->size[0];
+            i19 = b_a->size[0];
             b_a->size[0] = a->size[0];
-            emxEnsureCapacity(sp, (emxArray__common *)b_a, i18, (int32_T)sizeof
+            emxEnsureCapacity(sp, (emxArray__common *)b_a, i19, (int32_T)sizeof
                               (real_T), &lb_emlrtRTEI);
             nx = a->size[0];
-            for (i18 = 0; i18 < nx; i18++) {
-              b_a->data[i18] = (a->data[i18] + tempc->data[i18]) * emp2al;
+            for (i19 = 0; i19 < nx; i19++) {
+              b_a->data[i19] = (a->data[i19] + tempc->data[i19]) * emp2al;
             }
 
             b_rdivide(sp, b_a, em, a);
@@ -1378,51 +1378,51 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
       /*  */
       /* 'Mybesseli:258' b(v,n) = tempa; */
       ixstart = b->size[0];
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = v->size[0];
-      emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+      emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                         &lb_emlrtRTEI);
       nx = v->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        idx = (int32_T)v->data[i18];
+      for (i19 = 0; i19 < nx; i19++) {
+        idx = (int32_T)v->data[i19];
         if (!((idx >= 1) && (idx <= ixstart))) {
-          emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &jc_emlrtBCI, sp);
+          emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &qc_emlrtBCI, sp);
         }
 
-        ii->data[i18] = idx - 1;
+        ii->data[i19] = idx - 1;
       }
 
       if (n != (int32_T)muDoubleScalarFloor(n)) {
         emlrtIntegerCheckR2012b(n, &v_emlrtDCI, sp);
       }
 
-      i18 = (int32_T)n;
-      if (!((i18 >= 1) && (i18 <= 1))) {
-        emlrtDynamicBoundsCheckR2012b(i18, 1, 1, &ec_emlrtBCI, sp);
+      i19 = (int32_T)n;
+      if (!((i19 >= 1) && (i19 <= 1))) {
+        emlrtDynamicBoundsCheckR2012b(i19, 1, 1, &lc_emlrtBCI, sp);
       }
 
       c_ii[0] = ii->size[0];
       emlrtSubAssignSizeCheckR2012b(c_ii, 1, *(int32_T (*)[1])tempa->size, 1,
         &u_emlrtECI, sp);
       nx = tempa->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        b->data[ii->data[i18]] = tempa->data[i18];
+      for (i19 = 0; i19 < nx; i19++) {
+        b->data[ii->data[i19]] = tempa->data[i19];
       }
 
       /* 'Mybesseli:259' if (nb <= 1) */
       /* 'Mybesseli:260' sum = (sum + sum) + tempa; */
-      i18 = a->size[0];
+      i19 = a->size[0];
       idx = tempa->size[0];
-      if (i18 != idx) {
-        emlrtSizeEqCheck1DR2012b(i18, idx, &y_emlrtECI, sp);
+      if (i19 != idx) {
+        emlrtSizeEqCheck1DR2012b(i19, idx, &y_emlrtECI, sp);
       }
 
-      i18 = a->size[0];
-      emxEnsureCapacity(sp, (emxArray__common *)a, i18, (int32_T)sizeof(real_T),
+      i19 = a->size[0];
+      emxEnsureCapacity(sp, (emxArray__common *)a, i19, (int32_T)sizeof(real_T),
                         &lb_emlrtRTEI);
       nx = a->size[0];
-      for (i18 = 0; i18 < nx; i18++) {
-        a->data[i18] = (a->data[i18] + a->data[i18]) + tempa->data[i18];
+      for (i19 = 0; i19 < nx; i19++) {
+        a->data[i19] = (a->data[i19] + a->data[i19]) + tempa->data[i19];
       }
 
       /* 'Mybesseli:261' skip = -1; */
@@ -1447,28 +1447,28 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     /* 'Mybesseli:310' if (alpha ~= 0) */
     /* 'Mybesseli:313' if ~scale */
     /* 'Mybesseli:313' sum = sum .* exp(-x); */
-    i18 = b_x->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)b_x, i18, (int32_T)sizeof(real_T),
+    i19 = b_x->size[0];
+    emxEnsureCapacity(sp, (emxArray__common *)b_x, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = b_x->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      b_x->data[i18] = -b_x->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      b_x->data[i19] = -b_x->data[i19];
     }
 
-    st.site = &of_emlrtRSI;
+    st.site = &pf_emlrtRSI;
     b_exp(&st, b_x);
-    i18 = a->size[0];
+    i19 = a->size[0];
     idx = b_x->size[0];
-    if (i18 != idx) {
-      emlrtSizeEqCheck1DR2012b(i18, idx, &t_emlrtECI, sp);
+    if (i19 != idx) {
+      emlrtSizeEqCheck1DR2012b(i19, idx, &t_emlrtECI, sp);
     }
 
-    i18 = a->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)a, i18, (int32_T)sizeof(real_T),
+    i19 = a->size[0];
+    emxEnsureCapacity(sp, (emxArray__common *)a, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = a->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      a->data[i18] *= b_x->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      a->data[i19] *= b_x->data[i19];
     }
 
     emxFree_real_T(&b_x);
@@ -1476,37 +1476,37 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     /* 'Mybesseli:314' for n = 1:nb */
     /* 'Mybesseli:315' b(v,n) = b(v,n) ./ sum; */
     ixstart = b->size[0];
-    i18 = ii->size[0];
+    i19 = ii->size[0];
     ii->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+    emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &mc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &tc_emlrtBCI, sp);
       }
 
-      ii->data[i18] = idx - 1;
+      ii->data[i19] = idx - 1;
     }
 
     emxInit_real_T1(sp, &b_b, 1, &lb_emlrtRTEI, true);
     ixstart = b->size[0];
-    i18 = b_b->size[0];
+    i19 = b_b->size[0];
     b_b->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)b_b, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)b_b, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &nc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &uc_emlrtBCI, sp);
       }
 
-      b_b->data[i18] = b->data[idx - 1];
+      b_b->data[i19] = b->data[idx - 1];
     }
 
-    st.site = &pf_emlrtRSI;
+    st.site = &qf_emlrtRSI;
     e_rdivide(&st, b_b, a, tempc);
     e_ii[0] = ii->size[0];
     emlrtSubAssignSizeCheckR2012b(e_ii, 1, *(int32_T (*)[1])tempc->size, 1,
@@ -1514,8 +1514,8 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
     nx = tempc->size[0];
     emxFree_real_T(&b_b);
     emxFree_real_T(&a);
-    for (i18 = 0; i18 < nx; i18++) {
-      b->data[ii->data[i18]] = tempc->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      b->data[ii->data[i19]] = tempc->data[i19];
     }
   }
 
@@ -1523,48 +1523,48 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /*   Two-term ascending series for small x. */
   /*  */
   /* 'Mybesseli:321' v = find((0 < xx) & (xx < 1.e-4)); */
-  i18 = x->size[0];
+  i19 = x->size[0];
   x->size[0] = xx->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)x, i18, (int32_T)sizeof(boolean_T),
+  emxEnsureCapacity(sp, (emxArray__common *)x, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    x->data[i18] = (0.0 < xx->data[i18]);
+  for (i19 = 0; i19 < nx; i19++) {
+    x->data[i19] = (0.0 < xx->data[i19]);
   }
 
-  i18 = r7->size[0];
+  i19 = r7->size[0];
   r7->size[0] = xx->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)r7, i18, (int32_T)sizeof(boolean_T),
+  emxEnsureCapacity(sp, (emxArray__common *)r7, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    r7->data[i18] = (xx->data[i18] < 0.0001);
+  for (i19 = 0; i19 < nx; i19++) {
+    r7->data[i19] = (xx->data[i19] < 0.0001);
   }
 
-  i18 = x->size[0];
+  i19 = x->size[0];
   idx = r7->size[0];
-  if (i18 != idx) {
-    emlrtSizeEqCheck1DR2012b(i18, idx, &r_emlrtECI, sp);
+  if (i19 != idx) {
+    emlrtSizeEqCheck1DR2012b(i19, idx, &r_emlrtECI, sp);
   }
 
-  st.site = &qf_emlrtRSI;
-  i18 = x->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)x, i18, (int32_T)sizeof(boolean_T),
+  st.site = &rf_emlrtRSI;
+  i19 = x->size[0];
+  emxEnsureCapacity(&st, (emxArray__common *)x, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = x->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    x->data[i18] = (x->data[i18] && r7->data[i18]);
+  for (i19 = 0; i19 < nx; i19++) {
+    x->data[i19] = (x->data[i19] && r7->data[i19]);
   }
 
   emxFree_boolean_T(&r7);
-  b_st.site = &pb_emlrtRSI;
+  b_st.site = &qb_emlrtRSI;
   nx = x->size[0];
   idx = 0;
-  i18 = ii->size[0];
+  i19 = ii->size[0];
   ii->size[0] = x->size[0];
-  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                     &lb_emlrtRTEI);
-  c_st.site = &vf_emlrtRSI;
+  c_st.site = &wf_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -1572,7 +1572,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   }
 
   if (overflow) {
-    d_st.site = &jb_emlrtRSI;
+    d_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
@@ -1605,120 +1605,120 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
 
   if (x->size[0] == 1) {
     if (idx == 0) {
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = 0;
-      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof
+      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof
                         (int32_T), &lb_emlrtRTEI);
     }
   } else {
     if (1 > idx) {
-      i18 = 0;
+      i19 = 0;
     } else {
-      i18 = idx;
+      i19 = idx;
     }
 
     iv19[0] = 1;
-    iv19[1] = i18;
-    c_st.site = &qb_emlrtRSI;
+    iv19[1] = i19;
+    c_st.site = &rb_emlrtRSI;
     indexShapeCheck(&c_st, ii->size[0], iv19);
     idx = ii->size[0];
-    ii->size[0] = i18;
+    ii->size[0] = i19;
     emxEnsureCapacity(&b_st, (emxArray__common *)ii, idx, (int32_T)sizeof
                       (int32_T), &f_emlrtRTEI);
   }
 
-  i18 = v->size[0];
+  i19 = v->size[0];
   v->size[0] = ii->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)v, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(&st, (emxArray__common *)v, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   nx = ii->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    v->data[i18] = ii->data[i18];
+  for (i19 = 0; i19 < nx; i19++) {
+    v->data[i19] = ii->data[i19];
   }
 
   /* 'Mybesseli:322' if any(v) */
-  st.site = &rf_emlrtRSI;
+  st.site = &sf_emlrtRSI;
   if (b_any(&st, v)) {
     /* 'Mybesseli:323' x = xx(v); */
     ixstart = xx->size[0];
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &oc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &vc_emlrtBCI, sp);
       }
     }
 
     /* 'Mybesseli:324' tempa = ones(length(x),1); */
     /* 'Mybesseli:325' empal = 1 + alpha; */
     /* 'Mybesseli:326' halfx = 0.5 * x; */
-    i18 = tempc->size[0];
+    i19 = tempc->size[0];
     tempc->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      tempc->data[i18] = 0.5 * xx->data[(int32_T)v->data[i18] - 1];
+    for (i19 = 0; i19 < nx; i19++) {
+      tempc->data[i19] = 0.5 * xx->data[(int32_T)v->data[i19] - 1];
     }
 
     /* 'Mybesseli:327' if (alpha ~= 0) */
     /* 'Mybesseli:328' if scale */
     /* 'Mybesseli:329' tempb = halfx .* halfx; */
-    i18 = tempc->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)tempc, i18, (int32_T)sizeof(real_T),
+    i19 = tempc->size[0];
+    emxEnsureCapacity(sp, (emxArray__common *)tempc, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = tempc->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      tempc->data[i18] *= tempc->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      tempc->data[i19] *= tempc->data[i19];
     }
 
     emxInit_real_T1(sp, &r9, 1, &lb_emlrtRTEI, true);
 
     /* 'Mybesseli:330' b(v,1) = tempa + tempa.*tempb / empal; */
     ixstart = v->size[0];
-    i18 = tempc->size[0];
-    if (ixstart != i18) {
-      emlrtSizeEqCheck1DR2012b(ixstart, i18, &q_emlrtECI, sp);
+    i19 = tempc->size[0];
+    if (ixstart != i19) {
+      emlrtSizeEqCheck1DR2012b(ixstart, i19, &q_emlrtECI, sp);
     }
 
-    i18 = r9->size[0];
+    i19 = r9->size[0];
     r9->size[0] = tempc->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)r9, i18, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)r9, i19, (int32_T)sizeof(real_T),
                       &lb_emlrtRTEI);
     nx = tempc->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      r9->data[i18] = tempc->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      r9->data[i19] = tempc->data[i19];
     }
 
     b_rdivide(sp, r9, 1.0, tempc);
     ixstart = v->size[0];
-    i18 = tempc->size[0];
-    if (ixstart != i18) {
-      emlrtSizeEqCheck1DR2012b(ixstart, i18, &p_emlrtECI, sp);
+    i19 = tempc->size[0];
+    if (ixstart != i19) {
+      emlrtSizeEqCheck1DR2012b(ixstart, i19, &p_emlrtECI, sp);
     }
 
     ixstart = b->size[0];
-    i18 = ii->size[0];
+    i19 = ii->size[0];
     ii->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+    emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
     emxFree_real_T(&r9);
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &pc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &wc_emlrtBCI, sp);
       }
 
-      ii->data[i18] = idx - 1;
+      ii->data[i19] = idx - 1;
     }
 
     f_ii[0] = ii->size[0];
     c_v[0] = v->size[0];
     emlrtSubAssignSizeCheckR2012b(f_ii, 1, c_v, 1, &o_emlrtECI, sp);
     ixstart = v->size[0];
-    for (i18 = 0; i18 < ixstart; i18++) {
-      b->data[ii->data[i18]] = 1.0 + tempc->data[i18];
+    for (i19 = 0; i19 < ixstart; i19++) {
+      b->data[ii->data[i19]] = 1.0 + tempc->data[i19];
     }
 
     /* 'Mybesseli:331' if (nb > 1) */
@@ -1730,24 +1730,24 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /*   x == 0 */
   /*  */
   /* 'Mybesseli:349' v = find(xx == 0); */
-  st.site = &sf_emlrtRSI;
-  i18 = x->size[0];
+  st.site = &tf_emlrtRSI;
+  i19 = x->size[0];
   x->size[0] = xx->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)x, i18, (int32_T)sizeof(boolean_T),
+  emxEnsureCapacity(&st, (emxArray__common *)x, i19, (int32_T)sizeof(boolean_T),
                     &lb_emlrtRTEI);
   nx = xx->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    x->data[i18] = (xx->data[i18] == 0.0);
+  for (i19 = 0; i19 < nx; i19++) {
+    x->data[i19] = (xx->data[i19] == 0.0);
   }
 
-  b_st.site = &pb_emlrtRSI;
+  b_st.site = &qb_emlrtRSI;
   nx = x->size[0];
   idx = 0;
-  i18 = ii->size[0];
+  i19 = ii->size[0];
   ii->size[0] = x->size[0];
-  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                     &lb_emlrtRTEI);
-  c_st.site = &vf_emlrtRSI;
+  c_st.site = &wf_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -1755,7 +1755,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   }
 
   if (overflow) {
-    d_st.site = &jb_emlrtRSI;
+    d_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
@@ -1788,89 +1788,89 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
 
   if (x->size[0] == 1) {
     if (idx == 0) {
-      i18 = ii->size[0];
+      i19 = ii->size[0];
       ii->size[0] = 0;
-      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i18, (int32_T)sizeof
+      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i19, (int32_T)sizeof
                         (int32_T), &lb_emlrtRTEI);
     }
   } else {
     if (1 > idx) {
-      i18 = 0;
+      i19 = 0;
     } else {
-      i18 = idx;
+      i19 = idx;
     }
 
     iv20[0] = 1;
-    iv20[1] = i18;
-    c_st.site = &qb_emlrtRSI;
+    iv20[1] = i19;
+    c_st.site = &rb_emlrtRSI;
     indexShapeCheck(&c_st, ii->size[0], iv20);
     idx = ii->size[0];
-    ii->size[0] = i18;
+    ii->size[0] = i19;
     emxEnsureCapacity(&b_st, (emxArray__common *)ii, idx, (int32_T)sizeof
                       (int32_T), &f_emlrtRTEI);
   }
 
   emxFree_boolean_T(&x);
-  i18 = v->size[0];
+  i19 = v->size[0];
   v->size[0] = ii->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)v, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(&st, (emxArray__common *)v, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   nx = ii->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    v->data[i18] = ii->data[i18];
+  for (i19 = 0; i19 < nx; i19++) {
+    v->data[i19] = ii->data[i19];
   }
 
   /* 'Mybesseli:350' if any(v) */
-  st.site = &tf_emlrtRSI;
+  st.site = &uf_emlrtRSI;
   if (b_any(&st, v)) {
     /*  if alpha>0, I(alpha,0) = 0; I(0,0) = 1. */
     /* 'Mybesseli:352' b(v,:) = zeros(length(v),nb); */
     ixstart = b->size[0];
-    i18 = ii->size[0];
+    i19 = ii->size[0];
     ii->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+    emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &qc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &xc_emlrtBCI, sp);
       }
 
-      ii->data[i18] = idx - 1;
+      ii->data[i19] = idx - 1;
     }
 
     g_ii[0] = ii->size[0];
     d_v[0] = v->size[0];
     emlrtSubAssignSizeCheckR2012b(g_ii, 1, d_v, 1, &n_emlrtECI, sp);
     ixstart = v->size[0];
-    for (i18 = 0; i18 < ixstart; i18++) {
-      b->data[ii->data[i18]] = 0.0;
+    for (i19 = 0; i19 < ixstart; i19++) {
+      b->data[ii->data[i19]] = 0.0;
     }
 
     /* 'Mybesseli:353' if alpha == 0 */
     /* 'Mybesseli:353' b(v,1) = ones(length(v),1); */
     ixstart = b->size[0];
-    i18 = ii->size[0];
+    i19 = ii->size[0];
     ii->size[0] = v->size[0];
-    emxEnsureCapacity(sp, (emxArray__common *)ii, i18, (int32_T)sizeof(int32_T),
+    emxEnsureCapacity(sp, (emxArray__common *)ii, i19, (int32_T)sizeof(int32_T),
                       &lb_emlrtRTEI);
     nx = v->size[0];
-    for (i18 = 0; i18 < nx; i18++) {
-      idx = (int32_T)v->data[i18];
+    for (i19 = 0; i19 < nx; i19++) {
+      idx = (int32_T)v->data[i19];
       if (!((idx >= 1) && (idx <= ixstart))) {
-        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &rc_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(idx, 1, ixstart, &yc_emlrtBCI, sp);
       }
 
-      ii->data[i18] = idx - 1;
+      ii->data[i19] = idx - 1;
     }
 
     h_ii[0] = ii->size[0];
     e_v[0] = v->size[0];
     emlrtSubAssignSizeCheckR2012b(h_ii, 1, e_v, 1, &m_emlrtECI, sp);
     ixstart = v->size[0];
-    for (i18 = 0; i18 < ixstart; i18++) {
-      b->data[ii->data[i18]] = 1.0;
+    for (i19 = 0; i19 < ixstart; i19++) {
+      b->data[ii->data[i19]] = 1.0;
     }
   }
 
@@ -1883,21 +1883,21 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /*  */
   /* 'Mybesseli:358' b = b(:,nfirst+1:nb); */
   ixstart = b->size[0];
-  i18 = c_b->size[0];
+  i19 = c_b->size[0];
   c_b->size[0] = ixstart;
-  emxEnsureCapacity(sp, (emxArray__common *)c_b, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)c_b, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
-  for (i18 = 0; i18 < ixstart; i18++) {
-    c_b->data[i18] = b->data[i18];
+  for (i19 = 0; i19 < ixstart; i19++) {
+    c_b->data[i19] = b->data[i19];
   }
 
-  i18 = b->size[0];
+  i19 = b->size[0];
   b->size[0] = c_b->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)b, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)b, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   nx = c_b->size[0];
-  for (i18 = 0; i18 < nx; i18++) {
-    b->data[i18] = c_b->data[i18];
+  for (i19 = 0; i19 < nx; i19++) {
+    b->data[i19] = c_b->data[i19];
   }
 
   emxFree_real_T(&c_b);
@@ -1905,18 +1905,18 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   /*     if resize */
   /* 'Mybesseli:360' if resize_flag */
   /* 'Mybesseli:361' output = reshape(b,resize(1),resize(2)); */
-  st.site = &uf_emlrtRSI;
-  b_st.site = &yf_emlrtRSI;
-  c_st.site = &dg_emlrtRSI;
+  st.site = &vf_emlrtRSI;
+  b_st.site = &ag_emlrtRSI;
+  c_st.site = &eg_emlrtRSI;
   assertValidSizeArg(&c_st, resize_idx_0);
-  c_st.site = &dg_emlrtRSI;
+  c_st.site = &eg_emlrtRSI;
   assertValidSizeArg(&c_st, 1.0);
   nx = (int32_T)resize_idx_0;
-  b_st.site = &ag_emlrtRSI;
+  b_st.site = &bg_emlrtRSI;
   resize_idx_0 = (uint32_T)b->size[0];
-  c_st.site = &eb_emlrtRSI;
-  d_st.site = &fb_emlrtRSI;
-  e_st.site = &gb_emlrtRSI;
+  c_st.site = &fb_emlrtRSI;
+  d_st.site = &gb_emlrtRSI;
+  e_st.site = &hb_emlrtRSI;
   ixstart = (int32_T)resize_idx_0;
   if (1 > (int32_T)resize_idx_0) {
     ixstart = 1;
@@ -1928,19 +1928,19 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   }
 
   if (nx > ixstart) {
-    b_st.site = &bg_emlrtRSI;
+    b_st.site = &cg_emlrtRSI;
     g_error(&b_st);
   }
 
   if (1 > ixstart) {
-    b_st.site = &bg_emlrtRSI;
+    b_st.site = &cg_emlrtRSI;
     g_error(&b_st);
   }
 
-  i18 = output->size[0] * output->size[1];
+  i19 = output->size[0] * output->size[1];
   output->size[0] = nx;
   output->size[1] = 1;
-  emxEnsureCapacity(&st, (emxArray__common *)output, i18, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(&st, (emxArray__common *)output, i19, (int32_T)sizeof(real_T),
                     &lb_emlrtRTEI);
   if (b->size[0] == output->size[0]) {
   } else {
@@ -1948,7 +1948,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
       "Coder:MATLAB:getReshapeDims_notSameNumel", 0);
   }
 
-  b_st.site = &cg_emlrtRSI;
+  b_st.site = &dg_emlrtRSI;
   if (1 > b->size[0]) {
     overflow = false;
   } else {
@@ -1956,7 +1956,7 @@ void Mybesseli(const emlrtStack *sp, emxArray_real_T *xx, emxArray_real_T
   }
 
   if (overflow) {
-    c_st.site = &jb_emlrtRSI;
+    c_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 
@@ -1990,7 +1990,7 @@ real_T b_Mybesseli(const emlrtStack *sp)
   int32_T l;
   boolean_T exitg1;
   real_T tempc;
-  int32_T i21;
+  int32_T i22;
 
   /* BESSELI Modified Bessel functions of the first kind. */
   /* 	I = BESSELI(ALPHA,X) computes modified Bessel functions of the */
@@ -2319,9 +2319,9 @@ real_T b_Mybesseli(const emlrtStack *sp)
   /*         Store b(nb). */
   /*  */
   /* 'Mybesseli:258' b(v,n) = tempa; */
-  i21 = (int32_T)n;
-  if (!((i21 >= 1) && (i21 <= 1))) {
-    emlrtDynamicBoundsCheckR2012b(i21, 1, 1, &ec_emlrtBCI, sp);
+  i22 = (int32_T)n;
+  if (!((i22 >= 1) && (i22 <= 1))) {
+    emlrtDynamicBoundsCheckR2012b(i22, 1, 1, &lc_emlrtBCI, sp);
   }
 
   /* 'Mybesseli:259' if (nb <= 1) */

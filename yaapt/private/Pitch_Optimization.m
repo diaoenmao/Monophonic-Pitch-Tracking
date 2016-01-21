@@ -11,5 +11,8 @@ for i=1:length(Pitch_temp)
         Pitch_temp(i) = Pitch_temp(i - 1);
     end
 end
-Pitch_out = Pitch_temp;
+% Pitch_out = Pitch_temp;
+Pitch_temp = Smooth(Pitch_temp);
+Pitch_temp = Smooth(Pitch_temp);
+Pitch_out = Smooth(Pitch_temp);
 end

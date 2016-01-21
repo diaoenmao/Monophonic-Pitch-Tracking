@@ -45,7 +45,7 @@ void c_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &qd_emlrtRSI;
+  st.site = &rd_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -60,7 +60,7 @@ void c_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   emxEnsureCapacity(&st, (emxArray__common *)y, n, (int32_T)sizeof(real_T),
                     &wb_emlrtRTEI);
   n = x->size[1] << 2;
-  b_st.site = &rd_emlrtRSI;
+  b_st.site = &sd_emlrtRSI;
   if (1 > n) {
     b11 = false;
   } else {
@@ -68,7 +68,7 @@ void c_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   }
 
   if (b11) {
-    c_st.site = &jb_emlrtRSI;
+    c_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 
@@ -90,7 +90,7 @@ void d_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &qd_emlrtRSI;
+  st.site = &rd_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -104,7 +104,7 @@ void d_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   y->size[1] = (int32_T)uv6[1];
   emxEnsureCapacity(&st, (emxArray__common *)y, k, (int32_T)sizeof(real_T),
                     &wb_emlrtRTEI);
-  b_st.site = &rd_emlrtRSI;
+  b_st.site = &sd_emlrtRSI;
   if (1 > x->size[1]) {
     overflow = false;
   } else {
@@ -112,7 +112,7 @@ void d_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   }
 
   if (overflow) {
-    c_st.site = &jb_emlrtRSI;
+    c_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 

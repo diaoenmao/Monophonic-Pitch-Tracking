@@ -2,7 +2,7 @@
  * File: cmp_rate.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Jan-2016 00:47:12
+ * C/C++ source code generated on  : 21-Jan-2016 05:43:25
  */
 
 /* Include Files */
@@ -65,10 +65,10 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
   boolean_T guard1 = false;
   int iidx[20];
   double b_Pitch[20];
-  emxArray_real_T *r9;
   emxArray_real_T *r10;
-  boolean_T exitg1;
   emxArray_real_T *r11;
+  boolean_T exitg1;
+  emxArray_real_T *r12;
   emxArray_real_T b_Merit_data;
 
   /*   Creation date:   2002 */
@@ -244,35 +244,35 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
         Pitch_data[loop_ub + i21] = 0.0;
       }
 
-      emxInit_real_T(&r9, 2);
-      i21 = r9->size[0] * r9->size[1];
-      r9->size[0] = 1;
-      r9->size[1] = 3 - numpeaks;
-      emxEnsureCapacity((emxArray__common *)r9, i21, (int)sizeof(double));
-      loop_ub = 3 - numpeaks;
-      for (i21 = 0; i21 < loop_ub; i21++) {
-        r9->data[i21] = 0.001;
-      }
-
       emxInit_real_T(&r10, 2);
-      xs = Merit_size[1];
-      ixstart = r9->size[1];
-      Merit_size[1] = xs + ixstart;
-      loop_ub = 3 - numpeaks;
       i21 = r10->size[0] * r10->size[1];
       r10->size[0] = 1;
-      r10->size[1] = loop_ub;
+      r10->size[1] = 3 - numpeaks;
       emxEnsureCapacity((emxArray__common *)r10, i21, (int)sizeof(double));
-      emxFree_real_T(&r9);
+      loop_ub = 3 - numpeaks;
       for (i21 = 0; i21 < loop_ub; i21++) {
-        r10->data[r10->size[0] * i21] = 0.001;
+        r10->data[i21] = 0.001;
+      }
+
+      emxInit_real_T(&r11, 2);
+      xs = Merit_size[1];
+      ixstart = r10->size[1];
+      Merit_size[1] = xs + ixstart;
+      loop_ub = 3 - numpeaks;
+      i21 = r11->size[0] * r11->size[1];
+      r11->size[0] = 1;
+      r11->size[1] = loop_ub;
+      emxEnsureCapacity((emxArray__common *)r11, i21, (int)sizeof(double));
+      emxFree_real_T(&r10);
+      for (i21 = 0; i21 < loop_ub; i21++) {
+        r11->data[r11->size[0] * i21] = 0.001;
       }
 
       for (i21 = 0; i21 < ixstart; i21++) {
-        Merit_data[xs + i21] = r10->data[i21];
+        Merit_data[xs + i21] = r11->data[i21];
       }
 
-      emxFree_real_T(&r10);
+      emxFree_real_T(&r11);
 
       /*      Pitch(numpeaks+1:maxcands) = 0; */
       /*      Merit(numpeaks+1:maxcands) = 0.001; */
@@ -310,21 +310,21 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double lag_min, double
   }
 
   if (mtmp > 1.0) {
-    emxInit_real_T(&r11, 2);
+    emxInit_real_T(&r12, 2);
     b_Merit_data.data = (double *)Merit_data;
     b_Merit_data.size = (int *)Merit_size;
     b_Merit_data.allocatedSize = -1;
     b_Merit_data.numDimensions = 2;
     b_Merit_data.canFreeData = false;
-    d_rdivide(&b_Merit_data, mtmp, r11);
+    d_rdivide(&b_Merit_data, mtmp, r12);
     Merit_size[0] = 1;
-    Merit_size[1] = r11->size[1];
-    loop_ub = r11->size[0] * r11->size[1];
+    Merit_size[1] = r12->size[1];
+    loop_ub = r12->size[0] * r12->size[1];
     for (i21 = 0; i21 < loop_ub; i21++) {
-      Merit_data[i21] = r11->data[i21];
+      Merit_data[i21] = r12->data[i21];
     }
 
-    emxFree_real_T(&r11);
+    emxFree_real_T(&r12);
   }
 }
 

@@ -15,7 +15,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fi_emlrtRSI = { 12, "all",
+static emlrtRSInfo gi_emlrtRSI = { 12, "all",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\all.m" };
 
 /* Function Definitions */
@@ -34,7 +34,7 @@ boolean_T all(const emlrtStack *sp, const emxArray_boolean_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &fi_emlrtRSI;
+  st.site = &gi_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -59,7 +59,7 @@ boolean_T all(const emlrtStack *sp, const emxArray_boolean_T *x)
   }
 
   y = true;
-  b_st.site = &pd_emlrtRSI;
+  b_st.site = &qd_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -67,7 +67,7 @@ boolean_T all(const emlrtStack *sp, const emxArray_boolean_T *x)
   }
 
   if (overflow) {
-    c_st.site = &jb_emlrtRSI;
+    c_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 

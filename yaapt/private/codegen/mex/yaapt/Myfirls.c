@@ -21,40 +21,40 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo r_emlrtRSI = { 88, "Myfirls",
+static emlrtRSInfo s_emlrtRSI = { 88, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo s_emlrtRSI = { 90, "Myfirls",
+static emlrtRSInfo t_emlrtRSI = { 90, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo t_emlrtRSI = { 91, "Myfirls",
+static emlrtRSInfo u_emlrtRSI = { 91, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo u_emlrtRSI = { 120, "Myfirls",
+static emlrtRSInfo v_emlrtRSI = { 120, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo v_emlrtRSI = { 122, "Myfirls",
+static emlrtRSInfo w_emlrtRSI = { 122, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo w_emlrtRSI = { 123, "Myfirls",
+static emlrtRSInfo x_emlrtRSI = { 123, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo x_emlrtRSI = { 124, "Myfirls",
+static emlrtRSInfo y_emlrtRSI = { 124, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo y_emlrtRSI = { 125, "Myfirls",
+static emlrtRSInfo ab_emlrtRSI = { 125, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo ab_emlrtRSI = { 126, "Myfirls",
+static emlrtRSInfo bb_emlrtRSI = { 126, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo bb_emlrtRSI = { 127, "Myfirls",
+static emlrtRSInfo cb_emlrtRSI = { 127, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo cb_emlrtRSI = { 128, "Myfirls",
+static emlrtRSInfo db_emlrtRSI = { 128, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
-static emlrtRSInfo db_emlrtRSI = { 136, "Myfirls",
+static emlrtRSInfo eb_emlrtRSI = { 136, "Myfirls",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfirls.m" };
 
 static emlrtDCInfo emlrtDCI = { 128, 28, "Myfirls",
@@ -944,12 +944,12 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   }
 
   if (any(bv0)) {
-    st.site = &r_emlrtRSI;
+    st.site = &s_emlrtRSI;
     b_error(&st);
   }
 
   /* 'Myfirls:90' if (max(F)>1)|(min(F)<0) */
-  st.site = &s_emlrtRSI;
+  st.site = &t_emlrtRSI;
   ixstart = 1;
   mtmp = F[0];
   if (muDoubleScalarIsNaN(F[0])) {
@@ -980,7 +980,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   if (mtmp > 1.0) {
     guard1 = true;
   } else {
-    st.site = &s_emlrtRSI;
+    st.site = &t_emlrtRSI;
     ixstart = 1;
     mtmp = F[0];
     if (muDoubleScalarIsNaN(F[0])) {
@@ -1013,7 +1013,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   }
 
   if (guard1) {
-    st.site = &t_emlrtRSI;
+    st.site = &u_emlrtRSI;
     c_error(&st);
   }
 
@@ -1063,7 +1063,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       emlrtIntegerCheckR2012b(x, &d_emlrtDCI, sp);
     }
 
-    st.site = &u_emlrtRSI;
+    st.site = &v_emlrtRSI;
     x = mpower(1.0);
     b0 += (b1 * (F[b_s] - F[b_s - 1]) + m / 2.0 * (F[b_s] * F[b_s] - F[b_s - 1] *
             F[b_s - 1])) * muDoubleScalarAbs(x);
@@ -1076,7 +1076,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       emlrtIntegerCheckR2012b(x, &c_emlrtDCI, sp);
     }
 
-    st.site = &v_emlrtRSI;
+    st.site = &w_emlrtRSI;
     x = mpower(1.0);
     mtmp = muDoubleScalarAbs(x);
     for (ixstart = 0; ixstart < 75; ixstart++) {
@@ -1104,21 +1104,21 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       b[ixstart] += b_b[ixstart] * mtmp;
     }
 
-    st.site = &w_emlrtRSI;
+    st.site = &x_emlrtRSI;
     sinc(&st, b_y, b_b);
     mtmp = F[b_s - 1] * (m * F[b_s - 1] + b1);
     for (ixstart = 0; ixstart < 75; ixstart++) {
       b_y[ixstart] = (2.0 + 2.0 * (real_T)ixstart) * F[b_s - 1];
     }
 
-    st.site = &x_emlrtRSI;
+    st.site = &y_emlrtRSI;
     sinc(&st, b_y, c_b);
     x = ((real_T)b_s + 1.0) / 2.0;
     if (x != muDoubleScalarFloor(x)) {
       emlrtIntegerCheckR2012b(x, &b_emlrtDCI, sp);
     }
 
-    st.site = &y_emlrtRSI;
+    st.site = &ab_emlrtRSI;
     x = mpower(1.0);
     y = muDoubleScalarAbs(x);
     for (ixstart = 0; ixstart < 75; ixstart++) {
@@ -1133,13 +1133,13 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       SD->u1.f1.a[ixstart] = (real_T)c_a[ixstart] * F[b_s];
     }
 
-    st.site = &ab_emlrtRSI;
+    st.site = &bb_emlrtRSI;
     b_sinc(&st, SD->u1.f1.a, d_b);
     for (ixstart = 0; ixstart < 5776; ixstart++) {
       SD->u1.f1.a[ixstart] = (real_T)d_a[ixstart] * F[b_s];
     }
 
-    st.site = &ab_emlrtRSI;
+    st.site = &bb_emlrtRSI;
     b_sinc(&st, SD->u1.f1.a, dv3);
     mtmp = 0.5 * F[b_s - 1];
     for (ixstart = 0; ixstart < 5776; ixstart++) {
@@ -1147,13 +1147,13 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       d_b[ixstart] += dv3[ixstart];
     }
 
-    st.site = &bb_emlrtRSI;
+    st.site = &cb_emlrtRSI;
     b_sinc(&st, SD->u1.f1.a, e_b);
     for (ixstart = 0; ixstart < 5776; ixstart++) {
       SD->u1.f1.a[ixstart] = (real_T)d_a[ixstart] * F[b_s - 1];
     }
 
-    st.site = &bb_emlrtRSI;
+    st.site = &cb_emlrtRSI;
     b_sinc(&st, SD->u1.f1.a, dv3);
     for (ixstart = 0; ixstart < 5776; ixstart++) {
       e_b[ixstart] += dv3[ixstart];
@@ -1164,7 +1164,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
       emlrtIntegerCheckR2012b(x, &emlrtDCI, sp);
     }
 
-    st.site = &cb_emlrtRSI;
+    st.site = &db_emlrtRSI;
     x = mpower(1.0);
     y = muDoubleScalarAbs(x);
     for (ixstart = 0; ixstart < 5776; ixstart++) {
@@ -1182,7 +1182,7 @@ void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6], real_T h[151
   /* 'Myfirls:136' a=G\p; */
   e_a[0] = b0;
   memcpy(&e_a[1], &b[0], 75U * sizeof(real_T));
-  st.site = &db_emlrtRSI;
+  st.site = &eb_emlrtRSI;
   mldivide(&st, SD->u1.f1.G, e_a);
 
   /* 'Myfirls:137' if (rem(N,2)~=0) */

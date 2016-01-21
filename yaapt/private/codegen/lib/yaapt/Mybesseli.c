@@ -2,7 +2,7 @@
  * File: Mybesseli.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Jan-2016 00:47:12
+ * C/C++ source code generated on  : 21-Jan-2016 05:43:25
  */
 
 /* Include Files */
@@ -144,7 +144,7 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
   emxArray_real_T *b_b;
   boolean_T exitg2;
   boolean_T guard2 = false;
-  emxArray_real_T *r5;
+  emxArray_real_T *r6;
   boolean_T exitg1;
   boolean_T guard1 = false;
   emxArray_real_T *c_b;
@@ -879,17 +879,17 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
       kk->data[i6] = 0.5 * xx->data[(int)v->data[i6] - 1];
     }
 
-    emxInit_real_T1(&r5, 1);
-    i6 = r5->size[0];
-    r5->size[0] = idx;
-    emxEnsureCapacity((emxArray__common *)r5, i6, (int)sizeof(double));
+    emxInit_real_T1(&r6, 1);
+    i6 = r6->size[0];
+    r6->size[0] = idx;
+    emxEnsureCapacity((emxArray__common *)r6, i6, (int)sizeof(double));
     for (i6 = 0; i6 < idx; i6++) {
-      r5->data[i6] = kk->data[i6] * kk->data[i6];
+      r6->data[i6] = kk->data[i6] * kk->data[i6];
     }
 
-    c_rdivide(r5, 1.0, kk);
+    c_rdivide(r6, 1.0, kk);
     ixstart = v->size[0];
-    emxFree_real_T(&r5);
+    emxFree_real_T(&r6);
     for (i6 = 0; i6 < ixstart; i6++) {
       b->data[(int)v->data[i6] - 1] = 1.0 + kk->data[i6];
     }

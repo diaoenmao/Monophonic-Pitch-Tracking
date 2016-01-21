@@ -2,7 +2,7 @@
  * File: tm_trk.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 15-Jan-2016 00:47:12
+ * C/C++ source code generated on  : 21-Jan-2016 05:43:25
  */
 
 /* Include Files */
@@ -81,7 +81,7 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
   int b_tmp_size[2];
   double b_tmp_data[6];
   emxArray_real_T *diff;
-  emxArray_real_T *r8;
+  emxArray_real_T *r9;
   int j;
   signed char c_tmp_data[1];
   double y_data[1];
@@ -498,7 +498,7 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
   /*    which are not close to the smoothed F0 track obtained from */
   /*    spectrogram */
   emxInit_real_T(&diff, 2);
-  emxInit_real_T(&r8, 2);
+  emxInit_real_T(&r9, 2);
   for (i = 0; i < 3; i++) {
     loop_ub = Pitch->size[1];
     i18 = temp_max->size[0] * temp_max->size[1];
@@ -570,22 +570,22 @@ void tm_trk(const emxArray_real_T *Data, double Fs, const emxArray_real_T
 
     /*      match  =  ((1 - (diff./freq_thresh)) .* match1); */
     unnamed_idx_1 = Merit->size[1];
-    i18 = r8->size[0] * r8->size[1];
-    r8->size[0] = 1;
-    r8->size[1] = unnamed_idx_1;
-    emxEnsureCapacity((emxArray__common *)r8, i18, (int)sizeof(double));
+    i18 = r9->size[0] * r9->size[1];
+    r9->size[0] = 1;
+    r9->size[1] = unnamed_idx_1;
+    emxEnsureCapacity((emxArray__common *)r9, i18, (int)sizeof(double));
     for (i18 = 0; i18 < unnamed_idx_1; i18++) {
-      r8->data[r8->size[0] * i18] = 1.2 * Merit->data[i + Merit->size[0] * i18] *
+      r9->data[r9->size[0] * i18] = 1.2 * Merit->data[i + Merit->size[0] * i18] *
         temp_min->data[temp_min->size[0] * i18];
     }
 
-    loop_ub = r8->size[1];
+    loop_ub = r9->size[1];
     for (i18 = 0; i18 < loop_ub; i18++) {
-      Merit->data[i + Merit->size[0] * i18] = r8->data[r8->size[0] * i18];
+      Merit->data[i + Merit->size[0] * i18] = r9->data[r9->size[0] * i18];
     }
   }
 
-  emxFree_real_T(&r8);
+  emxFree_real_T(&r9);
   emxFree_real_T(&b_y);
   emxFree_real_T(&y);
   emxFree_real_T(&diff);

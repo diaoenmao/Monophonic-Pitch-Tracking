@@ -26,10 +26,10 @@
 <a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="15"><font color="#888888 "><i>   15   </i></font></a>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_lb_emlrtRSI">lb_emlrtRSI</a> = <b>{</b> 37, <font color="#1122ff">&quot;mpower&quot;</font>,
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_mb_emlrtRSI">mb_emlrtRSI</a> = <b>{</b> 37, <font color="#1122ff">&quot;mpower&quot;</font>,
 <a name="18"><font color="#888888 "><i>   18   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\mpower.m&quot;</font> <b>}</b>;
 <a name="19"><font color="#888888 "><i>   19   </i></font></a>
-<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_nb_emlrtRSI">nb_emlrtRSI</a> = <b>{</b> 61, <font color="#1122ff">&quot;power&quot;</font>,
+<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_ob_emlrtRSI">ob_emlrtRSI</a> = <b>{</b> 61, <font color="#1122ff">&quot;power&quot;</font>,
 <a name="21"><font color="#888888 "><i>   21   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m&quot;</font> <b>}</b>;
 <a name="22"><font color="#888888 "><i>   22   </i></font></a>
 <a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
@@ -46,12 +46,12 @@
 <a name="34"><font color="#888888 "><i>   34   </i></font></a>  emlrtStack c_st;
 <a name="35"><font color="#888888 "><i>   35   </i></font></a>  st.prev = sp;
 <a name="36"><font color="#888888 "><i>   36   </i></font></a>  st.tls = sp-&gt;tls;
-<a name="37"><font color="#888888 "><i>   37   </i></font></a>  st.site = &amp;<a href="#var_lb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_lb_emlrtRSI');" target="_self"><font color="#1122aa">lb_emlrtRSI</font></a>;
+<a name="37"><font color="#888888 "><i>   37   </i></font></a>  st.site = &amp;<a href="#var_mb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_mb_emlrtRSI');" target="_self"><font color="#1122aa">mb_emlrtRSI</font></a>;
 <a name="38"><font color="#888888 "><i>   38   </i></font></a>  b_st.prev = &amp;st;
 <a name="39"><font color="#888888 "><i>   39   </i></font></a>  b_st.tls = st.tls;
 <a name="40"><font color="#888888 "><i>   40   </i></font></a>  c_st.prev = &amp;b_st;
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>  c_st.tls = b_st.tls;
-<a name="42"><font color="#888888 "><i>   42   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_mb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_mb_emlrtRSI');" target="_self"><font color="#1122aa">mb_emlrtRSI</font></a>;
+<a name="42"><font color="#888888 "><i>   42   </i></font></a>  b_st.site = &amp;<a href="yaapt_data_c.html#var_nb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_nb_emlrtRSI');" target="_self"><font color="#1122aa">nb_emlrtRSI</font></a>;
 <a name="43"><font color="#888888 "><i>   43   </i></font></a>  c = muDoubleScalarPower(a, b);
 <a name="44"><font color="#888888 "><i>   44   </i></font></a>  p = false;
 <a name="45"><font color="#888888 "><i>   45   </i></font></a>  <font color="#112266"><b>if</b></font> (a &lt; 0.0) <b>{</b>
@@ -65,7 +65,7 @@
 <a name="53"><font color="#888888 "><i>   53   </i></font></a>  <b>}</b>
 <a name="54"><font color="#888888 "><i>   54   </i></font></a>
 <a name="55"><font color="#888888 "><i>   55   </i></font></a>  <font color="#112266"><b>if</b></font> (p) <b>{</b>
-<a name="56"><font color="#888888 "><i>   56   </i></font></a>    c_st.site = &amp;<a href="#var_nb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_nb_emlrtRSI');" target="_self"><font color="#1122aa">nb_emlrtRSI</font></a>;
+<a name="56"><font color="#888888 "><i>   56   </i></font></a>    c_st.site = &amp;<a href="#var_ob_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ob_emlrtRSI');" target="_self"><font color="#1122aa">ob_emlrtRSI</font></a>;
 <a name="57"><font color="#888888 "><i>   57   </i></font></a>    <a href="error1_c.html#fcn_d_error" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_error');" target="_self"><font color="#1122aa">d_error</font></a>(&amp;c_st);
 <a name="58"><font color="#888888 "><i>   58   </i></font></a>  <b>}</b>
 <a name="59"><font color="#888888 "><i>   59   </i></font></a>

@@ -13,22 +13,22 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ti_emlrtRSI = { 15, "pchip",
+static emlrtRSInfo ui_emlrtRSI = { 15, "pchip",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\pchip.m" };
 
-static emlrtRSInfo ui_emlrtRSI = { 24, "pchip",
+static emlrtRSInfo vi_emlrtRSI = { 24, "pchip",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\pchip.m" };
 
-static emlrtRSInfo vi_emlrtRSI = { 40, "pchip",
+static emlrtRSInfo wi_emlrtRSI = { 40, "pchip",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\pchip.m" };
 
-static emlrtRSInfo wi_emlrtRSI = { 52, "pchip",
+static emlrtRSInfo xi_emlrtRSI = { 52, "pchip",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\pchip.m" };
 
-static emlrtRSInfo xi_emlrtRSI = { 62, "pchip",
+static emlrtRSInfo yi_emlrtRSI = { 62, "pchip",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\pchip.m" };
 
-static emlrtRSInfo yi_emlrtRSI = { 84, "pchip",
+static emlrtRSInfo aj_emlrtRSI = { 84, "pchip",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\pchip.m" };
 
 static emlrtRTEInfo mc_emlrtRTEI = { 1, 14, "pchip",
@@ -75,7 +75,7 @@ void pchip(const emlrtStack *sp, const emxArray_real_T *x, const emxArray_real_T
   boolean_T exitg1;
   emxArray_real_T *h;
   int32_T nx;
-  int32_T i31;
+  int32_T i32;
   int32_T szdel[2];
   emxArray_real_T *del;
   uint32_T uv3[2];
@@ -87,7 +87,7 @@ void pchip(const emlrtStack *sp, const emxArray_real_T *x, const emxArray_real_T
   st.prev = sp;
   st.tls = sp->tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &ti_emlrtRSI;
+  st.site = &ui_emlrtRSI;
   if (x->size[1] >= 2) {
   } else {
     emlrtErrorWithMessageIdR2012b(&st, &ef_emlrtRTEI,
@@ -145,56 +145,56 @@ void pchip(const emlrtStack *sp, const emxArray_real_T *x, const emxArray_real_T
 
   emxInit_real_T(&st, &h, 2, &nc_emlrtRTEI, true);
   nx = x->size[1];
-  i31 = h->size[0] * h->size[1];
+  i32 = h->size[0] * h->size[1];
   h->size[0] = 1;
   h->size[1] = x->size[1] - 1;
-  emxEnsureCapacity(sp, (emxArray__common *)h, i31, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)h, i32, (int32_T)sizeof(real_T),
                     &mc_emlrtRTEI);
-  st.site = &ui_emlrtRSI;
+  st.site = &vi_emlrtRSI;
   for (k = 1; k < nx; k++) {
     h->data[k - 1] = x->data[k] - x->data[k - 1];
   }
 
-  for (i31 = 0; i31 < 2; i31++) {
-    szdel[i31] = y->size[i31];
+  for (i32 = 0; i32 < 2; i32++) {
+    szdel[i32] = y->size[i32];
   }
 
   szdel[1]--;
-  for (i31 = 0; i31 < 2; i31++) {
-    k = szdel[i31];
+  for (i32 = 0; i32 < 2; i32++) {
+    k = szdel[i32];
     if (!(k > 0)) {
       emlrtNonNegativeCheckR2012b(k, &gb_emlrtDCI, sp);
     }
   }
 
   emxInit_real_T(sp, &del, 2, &oc_emlrtRTEI, true);
-  i31 = del->size[0] * del->size[1];
+  i32 = del->size[0] * del->size[1];
   del->size[0] = 1;
   del->size[1] = szdel[1];
-  emxEnsureCapacity(sp, (emxArray__common *)del, i31, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)del, i32, (int32_T)sizeof(real_T),
                     &mc_emlrtRTEI);
-  st.site = &vi_emlrtRSI;
+  st.site = &wi_emlrtRSI;
   for (k = 0; k + 1 < nx; k++) {
     del->data[k] = (y->data[k + 1] - y->data[k]) / h->data[k];
   }
 
-  for (i31 = 0; i31 < 2; i31++) {
-    uv3[i31] = (uint32_T)y->size[i31];
+  for (i32 = 0; i32 < 2; i32++) {
+    uv3[i32] = (uint32_T)y->size[i32];
   }
 
   emxInit_real_T(sp, &slopes, 2, &pc_emlrtRTEI, true);
-  i31 = slopes->size[0] * slopes->size[1];
+  i32 = slopes->size[0] * slopes->size[1];
   slopes->size[0] = 1;
   slopes->size[1] = (int32_T)uv3[1];
-  emxEnsureCapacity(sp, (emxArray__common *)slopes, i31, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)slopes, i32, (int32_T)sizeof(real_T),
                     &mc_emlrtRTEI);
   if (x->size[1] == 2) {
-    st.site = &wi_emlrtRSI;
+    st.site = &xi_emlrtRSI;
     for (k = 1; k <= nx; k++) {
       slopes->data[k - 1] = del->data[0];
     }
   } else {
-    st.site = &xi_emlrtRSI;
+    st.site = &yi_emlrtRSI;
     for (k = 1; k <= nx - 2; k++) {
       signd1 = h->data[k - 1] + h->data[k];
       hs3 = 3.0 * signd1;
@@ -257,19 +257,19 @@ void pchip(const emlrtStack *sp, const emxArray_real_T *x, const emxArray_real_T
     slopes->data[x->size[1] - 1] = hs3;
   }
 
-  st.site = &yi_emlrtRSI;
+  st.site = &aj_emlrtRSI;
   k = x->size[1];
-  i31 = v_breaks->size[0] * v_breaks->size[1];
+  i32 = v_breaks->size[0] * v_breaks->size[1];
   v_breaks->size[0] = 1;
   v_breaks->size[1] = k;
-  emxEnsureCapacity(&st, (emxArray__common *)v_breaks, i31, (int32_T)sizeof
+  emxEnsureCapacity(&st, (emxArray__common *)v_breaks, i32, (int32_T)sizeof
                     (real_T), &mc_emlrtRTEI);
-  for (i31 = 0; i31 < k; i31++) {
-    v_breaks->data[v_breaks->size[0] * i31] = x->data[i31];
+  for (i32 = 0; i32 < k; i32++) {
+    v_breaks->data[v_breaks->size[0] * i32] = x->data[i32];
   }
 
   nx = slopes->size[1] - 1;
-  i31 = v_coefs->size[0] * v_coefs->size[1];
+  i32 = v_coefs->size[0] * v_coefs->size[1];
   k = slopes->size[1] - 1;
   if (!(k > 0)) {
     emlrtNonNegativeCheckR2012b(k, &hb_emlrtDCI, &st);
@@ -277,7 +277,7 @@ void pchip(const emlrtStack *sp, const emxArray_real_T *x, const emxArray_real_T
 
   v_coefs->size[0] = k;
   v_coefs->size[1] = 4;
-  emxEnsureCapacity(&st, (emxArray__common *)v_coefs, i31, (int32_T)sizeof
+  emxEnsureCapacity(&st, (emxArray__common *)v_coefs, i32, (int32_T)sizeof
                     (real_T), &mc_emlrtRTEI);
   for (k = 0; k + 1 < x->size[1]; k++) {
     signd1 = (del->data[k] - slopes->data[k]) / h->data[k];

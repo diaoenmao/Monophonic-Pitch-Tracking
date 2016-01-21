@@ -19,19 +19,19 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sc_emlrtRSI = { 53, "Myspecgram",
+static emlrtRSInfo tc_emlrtRSI = { 53, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m" };
 
-static emlrtRSInfo tc_emlrtRSI = { 64, "Myspecgram",
+static emlrtRSInfo uc_emlrtRSI = { 64, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m" };
 
-static emlrtRSInfo uc_emlrtRSI = { 65, "Myspecgram",
+static emlrtRSInfo vc_emlrtRSI = { 65, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m" };
 
-static emlrtRSInfo vc_emlrtRSI = { 91, "Myspecgram",
+static emlrtRSInfo wc_emlrtRSI = { 91, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m" };
 
-static emlrtRSInfo wc_emlrtRSI = { 92, "Myspecgram",
+static emlrtRSInfo xc_emlrtRSI = { 92, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m" };
 
 static emlrtRTEInfo m_emlrtRTEI = { 1, 23, "Myspecgram",
@@ -58,25 +58,25 @@ static emlrtECInfo b_emlrtECI = { -1, 84, 5, "Myspecgram",
 static emlrtECInfo c_emlrtECI = { 2, 87, 9, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m" };
 
-static emlrtBCInfo d_emlrtBCI = { -1, -1, 58, 5, "x", "Myspecgram",
+static emlrtBCInfo k_emlrtBCI = { -1, -1, 58, 5, "x", "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 0 };
 
-static emlrtBCInfo e_emlrtBCI = { -1, -1, 66, 21, "colindex", "Myspecgram",
+static emlrtBCInfo l_emlrtBCI = { -1, -1, 66, 21, "colindex", "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 0 };
 
 static emlrtDCInfo g_emlrtDCI = { 66, 21, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 1 };
 
-static emlrtBCInfo f_emlrtBCI = { -1, -1, 67, 5, "x", "Myspecgram",
+static emlrtBCInfo m_emlrtBCI = { -1, -1, 67, 5, "x", "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 0 };
 
 static emlrtDCInfo h_emlrtDCI = { 67, 5, "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 1 };
 
-static emlrtBCInfo g_emlrtBCI = { -1, -1, 67, 13, "colindex", "Myspecgram",
+static emlrtBCInfo n_emlrtBCI = { -1, -1, 67, 13, "colindex", "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 0 };
 
-static emlrtBCInfo h_emlrtBCI = { -1, -1, 84, 12, "x", "Myspecgram",
+static emlrtBCInfo o_emlrtBCI = { -1, -1, 84, 12, "x", "Myspecgram",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myspecgram.m", 0 };
 
 static emlrtDCInfo i_emlrtDCI = { 84, 12, "Myspecgram",
@@ -94,8 +94,8 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   int32_T nx;
   int32_T varargin_1;
   int32_T nwind;
-  int32_T i9;
   int32_T i10;
+  int32_T i11;
   emxArray_real_T *b_x;
   int32_T apnd;
   int32_T cdiff;
@@ -189,7 +189,7 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   /*  [msg,x,nfft,Fs,window,noverlap]=specgramchk(varargin); */
   /*  error(msg) */
   /* 'Myspecgram:53' window = Myhanning(window); */
-  st.site = &sc_emlrtRSI;
+  st.site = &tc_emlrtRSI;
   Myhanning(&st, window, b_window);
 
   /*  window = hanning(window); */
@@ -204,13 +204,13 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   if (x->size[1] < b_window->size[0]) {
     /*  zero-pad x if it has length less than the window length */
     /* 'Myspecgram:58' x(nwind)=0; */
-    i9 = x->size[1];
-    i10 = b_window->size[0];
-    if (!((i10 >= 1) && (i10 <= i9))) {
-      emlrtDynamicBoundsCheckR2012b(i10, 1, i9, &d_emlrtBCI, sp);
+    i10 = x->size[1];
+    i11 = b_window->size[0];
+    if (!((i11 >= 1) && (i11 <= i10))) {
+      emlrtDynamicBoundsCheckR2012b(i11, 1, i10, &k_emlrtBCI, sp);
     }
 
-    x->data[i10 - 1] = 0.0;
+    x->data[i11 - 1] = 0.0;
 
     /* 'Myspecgram:58' nx=nwind; */
     nx = b_window->size[0];
@@ -219,22 +219,22 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   emxInit_real_T1(sp, &b_x, 1, &q_emlrtRTEI, true);
 
   /* 'Myspecgram:60' x = x(:); */
-  i9 = b_x->size[0];
+  i10 = b_x->size[0];
   b_x->size[0] = x->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b_x, i9, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)b_x, i10, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   apnd = x->size[1];
-  for (i9 = 0; i9 < apnd; i9++) {
-    b_x->data[i9] = x->data[i9];
+  for (i10 = 0; i10 < apnd; i10++) {
+    b_x->data[i10] = x->data[i10];
   }
 
   /*  make a column vector for ease later */
   /* 'Myspecgram:61' window = window(:); */
   cdiff = b_window->size[0];
-  i9 = b_window->size[0];
+  i10 = b_window->size[0];
   b_window->size[0] = cdiff;
-  emxEnsureCapacity(sp, (emxArray__common *)b_window, i9, (int32_T)sizeof(real_T),
-                    &m_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)b_window, i10, (int32_T)sizeof
+                    (real_T), &m_emlrtRTEI);
 
   /*  be consistent with data set */
   /* 'Myspecgram:63' ncol = fix((nx-noverlap)/(nwind-noverlap)); */
@@ -246,9 +246,9 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   }
 
   /* 'Myspecgram:64' colindex = 1 + (0:(ncol-1))*(nwind-noverlap); */
-  st.site = &tc_emlrtRSI;
-  b_st.site = &cd_emlrtRSI;
-  c_st.site = &dd_emlrtRSI;
+  st.site = &uc_emlrtRSI;
+  b_st.site = &dd_emlrtRSI;
+  c_st.site = &ed_emlrtRSI;
   if (muDoubleScalarIsNaN(ncol - 1.0)) {
     n = 1;
     anew = rtNaN;
@@ -287,7 +287,7 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
     }
   }
 
-  d_st.site = &ed_emlrtRSI;
+  d_st.site = &fd_emlrtRSI;
   if (!n_too_large) {
   } else {
     emlrtErrorWithMessageIdR2012b(&d_st, &ee_emlrtRTEI, "Coder:MATLAB:pmaxsize",
@@ -295,22 +295,22 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   }
 
   emxInit_real_T(&d_st, &colindex, 2, &n_emlrtRTEI, true);
-  i9 = colindex->size[0] * colindex->size[1];
+  i10 = colindex->size[0] * colindex->size[1];
   colindex->size[0] = 1;
   if (!(n > 0)) {
     emlrtNonNegativeCheckR2012b(n, &f_emlrtDCI, &c_st);
   }
 
   colindex->size[1] = n;
-  emxEnsureCapacity(&c_st, (emxArray__common *)colindex, i9, (int32_T)sizeof
+  emxEnsureCapacity(&c_st, (emxArray__common *)colindex, i10, (int32_T)sizeof
                     (real_T), &m_emlrtRTEI);
   if (n > 0) {
     colindex->data[0] = anew;
     if (n > 1) {
       colindex->data[n - 1] = b_apnd;
-      i9 = n - 1;
-      nm1d2 = asr_s32(i9, 1U);
-      d_st.site = &fd_emlrtRSI;
+      i10 = n - 1;
+      nm1d2 = asr_s32(i10, 1U);
+      d_st.site = &gd_emlrtRSI;
       for (cdiff = 1; cdiff < nm1d2; cdiff++) {
         colindex->data[cdiff] = anew + (real_T)cdiff;
         colindex->data[(n - cdiff) - 1] = b_apnd - (real_T)cdiff;
@@ -326,21 +326,21 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   }
 
   anew = (real_T)varargin_1 - noverlap;
-  i9 = colindex->size[0] * colindex->size[1];
+  i10 = colindex->size[0] * colindex->size[1];
   colindex->size[0] = 1;
-  emxEnsureCapacity(sp, (emxArray__common *)colindex, i9, (int32_T)sizeof(real_T),
-                    &m_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)colindex, i10, (int32_T)sizeof
+                    (real_T), &m_emlrtRTEI);
   cdiff = colindex->size[0];
   nm1d2 = colindex->size[1];
   apnd = cdiff * nm1d2;
-  for (i9 = 0; i9 < apnd; i9++) {
-    colindex->data[i9] = 1.0 + colindex->data[i9] * anew;
+  for (i10 = 0; i10 < apnd; i10++) {
+    colindex->data[i10] = 1.0 + colindex->data[i10] * anew;
   }
 
   /* 'Myspecgram:65' rowindex = (1:nwind)'; */
-  st.site = &uc_emlrtRSI;
-  b_st.site = &cd_emlrtRSI;
-  c_st.site = &dd_emlrtRSI;
+  st.site = &vc_emlrtRSI;
+  b_st.site = &dd_emlrtRSI;
+  c_st.site = &ed_emlrtRSI;
   if (varargin_1 < 1) {
     n = 0;
     apnd = 0;
@@ -366,19 +366,19 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   }
 
   emxInit_real_T(&c_st, &y, 2, &m_emlrtRTEI, true);
-  d_st.site = &ed_emlrtRSI;
-  i9 = y->size[0] * y->size[1];
+  d_st.site = &fd_emlrtRSI;
+  i10 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = n;
-  emxEnsureCapacity(&c_st, (emxArray__common *)y, i9, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(&c_st, (emxArray__common *)y, i10, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   if (n > 0) {
     y->data[0] = 1.0;
     if (n > 1) {
       y->data[n - 1] = apnd;
-      i9 = n - 1;
-      nm1d2 = asr_s32(i9, 1U);
-      d_st.site = &fd_emlrtRSI;
+      i10 = n - 1;
+      nm1d2 = asr_s32(i10, 1U);
+      d_st.site = &gd_emlrtRSI;
       for (cdiff = 1; cdiff < nm1d2; cdiff++) {
         y->data[cdiff] = 1.0 + (real_T)cdiff;
         y->data[(n - cdiff) - 1] = apnd - cdiff;
@@ -394,49 +394,49 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   }
 
   emxInit_real_T1(&c_st, &rowindex, 1, &o_emlrtRTEI, true);
-  i9 = rowindex->size[0];
+  i10 = rowindex->size[0];
   rowindex->size[0] = y->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)rowindex, i9, (int32_T)sizeof(real_T),
-                    &m_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)rowindex, i10, (int32_T)sizeof
+                    (real_T), &m_emlrtRTEI);
   apnd = y->size[1];
-  for (i9 = 0; i9 < apnd; i9++) {
-    rowindex->data[i9] = y->data[y->size[0] * i9];
+  for (i10 = 0; i10 < apnd; i10++) {
+    rowindex->data[i10] = y->data[y->size[0] * i10];
   }
 
   emxFree_real_T(&y);
 
   /* 'Myspecgram:66' if length(x)<(nwind+colindex(ncol)-1) */
   nm1d2 = x->size[1];
-  i9 = colindex->size[1];
+  i10 = colindex->size[1];
   if (ncol != (int32_T)ncol) {
     emlrtIntegerCheckR2012b(ncol, &g_emlrtDCI, sp);
   }
 
-  i10 = (int32_T)ncol;
-  if (!((i10 >= 1) && (i10 <= i9))) {
-    emlrtDynamicBoundsCheckR2012b(i10, 1, i9, &e_emlrtBCI, sp);
+  i11 = (int32_T)ncol;
+  if (!((i11 >= 1) && (i11 <= i10))) {
+    emlrtDynamicBoundsCheckR2012b(i11, 1, i10, &l_emlrtBCI, sp);
   }
 
-  if (nm1d2 < ((real_T)varargin_1 + colindex->data[i10 - 1]) - 1.0) {
+  if (nm1d2 < ((real_T)varargin_1 + colindex->data[i11 - 1]) - 1.0) {
     /* 'Myspecgram:67' x(nwind+colindex(ncol)-1) = 0; */
     nm1d2 = x->size[1];
-    i9 = colindex->size[1];
-    i10 = (int32_T)ncol;
-    if (!((i10 >= 1) && (i10 <= i9))) {
-      emlrtDynamicBoundsCheckR2012b(i10, 1, i9, &g_emlrtBCI, sp);
+    i10 = colindex->size[1];
+    i11 = (int32_T)ncol;
+    if (!((i11 >= 1) && (i11 <= i10))) {
+      emlrtDynamicBoundsCheckR2012b(i11, 1, i10, &n_emlrtBCI, sp);
     }
 
-    anew = ((real_T)varargin_1 + colindex->data[i10 - 1]) - 1.0;
+    anew = ((real_T)varargin_1 + colindex->data[i11 - 1]) - 1.0;
     if (anew != (int32_T)muDoubleScalarFloor(anew)) {
       emlrtIntegerCheckR2012b(anew, &h_emlrtDCI, sp);
     }
 
-    i9 = (int32_T)anew;
-    if (!((i9 >= 1) && (i9 <= nm1d2))) {
-      emlrtDynamicBoundsCheckR2012b(i9, 1, nm1d2, &f_emlrtBCI, sp);
+    i10 = (int32_T)anew;
+    if (!((i10 >= 1) && (i10 <= nm1d2))) {
+      emlrtDynamicBoundsCheckR2012b(i10, 1, nm1d2, &m_emlrtBCI, sp);
     }
 
-    b_x->data[i9 - 1] = 0.0;
+    b_x->data[i10 - 1] = 0.0;
 
     /*  zero-pad x */
   }
@@ -447,15 +447,15 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   /* 'Myspecgram:76' use_chirp = 0; */
   /* 'Myspecgram:79' if (length(nfft)==1) | use_chirp */
   /* 'Myspecgram:80' y = complex(zeros(nwind,ncol)); */
-  i9 = yo->size[0] * yo->size[1];
+  i10 = yo->size[0] * yo->size[1];
   yo->size[0] = varargin_1;
   yo->size[1] = (int32_T)ncol;
-  emxEnsureCapacity(sp, (emxArray__common *)yo, i9, (int32_T)sizeof(creal_T),
+  emxEnsureCapacity(sp, (emxArray__common *)yo, i10, (int32_T)sizeof(creal_T),
                     &m_emlrtRTEI);
   apnd = varargin_1 * (int32_T)ncol;
-  for (i9 = 0; i9 < apnd; i9++) {
-    yo->data[i9].re = 0.0;
-    yo->data[i9].im = 0.0;
+  for (i10 = 0; i10 < apnd; i10++) {
+    yo->data[i10].re = 0.0;
+    yo->data[i10].im = 0.0;
   }
 
   emxInit_real_T(sp, &r0, 2, &m_emlrtRTEI, true);
@@ -464,53 +464,53 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   /*  should be able to do this with fancy indexing! */
   /* 'Myspecgram:84' y(:) = x(rowindex(:,ones(1,ncol))+colindex(ones(nwind,1),:)-1); */
   apnd = rowindex->size[0];
-  i9 = r0->size[0] * r0->size[1];
+  i10 = r0->size[0] * r0->size[1];
   r0->size[0] = apnd;
   r0->size[1] = (int32_T)ncol;
-  emxEnsureCapacity(sp, (emxArray__common *)r0, i9, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)r0, i10, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   n = (int32_T)ncol;
-  for (i9 = 0; i9 < n; i9++) {
-    for (i10 = 0; i10 < apnd; i10++) {
-      r0->data[i10 + r0->size[0] * i9] = rowindex->data[i10];
+  for (i10 = 0; i10 < n; i10++) {
+    for (i11 = 0; i11 < apnd; i11++) {
+      r0->data[i11 + r0->size[0] * i10] = rowindex->data[i11];
     }
   }
 
   emxInit_real_T(sp, &b_rowindex, 2, &m_emlrtRTEI, true);
   apnd = rowindex->size[0];
-  i9 = b_rowindex->size[0] * b_rowindex->size[1];
+  i10 = b_rowindex->size[0] * b_rowindex->size[1];
   b_rowindex->size[0] = apnd;
   b_rowindex->size[1] = (int32_T)ncol;
-  emxEnsureCapacity(sp, (emxArray__common *)b_rowindex, i9, (int32_T)sizeof
+  emxEnsureCapacity(sp, (emxArray__common *)b_rowindex, i10, (int32_T)sizeof
                     (real_T), &m_emlrtRTEI);
   n = (int32_T)ncol;
-  for (i9 = 0; i9 < n; i9++) {
-    for (i10 = 0; i10 < apnd; i10++) {
-      b_rowindex->data[i10 + b_rowindex->size[0] * i9] = rowindex->data[i10];
+  for (i10 = 0; i10 < n; i10++) {
+    for (i11 = 0; i11 < apnd; i11++) {
+      b_rowindex->data[i11 + b_rowindex->size[0] * i10] = rowindex->data[i11];
     }
   }
 
-  for (i9 = 0; i9 < 2; i9++) {
-    c_rowindex[i9] = b_rowindex->size[i9];
+  for (i10 = 0; i10 < 2; i10++) {
+    c_rowindex[i10] = b_rowindex->size[i10];
   }
 
   emxFree_real_T(&b_rowindex);
   emxInit_real_T(sp, &b_colindex, 2, &m_emlrtRTEI, true);
   apnd = colindex->size[1];
-  i9 = b_colindex->size[0] * b_colindex->size[1];
+  i10 = b_colindex->size[0] * b_colindex->size[1];
   b_colindex->size[0] = nwind;
   b_colindex->size[1] = apnd;
-  emxEnsureCapacity(sp, (emxArray__common *)b_colindex, i9, (int32_T)sizeof
+  emxEnsureCapacity(sp, (emxArray__common *)b_colindex, i10, (int32_T)sizeof
                     (real_T), &m_emlrtRTEI);
-  for (i9 = 0; i9 < apnd; i9++) {
-    for (i10 = 0; i10 < nwind; i10++) {
-      b_colindex->data[i10 + b_colindex->size[0] * i9] = colindex->data
-        [colindex->size[0] * i9];
+  for (i10 = 0; i10 < apnd; i10++) {
+    for (i11 = 0; i11 < nwind; i11++) {
+      b_colindex->data[i11 + b_colindex->size[0] * i10] = colindex->
+        data[colindex->size[0] * i10];
     }
   }
 
-  for (i9 = 0; i9 < 2; i9++) {
-    c_colindex[i9] = b_colindex->size[i9];
+  for (i10 = 0; i10 < 2; i10++) {
+    c_colindex[i10] = b_colindex->size[i10];
   }
 
   emxFree_real_T(&b_colindex);
@@ -520,59 +520,59 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   }
 
   cdiff = b_x->size[0];
-  i9 = r1->size[0] * r1->size[1];
+  i10 = r1->size[0] * r1->size[1];
   r1->size[0] = r0->size[0];
   r1->size[1] = r0->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)r1, i9, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)r1, i10, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   apnd = r0->size[1];
-  for (i9 = 0; i9 < apnd; i9++) {
+  for (i10 = 0; i10 < apnd; i10++) {
     n = r0->size[0];
-    for (i10 = 0; i10 < n; i10++) {
-      anew = (r0->data[i10 + r0->size[0] * i9] + colindex->data[colindex->size[0]
-              * i9]) - 1.0;
+    for (i11 = 0; i11 < n; i11++) {
+      anew = (r0->data[i11 + r0->size[0] * i10] + colindex->data[colindex->size
+              [0] * i10]) - 1.0;
       if (anew != (int32_T)muDoubleScalarFloor(anew)) {
         emlrtIntegerCheckR2012b(anew, &i_emlrtDCI, sp);
       }
 
       nm1d2 = (int32_T)anew;
       if (!((nm1d2 >= 1) && (nm1d2 <= cdiff))) {
-        emlrtDynamicBoundsCheckR2012b(nm1d2, 1, cdiff, &h_emlrtBCI, sp);
+        emlrtDynamicBoundsCheckR2012b(nm1d2, 1, cdiff, &o_emlrtBCI, sp);
       }
 
-      r1->data[i10 + r1->size[0] * i9] = b_x->data[nm1d2 - 1];
+      r1->data[i11 + r1->size[0] * i10] = b_x->data[nm1d2 - 1];
     }
   }
 
   emxFree_real_T(&colindex);
   emxInit_real_T1(sp, &r2, 1, &m_emlrtRTEI, true);
-  i9 = rowindex->size[0];
-  i10 = r2->size[0];
+  i10 = rowindex->size[0];
+  i11 = r2->size[0];
   r2->size[0] = (int32_T)ncol;
-  emxEnsureCapacity(sp, (emxArray__common *)r2, i10, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)r2, i11, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   apnd = (int32_T)ncol;
   emxFree_real_T(&rowindex);
-  for (i10 = 0; i10 < apnd; i10++) {
-    r2->data[i10] = 1.0;
+  for (i11 = 0; i11 < apnd; i11++) {
+    r2->data[i11] = 1.0;
+  }
+
+  i11 = yo->size[0] * yo->size[1];
+  i10 *= r2->size[0];
+  if (i11 != i10) {
+    emlrtSizeEqCheck1DR2012b(i11, i10, &b_emlrtECI, sp);
   }
 
   i10 = yo->size[0] * yo->size[1];
-  i9 *= r2->size[0];
-  if (i10 != i9) {
-    emlrtSizeEqCheck1DR2012b(i10, i9, &b_emlrtECI, sp);
-  }
-
-  i9 = yo->size[0] * yo->size[1];
   yo->size[0] = r1->size[0];
   yo->size[1] = r1->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)yo, i9, (int32_T)sizeof(creal_T),
+  emxEnsureCapacity(sp, (emxArray__common *)yo, i10, (int32_T)sizeof(creal_T),
                     &m_emlrtRTEI);
   apnd = r1->size[0] * r1->size[1];
   emxFree_real_T(&r2);
-  for (i9 = 0; i9 < apnd; i9++) {
-    yo->data[i9].re = r1->data[i9];
-    yo->data[i9].im = 0.0;
+  for (i10 = 0; i10 < apnd; i10++) {
+    yo->data[i10].re = r1->data[i10];
+    yo->data[i10].im = 0.0;
   }
 
   emxFree_real_T(&r1);
@@ -580,55 +580,55 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   /*  Apply the window to the array of offset signal segments. */
   /* 'Myspecgram:87' y = window(:,ones(1,ncol)).*y; */
   apnd = b_window->size[0];
-  i9 = r0->size[0] * r0->size[1];
+  i10 = r0->size[0] * r0->size[1];
   r0->size[0] = apnd;
   r0->size[1] = (int32_T)ncol;
-  emxEnsureCapacity(sp, (emxArray__common *)r0, i9, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)r0, i10, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   n = (int32_T)ncol;
-  for (i9 = 0; i9 < n; i9++) {
-    for (i10 = 0; i10 < apnd; i10++) {
-      r0->data[i10 + r0->size[0] * i9] = b_window->data[i10];
+  for (i10 = 0; i10 < n; i10++) {
+    for (i11 = 0; i11 < apnd; i11++) {
+      r0->data[i11 + r0->size[0] * i10] = b_window->data[i11];
     }
   }
 
   emxInit_real_T(sp, &c_window, 2, &m_emlrtRTEI, true);
   apnd = b_window->size[0];
-  i9 = c_window->size[0] * c_window->size[1];
+  i10 = c_window->size[0] * c_window->size[1];
   c_window->size[0] = apnd;
   c_window->size[1] = (int32_T)ncol;
-  emxEnsureCapacity(sp, (emxArray__common *)c_window, i9, (int32_T)sizeof(real_T),
-                    &m_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)c_window, i10, (int32_T)sizeof
+                    (real_T), &m_emlrtRTEI);
   n = (int32_T)ncol;
-  for (i9 = 0; i9 < n; i9++) {
-    for (i10 = 0; i10 < apnd; i10++) {
-      c_window->data[i10 + c_window->size[0] * i9] = b_window->data[i10];
+  for (i10 = 0; i10 < n; i10++) {
+    for (i11 = 0; i11 < apnd; i11++) {
+      c_window->data[i11 + c_window->size[0] * i10] = b_window->data[i11];
     }
   }
 
   emxFree_real_T(&b_window);
-  for (i9 = 0; i9 < 2; i9++) {
-    d_window[i9] = c_window->size[i9];
+  for (i10 = 0; i10 < 2; i10++) {
+    d_window[i10] = c_window->size[i10];
   }
 
   emxFree_real_T(&c_window);
-  for (i9 = 0; i9 < 2; i9++) {
-    b_yo[i9] = yo->size[i9];
+  for (i10 = 0; i10 < 2; i10++) {
+    b_yo[i10] = yo->size[i10];
   }
 
   if ((d_window[0] != b_yo[0]) || (d_window[1] != b_yo[1])) {
     emlrtSizeEqCheckNDR2012b(&d_window[0], &b_yo[0], &c_emlrtECI, sp);
   }
 
-  i9 = yo->size[0] * yo->size[1];
+  i10 = yo->size[0] * yo->size[1];
   yo->size[0] = r0->size[0];
   yo->size[1] = r0->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)yo, i9, (int32_T)sizeof(creal_T),
+  emxEnsureCapacity(sp, (emxArray__common *)yo, i10, (int32_T)sizeof(creal_T),
                     &m_emlrtRTEI);
   apnd = r0->size[0] * r0->size[1];
-  for (i9 = 0; i9 < apnd; i9++) {
-    yo->data[i9].re *= r0->data[i9];
-    yo->data[i9].im *= r0->data[i9];
+  for (i10 = 0; i10 < apnd; i10++) {
+    yo->data[i10].re *= r0->data[i10];
+    yo->data[i10].im *= r0->data[i10];
   }
 
   emxFree_real_T(&r0);
@@ -639,33 +639,33 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
   /*  USE FFT */
   /*  now fft y which does the columns */
   /* 'Myspecgram:91' y = fft(y,nfft); */
-  st.site = &vc_emlrtRSI;
+  st.site = &wc_emlrtRSI;
   fft(&st, yo, r3);
-  i9 = yo->size[0] * yo->size[1];
+  i10 = yo->size[0] * yo->size[1];
   yo->size[0] = 8192;
   yo->size[1] = r3->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)yo, i9, (int32_T)sizeof(creal_T),
+  emxEnsureCapacity(sp, (emxArray__common *)yo, i10, (int32_T)sizeof(creal_T),
                     &m_emlrtRTEI);
   apnd = r3->size[0] * r3->size[1];
-  for (i9 = 0; i9 < apnd; i9++) {
-    yo->data[i9] = r3->data[i9];
+  for (i10 = 0; i10 < apnd; i10++) {
+    yo->data[i10] = r3->data[i10];
   }
 
   emxFree_creal_T(&r3);
   emxInit_real_T1(sp, &c_x, 1, &m_emlrtRTEI, true);
 
   /* 'Myspecgram:92' if ~any(any(imag(x))) */
-  i9 = c_x->size[0];
+  i10 = c_x->size[0];
   c_x->size[0] = b_x->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)c_x, i9, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)c_x, i10, (int32_T)sizeof(real_T),
                     &m_emlrtRTEI);
   apnd = b_x->size[0];
-  for (i9 = 0; i9 < apnd; i9++) {
-    c_x->data[i9] = 0.0;
+  for (i10 = 0; i10 < apnd; i10++) {
+    c_x->data[i10] = 0.0;
   }
 
   emxFree_real_T(&b_x);
-  st.site = &wc_emlrtRSI;
+  st.site = &xc_emlrtRSI;
   n_too_large = b_any(&st, c_x);
   emxFree_real_T(&c_x);
   if (!!!n_too_large) {
@@ -674,34 +674,34 @@ void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window, real_T
     /* 'Myspecgram:95' else */
     /* 'Myspecgram:96' select = 1:nfft/2+1; */
     /* 'Myspecgram:98' y = y(select,:); */
-    for (i9 = 0; i9 < 4097; i9++) {
-      iv11[i9] = (int16_T)(1 + i9);
+    for (i10 = 0; i10 < 4097; i10++) {
+      iv11[i10] = (int16_T)(1 + i10);
     }
 
     emxInit_creal_T(sp, &c_yo, 2, &m_emlrtRTEI, true);
     cdiff = yo->size[1];
-    i9 = c_yo->size[0] * c_yo->size[1];
+    i10 = c_yo->size[0] * c_yo->size[1];
     c_yo->size[0] = 4097;
     c_yo->size[1] = cdiff;
-    emxEnsureCapacity(sp, (emxArray__common *)c_yo, i9, (int32_T)sizeof(creal_T),
+    emxEnsureCapacity(sp, (emxArray__common *)c_yo, i10, (int32_T)sizeof(creal_T),
                       &m_emlrtRTEI);
-    for (i9 = 0; i9 < cdiff; i9++) {
-      for (i10 = 0; i10 < 4097; i10++) {
-        c_yo->data[i10 + c_yo->size[0] * i9] = yo->data[(iv11[i10] + yo->size[0]
-          * i9) - 1];
+    for (i10 = 0; i10 < cdiff; i10++) {
+      for (i11 = 0; i11 < 4097; i11++) {
+        c_yo->data[i11 + c_yo->size[0] * i10] = yo->data[(iv11[i11] + yo->size[0]
+          * i10) - 1];
       }
     }
 
-    i9 = yo->size[0] * yo->size[1];
+    i10 = yo->size[0] * yo->size[1];
     yo->size[0] = c_yo->size[0];
     yo->size[1] = c_yo->size[1];
-    emxEnsureCapacity(sp, (emxArray__common *)yo, i9, (int32_T)sizeof(creal_T),
+    emxEnsureCapacity(sp, (emxArray__common *)yo, i10, (int32_T)sizeof(creal_T),
                       &m_emlrtRTEI);
     apnd = c_yo->size[1];
-    for (i9 = 0; i9 < apnd; i9++) {
+    for (i10 = 0; i10 < apnd; i10++) {
       n = c_yo->size[0];
-      for (i10 = 0; i10 < n; i10++) {
-        yo->data[i10 + yo->size[0] * i9] = c_yo->data[i10 + c_yo->size[0] * i9];
+      for (i11 = 0; i11 < n; i11++) {
+        yo->data[i11 + yo->size[0] * i10] = c_yo->data[i11 + c_yo->size[0] * i10];
       }
     }
 

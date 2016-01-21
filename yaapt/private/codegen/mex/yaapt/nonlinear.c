@@ -19,37 +19,37 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo k_emlrtRSI = { 54, "nonlinear",
+static emlrtRSInfo l_emlrtRSI = { 54, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo l_emlrtRSI = { 63, "nonlinear",
+static emlrtRSInfo m_emlrtRSI = { 63, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo m_emlrtRSI = { 75, "nonlinear",
+static emlrtRSInfo n_emlrtRSI = { 75, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo n_emlrtRSI = { 79, "nonlinear",
+static emlrtRSInfo o_emlrtRSI = { 79, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo o_emlrtRSI = { 146, "Myfir1",
+static emlrtRSInfo p_emlrtRSI = { 146, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo p_emlrtRSI = { 149, "Myfir1",
+static emlrtRSInfo q_emlrtRSI = { 149, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo q_emlrtRSI = { 156, "Myfir1",
+static emlrtRSInfo r_emlrtRSI = { 156, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo jc_emlrtRSI = { 58, "power",
+static emlrtRSInfo kc_emlrtRSI = { 58, "power",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
-static emlrtRSInfo kc_emlrtRSI = { 60, "power",
+static emlrtRSInfo lc_emlrtRSI = { 60, "power",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
-static emlrtRSInfo lc_emlrtRSI = { 73, "applyScalarFunction",
+static emlrtRSInfo mc_emlrtRSI = { 73, "applyScalarFunction",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
 
-static emlrtRSInfo mc_emlrtRSI = { 132, "applyScalarFunction",
+static emlrtRSInfo nc_emlrtRSI = { 132, "applyScalarFunction",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
 
 static emlrtRTEInfo c_emlrtRTEI = { 1, 40, "nonlinear",
@@ -58,10 +58,10 @@ static emlrtRTEInfo c_emlrtRTEI = { 1, 40, "nonlinear",
 static emlrtRTEInfo d_emlrtRTEI = { 63, 1, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtBCInfo emlrtBCI = { -1, -1, 82, 9, "tempData", "nonlinear",
+static emlrtBCInfo h_emlrtBCI = { -1, -1, 82, 9, "tempData", "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m", 0 };
 
-static emlrtBCInfo b_emlrtBCI = { -1, -1, 65, 9, "tempData", "nonlinear",
+static emlrtBCInfo i_emlrtBCI = { -1, -1, 65, 9, "tempData", "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m", 0 };
 
 /* Function Definitions */
@@ -224,7 +224,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   w[1] = 1500.0 / (Fs / 2.0);
 
   /* 'nonlinear:54' b_F1 = Myfir1(Filter_order,w); */
-  st.site = &k_emlrtRSI;
+  st.site = &l_emlrtRSI;
 
   /* FIR1   FIR filter design using the window method.  */
   /*    B = FIR1(N,Wn) designs an N'th order lowpass FIR digital filter  */
@@ -365,7 +365,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   }
 
   if (overflow) {
-    b_st.site = &o_emlrtRSI;
+    b_st.site = &p_emlrtRSI;
     for (k = 0; k < 47; k++) {
       u[k] = varargin_1[k];
     }
@@ -374,13 +374,13 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     m1 = emlrtCreateCharArray(2, iv2);
     emlrtInitCharArrayR2013a(&b_st, 47, m1, &u[0]);
     emlrtAssign(&y, m1);
-    c_st.site = &mm_emlrtRSI;
+    c_st.site = &nm_emlrtRSI;
     n_error(&c_st, y, &emlrtMCI);
   }
 
   /* 'Myfir1:148' if  any(diff(Wn)<0) */
   if (!!(w[1] - w[0] < 0.0)) {
-    b_st.site = &p_emlrtRSI;
+    b_st.site = &q_emlrtRSI;
     for (k = 0; k < 30; k++) {
       b_u[k] = b_varargin_1[k];
     }
@@ -389,7 +389,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     m1 = emlrtCreateCharArray(2, iv3);
     emlrtInitCharArrayR2013a(&b_st, 30, m1, &b_u[0]);
     emlrtAssign(&b_y, m1);
-    c_st.site = &mm_emlrtRSI;
+    c_st.site = &nm_emlrtRSI;
     n_error(&c_st, b_y, &emlrtMCI);
   }
 
@@ -410,7 +410,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     b_ff[k] = ff[k];
   }
 
-  b_st.site = &q_emlrtRSI;
+  b_st.site = &r_emlrtRSI;
   Myfirls(SD, &b_st, b_ff, hh);
 
   /* 'Myfir1:159' b = hh.*Window(:)'; */
@@ -476,7 +476,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   /*  DataA   is original acoustic signal */
   /*  Original signal filtered with F1 */
   /* 'nonlinear:63' tempData = filter(b_F1,a,DataA); */
-  st.site = &l_emlrtRSI;
+  st.site = &m_emlrtRSI;
   filter(&st, hh, DataA, tempData);
 
   /*  LenData_dec = fix ((lenDataA+dec_factor-1)/dec_factor); */
@@ -486,13 +486,13 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   } else {
     k = tempData->size[1];
     if (!(1 <= k)) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, k, &b_emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(1, 1, k, &i_emlrtBCI, sp);
     }
 
     k = tempData->size[1];
     loop_ub = DataA->size[1];
     if (!((loop_ub >= 1) && (loop_ub <= k))) {
-      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, k, &b_emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, k, &i_emlrtBCI, sp);
     }
   }
 
@@ -512,9 +512,9 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   /*    DataC =  abs(DataA); */
   /*    Squared value of the signal */
   /* 'nonlinear:75' DataC =  DataA .^2; */
-  st.site = &m_emlrtRSI;
-  b_st.site = &mb_emlrtRSI;
-  c_st.site = &jc_emlrtRSI;
+  st.site = &n_emlrtRSI;
+  b_st.site = &nb_emlrtRSI;
+  c_st.site = &kc_emlrtRSI;
   k = tempData->size[0] * tempData->size[1];
   tempData->size[0] = 1;
   tempData->size[1] = DataA->size[1];
@@ -525,8 +525,8 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
     tempData->data[k] = DataA->data[k];
   }
 
-  d_st.site = &lc_emlrtRSI;
-  e_st.site = &nc_emlrtRSI;
+  d_st.site = &mc_emlrtRSI;
+  e_st.site = &oc_emlrtRSI;
   for (k = 0; k < 2; k++) {
     w[k] = DataA->size[k];
   }
@@ -542,7 +542,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   }
 
   k = DataA->size[1];
-  d_st.site = &mc_emlrtRSI;
+  d_st.site = &nc_emlrtRSI;
   if (1 > DataA->size[1]) {
     overflow = false;
   } else {
@@ -550,7 +550,7 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   }
 
   if (overflow) {
-    e_st.site = &jb_emlrtRSI;
+    e_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&e_st, true);
   }
 
@@ -568,11 +568,11 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
 
   emlrtPopJmpBuf(&c_st, &emlrtJBStack);
   emlrtExitParallelRegion(&c_st, omp_in_parallel());
-  c_st.site = &kc_emlrtRSI;
+  c_st.site = &lc_emlrtRSI;
 
   /*    Nonlinear version filtered with F1 */
   /* 'nonlinear:79' tempData = filter(b_F1,a,DataC); */
-  st.site = &n_emlrtRSI;
+  st.site = &o_emlrtRSI;
   filter(&st, hh, DataC, tempData);
 
   /* 'nonlinear:80' LenData_dec = fix ((lenDataA+dec_factor-1)/dec_factor); */
@@ -583,12 +583,12 @@ void nonlinear(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T
   } else {
     k = tempData->size[1];
     if (!(1 <= k)) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, k, &emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(1, 1, k, &h_emlrtBCI, sp);
     }
 
     k = tempData->size[1];
     if (!(lenDataA <= k)) {
-      emlrtDynamicBoundsCheckR2012b(lenDataA, 1, k, &emlrtBCI, sp);
+      emlrtDynamicBoundsCheckR2012b(lenDataA, 1, k, &h_emlrtBCI, sp);
     }
 
     loop_ub = lenDataA;

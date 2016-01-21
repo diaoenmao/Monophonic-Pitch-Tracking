@@ -15,7 +15,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo th_emlrtRSI = { 53, "median",
+static emlrtRSInfo uh_emlrtRSI = { 53, "median",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
 static emlrtRTEInfo ac_emlrtRTEI = { 1, 14, "median",
@@ -35,7 +35,7 @@ void b_median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
   boolean_T p;
   int32_T k;
   int32_T exitg1;
-  int32_T i44;
+  int32_T i45;
   uint32_T sz[2];
   int32_T i;
   int32_T b_i;
@@ -68,8 +68,8 @@ void b_median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
   do {
     exitg1 = 0;
     if (k < 2) {
-      i44 = x->size[k];
-      if (i44 != 0) {
+      i45 = x->size[k];
+      if (i45 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -91,30 +91,30 @@ void b_median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y
       "Coder:toolbox:median_specialEmpty", 0);
   }
 
-  for (i44 = 0; i44 < 2; i44++) {
-    sz[i44] = (uint32_T)x->size[i44];
+  for (i45 = 0; i45 < 2; i45++) {
+    sz[i45] = (uint32_T)x->size[i45];
   }
 
-  i44 = y->size[0] * y->size[1];
+  i45 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(sp, (emxArray__common *)y, i44, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)y, i45, (int32_T)sizeof(real_T),
                     &ac_emlrtRTEI);
   if (x->size[1] == 0) {
-    i44 = y->size[0] * y->size[1];
+    i45 = y->size[0] * y->size[1];
     y->size[0] = 1;
-    emxEnsureCapacity(sp, (emxArray__common *)y, i44, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)y, i45, (int32_T)sizeof(real_T),
                       &ac_emlrtRTEI);
     k = y->size[1];
-    for (i44 = 0; i44 < k; i44++) {
-      y->data[y->size[0] * i44] = rtNaN;
+    for (i45 = 0; i45 < k; i45++) {
+      y->data[y->size[0] * i45] = rtNaN;
     }
   } else {
     k = x->size[1];
-    st.site = &th_emlrtRSI;
+    st.site = &uh_emlrtRSI;
     overflow = (x->size[1] > 2147483646);
     if (overflow) {
-      b_st.site = &jb_emlrtRSI;
+      b_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 
@@ -253,7 +253,7 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   boolean_T p;
   int32_T k;
   int32_T exitg1;
-  int32_T i28;
+  int32_T i29;
   uint32_T sz[2];
   int32_T i;
   int32_T b_i;
@@ -286,8 +286,8 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   do {
     exitg1 = 0;
     if (k < 2) {
-      i28 = x->size[k];
-      if (i28 != 0) {
+      i29 = x->size[k];
+      if (i29 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -309,30 +309,30 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       "Coder:toolbox:median_specialEmpty", 0);
   }
 
-  for (i28 = 0; i28 < 2; i28++) {
-    sz[i28] = (uint32_T)x->size[i28];
+  for (i29 = 0; i29 < 2; i29++) {
+    sz[i29] = (uint32_T)x->size[i29];
   }
 
-  i28 = y->size[0] * y->size[1];
+  i29 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(sp, (emxArray__common *)y, i28, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)y, i29, (int32_T)sizeof(real_T),
                     &ac_emlrtRTEI);
   if (x->size[1] == 0) {
-    i28 = y->size[0] * y->size[1];
+    i29 = y->size[0] * y->size[1];
     y->size[0] = 1;
-    emxEnsureCapacity(sp, (emxArray__common *)y, i28, (int32_T)sizeof(real_T),
+    emxEnsureCapacity(sp, (emxArray__common *)y, i29, (int32_T)sizeof(real_T),
                       &ac_emlrtRTEI);
     k = y->size[1];
-    for (i28 = 0; i28 < k; i28++) {
-      y->data[y->size[0] * i28] = rtNaN;
+    for (i29 = 0; i29 < k; i29++) {
+      y->data[y->size[0] * i29] = rtNaN;
     }
   } else {
     k = x->size[1];
-    st.site = &th_emlrtRSI;
+    st.site = &uh_emlrtRSI;
     overflow = (x->size[1] > 2147483646);
     if (overflow) {
-      b_st.site = &jb_emlrtRSI;
+      b_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);
     }
 

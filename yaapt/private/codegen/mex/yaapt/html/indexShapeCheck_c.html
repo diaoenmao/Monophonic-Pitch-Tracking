@@ -24,13 +24,13 @@
 <a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="13"><font color="#888888 "><i>   13   </i></font></a>
 <a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_rb_emlrtRSI">rb_emlrtRSI</a> = <b>{</b> 18, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
+<a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_sb_emlrtRSI">sb_emlrtRSI</a> = <b>{</b> 18, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
 <a name="16"><font color="#888888 "><i>   16   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m&quot;</font> <b>}</b>;
 <a name="17"><font color="#888888 "><i>   17   </i></font></a>
-<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_ig_emlrtRSI">ig_emlrtRSI</a> = <b>{</b> 14, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
+<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_jg_emlrtRSI">jg_emlrtRSI</a> = <b>{</b> 14, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
 <a name="19"><font color="#888888 "><i>   19   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m&quot;</font> <b>}</b>;
 <a name="20"><font color="#888888 "><i>   20   </i></font></a>
-<a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_jg_emlrtRSI">jg_emlrtRSI</a> = <b>{</b> 80, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
+<a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#112266"><b>static</b></font> emlrtRSInfo <a name="var_kg_emlrtRSI">kg_emlrtRSI</a> = <b>{</b> 80, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
 <a name="22"><font color="#888888 "><i>   22   </i></font></a>  <font color="#1122ff">&quot;F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m&quot;</font> <b>}</b>;
 <a name="23"><font color="#888888 "><i>   23   </i></font></a>
 <a name="24"><font color="#888888 "><i>   24   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_ae_emlrtRTEI">ae_emlrtRTEI</a> = <b>{</b> 85, 5, <font color="#1122ff">&quot;indexShapeCheck&quot;</font>,
@@ -71,14 +71,14 @@
 <a name="59"><font color="#888888 "><i>   59   </i></font></a>    <b>}</b>
 <a name="60"><font color="#888888 "><i>   60   </i></font></a>
 <a name="61"><font color="#888888 "><i>   61   </i></font></a>    <font color="#112266"><b>if</b></font> (nonSingletonDimFound) <b>{</b>
-<a name="62"><font color="#888888 "><i>   62   </i></font></a>      st.site = &amp;<a href="#var_ig_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ig_emlrtRSI');" target="_self"><font color="#1122aa">ig_emlrtRSI</font></a>;
+<a name="62"><font color="#888888 "><i>   62   </i></font></a>      st.site = &amp;<a href="#var_jg_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_jg_emlrtRSI');" target="_self"><font color="#1122aa">jg_emlrtRSI</font></a>;
 <a name="63"><font color="#888888 "><i>   63   </i></font></a>      <font color="#112266"><b>if</b></font> (((matrixSize == 1) != (indexSize[0] == 1)) || (indexSize[1] != 1)) <b>{</b>
 <a name="64"><font color="#888888 "><i>   64   </i></font></a>        nonSingletonDimFound = true;
 <a name="65"><font color="#888888 "><i>   65   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
 <a name="66"><font color="#888888 "><i>   66   </i></font></a>        nonSingletonDimFound = false;
 <a name="67"><font color="#888888 "><i>   67   </i></font></a>      <b>}</b>
 <a name="68"><font color="#888888 "><i>   68   </i></font></a>
-<a name="69"><font color="#888888 "><i>   69   </i></font></a>      b_st.site = &amp;<a href="#var_jg_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_jg_emlrtRSI');" target="_self"><font color="#1122aa">jg_emlrtRSI</font></a>;
+<a name="69"><font color="#888888 "><i>   69   </i></font></a>      b_st.site = &amp;<a href="#var_kg_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_kg_emlrtRSI');" target="_self"><font color="#1122aa">kg_emlrtRSI</font></a>;
 <a name="70"><font color="#888888 "><i>   70   </i></font></a>      <font color="#112266"><b>if</b></font> (!nonSingletonDimFound) <b>{</b>
 <a name="71"><font color="#888888 "><i>   71   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
 <a name="72"><font color="#888888 "><i>   72   </i></font></a>        emlrtErrorWithMessageIdR2012b(&amp;b_st, &amp;<a href="#var_ae_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ae_emlrtRTEI');" target="_self"><font color="#1122aa">ae_emlrtRTEI</font></a>,
@@ -127,7 +127,7 @@
 <a name="115"><font color="#888888 "><i>  115   </i></font></a>    nonSingletonDimFound = false;
 <a name="116"><font color="#888888 "><i>  116   </i></font></a>  <b>}</b>
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>
-<a name="118"><font color="#888888 "><i>  118   </i></font></a>  st.site = &amp;<a href="#var_rb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_rb_emlrtRSI');" target="_self"><font color="#1122aa">rb_emlrtRSI</font></a>;
+<a name="118"><font color="#888888 "><i>  118   </i></font></a>  st.site = &amp;<a href="#var_sb_emlrtRSI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_sb_emlrtRSI');" target="_self"><font color="#1122aa">sb_emlrtRSI</font></a>;
 <a name="119"><font color="#888888 "><i>  119   </i></font></a>  <font color="#112266"><b>if</b></font> (!nonSingletonDimFound) <b>{</b>
 <a name="120"><font color="#888888 "><i>  120   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
 <a name="121"><font color="#888888 "><i>  121   </i></font></a>    emlrtErrorWithMessageIdR2012b(&amp;st, &amp;<a href="#var_ae_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_ae_emlrtRTEI');" target="_self"><font color="#1122aa">ae_emlrtRTEI</font></a>,

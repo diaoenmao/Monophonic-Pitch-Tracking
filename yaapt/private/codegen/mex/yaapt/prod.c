@@ -15,7 +15,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo kg_emlrtRSI = { 11, "prod",
+static emlrtRSInfo lg_emlrtRSI = { 11, "prod",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\prod.m" };
 
 static emlrtRTEInfo ub_emlrtRTEI = { 1, 14, "prod",
@@ -43,7 +43,7 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &kg_emlrtRSI;
+  st.site = &lg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -79,7 +79,7 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  b_st.site = &td_emlrtRSI;
+  b_st.site = &ud_emlrtRSI;
   for (ix = 0; ix < 2; ix++) {
     sz[ix] = (uint32_T)x->size[ix];
   }
@@ -101,10 +101,10 @@ void prod(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   } else {
     ix = -1;
     iy = -1;
-    c_st.site = &ud_emlrtRSI;
+    c_st.site = &vd_emlrtRSI;
     overflow = (x->size[1] > 2147483646);
     if (overflow) {
-      d_st.site = &jb_emlrtRSI;
+      d_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 

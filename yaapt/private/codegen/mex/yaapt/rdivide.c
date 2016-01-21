@@ -27,15 +27,15 @@ static emlrtRTEInfo te_emlrtRTEI = { 13, 15, "rdivide",
 void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
                emxArray_real_T *z)
 {
-  int32_T i13;
+  int32_T i14;
   int32_T loop_ub;
-  i13 = z->size[0];
+  i14 = z->size[0];
   z->size[0] = x->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i13, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)z, i14, (int32_T)sizeof(real_T),
                     &s_emlrtRTEI);
   loop_ub = x->size[0];
-  for (i13 = 0; i13 < loop_ub; i13++) {
-    z->data[i13] = x->data[i13] / y;
+  for (i14 = 0; i14 < loop_ub; i14++) {
+    z->data[i14] = x->data[i14] / y;
   }
 }
 
@@ -45,16 +45,16 @@ void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
 void c_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
                emxArray_real_T *z)
 {
-  int32_T i16;
+  int32_T i17;
   int32_T loop_ub;
-  i16 = z->size[0] * z->size[1];
+  i17 = z->size[0] * z->size[1];
   z->size[0] = 1;
   z->size[1] = x->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i16, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)z, i17, (int32_T)sizeof(real_T),
                     &s_emlrtRTEI);
   loop_ub = x->size[0] * x->size[1];
-  for (i16 = 0; i16 < loop_ub; i16++) {
-    z->data[i16] = x->data[i16] / y;
+  for (i17 = 0; i17 < loop_ub; i17++) {
+    z->data[i17] = x->data[i17] / y;
   }
 }
 
@@ -64,15 +64,15 @@ void c_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
 void d_rdivide(const emlrtStack *sp, real_T x, const emxArray_real_T *y,
                emxArray_real_T *z)
 {
-  int32_T i19;
+  int32_T i20;
   int32_T loop_ub;
-  i19 = z->size[0];
+  i20 = z->size[0];
   z->size[0] = y->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i19, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)z, i20, (int32_T)sizeof(real_T),
                     &s_emlrtRTEI);
   loop_ub = y->size[0];
-  for (i19 = 0; i19 < loop_ub; i19++) {
-    z->data[i19] = x / y->data[i19];
+  for (i20 = 0; i20 < loop_ub; i20++) {
+    z->data[i20] = x / y->data[i20];
   }
 }
 

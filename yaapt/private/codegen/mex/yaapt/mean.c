@@ -18,10 +18,10 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo wd_emlrtRSI = { 34, "mean",
+static emlrtRSInfo xd_emlrtRSI = { 34, "mean",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\mean.m" };
 
-static emlrtRSInfo di_emlrtRSI = { 56, "combine_vector_elements",
+static emlrtRSInfo ei_emlrtRSI = { 56, "combine_vector_elements",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\combine_vector_elements.m"
 };
 
@@ -66,7 +66,7 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &wd_emlrtRSI;
+  st.site = &xd_emlrtRSI;
   for (vlen = 0; vlen < 2; vlen++) {
     sz[vlen] = (uint32_T)x->size[vlen];
   }
@@ -90,10 +90,10 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     vstride = x->size[0];
     iy = -1;
     ixstart = -1;
-    b_st.site = &di_emlrtRSI;
+    b_st.site = &ei_emlrtRSI;
     overflow = (x->size[0] > 2147483646);
     if (overflow) {
-      c_st.site = &jb_emlrtRSI;
+      c_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&c_st, true);
     }
 
@@ -101,7 +101,7 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       ixstart++;
       ix = ixstart;
       s = x->data[ixstart];
-      b_st.site = &vd_emlrtRSI;
+      b_st.site = &wd_emlrtRSI;
       if (2 > vlen) {
         b12 = false;
       } else {
@@ -109,7 +109,7 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       }
 
       if (b12) {
-        c_st.site = &jb_emlrtRSI;
+        c_st.site = &kb_emlrtRSI;
         check_forloop_overflow_error(&c_st, true);
       }
 
@@ -171,12 +171,12 @@ real_T c_mean(const emlrtStack *sp, const emxArray_real_T *x)
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  st.site = &wd_emlrtRSI;
+  st.site = &xd_emlrtRSI;
   if (x->size[0] == 0) {
     y = 0.0;
   } else {
     y = x->data[0];
-    b_st.site = &xd_emlrtRSI;
+    b_st.site = &yd_emlrtRSI;
     if (2 > x->size[0]) {
       overflow = false;
     } else {
@@ -184,7 +184,7 @@ real_T c_mean(const emlrtStack *sp, const emxArray_real_T *x)
     }
 
     if (overflow) {
-      c_st.site = &jb_emlrtRSI;
+      c_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&c_st, true);
     }
 
@@ -233,7 +233,7 @@ real_T mean(const emlrtStack *sp, const emxArray_real_T *x)
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  st.site = &wd_emlrtRSI;
+  st.site = &xd_emlrtRSI;
   b_x = combine_vector_elements(&st, x);
   return b_x / (real_T)x->size[1];
 }

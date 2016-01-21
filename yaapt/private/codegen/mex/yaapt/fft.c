@@ -17,25 +17,25 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo id_emlrtRSI = { 14, "fft",
+static emlrtRSInfo jd_emlrtRSI = { 14, "fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\fft.m" };
 
-static emlrtRSInfo jd_emlrtRSI = { 47, "eml_fft",
+static emlrtRSInfo kd_emlrtRSI = { 47, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
-static emlrtRSInfo kd_emlrtRSI = { 102, "eml_fft",
+static emlrtRSInfo ld_emlrtRSI = { 102, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
-static emlrtRSInfo ld_emlrtRSI = { 107, "eml_fft",
+static emlrtRSInfo md_emlrtRSI = { 107, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
-static emlrtRSInfo md_emlrtRSI = { 109, "eml_fft",
+static emlrtRSInfo nd_emlrtRSI = { 109, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
-static emlrtRSInfo nd_emlrtRSI = { 120, "eml_fft",
+static emlrtRSInfo od_emlrtRSI = { 120, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
-static emlrtRSInfo hg_emlrtRSI = { 42, "eml_fft",
+static emlrtRSInfo ig_emlrtRSI = { 42, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
 static emlrtRTEInfo t_emlrtRTEI = { 1, 14, "fft",
@@ -44,7 +44,7 @@ static emlrtRTEInfo t_emlrtRTEI = { 1, 14, "fft",
 static emlrtRTEInfo fe_emlrtRTEI = { 18, 19, "eml_fft",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\private\\eml_fft.m" };
 
-static emlrtRSInfo qm_emlrtRSI = { 18, "indexDivide",
+static emlrtRSInfo rm_emlrtRSI = { 18, "indexDivide",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexDivide.m" };
 
 /* Function Declarations */
@@ -2867,7 +2867,7 @@ void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192])
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &id_emlrtRSI;
+  st.site = &jd_emlrtRSI;
   if ((x->size[1] == 1) || (x->size[1] != 1)) {
     tst = true;
   } else {
@@ -2890,8 +2890,8 @@ void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192])
     b_x->data[SZ1] = x->data[x->size[0] * SZ1];
   }
 
-  b_st.site = &hg_emlrtRSI;
-  c_st.site = &jd_emlrtRSI;
+  b_st.site = &ig_emlrtRSI;
+  c_st.site = &kd_emlrtRSI;
   SZ1 = b_x->size[0];
   if (8192 > b_x->size[0]) {
     for (i = 0; i < 8192; i++) {
@@ -2905,10 +2905,10 @@ void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192])
     minval = muIntScalarMin_sint32(SZ1, 8192) - 1;
     iy = b_x->size[0] - minval;
     ixDelta = muIntScalarMax_sint32(1, iy);
-    d_st.site = &qm_emlrtRSI;
+    d_st.site = &rm_emlrtRSI;
     lastChan = (div_s32(&d_st, b_x->size[0], b_x->size[0]) - 1) << 13;
     ix = 0;
-    d_st.site = &kd_emlrtRSI;
+    d_st.site = &ld_emlrtRSI;
     if (0 > lastChan) {
       b6 = false;
     } else {
@@ -2916,18 +2916,18 @@ void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192])
     }
 
     if (b6) {
-      e_st.site = &jb_emlrtRSI;
+      e_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&e_st, true);
     }
 
     for (chanStart = 0; chanStart <= lastChan; chanStart += 8192) {
       ju = 0;
       iy = chanStart;
-      d_st.site = &ld_emlrtRSI;
+      d_st.site = &md_emlrtRSI;
       for (i = 1; i <= minval; i++) {
         b_y1[iy].re = b_x->data[ix];
         b_y1[iy].im = 0.0;
-        d_st.site = &md_emlrtRSI;
+        d_st.site = &nd_emlrtRSI;
         SZ1 = 8192;
         tst = true;
         while (tst) {
@@ -2943,7 +2943,7 @@ void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192])
       b_y1[iy].re = b_x->data[ix];
       b_y1[iy].im = 0.0;
       ix += ixDelta;
-      d_st.site = &nd_emlrtRSI;
+      d_st.site = &od_emlrtRSI;
       if (chanStart > chanStart + 8190) {
         b_chanStart = false;
       } else {
@@ -2951,7 +2951,7 @@ void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192])
       }
 
       if (b_chanStart) {
-        e_st.site = &jb_emlrtRSI;
+        e_st.site = &kb_emlrtRSI;
         check_forloop_overflow_error(&e_st, true);
       }
 
@@ -5777,7 +5777,7 @@ void fft(const emlrtStack *sp, const emxArray_creal_T *x, emxArray_creal_T *y)
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &id_emlrtRSI;
+  st.site = &jd_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -5791,7 +5791,7 @@ void fft(const emlrtStack *sp, const emxArray_creal_T *x, emxArray_creal_T *y)
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
-  b_st.site = &jd_emlrtRSI;
+  b_st.site = &kd_emlrtRSI;
   SZ1 = x->size[0];
   for (ju = 0; ju < 2; ju++) {
     sz[ju] = x->size[ju];
@@ -5821,10 +5821,10 @@ void fft(const emlrtStack *sp, const emxArray_creal_T *x, emxArray_creal_T *y)
     minval = muIntScalarMin_sint32(SZ1, 8192) - 1;
     SZ1 = x->size[0] - minval;
     ixDelta = muIntScalarMax_sint32(1, SZ1);
-    c_st.site = &qm_emlrtRSI;
+    c_st.site = &rm_emlrtRSI;
     lastChan = (div_s32(&c_st, x->size[0] * x->size[1], x->size[0]) - 1) << 13;
     ix = 0;
-    c_st.site = &kd_emlrtRSI;
+    c_st.site = &ld_emlrtRSI;
     if (0 > lastChan) {
       b3 = false;
     } else {
@@ -5832,17 +5832,17 @@ void fft(const emlrtStack *sp, const emxArray_creal_T *x, emxArray_creal_T *y)
     }
 
     if (b3) {
-      d_st.site = &jb_emlrtRSI;
+      d_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 
     for (chanStart = 0; chanStart <= lastChan; chanStart += 8192) {
       ju = 0;
       SZ1 = chanStart;
-      c_st.site = &ld_emlrtRSI;
+      c_st.site = &md_emlrtRSI;
       for (i = 1; i <= minval; i++) {
         y->data[SZ1] = x->data[ix];
-        c_st.site = &md_emlrtRSI;
+        c_st.site = &nd_emlrtRSI;
         SZ1 = 8192;
         tst = true;
         while (tst) {
@@ -5857,7 +5857,7 @@ void fft(const emlrtStack *sp, const emxArray_creal_T *x, emxArray_creal_T *y)
 
       y->data[SZ1] = x->data[ix];
       ix += ixDelta;
-      c_st.site = &nd_emlrtRSI;
+      c_st.site = &od_emlrtRSI;
       if (chanStart > chanStart + 8190) {
         b_chanStart = false;
       } else {
@@ -5865,7 +5865,7 @@ void fft(const emlrtStack *sp, const emxArray_creal_T *x, emxArray_creal_T *y)
       }
 
       if (b_chanStart) {
-        d_st.site = &jb_emlrtRSI;
+        d_st.site = &kb_emlrtRSI;
         check_forloop_overflow_error(&d_st, true);
       }
 

@@ -18,13 +18,13 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ve_emlrtRSI = { 48, "Mykaiser",
+static emlrtRSInfo we_emlrtRSI = { 48, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtRSInfo we_emlrtRSI = { 49, "Mykaiser",
+static emlrtRSInfo xe_emlrtRSI = { 49, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
-static emlrtRSInfo xe_emlrtRSI = { 50, "Mykaiser",
+static emlrtRSInfo ye_emlrtRSI = { 50, "Mykaiser",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Mykaiser.m" };
 
 static emlrtRTEInfo jb_emlrtRTEI = { 41, 14, "Mykaiser",
@@ -118,9 +118,9 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     /* 'Mykaiser:46' else */
     /* 'Mykaiser:47' m = n - 1; */
     /* 'Mykaiser:48' k = (0 : m)'; */
-    st.site = &ve_emlrtRSI;
-    b_st.site = &cd_emlrtRSI;
-    c_st.site = &dd_emlrtRSI;
+    st.site = &we_emlrtRSI;
+    b_st.site = &dd_emlrtRSI;
+    c_st.site = &ed_emlrtRSI;
     if (muDoubleScalarIsNaN(n - 1.0)) {
       b_n = 1;
       anew = rtNaN;
@@ -159,7 +159,7 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
       }
     }
 
-    d_st.site = &ed_emlrtRSI;
+    d_st.site = &fd_emlrtRSI;
     if (!n_too_large) {
     } else {
       emlrtErrorWithMessageIdR2012b(&d_st, &ee_emlrtRTEI,
@@ -182,7 +182,7 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
         y->data[b_n - 1] = apnd;
         k = b_n - 1;
         nm1d2 = asr_s32(k, 1U);
-        d_st.site = &fd_emlrtRSI;
+        d_st.site = &gd_emlrtRSI;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (real_T)k;
           y->data[(b_n - k) - 1] = apnd - (real_T)k;
@@ -226,7 +226,7 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     }
 
     emxInit_real_T1(sp, &b_y, 1, &jb_emlrtRTEI, true);
-    st.site = &we_emlrtRSI;
+    st.site = &xe_emlrtRSI;
     b_sqrt(&st, b_k);
 
     /* 'Mykaiser:50' w = Mybesseli (0, k) / Mybesseli (0, beta); */
@@ -240,9 +240,9 @@ void Mykaiser(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     }
 
     emxFree_real_T(&b_k);
-    st.site = &xe_emlrtRSI;
+    st.site = &ye_emlrtRSI;
     Mybesseli(&st, b_y, w);
-    st.site = &xe_emlrtRSI;
+    st.site = &ye_emlrtRSI;
     anew = b_Mybesseli(&st);
     k = w->size[0] * w->size[1];
     emxEnsureCapacity(sp, (emxArray__common *)w, k, (int32_T)sizeof(real_T),

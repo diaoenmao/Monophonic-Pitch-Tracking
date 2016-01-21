@@ -22,41 +22,78 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo emlrtRSI = { 120, "yaapt",
+static emlrtRSInfo emlrtRSI = { 121, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo b_emlrtRSI = { 125, "yaapt",
+static emlrtRSInfo b_emlrtRSI = { 126, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo c_emlrtRSI = { 128, "yaapt",
+static emlrtRSInfo c_emlrtRSI = { 129, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo d_emlrtRSI = { 133, "yaapt",
+static emlrtRSInfo d_emlrtRSI = { 134, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo e_emlrtRSI = { 137, "yaapt",
+static emlrtRSInfo e_emlrtRSI = { 138, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo f_emlrtRSI = { 143, "yaapt",
+static emlrtRSInfo f_emlrtRSI = { 144, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo g_emlrtRSI = { 146, "yaapt",
+static emlrtRSInfo g_emlrtRSI = { 147, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo h_emlrtRSI = { 149, "yaapt",
+static emlrtRSInfo h_emlrtRSI = { 150, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo i_emlrtRSI = { 153, "yaapt",
+static emlrtRSInfo i_emlrtRSI = { 154, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo j_emlrtRSI = { 157, "yaapt",
+static emlrtRSInfo j_emlrtRSI = { 158, "yaapt",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
+
+static emlrtRSInfo k_emlrtRSI = { 159, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
 static emlrtRTEInfo emlrtRTEI = { 1, 37, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRTEInfo b_emlrtRTEI = { 153, 1, "yaapt",
+static emlrtRTEInfo b_emlrtRTEI = { 154, 1, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
+
+static emlrtBCInfo emlrtBCI = { -1, -1, 8, 1, "Pitch_temp", "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
+
+static emlrtBCInfo b_emlrtBCI = { -1, -1, 10, 44, "Pitch_temp",
+  "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
+
+static emlrtBCInfo c_emlrtBCI = { -1, -1, 10, 63, "Pitch_temp",
+  "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
+
+static emlrtBCInfo d_emlrtBCI = { -1, -1, 10, 80, "Pitch_temp",
+  "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
+
+static emlrtBCInfo e_emlrtBCI = { -1, -1, 10, 97, "Pitch_temp",
+  "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
+
+static emlrtBCInfo f_emlrtBCI = { -1, -1, 11, 25, "Pitch_temp",
+  "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
+
+static emlrtBCInfo g_emlrtBCI = { -1, -1, 11, 9, "Pitch_temp",
+  "Pitch_Optimization",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
+  0 };
 
 /* Function Declarations */
 static void o_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
@@ -116,6 +153,8 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   emxArray_real_T *TMerit2;
   emxArray_real_T *RPitch;
   emxArray_real_T *Merit;
+  int32_T i1;
+  int32_T i;
   emlrtStack st;
   emlrtStack b_st;
   st.prev = sp;
@@ -207,8 +246,8 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   /*  % DP weight factor of UV-UV transitions */
   /*  % Weight factor for local costs */
   /* 'yaapt:54' Prm = struct(... */
-  /* 'yaapt:55'     'frame_length',   25, ... % Length of each analysis frame (ms) */
-  /* 'yaapt:56'     'frame_space',    10, ... % Spacing between analysis frame (ms) */
+  /* 'yaapt:55'     'frame_length',   20, ... % Length of each analysis frame (ms) */
+  /* 'yaapt:56'     'frame_space',    30, ... % Spacing between analysis frame (ms) */
   /* 'yaapt:57'     'f0_min',         60, ... % Minimum F0 searched (Hz) */
   /* 'yaapt:58'     'f0_max',        400, ... % Maximum F0 searached (Hz) */
   /* 'yaapt:59'     'fft_length',   8192, ... % FFT length */
@@ -223,8 +262,8 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   /* 'yaapt:68'     'shc_pwidth',     50, ... % Window width in SHC peak picking (Hz) */
   /* 'yaapt:69'     'shc_thresh1',   5.0, ... % Threshold 1 for SHC peak picking */
   /* 'yaapt:70'     'shc_thresh2',  1.25, ... % Threshold 2 for SHC peak picking */
-  /* 'yaapt:71'     'f0_double',     150, ... % F0 doubling decision threshold (Hz) */
-  /* 'yaapt:72'     'f0_half',       150, ... % F0 halving decision threshold (Hz) */
+  /* 'yaapt:71'     'f0_double',     300, ... % F0 doubling decision threshold (Hz) */
+  /* 'yaapt:72'     'f0_half',       300, ... % F0 halving decision threshold (Hz) */
   /* 'yaapt:73'     'dp5_k1',         11, ... % Weight used in dynaimc program */
   /* 'yaapt:74'     'dec_factor',      1, ... % Factor for signal resampling */
   /* 'yaapt:75'     'nccf_thresh1', 0.25, ... % Threshold for considering a peak in NCCF */
@@ -267,22 +306,23 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*   Step 1. Preprocessing */
   /*   Create the squared or absolute values of filtered speech data */
-  /* 'yaapt:120' [DataB, DataC, DataD, nFs] = nonlinear(Data, Fs, Prm); */
+  /*  Data_after = Preprocess(Data); */
+  /* 'yaapt:121' [DataB, DataC, DataD, nFs] = nonlinear(Data, Fs, Prm); */
   st.site = &emlrtRSI;
   nonlinear(SD, &st, Data, Fs, DataB, DataC, DataD, &nFs);
 
   /*   Check frame size, frame jump and the number of frames for nonlinear singal */
-  /* 'yaapt:123' nframesize = fix(Prm.frame_length*nFs/1000); */
-  y = 25.0 * nFs / 1000.0;
+  /* 'yaapt:124' nframesize = fix(Prm.frame_length*nFs/1000); */
+  y = 20.0 * nFs / 1000.0;
   if (y < 0.0) {
     nframesize = muDoubleScalarCeil(y);
   } else {
     nframesize = muDoubleScalarFloor(y);
   }
 
-  /* 'yaapt:124' if (nframesize < 15) */
+  /* 'yaapt:125' if (nframesize < 15) */
   if (nframesize < 15.0) {
-    /* 'yaapt:125' error('Frame length value %d is too short', Prm.frame_length); */
+    /* 'yaapt:126' error('Frame length value %d is too short', Prm.frame_length); */
     st.site = &b_emlrtRSI;
     for (i0 = 0; i0 < 34; i0++) {
       u[i0] = varargin_1[i0];
@@ -292,13 +332,13 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
     m0 = emlrtCreateCharArray(2, iv0);
     emlrtInitCharArrayR2013a(&st, 34, m0, &u[0]);
     emlrtAssign(&b_y, m0);
-    b_st.site = &mm_emlrtRSI;
-    o_error(&b_st, b_y, emlrt_marshallOut(25.0), &emlrtMCI);
+    b_st.site = &nm_emlrtRSI;
+    o_error(&b_st, b_y, emlrt_marshallOut(20.0), &emlrtMCI);
   }
 
-  /* 'yaapt:127' if (nframesize > 2048) */
+  /* 'yaapt:128' if (nframesize > 2048) */
   if (nframesize > 2048.0) {
-    /* 'yaapt:128' error('Frame length value %d exceeds the limit', Prm.frame_length); */
+    /* 'yaapt:129' error('Frame length value %d exceeds the limit', Prm.frame_length); */
     st.site = &c_emlrtRSI;
     for (i0 = 0; i0 < 39; i0++) {
       b_u[i0] = b_varargin_1[i0];
@@ -308,8 +348,8 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
     m0 = emlrtCreateCharArray(2, iv1);
     emlrtInitCharArrayR2013a(&st, 39, m0, &b_u[0]);
     emlrtAssign(&c_y, m0);
-    b_st.site = &mm_emlrtRSI;
-    o_error(&b_st, c_y, emlrt_marshallOut(25.0), &emlrtMCI);
+    b_st.site = &nm_emlrtRSI;
+    o_error(&b_st, c_y, emlrt_marshallOut(20.0), &emlrtMCI);
   }
 
   emxInit_real_T(sp, &Energy, 2, &emlrtRTEI, true);
@@ -318,13 +358,13 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
 
   /*   Step 2. Spectral pitch tracking */
   /*   Calculate NLFER and determine voiced/unvoiced frames with NLFER */
-  /* 'yaapt:133' [Energy, VUVEnergy]= nlfer(DataB, nFs, Prm); */
+  /* 'yaapt:134' [Energy, VUVEnergy]= nlfer(DataB, nFs, Prm); */
   st.site = &d_emlrtRSI;
   nlfer(&st, DataB, nFs, Energy, VUVEnergy);
 
   /*   Calculate an approximate pitch track from the spectrum. */
   /*   At this point, SPitch is best estimate of pitch track from spectrum */
-  /* 'yaapt:137' [SPitch, VUVSPitch, pAvg, pStd]= spec_trk(DataD, nFs, VUVEnergy, Prm); */
+  /* 'yaapt:138' [SPitch, VUVSPitch, pAvg, pStd]= spec_trk(DataD, nFs, VUVEnergy, Prm); */
   i0 = b_DataD->size[0] * b_DataD->size[1];
   b_DataD->size[0] = 1;
   b_DataD->size[1] = DataD->size[1];
@@ -350,38 +390,127 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   /*   Step 3. Temporal pitch tracking based on NCCF */
   /*   Calculate a pitch track based on time-domain processing */
   /*   Pitch tracking from the filterd original signal  */
-  /* 'yaapt:143' [TPitch1, TMerit1] = tm_trk(DataB, nFs, SPitch, pStd, pAvg, Prm); */
+  /* 'yaapt:144' [TPitch1, TMerit1] = tm_trk(DataB, nFs, SPitch, pStd, pAvg, Prm); */
   st.site = &f_emlrtRSI;
   tm_trk(&st, DataB, nFs, DataC, pStd, TPitch1, TMerit1);
 
   /*   Pitch tracking from the filterd nonlinear signal  */
-  /* 'yaapt:146' [TPitch2, TMerit2] = tm_trk(DataD, nFs, SPitch, pStd, pAvg, Prm); */
+  /* 'yaapt:147' [TPitch2, TMerit2] = tm_trk(DataD, nFs, SPitch, pStd, pAvg, Prm); */
   st.site = &g_emlrtRSI;
   tm_trk(&st, DataD, nFs, DataC, pStd, TPitch2, TMerit2);
 
   /*  Refine pitch candidates  */
-  /* 'yaapt:149' [RPitch, Merit] = refine(TPitch1, TMerit1, TPitch2, TMerit2, SPitch, ... */
-  /* 'yaapt:150'                         Energy, VUVEnergy, Prm); */
+  /* 'yaapt:150' [RPitch, Merit] = refine(TPitch1, TMerit1, TPitch2, TMerit2, SPitch, ... */
+  /* 'yaapt:151'                         Energy, VUVEnergy, Prm); */
   st.site = &h_emlrtRSI;
   refine(&st, TPitch1, TMerit1, TPitch2, TMerit2, DataC, Energy, VUVEnergy,
          RPitch, Merit);
 
   /*  Step 5. Use dyanamic programming to determine the final pitch */
-  /* 'yaapt:153' Pitch_before  = dynamic(RPitch, Merit, Energy, Prm); */
+  /* 'yaapt:154' Pitch_before  = dynamic(RPitch, Merit, Energy, Prm); */
   st.site = &i_emlrtRSI;
   dynamic(&st, RPitch, Merit, Energy, Pitch_before);
 
-  /* 'yaapt:154' numfrms = length(Pitch_before); */
+  /* 'yaapt:155' numfrms = length(Pitch_before); */
   *numfrms = Pitch_before->size[1];
 
-  /* 'yaapt:155' frmrate = Prm.frame_space; */
-  *frmrate = 10.0;
+  /* 'yaapt:156' frmrate = Prm.frame_space; */
+  *frmrate = 30.0;
 
-  /* 'yaapt:157' [Pitch,~] = freqSelect(Pitch_before); */
+  /* 'yaapt:158' [Pitch_Freq,~] = freqSelect(Pitch_before); */
   st.site = &j_emlrtRSI;
   freqSelect(&st, Pitch_before, Pitch, DataC);
 
-  /* 'yaapt:157' ~ */
+  /* 'yaapt:158' ~ */
+  /* 'yaapt:159' Pitch = Pitch_Optimization(Pitch_Freq); */
+  st.site = &k_emlrtRSI;
+
+  /*  Preprocess the raw data from android voice recorder */
+  /*  */
+  /*  Data_in = Raw data android voice recorder */
+  /*  Data_out = Head and tail muted data */
+  /*  The noise comes from opening mic and closing mic */
+  /* 'Pitch_Optimization:7' Pitch_temp = Pitch; */
+  /* 'Pitch_Optimization:8' Pitch_temp(1:3)=0; */
+  loop_ub = Pitch->size[1];
+  emxFree_real_T(&b_DataD);
+  emxFree_real_T(&Merit);
+  emxFree_real_T(&RPitch);
+  emxFree_real_T(&TMerit2);
+  emxFree_real_T(&TPitch2);
+  emxFree_real_T(&TMerit1);
+  emxFree_real_T(&TPitch1);
+  emxFree_real_T(&pStd);
+  emxFree_real_T(&pAvg);
+  emxFree_boolean_T(&VUVEnergy);
+  emxFree_real_T(&Energy);
+  emxFree_real_T(&DataD);
+  emxFree_real_T(&DataC);
+  emxFree_real_T(&DataB);
+  emxFree_real_T(&Pitch_before);
+  for (i0 = 0; i0 < 3; i0++) {
+    i1 = 1 + i0;
+    if (!(i1 <= loop_ub)) {
+      emlrtDynamicBoundsCheckR2012b(i1, 1, loop_ub, &emlrtBCI, &st);
+    }
+
+    Pitch->data[i1 - 1] = 0.0;
+  }
+
+  /* 'Pitch_Optimization:9' for i=1:length(Pitch_temp) */
+  i0 = Pitch->size[1];
+  i = 1;
+  while (i - 1 <= i0 - 1) {
+    /* 'Pitch_Optimization:10' if( i+1<length(Pitch_temp) && i-1>0 && Pitch_temp(i-1) ~= Pitch_temp(i) && Pitch_temp(i) ~= Pitch_temp(i+1)) */
+    if ((i + 1U < (uint32_T)Pitch->size[1]) && (i - 1 > 0)) {
+      i1 = Pitch->size[1];
+      loop_ub = i - 1;
+      if (!((loop_ub >= 1) && (loop_ub <= i1))) {
+        emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i1, &b_emlrtBCI, &st);
+      }
+
+      i1 = Pitch->size[1];
+      if (!((i >= 1) && (i <= i1))) {
+        emlrtDynamicBoundsCheckR2012b(i, 1, i1, &c_emlrtBCI, &st);
+      }
+
+      if (Pitch->data[loop_ub - 1] != Pitch->data[i - 1]) {
+        i1 = Pitch->size[1];
+        if (!((i >= 1) && (i <= i1))) {
+          emlrtDynamicBoundsCheckR2012b(i, 1, i1, &d_emlrtBCI, &st);
+        }
+
+        i1 = Pitch->size[1];
+        loop_ub = (int32_T)(i + 1U);
+        if (!((loop_ub >= 1) && (loop_ub <= i1))) {
+          emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i1, &e_emlrtBCI, &st);
+        }
+
+        if (Pitch->data[i - 1] != Pitch->data[loop_ub - 1]) {
+          /* 'Pitch_Optimization:11' Pitch_temp(i) = Pitch_temp(i - 1); */
+          i1 = Pitch->size[1];
+          loop_ub = i - 1;
+          if (!((loop_ub >= 1) && (loop_ub <= i1))) {
+            emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i1, &f_emlrtBCI, &st);
+          }
+
+          i1 = Pitch->size[1];
+          if (!((i >= 1) && (i <= i1))) {
+            emlrtDynamicBoundsCheckR2012b(i, 1, i1, &g_emlrtBCI, &st);
+          }
+
+          Pitch->data[i - 1] = Pitch->data[loop_ub - 1];
+        }
+      }
+    }
+
+    i++;
+    if (*emlrtBreakCheckR2012bFlagVar != 0) {
+      emlrtBreakCheckR2012b(&st);
+    }
+  }
+
+  /* 'Pitch_Optimization:14' Pitch_out = Pitch_temp; */
   /* figure(3) */
   /*  plot(SPitch, 'b') */
   /*  hold on */
@@ -412,21 +541,6 @@ void yaapt(yaaptStackData *SD, const emlrtStack *sp, const emxArray_real_T *Data
   /*      pt_figs(DataB, DataD, nFs, SPitch, Energy, VUVEnergy, RPitch, Pitch, Prm); */
   /*  end */
   /* ============================================================================== */
-  emxFree_real_T(&b_DataD);
-  emxFree_real_T(&Merit);
-  emxFree_real_T(&RPitch);
-  emxFree_real_T(&TMerit2);
-  emxFree_real_T(&TPitch2);
-  emxFree_real_T(&TMerit1);
-  emxFree_real_T(&TPitch1);
-  emxFree_real_T(&pStd);
-  emxFree_real_T(&pAvg);
-  emxFree_boolean_T(&VUVEnergy);
-  emxFree_real_T(&Energy);
-  emxFree_real_T(&DataD);
-  emxFree_real_T(&DataC);
-  emxFree_real_T(&DataB);
-  emxFree_real_T(&Pitch_before);
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }
 

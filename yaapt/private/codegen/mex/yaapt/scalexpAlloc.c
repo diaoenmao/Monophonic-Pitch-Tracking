@@ -22,16 +22,16 @@ boolean_T dimagree(const emxArray_real_T *z, const emxArray_real_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   boolean_T exitg1;
-  int32_T i6;
   int32_T i7;
+  int32_T i8;
   p = true;
   b_p = true;
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k + 1 < 3)) {
-    i6 = z->size[k];
-    i7 = varargin_1->size[k];
-    if (i6 != i7) {
+    i7 = z->size[k];
+    i8 = varargin_1->size[k];
+    if (i7 != i8) {
       b_p = false;
       exitg1 = true;
     } else {
