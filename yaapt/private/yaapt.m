@@ -55,7 +55,7 @@ Prm = struct(...
     'frame_length',   20, ... % Length of each analysis frame (ms)
     'frame_space',    30, ... % Spacing between analysis frame (ms)
     'f0_min',         60, ... % Minimum F0 searched (Hz)
-    'f0_max',        400, ... % Maximum F0 searached (Hz)
+    'f0_max',        600, ... % Maximum F0 searached (Hz)
     'fft_length',   8192, ... % FFT length
     'bp_forder',     150, ... % Order of bandpass filter
     'bp_low',         50, ... % Low frequency of filter passband (Hz)
@@ -154,7 +154,7 @@ end
 Pitch_before  = dynamic(RPitch, Merit, Energy, Prm);
 numfrms = length(Pitch_before);
 frmrate = Prm.frame_space; 
-
+ 
 [Pitch_Freq,~] = freqSelect(Pitch_before);
 Pitch = Pitch_Optimization(Pitch_Freq);
   %figure(3)

@@ -12,7 +12,7 @@ chunk2 = [];
 chunk3 = [];
 pointer = 0;
 fixed_threshold = 10; % 10 frames
-percent_threshold = 0.01; % 1 percent
+% percent_threshold = 0.01; % 1 percent
 for i=1:length(arr)
     if pointer== 0 
 	   chunk1_value = arr(i);
