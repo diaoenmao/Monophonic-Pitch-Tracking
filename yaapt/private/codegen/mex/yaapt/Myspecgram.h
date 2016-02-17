@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T window,
-  real_T noverlap, emxArray_creal_T *yo);
+extern void Myspecgram(const emlrtStack *sp, emxArray_real_T *x, real_T nfft,
+  real_T window, real_T noverlap, emxArray_creal_T *yo);
 
 #endif
 

@@ -23,9 +23,9 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void yaapt(yaaptStackData *SD, const emlrtStack *sp, const
-                  emxArray_real_T *Data, real_T Fs, emxArray_real_T *Pitch,
-                  real_T *numfrms, real_T *frmrate);
+extern void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs,
+                  const real_T Parameter[33], emxArray_real_T *Pitch, real_T
+                  *numfrms, real_T *frmrate);
 
 #endif
 

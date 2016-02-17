@@ -24,8 +24,10 @@
 
 /* Function Declarations */
 extern void cmp_rate(const emlrtStack *sp, const emxArray_real_T *Phi, real_T Fs,
-                     real_T lag_min, real_T lag_max, emxArray_real_T *Pitch,
-                     emxArray_real_T *Merit);
+                     real_T maxcands, real_T lag_min, real_T lag_max, real_T
+                     Prm_nccf_thresh1, real_T Prm_nccf_thresh2, real_T
+                     Prm_nccf_pwidth, emxArray_real_T *Pitch, emxArray_real_T
+                     *Merit);
 
 #endif
 

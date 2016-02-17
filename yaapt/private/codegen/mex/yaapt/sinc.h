@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_sinc(const emlrtStack *sp, real_T x[5776], real_T y[5776]);
-extern void sinc(const emlrtStack *sp, real_T x[75], real_T y[75]);
+extern void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y);
+extern void sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y);
 
 #endif
 

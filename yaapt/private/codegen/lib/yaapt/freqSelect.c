@@ -2,7 +2,7 @@
  * File: freqSelect.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -57,7 +57,7 @@ void freqSelect(const emxArray_real_T *fq, emxArray_real_T *freq,
   /*  Ex: A4 - Ab4 */
   /*  fq2cnt(440) - fq2cnt(415.305) = 6000 - 5900 = 100 */
   /*  */
-  d_rdivide(fq, 13.75, x);
+  c_rdivide(fq, 13.75, x);
   b_cnt = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
   cnt->size[1] = x->size[1];

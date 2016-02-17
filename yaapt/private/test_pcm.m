@@ -5,7 +5,8 @@ Fs=22050;
 time=linspace(0, length(Data)/Fs, length(Data));
 plot(time,Data)
 Data =double(Data);
-[Pitch, nf] = yaapt(Data', Fs); 
+load('default_parameter.mat')
+[Pitch, nf] = yaapt(Data', Fs, Parameter); 
 subplot(4,1,1)
 plot(Data)
 subplot(4,1,2)

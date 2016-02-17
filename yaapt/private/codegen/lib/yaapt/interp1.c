@@ -2,7 +2,7 @@
  * File: interp1.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -31,7 +31,7 @@ void interp1(const emxArray_real_T *varargin_1, const emxArray_real_T
   int nx;
   unsigned int outsize[2];
   emxArray_real_T *xi;
-  struct_T pp;
+  b_struct_T pp;
   emxArray_real_T *b_y;
   int exitg1;
   int b_j1;

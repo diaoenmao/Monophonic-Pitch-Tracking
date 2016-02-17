@@ -71,7 +71,10 @@ CandsMerit = ones(maxpeaks, numframes);
 % a = Data;
 % Data(end:(numframes-1)*nframejump+nframesize) = 0;
 Data(end) = 0;
-Data = [Data zeros(1,(numframes-1)*nframejump+nframesize-length(Data))];
+zero_padded = (numframes-1)*nframejump+nframesize-length(Data);
+if(zero_padded >0)    
+    Data = [Data zero_padded];
+end
 %-- MAIN ROUTINE --------------------------------------------------------------
 % Compute SHC for voiced frame
 Kaiser_window = Mykaiser(nframesize);

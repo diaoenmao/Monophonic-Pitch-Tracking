@@ -52,7 +52,7 @@ void assertValidSizeArg(const emlrtStack *sp, real_T varargin_1)
 
   if (p) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ue_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &cg_emlrtRTEI,
       "Coder:MATLAB:NonIntegerInput", 4, 12, MIN_int32_T, 12, MAX_int32_T);
   }
 
@@ -64,7 +64,7 @@ void assertValidSizeArg(const emlrtStack *sp, real_T varargin_1)
 
   if (2.147483647E+9 >= b_varargin_1) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ve_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
+    emlrtErrorWithMessageIdR2012b(sp, &dg_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
   }
 }
 

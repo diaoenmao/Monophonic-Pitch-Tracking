@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void spec_trk(yaaptStackData *SD, const emlrtStack *sp, emxArray_real_T
-                     *Data, real_T Fs, const emxArray_boolean_T *VUVEnergy,
+extern void spec_trk(const emlrtStack *sp, emxArray_real_T *Data, real_T Fs,
+                     const emxArray_boolean_T *VUVEnergy, const struct_T *Prm,
                      emxArray_real_T *SPitch, emxArray_real_T *VUVSPitch,
                      emxArray_real_T *pAvg, emxArray_real_T *pStd);
 

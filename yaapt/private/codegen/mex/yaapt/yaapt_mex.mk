@@ -14,27 +14,30 @@ SRC_FILES =  \
 	yaapt.c \
 	nonlinear.c \
 	rdivide.c \
+	Myfir1.c \
 	error.c \
+	colon.c \
 	eml_int_forloop_overflow_check.c \
 	abs.c \
 	scalexpAlloc.c \
+	cos.c \
 	any.c \
 	isequal.c \
 	diff.c \
 	Myfirls.c \
 	sqrt.c \
 	error1.c \
-	mpower.c \
-	cos.c \
-	sinc.c \
 	indexShapeCheck.c \
-	mldivide.c \
+	mpower.c \
+	sinc.c \
 	lusolve.c \
 	xgetrf.c \
 	repmat.c \
 	assertValidSizeArg.c \
+	infocheck.c \
 	warning.c \
-	xtrsm.c \
+	qrsolve.c \
+	xgeqp3.c \
 	mean.c \
 	combine_vector_elements.c \
 	exp.c \
@@ -59,18 +62,17 @@ SRC_FILES =  \
 	Mymedfilt1.c \
 	median.c \
 	dynamic5.c \
+	path1.c \
 	interp1.c \
 	pchip.c \
 	tm_trk.c \
 	crs_corr.c \
 	cmp_rate.c \
-	qrsolve.c \
-	xgeqp3.c \
 	refine.c \
 	cat.c \
-	dynamic.c \
 	freqSelect.c \
 	fq2cnt.c \
+	Smooth.c \
 	_coder_yaapt_info.c \
 	_coder_yaapt_api.c \
 	_coder_yaapt_mex.c \

@@ -2,7 +2,7 @@
  * File: yaapt_emxutil.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -53,10 +53,10 @@ void emxEnsureCapacity(emxArray__common *emxArray, int oldNumel, int elementSize
 }
 
 /*
- * Arguments    : struct_T *pStruct
+ * Arguments    : b_struct_T *pStruct
  * Return Type  : void
  */
-void emxFreeStruct_struct_T(struct_T *pStruct)
+void emxFreeStruct_struct_T(b_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->breaks);
   emxFree_real_T(&pStruct->coefs);
@@ -132,10 +132,10 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
 }
 
 /*
- * Arguments    : struct_T *pStruct
+ * Arguments    : b_struct_T *pStruct
  * Return Type  : void
  */
-void emxInitStruct_struct_T(struct_T *pStruct)
+void emxInitStruct_struct_T(b_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->breaks, 2);
   emxInit_real_T(&pStruct->coefs, 2);
@@ -189,6 +189,27 @@ void emxInit_boolean_T1(emxArray_boolean_T **pEmxArray, int numDimensions)
  * Return Type  : void
  */
 void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions)
+{
+  emxArray_creal_T *emxArray;
+  int i;
+  *pEmxArray = (emxArray_creal_T *)malloc(sizeof(emxArray_creal_T));
+  emxArray = *pEmxArray;
+  emxArray->data = (creal_T *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+/*
+ * Arguments    : emxArray_creal_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
+void emxInit_creal_T1(emxArray_creal_T **pEmxArray, int numDimensions)
 {
   emxArray_creal_T *emxArray;
   int i;

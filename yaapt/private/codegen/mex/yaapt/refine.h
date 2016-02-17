@@ -27,7 +27,9 @@ extern void refine(const emlrtStack *sp, const emxArray_real_T *TPitch1, const
                    emxArray_real_T *TMerit1, const emxArray_real_T *TPitch2,
                    const emxArray_real_T *TMerit2, const emxArray_real_T *SPitch,
                    const emxArray_real_T *Energy, const emxArray_boolean_T
-                   *VUVEnergy, emxArray_real_T *Pitch, emxArray_real_T *Merit);
+                   *VUVEnergy, real_T Prm_nlfer_thresh2, real_T Prm_merit_pivot,
+                   real_T Prm_median_value, emxArray_real_T *Pitch,
+                   emxArray_real_T *Merit);
 
 #endif
 

@@ -23,7 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void warn_singular(const emlrtStack *sp);
+extern void lusolve(const emlrtStack *sp, const emxArray_real_T *A,
+                    emxArray_real_T *B);
 
 #endif
 

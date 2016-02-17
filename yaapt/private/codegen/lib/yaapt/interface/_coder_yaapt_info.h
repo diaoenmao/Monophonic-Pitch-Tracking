@@ -2,7 +2,7 @@
  * File: _coder_yaapt_info.h 
  *  
  * MATLAB Coder version            : 3.0 
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25 
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40 
  */
 
 #ifndef ___CODER_YAAPT_INFO_H__

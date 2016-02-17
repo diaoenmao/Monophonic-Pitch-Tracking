@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: cat.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 21-Jan-2016 05:43:25</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 16-Feb-2016 23:38:40</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -48,7 +48,7 @@
 <a name="36"><font color="#888888 "><i>   36   </i></font></a>    ysize[iy] = sz1[iy];
 <a name="37"><font color="#888888 "><i>   37   </i></font></a>  <b>}</b>
 <a name="38"><font color="#888888 "><i>   38   </i></font></a>
-<a name="39"><font color="#888888 "><i>   39   </i></font></a>  ysize[0] += 3U;
+<a name="39"><font color="#888888 "><i>   39   </i></font></a>  ysize[0] += varargin_2-&gt;size[0];
 <a name="40"><font color="#888888 "><i>   40   </i></font></a>  iy = y-&gt;size[0] * y-&gt;size[1];
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>  y-&gt;size[0] = (<font color="#112266"><b>int</b></font>)ysize[0];
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>  y-&gt;size[1] = (<font color="#112266"><b>int</b></font>)ysize[1];
@@ -59,15 +59,15 @@
 <a name="47"><font color="#888888 "><i>   47   </i></font></a>
 <a name="48"><font color="#888888 "><i>   48   </i></font></a>  iy = 0;
 <a name="49"><font color="#888888 "><i>   49   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; (<font color="#112266"><b>int</b></font>)ysize[1]; i++) <b>{</b>
-<a name="50"><font color="#888888 "><i>   50   </i></font></a>    ix = i * 3;
-<a name="51"><font color="#888888 "><i>   51   </i></font></a>    <font color="#112266"><b>for</b></font> (l = 0; l &lt; 3; l++) <b>{</b>
+<a name="50"><font color="#888888 "><i>   50   </i></font></a>    ix = i * varargin_1-&gt;size[0];
+<a name="51"><font color="#888888 "><i>   51   </i></font></a>    <font color="#112266"><b>for</b></font> (l = 1; l &lt;= varargin_1-&gt;size[0]; l++) <b>{</b>
 <a name="52"><font color="#888888 "><i>   52   </i></font></a>      y-&gt;data[iy] = varargin_1-&gt;data[ix];
 <a name="53"><font color="#888888 "><i>   53   </i></font></a>      ix++;
 <a name="54"><font color="#888888 "><i>   54   </i></font></a>      iy++;
 <a name="55"><font color="#888888 "><i>   55   </i></font></a>    <b>}</b>
 <a name="56"><font color="#888888 "><i>   56   </i></font></a>
-<a name="57"><font color="#888888 "><i>   57   </i></font></a>    ix = i * 3;
-<a name="58"><font color="#888888 "><i>   58   </i></font></a>    <font color="#112266"><b>for</b></font> (l = 0; l &lt; 3; l++) <b>{</b>
+<a name="57"><font color="#888888 "><i>   57   </i></font></a>    ix = i * varargin_2-&gt;size[0];
+<a name="58"><font color="#888888 "><i>   58   </i></font></a>    <font color="#112266"><b>for</b></font> (l = 1; l &lt;= varargin_2-&gt;size[0]; l++) <b>{</b>
 <a name="59"><font color="#888888 "><i>   59   </i></font></a>      y-&gt;data[iy] = varargin_2-&gt;data[ix];
 <a name="60"><font color="#888888 "><i>   60   </i></font></a>      ix++;
 <a name="61"><font color="#888888 "><i>   61   </i></font></a>      iy++;

@@ -11,16 +11,24 @@
 #include "cat.h"
 #include "error1.h"
 #include "yaapt_emxutil.h"
+#include "eml_int_forloop_overflow_check.h"
+#include "yaapt_data.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hl_emlrtRSI = { 36, "cat",
+static emlrtRSInfo sm_emlrtRSI = { 36, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
-static emlrtRTEInfo gd_emlrtRTEI = { 1, 14, "cat",
+static emlrtRSInfo tm_emlrtRSI = { 55, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
-static emlrtRTEInfo nf_emlrtRTEI = { 38, 23, "cat",
+static emlrtRSInfo um_emlrtRSI = { 65, "cat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
+
+static emlrtRTEInfo he_emlrtRTEI = { 1, 14, "cat",
+  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
+
+static emlrtRTEInfo vg_emlrtRTEI = { 38, 23, "cat",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\cat.m" };
 
 /* Function Declarations */
@@ -39,17 +47,17 @@ static boolean_T isconsistent(int32_T dim, const emxArray_real_T *y, const
   int32_T j;
   int32_T exitg1;
   boolean_T guard1 = false;
-  int32_T i43;
-  int32_T i44;
+  int32_T i51;
+  int32_T i52;
   j = 0;
   do {
     exitg1 = 0;
     if (j < 2) {
       guard1 = false;
       if (!(dim == 1 + j)) {
-        i43 = y->size[j];
-        i44 = x->size[j];
-        if (i43 != i44) {
+        i51 = y->size[j];
+        i52 = x->size[j];
+        if (i51 != i52) {
           p = false;
           exitg1 = 1;
         } else {
@@ -82,10 +90,14 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   uint32_T ysize[2];
   int32_T i;
   int32_T ix;
+  boolean_T overflow;
   int32_T l;
   emlrtStack st;
+  emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
   for (iy = 0; iy < 2; iy++) {
     sz1[iy] = (uint32_T)varargin_1->size[iy];
   }
@@ -94,31 +106,31 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
     ysize[iy] = sz1[iy];
   }
 
-  ysize[0] += 3U;
+  ysize[0] += varargin_2->size[0];
   iy = y->size[0] * y->size[1];
   y->size[0] = (int32_T)ysize[0];
   y->size[1] = (int32_T)ysize[1];
   emxEnsureCapacity(sp, (emxArray__common *)y, iy, (int32_T)sizeof(real_T),
-                    &gd_emlrtRTEI);
-  if (varargin_1->size[1] == 0) {
-    st.site = &hl_emlrtRSI;
+                    &he_emlrtRTEI);
+  if ((varargin_1->size[0] == 0) || (varargin_1->size[1] == 0)) {
+    st.site = &sm_emlrtRSI;
     l_error(&st);
   }
 
   if (isconsistent(1, y, varargin_1)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &nf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &vg_emlrtRTEI,
       "Coder:MATLAB:catenate_dimensionMismatch", 0);
   }
 
-  if (varargin_2->size[1] == 0) {
-    st.site = &hl_emlrtRSI;
+  if ((varargin_2->size[0] == 0) || (varargin_2->size[1] == 0)) {
+    st.site = &sm_emlrtRSI;
     l_error(&st);
   }
 
   if (isconsistent(1, y, varargin_2)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &nf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &vg_emlrtRTEI,
       "Coder:MATLAB:catenate_dimensionMismatch", 0);
   }
 
@@ -127,16 +139,31 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   }
 
   iy = 1;
+  st.site = &tm_emlrtRSI;
   for (i = 0; i < (int32_T)ysize[1]; i++) {
-    ix = i * 3;
-    for (l = 0; l < 3; l++) {
+    ix = i * varargin_1->size[0];
+    st.site = &um_emlrtRSI;
+    overflow = (varargin_1->size[0] > 2147483646);
+    if (overflow) {
+      b_st.site = &cb_emlrtRSI;
+      check_forloop_overflow_error(&b_st, true);
+    }
+
+    for (l = 1; l <= varargin_1->size[0]; l++) {
       y->data[iy - 1] = varargin_1->data[ix];
       ix++;
       iy++;
     }
 
-    ix = i * 3;
-    for (l = 0; l < 3; l++) {
+    ix = i * varargin_2->size[0];
+    st.site = &um_emlrtRSI;
+    overflow = (varargin_2->size[0] > 2147483646);
+    if (overflow) {
+      b_st.site = &cb_emlrtRSI;
+      check_forloop_overflow_error(&b_st, true);
+    }
+
+    for (l = 1; l <= varargin_2->size[0]; l++) {
       y->data[iy - 1] = varargin_2->data[ix];
       ix++;
       iy++;

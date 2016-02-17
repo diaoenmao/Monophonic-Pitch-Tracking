@@ -2,7 +2,7 @@
  * File: cat.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -36,7 +36,7 @@ void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
     ysize[iy] = sz1[iy];
   }
 
-  ysize[0] += 3U;
+  ysize[0] += varargin_2->size[0];
   iy = y->size[0] * y->size[1];
   y->size[0] = (int)ysize[0];
   y->size[1] = (int)ysize[1];
@@ -47,15 +47,15 @@ void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
 
   iy = 0;
   for (i = 0; i < (int)ysize[1]; i++) {
-    ix = i * 3;
-    for (l = 0; l < 3; l++) {
+    ix = i * varargin_1->size[0];
+    for (l = 1; l <= varargin_1->size[0]; l++) {
       y->data[iy] = varargin_1->data[ix];
       ix++;
       iy++;
     }
 
-    ix = i * 3;
-    for (l = 0; l < 3; l++) {
+    ix = i * varargin_2->size[0];
+    for (l = 1; l <= varargin_2->size[0]; l++) {
       y->data[iy] = varargin_2->data[ix];
       ix++;
       iy++;

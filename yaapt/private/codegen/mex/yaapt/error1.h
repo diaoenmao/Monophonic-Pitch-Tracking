@@ -27,11 +27,11 @@ extern void d_error(const emlrtStack *sp);
 extern void e_error(const emlrtStack *sp);
 extern void error(const emlrtStack *sp);
 extern void f_error(const emlrtStack *sp, int32_T varargin_2);
-extern void g_error(const emlrtStack *sp);
-extern void h_error(const emlrtStack *sp);
+extern void g_error(const emlrtStack *sp, int32_T varargin_2);
+extern void h_error(const emlrtStack *sp, int32_T varargin_2);
 extern void i_error(const emlrtStack *sp);
-extern void j_error(const emlrtStack *sp, int32_T varargin_2);
-extern void k_error(const emlrtStack *sp, int32_T varargin_2);
+extern void j_error(const emlrtStack *sp);
+extern void k_error(const emlrtStack *sp);
 extern void l_error(const emlrtStack *sp);
 extern void m_error(const emlrtStack *sp);
 

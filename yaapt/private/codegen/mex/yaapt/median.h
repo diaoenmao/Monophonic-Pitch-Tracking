@@ -23,8 +23,6 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_median(const emlrtStack *sp, const emxArray_real_T *x,
-                     emxArray_real_T *y);
 extern void median(const emlrtStack *sp, const emxArray_real_T *x,
                    emxArray_real_T *y);
 

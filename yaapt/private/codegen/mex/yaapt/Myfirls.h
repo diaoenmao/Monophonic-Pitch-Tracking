@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void Myfirls(yaaptStackData *SD, const emlrtStack *sp, real_T F[6],
-                    real_T h[151]);
+extern void Myfirls(const emlrtStack *sp, real_T N, real_T F[6], emxArray_real_T
+                    *h);
 
 #endif
 

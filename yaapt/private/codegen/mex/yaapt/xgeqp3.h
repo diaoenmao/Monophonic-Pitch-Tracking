@@ -23,6 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
+extern void b_xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T
+                     *tau, emxArray_int32_T *jpvt);
 extern void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T
                    *tau, emxArray_int32_T *jpvt);
 

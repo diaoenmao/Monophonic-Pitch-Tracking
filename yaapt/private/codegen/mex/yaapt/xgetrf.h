@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void xgetrf(const emlrtStack *sp, real_T A[5776], int32_T ipiv[76],
-                   int32_T *info);
+extern void xgetrf(const emlrtStack *sp, int32_T m, int32_T n, emxArray_real_T
+                   *A, int32_T lda, emxArray_int32_T *ipiv, int32_T *info);
 
 #endif
 

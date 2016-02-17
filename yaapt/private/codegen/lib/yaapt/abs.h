@@ -2,7 +2,7 @@
  * File: abs.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __ABS_H__
@@ -20,7 +20,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_abs(const creal_T x[8192], double y[8192]);
+extern void b_abs(const emxArray_creal_T *x, emxArray_real_T *y);
 extern void c_abs(const emxArray_real_T *x, emxArray_real_T *y);
 
 #endif

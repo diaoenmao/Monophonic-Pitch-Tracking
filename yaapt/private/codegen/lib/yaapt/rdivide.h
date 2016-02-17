@@ -2,7 +2,7 @@
  * File: rdivide.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __RDIVIDE_H__
@@ -20,13 +20,11 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_rdivide(const double x[5776], const double y[5776], double z[5776]);
-extern void c_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z);
-extern void d_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z);
-extern void e_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z);
-extern void f_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
+extern void b_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
                       emxArray_real_T *z);
-extern void rdivide(const double x[75], const double y[75], double z[75]);
+extern void c_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z);
+extern void d_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z);
+extern void rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z);
 
 #endif
 

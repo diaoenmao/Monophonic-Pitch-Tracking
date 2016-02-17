@@ -2,7 +2,7 @@
  * File: peaks.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __PEAKS_H__
@@ -20,8 +20,11 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void peaks(emxArray_real_T *Data, double delta, double Pitch_data[], int
-                  Pitch_size[2], double Merit_data[], int Merit_size[2]);
+extern void peaks(emxArray_real_T *Data, double delta, double maxpeaks, double
+                  Prm_f0_min, double Prm_f0_max, double Prm_shc_pwidth, double
+                  Prm_shc_thresh1, double Prm_shc_thresh2, double Prm_f0_double,
+                  double Prm_f0_half, double Prm_merit_extra, emxArray_real_T
+                  *Pitch, emxArray_real_T *Merit);
 
 #endif
 

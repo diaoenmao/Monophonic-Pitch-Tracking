@@ -23,7 +23,6 @@ void yaapt_initialize(void)
   st.tls = emlrtRootTLSGlobal;
   emlrtClearAllocCountR2012b(&st, false, 0U, 0);
   emlrtEnterRtStackR2012b(&st);
-  emlrtLicenseCheckR2012b(&st, "Signal_Toolbox", 2);
   emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
 }
 

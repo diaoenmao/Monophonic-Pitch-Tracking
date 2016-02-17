@@ -2,7 +2,7 @@
  * File: sinc.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __SINC_H__
@@ -20,8 +20,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_sinc(double x[5776], double y[5776]);
-extern void sinc(double x[75], double y[75]);
+extern void b_sinc(emxArray_real_T *x, emxArray_real_T *y);
+extern void sinc(emxArray_real_T *x, emxArray_real_T *y);
 
 #endif
 

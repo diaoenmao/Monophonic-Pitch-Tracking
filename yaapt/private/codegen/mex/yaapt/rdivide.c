@@ -10,13 +10,12 @@
 #include "yaapt.h"
 #include "rdivide.h"
 #include "yaapt_emxutil.h"
+#include "isequal.h"
+#include "yaapt_data.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo s_emlrtRTEI = { 1, 14, "rdivide",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\rdivide.m" };
-
-static emlrtRTEInfo te_emlrtRTEI = { 13, 15, "rdivide",
+static emlrtRTEInfo j_emlrtRTEI = { 1, 14, "rdivide",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\rdivide.m" };
 
 /* Function Definitions */
@@ -24,18 +23,29 @@ static emlrtRTEInfo te_emlrtRTEI = { 13, 15, "rdivide",
 /*
  *
  */
-void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
-               emxArray_real_T *z)
+void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, const
+               emxArray_real_T *y, emxArray_real_T *z)
 {
-  int32_T i14;
+  real_T b_x[2];
+  real_T b_y[2];
+  int32_T i9;
   int32_T loop_ub;
-  i14 = z->size[0];
+  b_x[0] = x->size[0];
+  b_x[1] = 1.0;
+  b_y[0] = y->size[0];
+  b_y[1] = 1.0;
+  if (isequal(b_x, b_y)) {
+  } else {
+    emlrtErrorWithMessageIdR2012b(sp, &gf_emlrtRTEI, "MATLAB:dimagree", 0);
+  }
+
+  i9 = z->size[0];
   z->size[0] = x->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i14, (int32_T)sizeof(real_T),
-                    &s_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)z, i9, (int32_T)sizeof(real_T),
+                    &j_emlrtRTEI);
   loop_ub = x->size[0];
-  for (i14 = 0; i14 < loop_ub; i14++) {
-    z->data[i14] = x->data[i14] / y;
+  for (i9 = 0; i9 < loop_ub; i9++) {
+    z->data[i9] = x->data[i9] / y->data[i9];
   }
 }
 
@@ -45,16 +55,16 @@ void b_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
 void c_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
                emxArray_real_T *z)
 {
-  int32_T i17;
+  int32_T i14;
   int32_T loop_ub;
-  i17 = z->size[0] * z->size[1];
+  i14 = z->size[0] * z->size[1];
   z->size[0] = 1;
   z->size[1] = x->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i17, (int32_T)sizeof(real_T),
-                    &s_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)z, i14, (int32_T)sizeof(real_T),
+                    &j_emlrtRTEI);
   loop_ub = x->size[0] * x->size[1];
-  for (i17 = 0; i17 < loop_ub; i17++) {
-    z->data[i17] = x->data[i17] / y;
+  for (i14 = 0; i14 < loop_ub; i14++) {
+    z->data[i14] = x->data[i14] / y;
   }
 }
 
@@ -64,76 +74,33 @@ void c_rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
 void d_rdivide(const emlrtStack *sp, real_T x, const emxArray_real_T *y,
                emxArray_real_T *z)
 {
-  int32_T i20;
+  int32_T i25;
   int32_T loop_ub;
-  i20 = z->size[0];
+  i25 = z->size[0];
   z->size[0] = y->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)z, i20, (int32_T)sizeof(real_T),
-                    &s_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)z, i25, (int32_T)sizeof(real_T),
+                    &j_emlrtRTEI);
   loop_ub = y->size[0];
-  for (i20 = 0; i20 < loop_ub; i20++) {
-    z->data[i20] = x / y->data[i20];
+  for (i25 = 0; i25 < loop_ub; i25++) {
+    z->data[i25] = x / y->data[i25];
   }
 }
 
 /*
  *
  */
-void e_rdivide(const emlrtStack *sp, const emxArray_real_T *x, const
-               emxArray_real_T *y, emxArray_real_T *z)
+void rdivide(const emlrtStack *sp, const emxArray_real_T *x, real_T y,
+             emxArray_real_T *z)
 {
-  uint32_T varargin_1[2];
-  uint32_T varargin_2[2];
-  boolean_T p;
-  boolean_T b_p;
-  int32_T k;
-  boolean_T exitg1;
+  int32_T i3;
   int32_T loop_ub;
-  varargin_1[0] = (uint32_T)x->size[0];
-  varargin_1[1] = 1U;
-  varargin_2[0] = (uint32_T)y->size[0];
-  varargin_2[1] = 1U;
-  p = false;
-  b_p = true;
-  k = 0;
-  exitg1 = false;
-  while ((!exitg1) && (k < 2)) {
-    if (!((int32_T)varargin_1[k] == (int32_T)varargin_2[k])) {
-      b_p = false;
-      exitg1 = true;
-    } else {
-      k++;
-    }
-  }
-
-  if (!b_p) {
-  } else {
-    p = true;
-  }
-
-  if (p) {
-  } else {
-    emlrtErrorWithMessageIdR2012b(sp, &te_emlrtRTEI, "MATLAB:dimagree", 0);
-  }
-
-  k = z->size[0];
+  i3 = z->size[0];
   z->size[0] = x->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)z, k, (int32_T)sizeof(real_T),
-                    &s_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)z, i3, (int32_T)sizeof(real_T),
+                    &j_emlrtRTEI);
   loop_ub = x->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    z->data[k] = x->data[k] / y->data[k];
-  }
-}
-
-/*
- *
- */
-void rdivide(const real_T x[75], const real_T y[75], real_T z[75])
-{
-  int32_T i;
-  for (i = 0; i < 75; i++) {
-    z[i] = x[i] / y[i];
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    z->data[i3] = x->data[i3] / y;
   }
 }
 

@@ -25,7 +25,7 @@
 /* Function Declarations */
 extern void b_filter(const emlrtStack *sp, const emxArray_real_T *x,
                      emxArray_real_T *y);
-extern void filter(const emlrtStack *sp, const real_T b[151], const
+extern void filter(const emlrtStack *sp, const emxArray_real_T *b, const
                    emxArray_real_T *x, emxArray_real_T *y);
 
 #endif

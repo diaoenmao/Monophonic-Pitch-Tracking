@@ -8,9 +8,14 @@ libiomp5md.lib
 /export:emlrtMexFcnProperties
 /export:yaapt
 /export:asr_s32
+/export:b_emlrt_marshallIn
+/export:b_sprintf
+/export:div_s32_floor
 /export:emlrtGetRootTLSGlobal
 /export:emlrtLockerFunction
+/export:emlrt_marshallIn
 /export:emlrt_marshallOut
+/export:i_emlrt_marshallIn
 /export:n_error
 /export:emxEnsureCapacity
 /export:emxFreeStruct_struct_T
@@ -23,6 +28,7 @@ libiomp5md.lib
 /export:emxInit_boolean_T
 /export:emxInit_boolean_T1
 /export:emxInit_creal_T
+/export:emxInit_creal_T1
 /export:emxInit_int32_T
 /export:emxInit_int32_T1
 /export:emxInit_ptrdiff_t

@@ -2,7 +2,7 @@
  * File: filter.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -66,24 +66,33 @@ void b_filter(const emxArray_real_T *x, emxArray_real_T *y)
 }
 
 /*
- * Arguments    : const double b[151]
+ * Arguments    : const emxArray_real_T *b
  *                const emxArray_real_T *x
  *                emxArray_real_T *y
  * Return Type  : void
  */
-void filter(const double b[151], const emxArray_real_T *x, emxArray_real_T *y)
+void filter(const emxArray_real_T *b, const emxArray_real_T *x, emxArray_real_T *
+            y)
 {
+  int nb;
+  int ndbuffer;
   int j;
   int nx;
   int k;
-  double dbuffer[151];
-  double b_dbuffer;
+  emxArray_real_T *dbuffer;
+  nb = b->size[1];
+  if (1 >= b->size[1]) {
+    ndbuffer = 0;
+  } else {
+    ndbuffer = b->size[1] - 1;
+  }
+
   j = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = x->size[1];
   emxEnsureCapacity((emxArray__common *)y, j, (int)sizeof(double));
   nx = x->size[1];
-  if (x->size[1] >= 302) {
+  if (x->size[1] >= (b->size[1] << 1)) {
     j = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity((emxArray__common *)y, j, (int)sizeof(double));
@@ -92,26 +101,34 @@ void filter(const double b[151], const emxArray_real_T *x, emxArray_real_T *y)
       y->data[y->size[0] * j] = 0.0;
     }
 
-    for (k = 0; k < 151; k++) {
-      for (j = k; j + 1 <= nx; j++) {
-        y->data[j] += b[k] * x->data[j - k];
+    for (k = 1; k <= nb; k++) {
+      for (j = k; j <= nx; j++) {
+        y->data[j - 1] += b->data[k - 1] * x->data[j - k];
       }
     }
   } else {
-    memset(&dbuffer[1], 0, 150U * sizeof(double));
-    for (j = 0; j + 1 <= nx; j++) {
-      for (k = 0; k < 150; k++) {
-        dbuffer[k] = dbuffer[k + 1];
-      }
-
-      dbuffer[150] = 0.0;
-      for (k = 0; k < 151; k++) {
-        b_dbuffer = dbuffer[k] + x->data[j] * b[k];
-        dbuffer[k] = b_dbuffer;
-      }
-
-      y->data[j] = dbuffer[0];
+    emxInit_real_T1(&dbuffer, 1);
+    j = dbuffer->size[0];
+    dbuffer->size[0] = ndbuffer + 1;
+    emxEnsureCapacity((emxArray__common *)dbuffer, j, (int)sizeof(double));
+    for (k = 1; k <= ndbuffer; k++) {
+      dbuffer->data[k] = 0.0;
     }
+
+    for (j = 0; j + 1 <= nx; j++) {
+      for (k = 1; k <= ndbuffer; k++) {
+        dbuffer->data[k - 1] = dbuffer->data[k];
+      }
+
+      dbuffer->data[ndbuffer] = 0.0;
+      for (k = 0; k + 1 <= nb; k++) {
+        dbuffer->data[k] += x->data[j] * b->data[k];
+      }
+
+      y->data[j] = dbuffer->data[0];
+    }
+
+    emxFree_real_T(&dbuffer);
   }
 }
 

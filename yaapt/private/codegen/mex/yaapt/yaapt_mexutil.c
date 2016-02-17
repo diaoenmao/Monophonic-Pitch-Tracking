@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_mexutil.h"
+#include "tm_trk.h"
 #include "yaapt_data.h"
 #include "lapacke.h"
 
@@ -25,6 +26,72 @@ int32_T asr_s32(int32_T u, uint32_T n)
   return y;
 }
 
+void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
+  emlrtMsgIdentifier *parentId, char_T y[14])
+{
+  i_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
+  emlrtDestroyArray(&u);
+}
+
+const mxArray *b_sprintf(const emlrtStack *sp, const mxArray *b, const mxArray
+  *c, emlrtMCInfo *location)
+{
+  const mxArray *pArrays[2];
+  const mxArray *m18;
+  pArrays[0] = b;
+  pArrays[1] = c;
+  return emlrtCallMATLABR2012b(sp, 1, &m18, 2, pArrays, "sprintf", true,
+    location);
+}
+
+int32_T div_s32_floor(const emlrtStack *sp, int32_T numerator, int32_T
+                      denominator)
+{
+  int32_T quotient;
+  uint32_T absNumerator;
+  uint32_T absDenominator;
+  boolean_T quotientNeedsNegation;
+  uint32_T tempAbsQuotient;
+  if (denominator == 0) {
+    if (numerator >= 0) {
+      quotient = MAX_int32_T;
+    } else {
+      quotient = MIN_int32_T;
+    }
+
+    emlrtDivisionByZeroErrorR2012b(NULL, sp);
+  } else {
+    if (numerator >= 0) {
+      absNumerator = (uint32_T)numerator;
+    } else {
+      absNumerator = (uint32_T)-numerator;
+    }
+
+    if (denominator >= 0) {
+      absDenominator = (uint32_T)denominator;
+    } else {
+      absDenominator = (uint32_T)-denominator;
+    }
+
+    quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+    tempAbsQuotient = absNumerator / absDenominator;
+    if (quotientNeedsNegation) {
+      absNumerator %= absDenominator;
+      if (absNumerator > 0U) {
+        tempAbsQuotient++;
+      }
+    }
+
+    if (quotientNeedsNegation) {
+      quotient = -(int32_T)tempAbsQuotient;
+    } else {
+      quotient = (int32_T)tempAbsQuotient;
+    }
+  }
+
+  return quotient;
+}
+
 emlrtCTX emlrtGetRootTLSGlobal(void)
 {
   return emlrtRootTLSGlobal;
@@ -38,14 +105,35 @@ void emlrtLockerFunction(EmlrtLockeeFunction aLockee, const emlrtConstCTX aTLS,
   omp_unset_lock(&emlrtLockGlobal);
 }
 
+void emlrt_marshallIn(const emlrtStack *sp, const mxArray *c_sprintf, const
+                      char_T *identifier, char_T y[14])
+{
+  emlrtMsgIdentifier thisId;
+  thisId.fIdentifier = identifier;
+  thisId.fParent = NULL;
+  thisId.bParentIsCell = false;
+  b_emlrt_marshallIn(sp, emlrtAlias(c_sprintf), &thisId, y);
+  emlrtDestroyArray(&c_sprintf);
+}
+
 const mxArray *emlrt_marshallOut(const real_T u)
 {
   const mxArray *y;
-  const mxArray *m10;
+  const mxArray *m11;
   y = NULL;
-  m10 = emlrtCreateDoubleScalar(u);
-  emlrtAssign(&y, m10);
+  m11 = emlrtCreateDoubleScalar(u);
+  emlrtAssign(&y, m11);
   return y;
+}
+
+void i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
+  emlrtMsgIdentifier *msgId, char_T ret[14])
+{
+  static const int32_T dims[2] = { 1, 14 };
+
+  emlrtCheckBuiltInR2012b(sp, msgId, src, "char", false, 2U, dims);
+  emlrtImportCharArrayR2015b(sp, src, ret, 14);
+  emlrtDestroyArray(&src);
 }
 
 void n_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)

@@ -2,7 +2,7 @@
  * File: Mymedfilt1.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __MYMEDFILT1_H__
@@ -20,9 +20,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m);
-extern void b_Mymedfilt1(const emxArray_real_T *s, emxArray_real_T *m);
-extern void c_Mymedfilt1(emxArray_real_T *s, emxArray_real_T *m);
+extern void Mymedfilt1(emxArray_real_T *s, double w, emxArray_real_T *m);
+extern void b_Mymedfilt1(const emxArray_real_T *s, double w, emxArray_real_T *m);
 
 #endif
 

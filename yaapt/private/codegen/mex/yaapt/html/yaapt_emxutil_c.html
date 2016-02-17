@@ -64,7 +64,7 @@
 <a name="52"><font color="#888888 "><i>   52   </i></font></a>  <b>}</b>
 <a name="53"><font color="#888888 "><i>   53   </i></font></a><b>}</b>
 <a name="54"><font color="#888888 "><i>   54   </i></font></a>
-<a name="55"><font color="#888888 "><i>   55   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxFreeStruct_struct_T">emxFreeStruct_struct_T</a>(<a href="yaapt_types_h.html#type_struct_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_struct_T');" target="_self"><font color="#1122aa">struct_T</font></a> *pStruct)
+<a name="55"><font color="#888888 "><i>   55   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxFreeStruct_struct_T">emxFreeStruct_struct_T</a>(<a href="yaapt_types_h.html#type_b_struct_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_b_struct_T');" target="_self"><font color="#1122aa">b_struct_T</font></a> *pStruct)
 <a name="56"><font color="#888888 "><i>   56   </i></font></a><b>{</b>
 <a name="57"><font color="#888888 "><i>   57   </i></font></a>  <a href="#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;pStruct-&gt;breaks);
 <a name="58"><font color="#888888 "><i>   58   </i></font></a>  <a href="#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;pStruct-&gt;coefs);
@@ -137,7 +137,7 @@
 <a name="125"><font color="#888888 "><i>  125   </i></font></a>  <b>}</b>
 <a name="126"><font color="#888888 "><i>  126   </i></font></a><b>}</b>
 <a name="127"><font color="#888888 "><i>  127   </i></font></a>
-<a name="128"><font color="#888888 "><i>  128   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInitStruct_struct_T">emxInitStruct_struct_T</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_struct_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_struct_T');" target="_self"><font color="#1122aa">struct_T</font></a> *pStruct, <font color="#112266"><b>const</b></font>
+<a name="128"><font color="#888888 "><i>  128   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInitStruct_struct_T">emxInitStruct_struct_T</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_b_struct_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_b_struct_T');" target="_self"><font color="#1122aa">b_struct_T</font></a> *pStruct, <font color="#112266"><b>const</b></font>
 <a name="129"><font color="#888888 "><i>  129   </i></font></a>  emlrtRTEInfo *srcLocation, boolean_T doPush)
 <a name="130"><font color="#888888 "><i>  130   </i></font></a><b>{</b>
 <a name="131"><font color="#888888 "><i>  131   </i></font></a>  <a href="#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(sp, &amp;pStruct-&gt;breaks, 2, srcLocation, doPush);
@@ -238,24 +238,24 @@
 <a name="226"><font color="#888888 "><i>  226   </i></font></a>  <b>}</b>
 <a name="227"><font color="#888888 "><i>  227   </i></font></a><b>}</b>
 <a name="228"><font color="#888888 "><i>  228   </i></font></a>
-<a name="229"><font color="#888888 "><i>  229   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_int32_T">emxInit_int32_T</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> **pEmxArray, int32_T
-<a name="230"><font color="#888888 "><i>  230   </i></font></a>                     numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
-<a name="231"><font color="#888888 "><i>  231   </i></font></a>                     doPush)
+<a name="229"><font color="#888888 "><i>  229   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_creal_T1">emxInit_creal_T1</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_creal_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_creal_T');" target="_self"><font color="#1122aa">emxArray_creal_T</font></a> **pEmxArray,
+<a name="230"><font color="#888888 "><i>  230   </i></font></a>                      int32_T numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation,
+<a name="231"><font color="#888888 "><i>  231   </i></font></a>                      boolean_T doPush)
 <a name="232"><font color="#888888 "><i>  232   </i></font></a><b>{</b>
-<a name="233"><font color="#888888 "><i>  233   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *emxArray;
+<a name="233"><font color="#888888 "><i>  233   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_creal_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_creal_T');" target="_self"><font color="#1122aa">emxArray_creal_T</font></a> *emxArray;
 <a name="234"><font color="#888888 "><i>  234   </i></font></a>  int32_T i;
-<a name="235"><font color="#888888 "><i>  235   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a>));
+<a name="235"><font color="#888888 "><i>  235   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_creal_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_creal_T');" target="_self"><font color="#1122aa">emxArray_creal_T</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_creal_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_creal_T');" target="_self"><font color="#1122aa">emxArray_creal_T</font></a>));
 <a name="236"><font color="#888888 "><i>  236   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)*pEmxArray == NULL) <b>{</b>
 <a name="237"><font color="#888888 "><i>  237   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
 <a name="238"><font color="#888888 "><i>  238   </i></font></a>  <b>}</b>
 <a name="239"><font color="#888888 "><i>  239   </i></font></a>
 <a name="240"><font color="#888888 "><i>  240   </i></font></a>  <font color="#112266"><b>if</b></font> (doPush) <b>{</b>
 <a name="241"><font color="#888888 "><i>  241   </i></font></a>    emlrtPushHeapReferenceStackR2012b(sp, (<font color="#112266"><b>void</b></font> *)pEmxArray, (<font color="#112266"><b>void</b></font> (*)(<font color="#112266"><b>void</b></font> *))
-<a name="242"><font color="#888888 "><i>  242   </i></font></a>      <a href="#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>);
+<a name="242"><font color="#888888 "><i>  242   </i></font></a>      <a href="#fcn_emxFree_creal_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_creal_T');" target="_self"><font color="#1122aa">emxFree_creal_T</font></a>);
 <a name="243"><font color="#888888 "><i>  243   </i></font></a>  <b>}</b>
 <a name="244"><font color="#888888 "><i>  244   </i></font></a>
 <a name="245"><font color="#888888 "><i>  245   </i></font></a>  emxArray = *pEmxArray;
-<a name="246"><font color="#888888 "><i>  246   </i></font></a>  emxArray-&gt;data = (int32_T *)NULL;
+<a name="246"><font color="#888888 "><i>  246   </i></font></a>  emxArray-&gt;data = (creal_T *)NULL;
 <a name="247"><font color="#888888 "><i>  247   </i></font></a>  emxArray-&gt;numDimensions = numDimensions;
 <a name="248"><font color="#888888 "><i>  248   </i></font></a>  emxArray-&gt;size = (int32_T *)emlrtMallocMex((uint32_T)(<font color="#112266"><b>sizeof</b></font>(int32_T)
 <a name="249"><font color="#888888 "><i>  249   </i></font></a>    * numDimensions));
@@ -270,9 +270,9 @@
 <a name="258"><font color="#888888 "><i>  258   </i></font></a>  <b>}</b>
 <a name="259"><font color="#888888 "><i>  259   </i></font></a><b>}</b>
 <a name="260"><font color="#888888 "><i>  260   </i></font></a>
-<a name="261"><font color="#888888 "><i>  261   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_int32_T1">emxInit_int32_T1</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> **pEmxArray,
-<a name="262"><font color="#888888 "><i>  262   </i></font></a>                      int32_T numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation,
-<a name="263"><font color="#888888 "><i>  263   </i></font></a>                      boolean_T doPush)
+<a name="261"><font color="#888888 "><i>  261   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_int32_T">emxInit_int32_T</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> **pEmxArray, int32_T
+<a name="262"><font color="#888888 "><i>  262   </i></font></a>                     numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
+<a name="263"><font color="#888888 "><i>  263   </i></font></a>                     doPush)
 <a name="264"><font color="#888888 "><i>  264   </i></font></a><b>{</b>
 <a name="265"><font color="#888888 "><i>  265   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *emxArray;
 <a name="266"><font color="#888888 "><i>  266   </i></font></a>  int32_T i;
@@ -302,55 +302,55 @@
 <a name="290"><font color="#888888 "><i>  290   </i></font></a>  <b>}</b>
 <a name="291"><font color="#888888 "><i>  291   </i></font></a><b>}</b>
 <a name="292"><font color="#888888 "><i>  292   </i></font></a>
-<a name="293"><font color="#888888 "><i>  293   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_ptrdiff_t">emxInit_ptrdiff_t</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a> **pEmxArray,
-<a name="294"><font color="#888888 "><i>  294   </i></font></a>  int32_T numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T doPush)
-<a name="295"><font color="#888888 "><i>  295   </i></font></a><b>{</b>
-<a name="296"><font color="#888888 "><i>  296   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a> *emxArray;
-<a name="297"><font color="#888888 "><i>  297   </i></font></a>  int32_T i;
-<a name="298"><font color="#888888 "><i>  298   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a>));
-<a name="299"><font color="#888888 "><i>  299   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)*pEmxArray == NULL) <b>{</b>
-<a name="300"><font color="#888888 "><i>  300   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-<a name="301"><font color="#888888 "><i>  301   </i></font></a>  <b>}</b>
-<a name="302"><font color="#888888 "><i>  302   </i></font></a>
-<a name="303"><font color="#888888 "><i>  303   </i></font></a>  <font color="#112266"><b>if</b></font> (doPush) <b>{</b>
-<a name="304"><font color="#888888 "><i>  304   </i></font></a>    emlrtPushHeapReferenceStackR2012b(sp, (<font color="#112266"><b>void</b></font> *)pEmxArray, (<font color="#112266"><b>void</b></font> (*)(<font color="#112266"><b>void</b></font> *))
-<a name="305"><font color="#888888 "><i>  305   </i></font></a>      <a href="#fcn_emxFree_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_ptrdiff_t');" target="_self"><font color="#1122aa">emxFree_ptrdiff_t</font></a>);
-<a name="306"><font color="#888888 "><i>  306   </i></font></a>  <b>}</b>
-<a name="307"><font color="#888888 "><i>  307   </i></font></a>
-<a name="308"><font color="#888888 "><i>  308   </i></font></a>  emxArray = *pEmxArray;
-<a name="309"><font color="#888888 "><i>  309   </i></font></a>  emxArray-&gt;data = (ptrdiff_t *)NULL;
-<a name="310"><font color="#888888 "><i>  310   </i></font></a>  emxArray-&gt;numDimensions = numDimensions;
-<a name="311"><font color="#888888 "><i>  311   </i></font></a>  emxArray-&gt;size = (int32_T *)emlrtMallocMex((uint32_T)(<font color="#112266"><b>sizeof</b></font>(int32_T)
-<a name="312"><font color="#888888 "><i>  312   </i></font></a>    * numDimensions));
-<a name="313"><font color="#888888 "><i>  313   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)emxArray-&gt;size == NULL) <b>{</b>
-<a name="314"><font color="#888888 "><i>  314   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-<a name="315"><font color="#888888 "><i>  315   </i></font></a>  <b>}</b>
-<a name="316"><font color="#888888 "><i>  316   </i></font></a>
-<a name="317"><font color="#888888 "><i>  317   </i></font></a>  emxArray-&gt;allocatedSize = 0;
-<a name="318"><font color="#888888 "><i>  318   </i></font></a>  emxArray-&gt;canFreeData = true;
-<a name="319"><font color="#888888 "><i>  319   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; numDimensions; i++) <b>{</b>
-<a name="320"><font color="#888888 "><i>  320   </i></font></a>    emxArray-&gt;size[i] = 0;
-<a name="321"><font color="#888888 "><i>  321   </i></font></a>  <b>}</b>
-<a name="322"><font color="#888888 "><i>  322   </i></font></a><b>}</b>
-<a name="323"><font color="#888888 "><i>  323   </i></font></a>
-<a name="324"><font color="#888888 "><i>  324   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_real_T">emxInit_real_T</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> **pEmxArray, int32_T
-<a name="325"><font color="#888888 "><i>  325   </i></font></a>                    numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
-<a name="326"><font color="#888888 "><i>  326   </i></font></a>                    doPush)
+<a name="293"><font color="#888888 "><i>  293   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_int32_T1">emxInit_int32_T1</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> **pEmxArray,
+<a name="294"><font color="#888888 "><i>  294   </i></font></a>                      int32_T numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation,
+<a name="295"><font color="#888888 "><i>  295   </i></font></a>                      boolean_T doPush)
+<a name="296"><font color="#888888 "><i>  296   </i></font></a><b>{</b>
+<a name="297"><font color="#888888 "><i>  297   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *emxArray;
+<a name="298"><font color="#888888 "><i>  298   </i></font></a>  int32_T i;
+<a name="299"><font color="#888888 "><i>  299   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a>));
+<a name="300"><font color="#888888 "><i>  300   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)*pEmxArray == NULL) <b>{</b>
+<a name="301"><font color="#888888 "><i>  301   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+<a name="302"><font color="#888888 "><i>  302   </i></font></a>  <b>}</b>
+<a name="303"><font color="#888888 "><i>  303   </i></font></a>
+<a name="304"><font color="#888888 "><i>  304   </i></font></a>  <font color="#112266"><b>if</b></font> (doPush) <b>{</b>
+<a name="305"><font color="#888888 "><i>  305   </i></font></a>    emlrtPushHeapReferenceStackR2012b(sp, (<font color="#112266"><b>void</b></font> *)pEmxArray, (<font color="#112266"><b>void</b></font> (*)(<font color="#112266"><b>void</b></font> *))
+<a name="306"><font color="#888888 "><i>  306   </i></font></a>      <a href="#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>);
+<a name="307"><font color="#888888 "><i>  307   </i></font></a>  <b>}</b>
+<a name="308"><font color="#888888 "><i>  308   </i></font></a>
+<a name="309"><font color="#888888 "><i>  309   </i></font></a>  emxArray = *pEmxArray;
+<a name="310"><font color="#888888 "><i>  310   </i></font></a>  emxArray-&gt;data = (int32_T *)NULL;
+<a name="311"><font color="#888888 "><i>  311   </i></font></a>  emxArray-&gt;numDimensions = numDimensions;
+<a name="312"><font color="#888888 "><i>  312   </i></font></a>  emxArray-&gt;size = (int32_T *)emlrtMallocMex((uint32_T)(<font color="#112266"><b>sizeof</b></font>(int32_T)
+<a name="313"><font color="#888888 "><i>  313   </i></font></a>    * numDimensions));
+<a name="314"><font color="#888888 "><i>  314   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)emxArray-&gt;size == NULL) <b>{</b>
+<a name="315"><font color="#888888 "><i>  315   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+<a name="316"><font color="#888888 "><i>  316   </i></font></a>  <b>}</b>
+<a name="317"><font color="#888888 "><i>  317   </i></font></a>
+<a name="318"><font color="#888888 "><i>  318   </i></font></a>  emxArray-&gt;allocatedSize = 0;
+<a name="319"><font color="#888888 "><i>  319   </i></font></a>  emxArray-&gt;canFreeData = true;
+<a name="320"><font color="#888888 "><i>  320   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; numDimensions; i++) <b>{</b>
+<a name="321"><font color="#888888 "><i>  321   </i></font></a>    emxArray-&gt;size[i] = 0;
+<a name="322"><font color="#888888 "><i>  322   </i></font></a>  <b>}</b>
+<a name="323"><font color="#888888 "><i>  323   </i></font></a><b>}</b>
+<a name="324"><font color="#888888 "><i>  324   </i></font></a>
+<a name="325"><font color="#888888 "><i>  325   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_ptrdiff_t">emxInit_ptrdiff_t</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a> **pEmxArray,
+<a name="326"><font color="#888888 "><i>  326   </i></font></a>  int32_T numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T doPush)
 <a name="327"><font color="#888888 "><i>  327   </i></font></a><b>{</b>
-<a name="328"><font color="#888888 "><i>  328   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *emxArray;
+<a name="328"><font color="#888888 "><i>  328   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a> *emxArray;
 <a name="329"><font color="#888888 "><i>  329   </i></font></a>  int32_T i;
-<a name="330"><font color="#888888 "><i>  330   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a>));
+<a name="330"><font color="#888888 "><i>  330   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_ptrdiff_t');" target="_self"><font color="#1122aa">emxArray_ptrdiff_t</font></a>));
 <a name="331"><font color="#888888 "><i>  331   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)*pEmxArray == NULL) <b>{</b>
 <a name="332"><font color="#888888 "><i>  332   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
 <a name="333"><font color="#888888 "><i>  333   </i></font></a>  <b>}</b>
 <a name="334"><font color="#888888 "><i>  334   </i></font></a>
 <a name="335"><font color="#888888 "><i>  335   </i></font></a>  <font color="#112266"><b>if</b></font> (doPush) <b>{</b>
 <a name="336"><font color="#888888 "><i>  336   </i></font></a>    emlrtPushHeapReferenceStackR2012b(sp, (<font color="#112266"><b>void</b></font> *)pEmxArray, (<font color="#112266"><b>void</b></font> (*)(<font color="#112266"><b>void</b></font> *))
-<a name="337"><font color="#888888 "><i>  337   </i></font></a>      <a href="#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>);
+<a name="337"><font color="#888888 "><i>  337   </i></font></a>      <a href="#fcn_emxFree_ptrdiff_t" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_ptrdiff_t');" target="_self"><font color="#1122aa">emxFree_ptrdiff_t</font></a>);
 <a name="338"><font color="#888888 "><i>  338   </i></font></a>  <b>}</b>
 <a name="339"><font color="#888888 "><i>  339   </i></font></a>
 <a name="340"><font color="#888888 "><i>  340   </i></font></a>  emxArray = *pEmxArray;
-<a name="341"><font color="#888888 "><i>  341   </i></font></a>  emxArray-&gt;data = (real_T *)NULL;
+<a name="341"><font color="#888888 "><i>  341   </i></font></a>  emxArray-&gt;data = (ptrdiff_t *)NULL;
 <a name="342"><font color="#888888 "><i>  342   </i></font></a>  emxArray-&gt;numDimensions = numDimensions;
 <a name="343"><font color="#888888 "><i>  343   </i></font></a>  emxArray-&gt;size = (int32_T *)emlrtMallocMex((uint32_T)(<font color="#112266"><b>sizeof</b></font>(int32_T)
 <a name="344"><font color="#888888 "><i>  344   </i></font></a>    * numDimensions));
@@ -365,9 +365,9 @@
 <a name="353"><font color="#888888 "><i>  353   </i></font></a>  <b>}</b>
 <a name="354"><font color="#888888 "><i>  354   </i></font></a><b>}</b>
 <a name="355"><font color="#888888 "><i>  355   </i></font></a>
-<a name="356"><font color="#888888 "><i>  356   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_real_T1">emxInit_real_T1</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> **pEmxArray, int32_T
-<a name="357"><font color="#888888 "><i>  357   </i></font></a>                     numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
-<a name="358"><font color="#888888 "><i>  358   </i></font></a>                     doPush)
+<a name="356"><font color="#888888 "><i>  356   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_real_T">emxInit_real_T</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> **pEmxArray, int32_T
+<a name="357"><font color="#888888 "><i>  357   </i></font></a>                    numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
+<a name="358"><font color="#888888 "><i>  358   </i></font></a>                    doPush)
 <a name="359"><font color="#888888 "><i>  359   </i></font></a><b>{</b>
 <a name="360"><font color="#888888 "><i>  360   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *emxArray;
 <a name="361"><font color="#888888 "><i>  361   </i></font></a>  int32_T i;
@@ -397,7 +397,7 @@
 <a name="385"><font color="#888888 "><i>  385   </i></font></a>  <b>}</b>
 <a name="386"><font color="#888888 "><i>  386   </i></font></a><b>}</b>
 <a name="387"><font color="#888888 "><i>  387   </i></font></a>
-<a name="388"><font color="#888888 "><i>  388   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_real_T2">emxInit_real_T2</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> **pEmxArray, int32_T
+<a name="388"><font color="#888888 "><i>  388   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_real_T1">emxInit_real_T1</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> **pEmxArray, int32_T
 <a name="389"><font color="#888888 "><i>  389   </i></font></a>                     numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
 <a name="390"><font color="#888888 "><i>  390   </i></font></a>                     doPush)
 <a name="391"><font color="#888888 "><i>  391   </i></font></a><b>{</b>
@@ -429,8 +429,40 @@
 <a name="417"><font color="#888888 "><i>  417   </i></font></a>  <b>}</b>
 <a name="418"><font color="#888888 "><i>  418   </i></font></a><b>}</b>
 <a name="419"><font color="#888888 "><i>  419   </i></font></a>
-<a name="420"><font color="#888888 "><i>  420   </i></font></a><font color="#117755"><i>/* End of code generation (yaapt_emxutil.c) */</i></font>
-<a name="421"><font color="#888888 "><i>  421   </i></font></a></pre>
+<a name="420"><font color="#888888 "><i>  420   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_emxInit_real_T2">emxInit_real_T2</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> **pEmxArray, int32_T
+<a name="421"><font color="#888888 "><i>  421   </i></font></a>                     numDimensions, <font color="#112266"><b>const</b></font> emlrtRTEInfo *srcLocation, boolean_T
+<a name="422"><font color="#888888 "><i>  422   </i></font></a>                     doPush)
+<a name="423"><font color="#888888 "><i>  423   </i></font></a><b>{</b>
+<a name="424"><font color="#888888 "><i>  424   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *emxArray;
+<a name="425"><font color="#888888 "><i>  425   </i></font></a>  int32_T i;
+<a name="426"><font color="#888888 "><i>  426   </i></font></a>  *pEmxArray = (<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *)emlrtMallocMex(<font color="#112266"><b>sizeof</b></font>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a>));
+<a name="427"><font color="#888888 "><i>  427   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)*pEmxArray == NULL) <b>{</b>
+<a name="428"><font color="#888888 "><i>  428   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+<a name="429"><font color="#888888 "><i>  429   </i></font></a>  <b>}</b>
+<a name="430"><font color="#888888 "><i>  430   </i></font></a>
+<a name="431"><font color="#888888 "><i>  431   </i></font></a>  <font color="#112266"><b>if</b></font> (doPush) <b>{</b>
+<a name="432"><font color="#888888 "><i>  432   </i></font></a>    emlrtPushHeapReferenceStackR2012b(sp, (<font color="#112266"><b>void</b></font> *)pEmxArray, (<font color="#112266"><b>void</b></font> (*)(<font color="#112266"><b>void</b></font> *))
+<a name="433"><font color="#888888 "><i>  433   </i></font></a>      <a href="#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>);
+<a name="434"><font color="#888888 "><i>  434   </i></font></a>  <b>}</b>
+<a name="435"><font color="#888888 "><i>  435   </i></font></a>
+<a name="436"><font color="#888888 "><i>  436   </i></font></a>  emxArray = *pEmxArray;
+<a name="437"><font color="#888888 "><i>  437   </i></font></a>  emxArray-&gt;data = (real_T *)NULL;
+<a name="438"><font color="#888888 "><i>  438   </i></font></a>  emxArray-&gt;numDimensions = numDimensions;
+<a name="439"><font color="#888888 "><i>  439   </i></font></a>  emxArray-&gt;size = (int32_T *)emlrtMallocMex((uint32_T)(<font color="#112266"><b>sizeof</b></font>(int32_T)
+<a name="440"><font color="#888888 "><i>  440   </i></font></a>    * numDimensions));
+<a name="441"><font color="#888888 "><i>  441   </i></font></a>  <font color="#112266"><b>if</b></font> ((<font color="#112266"><b>void</b></font> *)emxArray-&gt;size == NULL) <b>{</b>
+<a name="442"><font color="#888888 "><i>  442   </i></font></a>    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+<a name="443"><font color="#888888 "><i>  443   </i></font></a>  <b>}</b>
+<a name="444"><font color="#888888 "><i>  444   </i></font></a>
+<a name="445"><font color="#888888 "><i>  445   </i></font></a>  emxArray-&gt;allocatedSize = 0;
+<a name="446"><font color="#888888 "><i>  446   </i></font></a>  emxArray-&gt;canFreeData = true;
+<a name="447"><font color="#888888 "><i>  447   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; numDimensions; i++) <b>{</b>
+<a name="448"><font color="#888888 "><i>  448   </i></font></a>    emxArray-&gt;size[i] = 0;
+<a name="449"><font color="#888888 "><i>  449   </i></font></a>  <b>}</b>
+<a name="450"><font color="#888888 "><i>  450   </i></font></a><b>}</b>
+<a name="451"><font color="#888888 "><i>  451   </i></font></a>
+<a name="452"><font color="#888888 "><i>  452   </i></font></a><font color="#117755"><i>/* End of code generation (yaapt_emxutil.c) */</i></font>
+<a name="453"><font color="#888888 "><i>  453   </i></font></a></pre>
 </td></tr></table>
 </p>
 </body>

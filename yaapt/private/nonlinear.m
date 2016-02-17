@@ -82,5 +82,6 @@ DataD = zeros(1, LenData_dec);
 DataD = tempData(1:dec_factor:lenDataA);
 
 newFs = Fs/dec_factor;
+end
 
 

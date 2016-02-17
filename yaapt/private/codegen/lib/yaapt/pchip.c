@@ -2,7 +2,7 @@
  * File: pchip.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -83,7 +83,7 @@ void pchip(const emxArray_real_T *x, const emxArray_real_T *y, emxArray_real_T
 {
   emxArray_real_T *h;
   int nx;
-  int i17;
+  int i26;
   int k;
   int szdel[2];
   emxArray_real_T *del;
@@ -93,33 +93,33 @@ void pchip(const emxArray_real_T *x, const emxArray_real_T *y, emxArray_real_T
   double w1;
   emxInit_real_T(&h, 2);
   nx = x->size[1] - 1;
-  i17 = h->size[0] * h->size[1];
+  i26 = h->size[0] * h->size[1];
   h->size[0] = 1;
   h->size[1] = x->size[1] - 1;
-  emxEnsureCapacity((emxArray__common *)h, i17, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)h, i26, (int)sizeof(double));
   for (k = 1; k <= nx; k++) {
     h->data[k - 1] = x->data[k] - x->data[k - 1];
   }
 
-  for (i17 = 0; i17 < 2; i17++) {
-    szdel[i17] = y->size[i17];
+  for (i26 = 0; i26 < 2; i26++) {
+    szdel[i26] = y->size[i26];
   }
 
   emxInit_real_T(&del, 2);
   szdel[1]--;
-  i17 = del->size[0] * del->size[1];
+  i26 = del->size[0] * del->size[1];
   del->size[0] = 1;
   del->size[1] = szdel[1];
-  emxEnsureCapacity((emxArray__common *)del, i17, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)del, i26, (int)sizeof(double));
   for (k = 0; k + 1 <= nx; k++) {
     del->data[k] = (y->data[k + 1] - y->data[k]) / h->data[k];
   }
 
   emxInit_real_T(&slopes, 2);
-  i17 = slopes->size[0] * slopes->size[1];
+  i26 = slopes->size[0] * slopes->size[1];
   slopes->size[0] = 1;
   slopes->size[1] = y->size[1];
-  emxEnsureCapacity((emxArray__common *)slopes, i17, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)slopes, i26, (int)sizeof(double));
   if (x->size[1] == 2) {
     for (k = 0; k < 2; k++) {
       slopes->data[k] = del->data[0];
@@ -162,19 +162,19 @@ void pchip(const emxArray_real_T *x, const emxArray_real_T *y, emxArray_real_T
   }
 
   k = x->size[1];
-  i17 = v_breaks->size[0] * v_breaks->size[1];
+  i26 = v_breaks->size[0] * v_breaks->size[1];
   v_breaks->size[0] = 1;
   v_breaks->size[1] = k;
-  emxEnsureCapacity((emxArray__common *)v_breaks, i17, (int)sizeof(double));
-  for (i17 = 0; i17 < k; i17++) {
-    v_breaks->data[v_breaks->size[0] * i17] = x->data[i17];
+  emxEnsureCapacity((emxArray__common *)v_breaks, i26, (int)sizeof(double));
+  for (i26 = 0; i26 < k; i26++) {
+    v_breaks->data[v_breaks->size[0] * i26] = x->data[i26];
   }
 
   nx = slopes->size[1] - 1;
-  i17 = v_coefs->size[0] * v_coefs->size[1];
+  i26 = v_coefs->size[0] * v_coefs->size[1];
   v_coefs->size[0] = slopes->size[1] - 1;
   v_coefs->size[1] = 4;
-  emxEnsureCapacity((emxArray__common *)v_coefs, i17, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)v_coefs, i26, (int)sizeof(double));
   for (k = 0; k + 1 < x->size[1]; k++) {
     hs = (del->data[k] - slopes->data[k]) / h->data[k];
     hs3 = (slopes->data[k + 1] - del->data[k]) / h->data[k];

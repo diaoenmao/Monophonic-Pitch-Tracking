@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_sqrt(const emlrtStack *sp, emxArray_real_T *x);
-extern void c_sqrt(const emlrtStack *sp, real_T *x);
+extern void b_sqrt(const emlrtStack *sp, real_T *x);
+extern void c_sqrt(const emlrtStack *sp, emxArray_real_T *x);
 
 #endif
 

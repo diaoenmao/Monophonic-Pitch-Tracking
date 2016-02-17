@@ -12,7 +12,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo yd_emlrtRTEI = { 87, 9, "eml_int_forloop_overflow_check",
+static emlrtRTEInfo cf_emlrtRTEI = { 87, 9, "eml_int_forloop_overflow_check",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_int_forloop_overflow_check.m"
 };
 
@@ -27,7 +27,7 @@ void check_forloop_overflow_error(const emlrtStack *sp, boolean_T overflow)
 
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &yd_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &cf_emlrtRTEI,
       "Coder:toolbox:int_forloop_overflow", 3, 4, 5, cv0);
   }
 }

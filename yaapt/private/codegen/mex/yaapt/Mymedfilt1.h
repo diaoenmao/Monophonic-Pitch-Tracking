@@ -23,10 +23,10 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void Mymedfilt1(const emlrtStack *sp, emxArray_real_T *s, emxArray_real_T
-  *m);
-extern void b_Mymedfilt1(const emlrtStack *sp, const emxArray_real_T *s,
+extern void Mymedfilt1(const emlrtStack *sp, emxArray_real_T *s, real_T w,
   emxArray_real_T *m);
+extern void b_Mymedfilt1(const emlrtStack *sp, const emxArray_real_T *s, real_T
+  w, emxArray_real_T *m);
 
 #endif
 

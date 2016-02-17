@@ -2,7 +2,7 @@
  * File: prod.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -30,7 +30,7 @@ void prod(const emxArray_real_T *x, emxArray_real_T *y)
   y->size[0] = 1;
   y->size[1] = x->size[1];
   emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
-  if (x->size[1] == 0) {
+  if ((x->size[0] == 0) || (x->size[1] == 0)) {
     ixstart = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
@@ -45,7 +45,7 @@ void prod(const emxArray_real_T *x, emxArray_real_T *y)
       ixstart = ix + 1;
       ix++;
       s = x->data[ixstart];
-      for (k = 0; k < 3; k++) {
+      for (k = 2; k <= x->size[0]; k++) {
         ix++;
         s *= x->data[ix];
       }

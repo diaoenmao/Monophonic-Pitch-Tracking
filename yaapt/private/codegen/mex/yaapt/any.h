@@ -23,9 +23,11 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern boolean_T any(const boolean_T x[5]);
-extern boolean_T b_any(const emlrtStack *sp, const emxArray_real_T *x);
-extern boolean_T c_any(const emlrtStack *sp, const emxArray_boolean_T *x);
+extern boolean_T any(const boolean_T x[2]);
+extern boolean_T b_any(boolean_T x);
+extern boolean_T c_any(const boolean_T x[5]);
+extern boolean_T d_any(const emlrtStack *sp, const emxArray_real_T *x);
+extern boolean_T e_any(const emlrtStack *sp, const emxArray_boolean_T *x);
 
 #endif
 

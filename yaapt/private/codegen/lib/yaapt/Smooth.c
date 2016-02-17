@@ -2,7 +2,7 @@
  * File: Smooth.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -30,7 +30,7 @@ void Smooth(emxArray_real_T *arr)
   double chunk1_value;
   double chunk2_value;
   double chunk3_value;
-  int i26;
+  int i34;
   int pointer;
   int i;
   emxArray_real_T *b_chunk3;
@@ -49,28 +49,28 @@ void Smooth(emxArray_real_T *arr)
   chunk1_value = 0.0;
   chunk2_value = 0.0;
   chunk3_value = 0.0;
-  i26 = chunk1->size[0] * chunk1->size[1];
+  i34 = chunk1->size[0] * chunk1->size[1];
   chunk1->size[0] = 0;
   chunk1->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk1, i26, (int)sizeof(double));
-  i26 = chunk2->size[0] * chunk2->size[1];
+  emxEnsureCapacity((emxArray__common *)chunk1, i34, (int)sizeof(double));
+  i34 = chunk2->size[0] * chunk2->size[1];
   chunk2->size[0] = 0;
   chunk2->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk2, i26, (int)sizeof(double));
-  i26 = chunk3->size[0] * chunk3->size[1];
+  emxEnsureCapacity((emxArray__common *)chunk2, i34, (int)sizeof(double));
+  i34 = chunk3->size[0] * chunk3->size[1];
   chunk3->size[0] = 0;
   chunk3->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk3, i26, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)chunk3, i34, (int)sizeof(double));
   pointer = 0;
 
   /*  10 frames */
-  /*  1 percent */
-  i26 = arr->size[1];
+  /*  percent_threshold = 0.01; % 1 percent */
+  i34 = arr->size[1];
   i = 0;
   emxInit_real_T(&b_chunk3, 2);
   emxInit_real_T(&b_chunk2, 2);
   emxInit_real_T(&b_chunk1, 2);
-  while (i <= i26 - 1) {
+  while (i <= i34 - 1) {
     if (pointer == 0) {
       chunk1_value = arr->data[i];
       mtmp = chunk1->size[0] * chunk1->size[1];

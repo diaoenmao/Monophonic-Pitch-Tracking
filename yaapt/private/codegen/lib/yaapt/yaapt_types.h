@@ -2,7 +2,7 @@
  * File: yaapt_types.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __YAAPT_TYPES_H__
@@ -12,6 +12,37 @@
 #include "rtwtypes.h"
 
 /* Type Definitions */
+#ifndef struct_emxArray_real_T
+#define struct_emxArray_real_T
+
+struct emxArray_real_T
+{
+  double *data;
+  int *size;
+  int allocatedSize;
+  int numDimensions;
+  boolean_T canFreeData;
+};
+
+#endif                                 /*struct_emxArray_real_T*/
+
+#ifndef typedef_emxArray_real_T
+#define typedef_emxArray_real_T
+
+typedef struct emxArray_real_T emxArray_real_T;
+
+#endif                                 /*typedef_emxArray_real_T*/
+
+#ifndef typedef_b_struct_T
+#define typedef_b_struct_T
+
+typedef struct {
+  emxArray_real_T *breaks;
+  emxArray_real_T *coefs;
+} b_struct_T;
+
+#endif                                 /*typedef_b_struct_T*/
+
 #ifndef struct_emxArray__common
 #define struct_emxArray__common
 
@@ -96,33 +127,43 @@ typedef struct emxArray_int32_T emxArray_int32_T;
 
 #endif                                 /*typedef_emxArray_int32_T*/
 
-#ifndef struct_emxArray_real_T
-#define struct_emxArray_real_T
-
-struct emxArray_real_T
-{
-  double *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /*struct_emxArray_real_T*/
-
-#ifndef typedef_emxArray_real_T
-#define typedef_emxArray_real_T
-
-typedef struct emxArray_real_T emxArray_real_T;
-
-#endif                                 /*typedef_emxArray_real_T*/
-
 #ifndef typedef_struct_T
 #define typedef_struct_T
 
 typedef struct {
-  emxArray_real_T *breaks;
-  emxArray_real_T *coefs;
+  double frame_length;
+  double frame_space;
+  double f0_min;
+  double f0_max;
+  double fft_length;
+  double bp_forder;
+  double bp_low;
+  double bp_high;
+  double nlfer_thresh1;
+  double nlfer_thresh2;
+  double shc_numharms;
+  double shc_window;
+  double shc_maxpeaks;
+  double shc_pwidth;
+  double shc_thresh1;
+  double shc_thresh2;
+  double f0_double;
+  double f0_half;
+  double dp5_k1;
+  double dec_factor;
+  double nccf_thresh1;
+  double nccf_thresh2;
+  double nccf_maxcands;
+  double nccf_pwidth;
+  double merit_boost;
+  double merit_pivot;
+  double merit_extra;
+  double median_value;
+  double dp_w1;
+  double dp_w2;
+  double dp_w3;
+  double dp_w4;
+  double end;
 } struct_T;
 
 #endif                                 /*typedef_struct_T*/

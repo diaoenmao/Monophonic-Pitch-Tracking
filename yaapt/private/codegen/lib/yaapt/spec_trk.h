@@ -2,7 +2,7 @@
  * File: spec_trk.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __SPEC_TRK_H__
@@ -21,9 +21,9 @@
 
 /* Function Declarations */
 extern void spec_trk(emxArray_real_T *Data, double Fs, const emxArray_boolean_T *
-                     VUVEnergy, emxArray_real_T *SPitch, emxArray_real_T
-                     *VUVSPitch, double pAvg_data[], int pAvg_size[1], double
-                     pStd_data[], int pStd_size[1]);
+                     VUVEnergy, const struct_T *Prm, emxArray_real_T *SPitch,
+                     emxArray_real_T *VUVSPitch, double pAvg_data[], int
+                     pAvg_size[1], double pStd_data[], int pStd_size[1]);
 
 #endif
 

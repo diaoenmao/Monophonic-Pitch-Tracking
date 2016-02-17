@@ -105,10 +105,9 @@ if (ftype == 0),  % Type I and Type II linear phase FIR
     I1=a(:,ones(size(m)))+m(ones(size(a)),:);    % entries are m + k
     I2=a(:,ones(size(m)))-m(ones(size(a)),:);    % entries are m - k
     G=zeros(size(I1));
-
+    b0=0;       %  first entry must be handled separately (where k(1)=0)
     if (rem(N,2)~=0),
         k=a(2:length(a));
-        b0=0;       %  first entry must be handled separately (where k(1)=0)
     else
         k=m';
     end

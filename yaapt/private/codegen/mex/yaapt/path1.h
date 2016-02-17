@@ -1,0 +1,31 @@
+/*
+ * path1.h
+ *
+ * Code generation for function 'path1'
+ *
+ */
+
+#ifndef __PATH1_H__
+#define __PATH1_H__
+
+/* Include files */
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "mwmathutil.h"
+#include "tmwtypes.h"
+#include "mex.h"
+#include "emlrt.h"
+#include "blas.h"
+#include "rtwtypes.h"
+#include "omp.h"
+#include "yaapt_types.h"
+
+/* Function Declarations */
+extern void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
+                  emxArray_real_T *Trans, emxArray_real_T *PATH);
+
+#endif
+
+/* End of code generation (path1.h) */

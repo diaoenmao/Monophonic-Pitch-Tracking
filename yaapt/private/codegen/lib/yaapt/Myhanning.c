@@ -2,7 +2,7 @@
  * File: Myhanning.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -12,98 +12,10 @@
 #include "yaapt_emxutil.h"
 #include "cos.h"
 #include "rdivide.h"
+#include "Myspecgram.h"
 #include "yaapt_rtwutil.h"
 
-/* Function Declarations */
-static int div_s32_floor(int numerator, int denominator);
-static double rt_remd_snf(double u0, double u1);
-
 /* Function Definitions */
-
-/*
- * Arguments    : int numerator
- *                int denominator
- * Return Type  : int
- */
-static int div_s32_floor(int numerator, int denominator)
-{
-  int quotient;
-  unsigned int absNumerator;
-  unsigned int absDenominator;
-  boolean_T quotientNeedsNegation;
-  unsigned int tempAbsQuotient;
-  if (denominator == 0) {
-    if (numerator >= 0) {
-      quotient = MAX_int32_T;
-    } else {
-      quotient = MIN_int32_T;
-    }
-  } else {
-    if (numerator >= 0) {
-      absNumerator = (unsigned int)numerator;
-    } else {
-      absNumerator = (unsigned int)-numerator;
-    }
-
-    if (denominator >= 0) {
-      absDenominator = (unsigned int)denominator;
-    } else {
-      absDenominator = (unsigned int)-denominator;
-    }
-
-    quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
-    tempAbsQuotient = absNumerator / absDenominator;
-    if (quotientNeedsNegation) {
-      absNumerator %= absDenominator;
-      if (absNumerator > 0U) {
-        tempAbsQuotient++;
-      }
-    }
-
-    if (quotientNeedsNegation) {
-      quotient = -(int)tempAbsQuotient;
-    } else {
-      quotient = (int)tempAbsQuotient;
-    }
-  }
-
-  return quotient;
-}
-
-/*
- * Arguments    : double u0
- *                double u1
- * Return Type  : double
- */
-static double rt_remd_snf(double u0, double u1)
-{
-  double y;
-  double b_u1;
-  double tr;
-  if (!((!rtIsNaN(u0)) && (!rtIsInf(u0)) && ((!rtIsNaN(u1)) && (!rtIsInf(u1)))))
-  {
-    y = rtNaN;
-  } else {
-    if (u1 < 0.0) {
-      b_u1 = ceil(u1);
-    } else {
-      b_u1 = floor(u1);
-    }
-
-    if ((u1 != 0.0) && (u1 != b_u1)) {
-      tr = u0 / u1;
-      if (fabs(tr - rt_roundd_snf(tr)) <= DBL_EPSILON * fabs(tr)) {
-        y = 0.0;
-      } else {
-        y = fmod(u0, u1);
-      }
-    } else {
-      y = fmod(u0, u1);
-    }
-  }
-
-  return y;
-}
 
 /*
  * HANNING   Hanning window.
@@ -134,12 +46,12 @@ void Myhanning(double order, emxArray_real_T *w)
   double apnd;
   double ndbl;
   double cdiff;
-  int i2;
+  int i15;
   int nm1d2;
   int k;
-  emxArray_real_T *r4;
+  emxArray_real_T *r18;
   emxArray_real_T *b_w;
-  int i3;
+  int i16;
 
   /*    Copyright 1988-2002 The MathWorks, Inc. */
   /*    $Revision: 1.11 $  $Date: 2002/04/15 01:11:49 $ */
@@ -207,16 +119,16 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    i2 = y->size[0] * y->size[1];
+    i15 = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)y, i2, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)y, i15, (int)sizeof(double));
     if (n > 0) {
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
-        i2 = n - 1;
-        nm1d2 = i2 / 2;
+        i15 = n - 1;
+        nm1d2 = i15 / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(n - k) - 1] = apnd - (double)k;
@@ -231,62 +143,62 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&r4, 1);
-    i2 = r4->size[0];
-    r4->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r4, i2, (int)sizeof(double));
+    emxInit_real_T1(&r18, 1);
+    i15 = r18->size[0];
+    r18->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)r18, i15, (int)sizeof(double));
     nm1d2 = y->size[1];
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      r4->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      r18->data[i15] = 6.2831853071795862 * y->data[y->size[0] * i15];
     }
 
-    c_rdivide(r4, order + 1.0, w);
-    c_cos(w);
-    i2 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
+    rdivide(r18, order + 1.0, w);
+    b_cos(w);
+    i15 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r4);
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = 1.0 - w->data[i2];
+    emxFree_real_T(&r18);
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      w->data[i15] = 1.0 - w->data[i15];
     }
 
-    i2 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
+    i15 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] *= 0.5;
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      w->data[i15] *= 0.5;
     }
 
     if (1 > w->size[0]) {
-      i2 = 1;
+      i15 = 1;
       k = 1;
       n = 0;
     } else {
-      i2 = w->size[0];
+      i15 = w->size[0];
       k = -1;
       n = 1;
     }
 
     emxInit_real_T1(&b_w, 1);
-    i3 = b_w->size[0];
-    b_w->size[0] = (w->size[0] + div_s32_floor(n - i2, k)) + 1;
-    emxEnsureCapacity((emxArray__common *)b_w, i3, (int)sizeof(double));
+    i16 = b_w->size[0];
+    b_w->size[0] = (w->size[0] + div_s32_floor(n - i15, k)) + 1;
+    emxEnsureCapacity((emxArray__common *)b_w, i16, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i3 = 0; i3 < nm1d2; i3++) {
-      b_w->data[i3] = w->data[i3];
+    for (i16 = 0; i16 < nm1d2; i16++) {
+      b_w->data[i16] = w->data[i16];
     }
 
-    nm1d2 = div_s32_floor(n - i2, k);
+    nm1d2 = div_s32_floor(n - i15, k);
     for (n = 0; n <= nm1d2; n++) {
-      b_w->data[n + w->size[0]] = w->data[(i2 + k * n) - 1];
+      b_w->data[n + w->size[0]] = w->data[(i15 + k * n) - 1];
     }
 
-    i2 = w->size[0];
+    i15 = w->size[0];
     w->size[0] = b_w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
     nm1d2 = b_w->size[0];
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = b_w->data[i2];
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      w->data[i15] = b_w->data[i15];
     }
 
     emxFree_real_T(&b_w);
@@ -326,16 +238,16 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    i2 = y->size[0] * y->size[1];
+    i15 = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)y, i2, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)y, i15, (int)sizeof(double));
     if (n > 0) {
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
-        i2 = n - 1;
-        nm1d2 = i2 / 2;
+        i15 = n - 1;
+        nm1d2 = i15 / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(n - k) - 1] = apnd - (double)k;
@@ -350,62 +262,62 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&r4, 1);
-    i2 = r4->size[0];
-    r4->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r4, i2, (int)sizeof(double));
+    emxInit_real_T1(&r18, 1);
+    i15 = r18->size[0];
+    r18->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)r18, i15, (int)sizeof(double));
     nm1d2 = y->size[1];
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      r4->data[i2] = 6.2831853071795862 * y->data[y->size[0] * i2];
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      r18->data[i15] = 6.2831853071795862 * y->data[y->size[0] * i15];
     }
 
-    c_rdivide(r4, order + 1.0, w);
-    c_cos(w);
-    i2 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
+    rdivide(r18, order + 1.0, w);
+    b_cos(w);
+    i15 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r4);
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = 1.0 - w->data[i2];
+    emxFree_real_T(&r18);
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      w->data[i15] = 1.0 - w->data[i15];
     }
 
-    i2 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
+    i15 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] *= 0.5;
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      w->data[i15] *= 0.5;
     }
 
     if (1.0 > (double)w->size[0] - 1.0) {
-      i2 = 1;
+      i15 = 1;
       k = 1;
       n = 0;
     } else {
-      i2 = (int)((double)w->size[0] - 1.0);
+      i15 = (int)((double)w->size[0] - 1.0);
       k = -1;
       n = 1;
     }
 
     emxInit_real_T1(&b_w, 1);
-    i3 = b_w->size[0];
-    b_w->size[0] = (w->size[0] + div_s32_floor(n - i2, k)) + 1;
-    emxEnsureCapacity((emxArray__common *)b_w, i3, (int)sizeof(double));
+    i16 = b_w->size[0];
+    b_w->size[0] = (w->size[0] + div_s32_floor(n - i15, k)) + 1;
+    emxEnsureCapacity((emxArray__common *)b_w, i16, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i3 = 0; i3 < nm1d2; i3++) {
-      b_w->data[i3] = w->data[i3];
+    for (i16 = 0; i16 < nm1d2; i16++) {
+      b_w->data[i16] = w->data[i16];
     }
 
-    nm1d2 = div_s32_floor(n - i2, k);
+    nm1d2 = div_s32_floor(n - i15, k);
     for (n = 0; n <= nm1d2; n++) {
-      b_w->data[n + w->size[0]] = w->data[(i2 + k * n) - 1];
+      b_w->data[n + w->size[0]] = w->data[(i15 + k * n) - 1];
     }
 
-    i2 = w->size[0];
+    i15 = w->size[0];
     w->size[0] = b_w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i2, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
     nm1d2 = b_w->size[0];
-    for (i2 = 0; i2 < nm1d2; i2++) {
-      w->data[i2] = b_w->data[i2];
+    for (i15 = 0; i15 < nm1d2; i15++) {
+      w->data[i15] = b_w->data[i15];
     }
 
     emxFree_real_T(&b_w);

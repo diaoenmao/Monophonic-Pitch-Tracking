@@ -13,10 +13,6 @@
 #include "yaapt_data.h"
 #include "lapacke.h"
 
-/* Variable Definitions */
-static emlrtRSInfo yf_emlrtRSI = { 9, "exp",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\exp.m" };
-
 /* Function Definitions */
 
 /*
@@ -32,13 +28,13 @@ void b_exp(const emlrtStack *sp, emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &yf_emlrtRSI;
+  st.site = &ee_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  b_st.site = &id_emlrtRSI;
+  b_st.site = &eb_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -46,7 +42,7 @@ void b_exp(const emlrtStack *sp, emxArray_real_T *x)
   }
 
   if (overflow) {
-    c_st.site = &kb_emlrtRSI;
+    c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 

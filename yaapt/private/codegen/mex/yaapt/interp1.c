@@ -9,7 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "interp1.h"
-#include "spec_trk.h"
+#include "median.h"
 #include "yaapt_emxutil.h"
 #include "error1.h"
 #include "eml_int_forloop_overflow_check.h"
@@ -19,49 +19,49 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ii_emlrtRSI = { 41, "interp1",
+static emlrtRSInfo sk_emlrtRSI = { 41, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ji_emlrtRSI = { 153, "interp1",
+static emlrtRSInfo tk_emlrtRSI = { 153, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ki_emlrtRSI = { 155, "interp1",
+static emlrtRSInfo uk_emlrtRSI = { 155, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo li_emlrtRSI = { 162, "interp1",
+static emlrtRSInfo vk_emlrtRSI = { 162, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo mi_emlrtRSI = { 168, "interp1",
+static emlrtRSInfo wk_emlrtRSI = { 168, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo ni_emlrtRSI = { 173, "interp1",
+static emlrtRSInfo xk_emlrtRSI = { 173, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo oi_emlrtRSI = { 175, "interp1",
+static emlrtRSInfo yk_emlrtRSI = { 175, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo pi_emlrtRSI = { 200, "interp1",
+static emlrtRSInfo al_emlrtRSI = { 200, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo qi_emlrtRSI = { 21, "fliplr",
+static emlrtRSInfo bl_emlrtRSI = { 21, "fliplr",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\fliplr.m" };
 
-static emlrtRSInfo ri_emlrtRSI = { 242, "interp1",
+static emlrtRSInfo cl_emlrtRSI = { 242, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRSInfo si_emlrtRSI = { 263, "interp1",
+static emlrtRSInfo dl_emlrtRSI = { 263, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRTEInfo kc_emlrtRTEI = { 1, 15, "interp1",
+static emlrtRTEInfo nd_emlrtRTEI = { 1, 15, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRTEInfo lc_emlrtRTEI = { 240, 9, "interp1",
+static emlrtRTEInfo od_emlrtRTEI = { 240, 9, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRTEInfo cf_emlrtRTEI = { 144, 15, "interp1",
+static emlrtRTEInfo lg_emlrtRTEI = { 144, 15, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
-static emlrtRTEInfo df_emlrtRTEI = { 114, 23, "interp1",
+static emlrtRTEInfo mg_emlrtRTEI = { 114, 23, "interp1",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\polyfun\\interp1.m" };
 
 /* Function Definitions */
@@ -79,10 +79,10 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   emxArray_real_T *x;
   int32_T nx;
   uint32_T outsize[2];
-  uint32_T uv2[2];
+  uint32_T uv5[2];
   boolean_T overflow;
   emxArray_real_T *xi;
-  struct_T pp;
+  b_struct_T pp;
   emxArray_real_T *b_y;
   int32_T exitg1;
   int32_T b_j1;
@@ -112,24 +112,24 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &y, 2, &kc_emlrtRTEI, true);
-  st.site = &ii_emlrtRSI;
+  emxInit_real_T(sp, &y, 2, &nd_emlrtRTEI, true);
+  st.site = &sk_emlrtRSI;
   j2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = varargin_2->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)y, j2, (int32_T)sizeof(real_T),
-                    &kc_emlrtRTEI);
+                    &nd_emlrtRTEI);
   nd2 = varargin_2->size[0] * varargin_2->size[1];
   for (j2 = 0; j2 < nd2; j2++) {
     y->data[j2] = varargin_2->data[j2];
   }
 
-  emxInit_real_T(&st, &x, 2, &kc_emlrtRTEI, true);
+  emxInit_real_T(&st, &x, 2, &nd_emlrtRTEI, true);
   j2 = x->size[0] * x->size[1];
   x->size[0] = 1;
   x->size[1] = varargin_1->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)x, j2, (int32_T)sizeof(real_T),
-                    &kc_emlrtRTEI);
+                    &nd_emlrtRTEI);
   nd2 = varargin_1->size[0] * varargin_1->size[1];
   for (j2 = 0; j2 < nd2; j2++) {
     x->data[j2] = varargin_1->data[j2];
@@ -138,7 +138,7 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
   nx = varargin_1->size[1];
   if (varargin_1->size[1] == varargin_2->size[1]) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &df_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &mg_emlrtRTEI,
       "Coder:MATLAB:interp1_YInvalidLength", 0);
   }
 
@@ -148,19 +148,19 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
 
   if (varargin_1->size[1] > 1) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &cf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &lg_emlrtRTEI,
       "MATLAB:interp1:NotEnoughPts", 0);
   }
 
   for (j2 = 0; j2 < 2; j2++) {
-    uv2[j2] = (uint32_T)varargin_3->size[j2];
+    uv5[j2] = (uint32_T)varargin_3->size[j2];
   }
 
   j2 = Vq->size[0] * Vq->size[1];
   Vq->size[0] = 1;
   Vq->size[1] = (int32_T)outsize[1];
   emxEnsureCapacity(&st, (emxArray__common *)Vq, j2, (int32_T)sizeof(real_T),
-                    &kc_emlrtRTEI);
+                    &nd_emlrtRTEI);
   nd2 = (int32_T)outsize[1];
   for (j2 = 0; j2 < nd2; j2++) {
     Vq->data[j2] = 0.0;
@@ -168,39 +168,39 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
 
   if (varargin_3->size[1] == 0) {
   } else {
-    b_st.site = &ji_emlrtRSI;
+    b_st.site = &tk_emlrtRSI;
     overflow = (varargin_1->size[1] > 2147483646);
     if (overflow) {
-      c_st.site = &kb_emlrtRSI;
+      c_st.site = &cb_emlrtRSI;
       check_forloop_overflow_error(&c_st, true);
     }
 
     nd2 = 1;
-    emxInit_real_T(&st, &xi, 2, &kc_emlrtRTEI, true);
-    emxInitStruct_struct_T(&st, &pp, &lc_emlrtRTEI, true);
-    emxInit_real_T(&st, &b_y, 2, &kc_emlrtRTEI, true);
+    emxInit_real_T(&st, &xi, 2, &nd_emlrtRTEI, true);
+    emxInitStruct_struct_T(&st, &pp, &od_emlrtRTEI, true);
+    emxInit_real_T(&st, &b_y, 2, &nd_emlrtRTEI, true);
     do {
       exitg1 = 0;
       if (nd2 <= nx) {
         if (muDoubleScalarIsNaN(varargin_1->data[nd2 - 1])) {
-          b_st.site = &ki_emlrtRSI;
-          h_error(&b_st);
+          b_st.site = &uk_emlrtRSI;
+          j_error(&b_st);
         } else {
           nd2++;
         }
       } else {
         if (varargin_1->data[1] < varargin_1->data[0]) {
           nd2 = asr_s32(nx, 1U);
-          b_st.site = &li_emlrtRSI;
+          b_st.site = &vk_emlrtRSI;
           for (b_j1 = 1; b_j1 <= nd2; b_j1++) {
             xtmp = x->data[b_j1 - 1];
             x->data[b_j1 - 1] = x->data[nx - b_j1];
             x->data[nx - b_j1] = xtmp;
           }
 
-          b_st.site = &mi_emlrtRSI;
+          b_st.site = &wk_emlrtRSI;
           nd2 = asr_s32(varargin_2->size[1], 1U);
-          c_st.site = &qi_emlrtRSI;
+          c_st.site = &bl_emlrtRSI;
           for (b_j1 = 1; b_j1 <= nd2; b_j1++) {
             j2 = varargin_2->size[1] - b_j1;
             xtmp = y->data[b_j1 - 1];
@@ -209,20 +209,20 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
           }
         }
 
-        b_st.site = &ni_emlrtRSI;
+        b_st.site = &xk_emlrtRSI;
         for (nd2 = 1; nd2 + 1 <= nx; nd2++) {
           if (x->data[nd2] <= x->data[nd2 - 1]) {
-            b_st.site = &oi_emlrtRSI;
-            i_error(&b_st);
+            b_st.site = &yk_emlrtRSI;
+            k_error(&b_st);
           }
         }
 
-        b_st.site = &pi_emlrtRSI;
+        b_st.site = &al_emlrtRSI;
         j2 = xi->size[0] * xi->size[1];
         xi->size[0] = 1;
         xi->size[1] = varargin_3->size[1];
         emxEnsureCapacity(&b_st, (emxArray__common *)xi, j2, (int32_T)sizeof
-                          (real_T), &kc_emlrtRTEI);
+                          (real_T), &nd_emlrtRTEI);
         nd2 = varargin_3->size[0] * varargin_3->size[1];
         for (j2 = 0; j2 < nd2; j2++) {
           xi->data[j2] = varargin_3->data[j2];
@@ -230,10 +230,10 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
 
         j2 = Vq->size[0] * Vq->size[1];
         Vq->size[0] = 1;
-        Vq->size[1] = (int32_T)uv2[1];
+        Vq->size[1] = (int32_T)uv5[1];
         emxEnsureCapacity(&b_st, (emxArray__common *)Vq, j2, (int32_T)sizeof
-                          (real_T), &kc_emlrtRTEI);
-        nd2 = (int32_T)uv2[1];
+                          (real_T), &nd_emlrtRTEI);
+        nd2 = (int32_T)uv5[1];
         for (j2 = 0; j2 < nd2; j2++) {
           Vq->data[j2] = 0.0;
         }
@@ -243,18 +243,18 @@ void interp1(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
         b_y->size[0] = 1;
         b_y->size[1] = nd2;
         emxEnsureCapacity(&b_st, (emxArray__common *)b_y, j2, (int32_T)sizeof
-                          (real_T), &kc_emlrtRTEI);
+                          (real_T), &nd_emlrtRTEI);
         for (j2 = 0; j2 < nd2; j2++) {
           b_y->data[b_y->size[0] * j2] = y->data[j2];
         }
 
-        c_st.site = &ri_emlrtRSI;
+        c_st.site = &cl_emlrtRSI;
         pchip(&c_st, x, b_y, pp.breaks, pp.coefs);
         nd2 = varargin_3->size[1];
-        c_st.site = &si_emlrtRSI;
+        c_st.site = &dl_emlrtRSI;
         overflow = (varargin_3->size[1] > 2147483646);
         if (overflow) {
-          d_st.site = &kb_emlrtRSI;
+          d_st.site = &cb_emlrtRSI;
           check_forloop_overflow_error(&d_st, true);
         }
 

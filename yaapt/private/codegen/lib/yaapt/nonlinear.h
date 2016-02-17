@@ -2,7 +2,7 @@
  * File: nonlinear.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __NONLINEAR_H__
@@ -20,9 +20,11 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void nonlinear(const emxArray_real_T *DataA, double Fs, emxArray_real_T
-                      *DataB, emxArray_real_T *DataC, emxArray_real_T *DataD,
-                      double *newFs);
+extern void nonlinear(const emxArray_real_T *DataA, double Fs, double
+                      Prm_bp_forder, double Prm_bp_low, double Prm_bp_high,
+                      double Prm_dec_factor, emxArray_real_T *DataB,
+                      emxArray_real_T *DataC, emxArray_real_T *DataD, double
+                      *newFs);
 
 #endif
 

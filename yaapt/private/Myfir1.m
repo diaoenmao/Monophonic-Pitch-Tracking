@@ -134,8 +134,9 @@ if nw ~= 0 & nw ~= L
    error('The window length must be the same as the filter length.') 
 end 
 if nw == 0   % replace the following with the default window of your choice. 
-   Window = hamming(L); 
-end 
+%    Window = hamming(L); 
+   Window = Myhamming(L); 
+end
 % 
 % to use Kaiser window, beta must be supplied 
 % att = 60; % dB of attenuation desired in sidelobe 

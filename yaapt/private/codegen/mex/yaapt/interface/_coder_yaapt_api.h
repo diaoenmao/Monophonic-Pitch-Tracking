@@ -23,8 +23,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void yaapt_api(yaaptStackData *SD, const mxArray * const prhs[2], const
-                      mxArray *plhs[3]);
+extern void yaapt_api(const mxArray * const prhs[3], const mxArray *plhs[3]);
 
 #endif
 

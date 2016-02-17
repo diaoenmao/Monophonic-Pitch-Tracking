@@ -24,7 +24,11 @@
 
 /* Function Declarations */
 extern void peaks(const emlrtStack *sp, emxArray_real_T *Data, real_T delta,
-                  emxArray_real_T *Pitch, emxArray_real_T *Merit);
+                  real_T maxpeaks, real_T Prm_f0_min, real_T Prm_f0_max, real_T
+                  Prm_shc_pwidth, real_T Prm_shc_thresh1, real_T Prm_shc_thresh2,
+                  real_T Prm_f0_double, real_T Prm_f0_half, real_T
+                  Prm_merit_extra, emxArray_real_T *Pitch, emxArray_real_T
+                  *Merit);
 
 #endif
 

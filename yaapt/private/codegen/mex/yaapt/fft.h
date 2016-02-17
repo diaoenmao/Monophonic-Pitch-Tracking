@@ -23,9 +23,10 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_fft(const emlrtStack *sp, const emxArray_real_T *x, creal_T y[8192]);
-extern void fft(const emlrtStack *sp, const emxArray_creal_T *x,
-                emxArray_creal_T *y);
+extern void b_fft(const emlrtStack *sp, const emxArray_real_T *x, real_T
+                  varargin_1, emxArray_creal_T *y);
+extern void fft(const emlrtStack *sp, const emxArray_creal_T *x, real_T
+                varargin_1, emxArray_creal_T *y);
 
 #endif
 

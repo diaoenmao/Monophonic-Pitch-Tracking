@@ -10,81 +10,60 @@
 #include "yaapt.h"
 #include "xgeqp3.h"
 #include "yaapt_emxutil.h"
-#include "error1.h"
-#include "eml_int_forloop_overflow_check.h"
+#include "colon.h"
+#include "infocheck.h"
 #include "yaapt_data.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hk_emlrtRSI = { 241, "colon",
+static emlrtRSInfo gd_emlrtRSI = { 75, "colon",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo ik_emlrtRSI = { 268, "colon",
+static emlrtRSInfo hd_emlrtRSI = { 112, "colon",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
 
-static emlrtRSInfo mk_emlrtRSI = { 14, "xgeqp3",
+static emlrtRSInfo pd_emlrtRSI = { 14, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo nk_emlrtRSI = { 40, "xgeqp3",
+static emlrtRSInfo qd_emlrtRSI = { 40, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo ok_emlrtRSI = { 75, "xgeqp3",
+static emlrtRSInfo rd_emlrtRSI = { 75, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo pk_emlrtRSI = { 78, "xgeqp3",
+static emlrtRSInfo sd_emlrtRSI = { 78, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRSInfo qk_emlrtRSI = { 75, "colon",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
-
-static emlrtRSInfo rk_emlrtRSI = { 112, "colon",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
-
-static emlrtRSInfo sk_emlrtRSI = { 151, "colon",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
-
-static emlrtRSInfo tk_emlrtRSI = { 156, "colon",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m" };
-
-static emlrtRTEInfo cd_emlrtRTEI = { 1, 25, "xgeqp3",
+static emlrtRTEInfo bb_emlrtRTEI = { 1, 25, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtRTEInfo sd_emlrtRTEI = { 44, 5, "xgeqp3",
+static emlrtRTEInfo qe_emlrtRTEI = { 44, 5, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m" };
 
-static emlrtDCInfo pb_emlrtDCI = { 42, 32, "xgeqp3",
+static emlrtDCInfo rd_emlrtDCI = { 42, 32, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m", 4 };
 
-static emlrtDCInfo qb_emlrtDCI = { 44, 57, "xgeqp3",
+static emlrtDCInfo sd_emlrtDCI = { 44, 57, "xgeqp3",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\+lapack\\xgeqp3.m", 4 };
-
-static emlrtDCInfo rb_emlrtDCI = { 152, 28, "colon",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\colon.m", 4 };
 
 /* Function Definitions */
 
 /*
  *
  */
-void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
-            emxArray_int32_T *jpvt)
+void b_xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
+              emxArray_int32_T *jpvt)
 {
   int32_T n;
-  int32_T k;
-  boolean_T p;
-  int32_T info;
-  boolean_T b20;
+  int32_T i57;
   emxArray_ptrdiff_t *jpvt_t;
+  int32_T loop_ub;
   ptrdiff_t m_t;
-  boolean_T b21;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
   emlrtStack e_st;
-  emlrtStack f_st;
-  emlrtStack g_st;
-  emlrtStack h_st;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
@@ -95,189 +74,204 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   d_st.tls = c_st.tls;
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
-  f_st.prev = &e_st;
-  f_st.tls = e_st.tls;
-  g_st.prev = &f_st;
-  g_st.tls = f_st.tls;
-  h_st.prev = &g_st;
-  h_st.tls = g_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &mk_emlrtRSI;
+  st.site = &pd_emlrtRSI;
   n = A->size[1];
   if (A->size[1] == 0) {
-    k = tau->size[0];
+    i57 = tau->size[0];
     tau->size[0] = 0;
-    emxEnsureCapacity(&st, (emxArray__common *)tau, k, (int32_T)sizeof(real_T),
-                      &cd_emlrtRTEI);
-    b_st.site = &nk_emlrtRSI;
-    c_st.site = &dd_emlrtRSI;
-    d_st.site = &qk_emlrtRSI;
-    e_st.site = &rk_emlrtRSI;
-    f_st.site = &sk_emlrtRSI;
-    g_st.site = &hk_emlrtRSI;
-    if (A->size[1] < 1) {
-      n = 0;
-    } else {
-      p = (A->size[1] - 1 < MAX_int32_T);
-      h_st.site = &ik_emlrtRSI;
-      if (p) {
-      } else {
-        emlrtErrorWithMessageIdR2012b(&h_st, &ee_emlrtRTEI,
-          "Coder:MATLAB:pmaxsize", 0);
-      }
-
-      n = A->size[1];
-    }
-
-    k = jpvt->size[0] * jpvt->size[1];
-    jpvt->size[0] = 1;
-    if (!(n > 0)) {
-      emlrtNonNegativeCheckR2012b(n, &rb_emlrtDCI, &e_st);
-    }
-
-    jpvt->size[1] = n;
-    emxEnsureCapacity(&e_st, (emxArray__common *)jpvt, k, (int32_T)sizeof
-                      (int32_T), &cd_emlrtRTEI);
-    if (n > 0) {
-      jpvt->data[0] = 1;
-      info = 1;
-      f_st.site = &tk_emlrtRSI;
-      if (2 > n) {
-        b20 = false;
-      } else {
-        b20 = (n > 2147483646);
-      }
-
-      if (b20) {
-        g_st.site = &kb_emlrtRSI;
-        check_forloop_overflow_error(&g_st, true);
-      }
-
-      for (k = 2; k <= n; k++) {
-        info++;
-        jpvt->data[k - 1] = info;
-      }
-    }
+    emxEnsureCapacity(&st, (emxArray__common *)tau, i57, (int32_T)sizeof(real_T),
+                      &bb_emlrtRTEI);
+    b_st.site = &qd_emlrtRSI;
+    c_st.site = &x_emlrtRSI;
+    d_st.site = &gd_emlrtRSI;
+    e_st.site = &hd_emlrtRSI;
+    eml_signed_integer_colon(&e_st, A->size[1], jpvt);
   } else {
-    emxInit_ptrdiff_t(&st, &jpvt_t, 1, &sd_emlrtRTEI, true);
-    k = muIntScalarMin_sint32(1, n);
-    if (!(k > 0)) {
-      emlrtNonNegativeCheckR2012b(k, &pb_emlrtDCI, &st);
+    emxInit_ptrdiff_t(&st, &jpvt_t, 1, &qe_emlrtRTEI, true);
+    i57 = muIntScalarMin_sint32(1, n);
+    if (!(i57 > 0)) {
+      emlrtNonNegativeCheckR2012b(i57, &rd_emlrtDCI, &st);
     }
 
-    k = tau->size[0];
+    i57 = tau->size[0];
     tau->size[0] = muIntScalarMin_sint32(1, n);
-    emxEnsureCapacity(&st, (emxArray__common *)tau, k, (int32_T)sizeof(real_T),
-                      &cd_emlrtRTEI);
-    k = jpvt_t->size[0];
-    info = A->size[1];
-    if (!(info > 0)) {
-      emlrtNonNegativeCheckR2012b(info, &qb_emlrtDCI, &st);
+    emxEnsureCapacity(&st, (emxArray__common *)tau, i57, (int32_T)sizeof(real_T),
+                      &bb_emlrtRTEI);
+    i57 = jpvt_t->size[0];
+    loop_ub = A->size[1];
+    if (!(loop_ub > 0)) {
+      emlrtNonNegativeCheckR2012b(loop_ub, &sd_emlrtDCI, &st);
     }
 
-    jpvt_t->size[0] = info;
-    emxEnsureCapacity(&st, (emxArray__common *)jpvt_t, k, (int32_T)sizeof
-                      (ptrdiff_t), &cd_emlrtRTEI);
-    info = A->size[1];
-    if (!(info > 0)) {
-      emlrtNonNegativeCheckR2012b(info, &qb_emlrtDCI, &st);
+    jpvt_t->size[0] = loop_ub;
+    emxEnsureCapacity(&st, (emxArray__common *)jpvt_t, i57, (int32_T)sizeof
+                      (ptrdiff_t), &bb_emlrtRTEI);
+    loop_ub = A->size[1];
+    if (!(loop_ub > 0)) {
+      emlrtNonNegativeCheckR2012b(loop_ub, &sd_emlrtDCI, &st);
     }
 
-    for (k = 0; k < info; k++) {
-      jpvt_t->data[k] = (ptrdiff_t)0;
+    for (i57 = 0; i57 < loop_ub; i57++) {
+      jpvt_t->data[i57] = (ptrdiff_t)0;
     }
 
     m_t = (ptrdiff_t)1;
     m_t = LAPACKE_dgeqp3(102, m_t, (ptrdiff_t)A->size[1], &A->data[0], m_t,
                          &jpvt_t->data[0], &tau->data[0]);
-    info = (int32_T)m_t;
-    b_st.site = &ok_emlrtRSI;
-    if (info != 0) {
-      p = false;
-      if (info == -4) {
-        p = true;
-      }
-
-      if (!p) {
-        if (info == -1010) {
-          c_st.site = &cc_emlrtRSI;
-          e_error(&c_st);
-        } else {
-          c_st.site = &dc_emlrtRSI;
-          j_error(&c_st, info);
-        }
-      }
-
-      p = true;
-    } else {
-      p = false;
-    }
-
-    if (p) {
-      k = A->size[0] * A->size[1];
+    b_st.site = &rd_emlrtRSI;
+    if (infocheck(&b_st, (int32_T)m_t)) {
+      i57 = A->size[0] * A->size[1];
       A->size[0] = 1;
-      emxEnsureCapacity(&st, (emxArray__common *)A, k, (int32_T)sizeof(real_T),
-                        &cd_emlrtRTEI);
-      info = A->size[1];
-      for (k = 0; k < info; k++) {
-        A->data[A->size[0] * k] = rtNaN;
+      emxEnsureCapacity(&st, (emxArray__common *)A, i57, (int32_T)sizeof(real_T),
+                        &bb_emlrtRTEI);
+      loop_ub = A->size[1];
+      for (i57 = 0; i57 < loop_ub; i57++) {
+        A->data[A->size[0] * i57] = rtNaN;
       }
 
-      info = tau->size[0];
-      k = tau->size[0];
-      tau->size[0] = info;
-      emxEnsureCapacity(&st, (emxArray__common *)tau, k, (int32_T)sizeof(real_T),
-                        &cd_emlrtRTEI);
-      for (k = 0; k < info; k++) {
-        tau->data[k] = rtNaN;
+      loop_ub = tau->size[0];
+      i57 = tau->size[0];
+      tau->size[0] = loop_ub;
+      emxEnsureCapacity(&st, (emxArray__common *)tau, i57, (int32_T)sizeof
+                        (real_T), &bb_emlrtRTEI);
+      for (i57 = 0; i57 < loop_ub; i57++) {
+        tau->data[i57] = rtNaN;
       }
 
-      b_st.site = &pk_emlrtRSI;
-      c_st.site = &dd_emlrtRSI;
-      d_st.site = &qk_emlrtRSI;
-      e_st.site = &rk_emlrtRSI;
-      f_st.site = &sk_emlrtRSI;
-      g_st.site = &hk_emlrtRSI;
-      if (n < 1) {
-        n = 0;
-      } else {
-        h_st.site = &ik_emlrtRSI;
-      }
-
-      k = jpvt->size[0] * jpvt->size[1];
-      jpvt->size[0] = 1;
-      jpvt->size[1] = n;
-      emxEnsureCapacity(&e_st, (emxArray__common *)jpvt, k, (int32_T)sizeof
-                        (int32_T), &cd_emlrtRTEI);
-      if (n > 0) {
-        jpvt->data[0] = 1;
-        info = 1;
-        f_st.site = &tk_emlrtRSI;
-        if (2 > n) {
-          b21 = false;
-        } else {
-          b21 = (n > 2147483646);
-        }
-
-        if (b21) {
-          g_st.site = &kb_emlrtRSI;
-          check_forloop_overflow_error(&g_st, true);
-        }
-
-        for (k = 2; k <= n; k++) {
-          info++;
-          jpvt->data[k - 1] = info;
-        }
-      }
+      b_st.site = &sd_emlrtRSI;
+      c_st.site = &x_emlrtRSI;
+      d_st.site = &gd_emlrtRSI;
+      e_st.site = &hd_emlrtRSI;
+      eml_signed_integer_colon(&e_st, n, jpvt);
     } else {
-      k = jpvt->size[0] * jpvt->size[1];
+      i57 = jpvt->size[0] * jpvt->size[1];
       jpvt->size[0] = 1;
       jpvt->size[1] = jpvt_t->size[0];
-      emxEnsureCapacity(&st, (emxArray__common *)jpvt, k, (int32_T)sizeof
-                        (int32_T), &cd_emlrtRTEI);
-      info = jpvt_t->size[0];
-      for (k = 0; k < info; k++) {
-        jpvt->data[jpvt->size[0] * k] = (int32_T)jpvt_t->data[k];
+      emxEnsureCapacity(&st, (emxArray__common *)jpvt, i57, (int32_T)sizeof
+                        (int32_T), &bb_emlrtRTEI);
+      loop_ub = jpvt_t->size[0];
+      for (i57 = 0; i57 < loop_ub; i57++) {
+        jpvt->data[jpvt->size[0] * i57] = (int32_T)jpvt_t->data[i57];
+      }
+    }
+
+    emxFree_ptrdiff_t(&jpvt_t);
+  }
+
+  emlrtHeapReferenceStackLeaveFcnR2012b(sp);
+}
+
+/*
+ *
+ */
+void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
+            emxArray_int32_T *jpvt)
+{
+  int32_T m;
+  int32_T n;
+  int32_T i56;
+  emxArray_ptrdiff_t *jpvt_t;
+  int32_T loop_ub;
+  ptrdiff_t m_t;
+  int32_T b_loop_ub;
+  emlrtStack st;
+  emlrtStack b_st;
+  emlrtStack c_st;
+  emlrtStack d_st;
+  emlrtStack e_st;
+  st.prev = sp;
+  st.tls = sp->tls;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  c_st.prev = &b_st;
+  c_st.tls = b_st.tls;
+  d_st.prev = &c_st;
+  d_st.tls = c_st.tls;
+  e_st.prev = &d_st;
+  e_st.tls = d_st.tls;
+  emlrtHeapReferenceStackEnterFcnR2012b(sp);
+  st.site = &pd_emlrtRSI;
+  m = A->size[0];
+  n = A->size[1];
+  if ((A->size[0] == 0) || (A->size[1] == 0)) {
+    i56 = tau->size[0];
+    tau->size[0] = 0;
+    emxEnsureCapacity(&st, (emxArray__common *)tau, i56, (int32_T)sizeof(real_T),
+                      &bb_emlrtRTEI);
+    b_st.site = &qd_emlrtRSI;
+    c_st.site = &x_emlrtRSI;
+    d_st.site = &gd_emlrtRSI;
+    e_st.site = &hd_emlrtRSI;
+    eml_signed_integer_colon(&e_st, A->size[1], jpvt);
+  } else {
+    emxInit_ptrdiff_t(&st, &jpvt_t, 1, &qe_emlrtRTEI, true);
+    i56 = muIntScalarMin_sint32(m, n);
+    if (!(i56 > 0)) {
+      emlrtNonNegativeCheckR2012b(i56, &rd_emlrtDCI, &st);
+    }
+
+    i56 = tau->size[0];
+    tau->size[0] = muIntScalarMin_sint32(m, n);
+    emxEnsureCapacity(&st, (emxArray__common *)tau, i56, (int32_T)sizeof(real_T),
+                      &bb_emlrtRTEI);
+    i56 = jpvt_t->size[0];
+    m = A->size[1];
+    if (!(m > 0)) {
+      emlrtNonNegativeCheckR2012b(m, &sd_emlrtDCI, &st);
+    }
+
+    jpvt_t->size[0] = m;
+    emxEnsureCapacity(&st, (emxArray__common *)jpvt_t, i56, (int32_T)sizeof
+                      (ptrdiff_t), &bb_emlrtRTEI);
+    loop_ub = A->size[1];
+    if (!(loop_ub > 0)) {
+      emlrtNonNegativeCheckR2012b(loop_ub, &sd_emlrtDCI, &st);
+    }
+
+    for (i56 = 0; i56 < loop_ub; i56++) {
+      jpvt_t->data[i56] = (ptrdiff_t)0;
+    }
+
+    m_t = (ptrdiff_t)A->size[0];
+    m_t = LAPACKE_dgeqp3(102, m_t, (ptrdiff_t)A->size[1], &A->data[0], m_t,
+                         &jpvt_t->data[0], &tau->data[0]);
+    b_st.site = &rd_emlrtRSI;
+    if (infocheck(&b_st, (int32_T)m_t)) {
+      i56 = A->size[0] * A->size[1];
+      emxEnsureCapacity(&st, (emxArray__common *)A, i56, (int32_T)sizeof(real_T),
+                        &bb_emlrtRTEI);
+      loop_ub = A->size[1];
+      for (i56 = 0; i56 < loop_ub; i56++) {
+        b_loop_ub = A->size[0];
+        for (m = 0; m < b_loop_ub; m++) {
+          A->data[m + A->size[0] * i56] = rtNaN;
+        }
+      }
+
+      m = tau->size[0];
+      i56 = tau->size[0];
+      tau->size[0] = m;
+      emxEnsureCapacity(&st, (emxArray__common *)tau, i56, (int32_T)sizeof
+                        (real_T), &bb_emlrtRTEI);
+      for (i56 = 0; i56 < m; i56++) {
+        tau->data[i56] = rtNaN;
+      }
+
+      b_st.site = &sd_emlrtRSI;
+      c_st.site = &x_emlrtRSI;
+      d_st.site = &gd_emlrtRSI;
+      e_st.site = &hd_emlrtRSI;
+      eml_signed_integer_colon(&e_st, n, jpvt);
+    } else {
+      i56 = jpvt->size[0] * jpvt->size[1];
+      jpvt->size[0] = 1;
+      jpvt->size[1] = jpvt_t->size[0];
+      emxEnsureCapacity(&st, (emxArray__common *)jpvt, i56, (int32_T)sizeof
+                        (int32_T), &bb_emlrtRTEI);
+      loop_ub = jpvt_t->size[0];
+      for (i56 = 0; i56 < loop_ub; i56++) {
+        jpvt->data[jpvt->size[0] * i56] = (int32_T)jpvt_t->data[i56];
       }
     }
 

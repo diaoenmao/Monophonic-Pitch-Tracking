@@ -2,7 +2,7 @@
  * File: Myfirls.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __MYFIRLS_H__
@@ -20,7 +20,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void Myfirls(double F[6], double h[151]);
+extern void Myfirls(double N, double F[6], emxArray_real_T *h);
 
 #endif
 

@@ -2,7 +2,7 @@
  * File: yaapt_rtwutil.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 /* Include Files */
@@ -17,12 +17,13 @@
  *                int denominator
  * Return Type  : int
  */
-int div_s32(int numerator, int denominator)
+int div_s32_floor(int numerator, int denominator)
 {
   int quotient;
   unsigned int absNumerator;
   unsigned int absDenominator;
   boolean_T quotientNeedsNegation;
+  unsigned int tempAbsQuotient;
   if (denominator == 0) {
     if (numerator >= 0) {
       quotient = MAX_int32_T;
@@ -43,11 +44,18 @@ int div_s32(int numerator, int denominator)
     }
 
     quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
-    absNumerator /= absDenominator;
+    tempAbsQuotient = absNumerator / absDenominator;
     if (quotientNeedsNegation) {
-      quotient = -(int)absNumerator;
+      absNumerator %= absDenominator;
+      if (absNumerator > 0U) {
+        tempAbsQuotient++;
+      }
+    }
+
+    if (quotientNeedsNegation) {
+      quotient = -(int)tempAbsQuotient;
     } else {
-      quotient = (int)absNumerator;
+      quotient = (int)tempAbsQuotient;
     }
   }
 
@@ -76,6 +84,41 @@ double rt_hypotd_snf(double u0, double u1)
     y = b;
   } else {
     y = a * 1.4142135623730951;
+  }
+
+  return y;
+}
+
+/*
+ * Arguments    : double u0
+ *                double u1
+ * Return Type  : double
+ */
+double rt_remd_snf(double u0, double u1)
+{
+  double y;
+  double b_u1;
+  double tr;
+  if (!((!rtIsNaN(u0)) && (!rtIsInf(u0)) && ((!rtIsNaN(u1)) && (!rtIsInf(u1)))))
+  {
+    y = rtNaN;
+  } else {
+    if (u1 < 0.0) {
+      b_u1 = ceil(u1);
+    } else {
+      b_u1 = floor(u1);
+    }
+
+    if ((u1 != 0.0) && (u1 != b_u1)) {
+      tr = u0 / u1;
+      if (fabs(tr - rt_roundd_snf(tr)) <= DBL_EPSILON * fabs(tr)) {
+        y = 0.0;
+      } else {
+        y = fmod(u0, u1);
+      }
+    } else {
+      y = fmod(u0, u1);
+    }
   }
 
   return y;

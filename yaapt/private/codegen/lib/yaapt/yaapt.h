@@ -2,7 +2,7 @@
  * File: yaapt.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __YAAPT_H__
@@ -20,8 +20,9 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void yaapt(const emxArray_real_T *Data, double Fs, emxArray_real_T *Pitch,
-                  double *numfrms, double *frmrate);
+extern void yaapt(const emxArray_real_T *Data, double Fs, const double
+                  Parameter[33], emxArray_real_T *Pitch, double *numfrms, double
+                  *frmrate);
 
 #endif
 

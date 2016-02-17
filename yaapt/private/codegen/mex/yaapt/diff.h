@@ -23,8 +23,14 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void diff(const real_T x[6], real_T y[5]);
+extern void b_diff(const real_T x[6], real_T y[5]);
+extern real_T diff(const real_T x[2]);
 
+#ifdef __WATCOMC__
+
+#pragma aux diff value [8087];
+
+#endif
 #endif
 
 /* End of code generation (diff.h) */

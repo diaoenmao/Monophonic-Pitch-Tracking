@@ -23,9 +23,10 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_repmat(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *b);
-extern void repmat(const emlrtStack *sp, const emxArray_real_T *a,
-                   emxArray_real_T *b);
+extern void b_repmat(const emlrtStack *sp, const emxArray_real_T *a, real_T
+                     varargin_2, emxArray_real_T *b);
+extern void repmat(const emlrtStack *sp, const emxArray_real_T *a, real_T
+                   varargin_1, emxArray_real_T *b);
 
 #endif
 

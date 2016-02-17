@@ -9,30 +9,30 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "fq2cnt.h"
-#include "error1.h"
 #include "rdivide.h"
+#include "error1.h"
 #include "yaapt_emxutil.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "yaapt_data.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hm_emlrtRSI = { 10, "fq2cnt",
+static emlrtRSInfo sn_emlrtRSI = { 10, "fq2cnt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\fq2cnt.m" };
 
-static emlrtRSInfo im_emlrtRSI = { 23, "log2",
+static emlrtRSInfo tn_emlrtRSI = { 23, "log2",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo jm_emlrtRSI = { 24, "log2",
+static emlrtRSInfo un_emlrtRSI = { 24, "log2",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo km_emlrtRSI = { 27, "log2",
+static emlrtRSInfo vn_emlrtRSI = { 27, "log2",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo lm_emlrtRSI = { 53, "applyScalarFunction",
+static emlrtRSInfo wn_emlrtRSI = { 53, "applyScalarFunction",
   "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
 
-static emlrtRTEInfo qd_emlrtRTEI = { 1, 18, "fq2cnt",
+static emlrtRTEInfo me_emlrtRTEI = { 1, 18, "fq2cnt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\fq2cnt.m" };
 
 /* Function Definitions */
@@ -46,7 +46,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   emxArray_real_T *x;
   boolean_T overflow;
   int32_T k;
-  uint32_T uv7[2];
+  uint32_T uv10[2];
   int32_T b_cnt;
   int32_T b_k;
   int32_T c_k;
@@ -67,7 +67,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &x, 2, &qd_emlrtRTEI, true);
+  emxInit_real_T(sp, &x, 2, &me_emlrtRTEI, true);
 
   /*  FQ2CNT Transform input frequency to cent unit */
   /*  */
@@ -79,8 +79,8 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   /*  */
   /* 'fq2cnt:10' cnt = 1200.*log2((fq./13.75)); */
   c_rdivide(sp, fq, 13.75, x);
-  st.site = &hm_emlrtRSI;
-  b_st.site = &im_emlrtRSI;
+  st.site = &sn_emlrtRSI;
+  b_st.site = &tn_emlrtRSI;
   overflow = false;
   for (k = 0; k < x->size[1]; k++) {
     if (overflow || (x->data[k] < 0.0)) {
@@ -91,22 +91,22 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   }
 
   if (overflow) {
-    b_st.site = &jm_emlrtRSI;
+    b_st.site = &un_emlrtRSI;
     m_error(&b_st);
   }
 
-  b_st.site = &km_emlrtRSI;
+  b_st.site = &vn_emlrtRSI;
   for (b_cnt = 0; b_cnt < 2; b_cnt++) {
-    uv7[b_cnt] = (uint32_T)x->size[b_cnt];
+    uv10[b_cnt] = (uint32_T)x->size[b_cnt];
   }
 
   b_cnt = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
-  cnt->size[1] = (int32_T)uv7[1];
+  cnt->size[1] = (int32_T)uv10[1];
   emxEnsureCapacity(&b_st, (emxArray__common *)cnt, b_cnt, (int32_T)sizeof
-                    (real_T), &qd_emlrtRTEI);
+                    (real_T), &me_emlrtRTEI);
   k = x->size[1];
-  c_st.site = &lm_emlrtRSI;
+  c_st.site = &wn_emlrtRSI;
   if (1 > x->size[1]) {
     overflow = false;
   } else {
@@ -114,7 +114,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   }
 
   if (overflow) {
-    d_st.site = &kb_emlrtRSI;
+    d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
@@ -161,7 +161,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   b_cnt = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
   emxEnsureCapacity(sp, (emxArray__common *)cnt, b_cnt, (int32_T)sizeof(real_T),
-                    &qd_emlrtRTEI);
+                    &me_emlrtRTEI);
   k = cnt->size[0];
   b_cnt = cnt->size[1];
   k *= b_cnt;

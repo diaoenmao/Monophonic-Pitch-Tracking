@@ -16,7 +16,7 @@
 /*
  *
  */
-void diff(const real_T x[6], real_T y[5])
+void b_diff(const real_T x[6], real_T y[5])
 {
   int32_T ixLead;
   int32_T iyLead;
@@ -34,6 +34,14 @@ void diff(const real_T x[6], real_T y[5])
     y[iyLead] = tmp2;
     iyLead++;
   }
+}
+
+/*
+ *
+ */
+real_T diff(const real_T x[2])
+{
+  return x[1] - x[0];
 }
 
 /* End of code generation (diff.c) */

@@ -27,14 +27,14 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
   boolean_T p;
   int32_T k;
   int32_T exitg1;
-  int32_T i26;
+  int32_T i32;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &td_emlrtRSI;
+  st.site = &dg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -49,7 +49,7 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &ce_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &lf_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
@@ -59,8 +59,8 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
   do {
     exitg1 = 0;
     if (k < 2) {
-      i26 = x->size[k];
-      if (i26 != 0) {
+      i32 = x->size[k];
+      if (i32 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -78,16 +78,16 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
 
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &de_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &mf_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  b_st.site = &ud_emlrtRSI;
+  b_st.site = &eg_emlrtRSI;
   if (x->size[1] == 0) {
     y = 0.0;
   } else {
     y = x->data[0];
-    c_st.site = &yd_emlrtRSI;
+    c_st.site = &ig_emlrtRSI;
     if (2 > x->size[1]) {
       overflow = false;
     } else {
@@ -95,7 +95,7 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
     }
 
     if (overflow) {
-      d_st.site = &kb_emlrtRSI;
+      d_st.site = &cb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 
@@ -112,34 +112,34 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
  */
 real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
 {
-  boolean_T b7;
+  boolean_T b14;
   emlrtStack st;
   emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &td_emlrtRSI;
+  st.site = &dg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((x->size[1] == 1) || (x->size[1] != 1)) {
-    b7 = true;
+    b14 = true;
   } else {
-    b7 = false;
+    b14 = false;
   }
 
-  if (b7) {
+  if (b14) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &ce_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &lf_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
-  b7 = !b_isequal(x);
-  if (b7) {
+  b14 = !d_isequal(x);
+  if (b14) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &de_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &mf_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  b_st.site = &ud_emlrtRSI;
+  b_st.site = &eg_emlrtRSI;
   return combine_vector_elements(&b_st, x);
 }
 

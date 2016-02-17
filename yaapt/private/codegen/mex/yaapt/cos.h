@@ -23,8 +23,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_cos(real_T x[75]);
-extern void c_cos(const emlrtStack *sp, emxArray_real_T *x);
+extern void b_cos(const emlrtStack *sp, emxArray_real_T *x);
 
 #endif
 

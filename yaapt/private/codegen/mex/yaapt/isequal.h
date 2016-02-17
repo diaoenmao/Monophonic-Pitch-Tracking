@@ -24,8 +24,10 @@
 
 /* Function Declarations */
 extern boolean_T b_isequal(const emxArray_real_T *varargin_1);
-extern boolean_T c_isequal(const emxArray_boolean_T *varargin_1);
-extern boolean_T isequal(const emxArray_real_T *varargin_1);
+extern boolean_T c_isequal(const emxArray_real_T *varargin_1);
+extern boolean_T d_isequal(const emxArray_real_T *varargin_1);
+extern boolean_T e_isequal(const emxArray_boolean_T *varargin_1);
+extern boolean_T isequal(const real_T varargin_1[2], const real_T varargin_2[2]);
 
 #endif
 

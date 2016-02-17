@@ -1,4 +1,4 @@
-function[Pitch, numfrms, frmrate] = yaapt(Data, Fs)
+function[Pitch, numfrms, frmrate] = yaapt(Data, Fs, Parameter)
 
 % YAAPT Fundamental Frequency (Pitch) tracking
 %
@@ -52,41 +52,41 @@ end
 
 % Default values for the tracking with voiced/unvoiced decision
 Prm = struct(...
-    'frame_length',   20, ... % Length of each analysis frame (ms)
-    'frame_space',    30, ... % Spacing between analysis frame (ms)
-    'f0_min',         60, ... % Minimum F0 searched (Hz)
-    'f0_max',        600, ... % Maximum F0 searached (Hz)
-    'fft_length',   8192, ... % FFT length
-    'bp_forder',     150, ... % Order of bandpass filter
-    'bp_low',         50, ... % Low frequency of filter passband (Hz)
-    'bp_high',      1500, ... % High frequency of filter passband (Hz)
-    'nlfer_thresh1',0.75, ... % NLFER boundary for voiced/unvoiced decisions
-    'nlfer_thresh2', 0.1, ... % Threshold for NLFER definitely unvocied
-    'shc_numharms',    3, ... % Number of harmonics in SHC calculation
-    'shc_window',     40, ... % SHC window length (Hz)
-    'shc_maxpeaks',    4, ... % Maximum number of SHC peaks to be found
-    'shc_pwidth',     50, ... % Window width in SHC peak picking (Hz)
-    'shc_thresh1',   5.0, ... % Threshold 1 for SHC peak picking
-    'shc_thresh2',  1.25, ... % Threshold 2 for SHC peak picking
-    'f0_double',     300, ... % F0 doubling decision threshold (Hz)
-    'f0_half',       300, ... % F0 halving decision threshold (Hz)
-    'dp5_k1',         11, ... % Weight used in dynaimc program
-    'dec_factor',      1, ... % Factor for signal resampling
-    'nccf_thresh1', 0.25, ... % Threshold for considering a peak in NCCF
-    'nccf_thresh2',  0.9, ... % Threshold for terminating serach in NCCF
-    'nccf_maxcands',   3, ... % Maximum number of candidates found
-    'nccf_pwidth',     5, ... % Window width in NCCF peak picking
-    'merit_boost',  0.20, ... % Boost merit
-    'merit_pivot',  0.99, ... % Merit assigned to unvoiced candidates in
+    'frame_length',   Parameter(1), ... % Length of each analysis frame (ms)
+    'frame_space',    Parameter(2), ... % Spacing between analysis frame (ms)
+    'f0_min',         Parameter(3), ... % Minimum F0 searched (Hz)
+    'f0_max',        Parameter(4), ... % Maximum F0 searached (Hz)
+    'fft_length',   Parameter(5), ... % FFT length
+    'bp_forder',     Parameter(6), ... % Order of bandpass filter (even)
+    'bp_low',         Parameter(7), ... % Low frequency of filter passband (Hz)
+    'bp_high',      Parameter(8), ... % High frequency of filter passband (Hz)
+    'nlfer_thresh1',Parameter(9), ... % NLFER boundary for voiced/unvoiced decisions
+    'nlfer_thresh2', Parameter(10), ... % Threshold for NLFER definitely unvocied
+    'shc_numharms',    Parameter(11), ... % Number of harmonics in SHC calculation
+    'shc_window',     Parameter(12), ... % SHC window length (Hz)
+    'shc_maxpeaks',    Parameter(13), ... % Maximum number of SHC peaks to be found
+    'shc_pwidth',     Parameter(14), ... % Window width in SHC peak picking (Hz)
+    'shc_thresh1',   Parameter(15), ... % Threshold 1 for SHC peak picking
+    'shc_thresh2',  Parameter(16), ... % Threshold 2 for SHC peak picking
+    'f0_double',     Parameter(17), ... % F0 doubling decision threshold (Hz)
+    'f0_half',       Parameter(18), ... % F0 halving decision threshold (Hz)
+    'dp5_k1',         Parameter(19), ... % Weight used in dynaimc program
+    'dec_factor',      Parameter(20), ... % Factor for signal resampling
+    'nccf_thresh1', Parameter(21), ... % Threshold for considering a peak in NCCF
+    'nccf_thresh2',  Parameter(22), ... % Threshold for terminating serach in NCCF
+    'nccf_maxcands',   Parameter(23), ... % Maximum number of candidates found
+    'nccf_pwidth',     Parameter(24), ... % Window width in NCCF peak picking
+    'merit_boost',  Parameter(25), ... % Boost merit
+    'merit_pivot',  Parameter(26), ... % Merit assigned to unvoiced candidates in
                           ... % defintely unvoiced frames
-    'merit_extra',   0.4, ... % Merit assigned to extra candidates
+    'merit_extra',   Parameter(27), ... % Merit assigned to extra candidates
                           ... % in reducing F0 doubling/halving errors
-    'median_value',    7, ... % Order of medial filter
-    'dp_w1',        0.15, ... % DP weight factor for V-V transitions
-    'dp_w2',         0.5, ... % DP weight factor for V-UV or UV-V transitions
-    'dp_w3',         0.1, ... % DP weight factor of UV-UV transitions
-    'dp_w4',         0.9, ... % Weight factor for local costs
-    'end', -1);
+    'median_value',    Parameter(28), ... % Order of medial filter
+    'dp_w1',        Parameter(29), ... % DP weight factor for V-V transitions
+    'dp_w2',         Parameter(30), ... % DP weight factor for V-UV or UV-V transitions
+    'dp_w3',         Parameter(31), ... % DP weight factor of UV-UV transitions
+    'dp_w4',         Parameter(32), ... % Weight factor for local costs
+    'end', Parameter(33));
 
 
 % Select parameter set 

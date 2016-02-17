@@ -14,7 +14,7 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hd_emlrtRSI = { 10, "cos",
+static emlrtRSInfo db_emlrtRSI = { 10, "cos",
   "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\cos.m" };
 
 /* Function Definitions */
@@ -22,18 +22,7 @@ static emlrtRSInfo hd_emlrtRSI = { 10, "cos",
 /*
  *
  */
-void b_cos(real_T x[75])
-{
-  int32_T k;
-  for (k = 0; k < 75; k++) {
-    x[k] = muDoubleScalarCos(x[k]);
-  }
-}
-
-/*
- *
- */
-void c_cos(const emlrtStack *sp, emxArray_real_T *x)
+void b_cos(const emlrtStack *sp, emxArray_real_T *x)
 {
   int32_T nx;
   boolean_T overflow;
@@ -43,13 +32,13 @@ void c_cos(const emlrtStack *sp, emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &hd_emlrtRSI;
+  st.site = &db_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  b_st.site = &id_emlrtRSI;
+  b_st.site = &eb_emlrtRSI;
   if (1 > x->size[0]) {
     overflow = false;
   } else {
@@ -57,7 +46,7 @@ void c_cos(const emlrtStack *sp, emxArray_real_T *x)
   }
 
   if (overflow) {
-    c_st.site = &kb_emlrtRSI;
+    c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
   }
 

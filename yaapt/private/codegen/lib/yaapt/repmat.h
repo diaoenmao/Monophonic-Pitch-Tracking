@@ -2,7 +2,7 @@
  * File: repmat.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __REPMAT_H__
@@ -20,8 +20,10 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_repmat(double varargin_2, emxArray_real_T *b);
-extern void repmat(const emxArray_real_T *a, emxArray_real_T *b);
+extern void b_repmat(const emxArray_real_T *a, double varargin_2,
+                     emxArray_real_T *b);
+extern void repmat(const emxArray_real_T *a, double varargin_1, emxArray_real_T *
+                   b);
 
 #endif
 

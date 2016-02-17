@@ -2,7 +2,7 @@
  * File: fft.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 21-Jan-2016 05:43:25
+ * C/C++ source code generated on  : 16-Feb-2016 23:38:40
  */
 
 #ifndef __FFT_H__
@@ -20,7 +20,10 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void fft(const emxArray_real_T *x, creal_T y[8192]);
+extern void b_fft(const emxArray_real_T *x, double varargin_1, emxArray_creal_T *
+                  y);
+extern void fft(const emxArray_creal_T *x, double varargin_1, emxArray_creal_T
+                *y);
 
 #endif
 

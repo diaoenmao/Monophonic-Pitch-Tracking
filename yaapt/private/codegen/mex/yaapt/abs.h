@@ -23,7 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_abs(const creal_T x[8192], real_T y[8192]);
+extern void b_abs(const emlrtStack *sp, const emxArray_creal_T *x,
+                  emxArray_real_T *y);
 extern void c_abs(const emlrtStack *sp, const emxArray_real_T *x,
                   emxArray_real_T *y);
 extern void d_abs(const emlrtStack *sp, const emxArray_real_T *x,
