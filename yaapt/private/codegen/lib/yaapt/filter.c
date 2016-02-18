@@ -2,7 +2,7 @@
  * File: filter.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -107,7 +107,7 @@ void filter(const emxArray_real_T *b, const emxArray_real_T *x, emxArray_real_T 
       }
     }
   } else {
-    emxInit_real_T1(&dbuffer, 1);
+    emxInit_real_T2(&dbuffer, 1);
     j = dbuffer->size[0];
     dbuffer->size[0] = ndbuffer + 1;
     emxEnsureCapacity((emxArray__common *)dbuffer, j, (int)sizeof(double));

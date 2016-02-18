@@ -113,9 +113,10 @@ static emlrtBCInfo tr_emlrtBCI = { -1, -1, 85, 25, "chunk1", "Smooth",
 /* Function Definitions */
 
 /*
- * function [out] = Smooth(arr)
+ * function [out] = Smooth(arr, Prm)
  */
-void Smooth(const emlrtStack *sp, emxArray_real_T *arr)
+void Smooth(const emlrtStack *sp, emxArray_real_T *arr, real_T
+            Prm_smooth_threshold)
 {
   emxArray_real_T *chunk1;
   emxArray_real_T *chunk2;
@@ -180,7 +181,7 @@ void Smooth(const emlrtStack *sp, emxArray_real_T *arr)
   /* 'Smooth:13' pointer = 0; */
   pointer = 0;
 
-  /* 'Smooth:14' fixed_threshold = 10; */
+  /* 'Smooth:14' fixed_threshold = Prm.smooth_threshold; */
   /*  10 frames */
   /*  percent_threshold = 0.01; % 1 percent */
   /* 'Smooth:16' for i=1:length(arr) */
@@ -434,7 +435,7 @@ void Smooth(const emlrtStack *sp, emxArray_real_T *arr)
           }
 
           /* 'Smooth:49' if(min_len<=fixed_threshold) */
-          if (mtmp <= 10) {
+          if (mtmp <= Prm_smooth_threshold) {
             /* 'Smooth:50' if idx == 1 */
             if (itmp == 1) {
               /* 'Smooth:51' for m=1:length(chunk1) */
@@ -635,7 +636,7 @@ void Smooth(const emlrtStack *sp, emxArray_real_T *arr)
           n = chunk1->size[1];
         }
 
-        if (n < 10) {
+        if (n < Prm_smooth_threshold) {
           /* 'Smooth:84' for m=1:length(chunk1) */
           if ((chunk1->size[0] == 0) || (chunk1->size[1] == 0)) {
             n = 0;
@@ -701,7 +702,7 @@ void Smooth(const emlrtStack *sp, emxArray_real_T *arr)
           }
 
           /* 'Smooth:91' if(min_len<=fixed_threshold) */
-          if (mtmp <= 10) {
+          if (mtmp <= Prm_smooth_threshold) {
             /* 'Smooth:92' if idx == 1 */
             if (itmp == 1) {
               /* 'Smooth:93' for m=1:length(chunk1) */

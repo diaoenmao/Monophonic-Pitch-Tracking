@@ -1,4 +1,4 @@
-function [out] = Smooth(arr)
+function [out] = Smooth(arr, Prm)
 % Smooth frequency data by 3 chunks
 % arr = frequency data
 % out = data after smoothed
@@ -11,7 +11,7 @@ chunk1 = [];
 chunk2 = [];
 chunk3 = [];
 pointer = 0;
-fixed_threshold = 10; % 10 frames
+fixed_threshold = Prm.smooth_threshold; % 10 frames
 % percent_threshold = 0.01; % 1 percent
 for i=1:length(arr)
     if pointer== 0 

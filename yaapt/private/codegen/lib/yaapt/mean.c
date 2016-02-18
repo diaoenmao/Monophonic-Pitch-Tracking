@@ -2,7 +2,7 @@
  * File: mean.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -25,7 +25,7 @@ void b_mean(const emxArray_real_T *x, double y_data[], int y_size[1])
   int ix;
   int k;
   double s;
-  emxArray_real_T *r29;
+  emxArray_real_T *r26;
   emxArray_real_T b_y_data;
   y_size[0] = x->size[0];
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
@@ -45,20 +45,20 @@ void b_mean(const emxArray_real_T *x, double y_data[], int y_size[1])
     y_data[0] = s;
   }
 
-  emxInit_real_T1(&r29, 1);
+  emxInit_real_T2(&r26, 1);
   b_y_data.data = (double *)y_data;
   b_y_data.size = (int *)y_size;
   b_y_data.allocatedSize = -1;
   b_y_data.numDimensions = 1;
   b_y_data.canFreeData = false;
-  rdivide(&b_y_data, x->size[1], r29);
-  y_size[0] = r29->size[0];
-  ix = r29->size[0];
+  rdivide(&b_y_data, x->size[1], r26);
+  y_size[0] = r26->size[0];
+  ix = r26->size[0];
   for (k = 0; k < ix; k++) {
-    y_data[k] = r29->data[k];
+    y_data[k] = r26->data[k];
   }
 
-  emxFree_real_T(&r29);
+  emxFree_real_T(&r26);
 }
 
 /*

@@ -2,7 +2,7 @@
  * File: std.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -75,7 +75,7 @@ void c_std(const emxArray_real_T *varargin_1, double y_data[], int y_size[1])
   int k;
   double r;
   double y;
-  emxArray_real_T *r30;
+  emxArray_real_T *r27;
   n = varargin_1->size[1];
   if (varargin_1->size[1] > 1) {
     d = varargin_1->size[1] - 1;
@@ -111,23 +111,23 @@ void c_std(const emxArray_real_T *varargin_1, double y_data[], int y_size[1])
     y_data[0] = y;
   }
 
-  emxInit_real_T1(&r30, 1);
-  d = r30->size[0];
-  r30->size[0] = y_size[0];
-  emxEnsureCapacity((emxArray__common *)r30, d, (int)sizeof(double));
+  emxInit_real_T2(&r27, 1);
+  d = r27->size[0];
+  r27->size[0] = y_size[0];
+  emxEnsureCapacity((emxArray__common *)r27, d, (int)sizeof(double));
   n = y_size[0];
   for (d = 0; d < n; d++) {
-    r30->data[d] = y_data[d];
+    r27->data[d] = y_data[d];
   }
 
-  b_sqrt(r30);
-  y_size[0] = r30->size[0];
-  n = r30->size[0];
+  b_sqrt(r27);
+  y_size[0] = r27->size[0];
+  n = r27->size[0];
   for (d = 0; d < n; d++) {
-    y_data[d] = r30->data[d];
+    y_data[d] = r27->data[d];
   }
 
-  emxFree_real_T(&r30);
+  emxFree_real_T(&r27);
 }
 
 /*

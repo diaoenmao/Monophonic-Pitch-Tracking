@@ -2,7 +2,7 @@
  * File: Myhanning.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -46,12 +46,12 @@ void Myhanning(double order, emxArray_real_T *w)
   double apnd;
   double ndbl;
   double cdiff;
-  int i15;
+  int i13;
   int nm1d2;
   int k;
-  emxArray_real_T *r18;
+  emxArray_real_T *r15;
   emxArray_real_T *b_w;
-  int i16;
+  int i14;
 
   /*    Copyright 1988-2002 The MathWorks, Inc. */
   /*    $Revision: 1.11 $  $Date: 2002/04/15 01:11:49 $ */
@@ -119,16 +119,16 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    i15 = y->size[0] * y->size[1];
+    i13 = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)y, i15, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)y, i13, (int)sizeof(double));
     if (n > 0) {
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
-        i15 = n - 1;
-        nm1d2 = i15 / 2;
+        i13 = n - 1;
+        nm1d2 = i13 / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(n - k) - 1] = apnd - (double)k;
@@ -143,62 +143,62 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&r18, 1);
-    i15 = r18->size[0];
-    r18->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r18, i15, (int)sizeof(double));
+    emxInit_real_T2(&r15, 1);
+    i13 = r15->size[0];
+    r15->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)r15, i13, (int)sizeof(double));
     nm1d2 = y->size[1];
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      r18->data[i15] = 6.2831853071795862 * y->data[y->size[0] * i15];
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      r15->data[i13] = 6.2831853071795862 * y->data[y->size[0] * i13];
     }
 
-    rdivide(r18, order + 1.0, w);
+    rdivide(r15, order + 1.0, w);
     b_cos(w);
-    i15 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
+    i13 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r18);
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      w->data[i15] = 1.0 - w->data[i15];
+    emxFree_real_T(&r15);
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      w->data[i13] = 1.0 - w->data[i13];
     }
 
-    i15 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
+    i13 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      w->data[i15] *= 0.5;
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      w->data[i13] *= 0.5;
     }
 
     if (1 > w->size[0]) {
-      i15 = 1;
+      i13 = 1;
       k = 1;
       n = 0;
     } else {
-      i15 = w->size[0];
+      i13 = w->size[0];
       k = -1;
       n = 1;
     }
 
-    emxInit_real_T1(&b_w, 1);
-    i16 = b_w->size[0];
-    b_w->size[0] = (w->size[0] + div_s32_floor(n - i15, k)) + 1;
-    emxEnsureCapacity((emxArray__common *)b_w, i16, (int)sizeof(double));
+    emxInit_real_T2(&b_w, 1);
+    i14 = b_w->size[0];
+    b_w->size[0] = (w->size[0] + div_s32_floor(n - i13, k)) + 1;
+    emxEnsureCapacity((emxArray__common *)b_w, i14, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i16 = 0; i16 < nm1d2; i16++) {
-      b_w->data[i16] = w->data[i16];
+    for (i14 = 0; i14 < nm1d2; i14++) {
+      b_w->data[i14] = w->data[i14];
     }
 
-    nm1d2 = div_s32_floor(n - i15, k);
+    nm1d2 = div_s32_floor(n - i13, k);
     for (n = 0; n <= nm1d2; n++) {
-      b_w->data[n + w->size[0]] = w->data[(i15 + k * n) - 1];
+      b_w->data[n + w->size[0]] = w->data[(i13 + k * n) - 1];
     }
 
-    i15 = w->size[0];
+    i13 = w->size[0];
     w->size[0] = b_w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = b_w->size[0];
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      w->data[i15] = b_w->data[i15];
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      w->data[i13] = b_w->data[i13];
     }
 
     emxFree_real_T(&b_w);
@@ -238,16 +238,16 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    i15 = y->size[0] * y->size[1];
+    i13 = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)y, i15, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)y, i13, (int)sizeof(double));
     if (n > 0) {
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
-        i15 = n - 1;
-        nm1d2 = i15 / 2;
+        i13 = n - 1;
+        nm1d2 = i13 / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(n - k) - 1] = apnd - (double)k;
@@ -262,62 +262,62 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T1(&r18, 1);
-    i15 = r18->size[0];
-    r18->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r18, i15, (int)sizeof(double));
+    emxInit_real_T2(&r15, 1);
+    i13 = r15->size[0];
+    r15->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)r15, i13, (int)sizeof(double));
     nm1d2 = y->size[1];
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      r18->data[i15] = 6.2831853071795862 * y->data[y->size[0] * i15];
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      r15->data[i13] = 6.2831853071795862 * y->data[y->size[0] * i13];
     }
 
-    rdivide(r18, order + 1.0, w);
+    rdivide(r15, order + 1.0, w);
     b_cos(w);
-    i15 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
+    i13 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r18);
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      w->data[i15] = 1.0 - w->data[i15];
+    emxFree_real_T(&r15);
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      w->data[i13] = 1.0 - w->data[i13];
     }
 
-    i15 = w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
+    i13 = w->size[0];
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      w->data[i15] *= 0.5;
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      w->data[i13] *= 0.5;
     }
 
     if (1.0 > (double)w->size[0] - 1.0) {
-      i15 = 1;
+      i13 = 1;
       k = 1;
       n = 0;
     } else {
-      i15 = (int)((double)w->size[0] - 1.0);
+      i13 = (int)((double)w->size[0] - 1.0);
       k = -1;
       n = 1;
     }
 
-    emxInit_real_T1(&b_w, 1);
-    i16 = b_w->size[0];
-    b_w->size[0] = (w->size[0] + div_s32_floor(n - i15, k)) + 1;
-    emxEnsureCapacity((emxArray__common *)b_w, i16, (int)sizeof(double));
+    emxInit_real_T2(&b_w, 1);
+    i14 = b_w->size[0];
+    b_w->size[0] = (w->size[0] + div_s32_floor(n - i13, k)) + 1;
+    emxEnsureCapacity((emxArray__common *)b_w, i14, (int)sizeof(double));
     nm1d2 = w->size[0];
-    for (i16 = 0; i16 < nm1d2; i16++) {
-      b_w->data[i16] = w->data[i16];
+    for (i14 = 0; i14 < nm1d2; i14++) {
+      b_w->data[i14] = w->data[i14];
     }
 
-    nm1d2 = div_s32_floor(n - i15, k);
+    nm1d2 = div_s32_floor(n - i13, k);
     for (n = 0; n <= nm1d2; n++) {
-      b_w->data[n + w->size[0]] = w->data[(i15 + k * n) - 1];
+      b_w->data[n + w->size[0]] = w->data[(i13 + k * n) - 1];
     }
 
-    i15 = w->size[0];
+    i13 = w->size[0];
     w->size[0] = b_w->size[0];
-    emxEnsureCapacity((emxArray__common *)w, i15, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = b_w->size[0];
-    for (i15 = 0; i15 < nm1d2; i15++) {
-      w->data[i15] = b_w->data[i15];
+    for (i13 = 0; i13 < nm1d2; i13++) {
+      w->data[i13] = b_w->data[i13];
     }
 
     emxFree_real_T(&b_w);

@@ -2,7 +2,7 @@
  * File: rdivide.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -22,14 +22,14 @@
 void b_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
                emxArray_real_T *z)
 {
-  int i8;
+  int i7;
   int loop_ub;
-  i8 = z->size[0];
+  i7 = z->size[0];
   z->size[0] = x->size[0];
-  emxEnsureCapacity((emxArray__common *)z, i8, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)z, i7, (int)sizeof(double));
   loop_ub = x->size[0];
-  for (i8 = 0; i8 < loop_ub; i8++) {
-    z->data[i8] = x->data[i8] / y->data[i8];
+  for (i7 = 0; i7 < loop_ub; i7++) {
+    z->data[i7] = x->data[i7] / y->data[i7];
   }
 }
 
@@ -41,15 +41,15 @@ void b_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
  */
 void c_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z)
 {
-  int i12;
+  int i11;
   int loop_ub;
-  i12 = z->size[0] * z->size[1];
+  i11 = z->size[0] * z->size[1];
   z->size[0] = 1;
   z->size[1] = x->size[1];
-  emxEnsureCapacity((emxArray__common *)z, i12, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)z, i11, (int)sizeof(double));
   loop_ub = x->size[0] * x->size[1];
-  for (i12 = 0; i12 < loop_ub; i12++) {
-    z->data[i12] = x->data[i12] / y;
+  for (i11 = 0; i11 < loop_ub; i11++) {
+    z->data[i11] = x->data[i11] / y;
   }
 }
 
@@ -61,14 +61,14 @@ void c_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z)
  */
 void d_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z)
 {
-  int i18;
+  int i16;
   int loop_ub;
-  i18 = z->size[0];
+  i16 = z->size[0];
   z->size[0] = y->size[0];
-  emxEnsureCapacity((emxArray__common *)z, i18, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)z, i16, (int)sizeof(double));
   loop_ub = y->size[0];
-  for (i18 = 0; i18 < loop_ub; i18++) {
-    z->data[i18] = x / y->data[i18];
+  for (i16 = 0; i16 < loop_ub; i16++) {
+    z->data[i16] = x / y->data[i16];
   }
 }
 
@@ -80,14 +80,14 @@ void d_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z)
  */
 void rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z)
 {
-  int i4;
+  int i3;
   int loop_ub;
-  i4 = z->size[0];
+  i3 = z->size[0];
   z->size[0] = x->size[0];
-  emxEnsureCapacity((emxArray__common *)z, i4, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)z, i3, (int)sizeof(double));
   loop_ub = x->size[0];
-  for (i4 = 0; i4 < loop_ub; i4++) {
-    z->data[i4] = x->data[i4] / y;
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    z->data[i3] = x->data[i3] / y;
   }
 }
 

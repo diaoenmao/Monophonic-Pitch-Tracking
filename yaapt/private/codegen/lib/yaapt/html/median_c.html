@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: median.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 16-Feb-2016 23:38:40</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 18-Feb-2016 02:50:10</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -38,7 +38,7 @@
 <a name="26"><font color="#888888 "><i>   26   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *iwork;
 <a name="27"><font color="#888888 "><i>   27   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx;
 <a name="28"><font color="#888888 "><i>   28   </i></font></a>  <font color="#112266"><b>int</b></font> b_i;
-<a name="29"><font color="#888888 "><i>   29   </i></font></a>  <font color="#112266"><b>int</b></font> i23;
+<a name="29"><font color="#888888 "><i>   29   </i></font></a>  <font color="#112266"><b>int</b></font> i21;
 <a name="30"><font color="#888888 "><i>   30   </i></font></a>  <font color="#112266"><b>int</b></font> midm1;
 <a name="31"><font color="#888888 "><i>   31   </i></font></a>  <font color="#112266"><b>int</b></font> k;
 <a name="32"><font color="#888888 "><i>   32   </i></font></a>  <font color="#112266"><b>int</b></font> c_i;
@@ -68,7 +68,7 @@
 <a name="56"><font color="#888888 "><i>   56   </i></font></a>
 <a name="57"><font color="#888888 "><i>   57   </i></font></a><font color="#992211">#</font><font color="#992211"><b>pragma</b></font> omp parallel \
 <a name="58"><font color="#888888 "><i>   58   </i></font></a> num_threads(omp_get_max_threads()) \
-<a name="59"><font color="#888888 "><i>   59   </i></font></a> private(iwork,idx,b_i,i23,midm1,k,c_i,m,p,i2,j,pEnd,b_p,q,qEnd,kEnd)
+<a name="59"><font color="#888888 "><i>   59   </i></font></a> private(iwork,idx,b_i,i21,midm1,k,c_i,m,p,i2,j,pEnd,b_p,q,qEnd,kEnd)
 <a name="60"><font color="#888888 "><i>   60   </i></font></a>
 <a name="61"><font color="#888888 "><i>   61   </i></font></a>    <b>{</b>
 <a name="62"><font color="#888888 "><i>   62   </i></font></a>      <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T1');" target="_self"><font color="#1122aa">emxInit_int32_T1</font></a>(&amp;iwork, 1);
@@ -78,21 +78,21 @@
 <a name="66"><font color="#888888 "><i>   66   </i></font></a>
 <a name="67"><font color="#888888 "><i>   67   </i></font></a>      <font color="#112266"><b>for</b></font> (i = 1; i &lt;= ub_loop; i++) <b>{</b>
 <a name="68"><font color="#888888 "><i>   68   </i></font></a>        b_i = i;
-<a name="69"><font color="#888888 "><i>   69   </i></font></a>        i23 = x-&gt;size[0];
-<a name="70"><font color="#888888 "><i>   70   </i></font></a>        midm1 = i23 / 2;
+<a name="69"><font color="#888888 "><i>   69   </i></font></a>        i21 = x-&gt;size[0];
+<a name="70"><font color="#888888 "><i>   70   </i></font></a>        midm1 = i21 / 2;
 <a name="71"><font color="#888888 "><i>   71   </i></font></a>        k = x-&gt;size[0];
-<a name="72"><font color="#888888 "><i>   72   </i></font></a>        i23 = idx-&gt;size[0];
+<a name="72"><font color="#888888 "><i>   72   </i></font></a>        i21 = idx-&gt;size[0];
 <a name="73"><font color="#888888 "><i>   73   </i></font></a>        idx-&gt;size[0] = k;
-<a name="74"><font color="#888888 "><i>   74   </i></font></a>        <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)idx, i23, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
-<a name="75"><font color="#888888 "><i>   75   </i></font></a>        <font color="#112266"><b>for</b></font> (i23 = 0; i23 &lt; k; i23++) <b>{</b>
-<a name="76"><font color="#888888 "><i>   76   </i></font></a>          idx-&gt;data[i23] = 0;
+<a name="74"><font color="#888888 "><i>   74   </i></font></a>        <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)idx, i21, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
+<a name="75"><font color="#888888 "><i>   75   </i></font></a>        <font color="#112266"><b>for</b></font> (i21 = 0; i21 &lt; k; i21++) <b>{</b>
+<a name="76"><font color="#888888 "><i>   76   </i></font></a>          idx-&gt;data[i21] = 0;
 <a name="77"><font color="#888888 "><i>   77   </i></font></a>        <b>}</b>
 <a name="78"><font color="#888888 "><i>   78   </i></font></a>
-<a name="79"><font color="#888888 "><i>   79   </i></font></a>        i23 = x-&gt;size[0] + 1;
+<a name="79"><font color="#888888 "><i>   79   </i></font></a>        i21 = x-&gt;size[0] + 1;
 <a name="80"><font color="#888888 "><i>   80   </i></font></a>        c_i = iwork-&gt;size[0];
 <a name="81"><font color="#888888 "><i>   81   </i></font></a>        iwork-&gt;size[0] = k;
 <a name="82"><font color="#888888 "><i>   82   </i></font></a>        <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)iwork, c_i, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
-<a name="83"><font color="#888888 "><i>   83   </i></font></a>        <font color="#112266"><b>for</b></font> (k = 1; k &lt;= i23 - 2; k += 2) <b>{</b>
+<a name="83"><font color="#888888 "><i>   83   </i></font></a>        <font color="#112266"><b>for</b></font> (k = 1; k &lt;= i21 - 2; k += 2) <b>{</b>
 <a name="84"><font color="#888888 "><i>   84   </i></font></a>          m = x-&gt;data[k + x-&gt;size[0] * (b_i - 1)];
 <a name="85"><font color="#888888 "><i>   85   </i></font></a>          <font color="#112266"><b>if</b></font> ((x-&gt;data[(k + x-&gt;size[0] * (b_i - 1)) - 1] &lt;= m) || <a href="rt_nonfinite_c.html#fcn_rtIsNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsNaN');" target="_self"><font color="#1122aa">rtIsNaN</font></a>(m)) <b>{</b>
 <a name="86"><font color="#888888 "><i>   86   </i></font></a>            p = true;
@@ -117,15 +117,15 @@
 <a name="105"><font color="#888888 "><i>  105   </i></font></a>        <b>}</b>
 <a name="106"><font color="#888888 "><i>  106   </i></font></a>
 <a name="107"><font color="#888888 "><i>  107   </i></font></a>        c_i = 2;
-<a name="108"><font color="#888888 "><i>  108   </i></font></a>        <font color="#112266"><b>while</b></font> (c_i &lt; i23 - 1) <b>{</b>
+<a name="108"><font color="#888888 "><i>  108   </i></font></a>        <font color="#112266"><b>while</b></font> (c_i &lt; i21 - 1) <b>{</b>
 <a name="109"><font color="#888888 "><i>  109   </i></font></a>          i2 = c_i &lt;&lt; 1;
 <a name="110"><font color="#888888 "><i>  110   </i></font></a>          j = 1;
-<a name="111"><font color="#888888 "><i>  111   </i></font></a>          <font color="#112266"><b>for</b></font> (pEnd = 1 + c_i; pEnd &lt; i23; pEnd = qEnd + c_i) <b>{</b>
+<a name="111"><font color="#888888 "><i>  111   </i></font></a>          <font color="#112266"><b>for</b></font> (pEnd = 1 + c_i; pEnd &lt; i21; pEnd = qEnd + c_i) <b>{</b>
 <a name="112"><font color="#888888 "><i>  112   </i></font></a>            b_p = j;
 <a name="113"><font color="#888888 "><i>  113   </i></font></a>            q = pEnd;
 <a name="114"><font color="#888888 "><i>  114   </i></font></a>            qEnd = j + i2;
-<a name="115"><font color="#888888 "><i>  115   </i></font></a>            <font color="#112266"><b>if</b></font> (qEnd &gt; i23) <b>{</b>
-<a name="116"><font color="#888888 "><i>  116   </i></font></a>              qEnd = i23;
+<a name="115"><font color="#888888 "><i>  115   </i></font></a>            <font color="#112266"><b>if</b></font> (qEnd &gt; i21) <b>{</b>
+<a name="116"><font color="#888888 "><i>  116   </i></font></a>              qEnd = i21;
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>            <b>}</b>
 <a name="118"><font color="#888888 "><i>  118   </i></font></a>
 <a name="119"><font color="#888888 "><i>  119   </i></font></a>            k = 0;
@@ -178,8 +178,8 @@
 <a name="166"><font color="#888888 "><i>  166   </i></font></a>                    - 1])) <b>{</b>
 <a name="167"><font color="#888888 "><i>  167   </i></font></a>          m = x-&gt;data[(idx-&gt;data[idx-&gt;size[0] - 1] + x-&gt;size[0] * (b_i - 1)) - 1];
 <a name="168"><font color="#888888 "><i>  168   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="169"><font color="#888888 "><i>  169   </i></font></a>          i23 = x-&gt;size[0];
-<a name="170"><font color="#888888 "><i>  170   </i></font></a>          <font color="#112266"><b>if</b></font> (midm1 &lt;&lt; 1 == i23) <b>{</b>
+<a name="169"><font color="#888888 "><i>  169   </i></font></a>          i21 = x-&gt;size[0];
+<a name="170"><font color="#888888 "><i>  170   </i></font></a>          <font color="#112266"><b>if</b></font> (midm1 &lt;&lt; 1 == i21) <b>{</b>
 <a name="171"><font color="#888888 "><i>  171   </i></font></a>            <font color="#112266"><b>if</b></font> (((x-&gt;data[(idx-&gt;data[midm1 - 1] + x-&gt;size[0] * (b_i - 1)) - 1] &lt;
 <a name="172"><font color="#888888 "><i>  172   </i></font></a>                  0.0) &amp;&amp; (x-&gt;data[(idx-&gt;data[midm1] + x-&gt;size[0] * (b_i - 1)) -
 <a name="173"><font color="#888888 "><i>  173   </i></font></a>                           1] &gt;= 0.0)) || <a href="rt_nonfinite_c.html#fcn_rtIsInf" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rtIsInf');" target="_self"><font color="#1122aa">rtIsInf</font></a>(x-&gt;data[(idx-&gt;data[midm1 - 1]

@@ -2,7 +2,7 @@
  * File: Mymedfilt1.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -24,7 +24,7 @@ void Mymedfilt1(emxArray_real_T *s, double w, emxArray_real_T *m)
 {
   emxArray_real_T *b_s;
   int c_s;
-  int i22;
+  int i20;
   emxArray_real_T *b_m;
   double w2;
   int i;
@@ -57,63 +57,63 @@ void Mymedfilt1(emxArray_real_T *s, double w, emxArray_real_T *m)
   /*  You should have received a copy of the GNU Leser General Public License */
   /*  along with MVTB.  If not, see <http://www.gnu.org/licenses/>. */
   c_s = s->size[1];
-  i22 = b_s->size[0] * b_s->size[1];
+  i20 = b_s->size[0] * b_s->size[1];
   b_s->size[0] = 1;
   b_s->size[1] = c_s;
-  emxEnsureCapacity((emxArray__common *)b_s, i22, (int)sizeof(double));
-  for (i22 = 0; i22 < c_s; i22++) {
-    b_s->data[b_s->size[0] * i22] = s->data[i22];
+  emxEnsureCapacity((emxArray__common *)b_s, i20, (int)sizeof(double));
+  for (i20 = 0; i20 < c_s; i20++) {
+    b_s->data[b_s->size[0] * i20] = s->data[i20];
   }
 
-  i22 = s->size[0] * s->size[1];
+  i20 = s->size[0] * s->size[1];
   s->size[0] = 1;
   s->size[1] = b_s->size[1];
-  emxEnsureCapacity((emxArray__common *)s, i22, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)s, i20, (int)sizeof(double));
   c_s = b_s->size[1];
-  for (i22 = 0; i22 < c_s; i22++) {
-    s->data[s->size[0] * i22] = b_s->data[b_s->size[0] * i22];
+  for (i20 = 0; i20 < c_s; i20++) {
+    s->data[s->size[0] * i20] = b_s->data[b_s->size[0] * i20];
   }
 
   emxFree_real_T(&b_s);
   emxInit_real_T(&b_m, 2);
   w2 = floor(w / 2.0);
   w = 2.0 * w2 + 1.0;
-  i22 = b_m->size[0] * b_m->size[1];
+  i20 = b_m->size[0] * b_m->size[1];
   b_m->size[0] = (int)w;
   b_m->size[1] = (int)(((double)s->size[1] + w) - 1.0);
-  emxEnsureCapacity((emxArray__common *)b_m, i22, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)b_m, i20, (int)sizeof(double));
   c_s = (int)w * (int)(((double)s->size[1] + w) - 1.0);
-  for (i22 = 0; i22 < c_s; i22++) {
-    b_m->data[i22] = 0.0;
+  for (i20 = 0; i20 < c_s; i20++) {
+    b_m->data[i20] = 0.0;
   }
 
   i = 0;
   emxInit_real_T(&b, 2);
   while (i <= (int)((w - 1.0) + 1.0) - 1) {
-    i22 = b->size[0] * b->size[1];
+    i20 = b->size[0] * b->size[1];
     b->size[0] = 1;
     b->size[1] = (int)((w - (double)i) - 1.0);
-    emxEnsureCapacity((emxArray__common *)b, i22, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b, i20, (int)sizeof(double));
     c_s = (int)((w - (double)i) - 1.0);
-    for (i22 = 0; i22 < c_s; i22++) {
-      b->data[i22] = 1.0;
+    for (i20 = 0; i20 < c_s; i20++) {
+      b->data[i20] = 1.0;
     }
 
     d_s = s->data[0];
     e_s = s->data[s->size[1] - 1];
-    for (i22 = 0; i22 < i; i22++) {
-      b_m->data[i + b_m->size[0] * i22] = d_s;
+    for (i20 = 0; i20 < i; i20++) {
+      b_m->data[i + b_m->size[0] * i20] = d_s;
     }
 
     c_s = s->size[1];
-    for (i22 = 0; i22 < c_s; i22++) {
-      b_m->data[i + b_m->size[0] * (i22 + i)] = s->data[s->size[0] * i22];
+    for (i20 = 0; i20 < c_s; i20++) {
+      b_m->data[i + b_m->size[0] * (i20 + i)] = s->data[s->size[0] * i20];
     }
 
     c_s = b->size[1];
-    for (i22 = 0; i22 < c_s; i22++) {
-      b_m->data[i + b_m->size[0] * ((i22 + i) + s->size[1])] = e_s * b->data
-        [b->size[0] * i22];
+    for (i20 = 0; i20 < c_s; i20++) {
+      b_m->data[i + b_m->size[0] * ((i20 + i) + s->size[1])] = e_s * b->data
+        [b->size[0] * i20];
     }
 
     i++;
@@ -122,24 +122,24 @@ void Mymedfilt1(emxArray_real_T *s, double w, emxArray_real_T *m)
   emxFree_real_T(&b);
   emxInit_real_T(&c_m, 2);
   median(b_m, m);
-  i22 = s->size[1];
+  i20 = s->size[1];
   c_s = c_m->size[0] * c_m->size[1];
   c_m->size[0] = 1;
-  c_m->size[1] = (int)((double)i22 - 1.0) + 1;
+  c_m->size[1] = (int)((double)i20 - 1.0) + 1;
   emxEnsureCapacity((emxArray__common *)c_m, c_s, (int)sizeof(double));
-  c_s = (int)((double)i22 - 1.0);
+  c_s = (int)((double)i20 - 1.0);
   emxFree_real_T(&b_m);
-  for (i22 = 0; i22 <= c_s; i22++) {
-    c_m->data[c_m->size[0] * i22] = m->data[(int)(w2 + (double)(i22 + 1)) - 1];
+  for (i20 = 0; i20 <= c_s; i20++) {
+    c_m->data[c_m->size[0] * i20] = m->data[(int)(w2 + (double)(i20 + 1)) - 1];
   }
 
-  i22 = m->size[0] * m->size[1];
+  i20 = m->size[0] * m->size[1];
   m->size[0] = 1;
   m->size[1] = c_m->size[1];
-  emxEnsureCapacity((emxArray__common *)m, i22, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)m, i20, (int)sizeof(double));
   c_s = c_m->size[1];
-  for (i22 = 0; i22 < c_s; i22++) {
-    m->data[m->size[0] * i22] = c_m->data[c_m->size[0] * i22];
+  for (i20 = 0; i20 < c_s; i20++) {
+    m->data[m->size[0] * i20] = c_m->data[c_m->size[0] * i20];
   }
 
   emxFree_real_T(&c_m);
@@ -155,7 +155,7 @@ void b_Mymedfilt1(const emxArray_real_T *s, double w, emxArray_real_T *m)
 {
   emxArray_real_T *b_s;
   int s_idx_0;
-  int i25;
+  int i23;
   emxArray_real_T *b_m;
   double w2;
   int i;
@@ -188,53 +188,53 @@ void b_Mymedfilt1(const emxArray_real_T *s, double w, emxArray_real_T *m)
   /*  You should have received a copy of the GNU Leser General Public License */
   /*  along with MVTB.  If not, see <http://www.gnu.org/licenses/>. */
   s_idx_0 = s->size[1];
-  i25 = b_s->size[0] * b_s->size[1];
+  i23 = b_s->size[0] * b_s->size[1];
   b_s->size[0] = 1;
   b_s->size[1] = s_idx_0;
-  emxEnsureCapacity((emxArray__common *)b_s, i25, (int)sizeof(double));
-  for (i25 = 0; i25 < s_idx_0; i25++) {
-    b_s->data[b_s->size[0] * i25] = s->data[i25];
+  emxEnsureCapacity((emxArray__common *)b_s, i23, (int)sizeof(double));
+  for (i23 = 0; i23 < s_idx_0; i23++) {
+    b_s->data[b_s->size[0] * i23] = s->data[i23];
   }
 
   emxInit_real_T(&b_m, 2);
   w2 = floor(w / 2.0);
   w = 2.0 * w2 + 1.0;
-  i25 = b_m->size[0] * b_m->size[1];
+  i23 = b_m->size[0] * b_m->size[1];
   b_m->size[0] = (int)w;
   b_m->size[1] = (int)(((double)b_s->size[1] + w) - 1.0);
-  emxEnsureCapacity((emxArray__common *)b_m, i25, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)b_m, i23, (int)sizeof(double));
   s_idx_0 = (int)w * (int)(((double)b_s->size[1] + w) - 1.0);
-  for (i25 = 0; i25 < s_idx_0; i25++) {
-    b_m->data[i25] = 0.0;
+  for (i23 = 0; i23 < s_idx_0; i23++) {
+    b_m->data[i23] = 0.0;
   }
 
   i = 0;
   emxInit_real_T(&b, 2);
   while (i <= (int)((w - 1.0) + 1.0) - 1) {
-    i25 = b->size[0] * b->size[1];
+    i23 = b->size[0] * b->size[1];
     b->size[0] = 1;
     b->size[1] = (int)((w - (double)i) - 1.0);
-    emxEnsureCapacity((emxArray__common *)b, i25, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b, i23, (int)sizeof(double));
     s_idx_0 = (int)((w - (double)i) - 1.0);
-    for (i25 = 0; i25 < s_idx_0; i25++) {
-      b->data[i25] = 1.0;
+    for (i23 = 0; i23 < s_idx_0; i23++) {
+      b->data[i23] = 1.0;
     }
 
     c_s = b_s->data[0];
     d_s = b_s->data[b_s->size[1] - 1];
-    for (i25 = 0; i25 < i; i25++) {
-      b_m->data[i + b_m->size[0] * i25] = c_s;
+    for (i23 = 0; i23 < i; i23++) {
+      b_m->data[i + b_m->size[0] * i23] = c_s;
     }
 
     s_idx_0 = b_s->size[1];
-    for (i25 = 0; i25 < s_idx_0; i25++) {
-      b_m->data[i + b_m->size[0] * (i25 + i)] = b_s->data[b_s->size[0] * i25];
+    for (i23 = 0; i23 < s_idx_0; i23++) {
+      b_m->data[i + b_m->size[0] * (i23 + i)] = b_s->data[b_s->size[0] * i23];
     }
 
     s_idx_0 = b->size[1];
-    for (i25 = 0; i25 < s_idx_0; i25++) {
-      b_m->data[i + b_m->size[0] * ((i25 + i) + b_s->size[1])] = d_s * b->data
-        [b->size[0] * i25];
+    for (i23 = 0; i23 < s_idx_0; i23++) {
+      b_m->data[i + b_m->size[0] * ((i23 + i) + b_s->size[1])] = d_s * b->data
+        [b->size[0] * i23];
     }
 
     i++;
@@ -243,25 +243,25 @@ void b_Mymedfilt1(const emxArray_real_T *s, double w, emxArray_real_T *m)
   emxFree_real_T(&b);
   emxInit_real_T(&c_m, 2);
   median(b_m, m);
-  i25 = b_s->size[1];
+  i23 = b_s->size[1];
   s_idx_0 = c_m->size[0] * c_m->size[1];
   c_m->size[0] = 1;
-  c_m->size[1] = (int)((double)i25 - 1.0) + 1;
+  c_m->size[1] = (int)((double)i23 - 1.0) + 1;
   emxEnsureCapacity((emxArray__common *)c_m, s_idx_0, (int)sizeof(double));
-  s_idx_0 = (int)((double)i25 - 1.0);
+  s_idx_0 = (int)((double)i23 - 1.0);
   emxFree_real_T(&b_m);
   emxFree_real_T(&b_s);
-  for (i25 = 0; i25 <= s_idx_0; i25++) {
-    c_m->data[c_m->size[0] * i25] = m->data[(int)(w2 + (double)(i25 + 1)) - 1];
+  for (i23 = 0; i23 <= s_idx_0; i23++) {
+    c_m->data[c_m->size[0] * i23] = m->data[(int)(w2 + (double)(i23 + 1)) - 1];
   }
 
-  i25 = m->size[0] * m->size[1];
+  i23 = m->size[0] * m->size[1];
   m->size[0] = 1;
   m->size[1] = c_m->size[1];
-  emxEnsureCapacity((emxArray__common *)m, i25, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)m, i23, (int)sizeof(double));
   s_idx_0 = c_m->size[1];
-  for (i25 = 0; i25 < s_idx_0; i25++) {
-    m->data[m->size[0] * i25] = c_m->data[c_m->size[0] * i25];
+  for (i23 = 0; i23 < s_idx_0; i23++) {
+    m->data[m->size[0] * i23] = c_m->data[c_m->size[0] * i23];
   }
 
   emxFree_real_T(&c_m);

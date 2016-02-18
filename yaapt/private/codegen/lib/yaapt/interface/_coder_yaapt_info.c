@@ -2,7 +2,7 @@
  * File: _coder_yaapt_info.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -16049,11 +16049,11 @@ static void m_info_helper(const mxArray **info)
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/yaapt.m"), "context",
                 800);
   emlrtAddField(*info, emlrt_marshallOut("Pitch_Optimization"), "name", 800);
-  emlrtAddField(*info, emlrt_marshallOut("double"), "dominantType", 800);
+  emlrtAddField(*info, emlrt_marshallOut("struct"), "dominantType", 800);
   emlrtAddField(*info, emlrt_marshallOut(
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Pitch_Optimization.m"),
                 "resolved", 800);
-  emlrtAddField(*info, b_emlrt_marshallOut(1454278877U), "fileTimeLo", 800);
+  emlrtAddField(*info, b_emlrt_marshallOut(1455780346U), "fileTimeLo", 800);
   emlrtAddField(*info, b_emlrt_marshallOut(0U), "fileTimeHi", 800);
   emlrtAddField(*info, b_emlrt_marshallOut(0U), "mFileTimeLo", 800);
   emlrtAddField(*info, b_emlrt_marshallOut(0U), "mFileTimeHi", 800);
@@ -16081,11 +16081,11 @@ static void m_info_helper(const mxArray **info)
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Pitch_Optimization.m"),
                 "context", 802);
   emlrtAddField(*info, emlrt_marshallOut("Smooth"), "name", 802);
-  emlrtAddField(*info, emlrt_marshallOut("double"), "dominantType", 802);
+  emlrtAddField(*info, emlrt_marshallOut("struct"), "dominantType", 802);
   emlrtAddField(*info, emlrt_marshallOut(
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Smooth.m"),
                 "resolved", 802);
-  emlrtAddField(*info, b_emlrt_marshallOut(1454279726U), "fileTimeLo", 802);
+  emlrtAddField(*info, b_emlrt_marshallOut(1455780397U), "fileTimeLo", 802);
   emlrtAddField(*info, b_emlrt_marshallOut(0U), "fileTimeHi", 802);
   emlrtAddField(*info, b_emlrt_marshallOut(0U), "mFileTimeLo", 802);
   emlrtAddField(*info, b_emlrt_marshallOut(0U), "mFileTimeHi", 802);

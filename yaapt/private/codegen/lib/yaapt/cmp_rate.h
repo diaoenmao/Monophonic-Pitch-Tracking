@@ -2,7 +2,7 @@
  * File: cmp_rate.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 #ifndef __CMP_RATE_H__

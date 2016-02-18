@@ -23,7 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void Smooth(const emlrtStack *sp, emxArray_real_T *arr);
+extern void Smooth(const emlrtStack *sp, emxArray_real_T *arr, real_T
+                   Prm_smooth_threshold);
 
 #endif
 

@@ -2,7 +2,7 @@
  * File: median.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -26,7 +26,7 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
   emxArray_int32_T *iwork;
   emxArray_int32_T *idx;
   int b_i;
-  int i23;
+  int i21;
   int midm1;
   int k;
   int c_i;
@@ -56,7 +56,7 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
 
 #pragma omp parallel \
  num_threads(omp_get_max_threads()) \
- private(iwork,idx,b_i,i23,midm1,k,c_i,m,p,i2,j,pEnd,b_p,q,qEnd,kEnd)
+ private(iwork,idx,b_i,i21,midm1,k,c_i,m,p,i2,j,pEnd,b_p,q,qEnd,kEnd)
 
     {
       emxInit_int32_T1(&iwork, 1);
@@ -66,21 +66,21 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
 
       for (i = 1; i <= ub_loop; i++) {
         b_i = i;
-        i23 = x->size[0];
-        midm1 = i23 / 2;
+        i21 = x->size[0];
+        midm1 = i21 / 2;
         k = x->size[0];
-        i23 = idx->size[0];
+        i21 = idx->size[0];
         idx->size[0] = k;
-        emxEnsureCapacity((emxArray__common *)idx, i23, (int)sizeof(int));
-        for (i23 = 0; i23 < k; i23++) {
-          idx->data[i23] = 0;
+        emxEnsureCapacity((emxArray__common *)idx, i21, (int)sizeof(int));
+        for (i21 = 0; i21 < k; i21++) {
+          idx->data[i21] = 0;
         }
 
-        i23 = x->size[0] + 1;
+        i21 = x->size[0] + 1;
         c_i = iwork->size[0];
         iwork->size[0] = k;
         emxEnsureCapacity((emxArray__common *)iwork, c_i, (int)sizeof(int));
-        for (k = 1; k <= i23 - 2; k += 2) {
+        for (k = 1; k <= i21 - 2; k += 2) {
           m = x->data[k + x->size[0] * (b_i - 1)];
           if ((x->data[(k + x->size[0] * (b_i - 1)) - 1] <= m) || rtIsNaN(m)) {
             p = true;
@@ -105,15 +105,15 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
         }
 
         c_i = 2;
-        while (c_i < i23 - 1) {
+        while (c_i < i21 - 1) {
           i2 = c_i << 1;
           j = 1;
-          for (pEnd = 1 + c_i; pEnd < i23; pEnd = qEnd + c_i) {
+          for (pEnd = 1 + c_i; pEnd < i21; pEnd = qEnd + c_i) {
             b_p = j;
             q = pEnd;
             qEnd = j + i2;
-            if (qEnd > i23) {
-              qEnd = i23;
+            if (qEnd > i21) {
+              qEnd = i21;
             }
 
             k = 0;
@@ -166,8 +166,8 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
                     - 1])) {
           m = x->data[(idx->data[idx->size[0] - 1] + x->size[0] * (b_i - 1)) - 1];
         } else {
-          i23 = x->size[0];
-          if (midm1 << 1 == i23) {
+          i21 = x->size[0];
+          if (midm1 << 1 == i21) {
             if (((x->data[(idx->data[midm1 - 1] + x->size[0] * (b_i - 1)) - 1] <
                   0.0) && (x->data[(idx->data[midm1] + x->size[0] * (b_i - 1)) -
                            1] >= 0.0)) || rtIsInf(x->data[(idx->data[midm1 - 1]

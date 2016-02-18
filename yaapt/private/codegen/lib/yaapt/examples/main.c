@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /*************************************************************************/
@@ -38,7 +38,7 @@
 #include "yaapt_initialize.h"
 
 /* Function Declarations */
-static void argInit_1x33_real_T(double result[33]);
+static void argInit_1x34_real_T(double result[34]);
 static emxArray_real_T *argInit_1xUnbounded_real_T(void);
 static double argInit_real_T(void);
 static void main_yaapt(void);
@@ -46,15 +46,15 @@ static void main_yaapt(void);
 /* Function Definitions */
 
 /*
- * Arguments    : double result[33]
+ * Arguments    : double result[34]
  * Return Type  : void
  */
-static void argInit_1x33_real_T(double result[33])
+static void argInit_1x34_real_T(double result[34])
 {
   int idx1;
 
   /* Loop over the array to initialize each element. */
-  for (idx1 = 0; idx1 < 33; idx1++) {
+  for (idx1 = 0; idx1 < 34; idx1++) {
     /* Set the value of the array element.
        Change this value to the value that the application requires. */
     result[idx1] = argInit_real_T();
@@ -103,7 +103,7 @@ static void main_yaapt(void)
 {
   emxArray_real_T *Pitch;
   emxArray_real_T *Data;
-  double dv0[33];
+  double dv0[34];
   double frmrate;
   double numfrms;
   emxInitArray_real_T(&Pitch, 2);
@@ -114,7 +114,7 @@ static void main_yaapt(void)
 
   /* Initialize function input argument 'Parameter'. */
   /* Call the entry-point 'yaapt'. */
-  argInit_1x33_real_T(dv0);
+  argInit_1x34_real_T(dv0);
   yaapt(Data, argInit_real_T(), dv0, Pitch, &numfrms, &frmrate);
   emxDestroyArray_real_T(Pitch);
   emxDestroyArray_real_T(Data);

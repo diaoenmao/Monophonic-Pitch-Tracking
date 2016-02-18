@@ -23,40 +23,40 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo emlrtRSI = { 120, "yaapt",
+static emlrtRSInfo emlrtRSI = { 121, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo b_emlrtRSI = { 121, "yaapt",
+static emlrtRSInfo b_emlrtRSI = { 122, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo c_emlrtRSI = { 126, "yaapt",
+static emlrtRSInfo c_emlrtRSI = { 127, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo d_emlrtRSI = { 129, "yaapt",
+static emlrtRSInfo d_emlrtRSI = { 130, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo e_emlrtRSI = { 134, "yaapt",
+static emlrtRSInfo e_emlrtRSI = { 135, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo f_emlrtRSI = { 138, "yaapt",
+static emlrtRSInfo f_emlrtRSI = { 139, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo g_emlrtRSI = { 144, "yaapt",
+static emlrtRSInfo g_emlrtRSI = { 145, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo h_emlrtRSI = { 147, "yaapt",
+static emlrtRSInfo h_emlrtRSI = { 148, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo i_emlrtRSI = { 150, "yaapt",
+static emlrtRSInfo i_emlrtRSI = { 151, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo j_emlrtRSI = { 154, "yaapt",
+static emlrtRSInfo j_emlrtRSI = { 155, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo k_emlrtRSI = { 158, "yaapt",
+static emlrtRSInfo k_emlrtRSI = { 159, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo l_emlrtRSI = { 159, "yaapt",
+static emlrtRSInfo l_emlrtRSI = { 160, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
 static emlrtRSInfo pn_emlrtRSI = { 50, "dynamic",
@@ -80,7 +80,7 @@ static emlrtRSInfo ao_emlrtRSI = { 16, "Pitch_Optimization",
 static emlrtRTEInfo emlrtRTEI = { 1, 37, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRTEInfo b_emlrtRTEI = { 154, 1, "yaapt",
+static emlrtRTEInfo b_emlrtRTEI = { 155, 1, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
 static emlrtRTEInfo c_emlrtRTEI = { 9, 1, "Preprocess",
@@ -257,7 +257,7 @@ static void o_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
  * function[Pitch, numfrms, frmrate] = yaapt(Data, Fs, Parameter)
  */
 void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
-           real_T Parameter[33], emxArray_real_T *Pitch, real_T *numfrms, real_T
+           real_T Parameter[34], emxArray_real_T *Pitch, real_T *numfrms, real_T
            *frmrate)
 {
   emxArray_real_T *Data_temp;
@@ -401,6 +401,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /*  % DP weight factor for V-UV or UV-V transitions */
   /*  % DP weight factor of UV-UV transitions */
   /*  % Weight factor for local costs */
+  /*  % Threshold of smoothing chunks */
   /* 'yaapt:54' Prm = struct(... */
   /* 'yaapt:55'     'frame_length',   Parameter(1), ... % Length of each analysis frame (ms) */
   /* 'yaapt:56'     'frame_space',    Parameter(2), ... % Spacing between analysis frame (ms) */
@@ -436,7 +437,8 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* 'yaapt:86'     'dp_w2',         Parameter(30), ... % DP weight factor for V-UV or UV-V transitions */
   /* 'yaapt:87'     'dp_w3',         Parameter(31), ... % DP weight factor of UV-UV transitions */
   /* 'yaapt:88'     'dp_w4',         Parameter(32), ... % Weight factor for local costs */
-  /* 'yaapt:89'     'end', Parameter(33)); */
+  /* 'yaapt:89'     'smooth_threshold', Parameter(33), ... % Threshold of smoothing chunks */
+  /* 'yaapt:90'     'end', Parameter(34)); */
   /*  Select parameter set  */
   /*  if (nargin > 2 && ~isempty(VU) && VU == 0) */
   /*      Prm = Prm_aV; */
@@ -462,7 +464,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*   Step 1. Preprocessing */
   /*   Create the squared or absolute values of filtered speech data */
-  /* 'yaapt:120' Data_after = Preprocess(Data); */
+  /* 'yaapt:121' Data_after = Preprocess(Data); */
   st.site = &emlrtRSI;
 
   /*  Preprocess the raw data from android voice recorder */
@@ -534,13 +536,13 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   emxInit_real_T(&st, &DataD, 2, &emlrtRTEI, true);
 
   /* 'Preprocess:12' Data_out = Data_temp; */
-  /* 'yaapt:121' [DataB, DataC, DataD, nFs] = nonlinear(Data_after, Fs, Prm); */
+  /* 'yaapt:122' [DataB, DataC, DataD, nFs] = nonlinear(Data_after, Fs, Prm); */
   st.site = &b_emlrtRSI;
   nonlinear(&st, Data_temp, Fs, Parameter[5], Parameter[6], Parameter[7],
             Parameter[19], DataB, Pitch_before, DataD, &nFs);
 
   /*   Check frame size, frame jump and the number of frames for nonlinear singal */
-  /* 'yaapt:124' nframesize = fix(Prm.frame_length*nFs/1000); */
+  /* 'yaapt:125' nframesize = fix(Prm.frame_length*nFs/1000); */
   y = Parameter[0] * nFs / 1000.0;
   if (y < 0.0) {
     nframesize = muDoubleScalarCeil(y);
@@ -548,9 +550,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     nframesize = muDoubleScalarFloor(y);
   }
 
-  /* 'yaapt:125' if (nframesize < 15) */
+  /* 'yaapt:126' if (nframesize < 15) */
   if (nframesize < 15.0) {
-    /* 'yaapt:126' error('Frame length value %d is too short', Prm.frame_length); */
+    /* 'yaapt:127' error('Frame length value %d is too short', Prm.frame_length); */
     st.site = &c_emlrtRSI;
     for (i0 = 0; i0 < 34; i0++) {
       u[i0] = varargin_1[i0];
@@ -564,9 +566,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     o_error(&b_st, b_y, emlrt_marshallOut(Parameter[0]), &emlrtMCI);
   }
 
-  /* 'yaapt:128' if (nframesize > 2048) */
+  /* 'yaapt:129' if (nframesize > 2048) */
   if (nframesize > 2048.0) {
-    /* 'yaapt:129' error('Frame length value %d exceeds the limit', Prm.frame_length); */
+    /* 'yaapt:130' error('Frame length value %d exceeds the limit', Prm.frame_length); */
     st.site = &d_emlrtRSI;
     for (i0 = 0; i0 < 39; i0++) {
       b_u[i0] = b_varargin_1[i0];
@@ -585,15 +587,16 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
   /*   Step 2. Spectral pitch tracking */
   /*   Calculate NLFER and determine voiced/unvoiced frames with NLFER */
-  /* 'yaapt:134' [Energy, VUVEnergy]= nlfer(DataB, nFs, Prm); */
+  /* 'yaapt:135' [Energy, VUVEnergy]= nlfer(DataB, nFs, Prm); */
   st.site = &e_emlrtRSI;
   nlfer(&st, DataB, nFs, Parameter[0], Parameter[1], Parameter[2], Parameter[3],
         Parameter[4], Parameter[8], Data_temp, VUVEnergy);
 
   /*   Calculate an approximate pitch track from the spectrum. */
   /*   At this point, SPitch is best estimate of pitch track from spectrum */
-  /* 'yaapt:138' [SPitch, VUVSPitch, pAvg, pStd]= spec_trk(DataD, nFs, VUVEnergy, Prm); */
-  expl_temp.end = Parameter[32];
+  /* 'yaapt:139' [SPitch, VUVSPitch, pAvg, pStd]= spec_trk(DataD, nFs, VUVEnergy, Prm); */
+  expl_temp.end = Parameter[33];
+  expl_temp.smooth_threshold = Parameter[32];
   expl_temp.dp_w4 = Parameter[31];
   expl_temp.dp_w3 = Parameter[30];
   expl_temp.dp_w2 = Parameter[29];
@@ -652,28 +655,28 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /*   Step 3. Temporal pitch tracking based on NCCF */
   /*   Calculate a pitch track based on time-domain processing */
   /*   Pitch tracking from the filterd original signal  */
-  /* 'yaapt:144' [TPitch1, TMerit1] = tm_trk(DataB, nFs, SPitch, pStd, pAvg, Prm); */
+  /* 'yaapt:145' [TPitch1, TMerit1] = tm_trk(DataB, nFs, SPitch, pStd, pAvg, Prm); */
   st.site = &g_emlrtRSI;
   tm_trk(&st, DataB, nFs, Pitch_before, pStd, Parameter[0], Parameter[1],
          Parameter[2], Parameter[3], Parameter[20], Parameter[21], Parameter[22],
          Parameter[23], Parameter[24], TPitch1, TMerit1);
 
   /*   Pitch tracking from the filterd nonlinear signal  */
-  /* 'yaapt:147' [TPitch2, TMerit2] = tm_trk(DataD, nFs, SPitch, pStd, pAvg, Prm); */
+  /* 'yaapt:148' [TPitch2, TMerit2] = tm_trk(DataD, nFs, SPitch, pStd, pAvg, Prm); */
   st.site = &h_emlrtRSI;
   tm_trk(&st, DataD, nFs, Pitch_before, pStd, Parameter[0], Parameter[1],
          Parameter[2], Parameter[3], Parameter[20], Parameter[21], Parameter[22],
          Parameter[23], Parameter[24], TPitch2, TMerit2);
 
   /*  Refine pitch candidates  */
-  /* 'yaapt:150' [RPitch, Merit] = refine(TPitch1, TMerit1, TPitch2, TMerit2, SPitch, ... */
-  /* 'yaapt:151'                         Energy, VUVEnergy, Prm); */
+  /* 'yaapt:151' [RPitch, Merit] = refine(TPitch1, TMerit1, TPitch2, TMerit2, SPitch, ... */
+  /* 'yaapt:152'                         Energy, VUVEnergy, Prm); */
   st.site = &i_emlrtRSI;
   refine(&st, TPitch1, TMerit1, TPitch2, TMerit2, Pitch_before, Data_temp,
          VUVEnergy, Parameter[9], Parameter[25], Parameter[27], RPitch, Merit);
 
   /*  Step 5. Use dyanamic programming to determine the final pitch */
-  /* 'yaapt:154' Pitch_before  = dynamic(RPitch, Merit, Energy, Prm); */
+  /* 'yaapt:155' Pitch_before  = dynamic(RPitch, Merit, Energy, Prm); */
   st.site = &j_emlrtRSI;
 
   /* DYNAMIC Dynamic programming for YAAPT pitch tracking */
@@ -1151,18 +1154,18 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
   emxFree_real_T(&RPitch);
 
-  /* 'yaapt:155' numfrms = length(Pitch_before); */
+  /* 'yaapt:156' numfrms = length(Pitch_before); */
   *numfrms = Pitch_before->size[1];
 
-  /* 'yaapt:156' frmrate = Prm.frame_space; */
+  /* 'yaapt:157' frmrate = Prm.frame_space; */
   *frmrate = Parameter[1];
 
-  /* 'yaapt:158' [Pitch_Freq,~] = freqSelect(Pitch_before); */
+  /* 'yaapt:159' [Pitch_Freq,~] = freqSelect(Pitch_before); */
   st.site = &k_emlrtRSI;
   freqSelect(&st, Pitch_before, VUVSPitch, Data_temp);
 
-  /* 'yaapt:158' ~ */
-  /* 'yaapt:159' Pitch = Pitch_Optimization(Pitch_Freq); */
+  /* 'yaapt:159' ~ */
+  /* 'yaapt:160' Pitch = Pitch_Optimization(Pitch_Freq, Prm); */
   st.site = &l_emlrtRSI;
 
   /*  Preprocess the raw data from android voice recorder */
@@ -1237,17 +1240,17 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
   emxFree_real_T(&VUVSPitch);
 
-  /* 'Pitch_Optimization:14' Pitch_temp = Smooth(Pitch_temp); */
+  /* 'Pitch_Optimization:14' Pitch_temp = Smooth(Pitch_temp, Prm); */
   b_st.site = &xn_emlrtRSI;
-  Smooth(&b_st, Pitch);
+  Smooth(&b_st, Pitch, Parameter[32]);
 
-  /* 'Pitch_Optimization:15' Pitch_temp = Smooth(Pitch_temp); */
+  /* 'Pitch_Optimization:15' Pitch_temp = Smooth(Pitch_temp, Prm); */
   b_st.site = &yn_emlrtRSI;
-  Smooth(&b_st, Pitch);
+  Smooth(&b_st, Pitch, Parameter[32]);
 
-  /* 'Pitch_Optimization:16' Pitch_out = Smooth(Pitch_temp); */
+  /* 'Pitch_Optimization:16' Pitch_out = Smooth(Pitch_temp, Prm); */
   b_st.site = &ao_emlrtRSI;
-  Smooth(&b_st, Pitch);
+  Smooth(&b_st, Pitch, Parameter[32]);
 
   /*  Pitch_out = Pitch_temp; */
   /* figure(3) */

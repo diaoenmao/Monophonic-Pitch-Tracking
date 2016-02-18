@@ -86,7 +86,8 @@ Prm = struct(...
     'dp_w2',         Parameter(30), ... % DP weight factor for V-UV or UV-V transitions
     'dp_w3',         Parameter(31), ... % DP weight factor of UV-UV transitions
     'dp_w4',         Parameter(32), ... % Weight factor for local costs
-    'end', Parameter(33));
+    'smooth_threshold', Parameter(33), ... % Threshold of smoothing chunks
+    'end', Parameter(34));
 
 
 % Select parameter set 
@@ -156,7 +157,7 @@ numfrms = length(Pitch_before);
 frmrate = Prm.frame_space; 
  
 [Pitch_Freq,~] = freqSelect(Pitch_before);
-Pitch = Pitch_Optimization(Pitch_Freq);
+Pitch = Pitch_Optimization(Pitch_Freq, Prm);
   %figure(3)
   % plot(SPitch, 'b')
   % hold on

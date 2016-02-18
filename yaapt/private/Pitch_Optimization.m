@@ -1,4 +1,4 @@
-function [Pitch_out] = Pitch_Optimization(Pitch)
+function [Pitch_out] = Pitch_Optimization(Pitch, Prm)
 % Preprocess the raw data from android voice recorder
 %
 % Data_in = Raw data android voice recorder
@@ -11,8 +11,8 @@ for i=1:length(Pitch_temp)
     end
 end
 
-Pitch_temp = Smooth(Pitch_temp);
-Pitch_temp = Smooth(Pitch_temp);
-Pitch_out = Smooth(Pitch_temp);
+Pitch_temp = Smooth(Pitch_temp, Prm);
+Pitch_temp = Smooth(Pitch_temp, Prm);
+Pitch_out = Smooth(Pitch_temp, Prm);
 % Pitch_out = Pitch_temp;
 end

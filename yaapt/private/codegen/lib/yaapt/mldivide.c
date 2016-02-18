@@ -2,7 +2,7 @@
  * File: mldivide.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -29,7 +29,7 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
   emxArray_int32_T *jpvt;
   emxArray_real_T *b_B;
   unsigned int unnamed_idx_0;
-  int i10;
+  int i9;
   int minmn;
   int n;
   int j;
@@ -39,43 +39,43 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
   double wj;
   int maxmn;
   double s;
-  int i11;
+  int i10;
   int i;
   int mn;
   int rankR;
   emxInit_real_T(&b_A, 2);
-  emxInit_real_T1(&tau, 1);
+  emxInit_real_T2(&tau, 1);
   emxInit_int32_T(&jpvt, 2);
-  emxInit_real_T1(&b_B, 1);
+  emxInit_real_T2(&b_B, 1);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (B->size[0] == 0)) {
     unnamed_idx_0 = (unsigned int)A->size[1];
-    i10 = Y->size[0];
+    i9 = Y->size[0];
     Y->size[0] = (int)unnamed_idx_0;
-    emxEnsureCapacity((emxArray__common *)Y, i10, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)Y, i9, (int)sizeof(double));
     minmn = (int)unnamed_idx_0;
-    for (i10 = 0; i10 < minmn; i10++) {
-      Y->data[i10] = 0.0;
+    for (i9 = 0; i9 < minmn; i9++) {
+      Y->data[i9] = 0.0;
     }
   } else if (A->size[0] == A->size[1]) {
     n = A->size[1];
-    i10 = b_A->size[0] * b_A->size[1];
+    i9 = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
     b_A->size[1] = A->size[1];
-    emxEnsureCapacity((emxArray__common *)b_A, i10, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b_A, i9, (int)sizeof(double));
     minmn = A->size[0] * A->size[1];
-    for (i10 = 0; i10 < minmn; i10++) {
-      b_A->data[i10] = A->data[i10];
+    for (i9 = 0; i9 < minmn; i9++) {
+      b_A->data[i9] = A->data[i9];
     }
 
     minmn = A->size[1];
     eml_signed_integer_colon(minmn, jpvt);
     if (A->size[1] - 1 <= A->size[1]) {
-      i10 = A->size[1] - 1;
+      i9 = A->size[1] - 1;
     } else {
-      i10 = A->size[1];
+      i9 = A->size[1];
     }
 
-    for (j = 0; j + 1 <= i10; j++) {
+    for (j = 0; j + 1 <= i9; j++) {
       mmj = n - j;
       c = j * (n + 1);
       if (mmj < 1) {
@@ -110,8 +110,8 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
           }
         }
 
-        i11 = c + mmj;
-        for (i = c + 1; i + 1 <= i11; i++) {
+        i10 = c + mmj;
+        for (i = c + 1; i + 1 <= i10; i++) {
           b_A->data[i] /= b_A->data[c];
         }
       }
@@ -123,8 +123,8 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
         wj = b_A->data[mn];
         if (b_A->data[mn] != 0.0) {
           ix = c + 1;
-          i11 = mmj + maxmn;
-          for (i = 1 + maxmn; i + 1 <= i11; i++) {
+          i10 = mmj + maxmn;
+          for (i = 1 + maxmn; i + 1 <= i10; i++) {
             b_A->data[i] += b_A->data[ix] * -wj;
             ix++;
           }
@@ -135,12 +135,12 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
       }
     }
 
-    i10 = Y->size[0];
+    i9 = Y->size[0];
     Y->size[0] = B->size[0];
-    emxEnsureCapacity((emxArray__common *)Y, i10, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)Y, i9, (int)sizeof(double));
     minmn = B->size[0];
-    for (i10 = 0; i10 < minmn; i10++) {
-      Y->data[i10] = B->data[i10];
+    for (i9 = 0; i9 < minmn; i9++) {
+      Y->data[i9] = B->data[i9];
     }
 
     for (minmn = 0; minmn + 1 < n; minmn++) {
@@ -171,13 +171,13 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
       }
     }
   } else {
-    i10 = b_A->size[0] * b_A->size[1];
+    i9 = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
     b_A->size[1] = A->size[1];
-    emxEnsureCapacity((emxArray__common *)b_A, i10, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b_A, i9, (int)sizeof(double));
     minmn = A->size[0] * A->size[1];
-    for (i10 = 0; i10 < minmn; i10++) {
-      b_A->data[i10] = A->data[i10];
+    for (i9 = 0; i9 < minmn; i9++) {
+      b_A->data[i9] = A->data[i9];
     }
 
     xgeqp3(b_A, tau, jpvt);
@@ -198,19 +198,19 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
     }
 
     minmn = b_A->size[1];
-    i10 = Y->size[0];
+    i9 = Y->size[0];
     Y->size[0] = minmn;
-    emxEnsureCapacity((emxArray__common *)Y, i10, (int)sizeof(double));
-    for (i10 = 0; i10 < minmn; i10++) {
-      Y->data[i10] = 0.0;
+    emxEnsureCapacity((emxArray__common *)Y, i9, (int)sizeof(double));
+    for (i9 = 0; i9 < minmn; i9++) {
+      Y->data[i9] = 0.0;
     }
 
-    i10 = b_B->size[0];
+    i9 = b_B->size[0];
     b_B->size[0] = B->size[0];
-    emxEnsureCapacity((emxArray__common *)b_B, i10, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b_B, i9, (int)sizeof(double));
     minmn = B->size[0];
-    for (i10 = 0; i10 < minmn; i10++) {
-      b_B->data[i10] = B->data[i10];
+    for (i9 = 0; i9 < minmn; i9++) {
+      b_B->data[i9] = B->data[i9];
     }
 
     maxmn = b_A->size[0];

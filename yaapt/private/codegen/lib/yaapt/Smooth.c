@@ -2,7 +2,7 @@
  * File: Smooth.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -20,9 +20,10 @@
  *  3 chunks is one window, if the lengh of the middle chunk is below
  *  threshold it will be absorbed by the head or tail chunk.
  * Arguments    : emxArray_real_T *arr
+ *                double Prm_smooth_threshold
  * Return Type  : void
  */
-void Smooth(emxArray_real_T *arr)
+void Smooth(emxArray_real_T *arr, double Prm_smooth_threshold)
 {
   emxArray_real_T *chunk1;
   emxArray_real_T *chunk2;
@@ -30,7 +31,7 @@ void Smooth(emxArray_real_T *arr)
   double chunk1_value;
   double chunk2_value;
   double chunk3_value;
-  int i34;
+  int i32;
   int pointer;
   int i;
   emxArray_real_T *b_chunk3;
@@ -49,28 +50,28 @@ void Smooth(emxArray_real_T *arr)
   chunk1_value = 0.0;
   chunk2_value = 0.0;
   chunk3_value = 0.0;
-  i34 = chunk1->size[0] * chunk1->size[1];
+  i32 = chunk1->size[0] * chunk1->size[1];
   chunk1->size[0] = 0;
   chunk1->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk1, i34, (int)sizeof(double));
-  i34 = chunk2->size[0] * chunk2->size[1];
+  emxEnsureCapacity((emxArray__common *)chunk1, i32, (int)sizeof(double));
+  i32 = chunk2->size[0] * chunk2->size[1];
   chunk2->size[0] = 0;
   chunk2->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk2, i34, (int)sizeof(double));
-  i34 = chunk3->size[0] * chunk3->size[1];
+  emxEnsureCapacity((emxArray__common *)chunk2, i32, (int)sizeof(double));
+  i32 = chunk3->size[0] * chunk3->size[1];
   chunk3->size[0] = 0;
   chunk3->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk3, i34, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)chunk3, i32, (int)sizeof(double));
   pointer = 0;
 
   /*  10 frames */
   /*  percent_threshold = 0.01; % 1 percent */
-  i34 = arr->size[1];
+  i32 = arr->size[1];
   i = 0;
   emxInit_real_T(&b_chunk3, 2);
   emxInit_real_T(&b_chunk2, 2);
   emxInit_real_T(&b_chunk1, 2);
-  while (i <= i34 - 1) {
+  while (i <= i32 - 1) {
     if (pointer == 0) {
       chunk1_value = arr->data[i];
       mtmp = chunk1->size[0] * chunk1->size[1];
@@ -222,7 +223,7 @@ void Smooth(emxArray_real_T *arr)
             }
           }
 
-          if (mtmp <= 10) {
+          if (mtmp <= Prm_smooth_threshold) {
             if (itmp == 1) {
               if ((chunk1->size[0] == 0) || (chunk1->size[1] == 0)) {
                 n = 0;
@@ -316,7 +317,7 @@ void Smooth(emxArray_real_T *arr)
           n = chunk1->size[1];
         }
 
-        if (n < 10) {
+        if (n < Prm_smooth_threshold) {
           if ((chunk1->size[0] == 0) || (chunk1->size[1] == 0)) {
             n = 0;
           } else {
@@ -359,7 +360,7 @@ void Smooth(emxArray_real_T *arr)
             }
           }
 
-          if (mtmp <= 10) {
+          if (mtmp <= Prm_smooth_threshold) {
             if (itmp == 1) {
               if ((chunk1->size[0] == 0) || (chunk1->size[1] == 0)) {
                 n = 0;

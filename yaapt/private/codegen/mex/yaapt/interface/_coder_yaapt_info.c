@@ -18325,11 +18325,11 @@ static void o_info_helper(const mxArray **info)
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/yaapt.m"), "context",
                 906);
   emlrtAddField(*info, d_emlrt_marshallOut("Pitch_Optimization"), "name", 906);
-  emlrtAddField(*info, d_emlrt_marshallOut("double"), "dominantType", 906);
+  emlrtAddField(*info, d_emlrt_marshallOut("struct"), "dominantType", 906);
   emlrtAddField(*info, d_emlrt_marshallOut(
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Pitch_Optimization.m"),
                 "resolved", 906);
-  emlrtAddField(*info, e_emlrt_marshallOut(1454278877U), "fileTimeLo", 906);
+  emlrtAddField(*info, e_emlrt_marshallOut(1455780346U), "fileTimeLo", 906);
   emlrtAddField(*info, e_emlrt_marshallOut(0U), "fileTimeHi", 906);
   emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeLo", 906);
   emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeHi", 906);
@@ -18357,11 +18357,11 @@ static void o_info_helper(const mxArray **info)
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Pitch_Optimization.m"),
                 "context", 908);
   emlrtAddField(*info, d_emlrt_marshallOut("Smooth"), "name", 908);
-  emlrtAddField(*info, d_emlrt_marshallOut("double"), "dominantType", 908);
+  emlrtAddField(*info, d_emlrt_marshallOut("struct"), "dominantType", 908);
   emlrtAddField(*info, d_emlrt_marshallOut(
     "[PE]D:/GitHub/Monophonic-Pitch-Tracking/yaapt/private/Smooth.m"),
                 "resolved", 908);
-  emlrtAddField(*info, e_emlrt_marshallOut(1454279726U), "fileTimeLo", 908);
+  emlrtAddField(*info, e_emlrt_marshallOut(1455780397U), "fileTimeLo", 908);
   emlrtAddField(*info, e_emlrt_marshallOut(0U), "fileTimeHi", 908);
   emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeLo", 908);
   emlrtAddField(*info, e_emlrt_marshallOut(0U), "mFileTimeHi", 908);

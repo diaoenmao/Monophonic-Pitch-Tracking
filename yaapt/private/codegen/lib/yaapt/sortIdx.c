@@ -2,7 +2,7 @@
  * File: sortIdx.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -318,7 +318,7 @@ void sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
   int bLen2;
   int nPairs;
   int exitg1;
-  emxInit_real_T1(&b_x, 1);
+  emxInit_real_T2(&b_x, 1);
   ib = x->size[0];
   wOffset = b_x->size[0];
   b_x->size[0] = x->size[0];
@@ -353,7 +353,7 @@ void sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
     iwork->data[wOffset] = 0;
   }
 
-  emxInit_real_T1(&xwork, 1);
+  emxInit_real_T2(&xwork, 1);
   m = x->size[0];
   wOffset = xwork->size[0];
   xwork->size[0] = m;

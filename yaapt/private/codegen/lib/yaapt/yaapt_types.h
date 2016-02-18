@@ -2,7 +2,7 @@
  * File: yaapt_types.h
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 #ifndef __YAAPT_TYPES_H__
@@ -163,6 +163,7 @@ typedef struct {
   double dp_w2;
   double dp_w3;
   double dp_w4;
+  double smooth_threshold;
   double end;
 } struct_T;
 

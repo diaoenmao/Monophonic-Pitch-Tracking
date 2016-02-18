@@ -2,7 +2,7 @@
  * File: xgeqp3.c
  *
  * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 16-Feb-2016 23:38:40
+ * C/C++ source code generated on  : 18-Feb-2016 02:50:10
  */
 
 /* Include Files */
@@ -10,7 +10,6 @@
 #include "yaapt.h"
 #include "xgeqp3.h"
 #include "xscal.h"
-#include "abs.h"
 #include "xnrm2.h"
 #include "ixamax.h"
 #include "yaapt_emxutil.h"
@@ -30,7 +29,7 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
   int m;
   int n;
   int mn;
-  int i31;
+  int i29;
   emxArray_real_T *work;
   int itemp;
   emxArray_real_T *vn1;
@@ -60,30 +59,30 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
     mn = A->size[1];
   }
 
-  i31 = tau->size[0];
+  i29 = tau->size[0];
   tau->size[0] = mn;
-  emxEnsureCapacity((emxArray__common *)tau, i31, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)tau, i29, (int)sizeof(double));
   eml_signed_integer_colon(A->size[1], jpvt);
   if ((A->size[0] == 0) || (A->size[1] == 0)) {
   } else {
-    emxInit_real_T1(&work, 1);
+    emxInit_real_T2(&work, 1);
     itemp = A->size[1];
-    i31 = work->size[0];
+    i29 = work->size[0];
     work->size[0] = itemp;
-    emxEnsureCapacity((emxArray__common *)work, i31, (int)sizeof(double));
-    for (i31 = 0; i31 < itemp; i31++) {
-      work->data[i31] = 0.0;
+    emxEnsureCapacity((emxArray__common *)work, i29, (int)sizeof(double));
+    for (i29 = 0; i29 < itemp; i29++) {
+      work->data[i29] = 0.0;
     }
 
-    emxInit_real_T1(&vn1, 1);
-    emxInit_real_T1(&vn2, 1);
+    emxInit_real_T2(&vn1, 1);
+    emxInit_real_T2(&vn2, 1);
     itemp = A->size[1];
-    i31 = vn1->size[0];
+    i29 = vn1->size[0];
     vn1->size[0] = itemp;
-    emxEnsureCapacity((emxArray__common *)vn1, i31, (int)sizeof(double));
-    i31 = vn2->size[0];
+    emxEnsureCapacity((emxArray__common *)vn1, i29, (int)sizeof(double));
+    i29 = vn2->size[0];
     vn2->size[0] = vn1->size[0];
-    emxEnsureCapacity((emxArray__common *)vn2, i31, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)vn2, i29, (int)sizeof(double));
     k = 0;
     for (nmi = 0; nmi + 1 <= n; nmi++) {
       xnorm = 0.0;
@@ -233,9 +232,9 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
             }
 
             iy = 0;
-            i31 = i_ip1 + m * (lastc - 1);
+            i29 = i_ip1 + m * (lastc - 1);
             itemp = i_ip1;
-            while ((m > 0) && (itemp <= i31)) {
+            while ((m > 0) && (itemp <= i29)) {
               ix = i_i;
               xnorm = 0.0;
               pvt = itemp + lastv;
@@ -257,8 +256,8 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
               if (work->data[itemp] != 0.0) {
                 xnorm = work->data[itemp] * -tau->data[i];
                 ix = i_i;
-                i31 = lastv + i_ip1;
-                for (pvt = i_ip1; pvt <= i31; pvt++) {
+                i29 = lastv + i_ip1;
+                for (pvt = i_ip1; pvt <= i29; pvt++) {
                   A->data[pvt - 1] += A->data[ix] * xnorm;
                   ix++;
                 }

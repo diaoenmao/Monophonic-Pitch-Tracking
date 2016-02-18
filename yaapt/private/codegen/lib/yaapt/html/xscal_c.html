@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: xscal.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 16-Feb-2016 23:38:40</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 18-Feb-2016 02:50:10</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -33,10 +33,10 @@
 <a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="22"><font color="#888888 "><i>   22   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_xscal">xscal</a>(<font color="#112266"><b>int</b></font> n, <font color="#112266"><b>double</b></font> a, <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>int</b></font> ix0)
 <a name="23"><font color="#888888 "><i>   23   </i></font></a><b>{</b>
-<a name="24"><font color="#888888 "><i>   24   </i></font></a>  <font color="#112266"><b>int</b></font> i32;
+<a name="24"><font color="#888888 "><i>   24   </i></font></a>  <font color="#112266"><b>int</b></font> i30;
 <a name="25"><font color="#888888 "><i>   25   </i></font></a>  <font color="#112266"><b>int</b></font> k;
-<a name="26"><font color="#888888 "><i>   26   </i></font></a>  i32 = (ix0 + n) - 1;
-<a name="27"><font color="#888888 "><i>   27   </i></font></a>  <font color="#112266"><b>for</b></font> (k = ix0; k &lt;= i32; k++) <b>{</b>
+<a name="26"><font color="#888888 "><i>   26   </i></font></a>  i30 = (ix0 + n) - 1;
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>  <font color="#112266"><b>for</b></font> (k = ix0; k &lt;= i30; k++) <b>{</b>
 <a name="28"><font color="#888888 "><i>   28   </i></font></a>    x-&gt;data[k - 1] *= a;
 <a name="29"><font color="#888888 "><i>   29   </i></font></a>  <b>}</b>
 <a name="30"><font color="#888888 "><i>   30   </i></font></a><b>}</b>

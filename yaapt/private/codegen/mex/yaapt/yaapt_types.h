@@ -185,6 +185,7 @@ typedef struct {
   real_T dp_w2;
   real_T dp_w3;
   real_T dp_w4;
+  real_T smooth_threshold;
   real_T end;
 } struct_T;
 
