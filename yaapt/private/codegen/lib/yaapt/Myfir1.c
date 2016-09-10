@@ -1,8 +1,8 @@
 /*
  * File: Myfir1.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -10,7 +10,7 @@
 #include "yaapt.h"
 #include "Myfir1.h"
 #include "yaapt_emxutil.h"
-#include "rdivide.h"
+#include "abs.h"
 #include "Myfirls.h"
 #include "cos.h"
 #include "yaapt_rtwutil.h"
@@ -65,18 +65,16 @@ void Myfir1(double N, const double Wn[2], emxArray_real_T *b)
   double r;
   double apnd;
   double ndbl;
-  double cdiff;
   emxArray_real_T *hh;
+  double cdiff;
   int k;
-  int nm1d2;
-  emxArray_real_T *r2;
   emxArray_real_T *Window;
+  int nm1d2;
   double ff[6];
   double b_ff[6];
   double f0;
   emxArray_creal_T *y;
   emxArray_creal_T *x;
-  emxArray_real_T *b_b;
 
   /*    FIR1 is an M-file implementation of program 5.2 in the IEEE  */
   /*    Programs for Digital Signal Processing tape.   */
@@ -194,8 +192,7 @@ void Myfir1(double N, const double Wn[2], emxArray_real_T *b)
     hh->data[0] = r;
     if (n > 1) {
       hh->data[n - 1] = apnd;
-      k = n - 1;
-      nm1d2 = k / 2;
+      nm1d2 = (n - 1) / 2;
       for (k = 1; k < nm1d2; k++) {
         hh->data[k] = r + (double)k;
         hh->data[(n - k) - 1] = apnd - (double)k;
@@ -210,22 +207,20 @@ void Myfir1(double N, const double Wn[2], emxArray_real_T *b)
     }
   }
 
-  emxInit_real_T2(&r2, 1);
-  k = r2->size[0];
-  r2->size[0] = hh->size[1];
-  emxEnsureCapacity((emxArray__common *)r2, k, (int)sizeof(double));
+  emxInit_real_T1(&Window, 1);
+  k = Window->size[0];
+  Window->size[0] = hh->size[1];
+  emxEnsureCapacity((emxArray__common *)Window, k, (int)sizeof(double));
   nm1d2 = hh->size[1];
   for (k = 0; k < nm1d2; k++) {
-    r2->data[k] = 6.2831853071795862 * hh->data[hh->size[0] * k];
+    Window->data[k] = 6.2831853071795862 * hh->data[hh->size[0] * k] / ((N + 1.0)
+      - 1.0);
   }
 
-  emxInit_real_T2(&Window, 1);
-  rdivide(r2, (N + 1.0) - 1.0, Window);
   b_cos(Window);
   k = Window->size[0];
   emxEnsureCapacity((emxArray__common *)Window, k, (int)sizeof(double));
   nm1d2 = Window->size[0];
-  emxFree_real_T(&r2);
   for (k = 0; k < nm1d2; k++) {
     Window->data[k] = 0.54 - 0.46 * Window->data[k];
   }
@@ -308,8 +303,7 @@ void Myfir1(double N, const double Wn[2], emxArray_real_T *b)
     hh->data[0] = r;
     if (n > 1) {
       hh->data[n - 1] = apnd;
-      k = n - 1;
-      nm1d2 = k / 2;
+      nm1d2 = (n - 1) / 2;
       for (k = 1; k < nm1d2; k++) {
         hh->data[k] = r + (double)k;
         hh->data[(n - k) - 1] = apnd - (double)k;
@@ -376,18 +370,16 @@ void Myfir1(double N, const double Wn[2], emxArray_real_T *b)
   }
 
   emxFree_creal_T(&x);
-  emxInit_real_T(&b_b, 2);
-  k = b_b->size[0] * b_b->size[1];
-  b_b->size[0] = 1;
-  b_b->size[1] = b->size[1];
-  emxEnsureCapacity((emxArray__common *)b_b, k, (int)sizeof(double));
-  nm1d2 = b->size[0] * b->size[1];
+  r = rt_hypotd_snf(cdiff, ndbl);
+  k = b->size[0] * b->size[1];
+  b->size[0] = 1;
+  emxEnsureCapacity((emxArray__common *)b, k, (int)sizeof(double));
+  nm1d2 = b->size[0];
+  k = b->size[1];
+  nm1d2 *= k;
   for (k = 0; k < nm1d2; k++) {
-    b_b->data[k] = b->data[k];
+    b->data[k] /= r;
   }
-
-  c_rdivide(b_b, rt_hypotd_snf(cdiff, ndbl), b);
-  emxFree_real_T(&b_b);
 }
 
 /*

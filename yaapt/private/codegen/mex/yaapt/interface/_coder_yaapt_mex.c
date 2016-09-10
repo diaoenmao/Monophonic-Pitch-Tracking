@@ -12,6 +12,7 @@
 #include "_coder_yaapt_api.h"
 #include "yaapt_initialize.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */

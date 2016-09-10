@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __MYHANNING_H__
-#define __MYHANNING_H__
+#ifndef MYHANNING_H
+#define MYHANNING_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"

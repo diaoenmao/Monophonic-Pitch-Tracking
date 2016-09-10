@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "isequal.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
@@ -22,7 +23,7 @@ boolean_T b_isequal(const emxArray_real_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i21;
+  int32_T i23;
   p = false;
   b_p = false;
   k = 0;
@@ -30,12 +31,12 @@ boolean_T b_isequal(const emxArray_real_T *varargin_1)
     exitg1 = 0;
     if (k < 2) {
       if (1 + k <= 1) {
-        i21 = varargin_1->size[k];
+        i23 = varargin_1->size[k];
       } else {
-        i21 = 1;
+        i23 = 1;
       }
 
-      if (i21 != 0) {
+      if (i23 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -63,15 +64,15 @@ boolean_T c_isequal(const emxArray_real_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i22;
+  int32_T i24;
   p = false;
   b_p = false;
   k = 0;
   do {
     exitg1 = 0;
     if (k < 2) {
-      i22 = varargin_1->size[k];
-      if (i22 != 0) {
+      i24 = varargin_1->size[k];
+      if (i24 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -99,15 +100,15 @@ boolean_T d_isequal(const emxArray_real_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i23;
+  int32_T i25;
   p = false;
   b_p = false;
   k = 0;
   do {
     exitg1 = 0;
     if (k < 2) {
-      i23 = varargin_1->size[k];
-      if (i23 != 0) {
+      i25 = varargin_1->size[k];
+      if (i25 != 0) {
         exitg1 = 1;
       } else {
         k++;
@@ -135,7 +136,7 @@ boolean_T e_isequal(const emxArray_boolean_T *varargin_1)
   boolean_T b_p;
   int32_T k;
   int32_T exitg1;
-  int32_T i26;
+  int32_T i29;
   p = false;
   b_p = false;
   k = 0;
@@ -143,12 +144,12 @@ boolean_T e_isequal(const emxArray_boolean_T *varargin_1)
     exitg1 = 0;
     if (k < 2) {
       if (1 + k <= 1) {
-        i26 = varargin_1->size[k];
+        i29 = varargin_1->size[k];
       } else {
-        i26 = 1;
+        i29 = 1;
       }
 
-      if (i26 != 0) {
+      if (i29 != 0) {
         exitg1 = 1;
       } else {
         k++;

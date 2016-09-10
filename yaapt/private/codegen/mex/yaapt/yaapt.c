@@ -17,9 +17,11 @@
 #include "tm_trk.h"
 #include "spec_trk.h"
 #include "nlfer.h"
+#include "mrdivide.h"
 #include "nonlinear.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
@@ -59,21 +61,21 @@ static emlrtRSInfo k_emlrtRSI = { 159, "yaapt",
 static emlrtRSInfo l_emlrtRSI = { 160, "yaapt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m" };
 
-static emlrtRSInfo pn_emlrtRSI = { 50, "dynamic",
+static emlrtRSInfo ip_emlrtRSI = { 50, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRSInfo qn_emlrtRSI = { 96, "dynamic",
+static emlrtRSInfo jp_emlrtRSI = { 96, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtRSInfo xn_emlrtRSI = { 14, "Pitch_Optimization",
+static emlrtRSInfo qp_emlrtRSI = { 14, "Pitch_Optimization",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m"
 };
 
-static emlrtRSInfo yn_emlrtRSI = { 15, "Pitch_Optimization",
+static emlrtRSInfo rp_emlrtRSI = { 15, "Pitch_Optimization",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m"
 };
 
-static emlrtRSInfo ao_emlrtRSI = { 16, "Pitch_Optimization",
+static emlrtRSInfo sp_emlrtRSI = { 16, "Pitch_Optimization",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m"
 };
 
@@ -89,29 +91,29 @@ static emlrtRTEInfo c_emlrtRTEI = { 9, 1, "Preprocess",
 static emlrtRTEInfo d_emlrtRTEI = { 66, 1, "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m" };
 
-static emlrtBCInfo emlrtBCI = { -1, -1, 80, 50, "Energy", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo b_emlrtBCI = { -1, -1, 80, 38, "Energy", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo c_emlrtBCI = { -1, -1, 75, 62, "Pitch", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo d_emlrtBCI = { -1, -1, 75, 60, "Pitch", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo e_emlrtBCI = { -1, -1, 75, 51, "Pitch", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo f_emlrtBCI = { -1, -1, 75, 49, "Pitch", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo g_emlrtBCI = { -1, -1, 49, 20, "Pitch", "dynamic",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
-
-static emlrtBCInfo h_emlrtBCI = { -1, -1, 11, 1, "Data_temp", "Preprocess",
+static emlrtBCInfo emlrtBCI = { -1, -1, 11, 1, "Data_temp", "Preprocess",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Preprocess.m", 0 };
+
+static emlrtBCInfo b_emlrtBCI = { -1, -1, 49, 20, "Pitch", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
+
+static emlrtBCInfo c_emlrtBCI = { -1, -1, 75, 49, "Pitch", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
+
+static emlrtBCInfo d_emlrtBCI = { -1, -1, 75, 51, "Pitch", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
+
+static emlrtBCInfo e_emlrtBCI = { -1, -1, 75, 60, "Pitch", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
+
+static emlrtBCInfo f_emlrtBCI = { -1, -1, 75, 62, "Pitch", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
+
+static emlrtBCInfo g_emlrtBCI = { -1, -1, 80, 38, "Energy", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
+
+static emlrtBCInfo h_emlrtBCI = { -1, -1, 80, 50, "Energy", "dynamic",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
 static emlrtBCInfo i_emlrtBCI = { -1, -1, 10, 1, "Data_temp", "Preprocess",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Preprocess.m", 0 };
@@ -240,11 +242,11 @@ static emlrtBCInfo tb_emlrtBCI = { -1, -1, 86, 27, "Trans", "dynamic",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\dynamic.m", 0 };
 
 /* Function Declarations */
-static void o_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void p_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     emlrtMCInfo *location);
 
 /* Function Definitions */
-static void o_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void p_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     emlrtMCInfo *location)
 {
   const mxArray *pArrays[2];
@@ -272,28 +274,28 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   real_T nFs;
   real_T y;
   real_T nframesize;
+  emxArray_real_T *Energy;
+  emxArray_boolean_T *VUVEnergy;
+  const mxArray *b_y;
+  char_T u[34];
   static const char_T varargin_1[34] = { 'F', 'r', 'a', 'm', 'e', ' ', 'l', 'e',
     'n', 'g', 't', 'h', ' ', 'v', 'a', 'l', 'u', 'e', ' ', '%', 'd', ' ', 'i',
     's', ' ', 't', 'o', 'o', ' ', 's', 'h', 'o', 'r', 't' };
 
-  char_T u[34];
-  const mxArray *b_y;
+  emxArray_real_T *b_DataD;
+  const mxArray *m0;
   static const int32_T iv0[2] = { 1, 34 };
 
-  const mxArray *m0;
+  const mxArray *c_y;
+  char_T b_u[39];
   static const char_T b_varargin_1[39] = { 'F', 'r', 'a', 'm', 'e', ' ', 'l',
     'e', 'n', 'g', 't', 'h', ' ', 'v', 'a', 'l', 'u', 'e', ' ', '%', 'd', ' ',
     'e', 'x', 'c', 'e', 'e', 'd', 's', ' ', 't', 'h', 'e', ' ', 'l', 'i', 'm',
     'i', 't' };
 
-  char_T b_u[39];
-  const mxArray *c_y;
   static const int32_T iv1[2] = { 1, 39 };
 
-  emxArray_boolean_T *VUVEnergy;
-  emxArray_real_T *b_DataD;
   struct_T expl_temp;
-  emxArray_real_T *VUVSPitch;
   emxArray_real_T *pAvg;
   emxArray_real_T *pStd;
   emxArray_real_T *TPitch1;
@@ -304,15 +306,18 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   emxArray_real_T *Merit;
   int32_T numframes;
   int32_T numcands;
-  emxArray_real_T *b_RPitch;
-  emxArray_real_T *c_RPitch;
+  emxArray_real_T *b_Data_temp;
   emxArray_real_T *Trans;
   real_T mean_pitch;
   int32_T j;
   int32_T k;
-  boolean_T guard1 = false;
-  boolean_T guard2 = false;
   emxArray_real_T *r1;
+  boolean_T guard6 = false;
+  boolean_T guard3 = false;
+  boolean_T guard4 = false;
+  boolean_T guard5 = false;
+  boolean_T guard2 = false;
+  boolean_T guard1 = false;
   emlrtStack st;
   emlrtStack b_st;
   st.prev = sp;
@@ -321,6 +326,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
   emxInit_real_T(sp, &Data_temp, 2, &c_emlrtRTEI, true);
+  covrtLogFcn(&emlrtCoverageInstance, 0U, 0);
 
   /*  YAAPT Fundamental Frequency (Pitch) tracking */
   /*  */
@@ -366,6 +372,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* -- PARAMETERS ---------------------------------------------------------------- */
   /*  Preliminary input arguments check */
   /* 'yaapt:49' if nargin<2 */
+  covrtLogIf(&emlrtCoverageInstance, 0U, 0U, 0, false);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 0U, 1);
+
   /*  Default values for the tracking with voiced/unvoiced decision */
   /*  % Length of each analysis frame (ms) */
   /*  % Spacing between analysis frame (ms) */
@@ -466,6 +475,8 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /*   Create the squared or absolute values of filtered speech data */
   /* 'yaapt:121' Data_after = Preprocess(Data); */
   st.site = &emlrtRSI;
+  covrtLogFcn(&emlrtCoverageInstance, 1U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 1U, 0);
 
   /*  Preprocess the raw data from android voice recorder */
   /*  */
@@ -504,14 +515,14 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     i0 = Data_temp->size[1];
     end = Data_temp->size[1] - 2000;
     if (!((end >= 1) && (end <= i0))) {
-      emlrtDynamicBoundsCheckR2012b(end, 1, i0, &h_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(end, 1, i0, &emlrtBCI, &st);
     }
 
     i0 = end - 1;
     end = Data_temp->size[1];
     b_Data = Data_temp->size[1];
     if (!((b_Data >= 1) && (b_Data <= end))) {
-      emlrtDynamicBoundsCheckR2012b(b_Data, 1, end, &h_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(b_Data, 1, end, &emlrtBCI, &st);
     }
   }
 
@@ -551,7 +562,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   }
 
   /* 'yaapt:126' if (nframesize < 15) */
-  if (nframesize < 15.0) {
+  if (covrtLogIf(&emlrtCoverageInstance, 0U, 0U, 1, nframesize < 15.0)) {
+    covrtLogBasicBlock(&emlrtCoverageInstance, 0U, 2);
+
     /* 'yaapt:127' error('Frame length value %d is too short', Prm.frame_length); */
     st.site = &c_emlrtRSI;
     for (i0 = 0; i0 < 34; i0++) {
@@ -562,12 +575,14 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     m0 = emlrtCreateCharArray(2, iv0);
     emlrtInitCharArrayR2013a(&st, 34, m0, &u[0]);
     emlrtAssign(&b_y, m0);
-    b_st.site = &ho_emlrtRSI;
-    o_error(&b_st, b_y, emlrt_marshallOut(Parameter[0]), &emlrtMCI);
+    b_st.site = &fq_emlrtRSI;
+    p_error(&b_st, b_y, emlrt_marshallOut(Parameter[0]), &emlrtMCI);
   }
 
   /* 'yaapt:129' if (nframesize > 2048) */
-  if (nframesize > 2048.0) {
+  if (covrtLogIf(&emlrtCoverageInstance, 0U, 0U, 2, nframesize > 2048.0)) {
+    covrtLogBasicBlock(&emlrtCoverageInstance, 0U, 3);
+
     /* 'yaapt:130' error('Frame length value %d exceeds the limit', Prm.frame_length); */
     st.site = &d_emlrtRSI;
     for (i0 = 0; i0 < 39; i0++) {
@@ -578,19 +593,21 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     m0 = emlrtCreateCharArray(2, iv1);
     emlrtInitCharArrayR2013a(&st, 39, m0, &b_u[0]);
     emlrtAssign(&c_y, m0);
-    b_st.site = &ho_emlrtRSI;
-    o_error(&b_st, c_y, emlrt_marshallOut(Parameter[0]), &emlrtMCI);
+    b_st.site = &fq_emlrtRSI;
+    p_error(&b_st, c_y, emlrt_marshallOut(Parameter[0]), &emlrtMCI);
   }
 
+  emxInit_real_T(sp, &Energy, 2, &emlrtRTEI, true);
   emxInit_boolean_T(sp, &VUVEnergy, 2, &emlrtRTEI, true);
   emxInit_real_T(sp, &b_DataD, 2, &emlrtRTEI, true);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 0U, 4);
 
   /*   Step 2. Spectral pitch tracking */
   /*   Calculate NLFER and determine voiced/unvoiced frames with NLFER */
   /* 'yaapt:135' [Energy, VUVEnergy]= nlfer(DataB, nFs, Prm); */
   st.site = &e_emlrtRSI;
   nlfer(&st, DataB, nFs, Parameter[0], Parameter[1], Parameter[2], Parameter[3],
-        Parameter[4], Parameter[8], Data_temp, VUVEnergy);
+        Parameter[4], Parameter[8], Energy, VUVEnergy);
 
   /*   Calculate an approximate pitch track from the spectrum. */
   /*   At this point, SPitch is best estimate of pitch track from spectrum */
@@ -639,7 +656,6 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     b_DataD->data[i0] = DataD->data[i0];
   }
 
-  emxInit_real_T(sp, &VUVSPitch, 2, &emlrtRTEI, true);
   emxInit_real_T1(sp, &pAvg, 1, &emlrtRTEI, true);
   emxInit_real_T1(sp, &pStd, 1, &emlrtRTEI, true);
   emxInit_real_T(sp, &TPitch1, 2, &emlrtRTEI, true);
@@ -649,7 +665,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   emxInit_real_T(sp, &RPitch, 2, &emlrtRTEI, true);
   emxInit_real_T(sp, &Merit, 2, &emlrtRTEI, true);
   st.site = &f_emlrtRSI;
-  spec_trk(&st, b_DataD, nFs, VUVEnergy, &expl_temp, Pitch_before, VUVSPitch,
+  spec_trk(&st, b_DataD, nFs, VUVEnergy, &expl_temp, Data_temp, Pitch_before,
            pAvg, pStd);
 
   /*   Step 3. Temporal pitch tracking based on NCCF */
@@ -657,14 +673,14 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /*   Pitch tracking from the filterd original signal  */
   /* 'yaapt:145' [TPitch1, TMerit1] = tm_trk(DataB, nFs, SPitch, pStd, pAvg, Prm); */
   st.site = &g_emlrtRSI;
-  tm_trk(&st, DataB, nFs, Pitch_before, pStd, Parameter[0], Parameter[1],
+  tm_trk(&st, DataB, nFs, Data_temp, pStd, Parameter[0], Parameter[1],
          Parameter[2], Parameter[3], Parameter[20], Parameter[21], Parameter[22],
          Parameter[23], Parameter[24], TPitch1, TMerit1);
 
   /*   Pitch tracking from the filterd nonlinear signal  */
   /* 'yaapt:148' [TPitch2, TMerit2] = tm_trk(DataD, nFs, SPitch, pStd, pAvg, Prm); */
   st.site = &h_emlrtRSI;
-  tm_trk(&st, DataD, nFs, Pitch_before, pStd, Parameter[0], Parameter[1],
+  tm_trk(&st, DataD, nFs, Data_temp, pStd, Parameter[0], Parameter[1],
          Parameter[2], Parameter[3], Parameter[20], Parameter[21], Parameter[22],
          Parameter[23], Parameter[24], TPitch2, TMerit2);
 
@@ -672,12 +688,14 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* 'yaapt:151' [RPitch, Merit] = refine(TPitch1, TMerit1, TPitch2, TMerit2, SPitch, ... */
   /* 'yaapt:152'                         Energy, VUVEnergy, Prm); */
   st.site = &i_emlrtRSI;
-  refine(&st, TPitch1, TMerit1, TPitch2, TMerit2, Pitch_before, Data_temp,
-         VUVEnergy, Parameter[9], Parameter[25], Parameter[27], RPitch, Merit);
+  refine(&st, TPitch1, TMerit1, TPitch2, TMerit2, Data_temp, Energy, VUVEnergy,
+         Parameter[9], Parameter[25], Parameter[27], RPitch, Merit);
 
   /*  Step 5. Use dyanamic programming to determine the final pitch */
   /* 'yaapt:155' Pitch_before  = dynamic(RPitch, Merit, Energy, Prm); */
   st.site = &j_emlrtRSI;
+  covrtLogFcn(&emlrtCoverageInstance, 20U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 20U, 0);
 
   /* DYNAMIC Dynamic programming for YAAPT pitch tracking */
   /*  */
@@ -724,15 +742,18 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
   /* Copy some arrays */
   /* 'dynamic:49' BestPitch  = Pitch(numcands-1,:); */
+  loop_ub = RPitch->size[1];
   i0 = RPitch->size[0];
-  end = (int32_T)((real_T)RPitch->size[0] - 1.0);
-  if (!((end >= 1) && (end <= i0))) {
-    emlrtDynamicBoundsCheckR2012b(end, 1, i0, &g_emlrtBCI, &st);
+  b_Data = RPitch->size[0] - 1;
+  if (!((b_Data >= 1) && (b_Data <= i0))) {
+    emlrtDynamicBoundsCheckR2012b(b_Data, 1, i0, &b_emlrtBCI, &st);
   }
 
-  /* 'dynamic:50' mean_pitch = mean(BestPitch(BestPitch>0)); */
-  end = RPitch->size[1] - 1;
-  b_Data = 0;
+  i0 = Data_temp->size[0] * Data_temp->size[1];
+  Data_temp->size[0] = 1;
+  Data_temp->size[1] = loop_ub;
+  emxEnsureCapacity(&st, (emxArray__common *)Data_temp, i0, (int32_T)sizeof
+                    (real_T), &emlrtRTEI);
   emxFree_real_T(&b_DataD);
   emxFree_real_T(&TMerit2);
   emxFree_real_T(&TPitch2);
@@ -743,8 +764,16 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   emxFree_boolean_T(&VUVEnergy);
   emxFree_real_T(&DataD);
   emxFree_real_T(&DataB);
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    Data_temp->data[Data_temp->size[0] * i0] = RPitch->data[(b_Data +
+      RPitch->size[0] * i0) - 1];
+  }
+
+  /* 'dynamic:50' mean_pitch = mean(BestPitch(BestPitch>0)); */
+  end = RPitch->size[1] - 1;
+  b_Data = 0;
   for (loop_ub = 0; loop_ub <= end; loop_ub++) {
-    if (RPitch->data[(numcands + RPitch->size[0] * loop_ub) - 1] > 0.0) {
+    if (Data_temp->data[loop_ub] > 0.0) {
       b_Data++;
     }
   }
@@ -756,47 +785,33 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
                     &emlrtRTEI);
   b_Data = 0;
   for (loop_ub = 0; loop_ub <= end; loop_ub++) {
-    if (RPitch->data[(numcands + RPitch->size[0] * loop_ub) - 1] > 0.0) {
+    if (Data_temp->data[loop_ub] > 0.0) {
       r0->data[b_Data] = loop_ub + 1;
       b_Data++;
     }
   }
 
-  emxInit_real_T(&st, &b_RPitch, 2, &emlrtRTEI, true);
-  emxInit_real_T(&st, &c_RPitch, 2, &emlrtRTEI, true);
+  emxInit_real_T(&st, &b_Data_temp, 2, &emlrtRTEI, true);
   i0 = RPitch->size[1];
-  loop_ub = RPitch->size[1];
-  b_Data = RPitch->size[0];
-  end = c_RPitch->size[0] * c_RPitch->size[1];
-  c_RPitch->size[0] = 1;
-  c_RPitch->size[1] = loop_ub;
-  emxEnsureCapacity(&st, (emxArray__common *)c_RPitch, end, (int32_T)sizeof
+  end = b_Data_temp->size[0] * b_Data_temp->size[1];
+  b_Data_temp->size[0] = 1;
+  b_Data_temp->size[1] = r0->size[1];
+  emxEnsureCapacity(&st, (emxArray__common *)b_Data_temp, end, (int32_T)sizeof
                     (real_T), &emlrtRTEI);
+  loop_ub = r0->size[0] * r0->size[1];
   for (end = 0; end < loop_ub; end++) {
-    c_RPitch->data[c_RPitch->size[0] * end] = RPitch->data[(b_Data +
-      RPitch->size[0] * end) - 2];
-  }
-
-  end = b_RPitch->size[0] * b_RPitch->size[1];
-  b_RPitch->size[0] = 1;
-  b_RPitch->size[1] = r0->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)b_RPitch, end, (int32_T)sizeof
-                    (real_T), &emlrtRTEI);
-  loop_ub = r0->size[1];
-  for (end = 0; end < loop_ub; end++) {
-    b_Data = r0->data[r0->size[0] * end];
+    b_Data = r0->data[end];
     if (!((b_Data >= 1) && (b_Data <= i0))) {
       emlrtDynamicBoundsCheckR2012b(b_Data, 1, i0, &j_emlrtBCI, &st);
     }
 
-    b_RPitch->data[b_RPitch->size[0] * end] = c_RPitch->data[b_Data - 1];
+    b_Data_temp->data[end] = Data_temp->data[b_Data - 1];
   }
 
-  emxFree_real_T(&c_RPitch);
   emxFree_int32_T(&r0);
   emxInit_real_T2(&st, &Trans, 3, &d_emlrtRTEI, true);
-  b_st.site = &pn_emlrtRSI;
-  mean_pitch = mean(&b_st, b_RPitch);
+  b_st.site = &ip_emlrtRSI;
+  mean_pitch = mean(&b_st, b_Data_temp);
 
   /* The following weighting factors are used to differentially weight */
   /*  the various types of transitions which can occur, as well as weight */
@@ -817,7 +832,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   emxEnsureCapacity(&st, (emxArray__common *)Trans, i0, (int32_T)sizeof(real_T),
                     &emlrtRTEI);
   loop_ub = RPitch->size[0] * RPitch->size[0] * RPitch->size[1];
-  emxFree_real_T(&b_RPitch);
+  emxFree_real_T(&b_Data_temp);
   for (i0 = 0; i0 < loop_ub; i0++) {
     Trans->data[i0] = 1.0;
   }
@@ -827,12 +842,18 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* 'dynamic:70' for i = 2:numframes */
   loop_ub = 0;
   while (loop_ub <= numframes - 1) {
+    covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 0, 1);
+
     /* 'dynamic:71' for j = 1:numcands */
     j = 1;
     while (j - 1 <= numcands) {
+      covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 1, 1);
+
       /* 'dynamic:72' for k = 1:numcands */
       k = 1;
       while (k - 1 <= numcands) {
+        covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 2, 1);
+
         /*  both candidates voiced */
         /* 'dynamic:74' if ((Pitch(j,i) > 0) && (Pitch(k,i-1) > 0) ) */
         i0 = RPitch->size[0];
@@ -845,7 +866,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
           emlrtDynamicBoundsCheckR2012b(loop_ub + 2, 1, i0, &v_emlrtBCI, &st);
         }
 
-        if (RPitch->data[(j + RPitch->size[0] * (loop_ub + 1)) - 1] > 0.0) {
+        guard6 = false;
+        if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 0, RPitch->data[(j +
+              RPitch->size[0] * (loop_ub + 1)) - 1] > 0.0)) {
           i0 = RPitch->size[0];
           if (!((k >= 1) && (k <= i0))) {
             emlrtDynamicBoundsCheckR2012b(k, 1, i0, &w_emlrtBCI, &st);
@@ -856,30 +879,35 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
             emlrtDynamicBoundsCheckR2012b(loop_ub + 1, 1, i0, &x_emlrtBCI, &st);
           }
 
-          if (RPitch->data[(k + RPitch->size[0] * loop_ub) - 1] > 0.0) {
+          if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 1, RPitch->data[(k +
+                RPitch->size[0] * loop_ub) - 1] > 0.0)) {
+            covrtLogMcdc(&emlrtCoverageInstance, 20U, 0U, 0, true);
+            covrtLogIf(&emlrtCoverageInstance, 20U, 0U, 0, true);
+            covrtLogBasicBlock(&emlrtCoverageInstance, 20U, 1);
+
             /* 'dynamic:75' Trans(k,j,i) = dp_w1*(abs(Pitch(j,i)-Pitch(k,i-1))/mean_pitch); */
             i0 = RPitch->size[0];
             end = (j - 1) + 1;
             if (!((end >= 1) && (end <= i0))) {
-              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &f_emlrtBCI, &st);
+              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &c_emlrtBCI, &st);
             }
 
             i0 = RPitch->size[1];
             end = (int32_T)(2.0 + (real_T)loop_ub);
             if (!((end >= 1) && (end <= i0))) {
-              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &e_emlrtBCI, &st);
+              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &d_emlrtBCI, &st);
             }
 
             i0 = RPitch->size[0];
             end = (k - 1) + 1;
             if (!((end >= 1) && (end <= i0))) {
-              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &d_emlrtBCI, &st);
+              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &e_emlrtBCI, &st);
             }
 
             i0 = RPitch->size[1];
             end = (int32_T)((2.0 + (real_T)loop_ub) - 1.0);
             if (!((end >= 1) && (end <= i0))) {
-              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &c_emlrtBCI, &st);
+              emlrtDynamicBoundsCheckR2012b(end, 1, i0, &f_emlrtBCI, &st);
             }
 
             i0 = Trans->size[0];
@@ -903,7 +931,16 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
               (muDoubleScalarAbs(RPitch->data[(j + RPitch->size[0] * (loop_ub +
                   1)) - 1] - RPitch->data[(k + RPitch->size[0] * loop_ub) - 1]) /
                mean_pitch);
+          } else {
+            guard6 = true;
           }
+        } else {
+          guard6 = true;
+        }
+
+        if (guard6) {
+          covrtLogMcdc(&emlrtCoverageInstance, 20U, 0U, 0, false);
+          covrtLogIf(&emlrtCoverageInstance, 20U, 0U, 0, false);
         }
 
         /*  one candiate is unvoiced */
@@ -918,9 +955,11 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
           emlrtDynamicBoundsCheckR2012b(loop_ub + 2, 1, i0, &db_emlrtBCI, &st);
         }
 
-        guard1 = false;
-        guard2 = false;
-        if (RPitch->data[(j + RPitch->size[0] * (loop_ub + 1)) - 1] == 0.0) {
+        guard3 = false;
+        guard4 = false;
+        guard5 = false;
+        if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 2, RPitch->data[(j +
+              RPitch->size[0] * (loop_ub + 1)) - 1] == 0.0)) {
           i0 = RPitch->size[0];
           if (!((k >= 1) && (k <= i0))) {
             emlrtDynamicBoundsCheckR2012b(k, 1, i0, &eb_emlrtBCI, &st);
@@ -931,16 +970,17 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
             emlrtDynamicBoundsCheckR2012b(loop_ub + 1, 1, i0, &fb_emlrtBCI, &st);
           }
 
-          if (RPitch->data[(k + RPitch->size[0] * loop_ub) - 1] > 0.0) {
-            guard1 = true;
+          if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 3, RPitch->data[(k +
+                RPitch->size[0] * loop_ub) - 1] > 0.0)) {
+            guard4 = true;
           } else {
-            guard2 = true;
+            guard5 = true;
           }
         } else {
-          guard2 = true;
+          guard5 = true;
         }
 
-        if (guard2) {
+        if (guard5) {
           i0 = RPitch->size[0];
           if (!((j >= 1) && (j <= i0))) {
             emlrtDynamicBoundsCheckR2012b(j, 1, i0, &gb_emlrtBCI, &st);
@@ -951,7 +991,8 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
             emlrtDynamicBoundsCheckR2012b(loop_ub + 2, 1, i0, &hb_emlrtBCI, &st);
           }
 
-          if (RPitch->data[(j + RPitch->size[0] * (loop_ub + 1)) - 1] > 0.0) {
+          if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 4, RPitch->data[(j +
+                RPitch->size[0] * (loop_ub + 1)) - 1] > 0.0)) {
             i0 = RPitch->size[0];
             if (!((k >= 1) && (k <= i0))) {
               emlrtDynamicBoundsCheckR2012b(k, 1, i0, &ib_emlrtBCI, &st);
@@ -963,24 +1004,33 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
                 &st);
             }
 
-            if (RPitch->data[(k + RPitch->size[0] * loop_ub) - 1] == 0.0) {
-              guard1 = true;
+            if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 5, RPitch->data[(k
+                  + RPitch->size[0] * loop_ub) - 1] == 0.0)) {
+              guard4 = true;
+            } else {
+              guard3 = true;
             }
+          } else {
+            guard3 = true;
           }
         }
 
-        if (guard1) {
+        if (guard4) {
+          covrtLogMcdc(&emlrtCoverageInstance, 20U, 0U, 1, true);
+          covrtLogIf(&emlrtCoverageInstance, 20U, 0U, 1, true);
+          covrtLogBasicBlock(&emlrtCoverageInstance, 20U, 2);
+
           /* 'dynamic:80' benefit = min(1, abs(Energy(i-1)-Energy(i))); */
-          i0 = Data_temp->size[1];
+          i0 = Energy->size[1];
           end = (int32_T)((2.0 + (real_T)loop_ub) - 1.0);
           if (!((end >= 1) && (end <= i0))) {
-            emlrtDynamicBoundsCheckR2012b(end, 1, i0, &b_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(end, 1, i0, &g_emlrtBCI, &st);
           }
 
-          i0 = Data_temp->size[1];
+          i0 = Energy->size[1];
           end = (int32_T)(2.0 + (real_T)loop_ub);
           if (!((end >= 1) && (end <= i0))) {
-            emlrtDynamicBoundsCheckR2012b(end, 1, i0, &emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(end, 1, i0, &h_emlrtBCI, &st);
           }
 
           /* 'dynamic:81' Trans(k,j,i) =  dp_w2*(1-benefit); */
@@ -1001,8 +1051,13 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
           Trans->data[((k + Trans->size[0] * (j - 1)) + Trans->size[0] *
                        Trans->size[1] * (loop_ub + 1)) - 1] = Parameter[29] *
-            (1.0 - muDoubleScalarMin(1.0, muDoubleScalarAbs(Data_temp->
-               data[loop_ub] - Data_temp->data[loop_ub + 1])));
+            (1.0 - muDoubleScalarMin(1.0, muDoubleScalarAbs(Energy->data[loop_ub]
+               - Energy->data[loop_ub + 1])));
+        }
+
+        if (guard3) {
+          covrtLogMcdc(&emlrtCoverageInstance, 20U, 0U, 1, false);
+          covrtLogIf(&emlrtCoverageInstance, 20U, 0U, 1, false);
         }
 
         /*  both candidates are unvoiced */
@@ -1017,7 +1072,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
           emlrtDynamicBoundsCheckR2012b(loop_ub + 2, 1, i0, &ob_emlrtBCI, &st);
         }
 
-        if (RPitch->data[(j + RPitch->size[0] * (loop_ub + 1)) - 1] == 0.0) {
+        guard2 = false;
+        if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 6, RPitch->data[(j +
+              RPitch->size[0] * (loop_ub + 1)) - 1] == 0.0)) {
           i0 = RPitch->size[0];
           if (!((k >= 1) && (k <= i0))) {
             emlrtDynamicBoundsCheckR2012b(k, 1, i0, &pb_emlrtBCI, &st);
@@ -1028,7 +1085,12 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
             emlrtDynamicBoundsCheckR2012b(loop_ub + 1, 1, i0, &qb_emlrtBCI, &st);
           }
 
-          if (RPitch->data[(k + RPitch->size[0] * loop_ub) - 1] == 0.0) {
+          if (covrtLogCond(&emlrtCoverageInstance, 20U, 0U, 7, RPitch->data[(k +
+                RPitch->size[0] * loop_ub) - 1] == 0.0)) {
+            covrtLogMcdc(&emlrtCoverageInstance, 20U, 0U, 2, true);
+            covrtLogIf(&emlrtCoverageInstance, 20U, 0U, 2, true);
+            covrtLogBasicBlock(&emlrtCoverageInstance, 20U, 3);
+
             /* 'dynamic:86' Trans(k,j,i) =  dp_w3; */
             i0 = Trans->size[0];
             if (!((k >= 1) && (k <= i0))) {
@@ -1048,7 +1110,16 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
             Trans->data[((k + Trans->size[0] * (j - 1)) + Trans->size[0] *
                          Trans->size[1] * (loop_ub + 1)) - 1] = Parameter[30];
+          } else {
+            guard2 = true;
           }
+        } else {
+          guard2 = true;
+        }
+
+        if (guard2) {
+          covrtLogMcdc(&emlrtCoverageInstance, 20U, 0U, 2, false);
+          covrtLogIf(&emlrtCoverageInstance, 20U, 0U, 2, false);
         }
 
         k++;
@@ -1057,17 +1128,22 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
         }
       }
 
+      covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 2, 0);
       j++;
       if (*emlrtBreakCheckR2012bFlagVar != 0) {
         emlrtBreakCheckR2012b(&st);
       }
     }
 
+    covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 1, 0);
     loop_ub++;
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
       emlrtBreakCheckR2012b(&st);
     }
   }
+
+  covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 0, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 20U, 4);
 
   /*  Overal balance between Local and Transition costs */
   /* 'dynamic:93' Trans = Trans/dp_w4; */
@@ -1097,7 +1173,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   }
 
   emxFree_real_T(&Merit);
-  b_st.site = &qn_emlrtRSI;
+  b_st.site = &jp_emlrtRSI;
   path1(&b_st, r1, Trans, Data_temp);
 
   /* extracting the pitch, using Path */
@@ -1117,6 +1193,9 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* 'dynamic:100' for i = 1:numframes */
   loop_ub = 1;
   while (loop_ub - 1 <= numframes) {
+    covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 3, 1);
+    covrtLogBasicBlock(&emlrtCoverageInstance, 20U, 5);
+
     /* 'dynamic:101' FinPitch(i) = Pitch(Path(i),i); */
     i0 = RPitch->size[0];
     end = Data_temp->size[1];
@@ -1153,6 +1232,7 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   }
 
   emxFree_real_T(&RPitch);
+  covrtLogFor(&emlrtCoverageInstance, 20U, 0U, 3, 0);
 
   /* 'yaapt:156' numfrms = length(Pitch_before); */
   *numfrms = Pitch_before->size[1];
@@ -1162,11 +1242,13 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
 
   /* 'yaapt:159' [Pitch_Freq,~] = freqSelect(Pitch_before); */
   st.site = &k_emlrtRSI;
-  freqSelect(&st, Pitch_before, VUVSPitch, Data_temp);
+  freqSelect(&st, Pitch_before, Energy, Data_temp);
 
   /* 'yaapt:159' ~ */
   /* 'yaapt:160' Pitch = Pitch_Optimization(Pitch_Freq, Prm); */
   st.site = &l_emlrtRSI;
+  covrtLogFcn(&emlrtCoverageInstance, 23U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 23U, 0);
 
   /*  Preprocess the raw data from android voice recorder */
   /*  */
@@ -1176,21 +1258,26 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
   /* 'Pitch_Optimization:7' Pitch_temp = Pitch; */
   i0 = Pitch->size[0] * Pitch->size[1];
   Pitch->size[0] = 1;
-  Pitch->size[1] = VUVSPitch->size[1];
+  Pitch->size[1] = Energy->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)Pitch, i0, (int32_T)sizeof(real_T),
                     &emlrtRTEI);
-  loop_ub = VUVSPitch->size[0] * VUVSPitch->size[1];
+  loop_ub = Energy->size[0] * Energy->size[1];
   emxFree_real_T(&Data_temp);
   emxFree_real_T(&Pitch_before);
   for (i0 = 0; i0 < loop_ub; i0++) {
-    Pitch->data[i0] = VUVSPitch->data[i0];
+    Pitch->data[i0] = Energy->data[i0];
   }
 
   /* 'Pitch_Optimization:8' for i=1:length(Pitch_temp) */
   loop_ub = 1;
-  while (loop_ub - 1 <= VUVSPitch->size[1] - 1) {
+  while (loop_ub - 1 <= Energy->size[1] - 1) {
+    covrtLogFor(&emlrtCoverageInstance, 23U, 0U, 0, 1);
+
     /* 'Pitch_Optimization:9' if( i+1<length(Pitch_temp) && i-1>0 && Pitch_temp(i-1) ~= Pitch_temp(i) && Pitch_temp(i) ~= Pitch_temp(i+1)) */
-    if ((loop_ub + 1U < (uint32_T)Pitch->size[1]) && (loop_ub - 1 > 0)) {
+    guard1 = false;
+    if (covrtLogCond(&emlrtCoverageInstance, 23U, 0U, 0, loop_ub + 1U <
+                     (uint32_T)Pitch->size[1]) && covrtLogCond
+        (&emlrtCoverageInstance, 23U, 0U, 1, loop_ub - 1 > 0)) {
       i0 = Pitch->size[1];
       end = loop_ub - 1;
       if (!((end >= 1) && (end <= i0))) {
@@ -1202,7 +1289,8 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
         emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i0, &l_emlrtBCI, &st);
       }
 
-      if (Pitch->data[end - 1] != Pitch->data[loop_ub - 1]) {
+      if (covrtLogCond(&emlrtCoverageInstance, 23U, 0U, 2, Pitch->data[end - 1]
+                       != Pitch->data[loop_ub - 1])) {
         i0 = Pitch->size[1];
         if (!((loop_ub >= 1) && (loop_ub <= i0))) {
           emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i0, &m_emlrtBCI, &st);
@@ -1214,7 +1302,12 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
           emlrtDynamicBoundsCheckR2012b(end, 1, i0, &n_emlrtBCI, &st);
         }
 
-        if (Pitch->data[loop_ub - 1] != Pitch->data[end - 1]) {
+        if (covrtLogCond(&emlrtCoverageInstance, 23U, 0U, 3, Pitch->data[loop_ub
+                         - 1] != Pitch->data[end - 1])) {
+          covrtLogMcdc(&emlrtCoverageInstance, 23U, 0U, 0, true);
+          covrtLogIf(&emlrtCoverageInstance, 23U, 0U, 0, true);
+          covrtLogBasicBlock(&emlrtCoverageInstance, 23U, 1);
+
           /* 'Pitch_Optimization:10' Pitch_temp(i) = Pitch_temp(i - 1); */
           i0 = Pitch->size[1];
           end = loop_ub - 1;
@@ -1228,8 +1321,19 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
           }
 
           Pitch->data[loop_ub - 1] = Pitch->data[end - 1];
+        } else {
+          guard1 = true;
         }
+      } else {
+        guard1 = true;
       }
+    } else {
+      guard1 = true;
+    }
+
+    if (guard1) {
+      covrtLogMcdc(&emlrtCoverageInstance, 23U, 0U, 0, false);
+      covrtLogIf(&emlrtCoverageInstance, 23U, 0U, 0, false);
     }
 
     loop_ub++;
@@ -1238,18 +1342,20 @@ void yaapt(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, const
     }
   }
 
-  emxFree_real_T(&VUVSPitch);
+  emxFree_real_T(&Energy);
+  covrtLogFor(&emlrtCoverageInstance, 23U, 0U, 0, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 23U, 2);
 
   /* 'Pitch_Optimization:14' Pitch_temp = Smooth(Pitch_temp, Prm); */
-  b_st.site = &xn_emlrtRSI;
+  b_st.site = &qp_emlrtRSI;
   Smooth(&b_st, Pitch, Parameter[32]);
 
   /* 'Pitch_Optimization:15' Pitch_temp = Smooth(Pitch_temp, Prm); */
-  b_st.site = &yn_emlrtRSI;
+  b_st.site = &rp_emlrtRSI;
   Smooth(&b_st, Pitch, Parameter[32]);
 
   /* 'Pitch_Optimization:16' Pitch_out = Smooth(Pitch_temp, Prm); */
-  b_st.site = &ao_emlrtRSI;
+  b_st.site = &sp_emlrtRSI;
   Smooth(&b_st, Pitch, Parameter[32]);
 
   /*  Pitch_out = Pitch_temp; */

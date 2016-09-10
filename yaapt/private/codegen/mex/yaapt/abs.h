@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __ABS_H__
-#define __ABS_H__
+#ifndef ABS_H
+#define ABS_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"
@@ -26,8 +26,6 @@
 extern void b_abs(const emlrtStack *sp, const emxArray_creal_T *x,
                   emxArray_real_T *y);
 extern void c_abs(const emlrtStack *sp, const emxArray_real_T *x,
-                  emxArray_real_T *y);
-extern void d_abs(const emlrtStack *sp, const emxArray_real_T *x,
                   emxArray_real_T *y);
 
 #endif

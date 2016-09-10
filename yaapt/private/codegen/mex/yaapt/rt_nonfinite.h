@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __RT_NONFINITE_H__
-#define __RT_NONFINITE_H__
+#ifndef RT_NONFINITE_H
+#define RT_NONFINITE_H
 #define rtInf      	mxGetInf()
 #define rtMinusInf 	(-mxGetInf())
 #define rtNaN      	mxGetNaN()

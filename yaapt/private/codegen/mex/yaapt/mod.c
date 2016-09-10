@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "mod.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */

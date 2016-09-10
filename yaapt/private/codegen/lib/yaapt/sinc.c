@@ -1,8 +1,8 @@
 /*
  * File: sinc.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -85,7 +85,7 @@ void b_sinc(emxArray_real_T *x, emxArray_real_T *y)
     emxEnsureCapacity((emxArray__common *)b_ii, b_y, (int)sizeof(int));
   }
 
-  emxInit_real_T2(&i, 1);
+  emxInit_real_T1(&i, 1);
   b_y = i->size[0];
   i->size[0] = b_ii->size[0];
   emxEnsureCapacity((emxArray__common *)i, b_y, (int)sizeof(double));
@@ -164,7 +164,7 @@ void sinc(emxArray_real_T *x, emxArray_real_T *y)
   boolean_T guard1 = false;
   emxArray_real_T *i;
   emxArray_real_T *c_x;
-  emxArray_real_T *r13;
+  emxArray_real_T *r14;
   emxInit_boolean_T1(&b_x, 1);
   i8 = b_x->size[0];
   b_x->size[0] = x->size[0];
@@ -219,7 +219,7 @@ void sinc(emxArray_real_T *x, emxArray_real_T *y)
   }
 
   emxFree_boolean_T(&b_x);
-  emxInit_real_T2(&i, 1);
+  emxInit_real_T1(&i, 1);
   i8 = i->size[0];
   i->size[0] = b_ii->size[0];
   emxEnsureCapacity((emxArray__common *)i, i8, (int)sizeof(double));
@@ -249,7 +249,7 @@ void sinc(emxArray_real_T *x, emxArray_real_T *y)
     y->data[i8] = 3.1415926535897931 * x->data[i8];
   }
 
-  emxInit_real_T2(&c_x, 1);
+  emxInit_real_T1(&c_x, 1);
   i8 = c_x->size[0];
   c_x->size[0] = y->size[0];
   emxEnsureCapacity((emxArray__common *)c_x, i8, (int)sizeof(double));
@@ -262,21 +262,21 @@ void sinc(emxArray_real_T *x, emxArray_real_T *y)
     c_x->data[ii] = sin(c_x->data[ii]);
   }
 
-  emxInit_real_T2(&r13, 1);
-  i8 = r13->size[0];
-  r13->size[0] = x->size[0];
-  emxEnsureCapacity((emxArray__common *)r13, i8, (int)sizeof(double));
+  emxInit_real_T1(&r14, 1);
+  i8 = r14->size[0];
+  r14->size[0] = x->size[0];
+  emxEnsureCapacity((emxArray__common *)r14, i8, (int)sizeof(double));
   ii = x->size[0];
   for (i8 = 0; i8 < ii; i8++) {
-    r13->data[i8] = 3.1415926535897931 * x->data[i8];
+    r14->data[i8] = 3.1415926535897931 * x->data[i8];
   }
 
-  b_rdivide(c_x, r13, y);
+  rdivide(c_x, r14, y);
   i8 = b_ii->size[0];
   b_ii->size[0] = i->size[0];
   emxEnsureCapacity((emxArray__common *)b_ii, i8, (int)sizeof(int));
   ii = i->size[0];
-  emxFree_real_T(&r13);
+  emxFree_real_T(&r14);
   emxFree_real_T(&c_x);
   for (i8 = 0; i8 < ii; i8++) {
     b_ii->data[i8] = (int)i->data[i8];

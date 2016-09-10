@@ -9,23 +9,12 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_mexutil.h"
-#include "tm_trk.h"
+#include "mrdivide.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
-int32_T asr_s32(int32_T u, uint32_T n)
-{
-  int32_T y;
-  if (u >= 0) {
-    y = (int32_T)((uint32_T)u >> n);
-  } else {
-    y = -(int32_T)((uint32_T)-(u + 1) >> n) - 1;
-  }
-
-  return y;
-}
-
 void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
   emlrtMsgIdentifier *parentId, char_T y[14])
 {
@@ -37,10 +26,10 @@ const mxArray *b_sprintf(const emlrtStack *sp, const mxArray *b, const mxArray
   *c, emlrtMCInfo *location)
 {
   const mxArray *pArrays[2];
-  const mxArray *m18;
+  const mxArray *m16;
   pArrays[0] = b;
   pArrays[1] = c;
-  return emlrtCallMATLABR2012b(sp, 1, &m18, 2, pArrays, "sprintf", true,
+  return emlrtCallMATLABR2012b(sp, 1, &m16, 2, pArrays, "sprintf", true,
     location);
 }
 
@@ -61,16 +50,16 @@ int32_T div_s32_floor(const emlrtStack *sp, int32_T numerator, int32_T
 
     emlrtDivisionByZeroErrorR2012b(NULL, sp);
   } else {
-    if (numerator >= 0) {
-      absNumerator = (uint32_T)numerator;
+    if (numerator < 0) {
+      absNumerator = ~(uint32_T)numerator + 1U;
     } else {
-      absNumerator = (uint32_T)-numerator;
+      absNumerator = (uint32_T)numerator;
     }
 
-    if (denominator >= 0) {
-      absDenominator = (uint32_T)denominator;
+    if (denominator < 0) {
+      absDenominator = ~(uint32_T)denominator + 1U;
     } else {
-      absDenominator = (uint32_T)-denominator;
+      absDenominator = (uint32_T)denominator;
     }
 
     quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
@@ -136,7 +125,7 @@ void i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
   emlrtDestroyArray(&src);
 }
 
-void n_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
+void o_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
 {
   const mxArray *pArray;
   pArray = b;

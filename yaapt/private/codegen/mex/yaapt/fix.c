@@ -11,11 +11,12 @@
 #include "fix.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fi_emlrtRSI = { 10, "fix",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\fix.m" };
+static emlrtRSInfo qj_emlrtRSI = { 10, "fix",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\fix.m" };
 
 /* Function Definitions */
 
@@ -45,19 +46,14 @@ void c_fix(const emlrtStack *sp, emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &fi_emlrtRSI;
+  st.site = &qj_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
   b_st.site = &eb_emlrtRSI;
-  if (1 > x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (x->size[0] > 2147483646);
-  }
-
+  overflow = ((!(1 > x->size[0])) && (x->size[0] > 2147483646));
   if (overflow) {
     c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);

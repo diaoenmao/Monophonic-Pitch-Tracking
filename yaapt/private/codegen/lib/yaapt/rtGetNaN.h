@@ -1,12 +1,12 @@
 /*
  * File: rtGetNaN.h
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
-#ifndef __RTGETNAN_H__
-#define __RTGETNAN_H__
+#ifndef RTGETNAN_H
+#define RTGETNAN_H
 #include <stddef.h>
 #include "rtwtypes.h"
 #include "rt_nonfinite.h"

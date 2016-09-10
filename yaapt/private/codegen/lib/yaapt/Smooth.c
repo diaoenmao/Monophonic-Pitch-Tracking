@@ -1,8 +1,8 @@
 /*
  * File: Smooth.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -31,18 +31,18 @@ void Smooth(emxArray_real_T *arr, double Prm_smooth_threshold)
   double chunk1_value;
   double chunk2_value;
   double chunk3_value;
-  int i32;
+  int i34;
   int pointer;
   int i;
   emxArray_real_T *b_chunk3;
   emxArray_real_T *b_chunk2;
   emxArray_real_T *b_chunk1;
+  int n;
   int mtmp;
   int itmp;
-  int ix;
-  int n;
   unsigned int len_tmp[3];
   int m;
+  int ix;
   unsigned int b_mtmp;
   emxInit_real_T(&chunk1, 2);
   emxInit_real_T(&chunk2, 2);
@@ -50,145 +50,142 @@ void Smooth(emxArray_real_T *arr, double Prm_smooth_threshold)
   chunk1_value = 0.0;
   chunk2_value = 0.0;
   chunk3_value = 0.0;
-  i32 = chunk1->size[0] * chunk1->size[1];
+  i34 = chunk1->size[0] * chunk1->size[1];
   chunk1->size[0] = 0;
   chunk1->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk1, i32, (int)sizeof(double));
-  i32 = chunk2->size[0] * chunk2->size[1];
+  emxEnsureCapacity((emxArray__common *)chunk1, i34, (int)sizeof(double));
+  i34 = chunk2->size[0] * chunk2->size[1];
   chunk2->size[0] = 0;
   chunk2->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk2, i32, (int)sizeof(double));
-  i32 = chunk3->size[0] * chunk3->size[1];
+  emxEnsureCapacity((emxArray__common *)chunk2, i34, (int)sizeof(double));
+  i34 = chunk3->size[0] * chunk3->size[1];
   chunk3->size[0] = 0;
   chunk3->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)chunk3, i32, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)chunk3, i34, (int)sizeof(double));
   pointer = 0;
 
   /*  10 frames */
   /*  percent_threshold = 0.01; % 1 percent */
-  i32 = arr->size[1];
+  i34 = arr->size[1];
   i = 0;
   emxInit_real_T(&b_chunk3, 2);
   emxInit_real_T(&b_chunk2, 2);
   emxInit_real_T(&b_chunk1, 2);
-  while (i <= i32 - 1) {
+  while (i <= i34 - 1) {
     if (pointer == 0) {
       chunk1_value = arr->data[i];
-      mtmp = chunk1->size[0] * chunk1->size[1];
+      n = chunk1->size[0] * chunk1->size[1];
       chunk1->size[0] = 1;
       chunk1->size[1] = 1;
-      emxEnsureCapacity((emxArray__common *)chunk1, mtmp, (int)sizeof(double));
+      emxEnsureCapacity((emxArray__common *)chunk1, n, (int)sizeof(double));
       chunk1->data[0] = 1.0 + (double)i;
       pointer = 1;
     } else if (pointer == 1) {
       if ((chunk1->size[0] == 0) || (chunk1->size[1] == 0)) {
         chunk1_value = arr->data[i];
-        mtmp = chunk1->size[0] * chunk1->size[1];
+        n = chunk1->size[0] * chunk1->size[1];
         chunk1->size[0] = 1;
         chunk1->size[1] = 1;
-        emxEnsureCapacity((emxArray__common *)chunk1, mtmp, (int)sizeof(double));
+        emxEnsureCapacity((emxArray__common *)chunk1, n, (int)sizeof(double));
         chunk1->data[0] = 1.0 + (double)i;
       } else if (arr->data[i] == chunk1_value) {
-        mtmp = b_chunk1->size[0] * b_chunk1->size[1];
-        b_chunk1->size[0] = chunk1->size[0];
-        b_chunk1->size[1] = chunk1->size[1] + 1;
-        emxEnsureCapacity((emxArray__common *)b_chunk1, mtmp, (int)sizeof(double));
-        itmp = chunk1->size[1];
-        for (mtmp = 0; mtmp < itmp; mtmp++) {
-          ix = chunk1->size[0];
-          for (n = 0; n < ix; n++) {
-            b_chunk1->data[n + b_chunk1->size[0] * mtmp] = chunk1->data[n +
-              chunk1->size[0] * mtmp];
-          }
+        mtmp = chunk1->size[1];
+        n = b_chunk1->size[0] * b_chunk1->size[1];
+        b_chunk1->size[0] = 1;
+        b_chunk1->size[1] = mtmp + 1;
+        emxEnsureCapacity((emxArray__common *)b_chunk1, n, (int)sizeof(double));
+        for (n = 0; n < mtmp; n++) {
+          b_chunk1->data[b_chunk1->size[0] * n] = chunk1->data[n];
         }
 
-        b_chunk1->data[b_chunk1->size[0] * chunk1->size[1]] = 1.0 + (double)i;
-        mtmp = chunk1->size[0] * chunk1->size[1];
+        b_chunk1->data[b_chunk1->size[0] * mtmp] = 1.0 + (double)i;
+        n = chunk1->size[0] * chunk1->size[1];
         chunk1->size[0] = b_chunk1->size[0];
         chunk1->size[1] = b_chunk1->size[1];
-        emxEnsureCapacity((emxArray__common *)chunk1, mtmp, (int)sizeof(double));
-        itmp = b_chunk1->size[1];
-        for (mtmp = 0; mtmp < itmp; mtmp++) {
-          ix = b_chunk1->size[0];
-          for (n = 0; n < ix; n++) {
-            chunk1->data[n + chunk1->size[0] * mtmp] = b_chunk1->data[n +
-              b_chunk1->size[0] * mtmp];
+        emxEnsureCapacity((emxArray__common *)chunk1, n, (int)sizeof(double));
+        mtmp = b_chunk1->size[1];
+        for (n = 0; n < mtmp; n++) {
+          itmp = b_chunk1->size[0];
+          for (ix = 0; ix < itmp; ix++) {
+            chunk1->data[ix + chunk1->size[0] * n] = b_chunk1->data[ix +
+              b_chunk1->size[0] * n];
           }
         }
       } else {
         pointer = 2;
         chunk2_value = arr->data[i];
-        mtmp = chunk2->size[0] * chunk2->size[1];
+        n = chunk2->size[0] * chunk2->size[1];
         chunk2->size[0] = 1;
         chunk2->size[1] = 1;
-        emxEnsureCapacity((emxArray__common *)chunk2, mtmp, (int)sizeof(double));
+        emxEnsureCapacity((emxArray__common *)chunk2, n, (int)sizeof(double));
         chunk2->data[0] = 1.0 + (double)i;
       }
     } else if (pointer == 2) {
       if (arr->data[i] == chunk2_value) {
-        mtmp = b_chunk2->size[0] * b_chunk2->size[1];
-        b_chunk2->size[0] = chunk2->size[0];
-        b_chunk2->size[1] = chunk2->size[1] + 1;
-        emxEnsureCapacity((emxArray__common *)b_chunk2, mtmp, (int)sizeof(double));
-        itmp = chunk2->size[1];
-        for (mtmp = 0; mtmp < itmp; mtmp++) {
-          ix = chunk2->size[0];
-          for (n = 0; n < ix; n++) {
-            b_chunk2->data[n + b_chunk2->size[0] * mtmp] = chunk2->data[n +
-              chunk2->size[0] * mtmp];
-          }
+        if (!((chunk2->size[0] == 0) || (chunk2->size[1] == 0))) {
+          mtmp = chunk2->size[1];
+        } else {
+          mtmp = 0;
         }
 
-        b_chunk2->data[b_chunk2->size[0] * chunk2->size[1]] = 1.0 + (double)i;
-        mtmp = chunk2->size[0] * chunk2->size[1];
+        n = b_chunk2->size[0] * b_chunk2->size[1];
+        b_chunk2->size[0] = 1;
+        b_chunk2->size[1] = mtmp + 1;
+        emxEnsureCapacity((emxArray__common *)b_chunk2, n, (int)sizeof(double));
+        for (n = 0; n < mtmp; n++) {
+          b_chunk2->data[b_chunk2->size[0] * n] = chunk2->data[n];
+        }
+
+        b_chunk2->data[b_chunk2->size[0] * mtmp] = 1.0 + (double)i;
+        n = chunk2->size[0] * chunk2->size[1];
         chunk2->size[0] = b_chunk2->size[0];
         chunk2->size[1] = b_chunk2->size[1];
-        emxEnsureCapacity((emxArray__common *)chunk2, mtmp, (int)sizeof(double));
-        itmp = b_chunk2->size[1];
-        for (mtmp = 0; mtmp < itmp; mtmp++) {
-          ix = b_chunk2->size[0];
-          for (n = 0; n < ix; n++) {
-            chunk2->data[n + chunk2->size[0] * mtmp] = b_chunk2->data[n +
-              b_chunk2->size[0] * mtmp];
+        emxEnsureCapacity((emxArray__common *)chunk2, n, (int)sizeof(double));
+        mtmp = b_chunk2->size[1];
+        for (n = 0; n < mtmp; n++) {
+          itmp = b_chunk2->size[0];
+          for (ix = 0; ix < itmp; ix++) {
+            chunk2->data[ix + chunk2->size[0] * n] = b_chunk2->data[ix +
+              b_chunk2->size[0] * n];
           }
         }
       } else {
         pointer = 3;
         chunk3_value = arr->data[i];
-        mtmp = chunk3->size[0] * chunk3->size[1];
+        n = chunk3->size[0] * chunk3->size[1];
         chunk3->size[0] = 1;
         chunk3->size[1] = 1;
-        emxEnsureCapacity((emxArray__common *)chunk3, mtmp, (int)sizeof(double));
+        emxEnsureCapacity((emxArray__common *)chunk3, n, (int)sizeof(double));
         chunk3->data[0] = 1.0 + (double)i;
       }
     } else {
       if (pointer == 3) {
         if (arr->data[i] == chunk3_value) {
-          mtmp = b_chunk3->size[0] * b_chunk3->size[1];
-          b_chunk3->size[0] = chunk3->size[0];
-          b_chunk3->size[1] = chunk3->size[1] + 1;
-          emxEnsureCapacity((emxArray__common *)b_chunk3, mtmp, (int)sizeof
-                            (double));
-          itmp = chunk3->size[1];
-          for (mtmp = 0; mtmp < itmp; mtmp++) {
-            ix = chunk3->size[0];
-            for (n = 0; n < ix; n++) {
-              b_chunk3->data[n + b_chunk3->size[0] * mtmp] = chunk3->data[n +
-                chunk3->size[0] * mtmp];
-            }
+          if (!((chunk3->size[0] == 0) || (chunk3->size[1] == 0))) {
+            mtmp = chunk3->size[1];
+          } else {
+            mtmp = 0;
           }
 
-          b_chunk3->data[b_chunk3->size[0] * chunk3->size[1]] = 1.0 + (double)i;
-          mtmp = chunk3->size[0] * chunk3->size[1];
+          n = b_chunk3->size[0] * b_chunk3->size[1];
+          b_chunk3->size[0] = 1;
+          b_chunk3->size[1] = mtmp + 1;
+          emxEnsureCapacity((emxArray__common *)b_chunk3, n, (int)sizeof(double));
+          for (n = 0; n < mtmp; n++) {
+            b_chunk3->data[b_chunk3->size[0] * n] = chunk3->data[n];
+          }
+
+          b_chunk3->data[b_chunk3->size[0] * mtmp] = 1.0 + (double)i;
+          n = chunk3->size[0] * chunk3->size[1];
           chunk3->size[0] = b_chunk3->size[0];
           chunk3->size[1] = b_chunk3->size[1];
-          emxEnsureCapacity((emxArray__common *)chunk3, mtmp, (int)sizeof(double));
-          itmp = b_chunk3->size[1];
-          for (mtmp = 0; mtmp < itmp; mtmp++) {
-            ix = b_chunk3->size[0];
-            for (n = 0; n < ix; n++) {
-              chunk3->data[n + chunk3->size[0] * mtmp] = b_chunk3->data[n +
-                b_chunk3->size[0] * mtmp];
+          emxEnsureCapacity((emxArray__common *)chunk3, n, (int)sizeof(double));
+          mtmp = b_chunk3->size[1];
+          for (n = 0; n < mtmp; n++) {
+            itmp = b_chunk3->size[0];
+            for (ix = 0; ix < itmp; ix++) {
+              chunk3->data[ix + chunk3->size[0] * n] = b_chunk3->data[ix +
+                b_chunk3->size[0] * n];
             }
           }
         } else {
@@ -291,19 +288,19 @@ void Smooth(emxArray_real_T *arr, double Prm_smooth_threshold)
           chunk1_value = arr->data[i];
           chunk2_value = 0.0;
           chunk3_value = 0.0;
-          mtmp = chunk1->size[0] * chunk1->size[1];
+          n = chunk1->size[0] * chunk1->size[1];
           chunk1->size[0] = 1;
           chunk1->size[1] = 1;
-          emxEnsureCapacity((emxArray__common *)chunk1, mtmp, (int)sizeof(double));
+          emxEnsureCapacity((emxArray__common *)chunk1, n, (int)sizeof(double));
           chunk1->data[0] = 1.0 + (double)i;
-          mtmp = chunk2->size[0] * chunk2->size[1];
+          n = chunk2->size[0] * chunk2->size[1];
           chunk2->size[0] = 0;
           chunk2->size[1] = 0;
-          emxEnsureCapacity((emxArray__common *)chunk2, mtmp, (int)sizeof(double));
-          mtmp = chunk3->size[0] * chunk3->size[1];
+          emxEnsureCapacity((emxArray__common *)chunk2, n, (int)sizeof(double));
+          n = chunk3->size[0] * chunk3->size[1];
           chunk3->size[0] = 0;
           chunk3->size[1] = 0;
-          emxEnsureCapacity((emxArray__common *)chunk3, mtmp, (int)sizeof(double));
+          emxEnsureCapacity((emxArray__common *)chunk3, n, (int)sizeof(double));
           pointer = 1;
         }
       }

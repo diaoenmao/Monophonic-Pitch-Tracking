@@ -15,35 +15,36 @@
 #include "indexShapeCheck.h"
 #include "rdivide.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
 static emlrtRSInfo ic_emlrtRSI = { 24, "sinc",
-  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
+  "F:\\MATLAB\\R2016a\\toolbox\\signal\\signal\\sinc.m" };
 
 static emlrtRSInfo jc_emlrtRSI = { 26, "sinc",
-  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
+  "F:\\MATLAB\\R2016a\\toolbox\\signal\\signal\\sinc.m" };
 
 static emlrtRSInfo nc_emlrtRSI = { 10, "sin",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\sin.m" };
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\sin.m" };
 
-static emlrtRTEInfo t_emlrtRTEI = { 1, 12, "sinc",
-  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
+static emlrtRTEInfo u_emlrtRTEI = { 1, 12, "sinc",
+  "F:\\MATLAB\\R2016a\\toolbox\\signal\\signal\\sinc.m" };
 
-static emlrtRTEInfo v_emlrtRTEI = { 24, 1, "sinc",
-  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m" };
+static emlrtRTEInfo w_emlrtRTEI = { 24, 1, "sinc",
+  "F:\\MATLAB\\R2016a\\toolbox\\signal\\signal\\sinc.m" };
 
 static emlrtBCInfo bc_emlrtBCI = { -1, -1, 25, 1, "", "sinc",
-  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m", 0 };
+  "F:\\MATLAB\\R2016a\\toolbox\\signal\\signal\\sinc.m", 0 };
 
 static emlrtBCInfo cc_emlrtBCI = { -1, -1, 27, 1, "", "sinc",
-  "F:\\MATLAB\\toolbox\\signal\\signal\\sinc.m", 0 };
+  "F:\\MATLAB\\R2016a\\toolbox\\signal\\signal\\sinc.m", 0 };
 
-static emlrtRTEInfo if_emlrtRTEI = { 126, 19, "find",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\find.m" };
+static emlrtRTEInfo sf_emlrtRTEI = { 126, 19, "find",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elmat\\find.m" };
 
 static emlrtDCInfo l_emlrtDCI = { 131, 30, "find",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elmat\\find.m", 4 };
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elmat\\find.m", 4 };
 
 /* Function Definitions */
 
@@ -53,18 +54,16 @@ static emlrtDCInfo l_emlrtDCI = { 131, 30, "find",
 void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
 {
   emxArray_boolean_T *b_x;
-  int32_T i11;
+  int32_T i10;
   int32_T idx;
   int32_T nx;
   boolean_T b0;
   emxArray_int32_T *ii;
-  boolean_T b1;
   int32_T b_ii;
   boolean_T exitg1;
   boolean_T guard1 = false;
-  int32_T iv19[2];
+  int32_T iv18[2];
   emxArray_real_T *i;
-  boolean_T b2;
   emxArray_real_T *b_y;
   real_T c_y[2];
   real_T d_y[2];
@@ -82,16 +81,16 @@ void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_boolean_T(sp, &b_x, 2, &t_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &b_x, 2, &u_emlrtRTEI, true);
   st.site = &ic_emlrtRSI;
-  i11 = b_x->size[0] * b_x->size[1];
+  i10 = b_x->size[0] * b_x->size[1];
   b_x->size[0] = x->size[0];
   b_x->size[1] = x->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)b_x, i11, (int32_T)sizeof(boolean_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)b_x, i10, (int32_T)sizeof(boolean_T),
+                    &u_emlrtRTEI);
   idx = x->size[0] * x->size[1];
-  for (i11 = 0; i11 < idx; i11++) {
-    b_x->data[i11] = (x->data[i11] == 0.0);
+  for (i10 = 0; i10 < idx; i10++) {
+    b_x->data[i10] = (x->data[i10] == 0.0);
   }
 
   b_st.site = &kc_emlrtRSI;
@@ -106,27 +105,21 @@ void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
 
   if (b0) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &if_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &sf_emlrtRTEI,
       "Coder:toolbox:find_incompatibleShape", 0);
   }
 
-  emxInit_int32_T1(&b_st, &ii, 1, &w_emlrtRTEI, true);
-  i11 = ii->size[0];
-  if (!(nx > 0)) {
+  emxInit_int32_T1(&b_st, &ii, 1, &x_emlrtRTEI, true);
+  i10 = ii->size[0];
+  if (!(nx >= 0)) {
     emlrtNonNegativeCheckR2012b(nx, &l_emlrtDCI, &b_st);
   }
 
   ii->size[0] = nx;
-  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i11, (int32_T)sizeof(int32_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i10, (int32_T)sizeof(int32_T),
+                    &u_emlrtRTEI);
   c_st.site = &lc_emlrtRSI;
-  if (1 > nx) {
-    b1 = false;
-  } else {
-    b1 = (nx > 2147483646);
-  }
-
-  if (b1) {
+  if ((!(1 > nx)) && (nx > 2147483646)) {
     d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
@@ -155,85 +148,79 @@ void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
   emxFree_boolean_T(&b_x);
   if (idx <= nx) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &hf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &rf_emlrtRTEI,
       "Coder:builtins:AssertionFailed", 0);
   }
 
   if (nx == 1) {
     if (idx == 0) {
-      i11 = ii->size[0];
+      i10 = ii->size[0];
       ii->size[0] = 0;
-      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i11, (int32_T)sizeof
-                        (int32_T), &t_emlrtRTEI);
+      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i10, (int32_T)sizeof
+                        (int32_T), &u_emlrtRTEI);
     }
   } else {
     if (1 > idx) {
-      i11 = 0;
+      i10 = 0;
     } else {
-      i11 = idx;
+      i10 = idx;
     }
 
-    iv19[0] = 1;
-    iv19[1] = i11;
+    iv18[0] = 1;
+    iv18[1] = i10;
     c_st.site = &mc_emlrtRSI;
-    indexShapeCheck(&c_st, ii->size[0], iv19);
+    indexShapeCheck(&c_st, ii->size[0], iv18);
     nx = ii->size[0];
-    ii->size[0] = i11;
+    ii->size[0] = i10;
     emxEnsureCapacity(&b_st, (emxArray__common *)ii, nx, (int32_T)sizeof(int32_T),
-                      &u_emlrtRTEI);
+                      &v_emlrtRTEI);
   }
 
-  emxInit_real_T1(&b_st, &i, 1, &v_emlrtRTEI, true);
-  i11 = i->size[0];
+  emxInit_real_T1(&b_st, &i, 1, &w_emlrtRTEI, true);
+  i10 = i->size[0];
   i->size[0] = ii->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)i, i11, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)i, i10, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   idx = ii->size[0];
-  for (i11 = 0; i11 < idx; i11++) {
-    i->data[i11] = ii->data[i11];
+  for (i10 = 0; i10 < idx; i10++) {
+    i->data[i10] = ii->data[i10];
   }
 
   b_ii = x->size[0] * x->size[1];
-  i11 = ii->size[0];
+  i10 = ii->size[0];
   ii->size[0] = i->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)ii, i11, (int32_T)sizeof(int32_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)ii, i10, (int32_T)sizeof(int32_T),
+                    &u_emlrtRTEI);
   idx = i->size[0];
-  for (i11 = 0; i11 < idx; i11++) {
-    nx = (int32_T)i->data[i11];
+  for (i10 = 0; i10 < idx; i10++) {
+    nx = (int32_T)i->data[i10];
     if (!((nx >= 1) && (nx <= b_ii))) {
       emlrtDynamicBoundsCheckR2012b(nx, 1, b_ii, &bc_emlrtBCI, sp);
     }
 
-    ii->data[i11] = nx;
+    ii->data[i10] = nx;
   }
 
   idx = ii->size[0];
-  for (i11 = 0; i11 < idx; i11++) {
-    x->data[ii->data[i11] - 1] = 1.0;
+  for (i10 = 0; i10 < idx; i10++) {
+    x->data[ii->data[i10] - 1] = 1.0;
   }
 
-  i11 = y->size[0] * y->size[1];
+  i10 = y->size[0] * y->size[1];
   y->size[0] = x->size[0];
   y->size[1] = x->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)y, i11, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)y, i10, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   idx = x->size[0] * x->size[1];
-  for (i11 = 0; i11 < idx; i11++) {
-    y->data[i11] = 3.1415926535897931 * x->data[i11];
+  for (i10 = 0; i10 < idx; i10++) {
+    y->data[i10] = 3.1415926535897931 * x->data[i10];
   }
 
   st.site = &jc_emlrtRSI;
   b_st.site = &nc_emlrtRSI;
   nx = y->size[0] * y->size[1];
   c_st.site = &eb_emlrtRSI;
-  if (1 > nx) {
-    b2 = false;
-  } else {
-    b2 = (nx > 2147483646);
-  }
-
-  if (b2) {
+  if ((!(1 > nx)) && (nx > 2147483646)) {
     d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
@@ -242,61 +229,61 @@ void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
     y->data[b_ii] = muDoubleScalarSin(y->data[b_ii]);
   }
 
-  emxInit_real_T(&b_st, &b_y, 2, &t_emlrtRTEI, true);
-  i11 = b_y->size[0] * b_y->size[1];
+  emxInit_real_T(&b_st, &b_y, 2, &u_emlrtRTEI, true);
+  i10 = b_y->size[0] * b_y->size[1];
   b_y->size[0] = x->size[0];
   b_y->size[1] = x->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)b_y, i11, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)b_y, i10, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   idx = x->size[0] * x->size[1];
-  for (i11 = 0; i11 < idx; i11++) {
-    b_y->data[i11] = 3.1415926535897931 * x->data[i11];
+  for (i10 = 0; i10 < idx; i10++) {
+    b_y->data[i10] = 3.1415926535897931 * x->data[i10];
   }
 
   st.site = &jc_emlrtRSI;
-  for (i11 = 0; i11 < 2; i11++) {
-    c_y[i11] = y->size[i11];
+  for (i10 = 0; i10 < 2; i10++) {
+    c_y[i10] = y->size[i10];
   }
 
-  for (i11 = 0; i11 < 2; i11++) {
-    d_y[i11] = b_y->size[i11];
+  for (i10 = 0; i10 < 2; i10++) {
+    d_y[i10] = b_y->size[i10];
   }
 
   if (isequal(c_y, d_y)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &gf_emlrtRTEI, "MATLAB:dimagree", 0);
+    emlrtErrorWithMessageIdR2012b(&st, &qf_emlrtRTEI, "MATLAB:dimagree", 0);
   }
 
-  i11 = y->size[0] * y->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)y, i11, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  i10 = y->size[0] * y->size[1];
+  emxEnsureCapacity(&st, (emxArray__common *)y, i10, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   e_y = y->size[0];
   b_ii = y->size[1];
   idx = e_y * b_ii;
-  for (i11 = 0; i11 < idx; i11++) {
-    y->data[i11] /= b_y->data[i11];
+  for (i10 = 0; i10 < idx; i10++) {
+    y->data[i10] /= b_y->data[i10];
   }
 
   emxFree_real_T(&b_y);
   e_y = y->size[0] * y->size[1];
-  i11 = ii->size[0];
+  i10 = ii->size[0];
   ii->size[0] = i->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)ii, i11, (int32_T)sizeof(int32_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)ii, i10, (int32_T)sizeof(int32_T),
+                    &u_emlrtRTEI);
   idx = i->size[0];
-  for (i11 = 0; i11 < idx; i11++) {
-    nx = (int32_T)i->data[i11];
+  for (i10 = 0; i10 < idx; i10++) {
+    nx = (int32_T)i->data[i10];
     if (!((nx >= 1) && (nx <= e_y))) {
       emlrtDynamicBoundsCheckR2012b(nx, 1, e_y, &cc_emlrtBCI, sp);
     }
 
-    ii->data[i11] = nx;
+    ii->data[i10] = nx;
   }
 
   emxFree_real_T(&i);
   idx = ii->size[0];
-  for (i11 = 0; i11 < idx; i11++) {
-    y->data[ii->data[i11] - 1] = 1.0;
+  for (i10 = 0; i10 < idx; i10++) {
+    y->data[ii->data[i10] - 1] = 1.0;
   }
 
   emxFree_int32_T(&ii);
@@ -309,7 +296,7 @@ void b_sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
 void sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
 {
   emxArray_boolean_T *b_x;
-  int32_T i10;
+  int32_T i9;
   int32_T nx;
   emxArray_int32_T *ii;
   int32_T idx;
@@ -317,11 +304,11 @@ void sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
   int32_T b_ii;
   boolean_T exitg1;
   boolean_T guard1 = false;
-  int32_T iv18[2];
+  int32_T iv17[2];
   emxArray_real_T *i;
   emxArray_real_T *c_x;
-  emxArray_real_T *r15;
-  emxArray_real_T *r16;
+  emxArray_real_T *r12;
+  emxArray_real_T *r13;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
@@ -335,32 +322,27 @@ void sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_boolean_T1(sp, &b_x, 1, &t_emlrtRTEI, true);
+  emxInit_boolean_T1(sp, &b_x, 1, &u_emlrtRTEI, true);
   st.site = &ic_emlrtRSI;
-  i10 = b_x->size[0];
+  i9 = b_x->size[0];
   b_x->size[0] = x->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)b_x, i10, (int32_T)sizeof(boolean_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)b_x, i9, (int32_T)sizeof(boolean_T),
+                    &u_emlrtRTEI);
   nx = x->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    b_x->data[i10] = (x->data[i10] == 0.0);
+  for (i9 = 0; i9 < nx; i9++) {
+    b_x->data[i9] = (x->data[i9] == 0.0);
   }
 
-  emxInit_int32_T1(&st, &ii, 1, &w_emlrtRTEI, true);
+  emxInit_int32_T1(&st, &ii, 1, &x_emlrtRTEI, true);
   b_st.site = &kc_emlrtRSI;
   nx = b_x->size[0];
   idx = 0;
-  i10 = ii->size[0];
+  i9 = ii->size[0];
   ii->size[0] = b_x->size[0];
-  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i10, (int32_T)sizeof(int32_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(&b_st, (emxArray__common *)ii, i9, (int32_T)sizeof(int32_T),
+                    &u_emlrtRTEI);
   c_st.site = &lc_emlrtRSI;
-  if (1 > b_x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (b_x->size[0] > 2147483646);
-  }
-
+  overflow = ((!(1 > b_x->size[0])) && (b_x->size[0] > 2147483646));
   if (overflow) {
     d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
@@ -389,137 +371,132 @@ void sinc(const emlrtStack *sp, emxArray_real_T *x, emxArray_real_T *y)
 
   if (idx <= b_x->size[0]) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &hf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &rf_emlrtRTEI,
       "Coder:builtins:AssertionFailed", 0);
   }
 
   if (b_x->size[0] == 1) {
     if (idx == 0) {
-      i10 = ii->size[0];
+      i9 = ii->size[0];
       ii->size[0] = 0;
-      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i10, (int32_T)sizeof
-                        (int32_T), &t_emlrtRTEI);
+      emxEnsureCapacity(&b_st, (emxArray__common *)ii, i9, (int32_T)sizeof
+                        (int32_T), &u_emlrtRTEI);
     }
   } else {
     if (1 > idx) {
-      i10 = 0;
+      i9 = 0;
     } else {
-      i10 = idx;
+      i9 = idx;
     }
 
-    iv18[0] = 1;
-    iv18[1] = i10;
+    iv17[0] = 1;
+    iv17[1] = i9;
     c_st.site = &mc_emlrtRSI;
-    indexShapeCheck(&c_st, ii->size[0], iv18);
+    indexShapeCheck(&c_st, ii->size[0], iv17);
     idx = ii->size[0];
-    ii->size[0] = i10;
+    ii->size[0] = i9;
     emxEnsureCapacity(&b_st, (emxArray__common *)ii, idx, (int32_T)sizeof
-                      (int32_T), &u_emlrtRTEI);
+                      (int32_T), &v_emlrtRTEI);
   }
 
   emxFree_boolean_T(&b_x);
-  emxInit_real_T1(&b_st, &i, 1, &v_emlrtRTEI, true);
-  i10 = i->size[0];
+  emxInit_real_T1(&b_st, &i, 1, &w_emlrtRTEI, true);
+  i9 = i->size[0];
   i->size[0] = ii->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)i, i10, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(&st, (emxArray__common *)i, i9, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   nx = ii->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    i->data[i10] = ii->data[i10];
+  for (i9 = 0; i9 < nx; i9++) {
+    i->data[i9] = ii->data[i9];
   }
 
   b_ii = x->size[0];
-  i10 = ii->size[0];
+  i9 = ii->size[0];
   ii->size[0] = i->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)ii, i10, (int32_T)sizeof(int32_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)ii, i9, (int32_T)sizeof(int32_T),
+                    &u_emlrtRTEI);
   nx = i->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    idx = (int32_T)i->data[i10];
+  for (i9 = 0; i9 < nx; i9++) {
+    idx = (int32_T)i->data[i9];
     if (!((idx >= 1) && (idx <= b_ii))) {
       emlrtDynamicBoundsCheckR2012b(idx, 1, b_ii, &bc_emlrtBCI, sp);
     }
 
-    ii->data[i10] = idx;
+    ii->data[i9] = idx;
   }
 
   nx = ii->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    x->data[ii->data[i10] - 1] = 1.0;
+  for (i9 = 0; i9 < nx; i9++) {
+    x->data[ii->data[i9] - 1] = 1.0;
   }
 
-  emxInit_real_T1(sp, &c_x, 1, &t_emlrtRTEI, true);
-  i10 = c_x->size[0];
+  emxInit_real_T1(sp, &c_x, 1, &u_emlrtRTEI, true);
+  i9 = c_x->size[0];
   c_x->size[0] = x->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)c_x, i10, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)c_x, i9, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   nx = x->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    c_x->data[i10] = 3.1415926535897931 * x->data[i10];
+  for (i9 = 0; i9 < nx; i9++) {
+    c_x->data[i9] = 3.1415926535897931 * x->data[i9];
   }
 
-  emxInit_real_T1(sp, &r15, 1, &t_emlrtRTEI, true);
+  emxInit_real_T1(sp, &r12, 1, &u_emlrtRTEI, true);
   st.site = &jc_emlrtRSI;
   b_st.site = &nc_emlrtRSI;
-  i10 = r15->size[0];
-  r15->size[0] = c_x->size[0];
-  emxEnsureCapacity(&b_st, (emxArray__common *)r15, i10, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  i9 = r12->size[0];
+  r12->size[0] = c_x->size[0];
+  emxEnsureCapacity(&b_st, (emxArray__common *)r12, i9, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   nx = c_x->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    r15->data[i10] = c_x->data[i10];
+  for (i9 = 0; i9 < nx; i9++) {
+    r12->data[i9] = c_x->data[i9];
   }
 
   c_st.site = &eb_emlrtRSI;
-  if (1 > c_x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (c_x->size[0] > 2147483646);
-  }
-
+  overflow = ((!(1 > c_x->size[0])) && (c_x->size[0] > 2147483646));
   if (overflow) {
     d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
 
   for (b_ii = 0; b_ii + 1 <= c_x->size[0]; b_ii++) {
-    r15->data[b_ii] = muDoubleScalarSin(r15->data[b_ii]);
+    r12->data[b_ii] = muDoubleScalarSin(r12->data[b_ii]);
   }
 
   emxFree_real_T(&c_x);
-  emxInit_real_T1(&b_st, &r16, 1, &t_emlrtRTEI, true);
-  i10 = r16->size[0];
-  r16->size[0] = x->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)r16, i10, (int32_T)sizeof(real_T),
-                    &t_emlrtRTEI);
+  emxInit_real_T1(&b_st, &r13, 1, &u_emlrtRTEI, true);
+  i9 = r13->size[0];
+  r13->size[0] = x->size[0];
+  emxEnsureCapacity(sp, (emxArray__common *)r13, i9, (int32_T)sizeof(real_T),
+                    &u_emlrtRTEI);
   nx = x->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    r16->data[i10] = 3.1415926535897931 * x->data[i10];
+  for (i9 = 0; i9 < nx; i9++) {
+    r13->data[i9] = 3.1415926535897931 * x->data[i9];
   }
 
   st.site = &jc_emlrtRSI;
-  b_rdivide(&st, r15, r16, y);
+  rdivide(&st, r12, r13, y);
   b_ii = y->size[0];
-  i10 = ii->size[0];
+  i9 = ii->size[0];
   ii->size[0] = i->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)ii, i10, (int32_T)sizeof(int32_T),
-                    &t_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)ii, i9, (int32_T)sizeof(int32_T),
+                    &u_emlrtRTEI);
   nx = i->size[0];
-  emxFree_real_T(&r16);
-  emxFree_real_T(&r15);
-  for (i10 = 0; i10 < nx; i10++) {
-    idx = (int32_T)i->data[i10];
+  emxFree_real_T(&r13);
+  emxFree_real_T(&r12);
+  for (i9 = 0; i9 < nx; i9++) {
+    idx = (int32_T)i->data[i9];
     if (!((idx >= 1) && (idx <= b_ii))) {
       emlrtDynamicBoundsCheckR2012b(idx, 1, b_ii, &cc_emlrtBCI, sp);
     }
 
-    ii->data[i10] = idx;
+    ii->data[i9] = idx;
   }
 
   emxFree_real_T(&i);
   nx = ii->size[0];
-  for (i10 = 0; i10 < nx; i10++) {
-    y->data[ii->data[i10] - 1] = 1.0;
+  for (i9 = 0; i9 < nx; i9++) {
+    y->data[ii->data[i9] - 1] = 1.0;
   }
 
   emxFree_int32_T(&ii);

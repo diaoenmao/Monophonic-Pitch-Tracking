@@ -12,11 +12,12 @@
 #include "eml_int_forloop_overflow_check.h"
 #include "isequal.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo qk_emlrtRSI = { 12, "all",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\all.m" };
+static emlrtRSInfo jm_emlrtRSI = { 12, "all",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\ops\\all.m" };
 
 /* Function Definitions */
 
@@ -34,7 +35,7 @@ boolean_T all(const emlrtStack *sp, const emxArray_boolean_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &qk_emlrtRSI;
+  st.site = &jm_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -42,7 +43,7 @@ boolean_T all(const emlrtStack *sp, const emxArray_boolean_T *x)
   overflow = !e_isequal(x);
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &pf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &bg_emlrtRTEI,
       "Coder:toolbox:eml_all_or_any_specialEmpty", 0);
   }
 
@@ -54,18 +55,13 @@ boolean_T all(const emlrtStack *sp, const emxArray_boolean_T *x)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &qf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &cg_emlrtRTEI,
       "Coder:toolbox:eml_all_or_any_autoDimIncompatibility", 0);
   }
 
   y = true;
-  b_st.site = &ag_emlrtRSI;
-  if (1 > x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (x->size[0] > 2147483646);
-  }
-
+  b_st.site = &lh_emlrtRSI;
+  overflow = ((!(1 > x->size[0])) && (x->size[0] > 2147483646));
   if (overflow) {
     c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);

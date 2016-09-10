@@ -1,15 +1,14 @@
 /*
  * File: yaapt_terminate.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_terminate.h"
-#include "yaapt_data.h"
 
 /* Function Definitions */
 
@@ -19,7 +18,7 @@
  */
 void yaapt_terminate(void)
 {
-  omp_destroy_nest_lock(&emlrtNestLockGlobal);
+  /* (no terminate code required) */
 }
 
 /*

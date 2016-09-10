@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __SUM_H__
-#define __SUM_H__
+#ifndef SUM_H
+#define SUM_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"

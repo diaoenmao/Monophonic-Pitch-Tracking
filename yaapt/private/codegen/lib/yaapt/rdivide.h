@@ -1,12 +1,12 @@
 /*
  * File: rdivide.h
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
-#ifndef __RDIVIDE_H__
-#define __RDIVIDE_H__
+#ifndef RDIVIDE_H
+#define RDIVIDE_H
 
 /* Include Files */
 #include <float.h>
@@ -16,15 +16,12 @@
 #include <string.h>
 #include "rt_nonfinite.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
-                      emxArray_real_T *z);
-extern void c_rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z);
-extern void d_rdivide(double x, const emxArray_real_T *y, emxArray_real_T *z);
-extern void rdivide(const emxArray_real_T *x, double y, emxArray_real_T *z);
+extern void b_rdivide(const emxArray_real_T *y, emxArray_real_T *z);
+extern void rdivide(const emxArray_real_T *x, const emxArray_real_T *y,
+                    emxArray_real_T *z);
 
 #endif
 

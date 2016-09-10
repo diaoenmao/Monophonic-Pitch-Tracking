@@ -1,8 +1,8 @@
 /*
  * File: filter.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -22,8 +22,8 @@ void b_filter(const emxArray_real_T *x, emxArray_real_T *y)
 {
   int k;
   int nx;
-  int j;
   double dbuffer[3];
+  int j;
   double b_dbuffer;
   k = y->size[0] * y->size[1];
   y->size[0] = 1;
@@ -78,8 +78,8 @@ void filter(const emxArray_real_T *b, const emxArray_real_T *x, emxArray_real_T 
   int ndbuffer;
   int j;
   int nx;
-  int k;
   emxArray_real_T *dbuffer;
+  int k;
   nb = b->size[1];
   if (1 >= b->size[1]) {
     ndbuffer = 0;
@@ -107,7 +107,7 @@ void filter(const emxArray_real_T *b, const emxArray_real_T *x, emxArray_real_T 
       }
     }
   } else {
-    emxInit_real_T2(&dbuffer, 1);
+    emxInit_real_T1(&dbuffer, 1);
     j = dbuffer->size[0];
     dbuffer->size[0] = ndbuffer + 1;
     emxEnsureCapacity((emxArray__common *)dbuffer, j, (int)sizeof(double));

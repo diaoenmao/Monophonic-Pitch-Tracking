@@ -1,8 +1,8 @@
 /*
  * File: Mykaiser.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -27,10 +27,10 @@ void Mykaiser(double n, emxArray_real_T *w)
   double anew;
   double apnd;
   double ndbl;
-  double cdiff;
   emxArray_real_T *y;
-  int nm1d2;
+  double cdiff;
   emxArray_real_T *b_k;
+  int nm1d2;
   double c_n;
   double en;
   double p;
@@ -47,8 +47,8 @@ void Mykaiser(double n, emxArray_real_T *w)
   int count2;
   int l;
   boolean_T exitg1;
-  double tempc;
   emxArray_real_T *b_y;
+  double tempc;
   double b;
 
   /*  Copyright (C) 1995, 1996, 1997  Kurt Hornik */
@@ -136,8 +136,7 @@ void Mykaiser(double n, emxArray_real_T *w)
       y->data[0] = anew;
       if (b_n > 1) {
         y->data[b_n - 1] = apnd;
-        k = b_n - 1;
-        nm1d2 = k / 2;
+        nm1d2 = (b_n - 1) / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(b_n - k) - 1] = apnd - (double)k;
@@ -152,7 +151,7 @@ void Mykaiser(double n, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T2(&b_k, 1);
+    emxInit_real_T1(&b_k, 1);
     k = b_k->size[0];
     b_k->size[0] = y->size[1];
     emxEnsureCapacity((emxArray__common *)b_k, k, (int)sizeof(double));
@@ -385,7 +384,7 @@ void Mykaiser(double n, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T2(&b_y, 1);
+    emxInit_real_T1(&b_y, 1);
 
     /*  */
     /*         Store b(nb). */

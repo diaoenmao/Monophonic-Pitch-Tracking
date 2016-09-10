@@ -1,5 +1,5 @@
-<deployment-project plugin="plugin.coder" plugin-version="R2015b">
-  <configuration build-checksum="3738777456" file="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.prj" location="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" name="yaapt" target="target.unifiedcoder" target-name="MATLAB Coder">
+<deployment-project plugin="plugin.coder" plugin-version="R2016a">
+  <configuration build-checksum="2507194591" file="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.prj" location="D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private" name="yaapt" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -50,6 +50,7 @@
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
       <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
+      <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
       <unset>
         <param.BuiltInstrumentedMex />
         <param.RanInstrumentedMex />
@@ -87,6 +88,7 @@
         <param.EnableOpenMP />
         <param.InitFltsAndDblsToZero />
         <param.ConstantInputs />
+        <param.EnableCRICodeCoverage />
       </unset>
     </profile>
     <profile key="profile.c">
@@ -149,12 +151,12 @@
       <param.PostCodeGenCommand />
       <param.TargetLangStandard>C89/C90 (ANSI)</param.TargetLangStandard>
       <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
-      <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
+      <param.DeprecatedCRLFlag />
       <param.SameHardware>true</param.SameHardware>
-      <param.Toolchain>Automatically locate an installed toolchain</param.Toolchain>
+      <param.Toolchain>MinGW64 v4.x | gmake (64-bit Windows)</param.Toolchain>
       <param.BuildConfiguration>Faster Builds</param.BuildConfiguration>
       <param.CustomToolchainOptions />
-      <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
+      <var.ToolchainSettingsVisible />
       <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware/&gt;&lt;/ctdata&gt;</param.target.Data>
       <param.target.ActiveType>option.target.TargetType.MatlabHost</param.target.ActiveType>
       <param.target.ActiveTarget />
@@ -205,12 +207,12 @@
       <param.GenerateExampleMain>option.GenerateExampleMain.GenerateCodeOnly</param.GenerateExampleMain>
       <param.PreserveVariableNames>option.PreserveVariableNames.UserNames</param.PreserveVariableNames>
       <param.TargetLang>option.TargetLang.C</param.TargetLang>
-      <param.CCompilerOptimization>option.CCompilerOptimization.Off</param.CCompilerOptimization>
+      <param.CCompilerOptimization />
       <param.CCompilerCustomOptimizations />
       <param.GenerateMakefile>true</param.GenerateMakefile>
       <param.BuildToolEnable>false</param.BuildToolEnable>
-      <param.MakeCommand>make_rtw</param.MakeCommand>
-      <param.TemplateMakefile>default_tmf</param.TemplateMakefile>
+      <param.MakeCommand />
+      <param.TemplateMakefile />
       <param.BuildToolConfiguration />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
@@ -220,6 +222,7 @@
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
       <param.PassStructByReference>true</param.PassStructByReference>
+      <param.CustomLAPACKCallback />
       <param.UseECoderFeatures>true</param.UseECoderFeatures>
       <unset>
         <param.WorkingFolder />
@@ -294,6 +297,7 @@
         <param.EnableOpenMP />
         <param.InitFltsAndDblsToZero />
         <param.PassStructByReference />
+        <param.CustomLAPACKCallback />
         <param.UseECoderFeatures />
       </unset>
     </profile>
@@ -332,6 +336,7 @@
       <param.SearchPaths />
       <param.hdl.MapPersistentVarsToRAM />
       <param.hdl.RAMThreshold />
+      <param.hdl.MapPipelineDelaysToRAM />
       <param.hdl.RAMVariableNames />
       <param.hdl.RegisterInputs />
       <param.hdl.RegisterOutputs />
@@ -500,6 +505,7 @@
         <param.SearchPaths />
         <param.hdl.MapPersistentVarsToRAM />
         <param.hdl.RAMThreshold />
+        <param.hdl.MapPipelineDelaysToRAM />
         <param.hdl.RAMVariableNames />
         <param.hdl.RegisterInputs />
         <param.hdl.RegisterOutputs />
@@ -637,7 +643,7 @@
       </unset>
     </profile>
     <param.objective>option.objective.c</param.objective>
-    <param.WorkflowStep>workflowSummary</param.WorkflowStep>
+    <param.WorkflowStep>verifyCompatibility</param.WorkflowStep>
     <param.TestSnippets>
       <item>test_pcm</item>
       <item>test</item>
@@ -647,9 +653,9 @@
     <param.outputfile>${PROJECT_ROOT}\codegen\lib\yaapt\yaapt.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
-    <param.globals>
+    <param.newGlobals>
       <Globals />
-    </param.globals>
+    </param.newGlobals>
     <param.mex.mainhtml>D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\mex\yaapt\html\index.html</param.mex.mainhtml>
     <param.grt.mainhtml>D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\html\index.html</param.grt.mainhtml>
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
@@ -660,7 +666,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>829881900</param.AnnotationChecksum>
+    <param.AnnotationChecksum>1625016219</param.AnnotationChecksum>
     <var.LegacyTarget>target.matlab.coder</var.LegacyTarget>
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -668,9 +674,9 @@
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\yaapt</var.gc.lastOutputRoot>
-    <var.gc.preBuildChecksum>3738777456</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>3878952837</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\yaapt</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>2132540024</var.cfi.preBuildChecksum>
+    <var.cfi.preBuildChecksum>612521361</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>test_pcm</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
     <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\cmp_rate.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\crs_corr.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\dynamic5.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\fq2cnt.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\freqSelect.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mybesseli.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfir1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myfirls.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myhamming.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myhanning.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mykaiser.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Mymedfilt1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Myspecgram.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nlfer.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\nonlinear.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\path1.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\peaks.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Pitch_Optimization.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Preprocess.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\refine.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\Smooth.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\spec_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\tm_trk.m&lt;/file&gt;&lt;file&gt;D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\yaapt.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;121845413&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
@@ -723,6 +729,8 @@
     <param.fpDataRoot />
     <param.fpUserFileChecksum />
     <var.snapshotChecksum />
+    <var.functionBlockSid />
+    <param.fptSignedness>false</param.fptSignedness>
     <unset>
       <param.DefaultImportExportVariable />
       <param.outputfile />
@@ -756,7 +764,6 @@
       <param.LogAllIOValues />
       <param.DetectOverflows />
       <param.LogHistogram />
-      <param.ShowCoverage />
       <param.ExcludedFixedPointVerificationFiles />
       <param.ExcludedFixedPointSimulationFiles />
       <param.InstrumentedBuildChecksum />
@@ -779,72 +786,85 @@
       <param.fpDataRoot />
       <param.fpUserFileChecksum />
       <var.snapshotChecksum />
+      <var.functionBlockSid />
+      <param.fptSignedness />
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\yaapt.m">
-        <Inputs fileName="yaapt.m" functionName="yaapt">
-          <Input Name="Data">
-            <Class>double</Class>
-            <Size>1 x :inf</Size>
-            <Value />
-            <InitialValue />
-            <UserDefined>true</UserDefined>
-            <Complex>false</Complex>
-          </Input>
-          <Input Name="Fs">
-            <Class>double</Class>
-            <Size>1 x 1</Size>
-            <Value />
-            <InitialValue />
-            <UserDefined>true</UserDefined>
-            <Complex>false</Complex>
-          </Input>
-          <Input Name="Parameter">
-            <Class>double</Class>
-            <Size>1 x 34</Size>
-            <Value />
-            <InitialValue />
-            <UserDefined>true</UserDefined>
-            <Complex>false</Complex>
-          </Input>
-        </Inputs>
+        <Marker>1473104710170</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench>
       <file>${PROJECT_ROOT}\test.m</file>
       <file>${PROJECT_ROOT}\test_pcm.m</file>
+      <file>${MATLAB_ROOT}\toolbox\stats\stats\@classregtree\test.m</file>
     </fileset.testbench>
+    <fileset.inputtypes>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\yaapt.m">
+        <Inputs fileName="yaapt.m" functionName="yaapt">
+          <Input Name="Data" typeId="0" />
+          <Input Name="Fs" typeId="1" />
+          <Input Name="Parameter" typeId="2" />
+          <idpTable>
+            <type typeId="0">
+              <Class>double</Class>
+              <Size>1 x :inf</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+            </type>
+            <type typeId="1">
+              <Class>double</Class>
+              <Size>1 x 1</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+            </type>
+            <type typeId="2">
+              <Class>double</Class>
+              <Size>1 x 34</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+            </type>
+          </idpTable>
+        </Inputs>
+      </file>
+    </fileset.inputtypes>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\codegen\lib\yaapt" name="yaapt.lib" optional="false">D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private\codegen\lib\yaapt\yaapt.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>F:\MATLAB</root>
+      <root>F:\MATLAB\R2016a</root>
       <toolboxes>
-        <toolbox name="matlabhdlcoder" />
         <toolbox name="fixedpoint" />
-        <toolbox name="embeddedcoder" />
         <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
       </toolboxes>
-      <toolbox>
-        <matlabhdlcoder>
-          <enabled>true</enabled>
-        </matlabhdlcoder>
-      </toolbox>
       <toolbox>
         <fixedpoint>
           <enabled>true</enabled>
         </fixedpoint>
       </toolbox>
       <toolbox>
-        <embeddedcoder>
-          <enabled>true</enabled>
-        </embeddedcoder>
-      </toolbox>
-      <toolbox>
         <matlabcoder>
           <enabled>true</enabled>
         </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
       </toolbox>
     </matlab>
     <platform>

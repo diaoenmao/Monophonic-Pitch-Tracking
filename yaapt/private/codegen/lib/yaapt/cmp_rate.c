@@ -1,8 +1,8 @@
 /*
  * File: cmp_rate.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -10,7 +10,6 @@
 #include "yaapt.h"
 #include "cmp_rate.h"
 #include "yaapt_emxutil.h"
-#include "rdivide.h"
 #include "sort1.h"
 #include "yaapt_rtwutil.h"
 
@@ -55,28 +54,27 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
   double numpeaks;
   double b_Pitch[20];
   double b_Merit[20];
-  int i28;
   double d3;
+  int i30;
   int n;
   boolean_T exitg2;
   double b_n;
   double mtmp;
+  int iidx[20];
+  double c_Pitch[20];
   int loop_ub;
-  int xs;
+  int unnamed_idx_1;
   int ixstart;
   int c_n;
   int itmp;
+  boolean_T guard1 = false;
   int ix;
   boolean_T exitg3;
-  boolean_T guard1 = false;
-  int iidx[20];
-  double c_Pitch[20];
-  emxArray_real_T *r30;
-  emxArray_real_T *b;
-  emxArray_real_T *r31;
-  emxArray_real_T *r32;
+  emxArray_real_T *r29;
   boolean_T exitg1;
-  emxArray_real_T *c_Merit;
+  emxArray_real_T *b;
+  emxArray_real_T *r30;
+  emxArray_real_T *r31;
 
   /*   Creation date:   2002 */
   /*   Revision dates:   March 26, 2002, December 24, 2005 */
@@ -108,10 +106,8 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
 
   /*  Pitch     = zeros(1, maxcands); */
   /*  Merit     = zeros(1, maxcands); */
-  for (i28 = 0; i28 < 20; i28++) {
-    b_Pitch[i28] = 0.0;
-    b_Merit[i28] = 0.0;
-  }
+  memset(&b_Pitch[0], 0, 20U * sizeof(double));
+  memset(&b_Merit[0], 0, 20U * sizeof(double));
 
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*   Find all peaks for a (lag_min--to--lag_max) search range */
@@ -121,25 +117,25 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
   /*    criteria are eliminated. */
   /*    and allowing only the peaks which are a certain amplitude over the rest. */
   d3 = lag_min - center;
-  i28 = (int)(lag_max + (1.0 - d3));
+  i30 = (int)(lag_max + (1.0 - d3));
   n = 0;
   exitg2 = false;
-  while ((!exitg2) && (n <= i28 - 1)) {
+  while ((!exitg2) && (n <= i30 - 1)) {
     b_n = d3 + (double)n;
     mtmp = (b_n + Prm_nccf_pwidth) - 1.0;
     if (b_n > mtmp) {
       loop_ub = 1;
-      xs = 1;
+      unnamed_idx_1 = 1;
     } else {
       loop_ub = (int)b_n;
-      xs = (int)mtmp + 1;
+      unnamed_idx_1 = (int)mtmp + 1;
     }
 
     ixstart = 1;
-    c_n = xs - loop_ub;
+    c_n = unnamed_idx_1 - loop_ub;
     mtmp = Phi->data[loop_ub - 1];
     itmp = 1;
-    if (xs - loop_ub > 1) {
+    if (unnamed_idx_1 - loop_ub > 1) {
       if (rtIsNaN(mtmp)) {
         ix = 2;
         exitg3 = false;
@@ -155,7 +151,7 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
         }
       }
 
-      if (ixstart < xs - loop_ub) {
+      if (ixstart < unnamed_idx_1 - loop_ub) {
         while (ixstart + 1 <= c_n) {
           if (Phi->data[(loop_ub + ixstart) - 1] > mtmp) {
             mtmp = Phi->data[(loop_ub + ixstart) - 1];
@@ -199,8 +195,8 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
   /*  consider the case when the number of peaks are more than the maxcands. */
   /*  Then take only the best maxcands peaks based on the Merit values . */
   c_sort(b_Merit, iidx);
-  for (i28 = 0; i28 < 20; i28++) {
-    c_Pitch[i28] = b_Pitch[iidx[i28] - 1];
+  for (i30 = 0; i30 < 20; i30++) {
+    c_Pitch[i30] = b_Pitch[iidx[i30] - 1];
   }
 
   memcpy(&b_Pitch[0], &c_Pitch[0], 20U * sizeof(double));
@@ -215,12 +211,12 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
     loop_ub = (int)numpeaks;
   }
 
-  i28 = Merit->size[0] * Merit->size[1];
+  i30 = Merit->size[0] * Merit->size[1];
   Merit->size[0] = 1;
   Merit->size[1] = loop_ub;
-  emxEnsureCapacity((emxArray__common *)Merit, i28, (int)sizeof(double));
-  for (i28 = 0; i28 < loop_ub; i28++) {
-    Merit->data[Merit->size[0] * i28] = b_Merit[i28];
+  emxEnsureCapacity((emxArray__common *)Merit, i30, (int)sizeof(double));
+  for (i30 = 0; i30 < loop_ub; i30++) {
+    Merit->data[Merit->size[0] * i30] = b_Merit[i30];
   }
 
   if (1.0 > numpeaks) {
@@ -229,98 +225,98 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
     loop_ub = (int)numpeaks;
   }
 
-  i28 = Pitch->size[0] * Pitch->size[1];
+  i30 = Pitch->size[0] * Pitch->size[1];
   Pitch->size[0] = 1;
   Pitch->size[1] = loop_ub;
-  emxEnsureCapacity((emxArray__common *)Pitch, i28, (int)sizeof(double));
-  for (i28 = 0; i28 < loop_ub; i28++) {
-    Pitch->data[Pitch->size[0] * i28] = b_Pitch[i28];
+  emxEnsureCapacity((emxArray__common *)Pitch, i30, (int)sizeof(double));
+  for (i30 = 0; i30 < loop_ub; i30++) {
+    Pitch->data[Pitch->size[0] * i30] = b_Pitch[i30];
   }
 
   /*  if the number of peaks in the frame are less than the maxcands, then we  */
   /*  assign "null" values to remainder of peak and merit values in arrays */
   if (numpeaks < maxcands) {
     if (loop_ub == 0) {
-      i28 = Pitch->size[0] * Pitch->size[1];
+      i30 = Pitch->size[0] * Pitch->size[1];
       Pitch->size[0] = 1;
       Pitch->size[1] = (int)maxcands;
-      emxEnsureCapacity((emxArray__common *)Pitch, i28, (int)sizeof(double));
+      emxEnsureCapacity((emxArray__common *)Pitch, i30, (int)sizeof(double));
       loop_ub = (int)maxcands;
-      for (i28 = 0; i28 < loop_ub; i28++) {
-        Pitch->data[i28] = 0.0;
+      for (i30 = 0; i30 < loop_ub; i30++) {
+        Pitch->data[i30] = 0.0;
       }
 
-      i28 = Merit->size[0] * Merit->size[1];
+      i30 = Merit->size[0] * Merit->size[1];
       Merit->size[0] = 1;
       Merit->size[1] = (int)maxcands;
-      emxEnsureCapacity((emxArray__common *)Merit, i28, (int)sizeof(double));
+      emxEnsureCapacity((emxArray__common *)Merit, i30, (int)sizeof(double));
       loop_ub = (int)maxcands;
-      for (i28 = 0; i28 < loop_ub; i28++) {
-        Merit->data[i28] = 0.001;
+      for (i30 = 0; i30 < loop_ub; i30++) {
+        Merit->data[i30] = 0.001;
       }
     } else {
-      emxInit_real_T(&r30, 2);
-      xs = Pitch->size[1];
-      ixstart = (int)(maxcands - numpeaks);
-      i28 = Pitch->size[0] * Pitch->size[1];
-      Pitch->size[1] = xs + (int)(maxcands - numpeaks);
-      emxEnsureCapacity((emxArray__common *)Pitch, i28, (int)sizeof(double));
-      loop_ub = (int)(maxcands - numpeaks);
-      i28 = r30->size[0] * r30->size[1];
-      r30->size[0] = 1;
-      r30->size[1] = loop_ub;
-      emxEnsureCapacity((emxArray__common *)r30, i28, (int)sizeof(double));
-      for (i28 = 0; i28 < loop_ub; i28++) {
-        r30->data[r30->size[0] * i28] = 0.0;
+      emxInit_real_T(&r29, 2);
+      ixstart = Pitch->size[1];
+      c_n = (int)(maxcands - numpeaks);
+      i30 = Pitch->size[0] * Pitch->size[1];
+      Pitch->size[1] = ixstart + (int)(maxcands - numpeaks);
+      emxEnsureCapacity((emxArray__common *)Pitch, i30, (int)sizeof(double));
+      unnamed_idx_1 = (int)(maxcands - numpeaks);
+      i30 = r29->size[0] * r29->size[1];
+      r29->size[0] = 1;
+      r29->size[1] = unnamed_idx_1;
+      emxEnsureCapacity((emxArray__common *)r29, i30, (int)sizeof(double));
+      for (i30 = 0; i30 < unnamed_idx_1; i30++) {
+        r29->data[r29->size[0] * i30] = 0.0;
       }
 
-      for (i28 = 0; i28 < ixstart; i28++) {
-        Pitch->data[xs + i28] = r30->data[i28];
+      for (i30 = 0; i30 < c_n; i30++) {
+        Pitch->data[ixstart + i30] = r29->data[i30];
       }
 
-      emxFree_real_T(&r30);
+      emxFree_real_T(&r29);
       emxInit_real_T(&b, 2);
-      i28 = b->size[0] * b->size[1];
+      i30 = b->size[0] * b->size[1];
       b->size[0] = 1;
       b->size[1] = (int)(maxcands - numpeaks);
-      emxEnsureCapacity((emxArray__common *)b, i28, (int)sizeof(double));
+      emxEnsureCapacity((emxArray__common *)b, i30, (int)sizeof(double));
       loop_ub = (int)(maxcands - numpeaks);
-      for (i28 = 0; i28 < loop_ub; i28++) {
-        b->data[i28] = 1.0;
+      for (i30 = 0; i30 < loop_ub; i30++) {
+        b->data[i30] = 1.0;
+      }
+
+      emxInit_real_T(&r30, 2);
+      i30 = r30->size[0] * r30->size[1];
+      r30->size[0] = 1;
+      r30->size[1] = b->size[1];
+      emxEnsureCapacity((emxArray__common *)r30, i30, (int)sizeof(double));
+      loop_ub = b->size[0] * b->size[1];
+      for (i30 = 0; i30 < loop_ub; i30++) {
+        r30->data[i30] = 0.001 * b->data[i30];
       }
 
       emxInit_real_T(&r31, 2);
-      i28 = r31->size[0] * r31->size[1];
+      ixstart = Merit->size[1];
+      c_n = r30->size[1];
+      i30 = Merit->size[0] * Merit->size[1];
+      Merit->size[1] = ixstart + c_n;
+      emxEnsureCapacity((emxArray__common *)Merit, i30, (int)sizeof(double));
+      i30 = r31->size[0] * r31->size[1];
       r31->size[0] = 1;
       r31->size[1] = b->size[1];
-      emxEnsureCapacity((emxArray__common *)r31, i28, (int)sizeof(double));
-      loop_ub = b->size[0] * b->size[1];
-      for (i28 = 0; i28 < loop_ub; i28++) {
-        r31->data[i28] = 0.001 * b->data[i28];
-      }
-
-      emxInit_real_T(&r32, 2);
-      xs = Merit->size[1];
-      ixstart = r31->size[1];
-      i28 = Merit->size[0] * Merit->size[1];
-      Merit->size[1] = xs + ixstart;
-      emxEnsureCapacity((emxArray__common *)Merit, i28, (int)sizeof(double));
-      i28 = r32->size[0] * r32->size[1];
-      r32->size[0] = 1;
-      r32->size[1] = b->size[1];
-      emxEnsureCapacity((emxArray__common *)r32, i28, (int)sizeof(double));
+      emxEnsureCapacity((emxArray__common *)r31, i30, (int)sizeof(double));
       loop_ub = b->size[1];
-      emxFree_real_T(&r31);
-      for (i28 = 0; i28 < loop_ub; i28++) {
-        r32->data[r32->size[0] * i28] = 0.001 * b->data[b->size[0] * i28];
+      emxFree_real_T(&r30);
+      for (i30 = 0; i30 < loop_ub; i30++) {
+        r31->data[r31->size[0] * i30] = 0.001 * b->data[b->size[0] * i30];
       }
 
       emxFree_real_T(&b);
-      for (i28 = 0; i28 < ixstart; i28++) {
-        Merit->data[xs + i28] = r32->data[i28];
+      for (i30 = 0; i30 < c_n; i30++) {
+        Merit->data[ixstart + i30] = r31->data[i30];
       }
 
-      emxFree_real_T(&r32);
+      emxFree_real_T(&r31);
 
       /*      Pitch(numpeaks+1:maxcands) = 0; */
       /*      Merit(numpeaks+1:maxcands) = 0.001; */
@@ -358,18 +354,15 @@ void cmp_rate(const emxArray_real_T *Phi, double Fs, double maxcands, double
   }
 
   if (mtmp > 1.0) {
-    emxInit_real_T(&c_Merit, 2);
-    i28 = c_Merit->size[0] * c_Merit->size[1];
-    c_Merit->size[0] = 1;
-    c_Merit->size[1] = Merit->size[1];
-    emxEnsureCapacity((emxArray__common *)c_Merit, i28, (int)sizeof(double));
-    loop_ub = Merit->size[0] * Merit->size[1];
-    for (i28 = 0; i28 < loop_ub; i28++) {
-      c_Merit->data[i28] = Merit->data[i28];
+    i30 = Merit->size[0] * Merit->size[1];
+    Merit->size[0] = 1;
+    emxEnsureCapacity((emxArray__common *)Merit, i30, (int)sizeof(double));
+    loop_ub = Merit->size[0];
+    unnamed_idx_1 = Merit->size[1];
+    loop_ub *= unnamed_idx_1;
+    for (i30 = 0; i30 < loop_ub; i30++) {
+      Merit->data[i30] /= mtmp;
     }
-
-    c_rdivide(c_Merit, mtmp, Merit);
-    emxFree_real_T(&c_Merit);
   }
 }
 

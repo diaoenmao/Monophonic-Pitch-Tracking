@@ -1,6 +1,6 @@
 START_DIR = D:\GitHub\MONOPH~1\yaapt\private
 
-MATLAB_ROOT = F:\MATLAB
+MATLAB_ROOT = F:\MATLAB\R2016a
 MAKEFILE = yaapt_mex.mk
 
 include yaapt_mex.mki
@@ -13,6 +13,7 @@ SRC_FILES =  \
 	yaapt_terminate.c \
 	yaapt.c \
 	nonlinear.c \
+	mrdivide.c \
 	rdivide.c \
 	Myfir1.c \
 	error.c \
@@ -20,6 +21,7 @@ SRC_FILES =  \
 	eml_int_forloop_overflow_check.c \
 	abs.c \
 	scalexpAlloc.c \
+	Myhamming.c \
 	cos.c \
 	any.c \
 	isequal.c \
@@ -30,6 +32,7 @@ SRC_FILES =  \
 	indexShapeCheck.c \
 	mpower.c \
 	sinc.c \
+	mldivide.c \
 	lusolve.c \
 	xgetrf.c \
 	repmat.c \
@@ -53,16 +56,17 @@ SRC_FILES =  \
 	mod.c \
 	Mykaiser.c \
 	Mybesseli.c \
-	all.c \
 	prod.c \
 	peaks.c \
 	sort1.c \
 	sortIdx.c \
 	std.c \
+	var.c \
 	Mymedfilt1.c \
 	median.c \
 	dynamic5.c \
 	path1.c \
+	all.c \
 	interp1.c \
 	pchip.c \
 	tm_trk.c \
@@ -82,13 +86,13 @@ MEX_FILE_NAME_WO_EXT = yaapt_mex
 MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexw64
 TARGET = $(MEX_FILE_NAME)
 
-SYS_LIBS = libmwlapack.lib 
+SYS_LIBS = libmwblas.lib libmwlapack.lib 
 
 
 #
 #====================================================================
 # gmake makefile fragment for building MEX functions using MSVC
-# Copyright 2007-2013 The MathWorks, Inc.
+# Copyright 2007-2015 The MathWorks, Inc.
 #====================================================================
 #
 SHELL = cmd
@@ -100,7 +104,7 @@ LD = $(LINKER)
 OBJLISTC = $(SRC_FILES:.c=.$(OBJEXT))
 OBJLIST  = $(OBJLISTC:.cpp=.$(OBJEXT))
 
-ifneq (,$(findstring $(EMC_COMPILER),msvc80 msvc90 msvc100 msvc100free msvc110 msvc120 msvcsdk))
+ifneq (,$(findstring $(EMC_COMPILER),msvc80 msvc90 msvc100 msvc100free msvc110 msvc120 msvc140 msvcsdk))
   TARGETMT = $(TARGET).manifest
   MEX = $(TARGETMT)
   STRICTFP = /fp:strict
@@ -124,7 +128,7 @@ SYS_INCLUDE += /I "$(MATLAB_ROOT)\extern\include"
 SYS_INCLUDE += /I "."
 
 DIRECTIVES = $(MEX_FILE_NAME_WO_EXT)_mex.arf
-COMP_FLAGS = $(COMPFLAGS) $(OMPFLAGS) -DMX_COMPAT_32
+COMP_FLAGS = $(COMPFLAGS) $(OMPFLAGS)
 LINK_FLAGS = $(filter-out /export:mexFunction, $(LINKFLAGS))
 LINK_FLAGS += /NODEFAULTLIB:LIBCMT
 ifeq ($(EMC_CONFIG),optim)

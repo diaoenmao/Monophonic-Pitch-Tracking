@@ -9,20 +9,25 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "indexShapeCheck.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
 static emlrtRSInfo ec_emlrtRSI = { 18, "indexShapeCheck",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m"
+};
 
-static emlrtRSInfo qi_emlrtRSI = { 14, "indexShapeCheck",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRSInfo ek_emlrtRSI = { 14, "indexShapeCheck",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m"
+};
 
-static emlrtRSInfo ri_emlrtRSI = { 80, "indexShapeCheck",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRSInfo fk_emlrtRSI = { 80, "indexShapeCheck",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m"
+};
 
-static emlrtRTEInfo ff_emlrtRTEI = { 85, 5, "indexShapeCheck",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m" };
+static emlrtRTEInfo pf_emlrtRTEI = { 88, 9, "indexShapeCheck",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m"
+};
 
 /* Function Definitions */
 
@@ -59,17 +64,17 @@ void b_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize, const int32_T
     }
 
     if (nonSingletonDimFound) {
-      st.site = &qi_emlrtRSI;
+      st.site = &ek_emlrtRSI;
       if (((matrixSize == 1) != (indexSize[0] == 1)) || (indexSize[1] != 1)) {
         nonSingletonDimFound = true;
       } else {
         nonSingletonDimFound = false;
       }
 
-      b_st.site = &ri_emlrtRSI;
+      b_st.site = &fk_emlrtRSI;
       if (!nonSingletonDimFound) {
       } else {
-        emlrtErrorWithMessageIdR2012b(&b_st, &ff_emlrtRTEI,
+        emlrtErrorWithMessageIdR2012b(&b_st, &pf_emlrtRTEI,
           "Coder:FE:PotentialMatrixMatrix", 0);
       }
     }
@@ -118,7 +123,7 @@ void indexShapeCheck(const emlrtStack *sp, int32_T matrixSize, const int32_T
   st.site = &ec_emlrtRSI;
   if (!nonSingletonDimFound) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &ff_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &pf_emlrtRTEI,
       "Coder:FE:PotentialVectorVector", 0);
   }
 }

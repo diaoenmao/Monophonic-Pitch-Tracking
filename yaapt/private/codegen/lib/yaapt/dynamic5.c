@@ -1,8 +1,8 @@
 /*
  * File: dynamic5.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -42,10 +42,10 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   int k;
   int c_Trans;
   emxArray_real_T *r25;
-  int Path_size[2];
   double Path_data[4999];
+  int Path_size[2];
   int n;
-  emxInit_real_T1(&Trans, 3);
+  emxInit_real_T2(&Trans, 3);
 
   /*    Creation date:   Spring 2001 */
   /*    Revision dates:   January 3, 2002, March 7, 2005 */

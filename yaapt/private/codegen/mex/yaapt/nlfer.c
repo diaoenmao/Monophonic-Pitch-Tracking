@@ -10,38 +10,35 @@
 #include "yaapt.h"
 #include "nlfer.h"
 #include "yaapt_emxutil.h"
-#include "rdivide.h"
 #include "mean.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "isequal.h"
 #include "Myspecgram.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo we_emlrtRSI = { 46, "nlfer",
+static emlrtRSInfo ve_emlrtRSI = { 48, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRSInfo xe_emlrtRSI = { 49, "nlfer",
+static emlrtRSInfo we_emlrtRSI = { 52, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRSInfo ye_emlrtRSI = { 50, "nlfer",
+static emlrtRSInfo xe_emlrtRSI = { 53, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRTEInfo fb_emlrtRTEI = { 1, 30, "nlfer",
+static emlrtRTEInfo hb_emlrtRTEI = { 1, 30, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRTEInfo gb_emlrtRTEI = { 46, 1, "nlfer",
+static emlrtRTEInfo ib_emlrtRTEI = { 48, 1, "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
 
-static emlrtRTEInfo hb_emlrtRTEI = { 49, 1, "nlfer",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m" };
-
-static emlrtDCInfo m_emlrtDCI = { 49, 30, "nlfer",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m", 1 };
-
-static emlrtBCInfo dc_emlrtBCI = { -1, -1, 49, 30, "SpecData", "nlfer",
+static emlrtBCInfo dc_emlrtBCI = { -1, -1, 52, 30, "SpecData", "nlfer",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m", 0 };
+
+static emlrtDCInfo m_emlrtDCI = { 52, 30, "nlfer",
+  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nlfer.m", 1 };
 
 /* Function Definitions */
 
@@ -59,21 +56,18 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, real_T
   real_T N_F0_min;
   real_T N_F0_max;
   int32_T n;
-  int32_T k;
+  int32_T i;
   emxArray_creal_T *SpecData;
   real_T b_s;
-  int32_T vlen;
-  int32_T ix;
+  int32_T k;
+  int32_T xoffset;
   emxArray_creal_T *x;
-  int32_T iy;
-  int32_T i;
   emxArray_creal_T *b_SpecData;
+  int32_T loop_ub;
+  int32_T i15;
   uint32_T sz[2];
   emxArray_real_T *b_x;
-  boolean_T b5;
   boolean_T overflow;
-  emxArray_real_T *FrmEnergy;
-  boolean_T b6;
   real_T avgEnergy;
   emlrtStack st;
   emlrtStack b_st;
@@ -91,6 +85,8 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, real_T
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
+  covrtLogFcn(&emlrtCoverageInstance, 6U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 6U, 0);
 
   /*  NLFER  Normalized Low Frequency Energy Ratio */
   /*  */
@@ -131,124 +127,120 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, real_T
 
   /* 'nlfer:34' nframejump = fix(Prm.frame_space*Fs/1000); */
   s = Prm_frame_space * Fs / 1000.0;
-  emxInit_real_T(sp, &b_Data, 2, &fb_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Data, 2, &hb_emlrtRTEI, true);
 
   /*  If normalized low-frequency energy is below this, assume unvoiced frame */
   /* 'nlfer:37' nlfer_thersh1  = Prm.nlfer_thresh1; */
   /*  Low freqeuncy range for NLFER */
-  /* 'nlfer:40' N_F0_min = round ((Prm.f0_min*2/Fs) * nfftlength ); */
-  N_F0_min = muDoubleScalarRound(Prm_f0_min * 2.0 / Fs * Prm_fft_length);
+  /*  N_F0_min = round ((Prm.f0_min*2/Fs) * nfftlength ); */
+  /* 'nlfer:41' N_F0_min = round ((Prm.f0_min/Fs) * nfftlength ); */
+  N_F0_min = muDoubleScalarRound(Prm_f0_min / Fs * Prm_fft_length);
 
-  /* 'nlfer:41' N_F0_max = round ((Prm.f0_max/Fs) * nfftlength ); */
+  /* 'nlfer:42' N_F0_max = round ((Prm.f0_max/Fs) * nfftlength ); */
   N_F0_max = muDoubleScalarRound(Prm_f0_max / Fs * Prm_fft_length);
 
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
   /*   Spectrogram of the data */
-  /* 'nlfer:46' SpecData = Myspecgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump)); */
+  /*    B = SPECGRAM(A,NFFT,Fs,WINDOW,NOVERLAP) */
+  /* 'nlfer:48' SpecData = Myspecgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump)); */
   n = b_Data->size[0] * b_Data->size[1];
   b_Data->size[0] = 1;
   b_Data->size[1] = Data->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)b_Data, n, (int32_T)sizeof(real_T),
-                    &fb_emlrtRTEI);
-  k = Data->size[0] * Data->size[1];
-  for (n = 0; n < k; n++) {
+                    &hb_emlrtRTEI);
+  i = Data->size[0] * Data->size[1];
+  for (n = 0; n < i; n++) {
     b_Data->data[n] = Data->data[n];
   }
 
-  emxInit_creal_T(sp, &SpecData, 2, &gb_emlrtRTEI, true);
+  emxInit_creal_T(sp, &SpecData, 2, &ib_emlrtRTEI, true);
   if (s < 0.0) {
     b_s = muDoubleScalarCeil(s);
   } else {
     b_s = muDoubleScalarFloor(s);
   }
 
-  st.site = &we_emlrtRSI;
+  st.site = &ve_emlrtRSI;
   Myspecgram(&st, b_Data, Prm_fft_length, nframesize, nframesize - b_s, SpecData);
 
   /*  SpecData_test = specgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump)); */
   /*  Compute normalize low-frequency energy ratio  */
-  /* 'nlfer:49' FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:))); */
+  /*  FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:)).^2); PSD??? */
+  /* 'nlfer:52' FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:))); */
   emxFree_real_T(&b_Data);
   if (N_F0_min > N_F0_max) {
-    vlen = 1;
-    n = 1;
+    n = 0;
+    k = 0;
   } else {
+    n = SpecData->size[0];
     if (N_F0_min != (int32_T)muDoubleScalarFloor(N_F0_min)) {
       emlrtIntegerCheckR2012b(N_F0_min, &m_emlrtDCI, sp);
     }
 
-    n = SpecData->size[0];
-    vlen = (int32_T)N_F0_min;
-    if (!((vlen >= 1) && (vlen <= n))) {
-      emlrtDynamicBoundsCheckR2012b(vlen, 1, n, &dc_emlrtBCI, sp);
+    xoffset = (int32_T)N_F0_min;
+    if (!((xoffset >= 1) && (xoffset <= n))) {
+      emlrtDynamicBoundsCheckR2012b(xoffset, 1, n, &dc_emlrtBCI, sp);
     }
 
+    n = xoffset - 1;
+    xoffset = SpecData->size[0];
     if (N_F0_max != (int32_T)muDoubleScalarFloor(N_F0_max)) {
       emlrtIntegerCheckR2012b(N_F0_max, &m_emlrtDCI, sp);
     }
 
-    n = SpecData->size[0];
-    ix = (int32_T)N_F0_max;
-    if (!((ix >= 1) && (ix <= n))) {
-      emlrtDynamicBoundsCheckR2012b(ix, 1, n, &dc_emlrtBCI, sp);
-    }
-
-    n = ix + 1;
-  }
-
-  emxInit_creal_T(sp, &x, 2, &fb_emlrtRTEI, true);
-  st.site = &xe_emlrtRSI;
-  k = SpecData->size[1];
-  ix = x->size[0] * x->size[1];
-  x->size[0] = n - vlen;
-  x->size[1] = k;
-  emxEnsureCapacity(&st, (emxArray__common *)x, ix, (int32_T)sizeof(creal_T),
-                    &fb_emlrtRTEI);
-  for (ix = 0; ix < k; ix++) {
-    iy = n - vlen;
-    for (i = 0; i < iy; i++) {
-      x->data[i + x->size[0] * ix] = SpecData->data[((vlen + i) + SpecData->
-        size[0] * ix) - 1];
+    k = (int32_T)N_F0_max;
+    if (!((k >= 1) && (k <= xoffset))) {
+      emlrtDynamicBoundsCheckR2012b(k, 1, xoffset, &dc_emlrtBCI, sp);
     }
   }
 
-  emxInit_creal_T(&st, &b_SpecData, 2, &fb_emlrtRTEI, true);
-  b_st.site = &bg_emlrtRSI;
-  k = SpecData->size[1];
-  ix = b_SpecData->size[0] * b_SpecData->size[1];
-  b_SpecData->size[0] = n - vlen;
-  b_SpecData->size[1] = k;
-  emxEnsureCapacity(&b_st, (emxArray__common *)b_SpecData, ix, (int32_T)sizeof
-                    (creal_T), &fb_emlrtRTEI);
-  for (ix = 0; ix < k; ix++) {
-    iy = n - vlen;
-    for (i = 0; i < iy; i++) {
-      b_SpecData->data[i + b_SpecData->size[0] * ix] = SpecData->data[((vlen + i)
-        + SpecData->size[0] * ix) - 1];
+  emxInit_creal_T(sp, &x, 2, &hb_emlrtRTEI, true);
+  st.site = &we_emlrtRSI;
+  i = SpecData->size[1];
+  xoffset = x->size[0] * x->size[1];
+  x->size[0] = k - n;
+  x->size[1] = i;
+  emxEnsureCapacity(&st, (emxArray__common *)x, xoffset, (int32_T)sizeof(creal_T),
+                    &hb_emlrtRTEI);
+  for (xoffset = 0; xoffset < i; xoffset++) {
+    loop_ub = k - n;
+    for (i15 = 0; i15 < loop_ub; i15++) {
+      x->data[i15 + x->size[0] * xoffset] = SpecData->data[(n + i15) +
+        SpecData->size[0] * xoffset];
     }
   }
 
-  for (ix = 0; ix < 2; ix++) {
-    sz[ix] = (uint32_T)b_SpecData->size[ix];
+  emxInit_creal_T(&st, &b_SpecData, 2, &hb_emlrtRTEI, true);
+  b_st.site = &mh_emlrtRSI;
+  i = SpecData->size[1];
+  xoffset = b_SpecData->size[0] * b_SpecData->size[1];
+  b_SpecData->size[0] = k - n;
+  b_SpecData->size[1] = i;
+  emxEnsureCapacity(&b_st, (emxArray__common *)b_SpecData, xoffset, (int32_T)
+                    sizeof(creal_T), &hb_emlrtRTEI);
+  for (xoffset = 0; xoffset < i; xoffset++) {
+    loop_ub = k - n;
+    for (i15 = 0; i15 < loop_ub; i15++) {
+      b_SpecData->data[i15 + b_SpecData->size[0] * xoffset] = SpecData->data[(n
+        + i15) + SpecData->size[0] * xoffset];
+    }
+  }
+
+  for (xoffset = 0; xoffset < 2; xoffset++) {
+    sz[xoffset] = (uint32_T)b_SpecData->size[xoffset];
   }
 
   emxFree_creal_T(&b_SpecData);
-  emxInit_real_T(&b_st, &b_x, 2, &fb_emlrtRTEI, true);
-  ix = b_x->size[0] * b_x->size[1];
+  emxInit_real_T(&b_st, &b_x, 2, &hb_emlrtRTEI, true);
+  xoffset = b_x->size[0] * b_x->size[1];
   b_x->size[0] = (int32_T)sz[0];
   b_x->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(&b_st, (emxArray__common *)b_x, ix, (int32_T)sizeof(real_T),
-                    &fb_emlrtRTEI);
-  ix = SpecData->size[1];
-  n = (n - vlen) * ix;
-  c_st.site = &cg_emlrtRSI;
-  if (1 > n) {
-    b5 = false;
-  } else {
-    b5 = (n > 2147483646);
-  }
-
-  if (b5) {
+  emxEnsureCapacity(&b_st, (emxArray__common *)b_x, xoffset, (int32_T)sizeof
+                    (real_T), &hb_emlrtRTEI);
+  xoffset = SpecData->size[1];
+  n = (k - n) * xoffset;
+  c_st.site = &nh_emlrtRSI;
+  if ((!(1 > n)) && (n > 2147483646)) {
     d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
   }
@@ -259,8 +251,8 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, real_T
 
   emxFree_creal_T(&x);
   emxFree_creal_T(&SpecData);
-  st.site = &xe_emlrtRSI;
-  b_st.site = &dg_emlrtRSI;
+  st.site = &we_emlrtRSI;
+  b_st.site = &oh_emlrtRSI;
   if (((b_x->size[0] == 1) && (b_x->size[1] == 1)) || (b_x->size[0] != 1)) {
     overflow = true;
   } else {
@@ -269,93 +261,89 @@ void nlfer(const emlrtStack *sp, const emxArray_real_T *Data, real_T Fs, real_T
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &lf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &xf_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
   overflow = !c_isequal(b_x);
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&b_st, &mf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&b_st, &wf_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  c_st.site = &eg_emlrtRSI;
+  c_st.site = &ph_emlrtRSI;
   for (n = 0; n < 2; n++) {
     sz[n] = (uint32_T)b_x->size[n];
   }
 
-  emxInit_real_T(&c_st, &FrmEnergy, 2, &hb_emlrtRTEI, true);
-  n = FrmEnergy->size[0] * FrmEnergy->size[1];
-  FrmEnergy->size[0] = 1;
-  FrmEnergy->size[1] = (int32_T)sz[1];
-  emxEnsureCapacity(&c_st, (emxArray__common *)FrmEnergy, n, (int32_T)sizeof
-                    (real_T), &fb_emlrtRTEI);
+  n = Energy->size[0] * Energy->size[1];
+  Energy->size[0] = 1;
+  Energy->size[1] = (int32_T)sz[1];
+  emxEnsureCapacity(&c_st, (emxArray__common *)Energy, n, (int32_T)sizeof(real_T),
+                    &hb_emlrtRTEI);
   if ((b_x->size[0] == 0) || (b_x->size[1] == 0)) {
-    n = FrmEnergy->size[0] * FrmEnergy->size[1];
-    FrmEnergy->size[0] = 1;
-    emxEnsureCapacity(&c_st, (emxArray__common *)FrmEnergy, n, (int32_T)sizeof
-                      (real_T), &fb_emlrtRTEI);
-    k = FrmEnergy->size[1];
-    for (n = 0; n < k; n++) {
-      FrmEnergy->data[FrmEnergy->size[0] * n] = 0.0;
+    n = Energy->size[0] * Energy->size[1];
+    Energy->size[0] = 1;
+    emxEnsureCapacity(&c_st, (emxArray__common *)Energy, n, (int32_T)sizeof
+                      (real_T), &hb_emlrtRTEI);
+    i = Energy->size[1];
+    for (n = 0; n < i; n++) {
+      Energy->data[Energy->size[0] * n] = 0.0;
     }
   } else {
-    vlen = b_x->size[0];
-    ix = -1;
-    iy = -1;
-    d_st.site = &fg_emlrtRSI;
+    n = b_x->size[0];
+    d_st.site = &qh_emlrtRSI;
     overflow = (b_x->size[1] > 2147483646);
     if (overflow) {
       e_st.site = &cb_emlrtRSI;
       check_forloop_overflow_error(&e_st, true);
     }
 
-    for (i = 1; i <= b_x->size[1]; i++) {
-      n = ix + 1;
-      ix++;
-      s = b_x->data[n];
-      d_st.site = &gg_emlrtRSI;
-      if (2 > vlen) {
-        b6 = false;
-      } else {
-        b6 = (vlen > 2147483646);
-      }
-
-      if (b6) {
+    for (i = 0; i + 1 <= b_x->size[1]; i++) {
+      xoffset = i * n;
+      s = b_x->data[xoffset];
+      d_st.site = &rh_emlrtRSI;
+      if ((!(2 > n)) && (n > 2147483646)) {
         e_st.site = &cb_emlrtRSI;
         check_forloop_overflow_error(&e_st, true);
       }
 
-      for (k = 2; k <= vlen; k++) {
-        ix++;
-        s += b_x->data[ix];
+      for (k = 2; k <= n; k++) {
+        s += b_x->data[(xoffset + k) - 1];
       }
 
-      iy++;
-      FrmEnergy->data[iy] = s;
+      Energy->data[i] = s;
     }
   }
 
   emxFree_real_T(&b_x);
 
-  /* 'nlfer:50' avgEnergy = mean(FrmEnergy); */
-  st.site = &ye_emlrtRSI;
-  avgEnergy = mean(&st, FrmEnergy);
+  /* 'nlfer:53' avgEnergy = mean(FrmEnergy); */
+  st.site = &xe_emlrtRSI;
+  avgEnergy = mean(&st, Energy);
 
-  /* 'nlfer:52' Energy = FrmEnergy/avgEnergy; */
-  c_rdivide(sp, FrmEnergy, avgEnergy, Energy);
+  /* 'nlfer:55' Energy = FrmEnergy/avgEnergy; */
+  n = Energy->size[0] * Energy->size[1];
+  Energy->size[0] = 1;
+  emxEnsureCapacity(sp, (emxArray__common *)Energy, n, (int32_T)sizeof(real_T),
+                    &hb_emlrtRTEI);
+  n = Energy->size[0];
+  i = Energy->size[1];
+  i *= n;
+  for (n = 0; n < i; n++) {
+    Energy->data[n] /= avgEnergy;
+  }
 
   /*  The frame is voiced if NLFER enery > threshold, otherwise is unvoiced. */
-  /* 'nlfer:54' VUVEnergy = (Energy > nlfer_thersh1); */
+  /* 'nlfer:57' VUVEnergy = (Energy > nlfer_thersh1); */
   n = VUVEnergy->size[0] * VUVEnergy->size[1];
   VUVEnergy->size[0] = 1;
   VUVEnergy->size[1] = Energy->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)VUVEnergy, n, (int32_T)sizeof
-                    (boolean_T), &fb_emlrtRTEI);
-  k = Energy->size[0] * Energy->size[1];
-  emxFree_real_T(&FrmEnergy);
-  for (n = 0; n < k; n++) {
+                    (boolean_T), &hb_emlrtRTEI);
+  i = Energy->size[0] * Energy->size[1];
+  for (n = 0; n < i; n++) {
     VUVEnergy->data[n] = (Energy->data[n] > Prm_nlfer_thresh1);
   }
 

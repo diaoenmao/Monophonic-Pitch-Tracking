@@ -11,14 +11,15 @@
 #include "mpower.h"
 #include "error1.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
 static emlrtRSInfo fc_emlrtRSI = { 37, "mpower",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\mpower.m" };
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\ops\\mpower.m" };
 
 static emlrtRSInfo hc_emlrtRSI = { 61, "power",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
 /* Function Definitions */
 

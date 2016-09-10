@@ -9,11 +9,12 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "eml_int_forloop_overflow_check.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo cf_emlrtRTEI = { 87, 9, "eml_int_forloop_overflow_check",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\eml\\eml_int_forloop_overflow_check.m"
+static emlrtRTEInfo nf_emlrtRTEI = { 86, 15, "eml_int_forloop_overflow_check",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\eml\\eml_int_forloop_overflow_check.m"
 };
 
 /* Function Definitions */
@@ -23,12 +24,10 @@ static emlrtRTEInfo cf_emlrtRTEI = { 87, 9, "eml_int_forloop_overflow_check",
  */
 void check_forloop_overflow_error(const emlrtStack *sp, boolean_T overflow)
 {
-  static const char_T cv0[5] = { 'i', 'n', 't', '3', '2' };
-
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &cf_emlrtRTEI,
-      "Coder:toolbox:int_forloop_overflow", 3, 4, 5, cv0);
+    emlrtErrorWithMessageIdR2012b(sp, &nf_emlrtRTEI,
+      "Coder:toolbox:int_forloop_overflow", 3, 4, 5, "int32");
   }
 }
 

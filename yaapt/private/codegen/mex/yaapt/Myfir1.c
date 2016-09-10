@@ -9,17 +9,14 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "Myfir1.h"
-#include "median.h"
 #include "yaapt_emxutil.h"
-#include "rdivide.h"
 #include "path1.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "Myfirls.h"
-#include "diff.h"
-#include "any.h"
-#include "cos.h"
+#include "Myhamming.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
@@ -41,9 +38,6 @@ static emlrtRSInfo u_emlrtRSI = { 157, "Myfir1",
 static emlrtRSInfo v_emlrtRSI = { 174, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo w_emlrtRSI = { 7, "Myhamming",
-  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhamming.m" };
-
 static emlrtRTEInfo h_emlrtRTEI = { 1, 18, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
@@ -61,57 +55,54 @@ static emlrtECInfo emlrtECI = { 2, 160, 5, "Myfir1",
 void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T *
             b)
 {
-  int32_T k;
+  emxArray_real_T *Window;
+  int32_T nm1d2;
+  const mxArray *y;
+  char_T u[35];
   static const char_T varargin_1[35] = { 'N', ' ', 'm', 'u', 's', 't', ' ', 'b',
     'e', ' ', 'a', ' ', 'r', 'e', 'a', 'l', ',', ' ', 'p', 'o', 's', 'i', 't',
     'i', 'v', 'e', ' ', 'i', 'n', 't', 'e', 'g', 'e', 'r', '.' };
 
-  char_T u[35];
-  const mxArray *y;
+  const mxArray *m1;
   static const int32_T iv2[2] = { 1, 35 };
 
-  const mxArray *m1;
-  int32_T n;
-  real_T r;
-  real_T apnd;
   boolean_T overflow;
-  real_T ndbl;
-  real_T cdiff;
-  emxArray_real_T *b_y;
-  int32_T nm1d2;
-  emxArray_real_T *r2;
-  emxArray_real_T *Window;
-  boolean_T b_Wn[2];
+  int32_T k;
+  boolean_T exitg1;
+  const mxArray *b_y;
+  char_T b_u[47];
   static const char_T b_varargin_1[47] = { 'F', 'r', 'e', 'q', 'u', 'e', 'n',
     'c', 'i', 'e', 's', ' ', 'm', 'u', 's', 't', ' ', 'f', 'a', 'l', 'l', ' ',
     'i', 'n', ' ', 'r', 'a', 'n', 'g', 'e', ' ', 'b', 'e', 't', 'w', 'e', 'e',
     'n', ' ', '0', ' ', 'a', 'n', 'd', ' ', '1', '.' };
 
-  char_T b_u[47];
-  const mxArray *c_y;
   static const int32_T iv3[2] = { 1, 47 };
 
+  const mxArray *c_y;
+  char_T c_u[30];
   static const char_T c_varargin_1[30] = { 'F', 'r', 'e', 'q', 'u', 'e', 'n',
     'c', 'i', 'e', 's', ' ', 'm', 'u', 's', 't', ' ', 'b', 'e', ' ', 'i', 'n',
     'c', 'r', 'e', 'a', 's', 'i', 'n', 'g' };
 
-  char_T c_u[30];
-  const mxArray *d_y;
+  real_T ff[6];
   static const int32_T iv4[2] = { 1, 30 };
 
-  real_T ff[6];
   real_T b_ff[6];
+  emxArray_real_T *d_y;
   int32_T b_b[2];
   int32_T e_y[2];
   real_T f0;
+  int32_T n;
+  real_T r;
+  real_T apnd;
+  real_T ndbl;
+  real_T cdiff;
   emxArray_creal_T *x;
   emxArray_creal_T *a;
-  emxArray_real_T *c_b;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
-  emlrtStack e_st;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
@@ -120,9 +111,9 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
-  e_st.prev = &d_st;
-  e_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
+  covrtLogFcn(&emlrtCoverageInstance, 3U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 0);
 
   /* FIR1   FIR filter design using the window method.  */
   /*    B = FIR1(N,Wn) designs an N'th order lowpass FIR digital filter  */
@@ -218,19 +209,31 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*      error('Scaling option must be ''noscale'' or ''scale''.')  */
   /*  end  */
   /* 'Myfir1:104' if isempty(N) | ~isnumeric(N) | ~isreal(N) | N~=round(N) | N<=0 */
-  if ((N != muDoubleScalarRound(N)) || (N <= 0.0)) {
+  covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 0, false);
+  covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 1, true);
+  covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 2, true);
+  if (covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 3, N != muDoubleScalarRound(N))
+      || covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 4, N <= 0.0)) {
+    covrtLogMcdc(&emlrtCoverageInstance, 3U, 0U, 0, true);
+    covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 0, true);
     st.site = &q_emlrtRSI;
-    for (k = 0; k < 35; k++) {
-      u[k] = varargin_1[k];
+    for (nm1d2 = 0; nm1d2 < 35; nm1d2++) {
+      u[nm1d2] = varargin_1[nm1d2];
     }
 
     y = NULL;
     m1 = emlrtCreateCharArray(2, iv2);
     emlrtInitCharArrayR2013a(&st, 35, m1, &u[0]);
     emlrtAssign(&y, m1);
-    b_st.site = &ho_emlrtRSI;
-    n_error(&b_st, y, &emlrtMCI);
+    b_st.site = &fq_emlrtRSI;
+    o_error(&b_st, y, &emlrtMCI);
+  } else {
+    covrtLogMcdc(&emlrtCoverageInstance, 3U, 0U, 0, false);
+    covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 0, false);
   }
+
+  emxInit_real_T1(sp, &Window, 1, &i_emlrtRTEI, true);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 1);
 
   /*  Ftype = upper(Ftype);  */
   /*  if ~strncmp(Ftype,'HIGH',1) & ~strncmp(Ftype,'STOP',1) & ...  */
@@ -242,8 +245,13 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /* 'Myfir1:117' nbands = length(Wn) + 1; */
   /*  if (nbands > 2) & isempty(Ftype)  */
   /* 'Myfir1:119' if (nbands > 2) */
+  covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 1, true);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 2);
+
   /* 'Myfir1:120' Ftype = 'DC-0'; */
   /*  make sure default 3 band filter is bandpass  */
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 3);
+
   /* 'Myfir1:122' First_Band = isempty(strfind('DC-0',Ftype)) & isempty(strfind('HIGH',Ftype)); */
   /* 'Myfir1:123' mags = rem( First_Band + (0:nbands-1), 2); */
   /* 'Myfir1:125' L = N + 1; */
@@ -255,117 +263,19 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*        odd = 1;  */
   /*  end  */
   /* 'Myfir1:133' if nw ~= 0 & nw ~= L */
+  covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 5, false);
+  covrtLogMcdc(&emlrtCoverageInstance, 3U, 0U, 1, false);
+  covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 2, false);
+
   /* 'Myfir1:136' if nw == 0 */
+  covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 3, true);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 4);
+
   /*  replace the following with the default window of your choice.  */
   /*     Window = hamming(L);  */
   /* 'Myfir1:138' Window = Myhamming(L); */
   st.site = &r_emlrtRSI;
-
-  /* HAMMING HAMMING(N) returns the N-point Hamming window. */
-  /* 	Copyright (c) 1984-94 by The MathWorks, Inc. */
-  /*        $Revision: 1.4 $  $Date: 1994/01/25 17:59:14 $ */
-  /* 'Myhamming:7' w = .54 - .46*cos(2*pi*(0:n-1)'/(n-1)); */
-  b_st.site = &w_emlrtRSI;
-  c_st.site = &x_emlrtRSI;
-  d_st.site = &y_emlrtRSI;
-  if (muDoubleScalarIsNaN((N + 1.0) - 1.0)) {
-    n = 1;
-    r = rtNaN;
-    apnd = (N + 1.0) - 1.0;
-    overflow = false;
-  } else if ((N + 1.0) - 1.0 < 0.0) {
-    n = 0;
-    r = 0.0;
-    apnd = (N + 1.0) - 1.0;
-    overflow = false;
-  } else if (muDoubleScalarIsInf((N + 1.0) - 1.0)) {
-    n = 1;
-    r = rtNaN;
-    apnd = (N + 1.0) - 1.0;
-    overflow = !(0.0 == (N + 1.0) - 1.0);
-  } else {
-    r = 0.0;
-    ndbl = muDoubleScalarFloor(((N + 1.0) - 1.0) + 0.5);
-    apnd = ndbl;
-    cdiff = ndbl - ((N + 1.0) - 1.0);
-    if (muDoubleScalarAbs(cdiff) < 4.4408920985006262E-16 * muDoubleScalarAbs((N
-          + 1.0) - 1.0)) {
-      ndbl++;
-      apnd = (N + 1.0) - 1.0;
-    } else if (cdiff > 0.0) {
-      apnd = ndbl - 1.0;
-    } else {
-      ndbl++;
-    }
-
-    overflow = (2.147483647E+9 < ndbl);
-    if (ndbl >= 0.0) {
-      n = (int32_T)ndbl;
-    } else {
-      n = 0;
-    }
-  }
-
-  e_st.site = &ab_emlrtRSI;
-  if (!overflow) {
-  } else {
-    emlrtErrorWithMessageIdR2012b(&e_st, &ye_emlrtRTEI, "Coder:MATLAB:pmaxsize",
-      0);
-  }
-
-  emxInit_real_T(&e_st, &b_y, 2, &h_emlrtRTEI, true);
-  k = b_y->size[0] * b_y->size[1];
-  b_y->size[0] = 1;
-  if (!(n > 0)) {
-    emlrtNonNegativeCheckR2012b(n, &e_emlrtDCI, &d_st);
-  }
-
-  b_y->size[1] = n;
-  emxEnsureCapacity(&d_st, (emxArray__common *)b_y, k, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
-  if (n > 0) {
-    b_y->data[0] = r;
-    if (n > 1) {
-      b_y->data[n - 1] = apnd;
-      k = n - 1;
-      nm1d2 = asr_s32(k, 1U);
-      e_st.site = &bb_emlrtRSI;
-      for (k = 1; k < nm1d2; k++) {
-        b_y->data[k] = r + (real_T)k;
-        b_y->data[(n - k) - 1] = apnd - (real_T)k;
-      }
-
-      if (nm1d2 << 1 == n - 1) {
-        b_y->data[nm1d2] = (r + apnd) / 2.0;
-      } else {
-        b_y->data[nm1d2] = r + (real_T)nm1d2;
-        b_y->data[nm1d2 + 1] = apnd - (real_T)nm1d2;
-      }
-    }
-  }
-
-  emxInit_real_T1(&d_st, &r2, 1, &h_emlrtRTEI, true);
-  k = r2->size[0];
-  r2->size[0] = b_y->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)r2, k, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
-  nm1d2 = b_y->size[1];
-  for (k = 0; k < nm1d2; k++) {
-    r2->data[k] = 6.2831853071795862 * b_y->data[b_y->size[0] * k];
-  }
-
-  emxInit_real_T1(&st, &Window, 1, &i_emlrtRTEI, true);
-  rdivide(&st, r2, (N + 1.0) - 1.0, Window);
-  b_st.site = &w_emlrtRSI;
-  b_cos(&b_st, Window);
-  k = Window->size[0];
-  emxEnsureCapacity(&st, (emxArray__common *)Window, k, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
-  nm1d2 = Window->size[0];
-  emxFree_real_T(&r2);
-  for (k = 0; k < nm1d2; k++) {
-    Window->data[k] = 0.54 - 0.46 * Window->data[k];
-  }
+  Myhamming(&st, N + 1.0, Window);
 
   /*   */
   /*  to use Kaiser window, beta must be supplied  */
@@ -373,45 +283,55 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*  beta = 0.1102*(att-8.7);  */
   /*  wind = kaiser(L,beta);  */
   /* 'Myfir1:146' if  any( Wn<0 | Wn>1 ) */
-  for (k = 0; k < 2; k++) {
-    b_Wn[k] = ((Wn[k] < 0.0) || (Wn[k] > 1.0));
+  overflow = false;
+  k = 0;
+  exitg1 = false;
+  while ((!exitg1) && (k < 2)) {
+    if (!!((Wn[k] < 0.0) || (Wn[k] > 1.0))) {
+      overflow = true;
+      exitg1 = true;
+    } else {
+      k++;
+    }
   }
 
-  if (any(b_Wn)) {
+  if (covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 4, overflow)) {
     st.site = &s_emlrtRSI;
-    for (k = 0; k < 47; k++) {
-      b_u[k] = b_varargin_1[k];
+    for (nm1d2 = 0; nm1d2 < 47; nm1d2++) {
+      b_u[nm1d2] = b_varargin_1[nm1d2];
     }
 
-    c_y = NULL;
+    b_y = NULL;
     m1 = emlrtCreateCharArray(2, iv3);
     emlrtInitCharArrayR2013a(&st, 47, m1, &b_u[0]);
-    emlrtAssign(&c_y, m1);
-    b_st.site = &ho_emlrtRSI;
-    n_error(&b_st, c_y, &emlrtMCI);
+    emlrtAssign(&b_y, m1);
+    b_st.site = &fq_emlrtRSI;
+    o_error(&b_st, b_y, &emlrtMCI);
   }
 
   /* 'Myfir1:149' if  any(diff(Wn)<0) */
-  if (!!(diff(Wn) < 0.0)) {
+  if (covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 5, !!(Wn[1] - Wn[0] < 0.0))) {
     st.site = &t_emlrtRSI;
-    for (k = 0; k < 30; k++) {
-      c_u[k] = c_varargin_1[k];
+    for (nm1d2 = 0; nm1d2 < 30; nm1d2++) {
+      c_u[nm1d2] = c_varargin_1[nm1d2];
     }
 
-    d_y = NULL;
+    c_y = NULL;
     m1 = emlrtCreateCharArray(2, iv4);
     emlrtInitCharArrayR2013a(&st, 30, m1, &c_u[0]);
-    emlrtAssign(&d_y, m1);
-    b_st.site = &ho_emlrtRSI;
-    n_error(&b_st, d_y, &emlrtMCI);
+    emlrtAssign(&c_y, m1);
+    b_st.site = &fq_emlrtRSI;
+    o_error(&b_st, c_y, &emlrtMCI);
   }
+
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 5);
 
   /* 'Myfir1:153' Wn = Wn(:)'; */
   /* 'Myfir1:154' ff = [0,Wn(1:nbands-1); Wn(1:nbands-1),1]; */
   ff[0] = 0.0;
-  for (k = 0; k < 2; k++) {
-    ff[(k + 1) << 1] = Wn[k];
-    ff[1 + (k << 1)] = Wn[k];
+  for (nm1d2 = 0; nm1d2 < 2; nm1d2++) {
+    ff[(nm1d2 + 1) << 1] = Wn[nm1d2];
+    ff[1 + (nm1d2 << 1)] = Wn[nm1d2];
   }
 
   ff[5] = 1.0;
@@ -419,62 +339,73 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /* 'Myfir1:155' mags = [mags(:)'; mags(:)']; */
   /*  hh_test = firls(L-1,ff(:),mags(:));  */
   /* 'Myfir1:157' hh = Myfirls(L-1,ff(:),mags(:)); */
-  for (k = 0; k < 6; k++) {
-    b_ff[k] = ff[k];
+  for (nm1d2 = 0; nm1d2 < 6; nm1d2++) {
+    b_ff[nm1d2] = ff[nm1d2];
   }
 
+  emxInit_real_T(sp, &d_y, 2, &h_emlrtRTEI, true);
   st.site = &u_emlrtRSI;
   Myfirls(&st, (N + 1.0) - 1.0, b_ff, b);
 
   /* 'Myfir1:160' b = hh.*Window(:)'; */
-  nm1d2 = Window->size[0];
-  k = b_y->size[0] * b_y->size[1];
-  b_y->size[0] = 1;
-  b_y->size[1] = nm1d2;
-  emxEnsureCapacity(sp, (emxArray__common *)b_y, k, (int32_T)sizeof(real_T),
+  k = Window->size[0];
+  nm1d2 = d_y->size[0] * d_y->size[1];
+  d_y->size[0] = 1;
+  d_y->size[1] = k;
+  emxEnsureCapacity(sp, (emxArray__common *)d_y, nm1d2, (int32_T)sizeof(real_T),
                     &h_emlrtRTEI);
-  for (k = 0; k < nm1d2; k++) {
-    b_y->data[b_y->size[0] * k] = Window->data[k];
+  for (nm1d2 = 0; nm1d2 < k; nm1d2++) {
+    d_y->data[d_y->size[0] * nm1d2] = Window->data[nm1d2];
   }
 
-  for (k = 0; k < 2; k++) {
-    b_b[k] = b->size[k];
+  for (nm1d2 = 0; nm1d2 < 2; nm1d2++) {
+    b_b[nm1d2] = b->size[nm1d2];
   }
 
-  for (k = 0; k < 2; k++) {
-    e_y[k] = b_y->size[k];
+  for (nm1d2 = 0; nm1d2 < 2; nm1d2++) {
+    e_y[nm1d2] = d_y->size[nm1d2];
   }
 
   if ((b_b[0] != e_y[0]) || (b_b[1] != e_y[1])) {
     emlrtSizeEqCheckNDR2012b(&b_b[0], &e_y[0], &emlrtECI, sp);
   }
 
-  k = b->size[0] * b->size[1];
+  nm1d2 = b->size[0] * b->size[1];
   b->size[0] = 1;
-  emxEnsureCapacity(sp, (emxArray__common *)b, k, (int32_T)sizeof(real_T),
+  emxEnsureCapacity(sp, (emxArray__common *)b, nm1d2, (int32_T)sizeof(real_T),
                     &h_emlrtRTEI);
-  nm1d2 = b->size[0];
-  k = b->size[1];
-  nm1d2 *= k;
-  for (k = 0; k < nm1d2; k++) {
-    b->data[k] *= b_y->data[k];
+  k = b->size[0];
+  nm1d2 = b->size[1];
+  k *= nm1d2;
+  for (nm1d2 = 0; nm1d2 < k; nm1d2++) {
+    b->data[nm1d2] *= d_y->data[nm1d2];
   }
 
   /* 'Myfir1:161' a = 1; */
   /* 'Myfir1:163' if SCALING */
+  covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 6, true);
+
   /* 'Myfir1:164' if First_Band */
+  covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 7, false);
+
   /* 'Myfir1:166' else */
   /* 'Myfir1:167' if ff(4)==1 */
-  if (ff[3] == 1.0) {
+  if (covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 8, ff[3] == 1.0)) {
+    covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 7);
+
     /*  unity gain at Fs/2  */
     /* 'Myfir1:169' f0 = 1; */
     f0 = 1.0;
   } else {
+    covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 8);
+
     /* 'Myfir1:170' else */
     /*  unity gain at center of first passband  */
     /* 'Myfir1:172' f0 = mean(ff(3:4)); */
     f0 = (ff[2] + ff[3]) / 2.0;
   }
+
+  covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 9);
 
   /* 'Myfir1:174' b = b / abs( exp(-j*2*pi*(0:L-1)*(f0/2))*(b.') ); */
   st.site = &v_emlrtRSI;
@@ -521,76 +452,70 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   d_st.site = &ab_emlrtRSI;
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&d_st, &ye_emlrtRTEI, "Coder:MATLAB:pmaxsize",
+    emlrtErrorWithMessageIdR2012b(&d_st, &mf_emlrtRTEI, "Coder:MATLAB:pmaxsize",
       0);
   }
 
-  k = b_y->size[0] * b_y->size[1];
-  b_y->size[0] = 1;
-  if (!(n > 0)) {
+  nm1d2 = d_y->size[0] * d_y->size[1];
+  d_y->size[0] = 1;
+  if (!(n >= 0)) {
     emlrtNonNegativeCheckR2012b(n, &e_emlrtDCI, &c_st);
   }
 
-  b_y->size[1] = n;
-  emxEnsureCapacity(&c_st, (emxArray__common *)b_y, k, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
+  d_y->size[1] = n;
+  emxEnsureCapacity(&c_st, (emxArray__common *)d_y, nm1d2, (int32_T)sizeof
+                    (real_T), &h_emlrtRTEI);
   if (n > 0) {
-    b_y->data[0] = r;
+    d_y->data[0] = r;
     if (n > 1) {
-      b_y->data[n - 1] = apnd;
-      k = n - 1;
-      nm1d2 = asr_s32(k, 1U);
+      d_y->data[n - 1] = apnd;
+      nm1d2 = (n - 1) / 2;
       d_st.site = &bb_emlrtRSI;
       for (k = 1; k < nm1d2; k++) {
-        b_y->data[k] = r + (real_T)k;
-        b_y->data[(n - k) - 1] = apnd - (real_T)k;
+        d_y->data[k] = r + (real_T)k;
+        d_y->data[(n - k) - 1] = apnd - (real_T)k;
       }
 
       if (nm1d2 << 1 == n - 1) {
-        b_y->data[nm1d2] = (r + apnd) / 2.0;
+        d_y->data[nm1d2] = (r + apnd) / 2.0;
       } else {
-        b_y->data[nm1d2] = r + (real_T)nm1d2;
-        b_y->data[nm1d2 + 1] = apnd - (real_T)nm1d2;
+        d_y->data[nm1d2] = r + (real_T)nm1d2;
+        d_y->data[nm1d2 + 1] = apnd - (real_T)nm1d2;
       }
     }
   }
 
   emxInit_creal_T(&c_st, &x, 2, &h_emlrtRTEI, true);
   r = f0 / 2.0;
-  k = x->size[0] * x->size[1];
+  nm1d2 = x->size[0] * x->size[1];
   x->size[0] = 1;
-  x->size[1] = b_y->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)x, k, (int32_T)sizeof(creal_T),
+  x->size[1] = d_y->size[1];
+  emxEnsureCapacity(sp, (emxArray__common *)x, nm1d2, (int32_T)sizeof(creal_T),
                     &h_emlrtRTEI);
-  nm1d2 = b_y->size[0] * b_y->size[1];
-  for (k = 0; k < nm1d2; k++) {
-    ndbl = b_y->data[k] * -0.0;
-    apnd = b_y->data[k] * -6.2831853071795862;
-    x->data[k].re = r * ndbl;
-    x->data[k].im = r * apnd;
+  k = d_y->size[0] * d_y->size[1];
+  for (nm1d2 = 0; nm1d2 < k; nm1d2++) {
+    ndbl = d_y->data[nm1d2] * -0.0;
+    apnd = d_y->data[nm1d2] * -6.2831853071795862;
+    x->data[nm1d2].re = r * ndbl;
+    x->data[nm1d2].im = r * apnd;
   }
 
-  emxFree_real_T(&b_y);
+  emxFree_real_T(&d_y);
   emxInit_creal_T(sp, &a, 2, &h_emlrtRTEI, true);
   st.site = &v_emlrtRSI;
-  b_st.site = &ee_emlrtRSI;
-  k = a->size[0] * a->size[1];
+  b_st.site = &de_emlrtRSI;
+  nm1d2 = a->size[0] * a->size[1];
   a->size[0] = 1;
   a->size[1] = x->size[1];
-  emxEnsureCapacity(&b_st, (emxArray__common *)a, k, (int32_T)sizeof(creal_T),
+  emxEnsureCapacity(&b_st, (emxArray__common *)a, nm1d2, (int32_T)sizeof(creal_T),
                     &h_emlrtRTEI);
-  nm1d2 = x->size[0] * x->size[1];
-  for (k = 0; k < nm1d2; k++) {
-    a->data[k] = x->data[k];
+  k = x->size[0] * x->size[1];
+  for (nm1d2 = 0; nm1d2 < k; nm1d2++) {
+    a->data[nm1d2] = x->data[nm1d2];
   }
 
   c_st.site = &eb_emlrtRSI;
-  if (1 > x->size[1]) {
-    overflow = false;
-  } else {
-    overflow = (x->size[1] > 2147483646);
-  }
-
+  overflow = ((!(1 > x->size[1])) && (x->size[1] > 2147483646));
   if (overflow) {
     d_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&d_st, true);
@@ -613,52 +538,53 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
 
   emxFree_creal_T(&x);
   st.site = &v_emlrtRSI;
-  k = Window->size[0];
+  nm1d2 = Window->size[0];
   Window->size[0] = b->size[1];
-  emxEnsureCapacity(&st, (emxArray__common *)Window, k, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
-  nm1d2 = b->size[1];
-  for (k = 0; k < nm1d2; k++) {
-    Window->data[k] = b->data[b->size[0] * k];
+  emxEnsureCapacity(&st, (emxArray__common *)Window, nm1d2, (int32_T)sizeof
+                    (real_T), &h_emlrtRTEI);
+  k = b->size[1];
+  for (nm1d2 = 0; nm1d2 < k; nm1d2++) {
+    Window->data[nm1d2] = b->data[b->size[0] * nm1d2];
   }
 
-  b_st.site = &fe_emlrtRSI;
+  b_st.site = &ee_emlrtRSI;
   overflow = (a->size[1] == Window->size[0]);
   if (!overflow) {
     if ((a->size[1] == 1) || (Window->size[0] == 1)) {
-      emlrtErrorWithMessageIdR2012b(&b_st, &af_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&b_st, &lf_emlrtRTEI,
         "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
-      emlrtErrorWithMessageIdR2012b(&b_st, &bf_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&b_st, &kf_emlrtRTEI,
         "Coder:MATLAB:innerdim", 0);
     }
   }
 
   cdiff = 0.0;
   ndbl = 0.0;
-  for (k = 0; k < a->size[1]; k++) {
-    r = Window->data[k];
-    apnd = a->data[a->size[0] * k].re * r - a->data[a->size[0] * k].im * 0.0;
-    r = a->data[a->size[0] * k].re * 0.0 + a->data[a->size[0] * k].im * r;
+  for (nm1d2 = 0; nm1d2 < a->size[1]; nm1d2++) {
+    r = Window->data[nm1d2];
+    apnd = a->data[a->size[0] * nm1d2].re * r - a->data[a->size[0] * nm1d2].im *
+      0.0;
+    r = a->data[a->size[0] * nm1d2].re * 0.0 + a->data[a->size[0] * nm1d2].im *
+      r;
     cdiff += apnd;
     ndbl += r;
   }
 
   emxFree_creal_T(&a);
   emxFree_real_T(&Window);
-  emxInit_real_T(&st, &c_b, 2, &h_emlrtRTEI, true);
-  k = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = 1;
-  c_b->size[1] = b->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)c_b, k, (int32_T)sizeof(real_T),
-                    &h_emlrtRTEI);
+  r = muDoubleScalarHypot(cdiff, ndbl);
   nm1d2 = b->size[0] * b->size[1];
-  for (k = 0; k < nm1d2; k++) {
-    c_b->data[k] = b->data[k];
+  b->size[0] = 1;
+  emxEnsureCapacity(sp, (emxArray__common *)b, nm1d2, (int32_T)sizeof(real_T),
+                    &h_emlrtRTEI);
+  k = b->size[0];
+  nm1d2 = b->size[1];
+  k *= nm1d2;
+  for (nm1d2 = 0; nm1d2 < k; nm1d2++) {
+    b->data[nm1d2] /= r;
   }
 
-  c_rdivide(sp, c_b, muDoubleScalarHypot(cdiff, ndbl), b);
-  emxFree_real_T(&c_b);
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }
 

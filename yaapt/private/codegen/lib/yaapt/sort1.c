@@ -1,8 +1,8 @@
 /*
  * File: sort1.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -33,11 +33,11 @@ static void b_sort(double x[100], int idx[100])
   int nNaNs;
   int ib;
   int k;
+  signed char perm[4];
+  int iwork[100];
   int i2;
   int i3;
   int i4;
-  signed char perm[4];
-  int iwork[100];
   memset(&idx[0], 0, 100U * sizeof(int));
   for (m = 0; m < 4; m++) {
     x4[m] = 0.0;
@@ -222,11 +222,11 @@ static void d_sort(double x[20], int idx[20])
   int nNaNs;
   int ib;
   int k;
+  signed char perm[4];
+  int iwork[20];
   int bLen;
   int nPairs;
   int i4;
-  signed char perm[4];
-  int iwork[20];
   memset(&idx[0], 0, 20U * sizeof(int));
   for (m = 0; m < 4; m++) {
     x4[m] = 0.0;
@@ -430,7 +430,7 @@ static void d_sort(double x[20], int idx[20])
 static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
 {
   emxArray_real_T *vwork;
-  int i31;
+  int i33;
   int vstride;
   int k;
   int iv1[2];
@@ -441,8 +441,8 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
   int pageoffset;
   int j;
   int idx0;
-  emxInit_real_T2(&vwork, 1);
-  i31 = x->size[dim - 1];
+  emxInit_real_T1(&vwork, 1);
+  i33 = x->size[dim - 1];
   vstride = x->size[dim - 1];
   k = vwork->size[0];
   vwork->size[0] = vstride;
@@ -476,12 +476,12 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
     pageoffset = (i - 1) * pagesize;
     for (j = 0; j + 1 <= vstride; j++) {
       idx0 = pageoffset + j;
-      for (k = 0; k + 1 <= i31; k++) {
+      for (k = 0; k + 1 <= i33; k++) {
         vwork->data[k] = x->data[idx0 + k * vstride];
       }
 
       sortIdx(vwork, iidx);
-      for (k = 0; k + 1 <= i31; k++) {
+      for (k = 0; k + 1 <= i33; k++) {
         x->data[idx0 + k * vstride] = vwork->data[k];
         idx->data[idx0 + k * vstride] = iidx->data[k];
       }

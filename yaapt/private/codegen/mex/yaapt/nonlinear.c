@@ -17,6 +17,7 @@
 #include "Myfir1.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
@@ -32,17 +33,19 @@ static emlrtRSInfo o_emlrtRSI = { 75, "nonlinear",
 static emlrtRSInfo p_emlrtRSI = { 79, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
 
-static emlrtRSInfo qe_emlrtRSI = { 58, "power",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
+static emlrtRSInfo pe_emlrtRSI = { 58, "power",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
-static emlrtRSInfo re_emlrtRSI = { 60, "power",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
+static emlrtRSInfo qe_emlrtRSI = { 60, "power",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\ops\\power.m" };
 
-static emlrtRSInfo se_emlrtRSI = { 73, "applyScalarFunction",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
+static emlrtRSInfo re_emlrtRSI = { 73, "applyScalarFunction",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m"
+};
 
-static emlrtRSInfo te_emlrtRSI = { 132, "applyScalarFunction",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m" };
+static emlrtRSInfo se_emlrtRSI = { 132, "applyScalarFunction",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m"
+};
 
 static emlrtRTEInfo e_emlrtRTEI = { 1, 40, "nonlinear",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\nonlinear.m" };
@@ -108,6 +111,8 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
+  covrtLogFcn(&emlrtCoverageInstance, 2U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 2U, 0);
 
   /* NONLINEAR Create the nonlinear processed signal */
   /*  */
@@ -144,10 +149,14 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
   /* 'nonlinear:37' F_hp = Prm.bp_low; */
   /* 'nonlinear:38' F_lp = Prm.bp_high; */
   /* 'nonlinear:40' if (Fs > Fs_min) */
-  if (Fs > 1000.0) {
+  if (covrtLogIf(&emlrtCoverageInstance, 2U, 0U, 0, Fs > 1000.0)) {
+    covrtLogBasicBlock(&emlrtCoverageInstance, 2U, 1);
+
     /* 'nonlinear:41' dec_factor = Prm.dec_factor; */
     dec_factor = Prm_dec_factor;
   } else {
+    covrtLogBasicBlock(&emlrtCoverageInstance, 2U, 2);
+
     /* 'nonlinear:42' else */
     /* 'nonlinear:43' dec_factor = 1; */
     dec_factor = 1.0;
@@ -155,6 +164,7 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
 
   emxInit_real_T(sp, &b_F1, 2, &f_emlrtRTEI, true);
   emxInit_real_T(sp, &tempData, 2, &g_emlrtRTEI, true);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 2U, 3);
 
   /*  Creates the bandpass filters */
   /* 'nonlinear:48' lenDataA = length(DataA); */
@@ -224,7 +234,7 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
   /* 'nonlinear:75' DataC =  DataA .^2; */
   st.site = &o_emlrtRSI;
   b_st.site = &gc_emlrtRSI;
-  c_st.site = &qe_emlrtRSI;
+  c_st.site = &pe_emlrtRSI;
   i1 = tempData->size[0] * tempData->size[1];
   tempData->size[0] = 1;
   tempData->size[1] = DataA->size[1];
@@ -235,8 +245,8 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
     tempData->data[i1] = DataA->data[i1];
   }
 
-  d_st.site = &se_emlrtRSI;
-  e_st.site = &ue_emlrtRSI;
+  d_st.site = &re_emlrtRSI;
+  e_st.site = &te_emlrtRSI;
   for (i1 = 0; i1 < 2; i1++) {
     uv0[i1] = (uint32_T)DataA->size[i1];
   }
@@ -248,17 +258,12 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
                     &e_emlrtRTEI);
   if (dimagree(DataC, DataA)) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&d_st, &xe_emlrtRTEI, "MATLAB:dimagree", 0);
+    emlrtErrorWithMessageIdR2012b(&d_st, &jf_emlrtRTEI, "MATLAB:dimagree", 0);
   }
 
   loop_ub = DataA->size[1];
-  d_st.site = &te_emlrtRSI;
-  if (1 > DataA->size[1]) {
-    overflow = false;
-  } else {
-    overflow = (DataA->size[1] > 2147483646);
-  }
-
+  d_st.site = &se_emlrtRSI;
+  overflow = ((!(1 > DataA->size[1])) && (DataA->size[1] > 2147483646));
   if (overflow) {
     e_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&e_st, true);
@@ -278,7 +283,7 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
 
   emlrtPopJmpBuf(&c_st, &emlrtJBStack);
   emlrtExitParallelRegion(&c_st, omp_in_parallel());
-  c_st.site = &re_emlrtRSI;
+  c_st.site = &qe_emlrtRSI;
 
   /*    Nonlinear version filtered with F1 */
   /* 'nonlinear:79' tempData = filter(b_F1,a,DataC); */
@@ -296,7 +301,7 @@ void nonlinear(const emlrtStack *sp, const emxArray_real_T *DataA, real_T Fs,
     y = muDoubleScalarFloor(y);
   }
 
-  if (!(y > 0.0)) {
+  if (!(y >= 0.0)) {
     emlrtNonNegativeCheckR2012b(y, &c_emlrtDCI, sp);
   }
 

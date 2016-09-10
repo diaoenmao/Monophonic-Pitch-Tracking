@@ -1,7 +1,7 @@
 @echo off
-set MATLAB=F:\MATLAB
+set MATLAB=F:\MATLAB\R2016a
 set MATLAB_ARCH=win64
-set MATLAB_BIN="F:\MATLAB\bin"
+set MATLAB_BIN="F:\MATLAB\R2016a\bin"
 set ENTRYPOINT=mexFunction
 set OUTDIR=.\
 set LIB_NAME=yaapt_mex
@@ -20,7 +20,7 @@ echo LINKDEBUGFLAGS=%LINKDEBUGFLAGS%>> yaapt_mex.mki
 echo MATLAB_ARCH=%MATLAB_ARCH%>> yaapt_mex.mki
 echo BORLAND=%BORLAND%>> yaapt_mex.mki
 echo OMPFLAGS=/openmp >> yaapt_mex.mki
-echo OMPLINKFLAGS=/nodefaultlib:vcomp /LIBPATH:"F:\MATLAB\bin\win64" >> yaapt_mex.mki
-echo EMC_COMPILER=msvc120>> yaapt_mex.mki
+echo OMPLINKFLAGS=/nodefaultlib:vcomp /LIBPATH:"F:\MATLAB\R2016a\bin\win64" >> yaapt_mex.mki
+echo EMC_COMPILER=msvc140>> yaapt_mex.mki
 echo EMC_CONFIG=optim>> yaapt_mex.mki
-"F:\MATLAB\bin\win64\gmake" -B -f yaapt_mex.mk
+"F:\MATLAB\R2016a\bin\win64\gmake" -B -f yaapt_mex.mk

@@ -1,12 +1,12 @@
 /*
  * File: rtwtypes.h
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
-#ifndef __RTWTYPES_H__
-#define __RTWTYPES_H__
+#ifndef RTWTYPES_H
+#define RTWTYPES_H
 #ifndef __TMWTYPES__
 #define __TMWTYPES__
 

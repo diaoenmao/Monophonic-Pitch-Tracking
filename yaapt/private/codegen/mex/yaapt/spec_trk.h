@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __SPEC_TRK_H__
-#define __SPEC_TRK_H__
+#ifndef SPEC_TRK_H
+#define SPEC_TRK_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"

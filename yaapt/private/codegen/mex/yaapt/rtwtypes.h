@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __RTWTYPES_H__
-#define __RTWTYPES_H__
+#ifndef RTWTYPES_H
+#define RTWTYPES_H
 #include "tmwtypes.h"
 /* 
  * TRUE/FALSE definitions

@@ -1,13 +1,11 @@
 libemlrt.lib
 libcovrt.lib
 libut.lib
-libmwblas.lib
 libmwmathutil.lib
 libiomp5md.lib
 /export:mexFunction
 /export:emlrtMexFcnProperties
 /export:yaapt
-/export:asr_s32
 /export:b_emlrt_marshallIn
 /export:b_sprintf
 /export:div_s32_floor
@@ -16,7 +14,7 @@ libiomp5md.lib
 /export:emlrt_marshallIn
 /export:emlrt_marshallOut
 /export:i_emlrt_marshallIn
-/export:n_error
+/export:o_error
 /export:emxEnsureCapacity
 /export:emxFreeStruct_struct_T
 /export:emxFree_boolean_T

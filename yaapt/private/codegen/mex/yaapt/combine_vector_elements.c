@@ -11,6 +11,7 @@
 #include "combine_vector_elements.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
@@ -33,13 +34,8 @@ real_T combine_vector_elements(const emlrtStack *sp, const emxArray_real_T *x)
     y = 0.0;
   } else {
     y = x->data[0];
-    st.site = &ig_emlrtRSI;
-    if (2 > x->size[1]) {
-      overflow = false;
-    } else {
-      overflow = (x->size[1] > 2147483646);
-    }
-
+    st.site = &th_emlrtRSI;
+    overflow = ((!(2 > x->size[1])) && (x->size[1] > 2147483646));
     if (overflow) {
       b_st.site = &cb_emlrtRSI;
       check_forloop_overflow_error(&b_st, true);

@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __FFT_H__
-#define __FFT_H__
+#ifndef FFT_H
+#define FFT_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"

@@ -13,8 +13,8 @@
 <a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>/*</i></font>
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: pchip.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
-<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 18-Feb-2016 02:50:10</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.1</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 05-Sep-2016 15:50:20</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -95,7 +95,7 @@
 <a name="83"><font color="#888888 "><i>   83   </i></font></a><b>{</b>
 <a name="84"><font color="#888888 "><i>   84   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *h;
 <a name="85"><font color="#888888 "><i>   85   </i></font></a>  <font color="#112266"><b>int</b></font> nx;
-<a name="86"><font color="#888888 "><i>   86   </i></font></a>  <font color="#112266"><b>int</b></font> i24;
+<a name="86"><font color="#888888 "><i>   86   </i></font></a>  <font color="#112266"><b>int</b></font> i26;
 <a name="87"><font color="#888888 "><i>   87   </i></font></a>  <font color="#112266"><b>int</b></font> k;
 <a name="88"><font color="#888888 "><i>   88   </i></font></a>  <font color="#112266"><b>int</b></font> szdel[2];
 <a name="89"><font color="#888888 "><i>   89   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *del;
@@ -105,33 +105,33 @@
 <a name="93"><font color="#888888 "><i>   93   </i></font></a>  <font color="#112266"><b>double</b></font> w1;
 <a name="94"><font color="#888888 "><i>   94   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;h, 2);
 <a name="95"><font color="#888888 "><i>   95   </i></font></a>  nx = x-&gt;size[1] - 1;
-<a name="96"><font color="#888888 "><i>   96   </i></font></a>  i24 = h-&gt;size[0] * h-&gt;size[1];
+<a name="96"><font color="#888888 "><i>   96   </i></font></a>  i26 = h-&gt;size[0] * h-&gt;size[1];
 <a name="97"><font color="#888888 "><i>   97   </i></font></a>  h-&gt;size[0] = 1;
 <a name="98"><font color="#888888 "><i>   98   </i></font></a>  h-&gt;size[1] = x-&gt;size[1] - 1;
-<a name="99"><font color="#888888 "><i>   99   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)h, i24, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="99"><font color="#888888 "><i>   99   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)h, i26, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
 <a name="100"><font color="#888888 "><i>  100   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 1; k &lt;= nx; k++) <b>{</b>
 <a name="101"><font color="#888888 "><i>  101   </i></font></a>    h-&gt;data[k - 1] = x-&gt;data[k] - x-&gt;data[k - 1];
 <a name="102"><font color="#888888 "><i>  102   </i></font></a>  <b>}</b>
 <a name="103"><font color="#888888 "><i>  103   </i></font></a>
-<a name="104"><font color="#888888 "><i>  104   </i></font></a>  <font color="#112266"><b>for</b></font> (i24 = 0; i24 &lt; 2; i24++) <b>{</b>
-<a name="105"><font color="#888888 "><i>  105   </i></font></a>    szdel[i24] = y-&gt;size[i24];
+<a name="104"><font color="#888888 "><i>  104   </i></font></a>  <font color="#112266"><b>for</b></font> (i26 = 0; i26 &lt; 2; i26++) <b>{</b>
+<a name="105"><font color="#888888 "><i>  105   </i></font></a>    szdel[i26] = y-&gt;size[i26];
 <a name="106"><font color="#888888 "><i>  106   </i></font></a>  <b>}</b>
 <a name="107"><font color="#888888 "><i>  107   </i></font></a>
 <a name="108"><font color="#888888 "><i>  108   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;del, 2);
 <a name="109"><font color="#888888 "><i>  109   </i></font></a>  szdel[1]--;
-<a name="110"><font color="#888888 "><i>  110   </i></font></a>  i24 = del-&gt;size[0] * del-&gt;size[1];
+<a name="110"><font color="#888888 "><i>  110   </i></font></a>  i26 = del-&gt;size[0] * del-&gt;size[1];
 <a name="111"><font color="#888888 "><i>  111   </i></font></a>  del-&gt;size[0] = 1;
 <a name="112"><font color="#888888 "><i>  112   </i></font></a>  del-&gt;size[1] = szdel[1];
-<a name="113"><font color="#888888 "><i>  113   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)del, i24, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="113"><font color="#888888 "><i>  113   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)del, i26, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
 <a name="114"><font color="#888888 "><i>  114   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= nx; k++) <b>{</b>
 <a name="115"><font color="#888888 "><i>  115   </i></font></a>    del-&gt;data[k] = (y-&gt;data[k + 1] - y-&gt;data[k]) / h-&gt;data[k];
 <a name="116"><font color="#888888 "><i>  116   </i></font></a>  <b>}</b>
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>
 <a name="118"><font color="#888888 "><i>  118   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;slopes, 2);
-<a name="119"><font color="#888888 "><i>  119   </i></font></a>  i24 = slopes-&gt;size[0] * slopes-&gt;size[1];
+<a name="119"><font color="#888888 "><i>  119   </i></font></a>  i26 = slopes-&gt;size[0] * slopes-&gt;size[1];
 <a name="120"><font color="#888888 "><i>  120   </i></font></a>  slopes-&gt;size[0] = 1;
 <a name="121"><font color="#888888 "><i>  121   </i></font></a>  slopes-&gt;size[1] = y-&gt;size[1];
-<a name="122"><font color="#888888 "><i>  122   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)slopes, i24, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="122"><font color="#888888 "><i>  122   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)slopes, i26, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
 <a name="123"><font color="#888888 "><i>  123   </i></font></a>  <font color="#112266"><b>if</b></font> (x-&gt;size[1] == 2) <b>{</b>
 <a name="124"><font color="#888888 "><i>  124   </i></font></a>    <font color="#112266"><b>for</b></font> (k = 0; k &lt; 2; k++) <b>{</b>
 <a name="125"><font color="#888888 "><i>  125   </i></font></a>      slopes-&gt;data[k] = del-&gt;data[0];
@@ -174,19 +174,19 @@
 <a name="162"><font color="#888888 "><i>  162   </i></font></a>  <b>}</b>
 <a name="163"><font color="#888888 "><i>  163   </i></font></a>
 <a name="164"><font color="#888888 "><i>  164   </i></font></a>  k = x-&gt;size[1];
-<a name="165"><font color="#888888 "><i>  165   </i></font></a>  i24 = v_breaks-&gt;size[0] * v_breaks-&gt;size[1];
+<a name="165"><font color="#888888 "><i>  165   </i></font></a>  i26 = v_breaks-&gt;size[0] * v_breaks-&gt;size[1];
 <a name="166"><font color="#888888 "><i>  166   </i></font></a>  v_breaks-&gt;size[0] = 1;
 <a name="167"><font color="#888888 "><i>  167   </i></font></a>  v_breaks-&gt;size[1] = k;
-<a name="168"><font color="#888888 "><i>  168   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)v_breaks, i24, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
-<a name="169"><font color="#888888 "><i>  169   </i></font></a>  <font color="#112266"><b>for</b></font> (i24 = 0; i24 &lt; k; i24++) <b>{</b>
-<a name="170"><font color="#888888 "><i>  170   </i></font></a>    v_breaks-&gt;data[v_breaks-&gt;size[0] * i24] = x-&gt;data[i24];
+<a name="168"><font color="#888888 "><i>  168   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)v_breaks, i26, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="169"><font color="#888888 "><i>  169   </i></font></a>  <font color="#112266"><b>for</b></font> (i26 = 0; i26 &lt; k; i26++) <b>{</b>
+<a name="170"><font color="#888888 "><i>  170   </i></font></a>    v_breaks-&gt;data[v_breaks-&gt;size[0] * i26] = x-&gt;data[i26];
 <a name="171"><font color="#888888 "><i>  171   </i></font></a>  <b>}</b>
 <a name="172"><font color="#888888 "><i>  172   </i></font></a>
 <a name="173"><font color="#888888 "><i>  173   </i></font></a>  nx = slopes-&gt;size[1] - 1;
-<a name="174"><font color="#888888 "><i>  174   </i></font></a>  i24 = v_coefs-&gt;size[0] * v_coefs-&gt;size[1];
+<a name="174"><font color="#888888 "><i>  174   </i></font></a>  i26 = v_coefs-&gt;size[0] * v_coefs-&gt;size[1];
 <a name="175"><font color="#888888 "><i>  175   </i></font></a>  v_coefs-&gt;size[0] = slopes-&gt;size[1] - 1;
 <a name="176"><font color="#888888 "><i>  176   </i></font></a>  v_coefs-&gt;size[1] = 4;
-<a name="177"><font color="#888888 "><i>  177   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)v_coefs, i24, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="177"><font color="#888888 "><i>  177   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)v_coefs, i26, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
 <a name="178"><font color="#888888 "><i>  178   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt; x-&gt;size[1]; k++) <b>{</b>
 <a name="179"><font color="#888888 "><i>  179   </i></font></a>    hs = (del-&gt;data[k] - slopes-&gt;data[k]) / h-&gt;data[k];
 <a name="180"><font color="#888888 "><i>  180   </i></font></a>    hs3 = (slopes-&gt;data[k + 1] - del-&gt;data[k]) / h-&gt;data[k];

@@ -62,18 +62,18 @@ max_SHC   = fix((Prm.f0_max+Prm.shc_pwidth*2)/delta);
 min_SHC   = ceil(Prm.f0_min/delta);       
 % Number of harmomics considered
 numharmonics = Prm.shc_numharms;
-
+ 
 
 %-- INITIALIZATION -----------------------------------------------------------
 CandsPitch = zeros(maxpeaks, numframes);
 CandsMerit = ones(maxpeaks, numframes);
-% Zero paddinga
+% Zero padding a
 % a = Data;
 % Data(end:(numframes-1)*nframejump+nframesize) = 0;
-Data(end) = 0;
+% Data(end) = 0;
 zero_padded = (numframes-1)*nframejump+nframesize-length(Data);
-if(zero_padded >0)    
-    Data = [Data zero_padded];
+if(zero_padded > 0)    
+    Data = [Data zeros(1,zero_padded)];
 end
 %-- MAIN ROUTINE --------------------------------------------------------------
 % Compute SHC for voiced frame
@@ -81,8 +81,8 @@ Kaiser_window = Mykaiser(nframesize);
 % Kaiser_window_test = kaiser(nframesize);
 SHC = zeros(1,max_SHC);
 
-winix = repmat([1:window_length], numharmonics+1,1);
-rowix = repmat([1:numharmonics+1]', 1, window_length);
+winix = repmat(1:window_length, numharmonics+1,1);
+rowix = repmat((1:numharmonics+1)', 1, window_length);
 
 for frame = 1:numframes
     if (VUVEnergy(frame) > 0)
@@ -164,7 +164,7 @@ end
 VPeak_minmrt = Mymedfilt1(VPeak_minmrt, max(1,Prm.median_value-2));
 % VPeak_minmrt_test = medfilt1(VPeak_minmrt, max(1,Prm.median_value-2));
 % Replace the lowest merit candidates by the median smoothed ones
-% computed from highest merit peaks above
+% computed from highest merit peaks above ???
 for n=1: length(Idx)
     VCandsPitch(Idx(n), n) = VPeak_minmrt(n);
     % Assign merit for the smoothed peaks
@@ -215,7 +215,7 @@ if all(SPitch_temp_end < (pAvg/2))
 end
 
 [Indrows, Indcols, Vals] = find(SPitch);
-SPitch = interp1(Indcols, Vals, [1:numframes], 'pchip');
+SPitch = interp1(Indcols, Vals, 1:numframes, 'pchip');
 
 FILTER_ORDER = 3;
 flt_b = (ones(1,FILTER_ORDER))/FILTER_ORDER ;

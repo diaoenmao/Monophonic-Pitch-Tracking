@@ -1,12 +1,12 @@
 /*
  * File: rt_nonfinite.h
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
-#ifndef __RT_NONFINITE_H__
-#define __RT_NONFINITE_H__
+#ifndef RT_NONFINITE_H
+#define RT_NONFINITE_H
 #if defined(_MSC_VER) && (_MSC_VER <= 1200)
 #include <float.h>
 #endif

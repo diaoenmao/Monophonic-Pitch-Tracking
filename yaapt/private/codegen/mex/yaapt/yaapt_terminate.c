@@ -11,6 +11,7 @@
 #include "yaapt_terminate.h"
 #include "_coder_yaapt_mex.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
@@ -21,6 +22,81 @@ void yaapt_atexit(void)
   mexFunctionCreateRootTLS();
   st.tls = emlrtRootTLSGlobal;
   emlrtEnterRtStackR2012b(&st);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
+
+  /* Free instance data */
+  covrtFreeInstanceData(&emlrtCoverageInstance);
   emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
 }

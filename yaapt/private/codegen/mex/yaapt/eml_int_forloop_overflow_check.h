@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __EML_INT_FORLOOP_OVERFLOW_CHECK_H__
-#define __EML_INT_FORLOOP_OVERFLOW_CHECK_H__
+#ifndef EML_INT_FORLOOP_OVERFLOW_CHECK_H
+#define EML_INT_FORLOOP_OVERFLOW_CHECK_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"

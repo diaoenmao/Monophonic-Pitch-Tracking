@@ -1,8 +1,8 @@
 /*
  * File: freqSelect.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -10,7 +10,6 @@
 #include "yaapt.h"
 #include "freqSelect.h"
 #include "yaapt_emxutil.h"
-#include "rdivide.h"
 
 /* Function Definitions */
 
@@ -36,18 +35,14 @@
 void freqSelect(const emxArray_real_T *fq, emxArray_real_T *freq,
                 emxArray_real_T *cent)
 {
-  emxArray_real_T *cnt;
-  emxArray_real_T *x;
-  int b_cnt;
-  int ub_loop;
+  emxArray_real_T *z;
   int k;
-  int b_k;
-  double fdbl;
-  int eint;
   int inte;
+  emxArray_real_T *cnt;
+  double t;
+  int eint;
   int i;
-  emxInit_real_T(&cnt, 2);
-  emxInit_real_T(&x, 2);
+  emxInit_real_T(&z, 2);
 
   /*  FQ2CNT Transform input frequency to cent unit */
   /*  */
@@ -57,73 +52,74 @@ void freqSelect(const emxArray_real_T *fq, emxArray_real_T *freq,
   /*  Ex: A4 - Ab4 */
   /*  fq2cnt(440) - fq2cnt(415.305) = 6000 - 5900 = 100 */
   /*  */
-  c_rdivide(fq, 13.75, x);
-  b_cnt = cnt->size[0] * cnt->size[1];
+  k = z->size[0] * z->size[1];
+  z->size[0] = 1;
+  z->size[1] = fq->size[1];
+  emxEnsureCapacity((emxArray__common *)z, k, (int)sizeof(double));
+  inte = fq->size[0] * fq->size[1];
+  for (k = 0; k < inte; k++) {
+    z->data[k] = fq->data[k] / 13.75;
+  }
+
+  emxInit_real_T(&cnt, 2);
+  k = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
-  cnt->size[1] = x->size[1];
-  emxEnsureCapacity((emxArray__common *)cnt, b_cnt, (int)sizeof(double));
-  ub_loop = x->size[1];
-
-#pragma omp parallel for \
- num_threads(omp_get_max_threads()) \
- private(b_k,fdbl,inte) \
- firstprivate(eint)
-
-  for (k = 1; k <= ub_loop; k++) {
-    b_k = k;
-    if (x->data[b_k - 1] == 0.0) {
-      fdbl = rtMinusInf;
-    } else if (x->data[b_k - 1] < 0.0) {
-      fdbl = rtNaN;
-    } else if ((!rtIsInf(x->data[b_k - 1])) && (!rtIsNaN(x->data[b_k - 1]))) {
-      if ((!rtIsInf(x->data[b_k - 1])) && (!rtIsNaN(x->data[b_k - 1]))) {
-        fdbl = frexp(x->data[b_k - 1], &eint);
+  cnt->size[1] = z->size[1];
+  emxEnsureCapacity((emxArray__common *)cnt, k, (int)sizeof(double));
+  for (k = 0; k + 1 <= z->size[1]; k++) {
+    if (z->data[k] == 0.0) {
+      t = rtMinusInf;
+    } else if (z->data[k] < 0.0) {
+      t = rtNaN;
+    } else if ((!rtIsInf(z->data[k])) && (!rtIsNaN(z->data[k]))) {
+      if ((!rtIsInf(z->data[k])) && (!rtIsNaN(z->data[k]))) {
+        t = frexp(z->data[k], &eint);
         inte = eint;
       } else {
-        fdbl = x->data[b_k - 1];
+        t = z->data[k];
         inte = 0;
       }
 
-      if (fdbl == 0.5) {
-        fdbl = (double)inte - 1.0;
+      if (t == 0.5) {
+        t = (double)inte - 1.0;
       } else {
-        fdbl = log(fdbl) / 0.69314718055994529 + (double)inte;
+        t = log(t) / 0.69314718055994529 + (double)inte;
       }
     } else {
-      fdbl = x->data[b_k - 1];
+      t = z->data[k];
     }
 
-    cnt->data[b_k - 1] = fdbl;
+    cnt->data[k] = t;
   }
 
-  emxFree_real_T(&x);
-  b_cnt = cnt->size[0] * cnt->size[1];
+  emxFree_real_T(&z);
+  k = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
-  emxEnsureCapacity((emxArray__common *)cnt, b_cnt, (int)sizeof(double));
-  ub_loop = cnt->size[0];
-  b_cnt = cnt->size[1];
-  ub_loop *= b_cnt;
-  for (b_cnt = 0; b_cnt < ub_loop; b_cnt++) {
-    cnt->data[b_cnt] *= 1200.0;
+  emxEnsureCapacity((emxArray__common *)cnt, k, (int)sizeof(double));
+  k = cnt->size[0];
+  inte = cnt->size[1];
+  inte *= k;
+  for (k = 0; k < inte; k++) {
+    cnt->data[k] *= 1200.0;
   }
 
   /*  key = cell(1,length(cnt)); */
-  b_cnt = cent->size[0] * cent->size[1];
+  k = cent->size[0] * cent->size[1];
   cent->size[0] = 1;
   cent->size[1] = cnt->size[1];
-  emxEnsureCapacity((emxArray__common *)cent, b_cnt, (int)sizeof(double));
-  ub_loop = cnt->size[1];
-  for (b_cnt = 0; b_cnt < ub_loop; b_cnt++) {
-    cent->data[b_cnt] = 0.0;
+  emxEnsureCapacity((emxArray__common *)cent, k, (int)sizeof(double));
+  inte = cnt->size[1];
+  for (k = 0; k < inte; k++) {
+    cent->data[k] = 0.0;
   }
 
-  b_cnt = freq->size[0] * freq->size[1];
+  k = freq->size[0] * freq->size[1];
   freq->size[0] = 1;
   freq->size[1] = cnt->size[1];
-  emxEnsureCapacity((emxArray__common *)freq, b_cnt, (int)sizeof(double));
-  ub_loop = cnt->size[1];
-  for (b_cnt = 0; b_cnt < ub_loop; b_cnt++) {
-    freq->data[b_cnt] = 0.0;
+  emxEnsureCapacity((emxArray__common *)freq, k, (int)sizeof(double));
+  inte = cnt->size[1];
+  for (k = 0; k < inte; k++) {
+    freq->data[k] = 0.0;
   }
 
   for (i = 0; i < cnt->size[1]; i++) {

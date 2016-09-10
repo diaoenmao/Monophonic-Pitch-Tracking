@@ -12,139 +12,140 @@
 #include "yaapt_emxutil.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lk_emlrtRSI = { 31, "path1",
+static emlrtRSInfo em_emlrtRSI = { 31, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRSInfo mk_emlrtRSI = { 34, "path1",
+static emlrtRSInfo fm_emlrtRSI = { 34, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRSInfo nk_emlrtRSI = { 61, "path1",
+static emlrtRSInfo gm_emlrtRSI = { 61, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo fd_emlrtRTEI = { 1, 17, "path1",
+static emlrtRTEInfo pd_emlrtRTEI = { 1, 17, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo gd_emlrtRTEI = { 38, 1, "path1",
+static emlrtRTEInfo qd_emlrtRTEI = { 38, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo hd_emlrtRTEI = { 40, 1, "path1",
+static emlrtRTEInfo rd_emlrtRTEI = { 40, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo id_emlrtRTEI = { 42, 1, "path1",
+static emlrtRTEInfo sd_emlrtRTEI = { 42, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtRTEInfo jd_emlrtRTEI = { 43, 1, "path1",
+static emlrtRTEInfo td_emlrtRTEI = { 43, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtBCInfo og_emlrtBCI = { -1, -1, 46, 22, "Local", "path1",
+static emlrtBCInfo ng_emlrtBCI = { -1, -1, 46, 22, "Local", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo pg_emlrtBCI = { -1, -1, 74, 22, "CCOST", "path1",
+static emlrtBCInfo og_emlrtBCI = { -1, -1, 74, 22, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo qg_emlrtBCI = { -1, -1, 75, 13, "CCOST", "path1",
+static emlrtBCInfo pg_emlrtBCI = { -1, -1, 75, 13, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtRTEInfo kg_emlrtRTEI = { 99, 1, "path1",
+static emlrtRTEInfo vg_emlrtRTEI = { 99, 1, "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m" };
 
-static emlrtBCInfo rg_emlrtBCI = { -1, -1, 97, 6, "p", "path1",
+static emlrtBCInfo qg_emlrtBCI = { -1, -1, 97, 6, "p", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo sg_emlrtBCI = { -1, -1, 97, 1, "P", "path1",
+static emlrtBCInfo rg_emlrtBCI = { -1, -1, 97, 1, "P", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo tg_emlrtBCI = { -1, -1, 100, 14, "PRED", "path1",
+static emlrtBCInfo sg_emlrtBCI = { -1, -1, 100, 14, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ug_emlrtBCI = { -1, -1, 100, 14, "P", "path1",
+static emlrtBCInfo tg_emlrtBCI = { -1, -1, 100, 14, "P", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo vg_emlrtBCI = { -1, -1, 100, 21, "PRED", "path1",
+static emlrtBCInfo ug_emlrtBCI = { -1, -1, 100, 21, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo wg_emlrtBCI = { -1, -1, 100, 4, "P", "path1",
+static emlrtBCInfo vg_emlrtBCI = { -1, -1, 100, 4, "P", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo xg_emlrtBCI = { -1, -1, 72, 5, "p", "path1",
+static emlrtBCInfo wg_emlrtBCI = { -1, -1, 72, 5, "p", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo yg_emlrtBCI = { -1, -1, 74, 12, "CCOST", "path1",
+static emlrtBCInfo xg_emlrtBCI = { -1, -1, 74, 12, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ah_emlrtBCI = { -1, -1, 75, 22, "CCOST", "path1",
+static emlrtBCInfo yg_emlrtBCI = { -1, -1, 75, 22, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo bh_emlrtBCI = { -1, -1, 75, 31, "p", "path1",
+static emlrtBCInfo ah_emlrtBCI = { -1, -1, 75, 31, "p", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ch_emlrtBCI = { -1, -1, 69, 18, "CCOST", "path1",
+static emlrtBCInfo bh_emlrtBCI = { -1, -1, 69, 18, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo dh_emlrtBCI = { -1, -1, 69, 9, "PCOST", "path1",
+static emlrtBCInfo ch_emlrtBCI = { -1, -1, 69, 9, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo eh_emlrtBCI = { -1, -1, 51, 9, "CCOST", "path1",
+static emlrtBCInfo dh_emlrtBCI = { -1, -1, 51, 9, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo fh_emlrtBCI = { -1, -1, 60, 12, "CCOST", "path1",
+static emlrtBCInfo eh_emlrtBCI = { -1, -1, 60, 12, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo gh_emlrtBCI = { -1, -1, 64, 18, "CCOST", "path1",
+static emlrtBCInfo fh_emlrtBCI = { -1, -1, 64, 18, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo hh_emlrtBCI = { -1, -1, 64, 33, "Local", "path1",
+static emlrtBCInfo gh_emlrtBCI = { -1, -1, 64, 33, "Local", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ih_emlrtBCI = { -1, -1, 64, 35, "Local", "path1",
+static emlrtBCInfo hh_emlrtBCI = { -1, -1, 64, 35, "Local", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo jh_emlrtBCI = { -1, -1, 64, 9, "CCOST", "path1",
+static emlrtBCInfo ih_emlrtBCI = { -1, -1, 64, 9, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo kh_emlrtBCI = { -1, -1, 54, 16, "PCOST", "path1",
+static emlrtBCInfo jh_emlrtBCI = { -1, -1, 54, 16, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo lh_emlrtBCI = { -1, -1, 54, 31, "Trans", "path1",
+static emlrtBCInfo kh_emlrtBCI = { -1, -1, 54, 31, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo mh_emlrtBCI = { -1, -1, 54, 33, "Trans", "path1",
+static emlrtBCInfo lh_emlrtBCI = { -1, -1, 54, 33, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo nh_emlrtBCI = { -1, -1, 54, 35, "Trans", "path1",
+static emlrtBCInfo mh_emlrtBCI = { -1, -1, 54, 35, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo oh_emlrtBCI = { -1, -1, 54, 39, "CCOST", "path1",
+static emlrtBCInfo nh_emlrtBCI = { -1, -1, 54, 39, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo ph_emlrtBCI = { -1, -1, 55, 26, "PCOST", "path1",
+static emlrtBCInfo oh_emlrtBCI = { -1, -1, 55, 26, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo qh_emlrtBCI = { -1, -1, 55, 41, "Trans", "path1",
+static emlrtBCInfo ph_emlrtBCI = { -1, -1, 55, 41, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo rh_emlrtBCI = { -1, -1, 55, 43, "Trans", "path1",
+static emlrtBCInfo qh_emlrtBCI = { -1, -1, 55, 43, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo sh_emlrtBCI = { -1, -1, 55, 45, "Trans", "path1",
+static emlrtBCInfo rh_emlrtBCI = { -1, -1, 55, 45, "Trans", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo th_emlrtBCI = { -1, -1, 55, 17, "CCOST", "path1",
+static emlrtBCInfo sh_emlrtBCI = { -1, -1, 55, 17, "CCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo uh_emlrtBCI = { -1, -1, 56, 22, "PRED", "path1",
+static emlrtBCInfo th_emlrtBCI = { -1, -1, 56, 22, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo vh_emlrtBCI = { -1, -1, 56, 24, "PRED", "path1",
+static emlrtBCInfo uh_emlrtBCI = { -1, -1, 56, 24, "PRED", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo wh_emlrtBCI = { -1, -1, 46, 20, "Local", "path1",
+static emlrtBCInfo vh_emlrtBCI = { -1, -1, 46, 20, "Local", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
-static emlrtBCInfo xh_emlrtBCI = { -1, -1, 46, 5, "PCOST", "path1",
+static emlrtBCInfo wh_emlrtBCI = { -1, -1, 46, 5, "PCOST", "path1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\path1.m", 0 };
 
 /* Function Definitions */
@@ -157,25 +158,25 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
 {
   int32_T N;
   int32_T M;
-  int32_T i36;
+  int32_T i41;
+  emxArray_real_T *PRED;
+  const mxArray *y;
+  char_T u[28];
   static const char_T varargin_1[28] = { 'S', 't', 'o', 'p', ' ', 'i', 'n', ' ',
     'D', 'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o', ' ',
     'M', '>', '1', '0', '0' };
 
-  char_T u[28];
-  const mxArray *y;
+  const mxArray *m9;
   static const int32_T iv44[2] = { 1, 28 };
 
-  const mxArray *m9;
+  const mxArray *b_y;
+  char_T b_u[29];
   static const char_T b_varargin_1[29] = { 'S', 't', 'o', 'p', ' ', 'i', 'n',
     ' ', 'D', 'y', 'n', 'a', 'm', 'i', 'c', ' ', 'd', 'u', 'e', ' ', 't', 'o',
     ' ', 'N', '>', '1', '0', '0', '0' };
 
-  char_T b_u[29];
-  const mxArray *b_y;
   static const int32_T iv45[2] = { 1, 29 };
 
-  emxArray_real_T *PRED;
   int32_T loop_ub;
   emxArray_real_T *p;
   emxArray_real_T *PCOST;
@@ -183,15 +184,15 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
   int32_T J;
   int32_T I;
   int32_T K;
+  int32_T i42;
+  const mxArray *c_y;
+  char_T c_u[30];
   static const char_T c_varargin_1[30] = { 'C', 'C', 'O', 'S', 'T', '>', '1',
     '.', '0', 'E', '+', '5', '0', ',', ' ', 'S', 't', 'o', 'p', ' ', 'i', 'n',
     ' ', 'D', 'y', 'n', 'a', 'm', 'i', 'c' };
 
-  char_T c_u[30];
-  const mxArray *c_y;
   static const int32_T iv46[2] = { 1, 30 };
 
-  int32_T i37;
   int32_T b_I;
   emlrtStack st;
   emlrtStack b_st;
@@ -200,6 +201,8 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
+  covrtLogFcn(&emlrtCoverageInstance, 15U, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 0);
 
   /* PATH1 find optimal path with the lowest cost */
   /*  */
@@ -230,120 +233,124 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
 
   /* getting the size of the local matrix; */
   /* 'path1:30' if M>=500 */
-  if (Local->size[0] >= 500) {
+  if (covrtLogIf(&emlrtCoverageInstance, 15U, 0U, 0, Local->size[0] >= 500)) {
     /* if M is greater than 100, stop the routine; */
-    st.site = &lk_emlrtRSI;
-    for (i36 = 0; i36 < 28; i36++) {
-      u[i36] = varargin_1[i36];
+    st.site = &em_emlrtRSI;
+    for (i41 = 0; i41 < 28; i41++) {
+      u[i41] = varargin_1[i41];
     }
 
     y = NULL;
     m9 = emlrtCreateCharArray(2, iv44);
     emlrtInitCharArrayR2013a(&st, 28, m9, &u[0]);
     emlrtAssign(&y, m9);
-    b_st.site = &ho_emlrtRSI;
-    n_error(&b_st, y, &emlrtMCI);
+    b_st.site = &fq_emlrtRSI;
+    o_error(&b_st, y, &emlrtMCI);
   }
 
   /* 'path1:33' if N>=5000 */
-  if (Local->size[1] >= 5000) {
+  if (covrtLogIf(&emlrtCoverageInstance, 15U, 0U, 1, Local->size[1] >= 5000)) {
     /* if N is greater than 1000, stop the routine; */
-    st.site = &mk_emlrtRSI;
-    for (i36 = 0; i36 < 29; i36++) {
-      b_u[i36] = b_varargin_1[i36];
+    st.site = &fm_emlrtRSI;
+    for (i41 = 0; i41 < 29; i41++) {
+      b_u[i41] = b_varargin_1[i41];
     }
 
     b_y = NULL;
     m9 = emlrtCreateCharArray(2, iv45);
     emlrtInitCharArrayR2013a(&st, 29, m9, &b_u[0]);
     emlrtAssign(&b_y, m9);
-    b_st.site = &ho_emlrtRSI;
-    n_error(&b_st, b_y, &emlrtMCI);
+    b_st.site = &fq_emlrtRSI;
+    o_error(&b_st, b_y, &emlrtMCI);
   }
 
-  emxInit_real_T(sp, &PRED, 2, &gd_emlrtRTEI, true);
+  emxInit_real_T(sp, &PRED, 2, &qd_emlrtRTEI, true);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 1);
 
   /* 'path1:38' PRED=ones(M,N); */
-  i36 = PRED->size[0] * PRED->size[1];
+  i41 = PRED->size[0] * PRED->size[1];
   PRED->size[0] = Local->size[0];
   PRED->size[1] = Local->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)PRED, i36, (int32_T)sizeof(real_T),
-                    &fd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)PRED, i41, (int32_T)sizeof(real_T),
+                    &pd_emlrtRTEI);
   loop_ub = Local->size[0] * Local->size[1];
-  for (i36 = 0; i36 < loop_ub; i36++) {
-    PRED->data[i36] = 1.0;
+  for (i41 = 0; i41 < loop_ub; i41++) {
+    PRED->data[i41] = 1.0;
   }
 
   /* initializing several desired matrix; */
   /* 'path1:39' P=ones(1,N); */
-  i36 = PATH->size[0] * PATH->size[1];
+  i41 = PATH->size[0] * PATH->size[1];
   PATH->size[0] = 1;
   PATH->size[1] = Local->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)PATH, i36, (int32_T)sizeof(real_T),
-                    &fd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)PATH, i41, (int32_T)sizeof(real_T),
+                    &pd_emlrtRTEI);
   loop_ub = Local->size[1];
-  for (i36 = 0; i36 < loop_ub; i36++) {
-    PATH->data[i36] = 1.0;
+  for (i41 = 0; i41 < loop_ub; i41++) {
+    PATH->data[i41] = 1.0;
   }
 
-  emxInit_real_T(sp, &p, 2, &hd_emlrtRTEI, true);
+  emxInit_real_T(sp, &p, 2, &rd_emlrtRTEI, true);
 
   /* 'path1:40' p=zeros(1,N); */
-  i36 = p->size[0] * p->size[1];
+  i41 = p->size[0] * p->size[1];
   p->size[0] = 1;
   p->size[1] = Local->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)p, i36, (int32_T)sizeof(real_T),
-                    &fd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)p, i41, (int32_T)sizeof(real_T),
+                    &pd_emlrtRTEI);
   loop_ub = Local->size[1];
-  for (i36 = 0; i36 < loop_ub; i36++) {
-    p->data[i36] = 0.0;
+  for (i41 = 0; i41 < loop_ub; i41++) {
+    p->data[i41] = 0.0;
   }
 
-  emxInit_real_T(sp, &PCOST, 2, &id_emlrtRTEI, true);
+  emxInit_real_T(sp, &PCOST, 2, &sd_emlrtRTEI, true);
 
   /* PATH=zeros(1,N); */
   /* 'path1:42' PCOST = zeros(1,M); */
-  i36 = PCOST->size[0] * PCOST->size[1];
+  i41 = PCOST->size[0] * PCOST->size[1];
   PCOST->size[0] = 1;
   PCOST->size[1] = Local->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)PCOST, i36, (int32_T)sizeof(real_T),
-                    &fd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)PCOST, i41, (int32_T)sizeof(real_T),
+                    &pd_emlrtRTEI);
   loop_ub = Local->size[0];
-  for (i36 = 0; i36 < loop_ub; i36++) {
-    PCOST->data[i36] = 0.0;
+  for (i41 = 0; i41 < loop_ub; i41++) {
+    PCOST->data[i41] = 0.0;
   }
 
-  emxInit_real_T(sp, &CCOST, 2, &jd_emlrtRTEI, true);
+  emxInit_real_T(sp, &CCOST, 2, &td_emlrtRTEI, true);
 
   /* 'path1:43' CCOST = zeros(1,M); */
-  i36 = CCOST->size[0] * CCOST->size[1];
+  i41 = CCOST->size[0] * CCOST->size[1];
   CCOST->size[0] = 1;
   CCOST->size[1] = Local->size[0];
-  emxEnsureCapacity(sp, (emxArray__common *)CCOST, i36, (int32_T)sizeof(real_T),
-                    &fd_emlrtRTEI);
+  emxEnsureCapacity(sp, (emxArray__common *)CCOST, i41, (int32_T)sizeof(real_T),
+                    &pd_emlrtRTEI);
   loop_ub = Local->size[0];
-  for (i36 = 0; i36 < loop_ub; i36++) {
-    CCOST->data[i36] = 0.0;
+  for (i41 = 0; i41 < loop_ub; i41++) {
+    CCOST->data[i41] = 0.0;
   }
 
   /* 'path1:45' for J=1:M */
   J = 1;
   while (J - 1 <= M) {
+    covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 0, 1);
+    covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 2);
+
     /* initializing the previous costs; */
     /* 'path1:46' PCOST(J)=Local(J,1); */
-    i36 = Local->size[1];
-    if (!(1 <= i36)) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, i36, &og_emlrtBCI, sp);
+    i41 = Local->size[1];
+    if (!(1 <= i41)) {
+      emlrtDynamicBoundsCheckR2012b(1, 1, i41, &ng_emlrtBCI, sp);
     }
 
-    i36 = Local->size[0];
-    if (!((J >= 1) && (J <= i36))) {
-      emlrtDynamicBoundsCheckR2012b(J, 1, i36, &wh_emlrtBCI, sp);
+    i41 = Local->size[0];
+    if (!((J >= 1) && (J <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(J, 1, i41, &vh_emlrtBCI, sp);
     }
 
-    i36 = PCOST->size[1];
-    if (!((J >= 1) && (J <= i36))) {
-      emlrtDynamicBoundsCheckR2012b(J, 1, i36, &xh_emlrtBCI, sp);
+    i41 = PCOST->size[1];
+    if (!((J >= 1) && (J <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(J, 1, i41, &wh_emlrtBCI, sp);
     }
 
     PCOST->data[J - 1] = Local->data[J - 1];
@@ -353,17 +360,24 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
     }
   }
 
+  covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 0, 0);
+
   /* 'path1:49' for I=2:N */
   I = 2;
   while (I - 2 <= N - 2) {
+    covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 1, 1);
+
     /* this loop is doing the heart work of this routine. That means to */
     /* 'path1:50' for J=1:M */
     J = 1;
     while (J - 1 <= M) {
+      covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 2, 1);
+      covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 3);
+
       /* 'path1:51' CCOST(J)=1.0E+30; */
-      i36 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &eh_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &dh_emlrtBCI, sp);
       }
 
       CCOST->data[J - 1] = 1.0E+30;
@@ -372,60 +386,64 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
       /* 'path1:53' for K=1:M */
       K = 1;
       while (K - 1 <= M) {
+        covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 3, 1);
+
         /* 'path1:54' if PCOST(K)+Trans(K,J,I)<=CCOST(J) */
-        i36 = PCOST->size[1];
-        if (!((K >= 1) && (K <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(K, 1, i36, &kh_emlrtBCI, sp);
+        i41 = PCOST->size[1];
+        if (!((K >= 1) && (K <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(K, 1, i41, &jh_emlrtBCI, sp);
         }
 
-        i36 = Trans->size[0];
-        if (!((K >= 1) && (K <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(K, 1, i36, &lh_emlrtBCI, sp);
+        i41 = Trans->size[0];
+        if (!((K >= 1) && (K <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(K, 1, i41, &kh_emlrtBCI, sp);
         }
 
-        i36 = Trans->size[1];
-        if (!((J >= 1) && (J <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(J, 1, i36, &mh_emlrtBCI, sp);
+        i41 = Trans->size[1];
+        if (!((J >= 1) && (J <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(J, 1, i41, &lh_emlrtBCI, sp);
         }
 
-        i36 = Trans->size[2];
-        if (!((I >= 1) && (I <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(I, 1, i36, &nh_emlrtBCI, sp);
+        i41 = Trans->size[2];
+        if (!((I >= 1) && (I <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(I, 1, i41, &mh_emlrtBCI, sp);
         }
 
-        i36 = CCOST->size[1];
-        if (!((J >= 1) && (J <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(J, 1, i36, &oh_emlrtBCI, sp);
+        i41 = CCOST->size[1];
+        if (!((J >= 1) && (J <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(J, 1, i41, &nh_emlrtBCI, sp);
         }
 
-        if (PCOST->data[K - 1] + Trans->data[((K + Trans->size[0] * (J - 1)) +
-             Trans->size[0] * Trans->size[1] * (I - 1)) - 1] <= CCOST->data[J -
-            1]) {
+        if (covrtLogIf(&emlrtCoverageInstance, 15U, 0U, 2, PCOST->data[K - 1] +
+                       Trans->data[((K + Trans->size[0] * (J - 1)) + Trans->
+              size[0] * Trans->size[1] * (I - 1)) - 1] <= CCOST->data[J - 1])) {
+          covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 4);
+
           /* deciding the optimal path between two points in two next column;  */
           /* 'path1:55' CCOST(J)=PCOST(K)+Trans(K,J,I); */
-          i36 = PCOST->size[1];
-          if (!((K >= 1) && (K <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(K, 1, i36, &ph_emlrtBCI, sp);
+          i41 = PCOST->size[1];
+          if (!((K >= 1) && (K <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(K, 1, i41, &oh_emlrtBCI, sp);
           }
 
-          i36 = Trans->size[0];
-          if (!((K >= 1) && (K <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(K, 1, i36, &qh_emlrtBCI, sp);
+          i41 = Trans->size[0];
+          if (!((K >= 1) && (K <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(K, 1, i41, &ph_emlrtBCI, sp);
           }
 
-          i36 = Trans->size[1];
-          if (!((J >= 1) && (J <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(J, 1, i36, &rh_emlrtBCI, sp);
+          i41 = Trans->size[1];
+          if (!((J >= 1) && (J <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(J, 1, i41, &qh_emlrtBCI, sp);
           }
 
-          i36 = Trans->size[2];
-          if (!((I >= 1) && (I <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(I, 1, i36, &sh_emlrtBCI, sp);
+          i41 = Trans->size[2];
+          if (!((I >= 1) && (I <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(I, 1, i41, &rh_emlrtBCI, sp);
           }
 
-          i36 = CCOST->size[1];
-          if (!((J >= 1) && (J <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(J, 1, i36, &th_emlrtBCI, sp);
+          i41 = CCOST->size[1];
+          if (!((J >= 1) && (J <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(J, 1, i41, &sh_emlrtBCI, sp);
           }
 
           CCOST->data[J - 1] = PCOST->data[K - 1] + Trans->data[((K +
@@ -433,14 +451,14 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
             - 1];
 
           /* 'path1:56' PRED(J,I)=K; */
-          i36 = PRED->size[0];
-          if (!((J >= 1) && (J <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(J, 1, i36, &uh_emlrtBCI, sp);
+          i41 = PRED->size[0];
+          if (!((J >= 1) && (J <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(J, 1, i41, &th_emlrtBCI, sp);
           }
 
-          i36 = PRED->size[1];
-          if (!((I >= 1) && (I <= i36))) {
-            emlrtDynamicBoundsCheckR2012b(I, 1, i36, &vh_emlrtBCI, sp);
+          i41 = PRED->size[1];
+          if (!((I >= 1) && (I <= i41))) {
+            emlrtDynamicBoundsCheckR2012b(I, 1, i41, &uh_emlrtBCI, sp);
           }
 
           PRED->data[(J + PRED->size[0] * (I - 1)) - 1] = 1.0 + (real_T)(K - 1);
@@ -454,45 +472,50 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
         }
       }
 
+      covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 3, 0);
+
       /* 'path1:60' if CCOST(J)>=1.0E+30 */
-      i36 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &fh_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &eh_emlrtBCI, sp);
       }
 
-      if (CCOST->data[J - 1] >= 1.0E+30) {
-        st.site = &nk_emlrtRSI;
-        for (i36 = 0; i36 < 30; i36++) {
-          c_u[i36] = c_varargin_1[i36];
+      if (covrtLogIf(&emlrtCoverageInstance, 15U, 0U, 3, CCOST->data[J - 1] >=
+                     1.0E+30)) {
+        st.site = &gm_emlrtRSI;
+        for (i41 = 0; i41 < 30; i41++) {
+          c_u[i41] = c_varargin_1[i41];
         }
 
         c_y = NULL;
         m9 = emlrtCreateCharArray(2, iv46);
         emlrtInitCharArrayR2013a(&st, 30, m9, &c_u[0]);
         emlrtAssign(&c_y, m9);
-        b_st.site = &ho_emlrtRSI;
-        n_error(&b_st, c_y, &emlrtMCI);
+        b_st.site = &fq_emlrtRSI;
+        o_error(&b_st, c_y, &emlrtMCI);
       }
+
+      covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 5);
 
       /* 'path1:64' CCOST(J)=CCOST(J)+Local(J,I); */
-      i36 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &gh_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &fh_emlrtBCI, sp);
       }
 
-      i36 = Local->size[0];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &hh_emlrtBCI, sp);
+      i41 = Local->size[0];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &gh_emlrtBCI, sp);
       }
 
-      i36 = Local->size[1];
-      if (!((I >= 1) && (I <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(I, 1, i36, &ih_emlrtBCI, sp);
+      i41 = Local->size[1];
+      if (!((I >= 1) && (I <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(I, 1, i41, &hh_emlrtBCI, sp);
       }
 
-      i36 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &jh_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &ih_emlrtBCI, sp);
       }
 
       CCOST->data[J - 1] += Local->data[(J + Local->size[0] * (I - 1)) - 1];
@@ -504,18 +527,23 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
       }
     }
 
+    covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 2, 0);
+
     /* 'path1:68' for J=1:M */
     J = 1;
     while (J - 1 <= M) {
+      covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 4, 1);
+      covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 6);
+
       /* 'path1:69' PCOST(J)=CCOST(J); */
-      i36 = CCOST->size[1];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &ch_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &bh_emlrtBCI, sp);
       }
 
-      i36 = PCOST->size[1];
-      if (!((J >= 1) && (J <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J, 1, i36, &dh_emlrtBCI, sp);
+      i41 = PCOST->size[1];
+      if (!((J >= 1) && (J <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J, 1, i41, &ch_emlrtBCI, sp);
       }
 
       PCOST->data[J - 1] = CCOST->data[J - 1];
@@ -527,10 +555,13 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
       }
     }
 
+    covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 4, 0);
+    covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 7);
+
     /* 'path1:72' p(I)=1; */
-    i36 = p->size[1];
-    if (!((I >= 1) && (I <= i36))) {
-      emlrtDynamicBoundsCheckR2012b(I, 1, i36, &xg_emlrtBCI, sp);
+    i41 = p->size[1];
+    if (!((I >= 1) && (I <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(I, 1, i41, &wg_emlrtBCI, sp);
     }
 
     p->data[I - 1] = 1.0;
@@ -538,36 +569,41 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
     /* 'path1:73' for J=2:M */
     J = 0;
     while (J <= M - 1) {
+      covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 5, 1);
+
       /* obtaining the points with lowest cost in every column; */
       /* 'path1:74' if CCOST(J)<=CCOST(1) */
-      i36 = CCOST->size[1];
-      if (!(1 <= i36)) {
-        emlrtDynamicBoundsCheckR2012b(1, 1, i36, &pg_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!(1 <= i41)) {
+        emlrtDynamicBoundsCheckR2012b(1, 1, i41, &og_emlrtBCI, sp);
       }
 
-      i36 = CCOST->size[1];
-      if (!((J + 2 >= 1) && (J + 2 <= i36))) {
-        emlrtDynamicBoundsCheckR2012b(J + 2, 1, i36, &yg_emlrtBCI, sp);
+      i41 = CCOST->size[1];
+      if (!((J + 2 >= 1) && (J + 2 <= i41))) {
+        emlrtDynamicBoundsCheckR2012b(J + 2, 1, i41, &xg_emlrtBCI, sp);
       }
 
-      if (CCOST->data[J + 1] <= CCOST->data[0]) {
+      if (covrtLogIf(&emlrtCoverageInstance, 15U, 0U, 4, CCOST->data[J + 1] <=
+                     CCOST->data[0])) {
+        covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 8);
+
         /* 'path1:75' CCOST(1)=CCOST(J); */
-        i36 = CCOST->size[1];
-        if (!(1 <= i36)) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, i36, &qg_emlrtBCI, sp);
+        i41 = CCOST->size[1];
+        if (!(1 <= i41)) {
+          emlrtDynamicBoundsCheckR2012b(1, 1, i41, &pg_emlrtBCI, sp);
         }
 
-        i36 = CCOST->size[1];
-        if (!((J + 2 >= 1) && (J + 2 <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(J + 2, 1, i36, &ah_emlrtBCI, sp);
+        i41 = CCOST->size[1];
+        if (!((J + 2 >= 1) && (J + 2 <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(J + 2, 1, i41, &yg_emlrtBCI, sp);
         }
 
         CCOST->data[0] = CCOST->data[J + 1];
 
         /* 'path1:75' p(I)=J; */
-        i36 = p->size[1];
-        if (!((I >= 1) && (I <= i36))) {
-          emlrtDynamicBoundsCheckR2012b(I, 1, i36, &bh_emlrtBCI, sp);
+        i41 = p->size[1];
+        if (!((I >= 1) && (I <= i41))) {
+          emlrtDynamicBoundsCheckR2012b(I, 1, i41, &ah_emlrtBCI, sp);
         }
 
         p->data[I - 1] = 2.0 + (real_T)J;
@@ -579,6 +615,7 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
       }
     }
 
+    covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 5, 0);
     I++;
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
       emlrtBreakCheckR2012b(sp);
@@ -587,6 +624,8 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
 
   emxFree_real_T(&CCOST);
   emxFree_real_T(&PCOST);
+  covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 1, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 9);
 
   /*   Determine ending state with lowest cost */
   /*   Note that CCOST array is filled with costs of states for ending time step */
@@ -603,52 +642,54 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
   /*    end */
   /* 'path1:97' P(N)=p(N); */
   loop_ub = Local->size[1];
-  i36 = p->size[1];
-  i37 = Local->size[1];
-  if (!((i37 >= 1) && (i37 <= i36))) {
-    emlrtDynamicBoundsCheckR2012b(i37, 1, i36, &rg_emlrtBCI, sp);
+  i41 = p->size[1];
+  i42 = Local->size[1];
+  if (!((i42 >= 1) && (i42 <= i41))) {
+    emlrtDynamicBoundsCheckR2012b(i42, 1, i41, &qg_emlrtBCI, sp);
   }
 
-  i36 = Local->size[1];
-  if (!((i36 >= 1) && (i36 <= loop_ub))) {
-    emlrtDynamicBoundsCheckR2012b(i36, 1, loop_ub, &sg_emlrtBCI, sp);
+  i41 = Local->size[1];
+  if (!((i41 >= 1) && (i41 <= loop_ub))) {
+    emlrtDynamicBoundsCheckR2012b(i41, 1, loop_ub, &rg_emlrtBCI, sp);
   }
 
-  PATH->data[i36 - 1] = p->data[i37 - 1];
+  PATH->data[i41 - 1] = p->data[i42 - 1];
 
   /* 'path1:99' for I=N-1:-1:1 */
   emlrtForLoopVectorCheckR2012b((real_T)Local->size[1] - 1.0, -1.0, 1.0,
-    mxDOUBLE_CLASS, Local->size[1] - 1, &kg_emlrtRTEI, sp);
+    mxDOUBLE_CLASS, Local->size[1] - 1, &vg_emlrtRTEI, sp);
   I = 0;
   emxFree_real_T(&p);
   while (I <= Local->size[1] - 2) {
     b_I = N - I;
+    covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 6, 1);
+    covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 10);
 
     /* using this loop to get the path finally; from the last point going */
     /* 'path1:100' P(I)=PRED(P(I+1),I+1); */
-    i36 = PRED->size[0];
-    i37 = PATH->size[1];
-    if (!((b_I >= 1) && (b_I <= i37))) {
-      emlrtDynamicBoundsCheckR2012b(b_I, 1, i37, &ug_emlrtBCI, sp);
+    i41 = PRED->size[0];
+    i42 = PATH->size[1];
+    if (!((b_I >= 1) && (b_I <= i42))) {
+      emlrtDynamicBoundsCheckR2012b(b_I, 1, i42, &tg_emlrtBCI, sp);
     }
 
-    i37 = (int32_T)PATH->data[b_I - 1];
-    if (!((i37 >= 1) && (i37 <= i36))) {
-      emlrtDynamicBoundsCheckR2012b(i37, 1, i36, &tg_emlrtBCI, sp);
+    i42 = (int32_T)PATH->data[b_I - 1];
+    if (!((i42 >= 1) && (i42 <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(i42, 1, i41, &sg_emlrtBCI, sp);
     }
 
-    i36 = PRED->size[1];
-    if (!((b_I >= 1) && (b_I <= i36))) {
-      emlrtDynamicBoundsCheckR2012b(b_I, 1, i36, &vg_emlrtBCI, sp);
+    i41 = PRED->size[1];
+    if (!((b_I >= 1) && (b_I <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(b_I, 1, i41, &ug_emlrtBCI, sp);
     }
 
-    i36 = PATH->size[1];
+    i41 = PATH->size[1];
     loop_ub = b_I - 1;
-    if (!((loop_ub >= 1) && (loop_ub <= i36))) {
-      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i36, &wg_emlrtBCI, sp);
+    if (!((loop_ub >= 1) && (loop_ub <= i41))) {
+      emlrtDynamicBoundsCheckR2012b(loop_ub, 1, i41, &vg_emlrtBCI, sp);
     }
 
-    PATH->data[loop_ub - 1] = PRED->data[(i37 + PRED->size[0] * (b_I - 1)) - 1];
+    PATH->data[loop_ub - 1] = PRED->data[(i42 + PRED->size[0] * (b_I - 1)) - 1];
 
     /* backward to find the previous points, etc; */
     I++;
@@ -658,6 +699,8 @@ void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
   }
 
   emxFree_real_T(&PRED);
+  covrtLogFor(&emlrtCoverageInstance, 15U, 0U, 6, 0);
+  covrtLogBasicBlock(&emlrtCoverageInstance, 15U, 11);
 
   /* 'path1:102' PATH=P; */
   /* getting the final path.  */

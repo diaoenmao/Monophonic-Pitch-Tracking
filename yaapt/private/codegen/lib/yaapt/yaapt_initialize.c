@@ -1,15 +1,14 @@
 /*
  * File: yaapt_initialize.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_initialize.h"
-#include "yaapt_data.h"
 
 /* Function Definitions */
 
@@ -20,7 +19,6 @@
 void yaapt_initialize(void)
 {
   rt_InitInfAndNaN(8U);
-  omp_init_nest_lock(&emlrtNestLockGlobal);
 }
 
 /*

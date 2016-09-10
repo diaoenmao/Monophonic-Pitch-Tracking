@@ -12,14 +12,15 @@
 #include "error1.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo jh_emlrtRSI = { 11, "sqrt",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" };
+static emlrtRSInfo ui_emlrtRSI = { 11, "sqrt",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" };
 
-static emlrtRSInfo kh_emlrtRSI = { 15, "sqrt",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" };
+static emlrtRSInfo vi_emlrtRSI = { 15, "sqrt",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" };
 
 /* Function Definitions */
 
@@ -32,7 +33,7 @@ void b_sqrt(const emlrtStack *sp, real_T *x)
   st.prev = sp;
   st.tls = sp->tls;
   if (*x < 0.0) {
-    st.site = &td_emlrtRSI;
+    st.site = &sd_emlrtRSI;
     error(&st);
   }
 
@@ -52,7 +53,7 @@ void c_sqrt(const emlrtStack *sp, emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &jh_emlrtRSI;
+  st.site = &ui_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -67,19 +68,14 @@ void c_sqrt(const emlrtStack *sp, emxArray_real_T *x)
   }
 
   if (overflow) {
-    st.site = &td_emlrtRSI;
+    st.site = &sd_emlrtRSI;
     error(&st);
   }
 
-  st.site = &kh_emlrtRSI;
+  st.site = &vi_emlrtRSI;
   nx = x->size[0];
   b_st.site = &eb_emlrtRSI;
-  if (1 > x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (x->size[0] > 2147483646);
-  }
-
+  overflow = ((!(1 > x->size[0])) && (x->size[0] > 2147483646));
   if (overflow) {
     c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);

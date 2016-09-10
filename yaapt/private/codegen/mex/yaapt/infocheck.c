@@ -11,6 +11,7 @@
 #include "infocheck.h"
 #include "error1.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
@@ -21,26 +22,26 @@
 boolean_T infocheck(const emlrtStack *sp, int32_T info)
 {
   boolean_T p;
+  boolean_T b_p;
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
   if (info != 0) {
-    p = false;
+    p = true;
+    b_p = false;
     if (info == -4) {
-      p = true;
+      b_p = true;
     }
 
-    if (!p) {
+    if (!b_p) {
       if (info == -1010) {
-        st.site = &cd_emlrtRSI;
+        st.site = &bd_emlrtRSI;
         e_error(&st);
       } else {
-        st.site = &dd_emlrtRSI;
+        st.site = &cd_emlrtRSI;
         g_error(&st, info);
       }
     }
-
-    p = true;
   } else {
     p = false;
   }

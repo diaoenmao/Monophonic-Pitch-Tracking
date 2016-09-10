@@ -1,8 +1,8 @@
 /*
  * File: path1.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -37,12 +37,12 @@ void path1(const emxArray_real_T *Local, const emxArray_real_T *Trans, double
   emxArray_real_T *PRED;
   int N;
   int M;
-  int i22;
+  int i23;
   int loop_ub;
   double p_data[4999];
   double PCOST_data[499];
-  double CCOST_data[499];
   int J;
+  double CCOST_data[499];
   int I;
   int K;
   int b_I;
@@ -64,37 +64,37 @@ void path1(const emxArray_real_T *Local, const emxArray_real_T *Trans, double
   M = Local->size[0] - 1;
 
   /* getting the size of the local matrix; */
-  i22 = PRED->size[0] * PRED->size[1];
+  i23 = PRED->size[0] * PRED->size[1];
   PRED->size[0] = Local->size[0];
   PRED->size[1] = Local->size[1];
-  emxEnsureCapacity((emxArray__common *)PRED, i22, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)PRED, i23, (int)sizeof(double));
   loop_ub = Local->size[0] * Local->size[1];
-  for (i22 = 0; i22 < loop_ub; i22++) {
-    PRED->data[i22] = 1.0;
+  for (i23 = 0; i23 < loop_ub; i23++) {
+    PRED->data[i23] = 1.0;
   }
 
   /* initializing several desired matrix; */
   PATH_size[0] = 1;
   PATH_size[1] = Local->size[1];
   loop_ub = Local->size[1];
-  for (i22 = 0; i22 < loop_ub; i22++) {
-    PATH_data[i22] = 1.0;
+  for (i23 = 0; i23 < loop_ub; i23++) {
+    PATH_data[i23] = 1.0;
   }
 
   loop_ub = Local->size[1];
-  for (i22 = 0; i22 < loop_ub; i22++) {
-    p_data[i22] = 0.0;
+  for (i23 = 0; i23 < loop_ub; i23++) {
+    p_data[i23] = 0.0;
   }
 
   /* PATH=zeros(1,N); */
   loop_ub = Local->size[0];
-  for (i22 = 0; i22 < loop_ub; i22++) {
-    PCOST_data[i22] = 0.0;
+  for (i23 = 0; i23 < loop_ub; i23++) {
+    PCOST_data[i23] = 0.0;
   }
 
   loop_ub = Local->size[0];
-  for (i22 = 0; i22 < loop_ub; i22++) {
-    CCOST_data[i22] = 0.0;
+  for (i23 = 0; i23 < loop_ub; i23++) {
+    CCOST_data[i23] = 0.0;
   }
 
   for (J = 0; J <= M; J++) {

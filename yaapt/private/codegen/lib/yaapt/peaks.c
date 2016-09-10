@@ -1,8 +1,8 @@
 /*
  * File: peaks.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -12,7 +12,6 @@
 #include "yaapt_emxutil.h"
 #include "sort1.h"
 #include "mean.h"
-#include "rdivide.h"
 #include "fix.h"
 #include "mod.h"
 
@@ -69,22 +68,21 @@ void peaks(emxArray_real_T *Data, double delta, double maxpeaks, double
   double mtmp;
   int ix;
   boolean_T exitg2;
-  emxArray_real_T *b_Data;
   int loop_ub;
-  emxArray_real_T *c_Data;
+  emxArray_real_T *b_Data;
   double avg_data;
   double numpeaks;
   double b_n;
   int c_n;
-  int itmp;
-  boolean_T exitg1;
   int iidx[100];
+  int itmp;
   double c_Pitch[100];
+  boolean_T exitg1;
   emxArray_real_T *d_Pitch;
-  emxArray_real_T *e_Pitch;
-  emxArray_real_T *c_Merit;
   emxArray_real_T *r22;
+  emxArray_real_T *e_Pitch;
   emxArray_real_T *r23;
+  emxArray_real_T *c_Merit;
   emxArray_int32_T *r24;
 
   /*   Creation date:   March 1, 2006 */
@@ -134,10 +132,8 @@ void peaks(emxArray_real_T *Data, double delta, double maxpeaks, double
 
   /* -- INITIALIZATION ----------------------------------------------------------- */
   /*  Peak(Pitch) candidates */
-  for (i18 = 0; i18 < 100; i18++) {
-    b_Pitch[i18] = 0.0;
-    b_Merit[i18] = 0.0;
-  }
+  memset(&b_Pitch[0], 0, 100U * sizeof(double));
+  memset(&b_Merit[0], 0, 100U * sizeof(double));
 
   /*  Merits for peaks */
   /* -- MAIN ROUTINE -------------------------------------------------------------- */
@@ -178,18 +174,15 @@ void peaks(emxArray_real_T *Data, double delta, double maxpeaks, double
   }
 
   if (mtmp > 1.0E-14) {
-    emxInit_real_T(&b_Data, 2);
-    i18 = b_Data->size[0] * b_Data->size[1];
-    b_Data->size[0] = 1;
-    b_Data->size[1] = Data->size[1];
-    emxEnsureCapacity((emxArray__common *)b_Data, i18, (int)sizeof(double));
-    loop_ub = Data->size[0] * Data->size[1];
+    i18 = Data->size[0] * Data->size[1];
+    Data->size[0] = 1;
+    emxEnsureCapacity((emxArray__common *)Data, i18, (int)sizeof(double));
+    ixstart = Data->size[0];
+    n = Data->size[1];
+    loop_ub = ixstart * n;
     for (i18 = 0; i18 < loop_ub; i18++) {
-      b_Data->data[i18] = Data->data[i18];
+      Data->data[i18] /= mtmp;
     }
-
-    c_rdivide(b_Data, mtmp, Data);
-    emxFree_real_T(&b_Data);
   }
 
   /*  If true there are no large peaks and we assume that signal is unvoiced */
@@ -201,18 +194,18 @@ void peaks(emxArray_real_T *Data, double delta, double maxpeaks, double
     i19 = (int)max_lag;
   }
 
-  emxInit_real_T(&c_Data, 2);
-  loop_ub = c_Data->size[0] * c_Data->size[1];
-  c_Data->size[0] = 1;
-  c_Data->size[1] = i19 - i18;
-  emxEnsureCapacity((emxArray__common *)c_Data, loop_ub, (int)sizeof(double));
+  emxInit_real_T(&b_Data, 2);
+  loop_ub = b_Data->size[0] * b_Data->size[1];
+  b_Data->size[0] = 1;
+  b_Data->size[1] = i19 - i18;
+  emxEnsureCapacity((emxArray__common *)b_Data, loop_ub, (int)sizeof(double));
   loop_ub = i19 - i18;
   for (i19 = 0; i19 < loop_ub; i19++) {
-    c_Data->data[c_Data->size[0] * i19] = Data->data[i18 + i19];
+    b_Data->data[b_Data->size[0] * i19] = Data->data[i18 + i19];
   }
 
-  avg_data = mean(c_Data);
-  emxFree_real_T(&c_Data);
+  avg_data = mean(b_Data);
+  emxFree_real_T(&b_Data);
   if (avg_data > 1.0 / Prm_shc_thresh1) {
     /*     numpeaks = 0; */
     i18 = Pitch->size[0] * Pitch->size[1];

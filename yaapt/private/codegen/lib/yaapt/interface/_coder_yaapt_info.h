@@ -1,12 +1,12 @@
 /* 
  * File: _coder_yaapt_info.h 
  *  
- * MATLAB Coder version            : 3.0 
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10 
+ * MATLAB Coder version            : 3.1 
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20 
  */
 
-#ifndef ___CODER_YAAPT_INFO_H__
-#define ___CODER_YAAPT_INFO_H__
+#ifndef _CODER_YAAPT_INFO_H
+#define _CODER_YAAPT_INFO_H
 /* Include Files */ 
 #include "tmwtypes.h"
 #include "mex.h"

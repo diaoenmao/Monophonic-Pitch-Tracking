@@ -13,20 +13,21 @@
 #include "warning.h"
 #include "xgetrf.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sc_emlrtRSI = { 117, "lusolve",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
+static emlrtRSInfo sc_emlrtRSI = { 131, "lusolve",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
 
-static emlrtRSInfo tc_emlrtRSI = { 128, "lusolve",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
+static emlrtRSInfo tc_emlrtRSI = { 142, "lusolve",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
 
-static emlrtRSInfo uc_emlrtRSI = { 130, "lusolve",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
+static emlrtRSInfo uc_emlrtRSI = { 144, "lusolve",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
 
-static emlrtRTEInfo x_emlrtRTEI = { 1, 19, "lusolve",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
+static emlrtRTEInfo ab_emlrtRTEI = { 1, 19, "lusolve",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\lusolve.m" };
 
 /* Function Definitions */
 
@@ -58,25 +59,25 @@ void lusolve(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *B)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &b_A, 2, &x_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_A, 2, &ab_emlrtRTEI, true);
   st.site = &pc_emlrtRSI;
   info = b_A->size[0] * b_A->size[1];
   b_A->size[0] = A->size[0];
   b_A->size[1] = A->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)b_A, info, (int32_T)sizeof(real_T),
-                    &x_emlrtRTEI);
+                    &ab_emlrtRTEI);
   loop_ub = A->size[0] * A->size[1];
   for (info = 0; info < loop_ub; info++) {
     b_A->data[info] = A->data[info];
   }
 
-  emxInit_int32_T(&st, &ipiv, 2, &x_emlrtRTEI, true);
+  emxInit_int32_T(&st, &ipiv, 2, &ab_emlrtRTEI, true);
   b_st.site = &rc_emlrtRSI;
   xgetrf(&b_st, A->size[1], A->size[1], b_A, A->size[1], ipiv, &info);
   if (info > 0) {
     b_st.site = &qc_emlrtRSI;
     if (!emlrtSetWarningFlag(&b_st)) {
-      c_st.site = &kd_emlrtRSI;
+      c_st.site = &jd_emlrtRSI;
       warning(&c_st);
     }
   }

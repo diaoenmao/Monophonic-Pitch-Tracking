@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __YAAPT_TYPES_H__
-#define __YAAPT_TYPES_H__
+#ifndef YAAPT_TYPES_H
+#define YAAPT_TYPES_H
 
 /* Include files */
 #include "rtwtypes.h"

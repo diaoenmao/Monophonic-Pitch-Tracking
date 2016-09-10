@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __CRS_CORR_H__
-#define __CRS_CORR_H__
+#ifndef CRS_CORR_H
+#define CRS_CORR_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"

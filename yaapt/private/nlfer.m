@@ -37,15 +37,18 @@ nframejump = fix(Prm.frame_space*Fs/1000);
 nlfer_thersh1  = Prm.nlfer_thresh1;
 
 % Low freqeuncy range for NLFER
-N_F0_min = round ((Prm.f0_min*2/Fs) * nfftlength );
+% N_F0_min = round ((Prm.f0_min*2/Fs) * nfftlength );
+N_F0_min = round ((Prm.f0_min/Fs) * nfftlength );
 N_F0_max = round ((Prm.f0_max/Fs) * nfftlength );
 
 %-- MAIN ROUTINE --------------------------------------------------------------
 
 %  Spectrogram of the data
+%   B = SPECGRAM(A,NFFT,Fs,WINDOW,NOVERLAP)
 SpecData = Myspecgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump));
 % SpecData_test = specgram(Data,nfftlength,Fs,(nframesize),(nframesize-nframejump));
 % Compute normalize low-frequency energy ratio 
+% FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:)).^2); PSD???
 FrmEnergy = sum(abs(SpecData(N_F0_min:N_F0_max,:)));
 avgEnergy = mean(FrmEnergy);
 

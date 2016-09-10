@@ -1,8 +1,8 @@
 /*
  * File: mldivide.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -30,23 +30,23 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
   emxArray_real_T *b_B;
   unsigned int unnamed_idx_0;
   int i9;
-  int minmn;
   int n;
+  int minmn;
+  int rankR;
+  int maxmn;
   int j;
   int mmj;
   int c;
   int ix;
   double wj;
-  int maxmn;
-  double s;
   int i10;
-  int i;
   int mn;
-  int rankR;
+  int i;
+  double s;
   emxInit_real_T(&b_A, 2);
-  emxInit_real_T2(&tau, 1);
+  emxInit_real_T1(&tau, 1);
   emxInit_int32_T(&jpvt, 2);
-  emxInit_real_T2(&b_B, 1);
+  emxInit_real_T1(&b_B, 1);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (B->size[0] == 0)) {
     unnamed_idx_0 = (unsigned int)A->size[1];
     i9 = Y->size[0];
@@ -85,11 +85,11 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
         if (mmj > 1) {
           ix = c;
           wj = fabs(b_A->data[c]);
-          for (maxmn = 1; maxmn + 1 <= mmj; maxmn++) {
+          for (maxmn = 2; maxmn <= mmj; maxmn++) {
             ix++;
             s = fabs(b_A->data[ix]);
             if (s > wj) {
-              minmn = maxmn;
+              minmn = maxmn - 1;
               wj = s;
             }
           }
@@ -116,15 +116,15 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
         }
       }
 
-      minmn = (n - j) - 1;
-      maxmn = c + n;
+      minmn = n - j;
+      maxmn = (c + n) + 1;
       mn = c + n;
-      for (rankR = 1; rankR <= minmn; rankR++) {
+      for (rankR = 1; rankR < minmn; rankR++) {
         wj = b_A->data[mn];
         if (b_A->data[mn] != 0.0) {
           ix = c + 1;
           i10 = mmj + maxmn;
-          for (i = 1 + maxmn; i + 1 <= i10; i++) {
+          for (i = maxmn; i + 1 < i10; i++) {
             b_A->data[i] += b_A->data[ix] * -wj;
             ix++;
           }

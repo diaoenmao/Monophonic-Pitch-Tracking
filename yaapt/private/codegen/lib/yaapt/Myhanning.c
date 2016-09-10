@@ -1,8 +1,8 @@
 /*
  * File: Myhanning.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -11,7 +11,6 @@
 #include "Myhanning.h"
 #include "yaapt_emxutil.h"
 #include "cos.h"
-#include "rdivide.h"
 #include "Myspecgram.h"
 #include "yaapt_rtwutil.h"
 
@@ -49,7 +48,6 @@ void Myhanning(double order, emxArray_real_T *w)
   int i13;
   int nm1d2;
   int k;
-  emxArray_real_T *r15;
   emxArray_real_T *b_w;
   int i14;
 
@@ -127,8 +125,7 @@ void Myhanning(double order, emxArray_real_T *w)
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
-        i13 = n - 1;
-        nm1d2 = i13 / 2;
+        nm1d2 = (n - 1) / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(n - k) - 1] = apnd - (double)k;
@@ -143,21 +140,19 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T2(&r15, 1);
-    i13 = r15->size[0];
-    r15->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r15, i13, (int)sizeof(double));
+    i13 = w->size[0];
+    w->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = y->size[1];
     for (i13 = 0; i13 < nm1d2; i13++) {
-      r15->data[i13] = 6.2831853071795862 * y->data[y->size[0] * i13];
+      w->data[i13] = 6.2831853071795862 * y->data[y->size[0] * i13] / (order +
+        1.0);
     }
 
-    rdivide(r15, order + 1.0, w);
     b_cos(w);
     i13 = w->size[0];
     emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r15);
     for (i13 = 0; i13 < nm1d2; i13++) {
       w->data[i13] = 1.0 - w->data[i13];
     }
@@ -179,7 +174,7 @@ void Myhanning(double order, emxArray_real_T *w)
       n = 1;
     }
 
-    emxInit_real_T2(&b_w, 1);
+    emxInit_real_T1(&b_w, 1);
     i14 = b_w->size[0];
     b_w->size[0] = (w->size[0] + div_s32_floor(n - i13, k)) + 1;
     emxEnsureCapacity((emxArray__common *)b_w, i14, (int)sizeof(double));
@@ -246,8 +241,7 @@ void Myhanning(double order, emxArray_real_T *w)
       y->data[0] = anew;
       if (n > 1) {
         y->data[n - 1] = apnd;
-        i13 = n - 1;
-        nm1d2 = i13 / 2;
+        nm1d2 = (n - 1) / 2;
         for (k = 1; k < nm1d2; k++) {
           y->data[k] = anew + (double)k;
           y->data[(n - k) - 1] = apnd - (double)k;
@@ -262,21 +256,19 @@ void Myhanning(double order, emxArray_real_T *w)
       }
     }
 
-    emxInit_real_T2(&r15, 1);
-    i13 = r15->size[0];
-    r15->size[0] = y->size[1];
-    emxEnsureCapacity((emxArray__common *)r15, i13, (int)sizeof(double));
+    i13 = w->size[0];
+    w->size[0] = y->size[1];
+    emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = y->size[1];
     for (i13 = 0; i13 < nm1d2; i13++) {
-      r15->data[i13] = 6.2831853071795862 * y->data[y->size[0] * i13];
+      w->data[i13] = 6.2831853071795862 * y->data[y->size[0] * i13] / (order +
+        1.0);
     }
 
-    rdivide(r15, order + 1.0, w);
     b_cos(w);
     i13 = w->size[0];
     emxEnsureCapacity((emxArray__common *)w, i13, (int)sizeof(double));
     nm1d2 = w->size[0];
-    emxFree_real_T(&r15);
     for (i13 = 0; i13 < nm1d2; i13++) {
       w->data[i13] = 1.0 - w->data[i13];
     }
@@ -298,7 +290,7 @@ void Myhanning(double order, emxArray_real_T *w)
       n = 1;
     }
 
-    emxInit_real_T2(&b_w, 1);
+    emxInit_real_T1(&b_w, 1);
     i14 = b_w->size[0];
     b_w->size[0] = (w->size[0] + div_s32_floor(n - i13, k)) + 1;
     emxEnsureCapacity((emxArray__common *)b_w, i14, (int)sizeof(double));

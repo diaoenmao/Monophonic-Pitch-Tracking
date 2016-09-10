@@ -1,12 +1,12 @@
 /*
  * File: Mybesseli.h
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
-#ifndef __MYBESSELI_H__
-#define __MYBESSELI_H__
+#ifndef MYBESSELI_H
+#define MYBESSELI_H
 
 /* Include Files */
 #include <float.h>
@@ -16,7 +16,6 @@
 #include <string.h>
 #include "rt_nonfinite.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include "yaapt_types.h"
 
 /* Function Declarations */

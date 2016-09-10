@@ -1,8 +1,8 @@
 /*
  * File: yaapt_rtwutil.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -31,16 +31,16 @@ int div_s32_floor(int numerator, int denominator)
       quotient = MIN_int32_T;
     }
   } else {
-    if (numerator >= 0) {
-      absNumerator = (unsigned int)numerator;
+    if (numerator < 0) {
+      absNumerator = ~(unsigned int)numerator + 1U;
     } else {
-      absNumerator = (unsigned int)-numerator;
+      absNumerator = (unsigned int)numerator;
     }
 
-    if (denominator >= 0) {
-      absDenominator = (unsigned int)denominator;
+    if (denominator < 0) {
+      absDenominator = ~(unsigned int)denominator + 1U;
     } else {
-      absDenominator = (unsigned int)-denominator;
+      absDenominator = (unsigned int)denominator;
     }
 
     quotientNeedsNegation = ((numerator < 0) != (denominator < 0));

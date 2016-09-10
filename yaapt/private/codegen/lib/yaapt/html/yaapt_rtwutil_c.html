@@ -13,8 +13,8 @@
 <a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>/*</i></font>
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: yaapt_rtwutil.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
-<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 18-Feb-2016 02:50:10</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.1</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 05-Sep-2016 15:50:20</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -43,16 +43,16 @@
 <a name="31"><font color="#888888 "><i>   31   </i></font></a>      quotient = MIN_int32_T;
 <a name="32"><font color="#888888 "><i>   32   </i></font></a>    <b>}</b>
 <a name="33"><font color="#888888 "><i>   33   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="34"><font color="#888888 "><i>   34   </i></font></a>    <font color="#112266"><b>if</b></font> (numerator &gt;= 0) <b>{</b>
-<a name="35"><font color="#888888 "><i>   35   </i></font></a>      absNumerator = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)numerator;
+<a name="34"><font color="#888888 "><i>   34   </i></font></a>    <font color="#112266"><b>if</b></font> (numerator &lt; 0) <b>{</b>
+<a name="35"><font color="#888888 "><i>   35   </i></font></a>      absNumerator = ~(<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)numerator + 1U;
 <a name="36"><font color="#888888 "><i>   36   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="37"><font color="#888888 "><i>   37   </i></font></a>      absNumerator = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)-numerator;
+<a name="37"><font color="#888888 "><i>   37   </i></font></a>      absNumerator = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)numerator;
 <a name="38"><font color="#888888 "><i>   38   </i></font></a>    <b>}</b>
 <a name="39"><font color="#888888 "><i>   39   </i></font></a>
-<a name="40"><font color="#888888 "><i>   40   </i></font></a>    <font color="#112266"><b>if</b></font> (denominator &gt;= 0) <b>{</b>
-<a name="41"><font color="#888888 "><i>   41   </i></font></a>      absDenominator = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)denominator;
+<a name="40"><font color="#888888 "><i>   40   </i></font></a>    <font color="#112266"><b>if</b></font> (denominator &lt; 0) <b>{</b>
+<a name="41"><font color="#888888 "><i>   41   </i></font></a>      absDenominator = ~(<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)denominator + 1U;
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
-<a name="43"><font color="#888888 "><i>   43   </i></font></a>      absDenominator = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)-denominator;
+<a name="43"><font color="#888888 "><i>   43   </i></font></a>      absDenominator = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)denominator;
 <a name="44"><font color="#888888 "><i>   44   </i></font></a>    <b>}</b>
 <a name="45"><font color="#888888 "><i>   45   </i></font></a>
 <a name="46"><font color="#888888 "><i>   46   </i></font></a>    quotientNeedsNegation = ((numerator &lt; 0) != (denominator &lt; 0));

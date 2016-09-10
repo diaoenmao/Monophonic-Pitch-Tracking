@@ -12,41 +12,19 @@
 #include "eml_int_forloop_overflow_check.h"
 #include "isequal.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo yf_emlrtRSI = { 12, "any",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\ops\\any.m" };
+static emlrtRSInfo kh_emlrtRSI = { 12, "any",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\ops\\any.m" };
 
 /* Function Definitions */
 
 /*
  *
  */
-boolean_T any(const boolean_T x[2])
-{
-  boolean_T y;
-  int32_T k;
-  boolean_T exitg1;
-  y = false;
-  k = 0;
-  exitg1 = false;
-  while ((!exitg1) && (k < 2)) {
-    if (!!x[k]) {
-      y = true;
-      exitg1 = true;
-    } else {
-      k++;
-    }
-  }
-
-  return y;
-}
-
-/*
- *
- */
-boolean_T b_any(boolean_T x)
+boolean_T any(boolean_T x)
 {
   return !!x;
 }
@@ -54,7 +32,7 @@ boolean_T b_any(boolean_T x)
 /*
  *
  */
-boolean_T c_any(const boolean_T x[5])
+boolean_T b_any(const boolean_T x[5])
 {
   boolean_T y;
   int32_T k;
@@ -77,7 +55,7 @@ boolean_T c_any(const boolean_T x[5])
 /*
  *
  */
-boolean_T d_any(const emlrtStack *sp, const emxArray_real_T *x)
+boolean_T c_any(const emlrtStack *sp, const emxArray_real_T *x)
 {
   boolean_T y;
   boolean_T overflow;
@@ -88,7 +66,7 @@ boolean_T d_any(const emlrtStack *sp, const emxArray_real_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &yf_emlrtRSI;
+  st.site = &kh_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -96,7 +74,7 @@ boolean_T d_any(const emlrtStack *sp, const emxArray_real_T *x)
   overflow = !b_isequal(x);
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &pf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &bg_emlrtRTEI,
       "Coder:toolbox:eml_all_or_any_specialEmpty", 0);
   }
 
@@ -108,18 +86,13 @@ boolean_T d_any(const emlrtStack *sp, const emxArray_real_T *x)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &qf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &cg_emlrtRTEI,
       "Coder:toolbox:eml_all_or_any_autoDimIncompatibility", 0);
   }
 
   y = false;
-  b_st.site = &ag_emlrtRSI;
-  if (1 > x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (x->size[0] > 2147483646);
-  }
-
+  b_st.site = &lh_emlrtRSI;
+  overflow = ((!(1 > x->size[0])) && (x->size[0] > 2147483646));
   if (overflow) {
     c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);
@@ -148,7 +121,7 @@ boolean_T d_any(const emlrtStack *sp, const emxArray_real_T *x)
 /*
  *
  */
-boolean_T e_any(const emlrtStack *sp, const emxArray_boolean_T *x)
+boolean_T d_any(const emlrtStack *sp, const emxArray_boolean_T *x)
 {
   boolean_T y;
   boolean_T overflow;
@@ -159,7 +132,7 @@ boolean_T e_any(const emlrtStack *sp, const emxArray_boolean_T *x)
   emlrtStack c_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &yf_emlrtRSI;
+  st.site = &kh_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -167,7 +140,7 @@ boolean_T e_any(const emlrtStack *sp, const emxArray_boolean_T *x)
   overflow = !e_isequal(x);
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &pf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &bg_emlrtRTEI,
       "Coder:toolbox:eml_all_or_any_specialEmpty", 0);
   }
 
@@ -179,18 +152,13 @@ boolean_T e_any(const emlrtStack *sp, const emxArray_boolean_T *x)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &qf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &cg_emlrtRTEI,
       "Coder:toolbox:eml_all_or_any_autoDimIncompatibility", 0);
   }
 
   y = false;
-  b_st.site = &ag_emlrtRSI;
-  if (1 > x->size[0]) {
-    overflow = false;
-  } else {
-    overflow = (x->size[0] > 2147483646);
-  }
-
+  b_st.site = &lh_emlrtRSI;
+  overflow = ((!(1 > x->size[0])) && (x->size[0] > 2147483646));
   if (overflow) {
     c_st.site = &cb_emlrtRSI;
     check_forloop_overflow_error(&c_st, true);

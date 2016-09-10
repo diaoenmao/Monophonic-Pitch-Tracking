@@ -1,8 +1,8 @@
 /*
  * File: Mybesseli.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -27,17 +27,17 @@ static double rt_powd_snf(double u0, double u1);
 static double rt_powd_snf(double u0, double u1)
 {
   double y;
+  double d4;
   double d5;
-  double d6;
   if (rtIsNaN(u0) || rtIsNaN(u1)) {
     y = rtNaN;
   } else {
-    d5 = fabs(u0);
-    d6 = fabs(u1);
+    d4 = fabs(u0);
+    d5 = fabs(u1);
     if (rtIsInf(u1)) {
-      if (d5 == 1.0) {
+      if (d4 == 1.0) {
         y = rtNaN;
-      } else if (d5 > 1.0) {
+      } else if (d4 > 1.0) {
         if (u1 > 0.0) {
           y = rtInf;
         } else {
@@ -48,9 +48,9 @@ static double rt_powd_snf(double u0, double u1)
       } else {
         y = rtInf;
       }
-    } else if (d6 == 0.0) {
+    } else if (d5 == 0.0) {
       y = 1.0;
-    } else if (d6 == 1.0) {
+    } else if (d5 == 1.0) {
       if (u1 > 0.0) {
         y = u0;
       } else {
@@ -114,23 +114,27 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
   emxArray_real_T *v;
   boolean_T exitg7;
   boolean_T guard3 = false;
-  emxArray_real_T *kk;
+  emxArray_real_T *c_sum;
   emxArray_real_T *b_x;
+  boolean_T exitg2;
   double mtmp;
-  boolean_T exitg6;
+  boolean_T guard2 = false;
   emxArray_real_T *p;
+  boolean_T exitg6;
   double n;
   double en;
-  boolean_T exitg5;
   double test;
   emxArray_real_T *a;
+  boolean_T exitg5;
+  boolean_T exitg1;
+  boolean_T guard1 = false;
+  emxArray_real_T *b_b;
   int count;
   emxArray_boolean_T *b_p;
   emxArray_real_T *b_en;
   emxArray_real_T *c_en;
   int exitg4;
   emxArray_real_T *tempa;
-  emxArray_real_T *b_tempa;
   double em;
   double empal;
   double emp2al;
@@ -139,16 +143,10 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
   int l;
   emxArray_real_T *d_en;
   emxArray_real_T *e_en;
-  emxArray_real_T *c_p;
   boolean_T exitg3;
-  emxArray_real_T *b_b;
-  boolean_T exitg2;
-  boolean_T guard2 = false;
-  emxArray_real_T *r21;
-  boolean_T exitg1;
-  boolean_T guard1 = false;
   emxArray_real_T *c_b;
-  emxInit_real_T2(&b, 1);
+  emxArray_real_T *r21;
+  emxInit_real_T1(&b, 1);
 
   /*    Acknowledgement: */
   /*  */
@@ -255,7 +253,7 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
     emxEnsureCapacity((emxArray__common *)ii, i15, (int)sizeof(int));
   }
 
-  emxInit_real_T2(&v, 1);
+  emxInit_real_T1(&v, 1);
   i15 = v->size[0];
   v->size[0] = ii->size[0];
   emxEnsureCapacity((emxArray__common *)v, i15, (int)sizeof(double));
@@ -333,9 +331,9 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
     v->data[i15] = ii->data[i15];
   }
 
-  emxInit_real_T2(&kk, 1);
+  emxInit_real_T1(&c_sum, 1);
   if (any(v)) {
-    emxInit_real_T2(&b_x, 1);
+    emxInit_real_T1(&b_x, 1);
     i15 = b_x->size[0];
     b_x->size[0] = v->size[0];
     emxEnsureCapacity((emxArray__common *)b_x, i15, (int)sizeof(double));
@@ -344,46 +342,46 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
       b_x->data[i15] = xx->data[(int)v->data[i15] - 1];
     }
 
-    i15 = kk->size[0];
-    kk->size[0] = b_x->size[0];
-    emxEnsureCapacity((emxArray__common *)kk, i15, (int)sizeof(double));
+    i15 = c_sum->size[0];
+    c_sum->size[0] = b_x->size[0];
+    emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
     ixstart = b_x->size[0];
     for (i15 = 0; i15 < ixstart; i15++) {
-      kk->data[i15] = b_x->data[i15];
+      c_sum->data[i15] = b_x->data[i15];
     }
 
     for (ixstart = 0; ixstart + 1 <= v->size[0]; ixstart++) {
-      if (kk->data[ixstart] < 0.0) {
-        mtmp = ceil(kk->data[ixstart]);
+      if (c_sum->data[ixstart] < 0.0) {
+        mtmp = ceil(c_sum->data[ixstart]);
       } else {
-        mtmp = floor(kk->data[ixstart]);
+        mtmp = floor(c_sum->data[ixstart]);
       }
 
-      kk->data[ixstart] = mtmp;
+      c_sum->data[ixstart] = mtmp;
     }
 
     ixstart = 1;
-    idx = kk->size[0];
-    mtmp = kk->data[0];
-    if (kk->size[0] > 1) {
-      if (rtIsNaN(kk->data[0])) {
-        nx = 2;
+    nx = c_sum->size[0];
+    mtmp = c_sum->data[0];
+    if (c_sum->size[0] > 1) {
+      if (rtIsNaN(c_sum->data[0])) {
+        idx = 2;
         exitg6 = false;
-        while ((!exitg6) && (nx <= idx)) {
-          ixstart = nx;
-          if (!rtIsNaN(kk->data[nx - 1])) {
-            mtmp = kk->data[nx - 1];
+        while ((!exitg6) && (idx <= nx)) {
+          ixstart = idx;
+          if (!rtIsNaN(c_sum->data[idx - 1])) {
+            mtmp = c_sum->data[idx - 1];
             exitg6 = true;
           } else {
-            nx++;
+            idx++;
           }
         }
       }
 
-      if (ixstart < kk->size[0]) {
-        while (ixstart + 1 <= idx) {
-          if (kk->data[ixstart] > mtmp) {
-            mtmp = kk->data[ixstart];
+      if (ixstart < c_sum->size[0]) {
+        while (ixstart + 1 <= nx) {
+          if (c_sum->data[ixstart] > mtmp) {
+            mtmp = c_sum->data[ixstart];
           }
 
           ixstart++;
@@ -391,39 +389,45 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
       }
     }
 
-    emxInit_real_T2(&p, 1);
+    emxInit_real_T1(&p, 1);
 
     /*  */
     /*      Initialize the forward sweep, the p-sequence of Olver. */
     /*  */
     n = mtmp + 1.0;
     en = (mtmp + 1.0) + (mtmp + 1.0);
-    d_rdivide(en, b_x, p);
+    i15 = p->size[0];
+    p->size[0] = b_x->size[0];
+    emxEnsureCapacity((emxArray__common *)p, i15, (int)sizeof(double));
+    ixstart = b_x->size[0];
+    for (i15 = 0; i15 < ixstart; i15++) {
+      p->data[i15] = en / b_x->data[i15];
+    }
 
     /*  */
     /*      Calculate general significance test. */
     /*  */
     if (2.0 * mtmp > 80.0) {
       ixstart = 1;
-      idx = p->size[0];
+      nx = p->size[0];
       mtmp = p->data[0];
       if (p->size[0] > 1) {
         if (rtIsNaN(p->data[0])) {
-          nx = 2;
+          idx = 2;
           exitg5 = false;
-          while ((!exitg5) && (nx <= idx)) {
-            ixstart = nx;
-            if (!rtIsNaN(p->data[nx - 1])) {
-              mtmp = p->data[nx - 1];
+          while ((!exitg5) && (idx <= nx)) {
+            ixstart = idx;
+            if (!rtIsNaN(p->data[idx - 1])) {
+              mtmp = p->data[idx - 1];
               exitg5 = true;
             } else {
-              nx++;
+              idx++;
             }
           }
         }
 
         if (ixstart < p->size[0]) {
-          while (ixstart + 1 <= idx) {
+          while (ixstart + 1 <= nx) {
             if (p->data[ixstart] > mtmp) {
               mtmp = p->data[ixstart];
             }
@@ -438,7 +442,7 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
       test = 9.007199254740992E+15 / rt_powd_snf(1.585, mtmp);
     }
 
-    emxInit_real_T2(&a, 1);
+    emxInit_real_T1(&a, 1);
 
     /*        if (nbmx >= 3) */
     /*  % */
@@ -518,8 +522,8 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
 
     count = 0;
     emxInit_boolean_T1(&b_p, 1);
-    emxInit_real_T2(&b_en, 1);
-    emxInit_real_T2(&c_en, 1);
+    emxInit_real_T1(&b_en, 1);
+    emxInit_real_T1(&c_en, 1);
     do {
       exitg4 = 0;
       i15 = b_p->size[0];
@@ -534,12 +538,12 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
         n++;
         en += 2.0;
         if (count == 1) {
-          i15 = kk->size[0];
-          kk->size[0] = a->size[0];
-          emxEnsureCapacity((emxArray__common *)kk, i15, (int)sizeof(double));
+          i15 = c_sum->size[0];
+          c_sum->size[0] = a->size[0];
+          emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
           ixstart = a->size[0];
           for (i15 = 0; i15 < ixstart; i15++) {
-            kk->data[i15] = a->data[i15];
+            c_sum->data[i15] = a->data[i15];
           }
 
           i15 = a->size[0];
@@ -558,12 +562,12 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
             c_en->data[i15] = en * p->data[i15];
           }
 
-          b_rdivide(c_en, b_x, p);
+          rdivide(c_en, b_x, p);
           i15 = p->size[0];
           emxEnsureCapacity((emxArray__common *)p, i15, (int)sizeof(double));
           ixstart = p->size[0];
           for (i15 = 0; i15 < ixstart; i15++) {
-            p->data[i15] += kk->data[i15];
+            p->data[i15] += c_sum->data[i15];
           }
         } else {
           count = 1;
@@ -583,13 +587,13 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
             b_en->data[i15] = en * p->data[i15];
           }
 
-          b_rdivide(b_en, b_x, kk);
+          rdivide(b_en, b_x, c_sum);
           i15 = p->size[0];
-          p->size[0] = kk->size[0];
+          p->size[0] = c_sum->size[0];
           emxEnsureCapacity((emxArray__common *)p, i15, (int)sizeof(double));
-          ixstart = kk->size[0];
+          ixstart = c_sum->size[0];
           for (i15 = 0; i15 < ixstart; i15++) {
-            p->data[i15] = kk->data[i15] + 1.0;
+            p->data[i15] = c_sum->data[i15] + 1.0;
           }
         }
 
@@ -603,29 +607,27 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
     emxFree_real_T(&c_en);
     emxFree_real_T(&b_en);
     emxFree_boolean_T(&b_p);
-    emxInit_real_T2(&tempa, 1);
-    emxInit_real_T2(&b_tempa, 1);
+    emxInit_real_T1(&tempa, 1);
 
     /*  */
     /*      Initialize the backward recursion and the normalization sum. */
     /*  */
     n++;
     en += 2.0;
-    d_rdivide(1.0, p, tempa);
+    b_rdivide(p, tempa);
     em = n - 1.0;
     empal = n - 1.0;
     emp2al = (n - 1.0) - 1.0;
-    i15 = b_tempa->size[0];
-    b_tempa->size[0] = tempa->size[0];
-    emxEnsureCapacity((emxArray__common *)b_tempa, i15, (int)sizeof(double));
+    i15 = c_sum->size[0];
+    c_sum->size[0] = tempa->size[0];
+    emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
     ixstart = tempa->size[0];
     for (i15 = 0; i15 < ixstart; i15++) {
-      b_tempa->data[i15] = tempa->data[i15] * (n - 1.0) * ((n - 1.0) - 1.0);
+      c_sum->data[i15] = tempa->data[i15] * (n - 1.0) * ((n - 1.0) - 1.0) / (n -
+        1.0);
     }
 
-    rdivide(b_tempa, n - 1.0, p);
     nend = n - 1.0;
-    emxFree_real_T(&b_tempa);
     if (n - 1.0 < 0.0) {
       ixstart = tempa->size[0];
       for (i15 = 0; i15 < ixstart; i15++) {
@@ -641,38 +643,37 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
         /*            Recur backward via difference equation, calculating  */
         /*            (but not storing) b(n), until n = nb. */
         /*  */
-        i15 = kk->size[0];
-        kk->size[0] = tempa->size[0];
-        emxEnsureCapacity((emxArray__common *)kk, i15, (int)sizeof(double));
+        i15 = a->size[0];
+        a->size[0] = tempa->size[0];
+        emxEnsureCapacity((emxArray__common *)a, i15, (int)sizeof(double));
         ixstart = tempa->size[0];
         for (i15 = 0; i15 < ixstart; i15++) {
-          kk->data[i15] = tempa->data[i15];
+          a->data[i15] = tempa->data[i15];
         }
 
         count2 = 0;
         l = 0;
-        emxInit_real_T2(&d_en, 1);
-        emxInit_real_T2(&e_en, 1);
-        emxInit_real_T2(&c_p, 1);
+        emxInit_real_T1(&d_en, 1);
+        emxInit_real_T1(&e_en, 1);
         exitg3 = false;
         while ((!exitg3) && (l <= (int)nend - 1)) {
           n--;
           en -= 2.0;
           if (count2 == 1) {
-            i15 = a->size[0];
-            a->size[0] = kk->size[0];
-            emxEnsureCapacity((emxArray__common *)a, i15, (int)sizeof(double));
-            ixstart = kk->size[0];
+            i15 = p->size[0];
+            p->size[0] = a->size[0];
+            emxEnsureCapacity((emxArray__common *)p, i15, (int)sizeof(double));
+            ixstart = a->size[0];
             for (i15 = 0; i15 < ixstart; i15++) {
-              a->data[i15] = kk->data[i15];
+              p->data[i15] = a->data[i15];
             }
 
-            i15 = kk->size[0];
-            kk->size[0] = tempa->size[0];
-            emxEnsureCapacity((emxArray__common *)kk, i15, (int)sizeof(double));
+            i15 = a->size[0];
+            a->size[0] = tempa->size[0];
+            emxEnsureCapacity((emxArray__common *)a, i15, (int)sizeof(double));
             ixstart = tempa->size[0];
             for (i15 = 0; i15 < ixstart; i15++) {
-              kk->data[i15] = tempa->data[i15];
+              a->data[i15] = tempa->data[i15];
             }
 
             i15 = e_en->size[0];
@@ -683,21 +684,21 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
               e_en->data[i15] = en * tempa->data[i15];
             }
 
-            b_rdivide(e_en, b_x, tempa);
+            rdivide(e_en, b_x, tempa);
             i15 = tempa->size[0];
             emxEnsureCapacity((emxArray__common *)tempa, i15, (int)sizeof(double));
             ixstart = tempa->size[0];
             for (i15 = 0; i15 < ixstart; i15++) {
-              tempa->data[i15] += a->data[i15];
+              tempa->data[i15] += p->data[i15];
             }
           } else {
             count2 = 1;
-            i15 = kk->size[0];
-            kk->size[0] = tempa->size[0];
-            emxEnsureCapacity((emxArray__common *)kk, i15, (int)sizeof(double));
+            i15 = a->size[0];
+            a->size[0] = tempa->size[0];
+            emxEnsureCapacity((emxArray__common *)a, i15, (int)sizeof(double));
             ixstart = tempa->size[0];
             for (i15 = 0; i15 < ixstart; i15++) {
-              kk->data[i15] = tempa->data[i15];
+              a->data[i15] = tempa->data[i15];
             }
 
             i15 = d_en->size[0];
@@ -708,7 +709,7 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
               d_en->data[i15] = en * tempa->data[i15];
             }
 
-            b_rdivide(d_en, b_x, tempa);
+            rdivide(d_en, b_x, tempa);
           }
 
           /*                 tempc = tempb; */
@@ -724,21 +725,18 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
             }
 
             empal--;
-            i15 = c_p->size[0];
-            c_p->size[0] = p->size[0];
-            emxEnsureCapacity((emxArray__common *)c_p, i15, (int)sizeof(double));
-            ixstart = p->size[0];
+            i15 = c_sum->size[0];
+            emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
+            ixstart = c_sum->size[0];
             for (i15 = 0; i15 < ixstart; i15++) {
-              c_p->data[i15] = (p->data[i15] + tempa->data[i15] * empal) *
-                emp2al;
+              c_sum->data[i15] = (c_sum->data[i15] + tempa->data[i15] * empal) *
+                emp2al / em;
             }
 
-            rdivide(c_p, em, p);
             l++;
           }
         }
 
-        emxFree_real_T(&c_p);
         emxFree_real_T(&e_en);
         emxFree_real_T(&d_en);
       }
@@ -751,16 +749,18 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
         b->data[(int)v->data[i15] - 1] = tempa->data[i15];
       }
 
-      i15 = p->size[0];
-      emxEnsureCapacity((emxArray__common *)p, i15, (int)sizeof(double));
-      ixstart = p->size[0];
+      i15 = c_sum->size[0];
+      emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
+      ixstart = c_sum->size[0];
       for (i15 = 0; i15 < ixstart; i15++) {
-        p->data[i15] = (p->data[i15] + p->data[i15]) + tempa->data[i15];
+        c_sum->data[i15] = (c_sum->data[i15] + c_sum->data[i15]) + tempa->
+          data[i15];
       }
     }
 
     emxFree_real_T(&tempa);
     emxFree_real_T(&a);
+    emxFree_real_T(&p);
 
     /*  */
     /*      Calculate b(1) */
@@ -782,30 +782,32 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
     }
 
     b_exp(b_x);
-    i15 = p->size[0];
-    emxEnsureCapacity((emxArray__common *)p, i15, (int)sizeof(double));
-    ixstart = p->size[0];
+    i15 = c_sum->size[0];
+    emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
+    ixstart = c_sum->size[0];
     for (i15 = 0; i15 < ixstart; i15++) {
-      p->data[i15] *= b_x->data[i15];
+      c_sum->data[i15] *= b_x->data[i15];
     }
 
     emxFree_real_T(&b_x);
-    emxInit_real_T2(&b_b, 1);
-    i15 = b_b->size[0];
-    b_b->size[0] = v->size[0];
-    emxEnsureCapacity((emxArray__common *)b_b, i15, (int)sizeof(double));
+    emxInit_real_T1(&c_b, 1);
+    i15 = c_b->size[0];
+    c_b->size[0] = v->size[0];
+    emxEnsureCapacity((emxArray__common *)c_b, i15, (int)sizeof(double));
     ixstart = v->size[0];
     for (i15 = 0; i15 < ixstart; i15++) {
-      b_b->data[i15] = b->data[(int)v->data[i15] - 1];
+      c_b->data[i15] = b->data[(int)v->data[i15] - 1];
     }
 
-    b_rdivide(b_b, p, kk);
-    ixstart = kk->size[0];
-    emxFree_real_T(&b_b);
-    emxFree_real_T(&p);
+    emxInit_real_T1(&r21, 1);
+    rdivide(c_b, c_sum, r21);
+    ixstart = r21->size[0];
+    emxFree_real_T(&c_b);
     for (i15 = 0; i15 < ixstart; i15++) {
-      b->data[(int)v->data[i15] - 1] = kk->data[i15];
+      b->data[(int)v->data[i15] - 1] = r21->data[i15];
     }
+
+    emxFree_real_T(&r21);
   }
 
   /*  */
@@ -871,32 +873,21 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
   }
 
   if (any(v)) {
-    idx = v->size[0];
-    i15 = kk->size[0];
-    kk->size[0] = v->size[0];
-    emxEnsureCapacity((emxArray__common *)kk, i15, (int)sizeof(double));
+    i15 = c_sum->size[0];
+    c_sum->size[0] = v->size[0];
+    emxEnsureCapacity((emxArray__common *)c_sum, i15, (int)sizeof(double));
     ixstart = v->size[0];
     for (i15 = 0; i15 < ixstart; i15++) {
-      kk->data[i15] = 0.5 * xx->data[(int)v->data[i15] - 1];
+      c_sum->data[i15] = 0.5 * xx->data[(int)v->data[i15] - 1];
     }
 
-    emxInit_real_T2(&r21, 1);
-    i15 = r21->size[0];
-    r21->size[0] = idx;
-    emxEnsureCapacity((emxArray__common *)r21, i15, (int)sizeof(double));
-    for (i15 = 0; i15 < idx; i15++) {
-      r21->data[i15] = kk->data[i15] * kk->data[i15];
-    }
-
-    rdivide(r21, 1.0, kk);
     ixstart = v->size[0];
-    emxFree_real_T(&r21);
     for (i15 = 0; i15 < ixstart; i15++) {
-      b->data[(int)v->data[i15] - 1] = 1.0 + kk->data[i15];
+      b->data[(int)v->data[i15] - 1] = 1.0 + c_sum->data[i15] * c_sum->data[i15];
     }
   }
 
-  emxFree_real_T(&kk);
+  emxFree_real_T(&c_sum);
 
   /*  */
   /*   x == 0 */
@@ -976,28 +967,28 @@ void Mybesseli(emxArray_real_T *xx, emxArray_real_T *output)
   }
 
   emxFree_real_T(&v);
-  emxInit_real_T2(&c_b, 1);
+  emxInit_real_T1(&b_b, 1);
 
   /*  */
   /*   Return the requested index range */
   /*  */
   ixstart = b->size[0];
-  i15 = c_b->size[0];
-  c_b->size[0] = ixstart;
-  emxEnsureCapacity((emxArray__common *)c_b, i15, (int)sizeof(double));
+  i15 = b_b->size[0];
+  b_b->size[0] = ixstart;
+  emxEnsureCapacity((emxArray__common *)b_b, i15, (int)sizeof(double));
   for (i15 = 0; i15 < ixstart; i15++) {
-    c_b->data[i15] = b->data[i15];
+    b_b->data[i15] = b->data[i15];
   }
 
   i15 = b->size[0];
-  b->size[0] = c_b->size[0];
+  b->size[0] = b_b->size[0];
   emxEnsureCapacity((emxArray__common *)b, i15, (int)sizeof(double));
-  ixstart = c_b->size[0];
+  ixstart = b_b->size[0];
   for (i15 = 0; i15 < ixstart; i15++) {
-    b->data[i15] = c_b->data[i15];
+    b->data[i15] = b_b->data[i15];
   }
 
-  emxFree_real_T(&c_b);
+  emxFree_real_T(&b_b);
 
   /*     if resize */
   i15 = output->size[0] * output->size[1];

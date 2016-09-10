@@ -1,8 +1,8 @@
 /*
  * File: yaapt_emxutil.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -35,7 +35,11 @@ void emxEnsureCapacity(emxArray__common *emxArray, int oldNumel, int elementSize
     }
 
     while (i < newNumel) {
-      i <<= 1;
+      if (i > 1073741823) {
+        i = MAX_int32_T;
+      } else {
+        i <<= 1;
+      }
     }
 
     newData = calloc((unsigned int)i, (unsigned int)elementSize);
@@ -50,16 +54,6 @@ void emxEnsureCapacity(emxArray__common *emxArray, int oldNumel, int elementSize
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
   }
-}
-
-/*
- * Arguments    : b_struct_T *pStruct
- * Return Type  : void
- */
-void emxFreeStruct_struct_T(b_struct_T *pStruct)
-{
-  emxFree_real_T(&pStruct->breaks);
-  emxFree_real_T(&pStruct->coefs);
 }
 
 /*
@@ -129,16 +123,6 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     free((void *)*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
-}
-
-/*
- * Arguments    : b_struct_T *pStruct
- * Return Type  : void
- */
-void emxInitStruct_struct_T(b_struct_T *pStruct)
-{
-  emxInit_real_T(&pStruct->breaks, 2);
-  emxInit_real_T(&pStruct->coefs, 2);
 }
 
 /*

@@ -1,8 +1,8 @@
 /*
  * File: sortIdx.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -307,10 +307,10 @@ void sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
   emxArray_real_T *xwork;
   int nNaNs;
   int k;
-  int i3;
-  int i4;
   signed char perm[4];
   int nNonNaN;
+  int i3;
+  int i4;
   int nBlocks;
   int b_iwork[256];
   double b_xwork[256];
@@ -318,7 +318,7 @@ void sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
   int bLen2;
   int nPairs;
   int exitg1;
-  emxInit_real_T2(&b_x, 1);
+  emxInit_real_T1(&b_x, 1);
   ib = x->size[0];
   wOffset = b_x->size[0];
   b_x->size[0] = x->size[0];
@@ -353,7 +353,7 @@ void sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
     iwork->data[wOffset] = 0;
   }
 
-  emxInit_real_T2(&xwork, 1);
+  emxInit_real_T1(&xwork, 1);
   m = x->size[0];
   wOffset = xwork->size[0];
   xwork->size[0] = m;

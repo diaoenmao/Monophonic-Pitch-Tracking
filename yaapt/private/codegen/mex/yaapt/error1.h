@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __ERROR1_H__
-#define __ERROR1_H__
+#ifndef ERROR1_H
+#define ERROR1_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"
@@ -34,6 +34,7 @@ extern void j_error(const emlrtStack *sp);
 extern void k_error(const emlrtStack *sp);
 extern void l_error(const emlrtStack *sp);
 extern void m_error(const emlrtStack *sp);
+extern void n_error(const emlrtStack *sp);
 
 #endif
 

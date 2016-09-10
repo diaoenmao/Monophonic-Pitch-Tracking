@@ -9,6 +9,7 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_emxutil.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
@@ -31,7 +32,11 @@ void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
     }
 
     while (i < newNumel) {
-      i = (int32_T)emlrtSizeMulR2012b((uint32_T)i, 2U, srcLocation, sp);
+      if (i > 1073741823) {
+        i = MAX_int32_T;
+      } else {
+        i <<= 1;
+      }
     }
 
     newData = emlrtCallocMex((uint32_T)i, (uint32_T)elementSize);

@@ -3,6 +3,7 @@ Data = fread(fid, Inf, 'short');
 Data = int16(Data);
 Fs=22050;
 time=linspace(0, length(Data)/Fs, length(Data));
+figure
 plot(time,Data)
 Data =double(Data);
 load('default_parameter.mat')

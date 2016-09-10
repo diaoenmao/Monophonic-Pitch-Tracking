@@ -13,8 +13,8 @@
 <a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>/*</i></font>
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: mldivide.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
-<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.0</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 18-Feb-2016 02:50:10</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.1</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 05-Sep-2016 15:50:20</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -42,23 +42,23 @@
 <a name="30"><font color="#888888 "><i>   30   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *b_B;
 <a name="31"><font color="#888888 "><i>   31   </i></font></a>  <font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font> unnamed_idx_0;
 <a name="32"><font color="#888888 "><i>   32   </i></font></a>  <font color="#112266"><b>int</b></font> i9;
-<a name="33"><font color="#888888 "><i>   33   </i></font></a>  <font color="#112266"><b>int</b></font> minmn;
-<a name="34"><font color="#888888 "><i>   34   </i></font></a>  <font color="#112266"><b>int</b></font> n;
-<a name="35"><font color="#888888 "><i>   35   </i></font></a>  <font color="#112266"><b>int</b></font> j;
-<a name="36"><font color="#888888 "><i>   36   </i></font></a>  <font color="#112266"><b>int</b></font> mmj;
-<a name="37"><font color="#888888 "><i>   37   </i></font></a>  <font color="#112266"><b>int</b></font> c;
-<a name="38"><font color="#888888 "><i>   38   </i></font></a>  <font color="#112266"><b>int</b></font> ix;
-<a name="39"><font color="#888888 "><i>   39   </i></font></a>  <font color="#112266"><b>double</b></font> wj;
-<a name="40"><font color="#888888 "><i>   40   </i></font></a>  <font color="#112266"><b>int</b></font> maxmn;
-<a name="41"><font color="#888888 "><i>   41   </i></font></a>  <font color="#112266"><b>double</b></font> s;
+<a name="33"><font color="#888888 "><i>   33   </i></font></a>  <font color="#112266"><b>int</b></font> n;
+<a name="34"><font color="#888888 "><i>   34   </i></font></a>  <font color="#112266"><b>int</b></font> minmn;
+<a name="35"><font color="#888888 "><i>   35   </i></font></a>  <font color="#112266"><b>int</b></font> rankR;
+<a name="36"><font color="#888888 "><i>   36   </i></font></a>  <font color="#112266"><b>int</b></font> maxmn;
+<a name="37"><font color="#888888 "><i>   37   </i></font></a>  <font color="#112266"><b>int</b></font> j;
+<a name="38"><font color="#888888 "><i>   38   </i></font></a>  <font color="#112266"><b>int</b></font> mmj;
+<a name="39"><font color="#888888 "><i>   39   </i></font></a>  <font color="#112266"><b>int</b></font> c;
+<a name="40"><font color="#888888 "><i>   40   </i></font></a>  <font color="#112266"><b>int</b></font> ix;
+<a name="41"><font color="#888888 "><i>   41   </i></font></a>  <font color="#112266"><b>double</b></font> wj;
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>  <font color="#112266"><b>int</b></font> i10;
-<a name="43"><font color="#888888 "><i>   43   </i></font></a>  <font color="#112266"><b>int</b></font> i;
-<a name="44"><font color="#888888 "><i>   44   </i></font></a>  <font color="#112266"><b>int</b></font> mn;
-<a name="45"><font color="#888888 "><i>   45   </i></font></a>  <font color="#112266"><b>int</b></font> rankR;
+<a name="43"><font color="#888888 "><i>   43   </i></font></a>  <font color="#112266"><b>int</b></font> mn;
+<a name="44"><font color="#888888 "><i>   44   </i></font></a>  <font color="#112266"><b>int</b></font> i;
+<a name="45"><font color="#888888 "><i>   45   </i></font></a>  <font color="#112266"><b>double</b></font> s;
 <a name="46"><font color="#888888 "><i>   46   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;b_A, 2);
-<a name="47"><font color="#888888 "><i>   47   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T2" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T2');" target="_self"><font color="#1122aa">emxInit_real_T2</font></a>(&amp;tau, 1);
+<a name="47"><font color="#888888 "><i>   47   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T1');" target="_self"><font color="#1122aa">emxInit_real_T1</font></a>(&amp;tau, 1);
 <a name="48"><font color="#888888 "><i>   48   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T');" target="_self"><font color="#1122aa">emxInit_int32_T</font></a>(&amp;jpvt, 2);
-<a name="49"><font color="#888888 "><i>   49   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T2" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T2');" target="_self"><font color="#1122aa">emxInit_real_T2</font></a>(&amp;b_B, 1);
+<a name="49"><font color="#888888 "><i>   49   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T1');" target="_self"><font color="#1122aa">emxInit_real_T1</font></a>(&amp;b_B, 1);
 <a name="50"><font color="#888888 "><i>   50   </i></font></a>  <font color="#112266"><b>if</b></font> ((A-&gt;size[0] == 0) || (A-&gt;size[1] == 0) || (B-&gt;size[0] == 0)) <b>{</b>
 <a name="51"><font color="#888888 "><i>   51   </i></font></a>    unnamed_idx_0 = (<font color="#112266"><b>unsigned</b></font> <font color="#112266"><b>int</b></font>)A-&gt;size[1];
 <a name="52"><font color="#888888 "><i>   52   </i></font></a>    i9 = Y-&gt;size[0];
@@ -97,11 +97,11 @@
 <a name="85"><font color="#888888 "><i>   85   </i></font></a>        <font color="#112266"><b>if</b></font> (mmj &gt; 1) <b>{</b>
 <a name="86"><font color="#888888 "><i>   86   </i></font></a>          ix = c;
 <a name="87"><font color="#888888 "><i>   87   </i></font></a>          wj = fabs(b_A-&gt;data[c]);
-<a name="88"><font color="#888888 "><i>   88   </i></font></a>          <font color="#112266"><b>for</b></font> (maxmn = 1; maxmn + 1 &lt;= mmj; maxmn++) <b>{</b>
+<a name="88"><font color="#888888 "><i>   88   </i></font></a>          <font color="#112266"><b>for</b></font> (maxmn = 2; maxmn &lt;= mmj; maxmn++) <b>{</b>
 <a name="89"><font color="#888888 "><i>   89   </i></font></a>            ix++;
 <a name="90"><font color="#888888 "><i>   90   </i></font></a>            s = fabs(b_A-&gt;data[ix]);
 <a name="91"><font color="#888888 "><i>   91   </i></font></a>            <font color="#112266"><b>if</b></font> (s &gt; wj) <b>{</b>
-<a name="92"><font color="#888888 "><i>   92   </i></font></a>              minmn = maxmn;
+<a name="92"><font color="#888888 "><i>   92   </i></font></a>              minmn = maxmn - 1;
 <a name="93"><font color="#888888 "><i>   93   </i></font></a>              wj = s;
 <a name="94"><font color="#888888 "><i>   94   </i></font></a>            <b>}</b>
 <a name="95"><font color="#888888 "><i>   95   </i></font></a>          <b>}</b>
@@ -128,15 +128,15 @@
 <a name="116"><font color="#888888 "><i>  116   </i></font></a>        <b>}</b>
 <a name="117"><font color="#888888 "><i>  117   </i></font></a>      <b>}</b>
 <a name="118"><font color="#888888 "><i>  118   </i></font></a>
-<a name="119"><font color="#888888 "><i>  119   </i></font></a>      minmn = (n - j) - 1;
-<a name="120"><font color="#888888 "><i>  120   </i></font></a>      maxmn = c + n;
+<a name="119"><font color="#888888 "><i>  119   </i></font></a>      minmn = n - j;
+<a name="120"><font color="#888888 "><i>  120   </i></font></a>      maxmn = (c + n) + 1;
 <a name="121"><font color="#888888 "><i>  121   </i></font></a>      mn = c + n;
-<a name="122"><font color="#888888 "><i>  122   </i></font></a>      <font color="#112266"><b>for</b></font> (rankR = 1; rankR &lt;= minmn; rankR++) <b>{</b>
+<a name="122"><font color="#888888 "><i>  122   </i></font></a>      <font color="#112266"><b>for</b></font> (rankR = 1; rankR &lt; minmn; rankR++) <b>{</b>
 <a name="123"><font color="#888888 "><i>  123   </i></font></a>        wj = b_A-&gt;data[mn];
 <a name="124"><font color="#888888 "><i>  124   </i></font></a>        <font color="#112266"><b>if</b></font> (b_A-&gt;data[mn] != 0.0) <b>{</b>
 <a name="125"><font color="#888888 "><i>  125   </i></font></a>          ix = c + 1;
 <a name="126"><font color="#888888 "><i>  126   </i></font></a>          i10 = mmj + maxmn;
-<a name="127"><font color="#888888 "><i>  127   </i></font></a>          <font color="#112266"><b>for</b></font> (i = 1 + maxmn; i + 1 &lt;= i10; i++) <b>{</b>
+<a name="127"><font color="#888888 "><i>  127   </i></font></a>          <font color="#112266"><b>for</b></font> (i = maxmn; i + 1 &lt; i10; i++) <b>{</b>
 <a name="128"><font color="#888888 "><i>  128   </i></font></a>            b_A-&gt;data[i] += b_A-&gt;data[ix] * -wj;
 <a name="129"><font color="#888888 "><i>  129   </i></font></a>            ix++;
 <a name="130"><font color="#888888 "><i>  130   </i></font></a>          <b>}</b>

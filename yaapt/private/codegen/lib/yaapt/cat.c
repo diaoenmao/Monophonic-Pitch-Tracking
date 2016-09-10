@@ -1,8 +1,8 @@
 /*
  * File: cat.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -22,31 +22,23 @@
 void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
          emxArray_real_T *y)
 {
-  unsigned int sz1[2];
+  int ysize[2];
   int iy;
-  unsigned int ysize[2];
   int i;
   int ix;
   int l;
-  for (iy = 0; iy < 2; iy++) {
-    sz1[iy] = (unsigned int)varargin_1->size[iy];
-  }
-
-  for (iy = 0; iy < 2; iy++) {
-    ysize[iy] = sz1[iy];
-  }
-
-  ysize[0] += varargin_2->size[0];
+  ysize[0] = varargin_1->size[0] + varargin_2->size[0];
+  ysize[1] = varargin_1->size[1];
   iy = y->size[0] * y->size[1];
-  y->size[0] = (int)ysize[0];
-  y->size[1] = (int)ysize[1];
+  y->size[0] = ysize[0];
+  y->size[1] = ysize[1];
   emxEnsureCapacity((emxArray__common *)y, iy, (int)sizeof(double));
   for (iy = 0; iy < 2; iy++) {
-    ysize[iy] = (unsigned int)y->size[iy];
+    ysize[iy] = y->size[iy];
   }
 
   iy = 0;
-  for (i = 0; i < (int)ysize[1]; i++) {
+  for (i = 0; i < ysize[1]; i++) {
     ix = i * varargin_1->size[0];
     for (l = 1; l <= varargin_1->size[0]; l++) {
       y->data[iy] = varargin_1->data[ix];

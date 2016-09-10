@@ -1,8 +1,8 @@
 /*
  * File: prod.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -20,38 +20,33 @@
  */
 void prod(const emxArray_real_T *x, emxArray_real_T *y)
 {
-  int ixstart;
-  int k;
-  int ix;
-  int iy;
+  int vlen;
   int i;
+  int xoffset;
   double s;
-  ixstart = y->size[0] * y->size[1];
+  int k;
+  vlen = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = x->size[1];
-  emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)y, vlen, (int)sizeof(double));
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
-    ixstart = y->size[0] * y->size[1];
+    vlen = y->size[0] * y->size[1];
     y->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)y, ixstart, (int)sizeof(double));
-    k = y->size[1];
-    for (ixstart = 0; ixstart < k; ixstart++) {
-      y->data[y->size[0] * ixstart] = 1.0;
+    emxEnsureCapacity((emxArray__common *)y, vlen, (int)sizeof(double));
+    i = y->size[1];
+    for (vlen = 0; vlen < i; vlen++) {
+      y->data[y->size[0] * vlen] = 1.0;
     }
   } else {
-    ix = -1;
-    iy = -1;
-    for (i = 1; i <= x->size[1]; i++) {
-      ixstart = ix + 1;
-      ix++;
-      s = x->data[ixstart];
-      for (k = 2; k <= x->size[0]; k++) {
-        ix++;
-        s *= x->data[ix];
+    vlen = x->size[0];
+    for (i = 0; i + 1 <= x->size[1]; i++) {
+      xoffset = i * vlen;
+      s = x->data[xoffset];
+      for (k = 2; k <= vlen; k++) {
+        s *= x->data[(xoffset + k) - 1];
       }
 
-      iy++;
-      y->data[iy] = s;
+      y->data[i] = s;
     }
   }
 }

@@ -1,8 +1,8 @@
 /*
  * File: _coder_yaapt_api.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -12,7 +12,7 @@
 
 /* Variable Definitions */
 emlrtCTX emlrtRootTLSGlobal = NULL;
-emlrtContext emlrtContextGlobal = { true, false, 131419U, NULL, "yaapt", NULL,
+emlrtContext emlrtContextGlobal = { true, false, 131434U, NULL, "yaapt", NULL,
   false, { 2045744189U, 2170104910U, 2743257031U, 4284093946U }, NULL };
 
 /* Function Declarations */
@@ -147,9 +147,9 @@ static real_T (*e_emlrt_marshallIn(const emlrtStack *sp, const mxArray
 static const mxArray *emlrt_marshallOut(const emxArray_real_T *u)
 {
   const mxArray *y;
+  const mxArray *m0;
   static const int32_T iv0[2] = { 0, 0 };
 
-  const mxArray *m0;
   y = NULL;
   m0 = emlrtCreateNumericArray(2, iv0, mxDOUBLE_CLASS, mxREAL);
   mxSetData((mxArray *)m0, (void *)u->data);
@@ -229,11 +229,11 @@ static real_T (*f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
   static void g_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
   emlrtMsgIdentifier *msgId, emxArray_real_T *ret)
 {
-  int32_T iv1[2];
-  boolean_T bv0[2] = { false, true };
-
   static const int32_T dims[2] = { 1, -1 };
 
+  boolean_T bv0[2] = { false, true };
+
+  int32_T iv1[2];
   emlrtCheckVsBuiltInR2012b(sp, msgId, src, "double", false, 2U, dims, &bv0[0],
     iv1);
   ret->size[0] = iv1[0];
@@ -289,8 +289,8 @@ static real_T (*i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
   emxArray_real_T *Pitch;
   real_T Fs;
   real_T (*Parameter)[34];
-  real_T frmrate;
   real_T numfrms;
+  real_T frmrate;
   emlrtStack st = { NULL, NULL, NULL };
 
   st.tls = emlrtRootTLSGlobal;

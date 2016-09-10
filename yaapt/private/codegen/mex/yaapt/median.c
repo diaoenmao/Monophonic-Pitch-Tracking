@@ -12,49 +12,49 @@
 #include "yaapt_emxutil.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "isequal.h"
-#include "yaapt_mexutil.h"
 #include "yaapt_data.h"
+#include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ck_emlrtRSI = { 53, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRSInfo ul_emlrtRSI = { 78, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRSInfo dk_emlrtRSI = { 54, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRSInfo vl_emlrtRSI = { 79, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRSInfo ek_emlrtRSI = { 98, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRSInfo wl_emlrtRSI = { 140, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRSInfo fk_emlrtRSI = { 101, "sortIdx",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
+static emlrtRSInfo xl_emlrtRSI = { 101, "sortIdx",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
 
-static emlrtRSInfo gk_emlrtRSI = { 234, "sortIdx",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
+static emlrtRSInfo yl_emlrtRSI = { 234, "sortIdx",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
 
-static emlrtRSInfo hk_emlrtRSI = { 239, "sortIdx",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
+static emlrtRSInfo am_emlrtRSI = { 239, "sortIdx",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
 
-static emlrtRSInfo ik_emlrtRSI = { 292, "sortIdx",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
+static emlrtRSInfo bm_emlrtRSI = { 292, "sortIdx",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
 
-static emlrtRTEInfo xc_emlrtRTEI = { 1, 14, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRTEInfo id_emlrtRTEI = { 1, 14, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRTEInfo yc_emlrtRTEI = { 92, 14, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRTEInfo jd_emlrtRTEI = { 130, 14, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRTEInfo ad_emlrtRTEI = { 98, 1, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRTEInfo kd_emlrtRTEI = { 140, 1, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRTEInfo bd_emlrtRTEI = { 234, 1, "sortIdx",
-  "F:\\MATLAB\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
+static emlrtRTEInfo ld_emlrtRTEI = { 234, 1, "sortIdx",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\sortIdx.m" };
 
-static emlrtRTEInfo ig_emlrtRTEI = { 24, 19, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRTEInfo tg_emlrtRTEI = { 20, 19, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
-static emlrtRTEInfo jg_emlrtRTEI = { 21, 19, "median",
-  "F:\\MATLAB\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
+static emlrtRTEInfo ug_emlrtRTEI = { 17, 19, "median",
+  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\datafun\\median.m" };
 
 /* Function Declarations */
 static real_T vectormedian(const emlrtStack *sp, const emxArray_real_T *v);
@@ -68,10 +68,9 @@ static real_T vectormedian(const emlrtStack *sp, const emxArray_real_T *v)
 {
   real_T m;
   emxArray_int32_T *idx;
+  uint32_T unnamed_idx_0;
   int32_T i;
   int32_T midm1;
-  uint32_T unnamed_idx_0;
-  int32_T k;
   emxArray_int32_T *iwork;
   int32_T n;
   boolean_T overflow;
@@ -95,55 +94,49 @@ static real_T vectormedian(const emlrtStack *sp, const emxArray_real_T *v)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_int32_T1(sp, &idx, 1, &ad_emlrtRTEI, true);
-  i = v->size[0];
-  midm1 = asr_s32(i + (i < 0), 1U);
-  st.site = &ek_emlrtRSI;
+  emxInit_int32_T1(sp, &idx, 1, &kd_emlrtRTEI, true);
+  st.site = &wl_emlrtRSI;
   unnamed_idx_0 = (uint32_T)v->size[0];
   i = idx->size[0];
   idx->size[0] = (int32_T)unnamed_idx_0;
   emxEnsureCapacity(&st, (emxArray__common *)idx, i, (int32_T)sizeof(int32_T),
-                    &yc_emlrtRTEI);
-  k = (int32_T)unnamed_idx_0;
-  for (i = 0; i < k; i++) {
+                    &jd_emlrtRTEI);
+  midm1 = (int32_T)unnamed_idx_0;
+  for (i = 0; i < midm1; i++) {
     idx->data[i] = 0;
   }
 
   if (v->size[0] == 0) {
   } else {
-    emxInit_int32_T1(&st, &iwork, 1, &bd_emlrtRTEI, true);
-    b_st.site = &fk_emlrtRSI;
+    emxInit_int32_T1(&st, &iwork, 1, &ld_emlrtRTEI, true);
+    b_st.site = &xl_emlrtRSI;
     n = v->size[0] + 1;
-    c_st.site = &gk_emlrtRSI;
+    c_st.site = &yl_emlrtRSI;
     i = iwork->size[0];
     iwork->size[0] = (int32_T)unnamed_idx_0;
     emxEnsureCapacity(&c_st, (emxArray__common *)iwork, i, (int32_T)sizeof
-                      (int32_T), &yc_emlrtRTEI);
-    c_st.site = &hk_emlrtRSI;
-    if (1 > v->size[0] - 1) {
-      overflow = false;
-    } else {
-      overflow = (v->size[0] - 1 > 2147483645);
-    }
-
+                      (int32_T), &jd_emlrtRTEI);
+    c_st.site = &am_emlrtRSI;
+    overflow = ((!(1 > v->size[0] - 1)) && (v->size[0] - 1 > 2147483645));
     if (overflow) {
       d_st.site = &cb_emlrtRSI;
       check_forloop_overflow_error(&d_st, true);
     }
 
-    for (k = 1; k <= n - 2; k += 2) {
-      if ((v->data[k - 1] <= v->data[k]) || muDoubleScalarIsNaN(v->data[k])) {
+    for (midm1 = 1; midm1 <= n - 2; midm1 += 2) {
+      if ((v->data[midm1 - 1] <= v->data[midm1]) || muDoubleScalarIsNaN(v->
+           data[midm1])) {
         overflow = true;
       } else {
         overflow = false;
       }
 
       if (overflow) {
-        idx->data[k - 1] = k;
-        idx->data[k] = k + 1;
+        idx->data[midm1 - 1] = midm1;
+        idx->data[midm1] = midm1 + 1;
       } else {
-        idx->data[k - 1] = k + 1;
-        idx->data[k] = k;
+        idx->data[midm1 - 1] = midm1 + 1;
+        idx->data[midm1] = midm1;
       }
     }
 
@@ -163,9 +156,9 @@ static real_T vectormedian(const emlrtStack *sp, const emxArray_real_T *v)
           qEnd = n;
         }
 
-        k = 0;
+        midm1 = 0;
         kEnd = qEnd - j;
-        while (k + 1 <= kEnd) {
+        while (midm1 + 1 <= kEnd) {
           if ((v->data[idx->data[p - 1] - 1] <= v->data[idx->data[q] - 1]) ||
               muDoubleScalarIsNaN(v->data[idx->data[q] - 1])) {
             overflow = true;
@@ -174,33 +167,33 @@ static real_T vectormedian(const emlrtStack *sp, const emxArray_real_T *v)
           }
 
           if (overflow) {
-            iwork->data[k] = idx->data[p - 1];
+            iwork->data[midm1] = idx->data[p - 1];
             p++;
             if (p == pEnd) {
               while (q + 1 < qEnd) {
-                k++;
-                iwork->data[k] = idx->data[q];
+                midm1++;
+                iwork->data[midm1] = idx->data[q];
                 q++;
               }
             }
           } else {
-            iwork->data[k] = idx->data[q];
+            iwork->data[midm1] = idx->data[q];
             q++;
             if (q + 1 == qEnd) {
               while (p < pEnd) {
-                k++;
-                iwork->data[k] = idx->data[p - 1];
+                midm1++;
+                iwork->data[midm1] = idx->data[p - 1];
                 p++;
               }
             }
           }
 
-          k++;
+          midm1++;
         }
 
-        c_st.site = &ik_emlrtRSI;
-        for (k = 0; k + 1 <= kEnd; k++) {
-          idx->data[(j + k) - 1] = iwork->data[k];
+        c_st.site = &bm_emlrtRSI;
+        for (midm1 = 0; midm1 + 1 <= kEnd; midm1++) {
+          idx->data[(j + midm1) - 1] = iwork->data[midm1];
         }
 
         j = qEnd;
@@ -212,20 +205,25 @@ static real_T vectormedian(const emlrtStack *sp, const emxArray_real_T *v)
     emxFree_int32_T(&iwork);
   }
 
-  if (muDoubleScalarIsNaN(v->data[idx->data[idx->size[0] - 1] - 1])) {
-    m = v->data[idx->data[idx->size[0] - 1] - 1];
-  } else if (midm1 << 1 == v->size[0]) {
-    if (((v->data[idx->data[midm1 - 1] - 1] < 0.0) && (v->data[idx->data[midm1]
-          - 1] >= 0.0)) || muDoubleScalarIsInf(v->data[idx->data[midm1 - 1] - 1])
-        || muDoubleScalarIsInf(v->data[idx->data[midm1] - 1])) {
-      m = (v->data[idx->data[midm1 - 1] - 1] + v->data[idx->data[midm1] - 1]) /
-        2.0;
-    } else {
-      m = v->data[idx->data[midm1 - 1] - 1] + (v->data[idx->data[midm1] - 1] -
-        v->data[idx->data[midm1 - 1] - 1]) / 2.0;
-    }
+  if (v->size[0] < 1) {
+    m = rtNaN;
   } else {
-    m = v->data[idx->data[midm1] - 1];
+    midm1 = v->size[0] >> 1;
+    if (muDoubleScalarIsNaN(v->data[idx->data[v->size[0] - 1] - 1])) {
+      m = rtNaN;
+    } else if ((v->size[0] & 1) == 0) {
+      if (((v->data[idx->data[midm1 - 1] - 1] < 0.0) && (v->data[idx->data[midm1]
+            - 1] >= 0.0)) || muDoubleScalarIsInf(v->data[idx->data[midm1 - 1] -
+           1]) || muDoubleScalarIsInf(v->data[idx->data[midm1] - 1])) {
+        m = (v->data[idx->data[midm1 - 1] - 1] + v->data[idx->data[midm1] - 1]) /
+          2.0;
+      } else {
+        m = v->data[idx->data[midm1 - 1] - 1] + (v->data[idx->data[midm1] - 1] -
+          v->data[idx->data[midm1 - 1] - 1]) / 2.0;
+      }
+    } else {
+      m = v->data[idx->data[midm1] - 1];
+    }
   }
 
   emxFree_int32_T(&idx);
@@ -246,7 +244,7 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   emxArray_real_T *b_x;
   int32_T b_i;
   int32_T b_loop_ub;
-  int32_T i35;
+  int32_T i40;
   jmp_buf * volatile emlrtJBStack;
   emlrtStack st;
   emlrtStack b_st;
@@ -262,7 +260,7 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   overflow = !c_isequal(x);
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &jg_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &ug_emlrtRTEI,
       "Coder:toolbox:median_specialEmpty", 0);
   }
 
@@ -274,7 +272,7 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ig_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &tg_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
@@ -286,19 +284,19 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   y->size[0] = 1;
   y->size[1] = (int32_T)sz[1];
   emxEnsureCapacity(sp, (emxArray__common *)y, ub_loop, (int32_T)sizeof(real_T),
-                    &xc_emlrtRTEI);
+                    &id_emlrtRTEI);
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     ub_loop = y->size[0] * y->size[1];
     y->size[0] = 1;
     emxEnsureCapacity(sp, (emxArray__common *)y, ub_loop, (int32_T)sizeof(real_T),
-                      &xc_emlrtRTEI);
+                      &id_emlrtRTEI);
     loop_ub = y->size[1];
     for (ub_loop = 0; ub_loop < loop_ub; ub_loop++) {
       y->data[y->size[0] * ub_loop] = rtNaN;
     }
   } else {
     ub_loop = x->size[1];
-    st.site = &ck_emlrtRSI;
+    st.site = &ul_emlrtRSI;
     overflow = (x->size[1] > 2147483646);
     if (overflow) {
       b_st.site = &cb_emlrtRSI;
@@ -310,7 +308,7 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
 
 #pragma omp parallel \
  num_threads(emlrtAllocRegionTLSs(sp->tls, omp_in_parallel(), omp_get_max_threads(), omp_get_num_procs())) \
- private(b_x,b_i,b_loop_ub,i35,b_emlrtJBEnviron) \
+ private(b_x,b_i,b_loop_ub,i40,b_emlrtJBEnviron) \
  firstprivate(c_st,d_st,emlrtHadParallelError)
 
     {
@@ -321,7 +319,7 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
         emlrtSetJmpBuf(&c_st, &b_emlrtJBEnviron);
         d_st.prev = &c_st;
         d_st.tls = c_st.tls;
-        emxInit_real_T1(&c_st, &b_x, 1, &xc_emlrtRTEI, true);
+        emxInit_real_T1(&c_st, &b_x, 1, &id_emlrtRTEI, true);
       } else {
         emlrtHadParallelError = true;
       }
@@ -334,15 +332,15 @@ void median(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
         if (setjmp(b_emlrtJBEnviron) == 0) {
           b_i = i;
           b_loop_ub = x->size[0];
-          i35 = b_x->size[0];
+          i40 = b_x->size[0];
           b_x->size[0] = b_loop_ub;
-          emxEnsureCapacity(&c_st, (emxArray__common *)b_x, i35, (int32_T)sizeof
-                            (real_T), &xc_emlrtRTEI);
-          for (i35 = 0; i35 < b_loop_ub; i35++) {
-            b_x->data[i35] = x->data[i35 + x->size[0] * (b_i - 1)];
+          emxEnsureCapacity(&c_st, (emxArray__common *)b_x, i40, (int32_T)sizeof
+                            (real_T), &id_emlrtRTEI);
+          for (i40 = 0; i40 < b_loop_ub; i40++) {
+            b_x->data[i40] = x->data[i40 + x->size[0] * (b_i - 1)];
           }
 
-          d_st.site = &dk_emlrtRSI;
+          d_st.site = &vl_emlrtRSI;
           y->data[b_i - 1] = vectormedian(&d_st, b_x);
         } else {
           emlrtHadParallelError = true;

@@ -1,8 +1,8 @@
 /*
  * File: Myspecgram.c
  *
- * MATLAB Coder version            : 3.0
- * C/C++ source code generated on  : 18-Feb-2016 02:50:10
+ * MATLAB Coder version            : 3.1
+ * C/C++ source code generated on  : 05-Sep-2016 15:50:20
  */
 
 /* Include Files */
@@ -85,19 +85,19 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
   double anew;
   double apnd;
   double ndbl;
-  double b_cdiff;
   emxArray_real_T *colindex;
+  double b_cdiff;
   double absb;
   int b_apnd;
   emxArray_real_T *y;
   emxArray_real_T *rowindex;
-  emxArray_real_T *r14;
+  emxArray_real_T *r15;
   emxArray_creal_T *c_window;
   emxArray_real_T *c_x;
   boolean_T d_x;
   double b_y;
   emxArray_creal_T *b_yo;
-  emxInit_real_T2(&b_window, 1);
+  emxInit_real_T1(&b_window, 1);
 
   /*    Author(s): L. Shure, 1-1-91 */
   /*               T. Krauss, 4-2-93, updated */
@@ -118,7 +118,7 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
     nx = b_window->size[0];
   }
 
-  emxInit_real_T2(&b_x, 1);
+  emxInit_real_T1(&b_x, 1);
   i12 = b_x->size[0];
   b_x->size[0] = x->size[1];
   emxEnsureCapacity((emxArray__common *)b_x, i12, (int)sizeof(double));
@@ -178,8 +178,7 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
     colindex->data[0] = anew;
     if (n > 1) {
       colindex->data[n - 1] = apnd;
-      i12 = n - 1;
-      nm1d2 = i12 / 2;
+      nm1d2 = (n - 1) / 2;
       for (cdiff = 1; cdiff < nm1d2; cdiff++) {
         colindex->data[cdiff] = anew + (double)cdiff;
         colindex->data[(n - cdiff) - 1] = apnd - (double)cdiff;
@@ -237,8 +236,7 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
     y->data[0] = 1.0;
     if (n > 1) {
       y->data[n - 1] = b_apnd;
-      i12 = n - 1;
-      nm1d2 = i12 / 2;
+      nm1d2 = (n - 1) / 2;
       for (cdiff = 1; cdiff < nm1d2; cdiff++) {
         y->data[cdiff] = 1.0 + (double)cdiff;
         y->data[(n - cdiff) - 1] = b_apnd - cdiff;
@@ -253,7 +251,7 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
     }
   }
 
-  emxInit_real_T2(&rowindex, 1);
+  emxInit_real_T1(&rowindex, 1);
   i12 = rowindex->size[0];
   rowindex->size[0] = y->size[1];
   emxEnsureCapacity((emxArray__common *)rowindex, i12, (int)sizeof(double));
@@ -271,19 +269,19 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
     /*  zero-pad x */
   }
 
-  emxInit_real_T(&r14, 2);
+  emxInit_real_T(&r15, 2);
 
   /*  put x into columns of y with the proper offset */
   /*  should be able to do this with fancy indexing! */
   cdiff = rowindex->size[0];
-  i12 = r14->size[0] * r14->size[1];
-  r14->size[0] = cdiff;
-  r14->size[1] = (int)ncol;
-  emxEnsureCapacity((emxArray__common *)r14, i12, (int)sizeof(double));
+  i12 = r15->size[0] * r15->size[1];
+  r15->size[0] = cdiff;
+  r15->size[1] = (int)ncol;
+  emxEnsureCapacity((emxArray__common *)r15, i12, (int)sizeof(double));
   nm1d2 = (int)ncol;
   for (i12 = 0; i12 < nm1d2; i12++) {
     for (n = 0; n < cdiff; n++) {
-      r14->data[n + r14->size[0] * i12] = b_x->data[(int)((rowindex->data[n] +
+      r15->data[n + r15->size[0] * i12] = b_x->data[(int)((rowindex->data[n] +
         colindex->data[colindex->size[0] * i12]) - 1.0) - 1];
     }
   }
@@ -302,15 +300,15 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
   nm1d2 = (int)ncol;
   for (i12 = 0; i12 < nm1d2; i12++) {
     for (n = 0; n < cdiff; n++) {
-      absb = r14->data[n + r14->size[0] * i12];
+      absb = r15->data[n + r15->size[0] * i12];
       c_window->data[n + c_window->size[0] * i12].re = b_window->data[n] * absb;
       c_window->data[n + c_window->size[0] * i12].im = b_window->data[n] * 0.0;
     }
   }
 
-  emxFree_real_T(&r14);
+  emxFree_real_T(&r15);
   emxFree_real_T(&b_window);
-  emxInit_real_T2(&c_x, 1);
+  emxInit_real_T1(&c_x, 1);
   fft(c_window, nfft, yo);
   i12 = c_x->size[0];
   c_x->size[0] = b_x->size[0];
@@ -370,8 +368,7 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
         colindex->data[0] = anew;
         if (n > 1) {
           colindex->data[n - 1] = apnd;
-          i12 = n - 1;
-          nm1d2 = i12 / 2;
+          nm1d2 = (n - 1) / 2;
           for (cdiff = 1; cdiff < nm1d2; cdiff++) {
             colindex->data[cdiff] = anew + (double)cdiff;
             colindex->data[(n - cdiff) - 1] = apnd - (double)cdiff;
@@ -434,8 +431,7 @@ void Myspecgram(emxArray_real_T *x, double nfft, double window, double noverlap,
         colindex->data[0] = anew;
         if (n > 1) {
           colindex->data[n - 1] = apnd;
-          i12 = n - 1;
-          nm1d2 = i12 / 2;
+          nm1d2 = (n - 1) / 2;
           for (cdiff = 1; cdiff < nm1d2; cdiff++) {
             colindex->data[cdiff] = anew + (double)cdiff;
             colindex->data[(n - cdiff) - 1] = apnd - (double)cdiff;

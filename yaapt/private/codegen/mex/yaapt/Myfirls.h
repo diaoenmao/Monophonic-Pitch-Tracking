@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef __MYFIRLS_H__
-#define __MYFIRLS_H__
+#ifndef MYFIRLS_H
+#define MYFIRLS_H
 
 /* Include files */
 #include <math.h>
@@ -17,7 +17,7 @@
 #include "tmwtypes.h"
 #include "mex.h"
 #include "emlrt.h"
-#include "blas.h"
+#include "covrt.h"
 #include "rtwtypes.h"
 #include "omp.h"
 #include "yaapt_types.h"
