@@ -17,25 +17,18 @@
 #include "lapacke.h"
 
 /* Function Definitions */
-
-/*
- *
- */
 real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
 {
   real_T y;
   boolean_T overflow;
-  boolean_T p;
   int32_T k;
-  int32_T exitg1;
-  int32_T i36;
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &oh_emlrtRSI;
+  st.site = &og_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -50,49 +43,27 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
 
   if (overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &xf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &nf_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
-  overflow = false;
-  p = false;
-  k = 0;
-  do {
-    exitg1 = 0;
-    if (k < 2) {
-      i36 = x->size[k];
-      if (i36 != 0) {
-        exitg1 = 1;
-      } else {
-        k++;
-      }
-    } else {
-      p = true;
-      exitg1 = 1;
-    }
-  } while (exitg1 == 0);
-
-  if (!p) {
+  overflow = !d_isequal(x);
+  if (overflow) {
   } else {
-    overflow = true;
-  }
-
-  if (!overflow) {
-  } else {
-    emlrtErrorWithMessageIdR2012b(&st, &wf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &mf_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  b_st.site = &ph_emlrtRSI;
+  b_st.site = &pg_emlrtRSI;
   if (x->size[1] == 0) {
     y = 0.0;
   } else {
     y = x->data[0];
-    c_st.site = &th_emlrtRSI;
+    c_st.site = &tg_emlrtRSI;
     overflow = ((!(2 > x->size[1])) && (x->size[1] > 2147483646));
     if (overflow) {
-      d_st.site = &cb_emlrtRSI;
-      check_forloop_overflow_error(&d_st, true);
+      d_st.site = &ab_emlrtRSI;
+      check_forloop_overflow_error(&d_st);
     }
 
     for (k = 2; k <= x->size[1]; k++) {
@@ -103,39 +74,36 @@ real_T b_sum(const emlrtStack *sp, const emxArray_boolean_T *x)
   return y;
 }
 
-/*
- *
- */
 real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
 {
-  boolean_T b3;
+  boolean_T b2;
   emlrtStack st;
   emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &oh_emlrtRSI;
+  st.site = &og_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((x->size[1] == 1) || (x->size[1] != 1)) {
-    b3 = true;
+    b2 = true;
   } else {
-    b3 = false;
+    b2 = false;
   }
 
-  if (b3) {
+  if (b2) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &xf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &nf_emlrtRTEI,
       "Coder:toolbox:autoDimIncompatibility", 0);
   }
 
-  b3 = !d_isequal(x);
-  if (b3) {
+  b2 = !c_isequal(x);
+  if (b2) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&st, &wf_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(&st, &mf_emlrtRTEI,
       "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
 
-  b_st.site = &ph_emlrtRSI;
+  b_st.site = &pg_emlrtRSI;
   return combine_vector_elements(&b_st, x);
 }
 

@@ -10,21 +10,21 @@
 #include "yaapt.h"
 #include "_coder_yaapt_api.h"
 #include "yaapt_emxutil.h"
-#include "mrdivide.h"
+#include "qrsolve.h"
 #include "yaapt_mexutil.h"
 #include "yaapt_data.h"
 #include "blas.h"
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo af_emlrtRTEI = { 1, 1, "_coder_yaapt_api", "" };
+static emlrtRTEInfo re_emlrtRTEI = { 1, 1, "_coder_yaapt_api", "" };
 
 /* Function Declarations */
+static const mxArray *b_emlrt_marshallOut(const emxArray_real_T *u);
 static void c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Data, const
   char_T *identifier, emxArray_real_T *y);
 static void d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
   emlrtMsgIdentifier *parentId, emxArray_real_T *y);
-static const mxArray *d_emlrt_marshallOut(const emxArray_real_T *u);
 static real_T e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Fs, const
   char_T *identifier);
 static real_T f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
@@ -41,6 +41,20 @@ static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
   const emlrtMsgIdentifier *msgId))[34];
 
 /* Function Definitions */
+static const mxArray *b_emlrt_marshallOut(const emxArray_real_T *u)
+{
+  const mxArray *y;
+  const mxArray *m13;
+  static const int32_T iv56[2] = { 0, 0 };
+
+  y = NULL;
+  m13 = emlrtCreateNumericArray(2, iv56, mxDOUBLE_CLASS, mxREAL);
+  mxSetData((mxArray *)m13, (void *)u->data);
+  emlrtSetDimensions((mxArray *)m13, u->size, 2);
+  emlrtAssign(&y, m13);
+  return y;
+}
+
 static void c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Data, const
   char_T *identifier, emxArray_real_T *y)
 {
@@ -57,20 +71,6 @@ static void d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
 {
   j_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
   emlrtDestroyArray(&u);
-}
-
-static const mxArray *d_emlrt_marshallOut(const emxArray_real_T *u)
-{
-  const mxArray *y;
-  const mxArray *m14;
-  static const int32_T iv62[2] = { 0, 0 };
-
-  y = NULL;
-  m14 = emlrtCreateNumericArray(2, iv62, mxDOUBLE_CLASS, mxREAL);
-  mxSetData((mxArray *)m14, (void *)u->data);
-  emlrtSetDimensions((mxArray *)m14, u->size, 2);
-  emlrtAssign(&y, m14);
-  return y;
 }
 
 static real_T e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *Fs, const
@@ -123,11 +123,11 @@ static void j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
 
   boolean_T bv1[2] = { false, true };
 
-  int32_T iv63[2];
+  int32_T iv57[2];
   emlrtCheckVsBuiltInR2012b(sp, msgId, src, "double", false, 2U, dims, &bv1[0],
-    iv63);
-  ret->size[0] = iv63[0];
-  ret->size[1] = iv63[1];
+    iv57);
+  ret->size[0] = iv57[0];
+  ret->size[1] = iv57[1];
   ret->allocatedSize = ret->size[0] * ret->size[1];
   ret->data = (real_T *)mxGetData(src);
   ret->canFreeData = false;
@@ -168,8 +168,8 @@ static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &Data, 2, &af_emlrtRTEI, true);
-  emxInit_real_T(&st, &Pitch, 2, &af_emlrtRTEI, true);
+  emxInit_real_T(&st, &Data, 2, &re_emlrtRTEI, true);
+  emxInit_real_T(&st, &Pitch, 2, &re_emlrtRTEI, true);
 
   /* Marshall function inputs */
   c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Data", Data);
@@ -180,7 +180,7 @@ static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
   yaapt(&st, Data, Fs, *Parameter, Pitch, &numfrms, &frmrate);
 
   /* Marshall function outputs */
-  plhs[0] = d_emlrt_marshallOut(Pitch);
+  plhs[0] = b_emlrt_marshallOut(Pitch);
   plhs[1] = emlrt_marshallOut(numfrms);
   plhs[2] = emlrt_marshallOut(frmrate);
   Pitch->canFreeData = false;

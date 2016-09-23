@@ -2,15 +2,15 @@
  * File: sort1.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "sort1.h"
-#include "sortIdx.h"
 #include "yaapt_emxutil.h"
+#include "sortIdx.h"
 
 /* Function Declarations */
 static void b_sort(double x[100], int idx[100]);
@@ -430,7 +430,7 @@ static void d_sort(double x[20], int idx[20])
 static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
 {
   emxArray_real_T *vwork;
-  int i33;
+  int i32;
   int vstride;
   int k;
   int iv1[2];
@@ -441,8 +441,8 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
   int pageoffset;
   int j;
   int idx0;
-  emxInit_real_T1(&vwork, 1);
-  i33 = x->size[dim - 1];
+  emxInit_real_T2(&vwork, 1);
+  i32 = x->size[dim - 1];
   vstride = x->size[dim - 1];
   k = vwork->size[0];
   vwork->size[0] = vstride;
@@ -476,12 +476,12 @@ static void f_sort(emxArray_real_T *x, int dim, emxArray_int32_T *idx)
     pageoffset = (i - 1) * pagesize;
     for (j = 0; j + 1 <= vstride; j++) {
       idx0 = pageoffset + j;
-      for (k = 0; k + 1 <= i33; k++) {
+      for (k = 0; k + 1 <= i32; k++) {
         vwork->data[k] = x->data[idx0 + k * vstride];
       }
 
       sortIdx(vwork, iidx);
-      for (k = 0; k + 1 <= i33; k++) {
+      for (k = 0; k + 1 <= i32; k++) {
         x->data[idx0 + k * vstride] = vwork->data[k];
         idx->data[idx0 + k * vstride] = iidx->data[k];
       }
@@ -518,6 +518,43 @@ void e_sort(emxArray_real_T *x, emxArray_int32_T *idx)
   }
 
   f_sort(x, dim, idx);
+}
+
+/*
+ * Arguments    : emxArray_real_T *x
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
+void g_sort(emxArray_real_T *x, emxArray_int32_T *idx)
+{
+  emxArray_real_T *vwork;
+  int i33;
+  int k;
+  int i34;
+  emxArray_int32_T *iidx;
+  emxInit_real_T2(&vwork, 1);
+  i33 = x->size[1];
+  k = x->size[1];
+  i34 = vwork->size[0];
+  vwork->size[0] = k;
+  emxEnsureCapacity((emxArray__common *)vwork, i34, (int)sizeof(double));
+  i34 = idx->size[0] * idx->size[1];
+  idx->size[0] = 1;
+  idx->size[1] = x->size[1];
+  emxEnsureCapacity((emxArray__common *)idx, i34, (int)sizeof(int));
+  for (k = 0; k + 1 <= i33; k++) {
+    vwork->data[k] = x->data[k];
+  }
+
+  emxInit_int32_T1(&iidx, 1);
+  b_sortIdx(vwork, iidx);
+  for (k = 0; k + 1 <= i33; k++) {
+    x->data[k] = vwork->data[k];
+    idx->data[k] = iidx->data[k];
+  }
+
+  emxFree_int32_T(&iidx);
+  emxFree_real_T(&vwork);
 }
 
 /*

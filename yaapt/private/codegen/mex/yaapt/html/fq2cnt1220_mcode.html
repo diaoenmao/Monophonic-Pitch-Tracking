@@ -1,0 +1,14 @@
+<!-- saved from url=(0014)about:internet -->
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="197,1" id="srcline1"> 1</a></span><span class="line"><span class="keyword">function</span> [<span class="var type1" id="S2T1U3">cnt</span>] = fq2cnt(<span class="var type1" id="S3T1U6">fq</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="197,2" id="srcline2"> 2</a></span><span class="line"><span class="comment">% FQ2CNT Transform input frequency to cent unit</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,3" id="srcline3"> 3</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,4" id="srcline4"> 4</a></span><span class="line"><span class="comment">% fq = input frequency</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,5" id="srcline5"> 5</a></span><span class="line"><span class="comment">% cnt = output cent scale with base at 13.75 Hz</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,6" id="srcline6"> 6</a></span><span class="line"><span class="comment">% Each piano key frequency is linearly separated 100 cents </span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,7" id="srcline7"> 7</a></span><span class="line"><span class="comment">% Ex: A4 - Ab4</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,8" id="srcline8"> 8</a></span><span class="line"><span class="comment">% fq2cnt(440) - fq2cnt(415.305) = 6000 - 5900 = 100</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,9" id="srcline9"> 9</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="197,10" id="srcline10">10</a></span><span class="line"><span class="mxinfo " id="T1:U3"><span class="var type1" id="S2T1U9">cnt</span> = <span class="mxinfo " id="T1:U5"><span class="mxinfo " id="T2:U6">1200</span>.*<span class="mxinfo " id="T1:U7">log2((<span class="mxinfo " id="T1:U8"><span class="var type1" id="S3T1U16">fq</span>./13.75</span>))</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="197,11" id="srcline11">11</a></span><span class="line"><span class="keyword">end</span></span></span>
+</pre>

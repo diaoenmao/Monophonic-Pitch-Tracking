@@ -23,12 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A, const
-                      emxArray_real_T *tau, const emxArray_int32_T *jpvt,
-                      emxArray_real_T *B, int32_T rankA, emxArray_real_T *Y);
-extern void b_LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A, const
-  emxArray_real_T *tau, const emxArray_int32_T *jpvt, real_T B, int32_T rankA,
-  emxArray_real_T *Y);
+extern void qrsolve(const emlrtStack *sp, const emxArray_real_T *A, const
+                    emxArray_real_T *B, emxArray_real_T *Y);
 
 #endif
 

@@ -2,7 +2,7 @@
  * File: Myfir1.h
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 #ifndef MYFIR1_H

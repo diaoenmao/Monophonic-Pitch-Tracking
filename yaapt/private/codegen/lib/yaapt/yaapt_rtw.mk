@@ -2,8 +2,8 @@
 ## Makefile generated for MATLAB file/project 'yaapt'. 
 ## 
 ## Makefile     : yaapt_rtw.mk
-## Generated on : Thu Feb 18 02:29:27 2016
-## MATLAB Coder version: 3.0 (R2015b)
+## Generated on : Fri Sep 23 03:35:47 2016
+## MATLAB Coder version: 3.1 (R2016a)
 ## 
 ## Build Info:
 ## 
@@ -27,9 +27,9 @@
 PRODUCT_NAME              = yaapt
 MAKEFILE                  = yaapt_rtw.mk
 COMPUTER                  = PCWIN64
-MATLAB_ROOT               = F:\MATLAB
-MATLAB_BIN                = F:\MATLAB\bin
-MATLAB_ARCH_BIN           = F:\MATLAB\bin\win64
+MATLAB_ROOT               = F:\MATLAB\R2016a
+MATLAB_BIN                = F:\MATLAB\R2016a\bin
+MATLAB_ARCH_BIN           = F:\MATLAB\R2016a\bin\win64
 MASTER_ANCHOR_DIR         = 
 START_DIR                 = D:\GitHub\Monophonic-Pitch-Tracking\yaapt\private
 ARCH                      = win64
@@ -43,9 +43,9 @@ NODEBUG                   = 1
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          Microsoft Visual C++ 2013 v12.0 | nmake (64-bit Windows)
-# Supported Version(s):    12.0
-# ToolchainInfo Version:   R2015b
+# Toolchain Name:          Microsoft Visual C++ 2015 v14.0 | nmake (64-bit Windows)
+# Supported Version(s):    14.0
+# ToolchainInfo Version:   R2016a
 # Specification Revision:  1.0
 # 
 
@@ -68,7 +68,7 @@ NODEBUG                   = 1
 # MACROS
 #-----------
 
-MEX_OPTS_FILE       = $(MATLAB_ROOT)\bin\$(ARCH)\mexopts\msvc2013.xml
+MEX_OPTS_FILE       = $(MATLAB_ROOT)\bin\$(ARCH)\mexopts\msvc2015.xml
 MW_EXTERNLIB_DIR    = $(MATLAB_ROOT)\extern\lib\win64\microsoft
 MW_LIB_DIR          = $(MATLAB_ROOT)\lib\win64
 MEX_ARCH            = -win64
@@ -204,7 +204,7 @@ DEFINES = $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)\codegen\lib\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_data.c $(START_DIR)\codegen\lib\yaapt\yaapt_initialize.c $(START_DIR)\codegen\lib\yaapt\yaapt_terminate.c $(START_DIR)\codegen\lib\yaapt\yaapt.c $(START_DIR)\codegen\lib\yaapt\nonlinear.c $(START_DIR)\codegen\lib\yaapt\rdivide.c $(START_DIR)\codegen\lib\yaapt\Myfir1.c $(START_DIR)\codegen\lib\yaapt\colon.c $(START_DIR)\codegen\lib\yaapt\abs.c $(START_DIR)\codegen\lib\yaapt\cos.c $(START_DIR)\codegen\lib\yaapt\any.c $(START_DIR)\codegen\lib\yaapt\Myfirls.c $(START_DIR)\codegen\lib\yaapt\sqrt.c $(START_DIR)\codegen\lib\yaapt\sinc.c $(START_DIR)\codegen\lib\yaapt\mldivide.c $(START_DIR)\codegen\lib\yaapt\ixamax.c $(START_DIR)\codegen\lib\yaapt\xgeqp3.c $(START_DIR)\codegen\lib\yaapt\xnrm2.c $(START_DIR)\codegen\lib\yaapt\xscal.c $(START_DIR)\codegen\lib\yaapt\mean.c $(START_DIR)\codegen\lib\yaapt\exp.c $(START_DIR)\codegen\lib\yaapt\filter.c $(START_DIR)\codegen\lib\yaapt\fix.c $(START_DIR)\codegen\lib\yaapt\Myspecgram.c $(START_DIR)\codegen\lib\yaapt\Myhanning.c $(START_DIR)\codegen\lib\yaapt\fft.c $(START_DIR)\codegen\lib\yaapt\sum.c $(START_DIR)\codegen\lib\yaapt\spec_trk.c $(START_DIR)\codegen\lib\yaapt\mod.c $(START_DIR)\codegen\lib\yaapt\Mykaiser.c $(START_DIR)\codegen\lib\yaapt\Mybesseli.c $(START_DIR)\codegen\lib\yaapt\repmat.c $(START_DIR)\codegen\lib\yaapt\all.c $(START_DIR)\codegen\lib\yaapt\prod.c $(START_DIR)\codegen\lib\yaapt\peaks.c $(START_DIR)\codegen\lib\yaapt\sort1.c $(START_DIR)\codegen\lib\yaapt\sortIdx.c $(START_DIR)\codegen\lib\yaapt\std.c $(START_DIR)\codegen\lib\yaapt\Mymedfilt1.c $(START_DIR)\codegen\lib\yaapt\median.c $(START_DIR)\codegen\lib\yaapt\dynamic5.c $(START_DIR)\codegen\lib\yaapt\path1.c $(START_DIR)\codegen\lib\yaapt\interp1.c $(START_DIR)\codegen\lib\yaapt\pchip.c $(START_DIR)\codegen\lib\yaapt\tm_trk.c $(START_DIR)\codegen\lib\yaapt\cmp_rate.c $(START_DIR)\codegen\lib\yaapt\refine.c $(START_DIR)\codegen\lib\yaapt\cat.c $(START_DIR)\codegen\lib\yaapt\freqSelect.c $(START_DIR)\codegen\lib\yaapt\Smooth.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\lib\yaapt\rt_nonfinite.c $(START_DIR)\codegen\lib\yaapt\rtGetNaN.c $(START_DIR)\codegen\lib\yaapt\rtGetInf.c
+SRCS = $(START_DIR)\codegen\lib\yaapt\yaapt_rtwutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_data.c $(START_DIR)\codegen\lib\yaapt\yaapt_initialize.c $(START_DIR)\codegen\lib\yaapt\yaapt_terminate.c $(START_DIR)\codegen\lib\yaapt\yaapt.c $(START_DIR)\codegen\lib\yaapt\nonlinear.c $(START_DIR)\codegen\lib\yaapt\rdivide.c $(START_DIR)\codegen\lib\yaapt\Myfir1.c $(START_DIR)\codegen\lib\yaapt\colon.c $(START_DIR)\codegen\lib\yaapt\abs.c $(START_DIR)\codegen\lib\yaapt\cos.c $(START_DIR)\codegen\lib\yaapt\any.c $(START_DIR)\codegen\lib\yaapt\Myfirls.c $(START_DIR)\codegen\lib\yaapt\sqrt.c $(START_DIR)\codegen\lib\yaapt\sinc.c $(START_DIR)\codegen\lib\yaapt\mldivide.c $(START_DIR)\codegen\lib\yaapt\ixamax.c $(START_DIR)\codegen\lib\yaapt\xgeqp3.c $(START_DIR)\codegen\lib\yaapt\xnrm2.c $(START_DIR)\codegen\lib\yaapt\xscal.c $(START_DIR)\codegen\lib\yaapt\mean.c $(START_DIR)\codegen\lib\yaapt\exp.c $(START_DIR)\codegen\lib\yaapt\filter.c $(START_DIR)\codegen\lib\yaapt\fix.c $(START_DIR)\codegen\lib\yaapt\Myspecgram.c $(START_DIR)\codegen\lib\yaapt\Myhanning.c $(START_DIR)\codegen\lib\yaapt\fft.c $(START_DIR)\codegen\lib\yaapt\sum.c $(START_DIR)\codegen\lib\yaapt\spec_trk.c $(START_DIR)\codegen\lib\yaapt\mod.c $(START_DIR)\codegen\lib\yaapt\Mykaiser.c $(START_DIR)\codegen\lib\yaapt\Mybesseli.c $(START_DIR)\codegen\lib\yaapt\repmat.c $(START_DIR)\codegen\lib\yaapt\prod.c $(START_DIR)\codegen\lib\yaapt\peaks.c $(START_DIR)\codegen\lib\yaapt\sort1.c $(START_DIR)\codegen\lib\yaapt\sortIdx.c $(START_DIR)\codegen\lib\yaapt\std.c $(START_DIR)\codegen\lib\yaapt\Mymedfilt1.c $(START_DIR)\codegen\lib\yaapt\median.c $(START_DIR)\codegen\lib\yaapt\dynamic5.c $(START_DIR)\codegen\lib\yaapt\path1.c $(START_DIR)\codegen\lib\yaapt\tm_trk.c $(START_DIR)\codegen\lib\yaapt\cmp_rate.c $(START_DIR)\codegen\lib\yaapt\refine.c $(START_DIR)\codegen\lib\yaapt\cat.c $(START_DIR)\codegen\lib\yaapt\freqSelect.c $(START_DIR)\codegen\lib\yaapt\Smooth.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxutil.c $(START_DIR)\codegen\lib\yaapt\yaapt_emxAPI.c $(START_DIR)\codegen\lib\yaapt\rt_nonfinite.c $(START_DIR)\codegen\lib\yaapt\rtGetNaN.c $(START_DIR)\codegen\lib\yaapt\rtGetInf.c
 
 ALL_SRCS = $(SRCS)
 
@@ -212,7 +212,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = yaapt_rtwutil.obj yaapt_data.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj nonlinear.obj rdivide.obj Myfir1.obj colon.obj abs.obj cos.obj any.obj Myfirls.obj sqrt.obj sinc.obj mldivide.obj ixamax.obj xgeqp3.obj xnrm2.obj xscal.obj mean.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj sum.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj all.obj prod.obj peaks.obj sort1.obj sortIdx.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj path1.obj interp1.obj pchip.obj tm_trk.obj cmp_rate.obj refine.obj cat.obj freqSelect.obj Smooth.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
+OBJS = yaapt_rtwutil.obj yaapt_data.obj yaapt_initialize.obj yaapt_terminate.obj yaapt.obj nonlinear.obj rdivide.obj Myfir1.obj colon.obj abs.obj cos.obj any.obj Myfirls.obj sqrt.obj sinc.obj mldivide.obj ixamax.obj xgeqp3.obj xnrm2.obj xscal.obj mean.obj exp.obj filter.obj fix.obj Myspecgram.obj Myhanning.obj fft.obj sum.obj spec_trk.obj mod.obj Mykaiser.obj Mybesseli.obj repmat.obj prod.obj peaks.obj sort1.obj sortIdx.obj std.obj Mymedfilt1.obj median.obj dynamic5.obj path1.obj tm_trk.obj cmp_rate.obj refine.obj cat.obj freqSelect.obj Smooth.obj yaapt_emxutil.obj yaapt_emxAPI.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj
 
 ALL_OBJS = $(OBJS)
 

@@ -2,7 +2,7 @@
  * File: median.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
  */
 void median(const emxArray_real_T *x, emxArray_real_T *y)
 {
-  int i22;
+  int i20;
   int i;
   emxArray_int32_T *idx;
   emxArray_int32_T *iwork;
@@ -35,17 +35,17 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
   int q;
   int qEnd;
   int kEnd;
-  i22 = y->size[0] * y->size[1];
+  i20 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = x->size[1];
-  emxEnsureCapacity((emxArray__common *)y, i22, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)y, i20, (int)sizeof(double));
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
-    i22 = y->size[0] * y->size[1];
+    i20 = y->size[0] * y->size[1];
     y->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)y, i22, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)y, i20, (int)sizeof(double));
     midm1 = y->size[1];
-    for (i22 = 0; i22 < midm1; i22++) {
-      y->data[y->size[0] * i22] = rtNaN;
+    for (i20 = 0; i20 < midm1; i20++) {
+      y->data[y->size[0] * i20] = rtNaN;
     }
   } else {
     i = 0;
@@ -53,18 +53,18 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
     emxInit_int32_T1(&iwork, 1);
     while (i + 1 <= x->size[1]) {
       midm1 = x->size[0];
-      i22 = idx->size[0];
+      i20 = idx->size[0];
       idx->size[0] = midm1;
-      emxEnsureCapacity((emxArray__common *)idx, i22, (int)sizeof(int));
-      for (i22 = 0; i22 < midm1; i22++) {
-        idx->data[i22] = 0;
+      emxEnsureCapacity((emxArray__common *)idx, i20, (int)sizeof(int));
+      for (i20 = 0; i20 < midm1; i20++) {
+        idx->data[i20] = 0;
       }
 
-      i22 = x->size[0] + 1;
+      i20 = x->size[0] + 1;
       b_i = iwork->size[0];
       iwork->size[0] = midm1;
       emxEnsureCapacity((emxArray__common *)iwork, b_i, (int)sizeof(int));
-      for (midm1 = 1; midm1 <= i22 - 2; midm1 += 2) {
+      for (midm1 = 1; midm1 <= i20 - 2; midm1 += 2) {
         m = x->data[midm1 + x->size[0] * i];
         if ((x->data[(midm1 + x->size[0] * i) - 1] <= m) || rtIsNaN(m)) {
           p = true;
@@ -89,15 +89,15 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
       }
 
       b_i = 2;
-      while (b_i < i22 - 1) {
+      while (b_i < i20 - 1) {
         i2 = b_i << 1;
         j = 1;
-        for (pEnd = 1 + b_i; pEnd < i22; pEnd = qEnd + b_i) {
+        for (pEnd = 1 + b_i; pEnd < i20; pEnd = qEnd + b_i) {
           b_p = j;
           q = pEnd;
           qEnd = j + i2;
-          if (qEnd > i22) {
-            qEnd = i22;
+          if (qEnd > i20) {
+            qEnd = i20;
           }
 
           midm1 = 0;
@@ -146,14 +146,14 @@ void median(const emxArray_real_T *x, emxArray_real_T *y)
         b_i = i2;
       }
 
-      i22 = x->size[0];
-      midm1 = i22 >> 1;
-      i22 = x->size[0];
-      if (rtIsNaN(x->data[(idx->data[i22 - 1] + x->size[0] * i) - 1])) {
+      i20 = x->size[0];
+      midm1 = i20 >> 1;
+      i20 = x->size[0];
+      if (rtIsNaN(x->data[(idx->data[i20 - 1] + x->size[0] * i) - 1])) {
         m = rtNaN;
       } else {
-        i22 = x->size[0];
-        if ((i22 & 1) == 0) {
+        i20 = x->size[0];
+        if ((i20 & 1) == 0) {
           if (((x->data[(idx->data[midm1 - 1] + x->size[0] * i) - 1] < 0.0) &&
                (x->data[(idx->data[midm1] + x->size[0] * i) - 1] >= 0.0)) ||
               rtIsInf(x->data[(idx->data[midm1 - 1] + x->size[0] * i) - 1]) ||

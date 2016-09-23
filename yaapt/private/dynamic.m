@@ -72,7 +72,7 @@ for i = 2:numframes
         for k = 1:numcands
             % both candidates voiced
             if ((Pitch(j,i) > 0) && (Pitch(k,i-1) > 0) )        
-                Trans(k,j,i) = dp_w1*(abs(Pitch(j,i)-Pitch(k,i-1))/mean_pitch);
+                Trans(k,j,i) = dp_w1*(abs(Pitch(j,i)-Pitch(k,i-1))/abs(Pitch(j,i)+Pitch(k,i-1)));
             end
             
             % one candiate is unvoiced

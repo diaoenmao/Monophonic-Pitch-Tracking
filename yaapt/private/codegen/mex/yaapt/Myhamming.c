@@ -16,17 +16,13 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo w_emlrtRSI = { 7, "Myhamming",
+static emlrtRSInfo u_emlrtRSI = { 7, "Myhamming",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhamming.m" };
 
 static emlrtRTEInfo j_emlrtRTEI = { 1, 14, "Myhamming",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myhamming.m" };
 
 /* Function Definitions */
-
-/*
- * function w = Myhamming(n)
- */
 void Myhamming(const emlrtStack *sp, real_T n, emxArray_real_T *w)
 {
   int32_T b_n;
@@ -57,10 +53,9 @@ void Myhamming(const emlrtStack *sp, real_T n, emxArray_real_T *w)
   /* HAMMING HAMMING(N) returns the N-point Hamming window. */
   /* 	Copyright (c) 1984-94 by The MathWorks, Inc. */
   /*        $Revision: 1.4 $  $Date: 1994/01/25 17:59:14 $ */
-  /* 'Myhamming:7' w = .54 - .46*cos(2*pi*(0:n-1)'/(n-1)); */
-  st.site = &w_emlrtRSI;
-  b_st.site = &x_emlrtRSI;
-  c_st.site = &y_emlrtRSI;
+  st.site = &u_emlrtRSI;
+  b_st.site = &v_emlrtRSI;
+  c_st.site = &w_emlrtRSI;
   if (muDoubleScalarIsNaN(n - 1.0)) {
     b_n = 1;
     anew = rtNaN;
@@ -99,20 +94,16 @@ void Myhamming(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     }
   }
 
-  d_st.site = &ab_emlrtRSI;
+  d_st.site = &x_emlrtRSI;
   if (!n_too_large) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&d_st, &mf_emlrtRTEI, "Coder:MATLAB:pmaxsize",
+    emlrtErrorWithMessageIdR2012b(&d_st, &df_emlrtRTEI, "Coder:MATLAB:pmaxsize",
       0);
   }
 
   emxInit_real_T(&d_st, &y, 2, &j_emlrtRTEI, true);
   k = y->size[0] * y->size[1];
   y->size[0] = 1;
-  if (!(b_n >= 0)) {
-    emlrtNonNegativeCheckR2012b(b_n, &e_emlrtDCI, &c_st);
-  }
-
   y->size[1] = b_n;
   emxEnsureCapacity(&c_st, (emxArray__common *)y, k, (int32_T)sizeof(real_T),
                     &j_emlrtRTEI);
@@ -121,7 +112,7 @@ void Myhamming(const emlrtStack *sp, real_T n, emxArray_real_T *w)
     if (b_n > 1) {
       y->data[b_n - 1] = apnd;
       nm1d2 = (b_n - 1) / 2;
-      d_st.site = &bb_emlrtRSI;
+      d_st.site = &y_emlrtRSI;
       for (k = 1; k < nm1d2; k++) {
         y->data[k] = anew + (real_T)k;
         y->data[(b_n - k) - 1] = apnd - (real_T)k;
@@ -146,7 +137,7 @@ void Myhamming(const emlrtStack *sp, real_T n, emxArray_real_T *w)
   }
 
   emxFree_real_T(&y);
-  st.site = &w_emlrtRSI;
+  st.site = &u_emlrtRSI;
   b_cos(&st, w);
   k = w->size[0];
   emxEnsureCapacity(sp, (emxArray__common *)w, k, (int32_T)sizeof(real_T),

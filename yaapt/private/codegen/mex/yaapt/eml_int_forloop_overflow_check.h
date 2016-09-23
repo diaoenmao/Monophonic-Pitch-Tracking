@@ -23,8 +23,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void check_forloop_overflow_error(const emlrtStack *sp, boolean_T
-  overflow);
+extern void check_forloop_overflow_error(const emlrtStack *sp);
 
 #endif
 

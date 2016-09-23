@@ -26,6 +26,8 @@
 extern void c_sort(const emlrtStack *sp, real_T x[20], int32_T idx[20]);
 extern void e_sort(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T
                    *idx);
+extern void g_sort(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T
+                   *idx);
 extern void sort(const emlrtStack *sp, real_T x[100], int32_T idx[100]);
 
 #endif

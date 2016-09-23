@@ -2,7 +2,7 @@
  * File: all.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -24,7 +24,7 @@ boolean_T all(const emxArray_boolean_T *x)
   y = true;
   ix = 1;
   exitg1 = false;
-  while ((!exitg1) && (ix <= x->size[0])) {
+  while ((!exitg1) && (ix <= x->size[1])) {
     if (!x->data[ix - 1]) {
       y = false;
       exitg1 = true;

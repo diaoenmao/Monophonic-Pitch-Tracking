@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: mean.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.1</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 05-Sep-2016 15:50:20</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 23-Sep-2016 04:55:32</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -34,13 +34,13 @@
 <a name="22"><font color="#888888 "><i>   22   </i></font></a><b>{</b>
 <a name="23"><font color="#888888 "><i>   23   </i></font></a>  <font color="#112266"><b>double</b></font> s;
 <a name="24"><font color="#888888 "><i>   24   </i></font></a>  <font color="#112266"><b>int</b></font> k;
-<a name="25"><font color="#888888 "><i>   25   </i></font></a>  <font color="#112266"><b>int</b></font> i25;
+<a name="25"><font color="#888888 "><i>   25   </i></font></a>  <font color="#112266"><b>int</b></font> i23;
 <a name="26"><font color="#888888 "><i>   26   </i></font></a>  <font color="#112266"><b>int</b></font> loop_ub;
 <a name="27"><font color="#888888 "><i>   27   </i></font></a>  y_size[0] = x-&gt;size[0];
 <a name="28"><font color="#888888 "><i>   28   </i></font></a>  <font color="#112266"><b>if</b></font> ((x-&gt;size[0] == 0) || (x-&gt;size[1] == 0)) <b>{</b>
 <a name="29"><font color="#888888 "><i>   29   </i></font></a>    k = y_size[0];
-<a name="30"><font color="#888888 "><i>   30   </i></font></a>    <font color="#112266"><b>for</b></font> (i25 = 0; i25 &lt; k; i25++) <b>{</b>
-<a name="31"><font color="#888888 "><i>   31   </i></font></a>      y_data[i25] = 0.0;
+<a name="30"><font color="#888888 "><i>   30   </i></font></a>    <font color="#112266"><b>for</b></font> (i23 = 0; i23 &lt; k; i23++) <b>{</b>
+<a name="31"><font color="#888888 "><i>   31   </i></font></a>      y_data[i23] = 0.0;
 <a name="32"><font color="#888888 "><i>   32   </i></font></a>    <b>}</b>
 <a name="33"><font color="#888888 "><i>   33   </i></font></a>  <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
 <a name="34"><font color="#888888 "><i>   34   </i></font></a>    s = x-&gt;data[0];
@@ -53,8 +53,8 @@
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>  k = x-&gt;size[1];
 <a name="43"><font color="#888888 "><i>   43   </i></font></a>  loop_ub = y_size[0];
-<a name="44"><font color="#888888 "><i>   44   </i></font></a>  <font color="#112266"><b>for</b></font> (i25 = 0; i25 &lt; loop_ub; i25++) <b>{</b>
-<a name="45"><font color="#888888 "><i>   45   </i></font></a>    y_data[i25] /= (<font color="#112266"><b>double</b></font>)k;
+<a name="44"><font color="#888888 "><i>   44   </i></font></a>  <font color="#112266"><b>for</b></font> (i23 = 0; i23 &lt; loop_ub; i23++) <b>{</b>
+<a name="45"><font color="#888888 "><i>   45   </i></font></a>    y_data[i23] /= (<font color="#112266"><b>double</b></font>)k;
 <a name="46"><font color="#888888 "><i>   46   </i></font></a>  <b>}</b>
 <a name="47"><font color="#888888 "><i>   47   </i></font></a><b>}</b>
 <a name="48"><font color="#888888 "><i>   48   </i></font></a>

@@ -94,9 +94,6 @@ void yaapt_atexit(void)
 
   /* Free instance data */
   covrtFreeInstanceData(&emlrtCoverageInstance);
-
-  /* Free instance data */
-  covrtFreeInstanceData(&emlrtCoverageInstance);
   emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
 }

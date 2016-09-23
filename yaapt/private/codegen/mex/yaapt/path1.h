@@ -24,7 +24,8 @@
 
 /* Function Declarations */
 extern void path1(const emlrtStack *sp, const emxArray_real_T *Local, const
-                  emxArray_real_T *Trans, emxArray_real_T *PATH);
+                  emxArray_real_T *Trans, real_T PATH_data[], int32_T PATH_size
+                  [2]);
 
 #endif
 

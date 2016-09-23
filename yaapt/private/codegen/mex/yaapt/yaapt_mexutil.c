@@ -9,30 +9,11 @@
 #include "rt_nonfinite.h"
 #include "yaapt.h"
 #include "yaapt_mexutil.h"
-#include "mrdivide.h"
 #include "yaapt_data.h"
 #include "blas.h"
 #include "lapacke.h"
 
 /* Function Definitions */
-void b_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
-  emlrtMsgIdentifier *parentId, char_T y[14])
-{
-  i_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
-  emlrtDestroyArray(&u);
-}
-
-const mxArray *b_sprintf(const emlrtStack *sp, const mxArray *b, const mxArray
-  *c, emlrtMCInfo *location)
-{
-  const mxArray *pArrays[2];
-  const mxArray *m16;
-  pArrays[0] = b;
-  pArrays[1] = c;
-  return emlrtCallMATLABR2012b(sp, 1, &m16, 2, pArrays, "sprintf", true,
-    location);
-}
-
 int32_T div_s32_floor(const emlrtStack *sp, int32_T numerator, int32_T
                       denominator)
 {
@@ -94,38 +75,17 @@ void emlrtLockerFunction(EmlrtLockeeFunction aLockee, const emlrtConstCTX aTLS,
   omp_unset_lock(&emlrtLockGlobal);
 }
 
-void emlrt_marshallIn(const emlrtStack *sp, const mxArray *c_sprintf, const
-                      char_T *identifier, char_T y[14])
-{
-  emlrtMsgIdentifier thisId;
-  thisId.fIdentifier = identifier;
-  thisId.fParent = NULL;
-  thisId.bParentIsCell = false;
-  b_emlrt_marshallIn(sp, emlrtAlias(c_sprintf), &thisId, y);
-  emlrtDestroyArray(&c_sprintf);
-}
-
 const mxArray *emlrt_marshallOut(const real_T u)
 {
   const mxArray *y;
-  const mxArray *m11;
+  const mxArray *m12;
   y = NULL;
-  m11 = emlrtCreateDoubleScalar(u);
-  emlrtAssign(&y, m11);
+  m12 = emlrtCreateDoubleScalar(u);
+  emlrtAssign(&y, m12);
   return y;
 }
 
-void i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
-  emlrtMsgIdentifier *msgId, char_T ret[14])
-{
-  static const int32_T dims[2] = { 1, 14 };
-
-  emlrtCheckBuiltInR2012b(sp, msgId, src, "char", false, 2U, dims);
-  emlrtImportCharArrayR2015b(sp, src, ret, 14);
-  emlrtDestroyArray(&src);
-}
-
-void o_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
+void n_error(const emlrtStack *sp, const mxArray *b, emlrtMCInfo *location)
 {
   const mxArray *pArray;
   pArray = b;

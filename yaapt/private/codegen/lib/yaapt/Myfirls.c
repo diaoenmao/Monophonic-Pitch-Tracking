@@ -2,7 +2,7 @@
  * File: Myfirls.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -60,7 +60,7 @@
  */
 void Myfirls(double N, double F[6], emxArray_real_T *h)
 {
-  int i4;
+  int i3;
   double L;
   emxArray_real_T *m;
   int n;
@@ -72,25 +72,25 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
   int nm1d2;
   int k;
   int loop_ub;
-  unsigned int uv0[2];
+  unsigned int uv1[2];
   emxArray_real_T *I1;
-  int i5;
+  int i4;
   emxArray_real_T *I2;
   emxArray_real_T *G;
   double b0;
   emxArray_real_T *b_k;
   emxArray_real_T *b;
+  emxArray_real_T *r2;
+  emxArray_real_T *r3;
   emxArray_real_T *r4;
   emxArray_real_T *r5;
+  emxArray_real_T *p;
   emxArray_real_T *r6;
   emxArray_real_T *r7;
-  emxArray_real_T *p;
   emxArray_real_T *r8;
   emxArray_real_T *r9;
   emxArray_real_T *r10;
   emxArray_real_T *r11;
-  emxArray_real_T *r12;
-  emxArray_real_T *r13;
   emxArray_real_T *y;
   emxArray_real_T *c_k;
   int s;
@@ -99,7 +99,7 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
   static const signed char M[6] = { 0, 0, 1, 1, 0, 0 };
 
   double b1;
-  int i6;
+  int i5;
   emxArray_real_T *b_p;
 
   /* 	Example of a length 29 low-pass filter: */
@@ -142,8 +142,8 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
   N++;
 
   /*  filter length */
-  for (i4 = 0; i4 < 6; i4++) {
-    F[i4] /= 2.0;
+  for (i3 = 0; i3 < 6; i3++) {
+    F[i3] /= 2.0;
   }
 
   /*  make these guys columns */
@@ -186,10 +186,10 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
       }
     }
 
-    i4 = m->size[0] * m->size[1];
+    i3 = m->size[0] * m->size[1];
     m->size[0] = 1;
     m->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)m, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)m, i3, (int)sizeof(double));
     if (n > 0) {
       m->data[0] = xtmp;
       if (n > 1) {
@@ -209,14 +209,14 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
       }
     }
 
-    i4 = m->size[0] * m->size[1];
+    i3 = m->size[0] * m->size[1];
     m->size[0] = 1;
-    emxEnsureCapacity((emxArray__common *)m, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)m, i3, (int)sizeof(double));
     n = m->size[0];
     nm1d2 = m->size[1];
     loop_ub = n * nm1d2;
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      m->data[i4] += 0.5;
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      m->data[i3] += 0.5;
     }
 
     /*  type II */
@@ -254,10 +254,10 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
       }
     }
 
-    i4 = m->size[0] * m->size[1];
+    i3 = m->size[0] * m->size[1];
     m->size[0] = 1;
     m->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)m, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)m, i3, (int)sizeof(double));
     if (n > 0) {
       m->data[0] = xtmp;
       if (n > 1) {
@@ -280,121 +280,121 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
     /*  type I */
   }
 
-  emxInit_real_T1(&a, 1);
+  emxInit_real_T2(&a, 1);
 
   /*      k=m'; */
-  i4 = a->size[0];
+  i3 = a->size[0];
   a->size[0] = m->size[1];
-  emxEnsureCapacity((emxArray__common *)a, i4, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)a, i3, (int)sizeof(double));
   loop_ub = m->size[1];
-  for (i4 = 0; i4 < loop_ub; i4++) {
-    a->data[i4] = m->data[m->size[0] * i4];
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    a->data[i3] = m->data[m->size[0] * i3];
   }
 
-  for (i4 = 0; i4 < 2; i4++) {
-    uv0[i4] = (unsigned int)m->size[i4];
+  for (i3 = 0; i3 < 2; i3++) {
+    uv1[i3] = (unsigned int)m->size[i3];
   }
 
   emxInit_real_T(&I1, 2);
   loop_ub = a->size[0];
-  i4 = I1->size[0] * I1->size[1];
+  i3 = I1->size[0] * I1->size[1];
   I1->size[0] = loop_ub;
-  I1->size[1] = (int)uv0[1];
-  emxEnsureCapacity((emxArray__common *)I1, i4, (int)sizeof(double));
-  nm1d2 = (int)uv0[1];
-  for (i4 = 0; i4 < nm1d2; i4++) {
-    for (i5 = 0; i5 < loop_ub; i5++) {
-      I1->data[i5 + I1->size[0] * i4] = a->data[i5] + m->data[m->size[0] * i4];
+  I1->size[1] = (int)uv1[1];
+  emxEnsureCapacity((emxArray__common *)I1, i3, (int)sizeof(double));
+  nm1d2 = (int)uv1[1];
+  for (i3 = 0; i3 < nm1d2; i3++) {
+    for (i4 = 0; i4 < loop_ub; i4++) {
+      I1->data[i4 + I1->size[0] * i3] = a->data[i4] + m->data[m->size[0] * i3];
     }
   }
 
   /*  entries are m + k */
-  for (i4 = 0; i4 < 2; i4++) {
-    uv0[i4] = (unsigned int)m->size[i4];
+  for (i3 = 0; i3 < 2; i3++) {
+    uv1[i3] = (unsigned int)m->size[i3];
   }
 
   emxInit_real_T(&I2, 2);
   loop_ub = a->size[0];
-  i4 = I2->size[0] * I2->size[1];
+  i3 = I2->size[0] * I2->size[1];
   I2->size[0] = loop_ub;
-  I2->size[1] = (int)uv0[1];
-  emxEnsureCapacity((emxArray__common *)I2, i4, (int)sizeof(double));
-  nm1d2 = (int)uv0[1];
-  for (i4 = 0; i4 < nm1d2; i4++) {
-    for (i5 = 0; i5 < loop_ub; i5++) {
-      I2->data[i5 + I2->size[0] * i4] = a->data[i5] - m->data[m->size[0] * i4];
+  I2->size[1] = (int)uv1[1];
+  emxEnsureCapacity((emxArray__common *)I2, i3, (int)sizeof(double));
+  nm1d2 = (int)uv1[1];
+  for (i3 = 0; i3 < nm1d2; i3++) {
+    for (i4 = 0; i4 < loop_ub; i4++) {
+      I2->data[i4 + I2->size[0] * i3] = a->data[i4] - m->data[m->size[0] * i3];
     }
   }
 
   /*  entries are m - k */
-  for (i4 = 0; i4 < 2; i4++) {
-    uv0[i4] = (unsigned int)I1->size[i4];
+  for (i3 = 0; i3 < 2; i3++) {
+    uv1[i3] = (unsigned int)I1->size[i3];
   }
 
   emxInit_real_T(&G, 2);
-  i4 = G->size[0] * G->size[1];
-  G->size[0] = (int)uv0[0];
-  G->size[1] = (int)uv0[1];
-  emxEnsureCapacity((emxArray__common *)G, i4, (int)sizeof(double));
-  loop_ub = (int)uv0[0] * (int)uv0[1];
-  for (i4 = 0; i4 < loop_ub; i4++) {
-    G->data[i4] = 0.0;
+  i3 = G->size[0] * G->size[1];
+  G->size[0] = (int)uv1[0];
+  G->size[1] = (int)uv1[1];
+  emxEnsureCapacity((emxArray__common *)G, i3, (int)sizeof(double));
+  loop_ub = (int)uv1[0] * (int)uv1[1];
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    G->data[i3] = 0.0;
   }
 
   b0 = 0.0;
 
   /*   first entry must be handled separately (where k(1)=0) */
-  emxInit_real_T1(&b_k, 1);
+  emxInit_real_T2(&b_k, 1);
   if (rt_remd_snf(N, 2.0) != 0.0) {
     if (2 > a->size[0]) {
+      i3 = 0;
       i4 = 0;
-      i5 = 0;
     } else {
-      i4 = 1;
-      i5 = a->size[0];
+      i3 = 1;
+      i4 = a->size[0];
     }
 
     nm1d2 = b_k->size[0];
-    b_k->size[0] = i5 - i4;
+    b_k->size[0] = i4 - i3;
     emxEnsureCapacity((emxArray__common *)b_k, nm1d2, (int)sizeof(double));
-    loop_ub = i5 - i4;
-    for (i5 = 0; i5 < loop_ub; i5++) {
-      b_k->data[i5] = a->data[i4 + i5];
+    loop_ub = i4 - i3;
+    for (i4 = 0; i4 < loop_ub; i4++) {
+      b_k->data[i4] = a->data[i3 + i4];
     }
   } else {
-    i4 = b_k->size[0];
+    i3 = b_k->size[0];
     b_k->size[0] = m->size[1];
-    emxEnsureCapacity((emxArray__common *)b_k, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b_k, i3, (int)sizeof(double));
     loop_ub = m->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      b_k->data[i4] = m->data[m->size[0] * i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      b_k->data[i3] = m->data[m->size[0] * i3];
     }
   }
 
   emxFree_real_T(&m);
-  emxInit_real_T1(&b, 1);
-  uv0[0] = (unsigned int)b_k->size[0];
-  i4 = b->size[0];
-  b->size[0] = (int)uv0[0];
-  emxEnsureCapacity((emxArray__common *)b, i4, (int)sizeof(double));
-  loop_ub = (int)uv0[0];
-  for (i4 = 0; i4 < loop_ub; i4++) {
-    b->data[i4] = 0.0;
+  emxInit_real_T2(&b, 1);
+  uv1[0] = (unsigned int)b_k->size[0];
+  i3 = b->size[0];
+  b->size[0] = (int)uv1[0];
+  emxEnsureCapacity((emxArray__common *)b, i3, (int)sizeof(double));
+  loop_ub = (int)uv1[0];
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    b->data[i3] = 0.0;
   }
 
+  emxInit_real_T(&r2, 2);
+  emxInit_real_T(&r3, 2);
   emxInit_real_T(&r4, 2);
   emxInit_real_T(&r5, 2);
+  emxInit_real_T2(&p, 1);
   emxInit_real_T(&r6, 2);
   emxInit_real_T(&r7, 2);
-  emxInit_real_T1(&p, 1);
   emxInit_real_T(&r8, 2);
   emxInit_real_T(&r9, 2);
-  emxInit_real_T(&r10, 2);
-  emxInit_real_T(&r11, 2);
-  emxInit_real_T1(&r12, 1);
-  emxInit_real_T1(&r13, 1);
-  emxInit_real_T1(&y, 1);
-  emxInit_real_T1(&c_k, 1);
+  emxInit_real_T2(&r10, 1);
+  emxInit_real_T2(&r11, 1);
+  emxInit_real_T2(&y, 1);
+  emxInit_real_T2(&c_k, 1);
   for (s = 0; s < 3; s++) {
     b_s = s << 1;
     b_m = (double)(M[b_s + 1] - M[b_s]) / (F[b_s + 1] - F[b_s]);
@@ -405,133 +405,131 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
     /*   y-intercept */
     b0 += b1 * (F[b_s + 1] - F[b_s]) + b_m / 2.0 * (F[b_s + 1] * F[b_s + 1] -
       F[b_s] * F[b_s]);
-    i4 = p->size[0];
+    i3 = p->size[0];
     p->size[0] = b_k->size[0];
-    emxEnsureCapacity((emxArray__common *)p, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)p, i3, (int)sizeof(double));
     loop_ub = b_k->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      p->data[i4] = 6.2831853071795862 * b_k->data[i4] * F[b_s + 1];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      p->data[i3] = 6.2831853071795862 * b_k->data[i3] * F[b_s + 1];
     }
 
     b_cos(p);
-    i4 = a->size[0];
+    i3 = a->size[0];
     a->size[0] = b_k->size[0];
-    emxEnsureCapacity((emxArray__common *)a, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)a, i3, (int)sizeof(double));
     loop_ub = b_k->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      a->data[i4] = 6.2831853071795862 * b_k->data[i4] * F[b_s];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      a->data[i3] = 6.2831853071795862 * b_k->data[i3] * F[b_s];
     }
 
     b_cos(a);
     xtmp = b_m / 39.478417604357432;
-    i4 = y->size[0];
+    i3 = y->size[0];
     y->size[0] = p->size[0];
-    emxEnsureCapacity((emxArray__common *)y, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)y, i3, (int)sizeof(double));
     loop_ub = p->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      y->data[i4] = xtmp * (p->data[i4] - a->data[i4]);
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      y->data[i3] = xtmp * (p->data[i3] - a->data[i3]);
     }
 
-    i4 = c_k->size[0];
+    i3 = c_k->size[0];
     c_k->size[0] = b_k->size[0];
-    emxEnsureCapacity((emxArray__common *)c_k, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)c_k, i3, (int)sizeof(double));
     loop_ub = b_k->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      c_k->data[i4] = b_k->data[i4] * b_k->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      c_k->data[i3] = b_k->data[i3] * b_k->data[i3];
     }
 
     rdivide(y, c_k, p);
-    i4 = b->size[0];
-    emxEnsureCapacity((emxArray__common *)b, i4, (int)sizeof(double));
+    i3 = b->size[0];
+    emxEnsureCapacity((emxArray__common *)b, i3, (int)sizeof(double));
     loop_ub = b->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      b->data[i4] += p->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      b->data[i3] += p->data[i3];
     }
 
     ndbl = F[b_s + 1] * (b_m * F[b_s + 1] + b1);
-    i4 = r13->size[0];
-    r13->size[0] = b_k->size[0];
-    emxEnsureCapacity((emxArray__common *)r13, i4, (int)sizeof(double));
+    i3 = r11->size[0];
+    r11->size[0] = b_k->size[0];
+    emxEnsureCapacity((emxArray__common *)r11, i3, (int)sizeof(double));
     loop_ub = b_k->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      r13->data[i4] = 2.0 * b_k->data[i4] * F[b_s + 1];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      r11->data[i3] = 2.0 * b_k->data[i3] * F[b_s + 1];
     }
 
-    sinc(r13, p);
+    sinc(r11, p);
     xtmp = F[b_s] * (b_m * F[b_s] + b1);
-    i4 = r12->size[0];
-    r12->size[0] = b_k->size[0];
-    emxEnsureCapacity((emxArray__common *)r12, i4, (int)sizeof(double));
+    i3 = r10->size[0];
+    r10->size[0] = b_k->size[0];
+    emxEnsureCapacity((emxArray__common *)r10, i3, (int)sizeof(double));
     loop_ub = b_k->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      r12->data[i4] = 2.0 * b_k->data[i4] * F[b_s];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      r10->data[i3] = 2.0 * b_k->data[i3] * F[b_s];
     }
 
-    sinc(r12, a);
-    i4 = b->size[0];
-    emxEnsureCapacity((emxArray__common *)b, i4, (int)sizeof(double));
+    sinc(r10, a);
+    i3 = b->size[0];
+    emxEnsureCapacity((emxArray__common *)b, i3, (int)sizeof(double));
     loop_ub = b->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      b->data[i4] += ndbl * p->data[i4] - xtmp * a->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      b->data[i3] += ndbl * p->data[i3] - xtmp * a->data[i3];
     }
 
-    i4 = r11->size[0] * r11->size[1];
-    r11->size[0] = I1->size[0];
-    r11->size[1] = I1->size[1];
-    emxEnsureCapacity((emxArray__common *)r11, i4, (int)sizeof(double));
-    loop_ub = I1->size[0] * I1->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      r11->data[i4] = 2.0 * I1->data[i4] * F[b_s + 1];
-    }
-
-    b_sinc(r11, r4);
-    i4 = r10->size[0] * r10->size[1];
-    r10->size[0] = I2->size[0];
-    r10->size[1] = I2->size[1];
-    emxEnsureCapacity((emxArray__common *)r10, i4, (int)sizeof(double));
-    loop_ub = I2->size[0] * I2->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      r10->data[i4] = 2.0 * I2->data[i4] * F[b_s + 1];
-    }
-
-    b_sinc(r10, r5);
-    i4 = r9->size[0] * r9->size[1];
+    i3 = r9->size[0] * r9->size[1];
     r9->size[0] = I1->size[0];
     r9->size[1] = I1->size[1];
-    emxEnsureCapacity((emxArray__common *)r9, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)r9, i3, (int)sizeof(double));
     loop_ub = I1->size[0] * I1->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      r9->data[i4] = 2.0 * I1->data[i4] * F[b_s];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      r9->data[i3] = 2.0 * I1->data[i3] * F[b_s + 1];
     }
 
-    b_sinc(r9, r6);
-    i4 = r8->size[0] * r8->size[1];
+    b_sinc(r9, r2);
+    i3 = r8->size[0] * r8->size[1];
     r8->size[0] = I2->size[0];
     r8->size[1] = I2->size[1];
-    emxEnsureCapacity((emxArray__common *)r8, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)r8, i3, (int)sizeof(double));
     loop_ub = I2->size[0] * I2->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      r8->data[i4] = 2.0 * I2->data[i4] * F[b_s];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      r8->data[i3] = 2.0 * I2->data[i3] * F[b_s + 1];
     }
 
-    b_sinc(r8, r7);
+    b_sinc(r8, r3);
+    i3 = r7->size[0] * r7->size[1];
+    r7->size[0] = I1->size[0];
+    r7->size[1] = I1->size[1];
+    emxEnsureCapacity((emxArray__common *)r7, i3, (int)sizeof(double));
+    loop_ub = I1->size[0] * I1->size[1];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      r7->data[i3] = 2.0 * I1->data[i3] * F[b_s];
+    }
+
+    b_sinc(r7, r4);
+    i3 = r6->size[0] * r6->size[1];
+    r6->size[0] = I2->size[0];
+    r6->size[1] = I2->size[1];
+    emxEnsureCapacity((emxArray__common *)r6, i3, (int)sizeof(double));
+    loop_ub = I2->size[0] * I2->size[1];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      r6->data[i3] = 2.0 * I2->data[i3] * F[b_s];
+    }
+
+    b_sinc(r6, r5);
     ndbl = 0.5 * F[b_s + 1];
     xtmp = 0.5 * F[b_s];
-    i4 = G->size[0] * G->size[1];
-    emxEnsureCapacity((emxArray__common *)G, i4, (int)sizeof(double));
+    i3 = G->size[0] * G->size[1];
+    emxEnsureCapacity((emxArray__common *)G, i3, (int)sizeof(double));
     nm1d2 = G->size[0];
     k = G->size[1];
     loop_ub = nm1d2 * k;
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      G->data[i4] += ndbl * (r4->data[i4] + r5->data[i4]) - xtmp * (r6->data[i4]
-        + r7->data[i4]);
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      G->data[i3] += ndbl * (r2->data[i3] + r3->data[i3]) - xtmp * (r4->data[i3]
+        + r5->data[i3]);
     }
   }
 
   emxFree_real_T(&c_k);
   emxFree_real_T(&y);
-  emxFree_real_T(&r13);
-  emxFree_real_T(&r12);
   emxFree_real_T(&r11);
   emxFree_real_T(&r10);
   emxFree_real_T(&r9);
@@ -540,25 +538,27 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
   emxFree_real_T(&r6);
   emxFree_real_T(&r5);
   emxFree_real_T(&r4);
+  emxFree_real_T(&r3);
+  emxFree_real_T(&r2);
   emxFree_real_T(&b_k);
   emxFree_real_T(&I2);
   emxFree_real_T(&I1);
   if (rt_remd_snf(N, 2.0) != 0.0) {
-    i4 = p->size[0];
+    i3 = p->size[0];
     p->size[0] = 1 + b->size[0];
-    emxEnsureCapacity((emxArray__common *)p, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)p, i3, (int)sizeof(double));
     p->data[0] = b0;
     loop_ub = b->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      p->data[i4 + 1] = b->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      p->data[i3 + 1] = b->data[i3];
     }
   } else {
-    i4 = p->size[0];
+    i3 = p->size[0];
     p->size[0] = b->size[0];
-    emxEnsureCapacity((emxArray__common *)p, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)p, i3, (int)sizeof(double));
     loop_ub = b->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      p->data[i4] = b->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      p->data[i3] = b->data[i3];
     }
   }
 
@@ -567,12 +567,12 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
   emxFree_real_T(&G);
   if (rt_remd_snf(N, 2.0) != 0.0) {
     if (2.0 > L + 1.0) {
+      i3 = 1;
       i4 = 1;
-      i5 = 1;
       nm1d2 = 0;
     } else {
-      i4 = (int)(L + 1.0);
-      i5 = -1;
+      i3 = (int)(L + 1.0);
+      i4 = -1;
       nm1d2 = 2;
     }
 
@@ -584,28 +584,28 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
       n = (int)(L + 1.0);
     }
 
-    i6 = h->size[0] * h->size[1];
+    i5 = h->size[0] * h->size[1];
     h->size[0] = 1;
-    h->size[1] = (div_s32_floor(nm1d2 - i4, i5) + n) - k;
-    emxEnsureCapacity((emxArray__common *)h, i6, (int)sizeof(double));
-    loop_ub = div_s32_floor(nm1d2 - i4, i5);
-    for (i6 = 0; i6 <= loop_ub; i6++) {
-      h->data[h->size[0] * i6] = a->data[(i4 + i5 * i6) - 1] / 2.0;
+    h->size[1] = (div_s32_floor(nm1d2 - i3, i4) + n) - k;
+    emxEnsureCapacity((emxArray__common *)h, i5, (int)sizeof(double));
+    loop_ub = div_s32_floor(nm1d2 - i3, i4);
+    for (i5 = 0; i5 <= loop_ub; i5++) {
+      h->data[h->size[0] * i5] = a->data[(i3 + i4 * i5) - 1] / 2.0;
     }
 
-    h->data[h->size[0] * (div_s32_floor(nm1d2 - i4, i5) + 1)] = a->data[0];
+    h->data[h->size[0] * (div_s32_floor(nm1d2 - i3, i4) + 1)] = a->data[0];
     loop_ub = n - k;
     for (n = 0; n <= loop_ub - 3; n++) {
-      h->data[h->size[0] * ((n + div_s32_floor(nm1d2 - i4, i5)) + 2)] = a->data
+      h->data[h->size[0] * ((n + div_s32_floor(nm1d2 - i3, i4)) + 2)] = a->data
         [(k + n) + 2] / 2.0;
     }
   } else {
-    i4 = p->size[0];
+    i3 = p->size[0];
     p->size[0] = a->size[0];
-    emxEnsureCapacity((emxArray__common *)p, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)p, i3, (int)sizeof(double));
     loop_ub = a->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      p->data[i4] = a->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      p->data[i3] = a->data[i3];
     }
 
     n = a->size[0];
@@ -617,27 +617,27 @@ void Myfirls(double N, double F[6], emxArray_real_T *h)
     }
 
     emxInit_real_T(&b_p, 2);
-    i4 = b_p->size[0] * b_p->size[1];
+    i3 = b_p->size[0] * b_p->size[1];
     b_p->size[0] = 1;
     b_p->size[1] = p->size[0] + a->size[0];
-    emxEnsureCapacity((emxArray__common *)b_p, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)b_p, i3, (int)sizeof(double));
     loop_ub = p->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      b_p->data[b_p->size[0] * i4] = p->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      b_p->data[b_p->size[0] * i3] = p->data[i3];
     }
 
     loop_ub = a->size[0];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      b_p->data[b_p->size[0] * (i4 + p->size[0])] = a->data[i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      b_p->data[b_p->size[0] * (i3 + p->size[0])] = a->data[i3];
     }
 
-    i4 = h->size[0] * h->size[1];
+    i3 = h->size[0] * h->size[1];
     h->size[0] = 1;
     h->size[1] = b_p->size[1];
-    emxEnsureCapacity((emxArray__common *)h, i4, (int)sizeof(double));
+    emxEnsureCapacity((emxArray__common *)h, i3, (int)sizeof(double));
     loop_ub = b_p->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      h->data[h->size[0] * i4] = 0.5 * b_p->data[b_p->size[0] * i4];
+    for (i3 = 0; i3 < loop_ub; i3++) {
+      h->data[h->size[0] * i3] = 0.5 * b_p->data[b_p->size[0] * i3];
     }
 
     emxFree_real_T(&b_p);

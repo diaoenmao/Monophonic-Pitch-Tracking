@@ -24,6 +24,7 @@
 
 /* Function Declarations */
 extern void assertValidSizeArg(const emlrtStack *sp, real_T varargin_1);
+extern void b_assertValidSizeArg(const emlrtStack *sp, real_T varargin_1);
 
 #endif
 

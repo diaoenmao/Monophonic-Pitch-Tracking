@@ -32,7 +32,7 @@ extern real_T b_std(const emlrtStack *sp, const emxArray_real_T *varargin_1);
 #endif
 
 extern void c_std(const emlrtStack *sp, const emxArray_real_T *varargin_1,
-                  emxArray_real_T *y);
+                  real_T y_data[], int32_T y_size[1]);
 
 #endif
 

@@ -2,7 +2,7 @@
  * File: Myfir1.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -10,7 +10,6 @@
 #include "yaapt.h"
 #include "Myfir1.h"
 #include "yaapt_emxutil.h"
-#include "abs.h"
 #include "Myfirls.h"
 #include "cos.h"
 #include "yaapt_rtwutil.h"
@@ -207,7 +206,7 @@ void Myfir1(double N, const double Wn[2], emxArray_real_T *b)
     }
   }
 
-  emxInit_real_T1(&Window, 1);
+  emxInit_real_T2(&Window, 1);
   k = Window->size[0];
   Window->size[0] = hh->size[1];
   emxEnsureCapacity((emxArray__common *)Window, k, (int)sizeof(double));

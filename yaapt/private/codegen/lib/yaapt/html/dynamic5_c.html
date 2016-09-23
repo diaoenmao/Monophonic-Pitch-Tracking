@@ -14,7 +14,7 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: dynamic5.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.1</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 05-Sep-2016 15:50:20</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 23-Sep-2016 04:55:32</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
@@ -53,11 +53,11 @@
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>  <font color="#112266"><b>int</b></font> j;
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>  <font color="#112266"><b>int</b></font> k;
 <a name="43"><font color="#888888 "><i>   43   </i></font></a>  <font color="#112266"><b>int</b></font> c_Trans;
-<a name="44"><font color="#888888 "><i>   44   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *r25;
+<a name="44"><font color="#888888 "><i>   44   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *r24;
 <a name="45"><font color="#888888 "><i>   45   </i></font></a>  <font color="#112266"><b>double</b></font> Path_data[4999];
 <a name="46"><font color="#888888 "><i>   46   </i></font></a>  <font color="#112266"><b>int</b></font> Path_size[2];
 <a name="47"><font color="#888888 "><i>   47   </i></font></a>  <font color="#112266"><b>int</b></font> n;
-<a name="48"><font color="#888888 "><i>   48   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T2" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T2');" target="_self"><font color="#1122aa">emxInit_real_T2</font></a>(&amp;Trans, 3);
+<a name="48"><font color="#888888 "><i>   48   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T1');" target="_self"><font color="#1122aa">emxInit_real_T1</font></a>(&amp;Trans, 3);
 <a name="49"><font color="#888888 "><i>   49   </i></font></a>
 <a name="50"><font color="#888888 "><i>   50   </i></font></a>  <font color="#117755"><i>/*    Creation date:   Spring 2001 */</i></font>
 <a name="51"><font color="#888888 "><i>   51   </i></font></a>  <font color="#117755"><i>/*    Revision dates:   January 3, 2002, March 7, 2005 */</i></font>
@@ -121,19 +121,19 @@
 <a name="109"><font color="#888888 "><i>  109   </i></font></a>    Trans-&gt;data[b_Trans] *= k1;
 <a name="110"><font color="#888888 "><i>  110   </i></font></a>  <b>}</b>
 <a name="111"><font color="#888888 "><i>  111   </i></font></a>
-<a name="112"><font color="#888888 "><i>  112   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;r25, 2);
+<a name="112"><font color="#888888 "><i>  112   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T');" target="_self"><font color="#1122aa">emxInit_real_T</font></a>(&amp;r24, 2);
 <a name="113"><font color="#888888 "><i>  113   </i></font></a>
 <a name="114"><font color="#888888 "><i>  114   </i></font></a>  <font color="#117755"><i>/*  search the best path */</i></font>
-<a name="115"><font color="#888888 "><i>  115   </i></font></a>  b_Trans = r25-&gt;size[0] * r25-&gt;size[1];
-<a name="116"><font color="#888888 "><i>  116   </i></font></a>  r25-&gt;size[0] = Merit_array-&gt;size[0];
-<a name="117"><font color="#888888 "><i>  117   </i></font></a>  r25-&gt;size[1] = Merit_array-&gt;size[1];
-<a name="118"><font color="#888888 "><i>  118   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)r25, b_Trans, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="115"><font color="#888888 "><i>  115   </i></font></a>  b_Trans = r24-&gt;size[0] * r24-&gt;size[1];
+<a name="116"><font color="#888888 "><i>  116   </i></font></a>  r24-&gt;size[0] = Merit_array-&gt;size[0];
+<a name="117"><font color="#888888 "><i>  117   </i></font></a>  r24-&gt;size[1] = Merit_array-&gt;size[1];
+<a name="118"><font color="#888888 "><i>  118   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)r24, b_Trans, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
 <a name="119"><font color="#888888 "><i>  119   </i></font></a>  loop_ub = Merit_array-&gt;size[0] * Merit_array-&gt;size[1];
 <a name="120"><font color="#888888 "><i>  120   </i></font></a>  <font color="#112266"><b>for</b></font> (b_Trans = 0; b_Trans &lt; loop_ub; b_Trans++) <b>{</b>
-<a name="121"><font color="#888888 "><i>  121   </i></font></a>    r25-&gt;data[b_Trans] = 1.0 - Merit_array-&gt;data[b_Trans];
+<a name="121"><font color="#888888 "><i>  121   </i></font></a>    r24-&gt;data[b_Trans] = 1.0 - Merit_array-&gt;data[b_Trans];
 <a name="122"><font color="#888888 "><i>  122   </i></font></a>  <b>}</b>
 <a name="123"><font color="#888888 "><i>  123   </i></font></a>
-<a name="124"><font color="#888888 "><i>  124   </i></font></a>  <a href="path1_c.html#fcn_path1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_path1');" target="_self"><font color="#1122aa">path1</font></a>(r25, Trans, Path_data, Path_size);
+<a name="124"><font color="#888888 "><i>  124   </i></font></a>  <a href="path1_c.html#fcn_path1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_path1');" target="_self"><font color="#1122aa">path1</font></a>(r24, Trans, Path_data, Path_size);
 <a name="125"><font color="#888888 "><i>  125   </i></font></a>
 <a name="126"><font color="#888888 "><i>  126   </i></font></a>  <font color="#117755"><i>/*  Extract the final vocied F0 track which has the lowest cost */</i></font>
 <a name="127"><font color="#888888 "><i>  127   </i></font></a>  <font color="#117755"><i>/*  At this point, VSpec_F0 is the spectral pitch track for voiced frames */</i></font>
@@ -142,7 +142,7 @@
 <a name="130"><font color="#888888 "><i>  130   </i></font></a>  FinPitch-&gt;size[1] = Pitch_array-&gt;size[1];
 <a name="131"><font color="#888888 "><i>  131   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)FinPitch, b_Trans, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
 <a name="132"><font color="#888888 "><i>  132   </i></font></a>  loop_ub = Pitch_array-&gt;size[1];
-<a name="133"><font color="#888888 "><i>  133   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;r25);
+<a name="133"><font color="#888888 "><i>  133   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;r24);
 <a name="134"><font color="#888888 "><i>  134   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;Trans);
 <a name="135"><font color="#888888 "><i>  135   </i></font></a>  <font color="#112266"><b>for</b></font> (b_Trans = 0; b_Trans &lt; loop_ub; b_Trans++) <b>{</b>
 <a name="136"><font color="#888888 "><i>  136   </i></font></a>    FinPitch-&gt;data[b_Trans] = 0.0;

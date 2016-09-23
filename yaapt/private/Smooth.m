@@ -116,8 +116,3 @@ for i=1:length(arr)
 end
 out = arr;
 end
-			
-			
-			
-			
-					

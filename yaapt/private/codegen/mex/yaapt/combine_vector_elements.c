@@ -15,10 +15,6 @@
 #include "lapacke.h"
 
 /* Function Definitions */
-
-/*
- *
- */
 real_T combine_vector_elements(const emlrtStack *sp, const emxArray_real_T *x)
 {
   real_T y;
@@ -34,11 +30,11 @@ real_T combine_vector_elements(const emlrtStack *sp, const emxArray_real_T *x)
     y = 0.0;
   } else {
     y = x->data[0];
-    st.site = &th_emlrtRSI;
+    st.site = &tg_emlrtRSI;
     overflow = ((!(2 > x->size[1])) && (x->size[1] > 2147483646));
     if (overflow) {
-      b_st.site = &cb_emlrtRSI;
-      check_forloop_overflow_error(&b_st, true);
+      b_st.site = &ab_emlrtRSI;
+      check_forloop_overflow_error(&b_st);
     }
 
     for (k = 2; k <= x->size[1]; k++) {

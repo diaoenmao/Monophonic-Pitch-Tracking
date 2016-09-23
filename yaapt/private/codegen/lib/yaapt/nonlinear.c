@@ -2,7 +2,7 @@
  * File: nonlinear.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -54,8 +54,8 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, double Prm_bp_forder,
   emxArray_real_T *b_F1;
   emxArray_real_T *tempData;
   double b_Prm_bp_low[2];
+  int i1;
   int i2;
-  int i3;
   int k;
 
   /*    Creation date:  Jun. 30, 2006 */
@@ -97,20 +97,20 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, double Prm_bp_forder,
   /*  LenData_dec = fix ((lenDataA+dec_factor-1)/dec_factor); */
   if ((dec_factor == 0.0) || (((dec_factor > 0.0) && (1 > DataA->size[1])) ||
        ((0.0 > dec_factor) && (DataA->size[1] > 1)))) {
-    i2 = 1;
-    i3 = -1;
+    i1 = 1;
+    i2 = -1;
   } else {
-    i2 = (int)dec_factor;
-    i3 = DataA->size[1] - 1;
+    i1 = (int)dec_factor;
+    i2 = DataA->size[1] - 1;
   }
 
   k = DataB->size[0] * DataB->size[1];
   DataB->size[0] = 1;
-  DataB->size[1] = div_s32_floor(i3, i2) + 1;
+  DataB->size[1] = div_s32_floor(i2, i1) + 1;
   emxEnsureCapacity((emxArray__common *)DataB, k, (int)sizeof(double));
-  k = div_s32_floor(i3, i2);
-  for (i3 = 0; i3 <= k; i3++) {
-    DataB->data[DataB->size[0] * i3] = tempData->data[i2 * i3];
+  k = div_s32_floor(i2, i1);
+  for (i2 = 0; i2 <= k; i2++) {
+    DataB->data[DataB->size[0] * i2] = tempData->data[i1 * i2];
   }
 
   /*    Create nonlinear version of signal */
@@ -119,10 +119,10 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, double Prm_bp_forder,
   /*    Absoulte value of the signal */
   /*    DataC =  abs(DataA); */
   /*    Squared value of the signal */
-  i2 = DataC->size[0] * DataC->size[1];
+  i1 = DataC->size[0] * DataC->size[1];
   DataC->size[0] = 1;
   DataC->size[1] = DataA->size[1];
-  emxEnsureCapacity((emxArray__common *)DataC, i2, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)DataC, i1, (int)sizeof(double));
   for (k = 0; k + 1 <= DataA->size[1]; k++) {
     DataC->data[k] = DataA->data[k] * DataA->data[k];
   }
@@ -132,20 +132,20 @@ void nonlinear(const emxArray_real_T *DataA, double Fs, double Prm_bp_forder,
   emxFree_real_T(&b_F1);
   if ((dec_factor == 0.0) || (((dec_factor > 0.0) && (1 > DataA->size[1])) ||
        ((0.0 > dec_factor) && (DataA->size[1] > 1)))) {
-    i2 = 1;
-    i3 = -1;
+    i1 = 1;
+    i2 = -1;
   } else {
-    i2 = (int)dec_factor;
-    i3 = DataA->size[1] - 1;
+    i1 = (int)dec_factor;
+    i2 = DataA->size[1] - 1;
   }
 
   k = DataD->size[0] * DataD->size[1];
   DataD->size[0] = 1;
-  DataD->size[1] = div_s32_floor(i3, i2) + 1;
+  DataD->size[1] = div_s32_floor(i2, i1) + 1;
   emxEnsureCapacity((emxArray__common *)DataD, k, (int)sizeof(double));
-  k = div_s32_floor(i3, i2);
-  for (i3 = 0; i3 <= k; i3++) {
-    DataD->data[DataD->size[0] * i3] = tempData->data[i2 * i3];
+  k = div_s32_floor(i2, i1);
+  for (i2 = 0; i2 <= k; i2++) {
+    DataD->data[DataD->size[0] * i2] = tempData->data[i1 * i2];
   }
 
   emxFree_real_T(&tempData);

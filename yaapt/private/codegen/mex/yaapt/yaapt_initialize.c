@@ -74,9 +74,9 @@ static void yaapt_once(void)
 
   int32_T postfix_exprs_11_1[2] = { 0, -1 };
 
-  int32_T cond_starts_12_0[2] = { 3670, 3688 };
+  int32_T cond_starts_12_0[2] = { 3686, 3704 };
 
-  int32_T cond_ends_12_0[2] = { 3683, 3713 };
+  int32_T cond_ends_12_0[2] = { 3699, 3729 };
 
   int32_T postfix_exprs_12_0[3] = { 0, 1, -3 };
 
@@ -92,15 +92,15 @@ static void yaapt_once(void)
 
   int32_T postfix_exprs_20_0[3] = { 0, 1, -3 };
 
-  int32_T cond_starts_20_1[4] = { 3223, 3240, 3260, 3276 };
+  int32_T cond_starts_20_1[4] = { 3241, 3258, 3278, 3294 };
 
-  int32_T cond_ends_20_1[4] = { 3236, 3254, 3272, 3291 };
+  int32_T cond_ends_20_1[4] = { 3254, 3272, 3290, 3309 };
 
   int32_T postfix_exprs_20_1[7] = { 0, 1, -3, 2, 3, -3, -2 };
 
-  int32_T cond_starts_20_2[2] = { 3495, 3516 };
+  int32_T cond_starts_20_2[2] = { 3513, 3534 };
 
-  int32_T cond_ends_20_2[2] = { 3510, 3533 };
+  int32_T cond_ends_20_2[2] = { 3528, 3551 };
 
   int32_T postfix_exprs_20_2[3] = { 0, 1, -3 };
 
@@ -116,11 +116,53 @@ static void yaapt_once(void)
 
   int32_T postfix_exprs_21_1[3] = { 0, 1, -3 };
 
-  int32_T cond_starts_23_0[4] = { 298, 324, 333, 369 };
+  int32_T cond_starts_23_0[2] = { 1891, 1913 };
 
-  int32_T cond_ends_23_0[4] = { 320, 329, 365, 401 };
+  int32_T cond_ends_23_0[2] = { 1909, 1934 };
 
-  int32_T postfix_exprs_23_0[7] = { 0, 1, -3, 2, -3, 3, -3 };
+  int32_T postfix_exprs_23_0[3] = { 0, 1, -3 };
+
+  int32_T cond_starts_23_1[2] = { 2224, 2248 };
+
+  int32_T cond_ends_23_1[2] = { 2244, 2269 };
+
+  int32_T postfix_exprs_23_1[3] = { 0, 1, -3 };
+
+  int32_T cond_starts_23_2[3] = { 2287, 2345, 2381 };
+
+  int32_T cond_ends_23_2[3] = { 2343, 2378, 2417 };
+
+  int32_T postfix_exprs_23_2[5] = { 0, 1, -2, 2, -3 };
+
+  int32_T cond_starts_23_3[2] = { 2657, 2681 };
+
+  int32_T cond_ends_23_3[2] = { 2677, 2702 };
+
+  int32_T postfix_exprs_23_3[3] = { 0, 1, -3 };
+
+  int32_T cond_starts_23_4[3] = { 2720, 2779, 2815 };
+
+  int32_T cond_ends_23_4[3] = { 2777, 2812, 2851 };
+
+  int32_T postfix_exprs_23_4[5] = { 0, 1, -2, 2, -3 };
+
+  int32_T cond_starts_23_5[3] = { 3249, 3307, 3343 };
+
+  int32_T cond_ends_23_5[3] = { 3305, 3340, 3379 };
+
+  int32_T postfix_exprs_23_5[5] = { 0, 1, -2, 2, -3 };
+
+  int32_T cond_starts_23_6[3] = { 3712, 3770, 3806 };
+
+  int32_T cond_ends_23_6[3] = { 3768, 3803, 3842 };
+
+  int32_T postfix_exprs_23_6[5] = { 0, 1, -2, 2, -3 };
+
+  int32_T cond_starts_23_7[3] = { 4230, 4308, 4344 };
+
+  int32_T cond_ends_23_7[3] = { 4306, 4341, 4380 };
+
+  int32_T postfix_exprs_23_7[5] = { 0, 1, -2, 2, -3 };
 
   /* Allocate instance data */
   covrtAllocateInstanceData(&emlrtCoverageInstance);
@@ -128,22 +170,17 @@ static void yaapt_once(void)
   /* Initialize Coverage Information */
   covrtScriptInit(&emlrtCoverageInstance,
                   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\yaapt.m",
-                  0, 1, 5, 3, 0, 0, 0, 0, 0, 0, 0);
+                  0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 0, 0, "yaapt", 0, -1, 8736);
+  covrtFcnInit(&emlrtCoverageInstance, 0, 0, "yaapt", 0, -1, 8806);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 0, 4, 6575, -1, 7586);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 0, 3, 6400, -1, 6466);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 0, 2, 6306, -1, 6367);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 0, 1, 2550, -1, 6275);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 0, 1, 2550, -1, 7656);
   covrtBasicBlockInit(&emlrtCoverageInstance, 0, 0, 2445, -1, 2479);
 
   /* Initialize If Information */
   covrtIfInit(&emlrtCoverageInstance, 0, 0, 2429, 2440, -1, 2484);
-  covrtIfInit(&emlrtCoverageInstance, 0, 1, 6281, 6301, -1, 6372);
-  covrtIfInit(&emlrtCoverageInstance, 0, 2, 6373, 6395, -1, 6471);
 
   /* Initialize MCDC Information */
   /* Initialize For Information */
@@ -438,29 +475,26 @@ static void yaapt_once(void)
   /* Initialize Coverage Information */
   covrtScriptInit(&emlrtCoverageInstance,
                   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\spec_trk.m",
-                  9, 1, 21, 7, 0, 0, 0, 4, 0, 0, 0);
+                  9, 1, 18, 5, 0, 0, 0, 4, 0, 0, 0);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 9, 0, "spec_trk", 0, -1, 8710);
+  covrtFcnInit(&emlrtCoverageInstance, 9, 0, "spec_trk", 0, -1, 8808);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 20, 8188, -1, 8680);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 19, 8161, -1, 8179);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 18, 8095, -1, 8113);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 17, 7836, -1, 8052);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 16, 7667, -1, 7755);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 15, 7529, -1, 7555);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 14, 7098, -1, 7216);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 13, 7014, -1, 7074);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 12, 6721, -1, 6850);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 11, 6447, -1, 6513);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 10, 6352, -1, 6440);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 9, 5747, -1, 6325);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 8, 4240, -1, 4328);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 7, 4081, -1, 4155);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 6, 4014, -1, 4059);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 5, 3615, -1, 3914);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 4, 3338, -1, 3550);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 17, 7838, -1, 8778);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 16, 7669, -1, 7757);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 15, 7531, -1, 7557);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 14, 7100, -1, 7218);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 13, 7016, -1, 7076);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 12, 6723, -1, 6852);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 11, 6445, -1, 6511);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 10, 6350, -1, 6438);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 9, 5745, -1, 6323);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 8, 4238, -1, 4326);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 7, 4079, -1, 4153);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 6, 4012, -1, 4057);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 5, 3613, -1, 3912);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 9, 4, 3338, -1, 3548);
   covrtBasicBlockInit(&emlrtCoverageInstance, 9, 3, 3187, -1, 3221);
   covrtBasicBlockInit(&emlrtCoverageInstance, 9, 2, 2582, -1, 3157);
   covrtBasicBlockInit(&emlrtCoverageInstance, 9, 1, 2523, -1, 2556);
@@ -469,18 +503,16 @@ static void yaapt_once(void)
   /* Initialize If Information */
   covrtIfInit(&emlrtCoverageInstance, 9, 0, 2490, 2518, -1, 2561);
   covrtIfInit(&emlrtCoverageInstance, 9, 1, 3159, 3178, -1, 3226);
-  covrtIfInit(&emlrtCoverageInstance, 9, 2, 3581, 3606, 4161, 4337);
-  covrtIfInit(&emlrtCoverageInstance, 9, 3, 7076, 7094, 7287, 7774);
-  covrtIfInit(&emlrtCoverageInstance, 9, 4, 7302, 7321, 7654, 7764);
-  covrtIfInit(&emlrtCoverageInstance, 9, 5, 8054, 8090, -1, 8121);
-  covrtIfInit(&emlrtCoverageInstance, 9, 6, 8122, 8156, -1, 8186);
+  covrtIfInit(&emlrtCoverageInstance, 9, 2, 3579, 3604, 4159, 4335);
+  covrtIfInit(&emlrtCoverageInstance, 9, 3, 7078, 7096, 7289, 7776);
+  covrtIfInit(&emlrtCoverageInstance, 9, 4, 7304, 7323, 7656, 7766);
 
   /* Initialize MCDC Information */
   /* Initialize For Information */
-  covrtForInit(&emlrtCoverageInstance, 9, 0, 3553, 3577, 4341);
-  covrtForInit(&emlrtCoverageInstance, 9, 1, 3979, 4001, 4072);
-  covrtForInit(&emlrtCoverageInstance, 9, 2, 6327, 6348, 6446);
-  covrtForInit(&emlrtCoverageInstance, 9, 3, 6696, 6717, 6855);
+  covrtForInit(&emlrtCoverageInstance, 9, 0, 3551, 3575, 4339);
+  covrtForInit(&emlrtCoverageInstance, 9, 1, 3977, 3999, 4070);
+  covrtForInit(&emlrtCoverageInstance, 9, 2, 6325, 6346, 6444);
+  covrtForInit(&emlrtCoverageInstance, 9, 3, 6698, 6719, 6857);
 
   /* Initialize While Information */
   /* Initialize Switch Information */
@@ -634,56 +666,51 @@ static void yaapt_once(void)
   /* Initialize Coverage Information */
   covrtScriptInit(&emlrtCoverageInstance,
                   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\peaks.m",
-                  12, 1, 22, 13, 0, 0, 0, 1, 0, 2, 1);
+                  12, 1, 19, 11, 0, 0, 0, 1, 0, 2, 1);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 12, 0, "peaks", 0, -1, 5820);
+  covrtFcnInit(&emlrtCoverageInstance, 12, 0, "peaks", 0, -1, 5836);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 8, 3144, -1, 3265);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 12, 4036, -1, 4115);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 21, 5658, -1, 5722);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 20, 5449, -1, 5638);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 19, 5261, -1, 5334);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 18, 5131, -1, 5239);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 17, 5046, -1, 5082);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 16, 4823, -1, 4935);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 15, 4693, -1, 4801);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 14, 4608, -1, 4644);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 13, 4205, -1, 4409);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 11, 3820, -1, 3920);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 10, 3572, -1, 3608);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 9, 3530, -1, 3542);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 7, 3046, -1, 3084);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 6, 2946, -1, 2966);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 5, 2594, -1, 2916);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 4, 2417, -1, 2507);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 3, 2300, -1, 2370);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 2, 2079, -1, 2276);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 5, 3160, -1, 3281);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 9, 4052, -1, 4131);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 18, 5674, -1, 5738);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 17, 5465, -1, 5654);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 16, 5277, -1, 5350);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 15, 5147, -1, 5255);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 14, 5062, -1, 5098);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 13, 4839, -1, 4951);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 12, 4709, -1, 4817);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 11, 4624, -1, 4660);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 10, 4221, -1, 4425);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 8, 3836, -1, 3936);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 7, 3588, -1, 3624);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 6, 3546, -1, 3558);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 4, 3062, -1, 3100);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 3, 2962, -1, 2982);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 12, 2, 2079, -1, 2932);
   covrtBasicBlockInit(&emlrtCoverageInstance, 12, 1, 1996, -1, 2013);
   covrtBasicBlockInit(&emlrtCoverageInstance, 12, 0, 1641, -1, 1940);
 
   /* Initialize If Information */
   covrtIfInit(&emlrtCoverageInstance, 12, 0, 1971, 1991, -1, 2018);
-  covrtIfInit(&emlrtCoverageInstance, 12, 1, 2279, 2295, -1, 2376);
-  covrtIfInit(&emlrtCoverageInstance, 12, 2, 2377, 2412, -1, 2512);
-  covrtIfInit(&emlrtCoverageInstance, 12, 3, 2918, 2941, -1, 2971);
-  covrtIfInit(&emlrtCoverageInstance, 12, 4, 3086, 3116, -1, -2);
-  covrtIfInit(&emlrtCoverageInstance, 12, 5, 3666, 3713, -1, 3929);
-  covrtIfInit(&emlrtCoverageInstance, 12, 6, 3974, 4013, 4494, 5727);
-  covrtIfInit(&emlrtCoverageInstance, 12, 7, 4494, 4511, 5648, 5727);
-  covrtIfInit(&emlrtCoverageInstance, 12, 8, 4567, 4596, -1, 4944);
-  covrtIfInit(&emlrtCoverageInstance, 12, 9, 4654, 4680, -1, 4814);
-  covrtIfInit(&emlrtCoverageInstance, 12, 10, 5005, 5032, -1, 5343);
-  covrtIfInit(&emlrtCoverageInstance, 12, 11, 5092, 5118, -1, 5252);
-  covrtIfInit(&emlrtCoverageInstance, 12, 12, 5416, 5440, -1, 5647);
+  covrtIfInit(&emlrtCoverageInstance, 12, 1, 2934, 2957, -1, 2987);
+  covrtIfInit(&emlrtCoverageInstance, 12, 2, 3102, 3132, -1, -2);
+  covrtIfInit(&emlrtCoverageInstance, 12, 3, 3682, 3729, -1, 3945);
+  covrtIfInit(&emlrtCoverageInstance, 12, 4, 3990, 4029, 4510, 5743);
+  covrtIfInit(&emlrtCoverageInstance, 12, 5, 4510, 4527, 5664, 5743);
+  covrtIfInit(&emlrtCoverageInstance, 12, 6, 4583, 4612, -1, 4960);
+  covrtIfInit(&emlrtCoverageInstance, 12, 7, 4670, 4696, -1, 4830);
+  covrtIfInit(&emlrtCoverageInstance, 12, 8, 5021, 5048, -1, 5359);
+  covrtIfInit(&emlrtCoverageInstance, 12, 9, 5108, 5134, -1, 5268);
+  covrtIfInit(&emlrtCoverageInstance, 12, 10, 5432, 5456, -1, 5663);
 
   /* Initialize MCDC Information */
-  covrtMcdcInit(&emlrtCoverageInstance, 12, 0, 3669, 3713, 2, 0,
+  covrtMcdcInit(&emlrtCoverageInstance, 12, 0, 3685, 3729, 2, 0,
                 cond_starts_12_0, cond_ends_12_0, 3, postfix_exprs_12_0);
 
   /* Initialize For Information */
-  covrtForInit(&emlrtCoverageInstance, 12, 0, 3544, 3568, 3933);
+  covrtForInit(&emlrtCoverageInstance, 12, 0, 3560, 3584, 3949);
 
   /* Initialize While Information */
   /* Initialize Switch Information */
@@ -802,30 +829,33 @@ static void yaapt_once(void)
   /* Initialize Coverage Information */
   covrtScriptInit(&emlrtCoverageInstance,
                   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\tm_trk.m",
-                  16, 1, 9, 0, 0, 0, 0, 5, 0, 0, 0);
+                  16, 1, 10, 1, 0, 0, 0, 5, 0, 0, 0);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 16, 0, "tm_trk", 0, -1, 4059);
+  covrtFcnInit(&emlrtCoverageInstance, 16, 0, "tm_trk", 0, -1, 4217);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 8, 4004, -1, 4052);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 7, 3883, -1, 3935);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 6, 3816, -1, 3845);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 5, 3731, -1, 3764);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 4, 3615, -1, 3693);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 9, 4162, -1, 4210);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 8, 4041, -1, 4093);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 7, 3974, -1, 4003);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 6, 3889, -1, 3922);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 5, 3841, -1, 3866);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 16, 4, 3615, -1, 3769);
   covrtBasicBlockInit(&emlrtCoverageInstance, 16, 3, 2712, -1, 3310);
   covrtBasicBlockInit(&emlrtCoverageInstance, 16, 2, 2364, -1, 2604);
   covrtBasicBlockInit(&emlrtCoverageInstance, 16, 1, 2292, -1, 2358);
   covrtBasicBlockInit(&emlrtCoverageInstance, 16, 0, 1710, -1, 2261);
 
   /* Initialize If Information */
+  covrtIfInit(&emlrtCoverageInstance, 16, 0, 3806, 3828, -1, 3879);
+
   /* Initialize MCDC Information */
   /* Initialize For Information */
   covrtForInit(&emlrtCoverageInstance, 16, 0, 2263, 2288, 2363);
   covrtForInit(&emlrtCoverageInstance, 16, 1, 2687, 2707, 3315);
-  covrtForInit(&emlrtCoverageInstance, 16, 2, 3592, 3611, 4057);
-  covrtForInit(&emlrtCoverageInstance, 16, 3, 3699, 3722, 3773);
-  covrtForInit(&emlrtCoverageInstance, 16, 4, 3851, 3874, 3944);
+  covrtForInit(&emlrtCoverageInstance, 16, 2, 3592, 3611, 4215);
+  covrtForInit(&emlrtCoverageInstance, 16, 3, 3775, 3798, 3931);
+  covrtForInit(&emlrtCoverageInstance, 16, 4, 4009, 4032, 4102);
 
   /* Initialize While Information */
   /* Initialize Switch Information */
@@ -907,10 +937,10 @@ static void yaapt_once(void)
                   19, 1, 11, 4, 0, 0, 0, 4, 0, 0, 0);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 19, 0, "refine", 0, -1, 4199);
+  covrtFcnInit(&emlrtCoverageInstance, 19, 0, "refine", 0, -1, 4248);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 19, 10, 4056, -1, 4116);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 19, 10, 4056, -1, 4165);
   covrtBasicBlockInit(&emlrtCoverageInstance, 19, 9, 3968, -1, 4011);
   covrtBasicBlockInit(&emlrtCoverageInstance, 19, 8, 3875, -1, 3907);
   covrtBasicBlockInit(&emlrtCoverageInstance, 19, 7, 3654, -1, 3690);
@@ -949,34 +979,34 @@ static void yaapt_once(void)
                   20, 1, 6, 3, 0, 0, 0, 4, 0, 8, 3);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 20, 0, "dynamic", 0, -1, 3920);
+  covrtFcnInit(&emlrtCoverageInstance, 20, 0, "dynamic", 0, -1, 3938);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 5, 3883, -1, 3913);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 4, 3668, -1, 3859);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 3, 3552, -1, 3573);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 2, 3309, -1, 3404);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 1, 3075, -1, 3137);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 5, 3901, -1, 3931);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 4, 3686, -1, 3877);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 3, 3570, -1, 3591);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 2, 3327, -1, 3422);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 20, 1, 3075, -1, 3155);
   covrtBasicBlockInit(&emlrtCoverageInstance, 20, 0, 2136, -1, 2781);
 
   /* Initialize If Information */
-  covrtIfInit(&emlrtCoverageInstance, 20, 0, 3006, 3048, -1, 3154);
-  covrtIfInit(&emlrtCoverageInstance, 20, 1, 3219, 3292, -1, 3421);
-  covrtIfInit(&emlrtCoverageInstance, 20, 2, 3490, 3535, -1, 3590);
+  covrtIfInit(&emlrtCoverageInstance, 20, 0, 3006, 3048, -1, 3172);
+  covrtIfInit(&emlrtCoverageInstance, 20, 1, 3237, 3310, -1, 3439);
+  covrtIfInit(&emlrtCoverageInstance, 20, 2, 3508, 3553, -1, 3608);
 
   /* Initialize MCDC Information */
   covrtMcdcInit(&emlrtCoverageInstance, 20, 0, 3010, 3048, 2, 0,
                 cond_starts_20_0, cond_ends_20_0, 3, postfix_exprs_20_0);
-  covrtMcdcInit(&emlrtCoverageInstance, 20, 1, 3222, 3292, 4, 2,
+  covrtMcdcInit(&emlrtCoverageInstance, 20, 1, 3240, 3310, 4, 2,
                 cond_starts_20_1, cond_ends_20_1, 7, postfix_exprs_20_1);
-  covrtMcdcInit(&emlrtCoverageInstance, 20, 2, 3494, 3534, 2, 6,
+  covrtMcdcInit(&emlrtCoverageInstance, 20, 2, 3512, 3552, 2, 6,
                 cond_starts_20_2, cond_ends_20_2, 3, postfix_exprs_20_2);
 
   /* Initialize For Information */
-  covrtForInit(&emlrtCoverageInstance, 20, 0, 2887, 2907, 3614);
-  covrtForInit(&emlrtCoverageInstance, 20, 1, 2911, 2930, 3610);
-  covrtForInit(&emlrtCoverageInstance, 20, 2, 2938, 2957, 3602);
-  covrtForInit(&emlrtCoverageInstance, 20, 3, 3861, 3881, 3918);
+  covrtForInit(&emlrtCoverageInstance, 20, 0, 2887, 2907, 3632);
+  covrtForInit(&emlrtCoverageInstance, 20, 1, 2911, 2930, 3628);
+  covrtForInit(&emlrtCoverageInstance, 20, 2, 2938, 2957, 3620);
+  covrtForInit(&emlrtCoverageInstance, 20, 3, 3879, 3899, 3936);
 
   /* Initialize While Information */
   /* Initialize Switch Information */
@@ -1137,111 +1167,80 @@ static void yaapt_once(void)
 
   /* Initialize Coverage Information */
   covrtScriptInit(&emlrtCoverageInstance,
-                  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Pitch_Optimization.m",
-                  23, 1, 3, 1, 0, 0, 0, 1, 0, 4, 1);
+                  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Smooth2.m",
+                  23, 1, 19, 17, 0, 0, 0, 2, 1, 21, 8);
 
   /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 23, 0, "Pitch_Optimization", 0, -1, 602);
+  covrtFcnInit(&emlrtCoverageInstance, 23, 0, "Smooth2", 0, -1, 6437);
 
   /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 2, 460, -1, 571);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 1, 412, -1, 445);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 0, 243, -1, 261);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 18, 6267, -1, 6363);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 17, 6174, -1, 6237);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 5, 802, -1, 807);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 6, 834, -1, 874);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 16, 4401, -1, 4596);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 15, 3864, -1, 4155);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 14, 3401, -1, 3598);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 13, 2869, -1, 3144);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 12, 2435, -1, 2624);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 11, 2002, -1, 2191);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 10, 1623, -1, 1819);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 9, 1456, -1, 1604);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 8, 1254, -1, 1402);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 7, 909, -1, 1218);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 4, 486, -1, 619);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 3, 335, -1, 471);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 2, 294, -1, 306);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 1, 215, -1, 280);
+  covrtBasicBlockInit(&emlrtCoverageInstance, 23, 0, 35, -1, 163);
 
   /* Initialize If Information */
-  covrtIfInit(&emlrtCoverageInstance, 23, 0, 294, 402, -1, 454);
+  covrtIfInit(&emlrtCoverageInstance, 23, 0, 189, 206, -1, 289);
+  covrtIfInit(&emlrtCoverageInstance, 23, 1, 629, 648, -1, 899);
+  covrtIfInit(&emlrtCoverageInstance, 23, 2, 756, 789, 817, 887);
+  covrtIfInit(&emlrtCoverageInstance, 23, 3, 1224, 1245, 1408, 1828);
+  covrtIfInit(&emlrtCoverageInstance, 23, 4, 1408, 1447, 1610, 1828);
+  covrtIfInit(&emlrtCoverageInstance, 23, 5, 1854, 1879, -1, 6156);
+  covrtIfInit(&emlrtCoverageInstance, 23, 6, 1888, 1935, 2217, 4643);
+  covrtIfInit(&emlrtCoverageInstance, 23, 7, 1948, 1985, -1, 2208);
+  covrtIfInit(&emlrtCoverageInstance, 23, 8, 2217, 2270, 2650, 4643);
+  covrtIfInit(&emlrtCoverageInstance, 23, 9, 2283, 2418, -1, 2641);
+  covrtIfInit(&emlrtCoverageInstance, 23, 10, 2650, 2703, 3170, 4643);
+  covrtIfInit(&emlrtCoverageInstance, 23, 11, 2716, 2852, -1, 3161);
+  covrtIfInit(&emlrtCoverageInstance, 23, 12, 3186, 3229, 3643, 4631);
+  covrtIfInit(&emlrtCoverageInstance, 23, 13, 3245, 3380, -1, 3631);
+  covrtIfInit(&emlrtCoverageInstance, 23, 14, 3643, 3692, 4206, 4631);
+  covrtIfInit(&emlrtCoverageInstance, 23, 15, 3708, 3843, -1, 4194);
+  covrtIfInit(&emlrtCoverageInstance, 23, 16, 4226, 4381, -1, 4616);
 
   /* Initialize MCDC Information */
-  covrtMcdcInit(&emlrtCoverageInstance, 23, 0, 298, 401, 4, 0, cond_starts_23_0,
-                cond_ends_23_0, 7, postfix_exprs_23_0);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 0, 1891, 1934, 2, 0,
+                cond_starts_23_0, cond_ends_23_0, 3, postfix_exprs_23_0);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 1, 2224, 2269, 2, 2,
+                cond_starts_23_1, cond_ends_23_1, 3, postfix_exprs_23_1);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 2, 2286, 2417, 3, 4,
+                cond_starts_23_2, cond_ends_23_2, 5, postfix_exprs_23_2);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 3, 2657, 2702, 2, 7,
+                cond_starts_23_3, cond_ends_23_3, 3, postfix_exprs_23_3);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 4, 2719, 2851, 3, 9,
+                cond_starts_23_4, cond_ends_23_4, 5, postfix_exprs_23_4);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 5, 3248, 3379, 3, 12,
+                cond_starts_23_5, cond_ends_23_5, 5, postfix_exprs_23_5);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 6, 3711, 3842, 3, 15,
+                cond_starts_23_6, cond_ends_23_6, 5, postfix_exprs_23_6);
+  covrtMcdcInit(&emlrtCoverageInstance, 23, 7, 4229, 4380, 3, 18,
+                cond_starts_23_7, cond_ends_23_7, 5, postfix_exprs_23_7);
 
   /* Initialize For Information */
-  covrtForInit(&emlrtCoverageInstance, 23, 0, 263, 290, 458);
+  covrtForInit(&emlrtCoverageInstance, 23, 0, 165, 185, 311);
+  covrtForInit(&emlrtCoverageInstance, 23, 1, 6239, 6263, 6368);
 
   /* Initialize While Information */
+  covrtWhileInit(&emlrtCoverageInstance, 23, 0, 473, 481, 6173);
+
   /* Initialize Switch Information */
   /* Start callback for coverage engine */
   covrtScriptStart(&emlrtCoverageInstance, 23U);
-
-  /* Allocate instance data */
-  covrtAllocateInstanceData(&emlrtCoverageInstance);
-
-  /* Initialize Coverage Information */
-  covrtScriptInit(&emlrtCoverageInstance,
-                  "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Smooth.m",
-                  24, 1, 23, 24, 0, 0, 0, 10, 0, 0, 0);
-
-  /* Initialize Function Information */
-  covrtFcnInit(&emlrtCoverageInstance, 24, 0, "Smooth", 0, -1, 3492);
-
-  /* Initialize Basic Block Information */
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 22, 3478, -1, 3487);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 21, 3363, -1, 3392);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 20, 3181, -1, 3210);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 19, 3000, -1, 3029);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 18, 2794, -1, 2849);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 17, 2687, -1, 2716);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 16, 2460, -1, 2549);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 15, 2348, -1, 2377);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 14, 2055, -1, 2181);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 13, 1961, -1, 1990);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 12, 1779, -1, 1808);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 11, 1598, -1, 1627);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 10, 1392, -1, 1447);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 9, 1285, -1, 1314);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 8, 1058, -1, 1147);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 7, 991, -1, 1010);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 6, 872, -1, 933);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 5, 841, -1, 860);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 4, 713, -1, 776);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 3, 680, -1, 699);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 2, 606, -1, 640);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 1, 490, -1, 557);
-  covrtBasicBlockInit(&emlrtCoverageInstance, 24, 0, 248, -1, 392);
-
-  /* Initialize If Information */
-  covrtIfInit(&emlrtCoverageInstance, 24, 0, 470, 484, 560, 579);
-  covrtIfInit(&emlrtCoverageInstance, 24, 1, 560, 579, 792, 2196);
-  covrtIfInit(&emlrtCoverageInstance, 24, 2, 584, 602, 644, 790);
-  covrtIfInit(&emlrtCoverageInstance, 24, 3, 652, 675, 704, 784);
-  covrtIfInit(&emlrtCoverageInstance, 24, 4, 792, 811, 942, 2196);
-  covrtIfInit(&emlrtCoverageInstance, 24, 5, 814, 837, 864, 940);
-  covrtIfInit(&emlrtCoverageInstance, 24, 6, 942, 961, -1, 961);
-  covrtIfInit(&emlrtCoverageInstance, 24, 7, 964, 987, 1020, 2188);
-  covrtIfInit(&emlrtCoverageInstance, 24, 8, 1161, 1189, -1, 2051);
-  covrtIfInit(&emlrtCoverageInstance, 24, 9, 1206, 1217, 1356, 1371);
-  covrtIfInit(&emlrtCoverageInstance, 24, 10, 1356, 1371, 1878, 2035);
-  covrtIfInit(&emlrtCoverageInstance, 24, 11, 1500, 1522, 1677, 1703);
-  covrtIfInit(&emlrtCoverageInstance, 24, 12, 1677, 1703, -1, 1703);
-  covrtIfInit(&emlrtCoverageInstance, 24, 13, 1878, 1893, -1, 1893);
-  covrtIfInit(&emlrtCoverageInstance, 24, 14, 2201, 2218, -1, 3473);
-  covrtIfInit(&emlrtCoverageInstance, 24, 15, 2227, 2242, 2428, 2447);
-  covrtIfInit(&emlrtCoverageInstance, 24, 16, 2255, 2288, -1, 2419);
-  covrtIfInit(&emlrtCoverageInstance, 24, 17, 2428, 2447, -1, 2447);
-  covrtIfInit(&emlrtCoverageInstance, 24, 18, 2563, 2591, -1, 3453);
-  covrtIfInit(&emlrtCoverageInstance, 24, 19, 2608, 2619, 2758, 2773);
-  covrtIfInit(&emlrtCoverageInstance, 24, 20, 2758, 2773, 3280, 3437);
-  covrtIfInit(&emlrtCoverageInstance, 24, 21, 2902, 2924, 3079, 3105);
-  covrtIfInit(&emlrtCoverageInstance, 24, 22, 3079, 3105, -1, 3105);
-  covrtIfInit(&emlrtCoverageInstance, 24, 23, 3280, 3295, -1, 3295);
-
-  /* Initialize MCDC Information */
-  /* Initialize For Information */
-  covrtForInit(&emlrtCoverageInstance, 24, 0, 446, 466, 3477);
-  covrtForInit(&emlrtCoverageInstance, 24, 1, 1238, 1261, 1339);
-  covrtForInit(&emlrtCoverageInstance, 24, 2, 1547, 1570, 1656);
-  covrtForInit(&emlrtCoverageInstance, 24, 3, 1728, 1751, 1837);
-  covrtForInit(&emlrtCoverageInstance, 24, 4, 1914, 1937, 2015);
-  covrtForInit(&emlrtCoverageInstance, 24, 5, 2305, 2328, 2398);
-  covrtForInit(&emlrtCoverageInstance, 24, 6, 2640, 2663, 2741);
-  covrtForInit(&emlrtCoverageInstance, 24, 7, 2949, 2972, 3058);
-  covrtForInit(&emlrtCoverageInstance, 24, 8, 3130, 3153, 3239);
-  covrtForInit(&emlrtCoverageInstance, 24, 9, 3316, 3339, 3417);
-
-  /* Initialize While Information */
-  /* Initialize Switch Information */
-  /* Start callback for coverage engine */
-  covrtScriptStart(&emlrtCoverageInstance, 24U);
 }
 
 void yaapt_initialize(void)

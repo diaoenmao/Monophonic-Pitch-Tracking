@@ -23,16 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_mean(const emlrtStack *sp, const emxArray_real_T *x,
-                   emxArray_real_T *y);
-extern real_T c_mean(const emlrtStack *sp, const emxArray_real_T *x);
-
-#ifdef __WATCOMC__
-
-#pragma aux c_mean value [8087];
-
-#endif
-
+extern void b_mean(const emlrtStack *sp, const emxArray_real_T *x, real_T
+                   y_data[], int32_T y_size[1]);
 extern real_T mean(const emlrtStack *sp, const emxArray_real_T *x);
 
 #ifdef __WATCOMC__

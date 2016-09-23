@@ -10,7 +10,7 @@
 #include "yaapt.h"
 #include "Myfir1.h"
 #include "yaapt_emxutil.h"
-#include "path1.h"
+#include "error.h"
 #include "eml_int_forloop_overflow_check.h"
 #include "Myfirls.h"
 #include "Myhamming.h"
@@ -20,22 +20,22 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo q_emlrtRSI = { 105, "Myfir1",
+static emlrtRSInfo o_emlrtRSI = { 105, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo r_emlrtRSI = { 138, "Myfir1",
+static emlrtRSInfo p_emlrtRSI = { 138, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo s_emlrtRSI = { 147, "Myfir1",
+static emlrtRSInfo q_emlrtRSI = { 147, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo t_emlrtRSI = { 150, "Myfir1",
+static emlrtRSInfo r_emlrtRSI = { 150, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo u_emlrtRSI = { 157, "Myfir1",
+static emlrtRSInfo s_emlrtRSI = { 157, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
-static emlrtRSInfo v_emlrtRSI = { 174, "Myfir1",
+static emlrtRSInfo t_emlrtRSI = { 174, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
 static emlrtRTEInfo h_emlrtRTEI = { 1, 18, "Myfir1",
@@ -48,10 +48,6 @@ static emlrtECInfo emlrtECI = { 2, 160, 5, "Myfir1",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\Myfir1.m" };
 
 /* Function Definitions */
-
-/*
- * function [b,a] = Myfir1(N,Wn)
- */
 void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T *
             b)
 {
@@ -63,8 +59,8 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     'e', ' ', 'a', ' ', 'r', 'e', 'a', 'l', ',', ' ', 'p', 'o', 's', 'i', 't',
     'i', 'v', 'e', ' ', 'i', 'n', 't', 'e', 'g', 'e', 'r', '.' };
 
-  const mxArray *m1;
-  static const int32_T iv2[2] = { 1, 35 };
+  const mxArray *m0;
+  static const int32_T iv0[2] = { 1, 35 };
 
   boolean_T overflow;
   int32_T k;
@@ -76,7 +72,8 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     'i', 'n', ' ', 'r', 'a', 'n', 'g', 'e', ' ', 'b', 'e', 't', 'w', 'e', 'e',
     'n', ' ', '0', ' ', 'a', 'n', 'd', ' ', '1', '.' };
 
-  static const int32_T iv3[2] = { 1, 47 };
+  real_T ff[6];
+  static const int32_T iv1[2] = { 1, 47 };
 
   const mxArray *c_y;
   char_T c_u[30];
@@ -84,8 +81,7 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     'c', 'i', 'e', 's', ' ', 'm', 'u', 's', 't', ' ', 'b', 'e', ' ', 'i', 'n',
     'c', 'r', 'e', 'a', 's', 'i', 'n', 'g' };
 
-  real_T ff[6];
-  static const int32_T iv4[2] = { 1, 30 };
+  static const int32_T iv2[2] = { 1, 30 };
 
   real_T b_ff[6];
   emxArray_real_T *d_y;
@@ -167,7 +163,6 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*    2 - Window vector  */
   /*    3 - 'noscale' flag  */
   /*  default optional parameter values:  */
-  /* 'Myfir1:60' Wind = []; */
   /*  Ftype = '';  */
   /*  Wind = [];  */
   /*  Scale = 'scale';  */
@@ -204,11 +199,9 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*  case 'NOSCALE'  */
   /*      SCALING = 0;  */
   /*  case 'SCALE'  */
-  /* 'Myfir1:99' SCALING = 1; */
   /*  otherwise  */
   /*      error('Scaling option must be ''noscale'' or ''scale''.')  */
   /*  end  */
-  /* 'Myfir1:104' if isempty(N) | ~isnumeric(N) | ~isreal(N) | N~=round(N) | N<=0 */
   covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 0, false);
   covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 1, true);
   covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 2, true);
@@ -216,23 +209,23 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
       || covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 4, N <= 0.0)) {
     covrtLogMcdc(&emlrtCoverageInstance, 3U, 0U, 0, true);
     covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 0, true);
-    st.site = &q_emlrtRSI;
+    st.site = &o_emlrtRSI;
     for (nm1d2 = 0; nm1d2 < 35; nm1d2++) {
       u[nm1d2] = varargin_1[nm1d2];
     }
 
     y = NULL;
-    m1 = emlrtCreateCharArray(2, iv2);
-    emlrtInitCharArrayR2013a(&st, 35, m1, &u[0]);
-    emlrtAssign(&y, m1);
-    b_st.site = &fq_emlrtRSI;
-    o_error(&b_st, y, &emlrtMCI);
+    m0 = emlrtCreateCharArray(2, iv0);
+    emlrtInitCharArrayR2013a(&st, 35, m0, &u[0]);
+    emlrtAssign(&y, m0);
+    b_st.site = &to_emlrtRSI;
+    n_error(&b_st, y, &emlrtMCI);
   } else {
     covrtLogMcdc(&emlrtCoverageInstance, 3U, 0U, 0, false);
     covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 0, false);
   }
 
-  emxInit_real_T1(sp, &Window, 1, &i_emlrtRTEI, true);
+  emxInit_real_T2(sp, &Window, 1, &i_emlrtRTEI, true);
   covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 1);
 
   /*  Ftype = upper(Ftype);  */
@@ -241,40 +234,28 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*     ~isempty(Ftype)  */
   /*      error('Filter type must be ''high'',''stop'',''DC-0'', or ''DC-1''.')  */
   /*  end  */
-  /* 'Myfir1:115' nw = length(Wind); */
-  /* 'Myfir1:117' nbands = length(Wn) + 1; */
   /*  if (nbands > 2) & isempty(Ftype)  */
-  /* 'Myfir1:119' if (nbands > 2) */
   covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 1, true);
   covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 2);
 
-  /* 'Myfir1:120' Ftype = 'DC-0'; */
   /*  make sure default 3 band filter is bandpass  */
   covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 3);
 
-  /* 'Myfir1:122' First_Band = isempty(strfind('DC-0',Ftype)) & isempty(strfind('HIGH',Ftype)); */
-  /* 'Myfir1:123' mags = rem( First_Band + (0:nbands-1), 2); */
-  /* 'Myfir1:125' L = N + 1; */
-  /* 'Myfir1:126' odd = rem(L, 2); */
   /*  if (mags(nbands) & ~odd)  */
   /*        disp('For highpass and bandstop filters, order must be even.')  */
   /*        disp('Order is being increased by 1.')  */
   /*        N = N + 1;  L = L + 1;  */
   /*        odd = 1;  */
   /*  end  */
-  /* 'Myfir1:133' if nw ~= 0 & nw ~= L */
   covrtLogCond(&emlrtCoverageInstance, 3U, 0U, 5, false);
   covrtLogMcdc(&emlrtCoverageInstance, 3U, 0U, 1, false);
   covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 2, false);
-
-  /* 'Myfir1:136' if nw == 0 */
   covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 3, true);
   covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 4);
 
   /*  replace the following with the default window of your choice.  */
   /*     Window = hamming(L);  */
-  /* 'Myfir1:138' Window = Myhamming(L); */
-  st.site = &r_emlrtRSI;
+  st.site = &p_emlrtRSI;
   Myhamming(&st, N + 1.0, Window);
 
   /*   */
@@ -282,7 +263,6 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   /*  att = 60; % dB of attenuation desired in sidelobe  */
   /*  beta = 0.1102*(att-8.7);  */
   /*  wind = kaiser(L,beta);  */
-  /* 'Myfir1:146' if  any( Wn<0 | Wn>1 ) */
   overflow = false;
   k = 0;
   exitg1 = false;
@@ -296,38 +276,34 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   }
 
   if (covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 4, overflow)) {
-    st.site = &s_emlrtRSI;
+    st.site = &q_emlrtRSI;
     for (nm1d2 = 0; nm1d2 < 47; nm1d2++) {
       b_u[nm1d2] = b_varargin_1[nm1d2];
     }
 
     b_y = NULL;
-    m1 = emlrtCreateCharArray(2, iv3);
-    emlrtInitCharArrayR2013a(&st, 47, m1, &b_u[0]);
-    emlrtAssign(&b_y, m1);
-    b_st.site = &fq_emlrtRSI;
-    o_error(&b_st, b_y, &emlrtMCI);
+    m0 = emlrtCreateCharArray(2, iv1);
+    emlrtInitCharArrayR2013a(&st, 47, m0, &b_u[0]);
+    emlrtAssign(&b_y, m0);
+    b_st.site = &to_emlrtRSI;
+    n_error(&b_st, b_y, &emlrtMCI);
   }
 
-  /* 'Myfir1:149' if  any(diff(Wn)<0) */
   if (covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 5, !!(Wn[1] - Wn[0] < 0.0))) {
-    st.site = &t_emlrtRSI;
+    st.site = &r_emlrtRSI;
     for (nm1d2 = 0; nm1d2 < 30; nm1d2++) {
       c_u[nm1d2] = c_varargin_1[nm1d2];
     }
 
     c_y = NULL;
-    m1 = emlrtCreateCharArray(2, iv4);
-    emlrtInitCharArrayR2013a(&st, 30, m1, &c_u[0]);
-    emlrtAssign(&c_y, m1);
-    b_st.site = &fq_emlrtRSI;
-    o_error(&b_st, c_y, &emlrtMCI);
+    m0 = emlrtCreateCharArray(2, iv2);
+    emlrtInitCharArrayR2013a(&st, 30, m0, &c_u[0]);
+    emlrtAssign(&c_y, m0);
+    b_st.site = &to_emlrtRSI;
+    n_error(&b_st, c_y, &emlrtMCI);
   }
 
   covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 5);
-
-  /* 'Myfir1:153' Wn = Wn(:)'; */
-  /* 'Myfir1:154' ff = [0,Wn(1:nbands-1); Wn(1:nbands-1),1]; */
   ff[0] = 0.0;
   for (nm1d2 = 0; nm1d2 < 2; nm1d2++) {
     ff[(nm1d2 + 1) << 1] = Wn[nm1d2];
@@ -336,18 +312,14 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
 
   ff[5] = 1.0;
 
-  /* 'Myfir1:155' mags = [mags(:)'; mags(:)']; */
   /*  hh_test = firls(L-1,ff(:),mags(:));  */
-  /* 'Myfir1:157' hh = Myfirls(L-1,ff(:),mags(:)); */
   for (nm1d2 = 0; nm1d2 < 6; nm1d2++) {
     b_ff[nm1d2] = ff[nm1d2];
   }
 
   emxInit_real_T(sp, &d_y, 2, &h_emlrtRTEI, true);
-  st.site = &u_emlrtRSI;
+  st.site = &s_emlrtRSI;
   Myfirls(&st, (N + 1.0) - 1.0, b_ff, b);
-
-  /* 'Myfir1:160' b = hh.*Window(:)'; */
   k = Window->size[0];
   nm1d2 = d_y->size[0] * d_y->size[1];
   d_y->size[0] = 1;
@@ -381,36 +353,24 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     b->data[nm1d2] *= d_y->data[nm1d2];
   }
 
-  /* 'Myfir1:161' a = 1; */
-  /* 'Myfir1:163' if SCALING */
   covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 6, true);
-
-  /* 'Myfir1:164' if First_Band */
   covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 7, false);
-
-  /* 'Myfir1:166' else */
-  /* 'Myfir1:167' if ff(4)==1 */
   if (covrtLogIf(&emlrtCoverageInstance, 3U, 0U, 8, ff[3] == 1.0)) {
     covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 7);
 
     /*  unity gain at Fs/2  */
-    /* 'Myfir1:169' f0 = 1; */
     f0 = 1.0;
   } else {
     covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 8);
 
-    /* 'Myfir1:170' else */
     /*  unity gain at center of first passband  */
-    /* 'Myfir1:172' f0 = mean(ff(3:4)); */
     f0 = (ff[2] + ff[3]) / 2.0;
   }
 
   covrtLogBasicBlock(&emlrtCoverageInstance, 3U, 9);
-
-  /* 'Myfir1:174' b = b / abs( exp(-j*2*pi*(0:L-1)*(f0/2))*(b.') ); */
-  st.site = &v_emlrtRSI;
-  b_st.site = &x_emlrtRSI;
-  c_st.site = &y_emlrtRSI;
+  st.site = &t_emlrtRSI;
+  b_st.site = &v_emlrtRSI;
+  c_st.site = &w_emlrtRSI;
   if (muDoubleScalarIsNaN((N + 1.0) - 1.0)) {
     n = 1;
     r = rtNaN;
@@ -449,19 +409,15 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     }
   }
 
-  d_st.site = &ab_emlrtRSI;
+  d_st.site = &x_emlrtRSI;
   if (!overflow) {
   } else {
-    emlrtErrorWithMessageIdR2012b(&d_st, &mf_emlrtRTEI, "Coder:MATLAB:pmaxsize",
+    emlrtErrorWithMessageIdR2012b(&d_st, &df_emlrtRTEI, "Coder:MATLAB:pmaxsize",
       0);
   }
 
   nm1d2 = d_y->size[0] * d_y->size[1];
   d_y->size[0] = 1;
-  if (!(n >= 0)) {
-    emlrtNonNegativeCheckR2012b(n, &e_emlrtDCI, &c_st);
-  }
-
   d_y->size[1] = n;
   emxEnsureCapacity(&c_st, (emxArray__common *)d_y, nm1d2, (int32_T)sizeof
                     (real_T), &h_emlrtRTEI);
@@ -470,7 +426,7 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     if (n > 1) {
       d_y->data[n - 1] = apnd;
       nm1d2 = (n - 1) / 2;
-      d_st.site = &bb_emlrtRSI;
+      d_st.site = &y_emlrtRSI;
       for (k = 1; k < nm1d2; k++) {
         d_y->data[k] = r + (real_T)k;
         d_y->data[(n - k) - 1] = apnd - (real_T)k;
@@ -502,8 +458,8 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
 
   emxFree_real_T(&d_y);
   emxInit_creal_T(sp, &a, 2, &h_emlrtRTEI, true);
-  st.site = &v_emlrtRSI;
-  b_st.site = &de_emlrtRSI;
+  st.site = &t_emlrtRSI;
+  b_st.site = &qd_emlrtRSI;
   nm1d2 = a->size[0] * a->size[1];
   a->size[0] = 1;
   a->size[1] = x->size[1];
@@ -514,11 +470,11 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     a->data[nm1d2] = x->data[nm1d2];
   }
 
-  c_st.site = &eb_emlrtRSI;
+  c_st.site = &cb_emlrtRSI;
   overflow = ((!(1 > x->size[1])) && (x->size[1] > 2147483646));
   if (overflow) {
-    d_st.site = &cb_emlrtRSI;
-    check_forloop_overflow_error(&d_st, true);
+    d_st.site = &ab_emlrtRSI;
+    check_forloop_overflow_error(&d_st);
   }
 
   for (k = 0; k + 1 <= x->size[1]; k++) {
@@ -537,7 +493,7 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
   }
 
   emxFree_creal_T(&x);
-  st.site = &v_emlrtRSI;
+  st.site = &t_emlrtRSI;
   nm1d2 = Window->size[0];
   Window->size[0] = b->size[1];
   emxEnsureCapacity(&st, (emxArray__common *)Window, nm1d2, (int32_T)sizeof
@@ -547,14 +503,13 @@ void Myfir1(const emlrtStack *sp, real_T N, const real_T Wn[2], emxArray_real_T 
     Window->data[nm1d2] = b->data[b->size[0] * nm1d2];
   }
 
-  b_st.site = &ee_emlrtRSI;
-  overflow = (a->size[1] == Window->size[0]);
-  if (!overflow) {
+  b_st.site = &rd_emlrtRSI;
+  if (!(a->size[1] == Window->size[0])) {
     if ((a->size[1] == 1) || (Window->size[0] == 1)) {
-      emlrtErrorWithMessageIdR2012b(&b_st, &lf_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&b_st, &bf_emlrtRTEI,
         "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
-      emlrtErrorWithMessageIdR2012b(&b_st, &kf_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&b_st, &cf_emlrtRTEI,
         "Coder:MATLAB:innerdim", 0);
     }
   }

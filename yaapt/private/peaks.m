@@ -55,14 +55,14 @@ min_lag  = fix(Prm.f0_min/delta - width/4);
 % Highest frequency at which F0 is allowed
 max_lag  = fix(Prm.f0_max/delta + width/4);
 
-if (min_lag < 1)
-    min_lag = 1;
-    disp('min_lag is too low and adjusted (%d)', min_lag); 
-end
-if max_lag > (length(Data) - width)
-    max_lag = length(Data) - width;
-    disp('max_lag is too high and adjusted (%d)', max_lag);
-end
+% if (min_lag < 1)
+%     min_lag = 1;
+%     disp('min_lag is too low and adjusted (%d)', min_lag); 
+% end
+% if max_lag > (length(Data) - width)
+%     max_lag = length(Data) - width;
+%     disp('max_lag is too high and adjusted (%d)', max_lag);
+% end
 
 
 %-- INITIALIZATION -----------------------------------------------------------

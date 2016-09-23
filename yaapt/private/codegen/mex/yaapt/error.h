@@ -25,6 +25,9 @@
 /* Function Declarations */
 extern void b_error(const emlrtStack *sp);
 extern void c_error(const emlrtStack *sp);
+extern void i_error(const emlrtStack *sp);
+extern void j_error(const emlrtStack *sp);
+extern void k_error(const emlrtStack *sp);
 
 #endif
 

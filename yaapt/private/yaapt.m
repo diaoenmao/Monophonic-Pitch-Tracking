@@ -122,13 +122,13 @@ Data_after = Preprocess(Data);
 [DataB, DataC, DataD, nFs] = nonlinear(Data_after, Fs, Prm);
 
 %  Check frame size, frame jump and the number of frames for nonlinear singal
-nframesize = fix(Prm.frame_length*nFs/1000);    
-if (nframesize < 15)
-    error('Frame length value %d is too short', Prm.frame_length);
-end
-if (nframesize > 2048)
-    error('Frame length value %d exceeds the limit', Prm.frame_length);
-end
+% nframesize = fix(Prm.frame_length*nFs/1000);    
+% if (nframesize < 15)
+%     error('Frame length value %d is too short', Prm.frame_length);
+% end
+% if (nframesize > 2048)
+%     error('Frame length value %d exceeds the limit', Prm.frame_length);
+% end
 
 %  Step 2. Spectral pitch tracking
 %  Calculate NLFER and determine voiced/unvoiced frames with NLFER
@@ -150,14 +150,16 @@ end
 % Refine pitch candidates 
 [RPitch, Merit] = refine(TPitch1, TMerit1, TPitch2, TMerit2, SPitch, ...
                         Energy, VUVEnergy, Prm);
-
+                    
 % Step 5. Use dyanamic programming to determine the final pitch
 Pitch_before  = dynamic(RPitch, Merit, Energy, Prm);
 numfrms = length(Pitch_before);
 frmrate = Prm.frame_space; 
  
 [Pitch_Freq,~] = freqSelect(Pitch_before);
-Pitch = Pitch_Optimization(Pitch_Freq, Prm);
+% Pitch = Pitch_Optimization(Pitch_Freq, Prm);
+Pitch = Smooth2(Pitch_Freq, Prm);
+pt_figs(DataB, DataD, nFs, SPitch, Energy, VUVEnergy, RPitch, Pitch, Prm);
   %figure(3)
   % plot(SPitch, 'b')
   % hold on
@@ -191,7 +193,8 @@ Pitch = Pitch_Optimization(Pitch_Freq, Prm);
 %== FIGURE ====================================================================
 %  Several plots to illustrate processing and performance
 % if (GraphPar)     
-%     pt_figs(DataB, DataD, nFs, SPitch, Energy, VUVEnergy, RPitch, Pitch, Prm);
+
 % end
 
 %==============================================================================
+end

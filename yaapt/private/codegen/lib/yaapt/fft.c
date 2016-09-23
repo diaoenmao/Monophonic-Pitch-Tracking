@@ -2,7 +2,7 @@
  * File: fft.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -911,7 +911,7 @@ void b_fft(const emxArray_real_T *x, double varargin_1, emxArray_creal_T *y)
   emxArray_creal_T *b_y1;
   int b_x[2];
   emxArray_real_T c_x;
-  int i17;
+  int i15;
   int loop_ub;
   emxInit_creal_T1(&b_y1, 1);
   b_x[0] = x->size[1];
@@ -920,13 +920,13 @@ void b_fft(const emxArray_real_T *x, double varargin_1, emxArray_creal_T *y)
   c_x.size = (int *)&b_x;
   c_x.numDimensions = 1;
   eml_fft(&c_x, (int)varargin_1, b_y1);
-  i17 = y->size[0] * y->size[1];
+  i15 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = (int)varargin_1;
-  emxEnsureCapacity((emxArray__common *)y, i17, (int)sizeof(creal_T));
+  emxEnsureCapacity((emxArray__common *)y, i15, (int)sizeof(creal_T));
   loop_ub = (int)varargin_1;
-  for (i17 = 0; i17 < loop_ub; i17++) {
-    y->data[i17] = b_y1->data[i17];
+  for (i15 = 0; i15 < loop_ub; i15++) {
+    y->data[i15] = b_y1->data[i15];
   }
 
   emxFree_creal_T(&b_y1);

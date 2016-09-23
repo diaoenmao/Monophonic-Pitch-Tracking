@@ -22,21 +22,21 @@
 <a name="10"><font color="#888888 "><i>   10   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt.h&quot;</font>
 <a name="11"><font color="#888888 "><i>   11   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;_coder_yaapt_api.h&quot;</font>
 <a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_emxutil.h&quot;</font>
-<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;mrdivide.h&quot;</font>
+<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;qrsolve.h&quot;</font>
 <a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_mexutil.h&quot;</font>
 <a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_data.h&quot;</font>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;blas.h&quot;</font>
 <a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;lapacke.h&quot;</font>
 <a name="18"><font color="#888888 "><i>   18   </i></font></a>
 <a name="19"><font color="#888888 "><i>   19   </i></font></a><font color="#117755"><i>/* Variable Definitions */</i></font>
-<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_af_emlrtRTEI">af_emlrtRTEI</a> = <b>{</b> 1, 1, <font color="#1122ff">&quot;_coder_yaapt_api&quot;</font>, <font color="#1122ff">&quot;&quot;</font> <b>}</b>;
+<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>static</b></font> emlrtRTEInfo <a name="var_re_emlrtRTEI">re_emlrtRTEI</a> = <b>{</b> 1, 1, <font color="#1122ff">&quot;_coder_yaapt_api&quot;</font>, <font color="#1122ff">&quot;&quot;</font> <b>}</b>;
 <a name="21"><font color="#888888 "><i>   21   </i></font></a>
 <a name="22"><font color="#888888 "><i>   22   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
-<a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_c_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_c_emlrt_marshallIn');" target="_self"><font color="#1122aa">c_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Data, <font color="#112266"><b>const</b></font>
-<a name="24"><font color="#888888 "><i>   24   </i></font></a>  char_T *identifier, emxArray_real_T *y);
-<a name="25"><font color="#888888 "><i>   25   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_d_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_emlrt_marshallIn');" target="_self"><font color="#1122aa">d_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *u, <font color="#112266"><b>const</b></font>
-<a name="26"><font color="#888888 "><i>   26   </i></font></a>  emlrtMsgIdentifier *parentId, emxArray_real_T *y);
-<a name="27"><font color="#888888 "><i>   27   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> mxArray *<a href="#fcn_d_emlrt_marshallOut" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_emlrt_marshallOut');" target="_self"><font color="#1122aa">d_emlrt_marshallOut</font></a>(<font color="#112266"><b>const</b></font> emxArray_real_T *u);
+<a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> mxArray *<a href="#fcn_b_emlrt_marshallOut" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_emlrt_marshallOut');" target="_self"><font color="#1122aa">b_emlrt_marshallOut</font></a>(<font color="#112266"><b>const</b></font> emxArray_real_T *u);
+<a name="24"><font color="#888888 "><i>   24   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_c_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_c_emlrt_marshallIn');" target="_self"><font color="#1122aa">c_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Data, <font color="#112266"><b>const</b></font>
+<a name="25"><font color="#888888 "><i>   25   </i></font></a>  char_T *identifier, emxArray_real_T *y);
+<a name="26"><font color="#888888 "><i>   26   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_d_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_emlrt_marshallIn');" target="_self"><font color="#1122aa">d_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *u, <font color="#112266"><b>const</b></font>
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>  emlrtMsgIdentifier *parentId, emxArray_real_T *y);
 <a name="28"><font color="#888888 "><i>   28   </i></font></a><font color="#112266"><b>static</b></font> real_T <a href="#fcn_e_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_e_emlrt_marshallIn');" target="_self"><font color="#1122aa">e_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Fs, <font color="#112266"><b>const</b></font>
 <a name="29"><font color="#888888 "><i>   29   </i></font></a>  char_T *identifier);
 <a name="30"><font color="#888888 "><i>   30   </i></font></a><font color="#112266"><b>static</b></font> real_T <a href="#fcn_f_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_f_emlrt_marshallIn');" target="_self"><font color="#1122aa">f_emlrt_marshallIn</font></a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *u, <font color="#112266"><b>const</b></font>
@@ -53,36 +53,36 @@
 <a name="41"><font color="#888888 "><i>   41   </i></font></a>  <font color="#112266"><b>const</b></font> emlrtMsgIdentifier *msgId))[34];
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>
 <a name="43"><font color="#888888 "><i>   43   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
-<a name="44"><font color="#888888 "><i>   44   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_c_emlrt_marshallIn">c_emlrt_marshallIn</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Data, <font color="#112266"><b>const</b></font>
-<a name="45"><font color="#888888 "><i>   45   </i></font></a>  char_T *identifier, emxArray_real_T *y)
-<a name="46"><font color="#888888 "><i>   46   </i></font></a><b>{</b>
-<a name="47"><font color="#888888 "><i>   47   </i></font></a>  emlrtMsgIdentifier thisId;
-<a name="48"><font color="#888888 "><i>   48   </i></font></a>  thisId.fIdentifier = identifier;
-<a name="49"><font color="#888888 "><i>   49   </i></font></a>  thisId.fParent = NULL;
-<a name="50"><font color="#888888 "><i>   50   </i></font></a>  thisId.bParentIsCell = false;
-<a name="51"><font color="#888888 "><i>   51   </i></font></a>  <a href="#fcn_d_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_emlrt_marshallIn');" target="_self"><font color="#1122aa">d_emlrt_marshallIn</font></a>(sp, emlrtAlias(Data), &amp;thisId, y);
-<a name="52"><font color="#888888 "><i>   52   </i></font></a>  emlrtDestroyArray(&amp;Data);
-<a name="53"><font color="#888888 "><i>   53   </i></font></a><b>}</b>
-<a name="54"><font color="#888888 "><i>   54   </i></font></a>
-<a name="55"><font color="#888888 "><i>   55   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_d_emlrt_marshallIn">d_emlrt_marshallIn</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *u, <font color="#112266"><b>const</b></font>
-<a name="56"><font color="#888888 "><i>   56   </i></font></a>  emlrtMsgIdentifier *parentId, emxArray_real_T *y)
-<a name="57"><font color="#888888 "><i>   57   </i></font></a><b>{</b>
-<a name="58"><font color="#888888 "><i>   58   </i></font></a>  <a href="#fcn_j_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_j_emlrt_marshallIn');" target="_self"><font color="#1122aa">j_emlrt_marshallIn</font></a>(sp, emlrtAlias(u), parentId, y);
-<a name="59"><font color="#888888 "><i>   59   </i></font></a>  emlrtDestroyArray(&amp;u);
-<a name="60"><font color="#888888 "><i>   60   </i></font></a><b>}</b>
-<a name="61"><font color="#888888 "><i>   61   </i></font></a>
-<a name="62"><font color="#888888 "><i>   62   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> mxArray *<a name="fcn_d_emlrt_marshallOut">d_emlrt_marshallOut</a>(<font color="#112266"><b>const</b></font> emxArray_real_T *u)
-<a name="63"><font color="#888888 "><i>   63   </i></font></a><b>{</b>
-<a name="64"><font color="#888888 "><i>   64   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *y;
-<a name="65"><font color="#888888 "><i>   65   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m14;
-<a name="66"><font color="#888888 "><i>   66   </i></font></a>  <font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> int32_T iv62[2] = <b>{</b> 0, 0 <b>}</b>;
-<a name="67"><font color="#888888 "><i>   67   </i></font></a>
-<a name="68"><font color="#888888 "><i>   68   </i></font></a>  y = NULL;
-<a name="69"><font color="#888888 "><i>   69   </i></font></a>  m14 = emlrtCreateNumericArray(2, iv62, mxDOUBLE_CLASS, mxREAL);
-<a name="70"><font color="#888888 "><i>   70   </i></font></a>  mxSetData((mxArray *)m14, (<font color="#112266"><b>void</b></font> *)u-&gt;data);
-<a name="71"><font color="#888888 "><i>   71   </i></font></a>  emlrtSetDimensions((mxArray *)m14, u-&gt;size, 2);
-<a name="72"><font color="#888888 "><i>   72   </i></font></a>  emlrtAssign(&amp;y, m14);
-<a name="73"><font color="#888888 "><i>   73   </i></font></a>  <font color="#112266"><b>return</b></font> y;
+<a name="44"><font color="#888888 "><i>   44   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> mxArray *<a name="fcn_b_emlrt_marshallOut">b_emlrt_marshallOut</a>(<font color="#112266"><b>const</b></font> emxArray_real_T *u)
+<a name="45"><font color="#888888 "><i>   45   </i></font></a><b>{</b>
+<a name="46"><font color="#888888 "><i>   46   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *y;
+<a name="47"><font color="#888888 "><i>   47   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *m13;
+<a name="48"><font color="#888888 "><i>   48   </i></font></a>  <font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> int32_T iv56[2] = <b>{</b> 0, 0 <b>}</b>;
+<a name="49"><font color="#888888 "><i>   49   </i></font></a>
+<a name="50"><font color="#888888 "><i>   50   </i></font></a>  y = NULL;
+<a name="51"><font color="#888888 "><i>   51   </i></font></a>  m13 = emlrtCreateNumericArray(2, iv56, mxDOUBLE_CLASS, mxREAL);
+<a name="52"><font color="#888888 "><i>   52   </i></font></a>  mxSetData((mxArray *)m13, (<font color="#112266"><b>void</b></font> *)u-&gt;data);
+<a name="53"><font color="#888888 "><i>   53   </i></font></a>  emlrtSetDimensions((mxArray *)m13, u-&gt;size, 2);
+<a name="54"><font color="#888888 "><i>   54   </i></font></a>  emlrtAssign(&amp;y, m13);
+<a name="55"><font color="#888888 "><i>   55   </i></font></a>  <font color="#112266"><b>return</b></font> y;
+<a name="56"><font color="#888888 "><i>   56   </i></font></a><b>}</b>
+<a name="57"><font color="#888888 "><i>   57   </i></font></a>
+<a name="58"><font color="#888888 "><i>   58   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_c_emlrt_marshallIn">c_emlrt_marshallIn</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Data, <font color="#112266"><b>const</b></font>
+<a name="59"><font color="#888888 "><i>   59   </i></font></a>  char_T *identifier, emxArray_real_T *y)
+<a name="60"><font color="#888888 "><i>   60   </i></font></a><b>{</b>
+<a name="61"><font color="#888888 "><i>   61   </i></font></a>  emlrtMsgIdentifier thisId;
+<a name="62"><font color="#888888 "><i>   62   </i></font></a>  thisId.fIdentifier = identifier;
+<a name="63"><font color="#888888 "><i>   63   </i></font></a>  thisId.fParent = NULL;
+<a name="64"><font color="#888888 "><i>   64   </i></font></a>  thisId.bParentIsCell = false;
+<a name="65"><font color="#888888 "><i>   65   </i></font></a>  <a href="#fcn_d_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_emlrt_marshallIn');" target="_self"><font color="#1122aa">d_emlrt_marshallIn</font></a>(sp, emlrtAlias(Data), &amp;thisId, y);
+<a name="66"><font color="#888888 "><i>   66   </i></font></a>  emlrtDestroyArray(&amp;Data);
+<a name="67"><font color="#888888 "><i>   67   </i></font></a><b>}</b>
+<a name="68"><font color="#888888 "><i>   68   </i></font></a>
+<a name="69"><font color="#888888 "><i>   69   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_d_emlrt_marshallIn">d_emlrt_marshallIn</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *u, <font color="#112266"><b>const</b></font>
+<a name="70"><font color="#888888 "><i>   70   </i></font></a>  emlrtMsgIdentifier *parentId, emxArray_real_T *y)
+<a name="71"><font color="#888888 "><i>   71   </i></font></a><b>{</b>
+<a name="72"><font color="#888888 "><i>   72   </i></font></a>  <a href="#fcn_j_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_j_emlrt_marshallIn');" target="_self"><font color="#1122aa">j_emlrt_marshallIn</font></a>(sp, emlrtAlias(u), parentId, y);
+<a name="73"><font color="#888888 "><i>   73   </i></font></a>  emlrtDestroyArray(&amp;u);
 <a name="74"><font color="#888888 "><i>   74   </i></font></a><b>}</b>
 <a name="75"><font color="#888888 "><i>   75   </i></font></a>
 <a name="76"><font color="#888888 "><i>   76   </i></font></a><font color="#112266"><b>static</b></font> real_T <a name="fcn_e_emlrt_marshallIn">e_emlrt_marshallIn</a>(<font color="#112266"><b>const</b></font> emlrtStack *sp, <font color="#112266"><b>const</b></font> mxArray *Fs, <font color="#112266"><b>const</b></font>
@@ -135,11 +135,11 @@
 <a name="123"><font color="#888888 "><i>  123   </i></font></a>
 <a name="124"><font color="#888888 "><i>  124   </i></font></a>  boolean_T bv1[2] = <b>{</b> false, true <b>}</b>;
 <a name="125"><font color="#888888 "><i>  125   </i></font></a>
-<a name="126"><font color="#888888 "><i>  126   </i></font></a>  int32_T iv63[2];
+<a name="126"><font color="#888888 "><i>  126   </i></font></a>  int32_T iv57[2];
 <a name="127"><font color="#888888 "><i>  127   </i></font></a>  emlrtCheckVsBuiltInR2012b(sp, msgId, src, <font color="#1122ff">&quot;double&quot;</font>, false, 2U, dims, &amp;bv1[0],
-<a name="128"><font color="#888888 "><i>  128   </i></font></a>    iv63);
-<a name="129"><font color="#888888 "><i>  129   </i></font></a>  ret-&gt;size[0] = iv63[0];
-<a name="130"><font color="#888888 "><i>  130   </i></font></a>  ret-&gt;size[1] = iv63[1];
+<a name="128"><font color="#888888 "><i>  128   </i></font></a>    iv57);
+<a name="129"><font color="#888888 "><i>  129   </i></font></a>  ret-&gt;size[0] = iv57[0];
+<a name="130"><font color="#888888 "><i>  130   </i></font></a>  ret-&gt;size[1] = iv57[1];
 <a name="131"><font color="#888888 "><i>  131   </i></font></a>  ret-&gt;allocatedSize = ret-&gt;size[0] * ret-&gt;size[1];
 <a name="132"><font color="#888888 "><i>  132   </i></font></a>  ret-&gt;data = (real_T *)mxGetData(src);
 <a name="133"><font color="#888888 "><i>  133   </i></font></a>  ret-&gt;canFreeData = false;
@@ -180,8 +180,8 @@
 <a name="168"><font color="#888888 "><i>  168   </i></font></a>
 <a name="169"><font color="#888888 "><i>  169   </i></font></a>  st.tls = emlrtRootTLSGlobal;
 <a name="170"><font color="#888888 "><i>  170   </i></font></a>  emlrtHeapReferenceStackEnterFcnR2012b(&amp;st);
-<a name="171"><font color="#888888 "><i>  171   </i></font></a>  emxInit_real_T(&amp;st, &amp;Data, 2, &amp;<a href="#var_af_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_af_emlrtRTEI');" target="_self"><font color="#1122aa">af_emlrtRTEI</font></a>, true);
-<a name="172"><font color="#888888 "><i>  172   </i></font></a>  emxInit_real_T(&amp;st, &amp;Pitch, 2, &amp;<a href="#var_af_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_af_emlrtRTEI');" target="_self"><font color="#1122aa">af_emlrtRTEI</font></a>, true);
+<a name="171"><font color="#888888 "><i>  171   </i></font></a>  emxInit_real_T(&amp;st, &amp;Data, 2, &amp;<a href="#var_re_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_re_emlrtRTEI');" target="_self"><font color="#1122aa">re_emlrtRTEI</font></a>, true);
+<a name="172"><font color="#888888 "><i>  172   </i></font></a>  emxInit_real_T(&amp;st, &amp;Pitch, 2, &amp;<a href="#var_re_emlrtRTEI" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_re_emlrtRTEI');" target="_self"><font color="#1122aa">re_emlrtRTEI</font></a>, true);
 <a name="173"><font color="#888888 "><i>  173   </i></font></a>
 <a name="174"><font color="#888888 "><i>  174   </i></font></a>  <font color="#117755"><i>/* Marshall function inputs */</i></font>
 <a name="175"><font color="#888888 "><i>  175   </i></font></a>  <a href="#fcn_c_emlrt_marshallIn" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_c_emlrt_marshallIn');" target="_self"><font color="#1122aa">c_emlrt_marshallIn</font></a>(&amp;st, emlrtAlias(prhs[0]), <font color="#1122ff">&quot;Data&quot;</font>, Data);
@@ -192,7 +192,7 @@
 <a name="180"><font color="#888888 "><i>  180   </i></font></a>  yaapt(&amp;st, Data, Fs, *Parameter, Pitch, &amp;numfrms, &amp;frmrate);
 <a name="181"><font color="#888888 "><i>  181   </i></font></a>
 <a name="182"><font color="#888888 "><i>  182   </i></font></a>  <font color="#117755"><i>/* Marshall function outputs */</i></font>
-<a name="183"><font color="#888888 "><i>  183   </i></font></a>  plhs[0] = <a href="#fcn_d_emlrt_marshallOut" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_d_emlrt_marshallOut');" target="_self"><font color="#1122aa">d_emlrt_marshallOut</font></a>(Pitch);
+<a name="183"><font color="#888888 "><i>  183   </i></font></a>  plhs[0] = <a href="#fcn_b_emlrt_marshallOut" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_emlrt_marshallOut');" target="_self"><font color="#1122aa">b_emlrt_marshallOut</font></a>(Pitch);
 <a name="184"><font color="#888888 "><i>  184   </i></font></a>  plhs[1] = emlrt_marshallOut(numfrms);
 <a name="185"><font color="#888888 "><i>  185   </i></font></a>  plhs[2] = emlrt_marshallOut(frmrate);
 <a name="186"><font color="#888888 "><i>  186   </i></font></a>  Pitch-&gt;canFreeData = false;

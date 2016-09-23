@@ -23,8 +23,6 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void b_filter(const emlrtStack *sp, const emxArray_real_T *x,
-                     emxArray_real_T *y);
 extern void filter(const emlrtStack *sp, const emxArray_real_T *b, const
                    emxArray_real_T *x, emxArray_real_T *y);
 

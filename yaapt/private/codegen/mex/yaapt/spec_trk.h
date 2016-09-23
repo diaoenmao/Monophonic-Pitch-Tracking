@@ -25,8 +25,9 @@
 /* Function Declarations */
 extern void spec_trk(const emlrtStack *sp, emxArray_real_T *Data, real_T Fs,
                      const emxArray_boolean_T *VUVEnergy, const struct_T *Prm,
-                     emxArray_real_T *SPitch, emxArray_real_T *VUVSPitch,
-                     emxArray_real_T *pAvg, emxArray_real_T *pStd);
+                     emxArray_real_T *SPitch, emxArray_real_T *VUVSPitch, real_T
+                     pAvg_data[], int32_T pAvg_size[1], real_T pStd_data[],
+                     int32_T pStd_size[1]);
 
 #endif
 

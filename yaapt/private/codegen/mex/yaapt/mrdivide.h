@@ -23,8 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern void mrdivide(const emlrtStack *sp, real_T A, const emxArray_real_T *B,
-                     emxArray_real_T *y);
+extern void mrdivide(const emlrtStack *sp, real_T A_data[], int32_T A_size[2],
+                     const real_T B_data[], const int32_T B_size[2]);
 
 #endif
 

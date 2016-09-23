@@ -26,9 +26,10 @@
 extern void b_merge(const emlrtStack *sp, int32_T idx[20], real_T x[20], int32_T
                     offset, int32_T np, int32_T nq, int32_T iwork[20], real_T
                     xwork[20]);
+extern void b_sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T
+                      *idx);
 extern void merge_block(const emlrtStack *sp, int32_T idx[100], real_T x[100],
-  int32_T offset, int32_T n, int32_T preSortLevel, int32_T iwork[100], real_T
-  xwork[100]);
+  int32_T n, int32_T iwork[100], real_T xwork[100]);
 extern void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T
                     *idx);
 

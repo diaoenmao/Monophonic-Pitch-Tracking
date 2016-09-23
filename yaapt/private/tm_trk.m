@@ -84,15 +84,20 @@ end
 %   which are not close to the smoothed F0 track obtained from
 %   spectrogram
 for i = 1:maxcands
+    Idx_unvoiced = SPitch == 0;
     diff   =  abs( (Pitch(i,:) - SPitch(1,:)));
+%     diff(Idx_unvoiced) = freq_thresh + 1;
     match1 = zeros(1,length(diff));
     for j = 1:length(diff)
+        if(Idx_unvoiced(j)==1)
+            diff(j) = freq_thresh + 1;
+        end
          match1(j) = diff(j) < freq_thresh;
     end
 %     match1 =  (diff < freq_thresh);
     match = zeros(1,length(diff));
-    for j = 1:length(diff)
-         match(j) = ((1 - (diff(j)/freq_thresh)) * match1(j));
+    for k = 1:length(diff)
+         match(k) = ((1 - (diff(k)/freq_thresh)) * match1(k));
     end
 %     match  =  ((1 - (diff./freq_thresh)) .* match1);
     Merit(i,:) = ((1+merit_boost)*Merit(i,:)).*match;

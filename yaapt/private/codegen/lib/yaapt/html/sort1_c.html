@@ -14,15 +14,15 @@
 <a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: sort1.c</i></font>
 <a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
 <a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.1</i></font>
-<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 05-Sep-2016 15:50:20</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 23-Sep-2016 04:55:32</i></font>
 <a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
 <a name="7"><font color="#888888 "><i>    7   </i></font></a>
 <a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
 <a name="9"><font color="#888888 "><i>    9   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;rt_nonfinite.h&quot;</font>
 <a name="10"><font color="#888888 "><i>   10   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt.h&quot;</font>
 <a name="11"><font color="#888888 "><i>   11   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sort1.h&quot;</font>
-<a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sortIdx.h&quot;</font>
-<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_emxutil.h&quot;</font>
+<a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;yaapt_emxutil.h&quot;</font>
+<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sortIdx.h&quot;</font>
 <a name="14"><font color="#888888 "><i>   14   </i></font></a>
 <a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
 <a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_b_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sort');" target="_self"><font color="#1122aa">b_sort</font></a>(<font color="#112266"><b>double</b></font> x[100], <font color="#112266"><b>int</b></font> idx[100]);
@@ -442,7 +442,7 @@
 <a name="430"><font color="#888888 "><i>  430   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_f_sort">f_sort</a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <font color="#112266"><b>int</b></font> dim, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx)
 <a name="431"><font color="#888888 "><i>  431   </i></font></a><b>{</b>
 <a name="432"><font color="#888888 "><i>  432   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *vwork;
-<a name="433"><font color="#888888 "><i>  433   </i></font></a>  <font color="#112266"><b>int</b></font> i33;
+<a name="433"><font color="#888888 "><i>  433   </i></font></a>  <font color="#112266"><b>int</b></font> i32;
 <a name="434"><font color="#888888 "><i>  434   </i></font></a>  <font color="#112266"><b>int</b></font> vstride;
 <a name="435"><font color="#888888 "><i>  435   </i></font></a>  <font color="#112266"><b>int</b></font> k;
 <a name="436"><font color="#888888 "><i>  436   </i></font></a>  <font color="#112266"><b>int</b></font> iv1[2];
@@ -453,8 +453,8 @@
 <a name="441"><font color="#888888 "><i>  441   </i></font></a>  <font color="#112266"><b>int</b></font> pageoffset;
 <a name="442"><font color="#888888 "><i>  442   </i></font></a>  <font color="#112266"><b>int</b></font> j;
 <a name="443"><font color="#888888 "><i>  443   </i></font></a>  <font color="#112266"><b>int</b></font> idx0;
-<a name="444"><font color="#888888 "><i>  444   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T1');" target="_self"><font color="#1122aa">emxInit_real_T1</font></a>(&amp;vwork, 1);
-<a name="445"><font color="#888888 "><i>  445   </i></font></a>  i33 = x-&gt;size[dim - 1];
+<a name="444"><font color="#888888 "><i>  444   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T2" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T2');" target="_self"><font color="#1122aa">emxInit_real_T2</font></a>(&amp;vwork, 1);
+<a name="445"><font color="#888888 "><i>  445   </i></font></a>  i32 = x-&gt;size[dim - 1];
 <a name="446"><font color="#888888 "><i>  446   </i></font></a>  vstride = x-&gt;size[dim - 1];
 <a name="447"><font color="#888888 "><i>  447   </i></font></a>  k = vwork-&gt;size[0];
 <a name="448"><font color="#888888 "><i>  448   </i></font></a>  vwork-&gt;size[0] = vstride;
@@ -488,12 +488,12 @@
 <a name="476"><font color="#888888 "><i>  476   </i></font></a>    pageoffset = (i - 1) * pagesize;
 <a name="477"><font color="#888888 "><i>  477   </i></font></a>    <font color="#112266"><b>for</b></font> (j = 0; j + 1 &lt;= vstride; j++) <b>{</b>
 <a name="478"><font color="#888888 "><i>  478   </i></font></a>      idx0 = pageoffset + j;
-<a name="479"><font color="#888888 "><i>  479   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i33; k++) <b>{</b>
+<a name="479"><font color="#888888 "><i>  479   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i32; k++) <b>{</b>
 <a name="480"><font color="#888888 "><i>  480   </i></font></a>        vwork-&gt;data[k] = x-&gt;data[idx0 + k * vstride];
 <a name="481"><font color="#888888 "><i>  481   </i></font></a>      <b>}</b>
 <a name="482"><font color="#888888 "><i>  482   </i></font></a>
 <a name="483"><font color="#888888 "><i>  483   </i></font></a>      <a href="sortIdx_c.html#fcn_sortIdx" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_sortIdx');" target="_self"><font color="#1122aa">sortIdx</font></a>(vwork, iidx);
-<a name="484"><font color="#888888 "><i>  484   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i33; k++) <b>{</b>
+<a name="484"><font color="#888888 "><i>  484   </i></font></a>      <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i32; k++) <b>{</b>
 <a name="485"><font color="#888888 "><i>  485   </i></font></a>        x-&gt;data[idx0 + k * vstride] = vwork-&gt;data[k];
 <a name="486"><font color="#888888 "><i>  486   </i></font></a>        idx-&gt;data[idx0 + k * vstride] = iidx-&gt;data[k];
 <a name="487"><font color="#888888 "><i>  487   </i></font></a>      <b>}</b>
@@ -533,21 +533,58 @@
 <a name="521"><font color="#888888 "><i>  521   </i></font></a><b>}</b>
 <a name="522"><font color="#888888 "><i>  522   </i></font></a>
 <a name="523"><font color="#888888 "><i>  523   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="524"><font color="#888888 "><i>  524   </i></font></a><font color="#117755"><I> * Arguments    : double x[100]</i></font>
-<a name="525"><font color="#888888 "><i>  525   </i></font></a><font color="#117755"><I> *                int idx[100]</i></font>
+<a name="524"><font color="#888888 "><i>  524   </i></font></a><font color="#117755"><I> * Arguments    : emxArray_real_T *x</i></font>
+<a name="525"><font color="#888888 "><i>  525   </i></font></a><font color="#117755"><I> *                emxArray_int32_T *idx</i></font>
 <a name="526"><font color="#888888 "><i>  526   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
 <a name="527"><font color="#888888 "><i>  527   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="528"><font color="#888888 "><i>  528   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_sort">sort</a>(<font color="#112266"><b>double</b></font> x[100], <font color="#112266"><b>int</b></font> idx[100])
+<a name="528"><font color="#888888 "><i>  528   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_g_sort">g_sort</a>(<a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *x, <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *idx)
 <a name="529"><font color="#888888 "><i>  529   </i></font></a><b>{</b>
-<a name="530"><font color="#888888 "><i>  530   </i></font></a>  <a href="#fcn_b_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sort');" target="_self"><font color="#1122aa">b_sort</font></a>(x, idx);
-<a name="531"><font color="#888888 "><i>  531   </i></font></a><b>}</b>
-<a name="532"><font color="#888888 "><i>  532   </i></font></a>
-<a name="533"><font color="#888888 "><i>  533   </i></font></a><font color="#117755"><i>/*</i></font>
-<a name="534"><font color="#888888 "><i>  534   </i></font></a><font color="#117755"><I> * File trailer for sort1.c</i></font>
-<a name="535"><font color="#888888 "><i>  535   </i></font></a><font color="#117755"><I> *</i></font>
-<a name="536"><font color="#888888 "><i>  536   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
-<a name="537"><font color="#888888 "><i>  537   </i></font></a><font color="#117755"><I> */</i></font>
-<a name="538"><font color="#888888 "><i>  538   </i></font></a></pre>
+<a name="530"><font color="#888888 "><i>  530   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="_self"><font color="#1122aa">emxArray_real_T</font></a> *vwork;
+<a name="531"><font color="#888888 "><i>  531   </i></font></a>  <font color="#112266"><b>int</b></font> i33;
+<a name="532"><font color="#888888 "><i>  532   </i></font></a>  <font color="#112266"><b>int</b></font> k;
+<a name="533"><font color="#888888 "><i>  533   </i></font></a>  <font color="#112266"><b>int</b></font> i34;
+<a name="534"><font color="#888888 "><i>  534   </i></font></a>  <a href="yaapt_types_h.html#type_emxArray_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_int32_T');" target="_self"><font color="#1122aa">emxArray_int32_T</font></a> *iidx;
+<a name="535"><font color="#888888 "><i>  535   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_real_T2" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_real_T2');" target="_self"><font color="#1122aa">emxInit_real_T2</font></a>(&amp;vwork, 1);
+<a name="536"><font color="#888888 "><i>  536   </i></font></a>  i33 = x-&gt;size[1];
+<a name="537"><font color="#888888 "><i>  537   </i></font></a>  k = x-&gt;size[1];
+<a name="538"><font color="#888888 "><i>  538   </i></font></a>  i34 = vwork-&gt;size[0];
+<a name="539"><font color="#888888 "><i>  539   </i></font></a>  vwork-&gt;size[0] = k;
+<a name="540"><font color="#888888 "><i>  540   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)vwork, i34, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>double</b></font>));
+<a name="541"><font color="#888888 "><i>  541   </i></font></a>  i34 = idx-&gt;size[0] * idx-&gt;size[1];
+<a name="542"><font color="#888888 "><i>  542   </i></font></a>  idx-&gt;size[0] = 1;
+<a name="543"><font color="#888888 "><i>  543   </i></font></a>  idx-&gt;size[1] = x-&gt;size[1];
+<a name="544"><font color="#888888 "><i>  544   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="_self"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="yaapt_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="_self"><font color="#1122aa">emxArray__common</font></a> *)idx, i34, (<font color="#112266"><b>int</b></font>)<font color="#112266"><b>sizeof</b></font>(<font color="#112266"><b>int</b></font>));
+<a name="545"><font color="#888888 "><i>  545   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i33; k++) <b>{</b>
+<a name="546"><font color="#888888 "><i>  546   </i></font></a>    vwork-&gt;data[k] = x-&gt;data[k];
+<a name="547"><font color="#888888 "><i>  547   </i></font></a>  <b>}</b>
+<a name="548"><font color="#888888 "><i>  548   </i></font></a>
+<a name="549"><font color="#888888 "><i>  549   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxInit_int32_T1" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxInit_int32_T1');" target="_self"><font color="#1122aa">emxInit_int32_T1</font></a>(&amp;iidx, 1);
+<a name="550"><font color="#888888 "><i>  550   </i></font></a>  <a href="sortIdx_c.html#fcn_b_sortIdx" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sortIdx');" target="_self"><font color="#1122aa">b_sortIdx</font></a>(vwork, iidx);
+<a name="551"><font color="#888888 "><i>  551   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k + 1 &lt;= i33; k++) <b>{</b>
+<a name="552"><font color="#888888 "><i>  552   </i></font></a>    x-&gt;data[k] = vwork-&gt;data[k];
+<a name="553"><font color="#888888 "><i>  553   </i></font></a>    idx-&gt;data[k] = iidx-&gt;data[k];
+<a name="554"><font color="#888888 "><i>  554   </i></font></a>  <b>}</b>
+<a name="555"><font color="#888888 "><i>  555   </i></font></a>
+<a name="556"><font color="#888888 "><i>  556   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_int32_T');" target="_self"><font color="#1122aa">emxFree_int32_T</font></a>(&amp;iidx);
+<a name="557"><font color="#888888 "><i>  557   </i></font></a>  <a href="yaapt_emxutil_c.html#fcn_emxFree_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxFree_real_T');" target="_self"><font color="#1122aa">emxFree_real_T</font></a>(&amp;vwork);
+<a name="558"><font color="#888888 "><i>  558   </i></font></a><b>}</b>
+<a name="559"><font color="#888888 "><i>  559   </i></font></a>
+<a name="560"><font color="#888888 "><i>  560   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="561"><font color="#888888 "><i>  561   </i></font></a><font color="#117755"><I> * Arguments    : double x[100]</i></font>
+<a name="562"><font color="#888888 "><i>  562   </i></font></a><font color="#117755"><I> *                int idx[100]</i></font>
+<a name="563"><font color="#888888 "><i>  563   </i></font></a><font color="#117755"><I> * Return Type  : void</i></font>
+<a name="564"><font color="#888888 "><i>  564   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="565"><font color="#888888 "><i>  565   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_sort">sort</a>(<font color="#112266"><b>double</b></font> x[100], <font color="#112266"><b>int</b></font> idx[100])
+<a name="566"><font color="#888888 "><i>  566   </i></font></a><b>{</b>
+<a name="567"><font color="#888888 "><i>  567   </i></font></a>  <a href="#fcn_b_sort" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_b_sort');" target="_self"><font color="#1122aa">b_sort</font></a>(x, idx);
+<a name="568"><font color="#888888 "><i>  568   </i></font></a><b>}</b>
+<a name="569"><font color="#888888 "><i>  569   </i></font></a>
+<a name="570"><font color="#888888 "><i>  570   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="571"><font color="#888888 "><i>  571   </i></font></a><font color="#117755"><I> * File trailer for sort1.c</i></font>
+<a name="572"><font color="#888888 "><i>  572   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="573"><font color="#888888 "><i>  573   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
+<a name="574"><font color="#888888 "><i>  574   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="575"><font color="#888888 "><i>  575   </i></font></a></pre>
 </td></tr></table>
 </p>
 </body>

@@ -205,30 +205,30 @@ pStd = std(VPitch,0,2);
 SPitch(Idx_voiced) = VPitch;
 
 % Interpolating thru unvoiced frames
-SPitch_temp_first = SPitch(1);
-SPitch_temp_end = SPitch(end);
-if all(SPitch_temp_first < (pAvg/2))
-    SPitch(1)   = pAvg;   
-end
-if all(SPitch_temp_end < (pAvg/2))
-    SPitch(end) = pAvg;  
-end
+% SPitch_temp_first = SPitch(1);
+% SPitch_temp_end = SPitch(end);
+% if all(SPitch_temp_first < (pAvg/2))
+%     SPitch(1)   = pAvg;   
+% end
+% if all(SPitch_temp_end < (pAvg/2))
+%     SPitch(end) = pAvg;  
+% end
+% 
+% [Indrows, Indcols, Vals] = find(SPitch);
+% SPitch = interp1(Indcols, Vals, 1:numframes, 'pchip');
 
-[Indrows, Indcols, Vals] = find(SPitch);
-SPitch = interp1(Indcols, Vals, 1:numframes, 'pchip');
+% FILTER_ORDER = 3;
+% flt_b = (ones(1,FILTER_ORDER))/FILTER_ORDER ;
+% flt_a = 1;
 
-FILTER_ORDER = 3;
-flt_b = (ones(1,FILTER_ORDER))/FILTER_ORDER ;
-flt_a = 1;
-
-SPitch = filter(flt_b, flt_a, SPitch);
-
+% SPitch = filter(flt_b, flt_a, SPitch);
+% SPitch(Idx_voiced) = filter(flt_b, flt_a, SPitch(Idx_voiced));
 
 %  above messes up  first few values of SPitch  ---  simple fix up
 %  Note--   this fix up should be based on above filter order
 
-SPitch(1) = SPitch(3);
-SPitch(2) = SPitch (4);
+% SPitch(1) = SPitch(3);
+% SPitch(2) = SPitch (4);
 
 % Create pitch track with Voiced/Unvoiced decision
 VUVSPitch = SPitch;

@@ -2,7 +2,7 @@
  * File: mean.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -22,13 +22,13 @@ void b_mean(const emxArray_real_T *x, double y_data[], int y_size[1])
 {
   double s;
   int k;
-  int i25;
+  int i23;
   int loop_ub;
   y_size[0] = x->size[0];
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     k = y_size[0];
-    for (i25 = 0; i25 < k; i25++) {
-      y_data[i25] = 0.0;
+    for (i23 = 0; i23 < k; i23++) {
+      y_data[i23] = 0.0;
     }
   } else {
     s = x->data[0];
@@ -41,8 +41,8 @@ void b_mean(const emxArray_real_T *x, double y_data[], int y_size[1])
 
   k = x->size[1];
   loop_ub = y_size[0];
-  for (i25 = 0; i25 < loop_ub; i25++) {
-    y_data[i25] /= (double)k;
+  for (i23 = 0; i23 < loop_ub; i23++) {
+    y_data[i23] /= (double)k;
   }
 }
 

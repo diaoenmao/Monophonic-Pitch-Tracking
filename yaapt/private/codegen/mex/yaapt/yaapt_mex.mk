@@ -33,11 +33,9 @@ SRC_FILES =  \
 	mpower.c \
 	sinc.c \
 	mldivide.c \
-	lusolve.c \
 	xgetrf.c \
 	repmat.c \
 	assertValidSizeArg.c \
-	infocheck.c \
 	warning.c \
 	qrsolve.c \
 	xgeqp3.c \
@@ -45,7 +43,6 @@ SRC_FILES =  \
 	combine_vector_elements.c \
 	exp.c \
 	filter.c \
-	xaxpy.c \
 	fix.c \
 	nlfer.c \
 	Myspecgram.c \
@@ -61,14 +58,10 @@ SRC_FILES =  \
 	sort1.c \
 	sortIdx.c \
 	std.c \
-	var.c \
 	Mymedfilt1.c \
 	median.c \
 	dynamic5.c \
 	path1.c \
-	all.c \
-	interp1.c \
-	pchip.c \
 	tm_trk.c \
 	crs_corr.c \
 	cmp_rate.c \
@@ -76,7 +69,8 @@ SRC_FILES =  \
 	cat.c \
 	freqSelect.c \
 	fq2cnt.c \
-	Smooth.c \
+	Smooth2.c \
+	all.c \
 	_coder_yaapt_info.c \
 	_coder_yaapt_api.c \
 	_coder_yaapt_mex.c \

@@ -14,11 +14,46 @@
 #include "lapacke.h"
 
 /* Function Definitions */
-
-/*
- *
- */
 void assertValidSizeArg(const emlrtStack *sp, real_T varargin_1)
+{
+  boolean_T p;
+  boolean_T guard1 = false;
+  if ((varargin_1 != muDoubleScalarFloor(varargin_1)) || muDoubleScalarIsInf
+      (varargin_1)) {
+    p = false;
+  } else {
+    p = true;
+  }
+
+  guard1 = false;
+  if (p) {
+    if ((-2.147483648E+9 > varargin_1) || (2.147483647E+9 < varargin_1)) {
+      p = false;
+    } else {
+      p = true;
+    }
+
+    if (p) {
+      p = true;
+    } else {
+      guard1 = true;
+    }
+  } else {
+    guard1 = true;
+  }
+
+  if (guard1) {
+    p = false;
+  }
+
+  if (p) {
+  } else {
+    emlrtErrorWithMessageIdR2012b(sp, &cg_emlrtRTEI,
+      "Coder:MATLAB:NonIntegerInput", 4, 12, MIN_int32_T, 12, MAX_int32_T);
+  }
+}
+
+void b_assertValidSizeArg(const emlrtStack *sp, real_T varargin_1)
 {
   boolean_T p;
   boolean_T guard1 = false;
@@ -53,7 +88,7 @@ void assertValidSizeArg(const emlrtStack *sp, real_T varargin_1)
 
   if (p) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &ng_emlrtRTEI,
+    emlrtErrorWithMessageIdR2012b(sp, &cg_emlrtRTEI,
       "Coder:MATLAB:NonIntegerInput", 4, 12, MIN_int32_T, 12, MAX_int32_T);
   }
 
@@ -65,7 +100,7 @@ void assertValidSizeArg(const emlrtStack *sp, real_T varargin_1)
 
   if (2.147483647E+9 >= b_varargin_1) {
   } else {
-    emlrtErrorWithMessageIdR2012b(sp, &og_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
+    emlrtErrorWithMessageIdR2012b(sp, &dg_emlrtRTEI, "Coder:MATLAB:pmaxsize", 0);
   }
 }
 

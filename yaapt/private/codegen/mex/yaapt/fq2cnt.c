@@ -17,30 +17,23 @@
 #include "lapacke.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lp_emlrtRSI = { 10, "fq2cnt",
+static emlrtRSInfo wm_emlrtRSI = { 10, "fq2cnt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\fq2cnt.m" };
 
-static emlrtRSInfo mp_emlrtRSI = { 23, "log2",
+static emlrtRSInfo xm_emlrtRSI = { 24, "log2",
   "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo np_emlrtRSI = { 24, "log2",
+static emlrtRSInfo ym_emlrtRSI = { 27, "log2",
   "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
 
-static emlrtRSInfo op_emlrtRSI = { 27, "log2",
-  "F:\\MATLAB\\R2016a\\toolbox\\eml\\lib\\matlab\\elfun\\log2.m" };
-
-static emlrtRSInfo pp_emlrtRSI = { 53, "applyScalarFunction",
+static emlrtRSInfo an_emlrtRSI = { 53, "applyScalarFunction",
   "F:\\MATLAB\\R2016a\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunction.m"
 };
 
-static emlrtRTEInfo xe_emlrtRTEI = { 1, 18, "fq2cnt",
+static emlrtRTEInfo je_emlrtRTEI = { 1, 18, "fq2cnt",
   "D:\\GitHub\\Monophonic-Pitch-Tracking\\yaapt\\private\\fq2cnt.m" };
 
 /* Function Definitions */
-
-/*
- * function [cnt] = fq2cnt(fq)
- */
 void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
             *cnt)
 {
@@ -48,7 +41,6 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   int32_T k;
   int32_T loop_ub;
   boolean_T overflow;
-  uint32_T uv9[2];
   int32_T b_k;
   int32_T c_k;
   real_T t;
@@ -68,7 +60,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_real_T(sp, &x, 2, &xe_emlrtRTEI, true);
+  emxInit_real_T(sp, &x, 2, &je_emlrtRTEI, true);
   covrtLogFcn(&emlrtCoverageInstance, 22U, 0);
   covrtLogBasicBlock(&emlrtCoverageInstance, 22U, 0);
 
@@ -80,19 +72,17 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   /*  Ex: A4 - Ab4 */
   /*  fq2cnt(440) - fq2cnt(415.305) = 6000 - 5900 = 100 */
   /*  */
-  /* 'fq2cnt:10' cnt = 1200.*log2((fq./13.75)); */
   k = x->size[0] * x->size[1];
   x->size[0] = 1;
   x->size[1] = fq->size[1];
   emxEnsureCapacity(sp, (emxArray__common *)x, k, (int32_T)sizeof(real_T),
-                    &xe_emlrtRTEI);
+                    &je_emlrtRTEI);
   loop_ub = fq->size[0] * fq->size[1];
   for (k = 0; k < loop_ub; k++) {
     x->data[k] = fq->data[k] / 13.75;
   }
 
-  st.site = &lp_emlrtRSI;
-  b_st.site = &mp_emlrtRSI;
+  st.site = &wm_emlrtRSI;
   overflow = false;
   for (k = 0; k < x->size[1]; k++) {
     if (overflow || (x->data[k] < 0.0)) {
@@ -103,26 +93,22 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   }
 
   if (overflow) {
-    b_st.site = &np_emlrtRSI;
-    n_error(&b_st);
+    b_st.site = &xm_emlrtRSI;
+    m_error(&b_st);
   }
 
-  b_st.site = &op_emlrtRSI;
-  for (k = 0; k < 2; k++) {
-    uv9[k] = (uint32_T)x->size[k];
-  }
-
+  b_st.site = &ym_emlrtRSI;
   k = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
-  cnt->size[1] = (int32_T)uv9[1];
+  cnt->size[1] = x->size[1];
   emxEnsureCapacity(&b_st, (emxArray__common *)cnt, k, (int32_T)sizeof(real_T),
-                    &xe_emlrtRTEI);
+                    &je_emlrtRTEI);
   k = x->size[1];
-  c_st.site = &pp_emlrtRSI;
+  c_st.site = &an_emlrtRSI;
   overflow = ((!(1 > x->size[1])) && (x->size[1] > 2147483646));
   if (overflow) {
-    d_st.site = &cb_emlrtRSI;
-    check_forloop_overflow_error(&d_st, true);
+    d_st.site = &ab_emlrtRSI;
+    check_forloop_overflow_error(&d_st);
   }
 
   emlrtEnterParallelRegion(&b_st, omp_in_parallel());
@@ -168,7 +154,7 @@ void fq2cnt(const emlrtStack *sp, const emxArray_real_T *fq, emxArray_real_T
   k = cnt->size[0] * cnt->size[1];
   cnt->size[0] = 1;
   emxEnsureCapacity(sp, (emxArray__common *)cnt, k, (int32_T)sizeof(real_T),
-                    &xe_emlrtRTEI);
+                    &je_emlrtRTEI);
   k = cnt->size[0];
   loop_ub = cnt->size[1];
   loop_ub *= k;

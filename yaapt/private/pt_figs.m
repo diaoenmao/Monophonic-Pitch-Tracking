@@ -6,9 +6,9 @@ function []= pt_figs(DataB, DataD, Fs, SPitch, Energy, VUVEnergy, ...
 
 lenData = length(DataB); 
 
-fft_length = Prm.fft_length;
-frame_size = Prm.frame_length*Fs/1000;    
-frame_jump = Prm.frame_space*Fs/1000; 
+nfftlength = Prm.fft_length;
+nframesize = fix(Prm.frame_length*Fs/1000);    
+nframejump = fix(Prm.frame_space*Fs/1000); 
 startt = 1/Fs;
 finalt = lenData/Fs;
 startf     =  0;                  % starting frequency for spectral plots
@@ -42,16 +42,16 @@ ylabel('Amplitude');
 figure(2);
 eps  = .00000000000000001;
 
-N_startf = round((startf/Fs) * fft_length+1);
-N_finalf = round((finalf/Fs) * fft_length+1); % add +1 6/3/13
+N_startf = round((startf/Fs) * nfftlength+1);
+N_finalf = round((finalf/Fs) * nfftlength+1); % add +1 6/3/13
 
 % Hongbing: use 2*fft_length? since 2*frame_size is used in spec3_f0()
-Spec_mag = abs(specgram(DataB,fft_length,Fs,frame_size,frame_size-frame_jump));
+Spec_mag = abs(Myspecgram(DataB,nfftlength,Fs,(nframesize),(nframesize-nframejump)));
 Spec_log = log(Spec_mag + eps);
 Spec_log = Spec_log(N_startf:N_finalf,:);
 
 
-Spec_mag1 = abs(specgram(DataD,fft_length,Fs,frame_size,frame_size-frame_jump));
+Spec_mag1 = abs(Myspecgram(DataD,nfftlength,Fs,(nframesize),(nframesize-nframejump)));
 Spec_log1 = log(Spec_mag1 + eps);
 Spec_log1 = Spec_log1(N_startf:N_finalf,:);
 
@@ -170,7 +170,7 @@ ylabel('Frequency (Hz)');
 
 
 %==============================================================================
-pause;
+% pause;
 
 
 

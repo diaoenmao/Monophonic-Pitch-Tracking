@@ -105,6 +105,7 @@ end
 %  Copy over the SPitch array
 Pitch(maxcands-2,:) = SPitch;
 Merit(maxcands-2,:) = Energy/5;
+Pitch(repmat(VUVEnergy,size(Pitch,1),1)==0) = 0;
 
 %==============================================================================
 

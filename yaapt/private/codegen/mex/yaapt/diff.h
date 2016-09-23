@@ -23,6 +23,8 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
+extern void b_diff(const emlrtStack *sp, const emxArray_real_T *x,
+                   emxArray_real_T *y);
 extern void diff(const real_T x[6], real_T y[5]);
 
 #endif

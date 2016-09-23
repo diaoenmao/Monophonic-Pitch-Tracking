@@ -12,37 +12,6 @@
 #include "rtwtypes.h"
 
 /* Type Definitions */
-#ifndef struct_emxArray_real_T
-#define struct_emxArray_real_T
-
-struct emxArray_real_T
-{
-  real_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /*struct_emxArray_real_T*/
-
-#ifndef typedef_emxArray_real_T
-#define typedef_emxArray_real_T
-
-typedef struct emxArray_real_T emxArray_real_T;
-
-#endif                                 /*typedef_emxArray_real_T*/
-
-#ifndef typedef_b_struct_T
-#define typedef_b_struct_T
-
-typedef struct {
-  emxArray_real_T *breaks;
-  emxArray_real_T *coefs;
-} b_struct_T;
-
-#endif                                 /*typedef_b_struct_T*/
-
 #ifndef struct_emxArray__common
 #define struct_emxArray__common
 
@@ -148,6 +117,27 @@ struct emxArray_ptrdiff_t
 typedef struct emxArray_ptrdiff_t emxArray_ptrdiff_t;
 
 #endif                                 /*typedef_emxArray_ptrdiff_t*/
+
+#ifndef struct_emxArray_real_T
+#define struct_emxArray_real_T
+
+struct emxArray_real_T
+{
+  real_T *data;
+  int32_T *size;
+  int32_T allocatedSize;
+  int32_T numDimensions;
+  boolean_T canFreeData;
+};
+
+#endif                                 /*struct_emxArray_real_T*/
+
+#ifndef typedef_emxArray_real_T
+#define typedef_emxArray_real_T
+
+typedef struct emxArray_real_T emxArray_real_T;
+
+#endif                                 /*typedef_emxArray_real_T*/
 
 #ifndef typedef_struct_T
 #define typedef_struct_T

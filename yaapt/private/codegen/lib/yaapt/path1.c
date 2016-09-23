@@ -2,7 +2,7 @@
  * File: path1.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -37,7 +37,7 @@ void path1(const emxArray_real_T *Local, const emxArray_real_T *Trans, double
   emxArray_real_T *PRED;
   int N;
   int M;
-  int i23;
+  int i21;
   int loop_ub;
   double p_data[4999];
   double PCOST_data[499];
@@ -64,37 +64,37 @@ void path1(const emxArray_real_T *Local, const emxArray_real_T *Trans, double
   M = Local->size[0] - 1;
 
   /* getting the size of the local matrix; */
-  i23 = PRED->size[0] * PRED->size[1];
+  i21 = PRED->size[0] * PRED->size[1];
   PRED->size[0] = Local->size[0];
   PRED->size[1] = Local->size[1];
-  emxEnsureCapacity((emxArray__common *)PRED, i23, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)PRED, i21, (int)sizeof(double));
   loop_ub = Local->size[0] * Local->size[1];
-  for (i23 = 0; i23 < loop_ub; i23++) {
-    PRED->data[i23] = 1.0;
+  for (i21 = 0; i21 < loop_ub; i21++) {
+    PRED->data[i21] = 1.0;
   }
 
   /* initializing several desired matrix; */
   PATH_size[0] = 1;
   PATH_size[1] = Local->size[1];
   loop_ub = Local->size[1];
-  for (i23 = 0; i23 < loop_ub; i23++) {
-    PATH_data[i23] = 1.0;
+  for (i21 = 0; i21 < loop_ub; i21++) {
+    PATH_data[i21] = 1.0;
   }
 
   loop_ub = Local->size[1];
-  for (i23 = 0; i23 < loop_ub; i23++) {
-    p_data[i23] = 0.0;
+  for (i21 = 0; i21 < loop_ub; i21++) {
+    p_data[i21] = 0.0;
   }
 
   /* PATH=zeros(1,N); */
   loop_ub = Local->size[0];
-  for (i23 = 0; i23 < loop_ub; i23++) {
-    PCOST_data[i23] = 0.0;
+  for (i21 = 0; i21 < loop_ub; i21++) {
+    PCOST_data[i21] = 0.0;
   }
 
   loop_ub = Local->size[0];
-  for (i23 = 0; i23 < loop_ub; i23++) {
-    CCOST_data[i23] = 0.0;
+  for (i21 = 0; i21 < loop_ub; i21++) {
+    CCOST_data[i21] = 0.0;
   }
 
   for (J = 0; J <= M; J++) {

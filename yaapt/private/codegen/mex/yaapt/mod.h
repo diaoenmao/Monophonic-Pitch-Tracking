@@ -23,7 +23,7 @@
 #include "yaapt_types.h"
 
 /* Function Declarations */
-extern real_T b_mod(real_T x, real_T y);
+extern real_T b_mod(real_T x);
 
 #ifdef __WATCOMC__
 

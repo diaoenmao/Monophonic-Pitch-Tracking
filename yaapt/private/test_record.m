@@ -10,9 +10,10 @@ play(recObj);
 
 % Store data in double-precision array.
 myRecording = getaudiodata(recObj);
+load('default_parameter.mat')
+[Pitch, nf] = yaapt(myRecording', Fs, Parameter); 
+% subplot(2,1,1)
+% plot(myRecording)
+% subplot(2,1,2)
+% plot(Pitch)
 
-[Pitch, nf] = yaapt(myRecording', Fs); 
-subplot(2,1,1)
-plot(myRecording)
-subplot(2,1,2)
-plot(Pitch)

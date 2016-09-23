@@ -2,7 +2,7 @@
  * File: dynamic5.c
  *
  * MATLAB Coder version            : 3.1
- * C/C++ source code generated on  : 05-Sep-2016 15:50:20
+ * C/C++ source code generated on  : 23-Sep-2016 04:55:32
  */
 
 /* Include Files */
@@ -41,11 +41,11 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   int j;
   int k;
   int c_Trans;
-  emxArray_real_T *r25;
+  emxArray_real_T *r24;
   double Path_data[4999];
   int Path_size[2];
   int n;
-  emxInit_real_T2(&Trans, 3);
+  emxInit_real_T1(&Trans, 3);
 
   /*    Creation date:   Spring 2001 */
   /*    Revision dates:   January 3, 2002, March 7, 2005 */
@@ -109,19 +109,19 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
     Trans->data[b_Trans] *= k1;
   }
 
-  emxInit_real_T(&r25, 2);
+  emxInit_real_T(&r24, 2);
 
   /*  search the best path */
-  b_Trans = r25->size[0] * r25->size[1];
-  r25->size[0] = Merit_array->size[0];
-  r25->size[1] = Merit_array->size[1];
-  emxEnsureCapacity((emxArray__common *)r25, b_Trans, (int)sizeof(double));
+  b_Trans = r24->size[0] * r24->size[1];
+  r24->size[0] = Merit_array->size[0];
+  r24->size[1] = Merit_array->size[1];
+  emxEnsureCapacity((emxArray__common *)r24, b_Trans, (int)sizeof(double));
   loop_ub = Merit_array->size[0] * Merit_array->size[1];
   for (b_Trans = 0; b_Trans < loop_ub; b_Trans++) {
-    r25->data[b_Trans] = 1.0 - Merit_array->data[b_Trans];
+    r24->data[b_Trans] = 1.0 - Merit_array->data[b_Trans];
   }
 
-  path1(r25, Trans, Path_data, Path_size);
+  path1(r24, Trans, Path_data, Path_size);
 
   /*  Extract the final vocied F0 track which has the lowest cost */
   /*  At this point, VSpec_F0 is the spectral pitch track for voiced frames */
@@ -130,7 +130,7 @@ void dynamic5(const emxArray_real_T *Pitch_array, const emxArray_real_T
   FinPitch->size[1] = Pitch_array->size[1];
   emxEnsureCapacity((emxArray__common *)FinPitch, b_Trans, (int)sizeof(double));
   loop_ub = Pitch_array->size[1];
-  emxFree_real_T(&r25);
+  emxFree_real_T(&r24);
   emxFree_real_T(&Trans);
   for (b_Trans = 0; b_Trans < loop_ub; b_Trans++) {
     FinPitch->data[b_Trans] = 0.0;
