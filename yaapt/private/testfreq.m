@@ -13,9 +13,18 @@ target_freq = FreqData(:,2);
 % audiowrite('sample/record.wav',Data,Fs)
 [Data, Fs] = audioread ('sample/record.wav');
 
+bp_low = 20;
+bp_high = 4410;
+Filter_order = 150;
+w1  = (bp_low / (Fs/2));
+w2  = (bp_high / (Fs/2));
+w   = [w1 w2];
+bandpass = Myfir1(Filter_order,w);
+Data = filter(bandpass,1,Data);
 
 max_Fs = 8820;
-fft_length = 8192;
+fft_length = 8192*4;
+noverlap = floor(fft_length/3);
 if(Fs>max_Fs)
     dec_fac = Fs/max_Fs;
     dec_Fs = Fs/dec_fac;
@@ -34,25 +43,41 @@ else
 end
 player = audioplayer(dec_data,dec_Fs);
 play(player);
-res_window = kaiser(fft_length);
 
 
 
-% bp_low = 20;
-% bp_high = 4410;
-% Filter_order = 150;
-% w1  = (bp_low / (dec_Fs/2));
-% w2  = (bp_high / (dec_Fs/2));
-% w   = [w1 w2];
-% bandpass = Myfir1(Filter_order,w);
-% tempData = filter(bandpass,1,dec_data);
+if(fft_length>length(dec_data))
+    zeropadded_dec_data = [dec_data;zeros(fft_length-length(dec_data),1)];
+    tic
+    s = fft(zeropadded_dec_data,fft_length);
+    s = s(1:fix(length(s)/2)+1);
+    f = linspace(0,dec_Fs/2,fft_length/2+1)';
+    t = length(dec_data)/fft_length/2;
+    res_window = kaiser(fft_length);
+    [s2,f2,t2] = spectrogram(zeropadded_dec_data,res_window,[],fft_length,dec_Fs,'yaxis');
+else
+    res_window = kaiser(fft_length);
+    tic
+    [s,f,t] = spectrogram(dec_data,res_window,[],fft_length,dec_Fs,'yaxis');
+    toc
+end
 
-[s,f,t] = spectrogram(dec_data,res_window,[],fft_length,dec_Fs,'yaxis');
+
+
+
+
+
+
+
 mag = abs(s);
+% mag2 = abs(s2);
 him = imagesc(t,f,mag);
 axis xy
 colormap(1-gray)
-plot(f,mag(:,2))
+figure
+plot(f,mag(:,1))
+% figure
+% plot(f2,mag2(:,1))
 % target_mag=interp1(f,mag,target_freq,'nearest');
 % plot(target_freq,target_mag(:,1))
 c = fq2cnt(f);
