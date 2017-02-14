@@ -107,7 +107,11 @@ Voiced = zeros(time_numframes,1);
 % plot(tframes,time_Energy_L2_logdiff)
 % figure
 % plot(tframes,time_Attack)
-% 
+%
+
+
+
+
 % time_threshold=5;
 % Voiced(time_Energy/time_background_Energy>time_threshold)=1;
 % figure
@@ -127,22 +131,47 @@ frq_Spectral_Difference = [0 sum(abs(diff(abs(s),1,2)))];
 frq_Spectral_Difference_Detection = frq_Spectral_Difference./[1 frq_Energy(1:end-1)];
 frqframes = linspace(0,length(dec_data)/dec_Fs,frq_numframes)';
 frq_background_Energy = mean(frq_Energy(1:frq_background_frame_idx));
-figure
-plot(frqframes,frq_Energy)
-figure
-plot(frqframes,frq_Energy_HFC)
-figure
-plot(frqframes,frq_Spectral_Difference)
-figure
-plot(frqframes,frq_Spectral_Difference_Detection)
-figure
-mag = abs(s);
-him = imagesc(t,f,mag);
-axis xy
-colormap(1-gray)
 
-frq_threshold=50;
-Voiced(frq_Energy/frq_background_Energy>frq_threshold)=1;
+
+% figure
+% plot(frqframes,frq_Energy)
+% figure
+% plot(frqframes,frq_Energy_HFC)
+% figure
+% plot(frqframes,frq_Spectral_Difference)
+% figure
+% plot(frqframes,frq_Spectral_Difference_Detection)
+% figure
+% mag = abs(s);
+% him = imagesc(t,f,mag);
+% axis xy
+% colormap(1-gray)
+
+% peakpick_can =frq_Energy_HFC;
+% peakpick_can= (peakpick_can-mean(peakpick_can))/std(peakpick_can);
+% w=3;m=3;
+% frq_threshold=0.005;
+% for i=1:frq_numframes
+% %     k=1+(i-1)*(w);
+%     window1_idx = max(1,i-w);
+%     window2_idx = max(1,i-m*w);
+%     window1 = peakpick_can(window1_idx:i);
+%     [~,tmp]=max(window1);
+%     mask1(i) = tmp==length(window1);
+%     window2=peakpick_can(window2_idx:i);
+%     mask2(i) = peakpick_can(i)>(mean(window2)+frq_threshold);
+%       
+% end
+% figure
+% plot(mask1)
+% figure
+% plot(mask2)
+% Voiced=mask1&mask2;
+
+
+
+frq_threshold=100;
+Voiced((frq_Energy/frq_background_Energy)>frq_threshold)=1;
 figure
 plot(frqframes,Voiced)
 
