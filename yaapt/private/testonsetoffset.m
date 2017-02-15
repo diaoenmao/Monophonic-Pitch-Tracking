@@ -17,8 +17,8 @@ target_freq = FreqData(:,2);
 time=linspace(0,length(Data)/Fs,length(Data));
 
 %% Bandpass filter
-% bp_low = 20;
-% bp_high = 4410;
+bp_low = 20;
+bp_high = 4410;
 % Filter_order = 150;
 % w1  = (bp_low / (Fs/2));
 % w2  = (bp_high / (Fs/2));
@@ -77,7 +77,7 @@ frq_n_frame_length = fix(frq_frame_length*dec_Fs/1000);
 frq_n_frame_overlap = fix(frq_frame_overlap*dec_Fs/1000);
 frq_n_frame_jump = frq_n_frame_length-frq_n_frame_overlap;
 frq_numframes = fix((length(dec_data)-frq_n_frame_overlap)/(frq_n_frame_jump));
-frq_background_ref = 50;
+frq_background_ref = 100;
 frq_background_frame_idx  = fix(frq_background_ref/frq_frame_jump);
 
 Voiced = zeros(time_numframes,1);
@@ -123,29 +123,31 @@ fft_length = 8192;
 res_window = kaiser(frq_n_frame_length);
 [s,f,t] = spectrogram(dec_data,res_window,frq_n_frame_overlap,fft_length,dec_Fs,'yaxis');
 toc
-s = s(2:end,:); % No DC
+N_F0_min = round(bp_low/(dec_Fs/fft_length));
+N_F0_max = round(bp_high/(dec_Fs/fft_length));
+s = s(N_F0_min:min(N_F0_max,size(s,1)),:); % No DC
 frq_Energy = sum(abs(s).^2);
-frq_Energy_HFC = [1:size(s)]*abs(s).^2;
+frq_Energy_HFC = [1:size(s,1)]*abs(s).^2;
 frq_Energy(frq_Energy==0)=1;
 frq_Spectral_Difference = [0 sum(abs(diff(abs(s),1,2)))];
 frq_Spectral_Difference_Detection = frq_Spectral_Difference./[1 frq_Energy(1:end-1)];
 frqframes = linspace(0,length(dec_data)/dec_Fs,frq_numframes)';
-frq_background_Energy = mean(frq_Energy(1:frq_background_frame_idx));
+frq_background_Energy = mean(frq_Energy_HFC(1:frq_background_frame_idx));
 
 
-% figure
-% plot(frqframes,frq_Energy)
-% figure
-% plot(frqframes,frq_Energy_HFC)
-% figure
-% plot(frqframes,frq_Spectral_Difference)
-% figure
-% plot(frqframes,frq_Spectral_Difference_Detection)
-% figure
-% mag = abs(s);
-% him = imagesc(t,f,mag);
-% axis xy
-% colormap(1-gray)
+figure
+plot(frqframes,frq_Energy)
+figure
+plot(frqframes,frq_Energy_HFC)
+figure
+plot(frqframes,frq_Spectral_Difference)
+figure
+plot(frqframes,frq_Spectral_Difference_Detection)
+figure
+mag = abs(s);
+him = imagesc(t,f,mag);
+axis xy
+colormap(1-gray)
 
 % peakpick_can =frq_Energy_HFC;
 % peakpick_can= (peakpick_can-mean(peakpick_can))/std(peakpick_can);
@@ -168,10 +170,22 @@ frq_background_Energy = mean(frq_Energy(1:frq_background_frame_idx));
 % plot(mask2)
 % Voiced=mask1&mask2;
 
-
-
-frq_threshold=100;
-Voiced((frq_Energy/frq_background_Energy)>frq_threshold)=1;
+min_notelength = 125;%1/16 note, 120bpm,125ms
+min_notelength_idx = min_notelength/frq_frame_jump;
+onset_threshold=100;
+offset_threshold=10;
+frq_ref_Energy = frq_Energy_HFC/frq_background_Energy;
+onset_interval = frq_ref_Energy>onset_threshold;
+offset_interval = frq_ref_Energy<offset_threshold;
+while(any(onset_interval))
+    onset_idx_init=find(onset_interval,1);
+    offset_idx=find(offset_interval);
+    offset_idx_satisfied = offset_idx((offset_idx-onset_idx_init)>min_notelength_idx);
+    offset_idx_init = offset_idx_satisfied(1);
+    Voiced(onset_idx_init:offset_idx_init)=true;
+    onset_interval(onset_idx_init:offset_idx_init)=false;   
+end
+% Voiced((frq_Energy_HFC/frq_background_Energy)>onset_threshold)=1;
 figure
 plot(frqframes,Voiced)
 
