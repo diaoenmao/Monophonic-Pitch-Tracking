@@ -1,27 +1,5 @@
-close all
-load('target_freq.mat')
-load('bin_freq.mat')
+function [pitch] = blockfreq(Data,Fs)
 load('bin_cnt.mat')
-target_freq = FreqData(:,2);
-
-
-% Fs = 44100;
-% recObj = audiorecorder(Fs, 16, 1);
-% disp('Start speaking.')
-% recordblocking(recObj, 2);
-% disp('End of Recording.');
-% Data = getaudiodata(recObj);
-% audiowrite('sample/record.wav',Data,Fs)
-[Data, Fs] = audioread ('sample/record.wav');
-
-bp_low = 20;
-bp_high = 4410;
-Filter_order = 150;
-w1  = (bp_low / (Fs/2));
-w2  = (bp_high / (Fs/2));
-w   = [w1 w2];
-bandpass = Myfir1(Filter_order,w);
-Data = filter(bandpass,1,Data);
 
 max_Fs = 8820;
 if(Fs>max_Fs)
@@ -40,8 +18,6 @@ else
     dec_data = Data;
     dec_Fs = Fs;
 end
-player = audioplayer(dec_data,dec_Fs);
-play(player);
 
 fft_length = 8192*2;
 window_length = 1;
@@ -51,41 +27,15 @@ n_overlap = floor(n_window_length/2);
 
 if(fft_length>length(dec_data))
     zeropadded_dec_data = [dec_data;zeros(fft_length-length(dec_data),1)];
-    tic
     s = fft(zeropadded_dec_data,fft_length);
     s = s(1:fix(length(s)/2)+1);
     f = linspace(0,dec_Fs/2,fft_length/2+1)';
-    t = length(dec_data)/fft_length/2;
-    toc
-%     res_window = kaiser(fft_length);
-%     tic
-%     [s2,f2,t2] = spectrogram(zeropadded_dec_data,res_window,[],fft_length,dec_Fs,'yaxis');
-%     toc
 else
     res_window = kaiser(n_window_length);
-    tic
-    [s,f,t] = spectrogram(dec_data,res_window,n_overlap,fft_length,dec_Fs,'yaxis');
-    toc
+    [s,f,~] = spectrogram(dec_data,res_window,n_overlap,fft_length,dec_Fs,'yaxis');
 end
 
-
-
-
-
-
-
-
 mag = abs(s);
-% mag2 = abs(s2);
-him = imagesc(t,f,mag);
-axis xy
-colormap(1-gray)
-figure
-plot(f,mag(:,3))
-% figure
-% plot(f2,mag2(:,1))
-% target_mag=interp1(f,mag,target_freq,'nearest');
-% plot(target_freq,target_mag(:,1))
 c = fq2cnt(f);
 numframes = size(mag,2);
 pitch = zeros(2,numframes);
@@ -146,6 +96,4 @@ for i=1:numframes
     [~,pitch(1,i)] = max(sumofharm);
     [~,pitch(2,i)] = max(pitch_peaks(:,pitch(1,i)));
 end
-
-
-
+end
