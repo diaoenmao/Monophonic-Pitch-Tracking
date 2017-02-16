@@ -81,7 +81,7 @@ him = imagesc(t,f,mag);
 axis xy
 colormap(1-gray)
 figure
-plot(f,mag(:,3))
+plot(f,mag(:,1))
 % figure
 % plot(f2,mag2(:,1))
 % target_mag=interp1(f,mag,target_freq,'nearest');

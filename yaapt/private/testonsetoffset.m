@@ -13,7 +13,7 @@ target_freq = FreqData(:,2);
 % disp('End of Recording.');
 % Data = getaudiodata(recObj);
 % audiowrite('sample/record.wav',Data,Fs)
-[Data, Fs] = audioread ('sample/a a a a.wav');
+[Data, Fs] = audioread ('sample/01.wav');
 time=linspace(0,length(Data)/Fs,length(Data));
 
 %% Bandpass filter
@@ -60,15 +60,15 @@ plot(dec_time,dec_data)
 
 %% Analysis set up
 
-time_frame_length = 10;
-time_frame_overlap = 5;
-time_frame_jump = time_frame_length - time_frame_overlap;
-time_n_frame_length = fix(time_frame_length*dec_Fs/1000);
-time_n_frame_overlap = fix(time_frame_overlap*dec_Fs/1000);
-time_n_frame_jump = time_n_frame_length-time_n_frame_overlap;
-time_numframes = fix((length(dec_data)-time_n_frame_overlap)/(time_n_frame_jump));
-time_background_ref = 50;
-time_background_frame_idx  = fix(time_background_ref/time_frame_jump);
+% time_frame_length = 10;
+% time_frame_overlap = 5;
+% time_frame_jump = time_frame_length - time_frame_overlap;
+% time_n_frame_length = fix(time_frame_length*dec_Fs/1000);
+% time_n_frame_overlap = fix(time_frame_overlap*dec_Fs/1000);
+% time_n_frame_jump = time_n_frame_length-time_n_frame_overlap;
+% time_numframes = fix((length(dec_data)-time_n_frame_overlap)/(time_n_frame_jump));
+% time_background_ref = 50;
+% time_background_frame_idx  = fix(time_background_ref/time_frame_jump);
 
 frq_frame_length = 10;
 frq_frame_overlap = 5;
@@ -80,8 +80,8 @@ frq_numframes = fix((length(dec_data)-frq_n_frame_overlap)/(frq_n_frame_jump));
 frq_background_ref = 100;
 frq_background_frame_idx  = fix(frq_background_ref/frq_frame_jump);
 
-Voiced = zeros(time_numframes,1);
-
+Voiced = zeros(frq_numframes,1);
+interval = [];
 
 
 
@@ -131,7 +131,7 @@ frq_Energy_HFC = [1:size(s,1)]*abs(s).^2;
 frq_Energy(frq_Energy==0)=1;
 frq_Spectral_Difference = [0 sum(abs(diff(abs(s),1,2)))];
 frq_Spectral_Difference_Detection = frq_Spectral_Difference./[1 frq_Energy(1:end-1)];
-frqframes = linspace(0,length(dec_data)/dec_Fs,frq_numframes)';
+frqframes = linspace(0,length(dec_data)/dec_Fs,frq_numframes);
 frq_background_Energy = mean(frq_Energy_HFC(1:frq_background_frame_idx));
 
 
@@ -172,7 +172,7 @@ colormap(1-gray)
 
 min_notelength = 125;%1/16 note, 120bpm,125ms
 min_notelength_idx = min_notelength/frq_frame_jump;
-onset_threshold=100;
+onset_threshold=80;
 offset_threshold=10;
 frq_ref_Energy = frq_Energy_HFC/frq_background_Energy;
 onset_interval = frq_ref_Energy>onset_threshold;
@@ -182,7 +182,8 @@ while(any(onset_interval))
     offset_idx=find(offset_interval);
     offset_idx_satisfied = offset_idx((offset_idx-onset_idx_init)>min_notelength_idx);
     offset_idx_init = offset_idx_satisfied(1);
-    Voiced(onset_idx_init:offset_idx_init)=true;
+    Voiced(onset_idx_init:offset_idx_init) = true;
+    interval = [interval;onset_idx_init*frq_n_frame_jump offset_idx_init*frq_n_frame_jump];
     onset_interval(onset_idx_init:offset_idx_init)=false;   
 end
 % Voiced((frq_Energy_HFC/frq_background_Energy)>onset_threshold)=1;

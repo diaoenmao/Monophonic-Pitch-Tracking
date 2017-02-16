@@ -1,7 +1,11 @@
-function [pitch] = blockfreq(Data,Fs)
+function [out] = blockfreq(Data,Fs)
 load('bin_cnt.mat')
 
 max_Fs = 8820;
+fft_length = 8192*2;
+window_length = 1;
+out = zeros(1,2);
+
 if(Fs>max_Fs)
     dec_fac = Fs/max_Fs;
     dec_Fs = Fs/dec_fac;
@@ -19,8 +23,7 @@ else
     dec_Fs = Fs;
 end
 
-fft_length = 8192*2;
-window_length = 1;
+
 n_window_length = window_length*dec_Fs;
 n_overlap = floor(n_window_length/2);
 
@@ -30,15 +33,21 @@ if(fft_length>length(dec_data))
     s = fft(zeropadded_dec_data,fft_length);
     s = s(1:fix(length(s)/2)+1);
     f = linspace(0,dec_Fs/2,fft_length/2+1)';
+    t = length(dec_data)/fft_length/2;
 else
     res_window = kaiser(n_window_length);
-    [s,f,~] = spectrogram(dec_data,res_window,n_overlap,fft_length,dec_Fs,'yaxis');
+    [s,f,t] = spectrogram(dec_data,res_window,n_overlap,fft_length,dec_Fs,'yaxis');
 end
 
 mag = abs(s);
 c = fq2cnt(f);
 numframes = size(mag,2);
 pitch = zeros(2,numframes);
+him = imagesc(t,f,mag);
+axis xy
+colormap(1-gray)
+figure
+plot(f,mag(:,1))
 
 for i=1:numframes
     mag_window = mag(:,i);
@@ -96,4 +105,8 @@ for i=1:numframes
     [~,pitch(1,i)] = max(sumofharm);
     [~,pitch(2,i)] = max(pitch_peaks(:,pitch(1,i)));
 end
+
+out(1,1) = mode(pitch(1,:));
+out(1,2) = mode(pitch(2,:));
+
 end
