@@ -20,7 +20,7 @@ t8 = linspace(0,2*T16,2*k); % 这是一个八分之一音符 2*T16 = 2*1/16 = 1/8
 % 这几个mod分别制造了一个sin的半周期 应该是用来调整每个音符的响度，使其更加圆润
 mod4 = sin(pi*t4/t4(end));
 % figure
-plot(t4,mod4)
+% plot(t4,mod4)
 mod8 = sin(pi*t8/t8(end));
 % figure
 % plot(t8,mod8)

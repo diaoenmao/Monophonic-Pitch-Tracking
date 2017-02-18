@@ -1,4 +1,4 @@
-function [out] = blockfreq(Data,Fs)
+function [out] = blocknum(Data,Fs)
 load('bin_cnt.mat')
 
 max_Fs = 8820;
@@ -42,12 +42,14 @@ end
 mag = abs(s);
 c = fq2cnt(f);
 numframes = size(mag,2);
-pitch = zeros(2,numframes);
-him = imagesc(t,f,mag);
-axis xy
-colormap(1-gray)
-figure
-plot(f,mag(:,1))
+pitch = zeros(numframes,2);
+
+% figure
+% him = imagesc(t,f,mag);
+% axis xy
+% colormap(1-gray)
+% figure
+% plot(f,mag(:,1))
 
 for i=1:numframes
     mag_window = mag(:,i);
@@ -102,11 +104,11 @@ for i=1:numframes
         max(mag_window(c>=bin_cnt_low(7,11)&c<=bin_cnt_high(7,11))) max(mag_window(c>=bin_cnt_low(5,12)&c<=bin_cnt_high(7,12)));...
         ];
     sumofharm = sum(pitch_peaks);
-    [~,pitch(1,i)] = max(sumofharm);
-    [~,pitch(2,i)] = max(pitch_peaks(:,pitch(1,i)));
+    [~,pitch(i,1)] = max(sumofharm);
+    [~,pitch(i,2)] = max(pitch_peaks(:,pitch(i,1)));
 end
 
-out(1,1) = mode(pitch(1,:));
-out(1,2) = mode(pitch(2,:));
+out(1,1) = mode(pitch(:,1));
+out(1,2) = mode(pitch(:,2));
 
 end
